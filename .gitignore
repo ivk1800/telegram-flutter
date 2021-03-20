@@ -1,0 +1,4 @@
+.idea
+*.jugger.dart
+.metadata
+*.g.dart

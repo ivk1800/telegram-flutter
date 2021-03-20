@@ -1,0 +1,25 @@
+name: presentation
+description: A new Flutter project.
+version: 0.0.1
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  jugger: ^1.1.0-alpha
+  td_client:
+    path: ../td_client
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  path_provider: ^2.0.1
+  jugger_generator: 1.1.0+4-alpha
+  analyzer: ^1.1.0
+  build_runner: ^1.10.2
+  flutter_test:
+    sdk: flutter
+
+flutter:
