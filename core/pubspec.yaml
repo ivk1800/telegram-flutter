@@ -1,17 +1,16 @@
-name: td_client
+name: core
 description: A new Flutter project.
-version: 0.0.1
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
 
 dependencies:
+  jugger: ^1.1.0-alpha
   rxdart: ^0.26.0
-  tdlib:
-    git:
-      url: git@github.com:ivk1800/tdlib.git
-      ref: 9888c49fe56090e2b956fb4cb64fce9af8c44aba
+  td_client:
+    path: ../td_client
   flutter:
     sdk: flutter
 
