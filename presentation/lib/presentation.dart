@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:presentation/src/di/component/app_component.jugger.dart';
+import 'package:presentation/src/page/page.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 import 'src/di/component/app_component.dart';
-import 'src/page/Dialogs/dialogs_page.dart';
+import 'src/page/dialogs/dialogs_page.dart';
 
 late AppComponent appComponent;
 
@@ -45,6 +46,11 @@ void launch() {
       } else if (newEvent.authorizationState is td.AuthorizationStateReady) {
         runApp(const MaterialApp(
           home: DialogsPage(),
+        ));
+      } else if (newEvent.authorizationState
+          is td.AuthorizationStateWaitPhoneNumber) {
+        runApp(const MaterialApp(
+          home: LoginPage(),
         ));
       }
     }
