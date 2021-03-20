@@ -1,1 +1,1 @@
-export 'package:presentation/src/page/page.dart';
+export 'package:presentation/src/page/dialogs/dialogs_page.dart';

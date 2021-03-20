@@ -20,7 +20,10 @@ class ChatRepositoryImpl extends IChatRepository {
       if (event is td.UpdateNewChat) {
         _chats[event.chat.id] = event.chat;
         _chatsSubject.add(_chats.values.toList());
-      } else if (event is td.UpdateChatLastMessage) {}
+      } else if (event is td.UpdateChatLastMessage) {
+        _chats[event.chatId] =
+            _chats[event.chatId].copy(lastMessage: event.lastMessage);
+      }
     });
   }
 
