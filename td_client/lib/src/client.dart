@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tdlib/td_client.dart' as tdc;
@@ -23,4 +22,13 @@ class TdClient {
 
   Future<void> clientSend(td.TdFunction event) =>
       tdc.TdClient.clientSend(clientId, event);
+
+  Stream<T> sendFunction<T extends td.TdObject>(td.TdFunction event) {
+    return Stream.fromFuture(clientSend(event)).flatMap((value) => events
+        .where((td.TdObject element) {
+          return element is T;
+        })
+        .take(1)
+        .map((td.TdObject event) => event as T));
+  }
 }

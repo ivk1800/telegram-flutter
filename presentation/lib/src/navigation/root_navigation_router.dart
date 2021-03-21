@@ -18,7 +18,15 @@ class RootNavigationRouter implements INavigationRouter {
   @override
   void toRootSettingsScreen() {
     final PageRoute<dynamic> route = _defaultRoute(
-      (BuildContext context) => const SettingsPage(),
+      (BuildContext context) => const ProfilePage(),
+    );
+    _push(route);
+  }
+
+  @override
+  void toSessionsScreen() {
+    final PageRoute<dynamic> route = _defaultRoute(
+      (BuildContext context) => const SessionsPage(),
     );
     _push(route);
   }
