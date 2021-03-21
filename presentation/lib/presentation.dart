@@ -9,6 +9,8 @@ import 'package:tdlib/td_api.dart' as td;
 import 'src/di/component/app_component.dart';
 import 'src/page/dialogs/dialogs_page.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 late AppComponent appComponent;
 
 void launch() {
@@ -44,12 +46,14 @@ void launch() {
         client.clientSend(td.CheckDatabaseEncryptionKey(
             encryptionKey: 'mostrandomencryption'));
       } else if (newEvent.authorizationState is td.AuthorizationStateReady) {
-        runApp(const MaterialApp(
+        runApp(MaterialApp(
+          navigatorKey: navigatorKey,
           home: DialogsPage(),
         ));
       } else if (newEvent.authorizationState
           is td.AuthorizationStateWaitPhoneNumber) {
-        runApp(const MaterialApp(
+        runApp(MaterialApp(
+          navigatorKey: navigatorKey,
           home: LoginPage(),
         ));
       }

@@ -11,7 +11,7 @@ dependencies:
   tdlib:
     git:
       url: git@github.com:ivk1800/tdlib.git
-      ref: 89bfb24ad7906e2b3833cf6b9a6ecf37e585f1d0
+      ref: e3c9f10235bceb38e2135dd4154b1da0db31bb19
   flutter:
     sdk: flutter
 
