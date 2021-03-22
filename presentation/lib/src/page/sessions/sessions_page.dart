@@ -14,7 +14,8 @@ class SessionsPage extends StatefulWidget {
   SessionsPageState createState() => SessionsPageState();
 }
 
-class SessionsPageState extends State<SessionsPage> {
+class SessionsPageState extends State<SessionsPage>
+    with DefaultDataLoadingWidgetDelegateMixin<StateData> {
   @j.inject
   late IStringsProvider stringsProvider;
 
@@ -31,26 +32,25 @@ class SessionsPageState extends State<SessionsPage> {
   }
 
   @override
+  Widget buildSuccessWidget(BuildContext context, StateData data) {
+    final List<td.Session> session = data.sessions;
+    return ListView.builder(
+      itemCount: session.length,
+      itemBuilder: (BuildContext context, int index) {
+        return sessionTileFactory.create(session[index]);
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(stringsProvider.devices),
       ),
-      body: StreamBuilder<StateData>(
-        stream: viewModel.stateData,
-        builder: (BuildContext context, AsyncSnapshot<StateData?> snapshot) {
-          if (!snapshot.hasData) {
-            return Container();
-          }
-
-          final List<td.Session> session = snapshot.data!.sessions;
-          return ListView.builder(
-            itemCount: session.length,
-            itemBuilder: (BuildContext context, int index) {
-              return sessionTileFactory.create(session[index]);
-            },
-          );
-        },
+      body: DataLoadingWidget<StateData, SessionsViewModel>(
+        delegate: this,
+        viewModel: viewModel,
       ),
     );
   }

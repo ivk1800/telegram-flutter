@@ -22,7 +22,7 @@ class ChatRepositoryImpl extends IChatRepository {
         _chatsSubject.add(_chats.values.toList());
       } else if (event is td.UpdateChatLastMessage) {
         _chats[event.chatId] =
-            _chats[event.chatId].copy(lastMessage: event.lastMessage);
+            _chats[event.chatId]!.copy(lastMessage: event.lastMessage);
       }
     });
   }
