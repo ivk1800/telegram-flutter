@@ -11,16 +11,21 @@ class SessionsViewModel extends BaseViewModel
 
   final ISessionRepository sessionRepository;
 
-  Stream<StateData> get stateData => sessionRepository.activeSessions
-      .map((List<td.Session> event) => StateData(event));
-
   @override
   Stream<StateData> onCreateDataStream() => sessionRepository.activeSessions
-      .map((List<td.Session> event) => StateData(event));
+      .map((List<td.Session> event) => StateData(
+            thisSession:
+                event.firstWhere((td.Session session) => session.isCurrent),
+            // TODO: Ivan refactor filter sessions
+            activeSessions: event
+                .where((td.Session session) => !session.isCurrent)
+                .toList(),
+          ));
 }
 
 class StateData {
-  StateData(this.sessions);
+  StateData({required this.activeSessions, required this.thisSession});
 
-  final List<td.Session> sessions;
+  final td.Session thisSession;
+  final List<td.Session> activeSessions;
 }
