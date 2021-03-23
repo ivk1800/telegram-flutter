@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/src/di/component/screen/chat_screen_component.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:tdlib/td_api.dart' as td;
+import 'package:presentation/src/tile/chat_message/chat_message.dart';
 import 'package:presentation/src/tile/tile.dart';
+import 'package:tdlib/td_api.dart' as td;
 
 import 'chat_view_model.dart';
 
@@ -49,6 +50,7 @@ class ChatPageState extends State<ChatPage> {
               snapshot.data ?? const <td.Message>[];
 
           return ListView.builder(
+            reverse: true,
             itemCount: messages.length,
             itemBuilder: (BuildContext context, int index) {
               return chatMessageTileFactory.create(context, messages[index]);
