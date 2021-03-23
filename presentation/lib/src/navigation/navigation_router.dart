@@ -4,4 +4,6 @@ abstract class INavigationRouter {
   void toRootSettingsScreen();
 
   void toSessionsScreen();
+
+  void toChat(int chatId);
 }

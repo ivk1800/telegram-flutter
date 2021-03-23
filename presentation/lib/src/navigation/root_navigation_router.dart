@@ -31,6 +31,14 @@ class RootNavigationRouter implements INavigationRouter {
     _push(route);
   }
 
+  @override
+  void toChat(int chatId) {
+    final PageRoute<dynamic> route = _defaultRoute(
+      (BuildContext context) => ChatPage(chatId: chatId),
+    );
+    _push(route);
+  }
+
   void _push(Route<dynamic> route) {
     _navigationKey.currentState?.push<dynamic>(route);
   }

@@ -32,6 +32,12 @@ class SessionsPageState extends State<SessionsPage>
   }
 
   @override
+  void dispose() {
+    viewModel.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget buildSuccessWidget(BuildContext context, StateData data) {
     // TODO extract text to stings
     final ThemeData theme = Theme.of(context);

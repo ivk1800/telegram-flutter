@@ -10,9 +10,14 @@ class SessionTileFactory {
 
   Widget create(BuildContext context, td.Session session) {
     return ListTile(
-      onTap: () { },
+      onTap: () {},
       isThreeLine: true,
-      trailing: session.isCurrent ? Text('online', style: TextStyle(color: Theme.of(context).accentColor),) : null,
+      trailing: session.isCurrent
+          ? Text(
+              'online',
+              style: TextStyle(color: Theme.of(context).accentColor),
+            )
+          : null,
       title: Text('${session.applicationName} ${session.applicationVersion}'),
       subtitle: Text(
           '${session.deviceModel}, ${session.platform} ${session.systemVersion}, (${session.apiId}) \n${session.ip} - ${session.country}'),
