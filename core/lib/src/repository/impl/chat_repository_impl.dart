@@ -62,4 +62,8 @@ class ChatRepositoryImpl extends IChatRepository {
 
   @override
   Stream<List<td.Chat>> get chats => _chatsSubject;
+
+  @override
+  Future<td.Chat> getChat(int id) =>
+      _client.sendFunction<td.Chat>(td.GetChat(chatId: id)).single;
 }

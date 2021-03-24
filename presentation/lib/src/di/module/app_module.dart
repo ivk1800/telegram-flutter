@@ -15,6 +15,11 @@ abstract class AppModule {
 
   @j.singleton
   @j.bind
+  IChatMessageRepository bindChatMessageRepository(
+      ChatMessageRepositoryImpl impl);
+
+  @j.singleton
+  @j.bind
   IChatRepository bindChatRepository(ChatRepositoryImpl impl);
 
   @j.singleton

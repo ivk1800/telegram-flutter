@@ -20,6 +20,8 @@ class ChatPageState extends State<ChatPage> {
   @j.inject
   late ChatMessageTileFactory chatMessageTileFactory;
 
+  final ScrollController scrollController = ScrollController();
+
   @j.inject
   late ChatViewModel viewModel;
 
@@ -27,10 +29,18 @@ class ChatPageState extends State<ChatPage> {
   void initState() {
     inject();
     super.initState();
+
+    scrollController.addListener(() {
+      final double extentAfter = scrollController.position.extentAfter;
+      if (extentAfter < 200) {
+        viewModel.onScroll();
+      }
+    });
   }
 
   @override
   void dispose() {
+    scrollController.dispose();
     viewModel.dispose();
     super.dispose();
   }
@@ -49,12 +59,15 @@ class ChatPageState extends State<ChatPage> {
           final List<td.Message> messages =
               snapshot.data ?? const <td.Message>[];
 
-          return ListView.builder(
-            reverse: true,
-            itemCount: messages.length,
-            itemBuilder: (BuildContext context, int index) {
-              return chatMessageTileFactory.create(context, messages[index]);
-            },
+          return Scrollbar(
+            child: ListView.builder(
+              controller: scrollController,
+              reverse: true,
+              itemCount: messages.length,
+              itemBuilder: (BuildContext context, int index) {
+                return chatMessageTileFactory.create(context, messages[index]);
+              },
+            ),
           );
         },
       ),

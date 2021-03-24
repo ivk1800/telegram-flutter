@@ -13,7 +13,9 @@ class ChatTileFactory {
   Widget create(BuildContext context, td.Chat chat, ChatTapCallback onTap) {
     return ListTile(
       onTap: () => onTap.call(chat),
-      leading: TdAvatar(image: chat.photo?.small,),
+      leading: TdAvatar(
+        image: chat.photo?.small,
+      ),
       title: Text(chat.title),
       subtitle: Text(chat.lastMessage?.toString() ?? ''),
     );

@@ -6,33 +6,22 @@ import 'package:tdlib/td_api.dart' as td;
 
 class ChatViewModel extends BaseViewModel {
   @j.inject
-  ChatViewModel(this.chatId) {
-    appComponent
-        .getTdClient()
-        .sendFunction<td.Messages>(td.GetChatHistory(
-            chatId: chatId,
-            fromMessageId: 0,
-            offset: 0,
-            limit: 10,
-            onlyLocal: true))
-        .listen((td.Messages event) {
-      final List<td.Message>? messages = event.messages;
-      if (messages != null) {
-        _messagesSubject.add(messages);
-      }
-    });
+  ChatViewModel(this._chatId, this._messagesInteractor) {
+    _messagesInteractor.init(_chatId);
   }
 
-  final int chatId;
+  final int _chatId;
+  final ChatMessagesInteractor _messagesInteractor;
 
-  final BehaviorSubject<List<td.Message>> _messagesSubject =
-      BehaviorSubject<List<td.Message>>();
+  Stream<List<td.Message>> get messages => _messagesInteractor.messages;
 
-  Stream<List<td.Message>> get messages => _messagesSubject;
+  void onScroll() {
+    _messagesInteractor.loadMore();
+  }
 
   @override
   void dispose() {
-    _messagesSubject.close();
+    _messagesInteractor.dispose();
     super.dispose();
   }
 }
