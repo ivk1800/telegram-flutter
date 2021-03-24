@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:presentation/src/di/component/app_component.jugger.dart';
 import 'package:presentation/src/page/page.dart';
+import 'package:presentation/src/widget/widget.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
@@ -18,6 +19,7 @@ void launch() {
 
   appComponent = JuggerAppComponentBuilder().build();
 
+  // TODO refactor
   final TdClient client = appComponent.getTdClient();
   client.events.listen((td.TdObject newEvent) async {
     if (newEvent is td.UpdateAuthorizationState) {
@@ -46,15 +48,21 @@ void launch() {
         client.clientSend(td.CheckDatabaseEncryptionKey(
             encryptionKey: 'mostrandomencryption'));
       } else if (newEvent.authorizationState is td.AuthorizationStateReady) {
-        runApp(MaterialApp(
-          navigatorKey: navigatorKey,
-          home: DialogsPage(),
+        runApp(TdImageLoader(
+          client: client,
+          child: MaterialApp(
+            navigatorKey: navigatorKey,
+            home: const DialogsPage(),
+          ),
         ));
       } else if (newEvent.authorizationState
           is td.AuthorizationStateWaitPhoneNumber) {
-        runApp(MaterialApp(
-          navigatorKey: navigatorKey,
-          home: LoginPage(),
+        runApp(TdImageLoader(
+          client: client,
+          child: MaterialApp(
+            navigatorKey: navigatorKey,
+            home: const LoginPage(),
+          ),
         ));
       }
     }
