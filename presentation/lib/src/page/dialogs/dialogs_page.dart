@@ -35,9 +35,6 @@ class DialogsPageState extends State<DialogsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dialogs'),
-      ),
       body: StreamBuilder<List<td.Chat>>(
         stream: viewModel.chats,
         initialData: const <td.Chat>[],

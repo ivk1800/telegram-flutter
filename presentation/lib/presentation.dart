@@ -52,7 +52,7 @@ void launch() {
           client: client,
           child: MaterialApp(
             navigatorKey: navigatorKey,
-            home: const DialogsPage(),
+            home: const RootPage(),
           ),
         ));
       } else if (newEvent.authorizationState
