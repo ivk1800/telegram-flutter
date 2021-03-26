@@ -6,6 +6,10 @@ import 'package:tdlib/td_client.dart' as tdc;
 class TdClient {
   int clientId = 0;
 
+  int extra = 1;
+
+  int nextExtra() => extra++;
+
   final PublishSubject<td.TdObject> _eventController =
       PublishSubject<td.TdObject>();
 
@@ -23,12 +27,14 @@ class TdClient {
   Future<void> clientSend(td.TdFunction event) =>
       tdc.TdClient.clientSend(clientId, event);
 
-  Stream<T> sendFunction<T extends td.TdObject>(td.TdFunction event) {
-    return Stream.fromFuture(clientSend(event)).flatMap((value) => events
+  Stream<T> sendFunction<T extends td.TdObject>(td.TdFunction func) {
+    return Stream.fromFuture(clientSend(func)).flatMap((value) => events
         .where((td.TdObject element) {
-          return element is T;
+          return element.getExtra() == func.getExtra();
         })
         .take(1)
-        .map((td.TdObject event) => event as T));
+        .map((td.TdObject event) {
+          return event as T;
+        }));
   }
 }

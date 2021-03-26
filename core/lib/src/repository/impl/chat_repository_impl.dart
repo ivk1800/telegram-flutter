@@ -1,8 +1,8 @@
+import 'package:collection/collection.dart';
 import 'package:core/core.dart';
 import 'package:core/src/repository/chat_repository.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
-import 'package:collection/collection.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
@@ -64,6 +64,7 @@ class ChatRepositoryImpl extends IChatRepository {
   Stream<List<td.Chat>> get chats => _chatsSubject;
 
   @override
-  Future<td.Chat> getChat(int id) =>
-      _client.sendFunction<td.Chat>(td.GetChat(chatId: id)).single;
+  Future<td.Chat> getChat(int id) => _client
+      .sendFunction<td.Chat>(td.GetChat(chatId: id, extra: _client.nextExtra()))
+      .single;
 }

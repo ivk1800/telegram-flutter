@@ -1,8 +1,10 @@
-import 'package:jugger/jugger.dart' as j;
-import 'package:tdlib/td_api.dart' as td;
+import 'dart:math';
+
 import 'package:core/src/repository/chat_message_repository.dart';
-import 'package:td_client/td_client.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
+import 'package:td_client/td_client.dart';
+import 'package:tdlib/td_api.dart' as td;
 
 class ChatMessageRepositoryImpl implements IChatMessageRepository {
   @j.inject
@@ -33,6 +35,7 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
           required int limit}) =>
       _client
           .sendFunction<td.Messages>(td.GetChatHistory(
+              extra: _client.nextExtra(),
               chatId: chatId,
               fromMessageId: fromMessageId,
               offset: 0,
