@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/presentation.dart';
+import 'package:presentation/src/app/app.dart';
 import 'package:presentation/src/navigation/navigation.dart';
 import 'package:presentation/src/util/util.dart';
 import 'package:td_client/td_client.dart';
@@ -12,6 +13,11 @@ abstract class AppModule {
   static TdClient provideTdClient() {
     return TdClient();
   }
+
+  @j.singleton
+  @j.provide
+  static OptionsManager provideOptionsManager(TdClient client) =>
+      OptionsManager(client);
 
   @j.singleton
   @j.bind
@@ -29,7 +35,7 @@ abstract class AppModule {
   @j.singleton
   @j.provide
   static INavigationRouter provideRootNavigationRouter() =>
-      RootNavigationRouter(navigatorKey);
+      RootNavigationRouter(MyApp.navigatorKey);
 
   @j.singleton
   @j.provide

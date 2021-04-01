@@ -9,12 +9,15 @@ import 'package:tdlib/td_api.dart' as td;
 class ChatRepositoryImpl extends IChatRepository {
   @j.inject
   ChatRepositoryImpl(this._client) {
-    _client.clientSend(td.GetChats(
+    _client.sendFunction(td.GetChats(
+      extra: _client.nextExtra(),
       offsetChatId: 0,
-      offsetOrder: 1000,
+      offsetOrder: 9223372036854775807,
       chatList: const td.ChatListMain(),
       limit: 10,
-    ));
+    )).listen((event) {
+      print('');
+    });
     _client.events
         .where((td.TdObject event) =>
             event is td.UpdateNewChat || event is td.UpdateChatLastMessage)

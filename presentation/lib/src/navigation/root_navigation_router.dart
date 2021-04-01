@@ -39,6 +39,24 @@ class RootNavigationRouter implements INavigationRouter {
     _push(route);
   }
 
+  @override
+  void toLogin() {
+    final PageRoute<dynamic> route = _defaultRoute(
+      (BuildContext context) => const LoginPage(),
+    );
+    _navigationKey.currentState
+        ?.pushAndRemoveUntil<dynamic>(route, (Route<dynamic> route) => false);
+  }
+
+  @override
+  void toRoot() {
+    final PageRoute<dynamic> route = _defaultRoute(
+      (BuildContext context) => const RootPage(),
+    );
+    _navigationKey.currentState
+        ?.pushAndRemoveUntil<dynamic>(route, (Route<dynamic> route) => false);
+  }
+
   void _push(Route<dynamic> route) {
     _navigationKey.currentState?.push<dynamic>(route);
   }
