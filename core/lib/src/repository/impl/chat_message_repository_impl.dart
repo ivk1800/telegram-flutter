@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:core/src/repository/chat_message_repository.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
@@ -33,13 +31,12 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
           {required int chatId,
           required int fromMessageId,
           required int limit}) =>
-      _client
-          .sendFunction<td.Messages>(td.GetChatHistory(
-              extra: _client.nextExtra(),
-              chatId: chatId,
-              fromMessageId: fromMessageId,
-              offset: 0,
-              limit: limit,
-              onlyLocal: false))
+      Stream<td.Messages>.fromFuture(_client.send<td.Messages>(
+              td.GetChatHistory(
+                  chatId: chatId,
+                  fromMessageId: fromMessageId,
+                  offset: 0,
+                  limit: limit,
+                  onlyLocal: false)))
           .map((td.Messages event) => event.messages ?? <td.Message>[]);
 }

@@ -5,17 +5,17 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
+import 'package:tdlib/td_client.dart';
 
 class ChatRepositoryImpl extends IChatRepository {
   @j.inject
   ChatRepositoryImpl(this._client) {
-    _client.sendFunction(td.GetChats(
-      extra: _client.nextExtra(),
+    Stream<td.Chats>.fromFuture(_client.send<td.Chats>(td.GetChats(
       offsetChatId: 0,
       offsetOrder: 9223372036854775807,
       chatList: const td.ChatListMain(),
       limit: 10,
-    )).listen((event) {
+    ))).listen((event) {
       print('');
     });
     _client.events
@@ -67,7 +67,6 @@ class ChatRepositoryImpl extends IChatRepository {
   Stream<List<td.Chat>> get chats => _chatsSubject;
 
   @override
-  Future<td.Chat> getChat(int id) => _client
-      .sendFunction<td.Chat>(td.GetChat(chatId: id, extra: _client.nextExtra()))
-      .single;
+  Future<td.Chat> getChat(int id) =>
+      _client.send<td.Chat>(td.GetChat(chatId: id));
 }

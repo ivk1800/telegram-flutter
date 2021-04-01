@@ -25,7 +25,7 @@ class TdImageLoaderState extends State<TdImageLoader> {
   void load(td.File image) {
     if (!image.local.isDownloadingActive &&
         !image.local.isDownloadingCompleted) {
-      widget.client.clientSend(td.DownloadFile(
+      widget.client.send<td.File>(td.DownloadFile(
           fileId: image.id,
           priority: 1,
           limit: 0,

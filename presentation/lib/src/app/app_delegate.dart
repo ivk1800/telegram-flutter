@@ -28,7 +28,7 @@ class AppDelegate {
       if (newEvent is td.UpdateAuthorizationState) {
         if (newEvent.authorizationState
             is td.AuthorizationStateWaitTdlibParameters) {
-          _client.clientSend(td.SetTdlibParameters(
+          _client.send<td.Ok>(td.SetTdlibParameters(
               parameters: td.TdlibParameters(
                   systemVersion: '1',
                   useTestDc: false,
@@ -48,7 +48,7 @@ class AppDelegate {
                   apiHash: '')));
         } else if (newEvent.authorizationState
             is td.AuthorizationStateWaitEncryptionKey) {
-          _client.clientSend(td.CheckDatabaseEncryptionKey(
+          _client.send<td.Ok>(td.CheckDatabaseEncryptionKey(
               encryptionKey: 'mostrandomencryption'));
         } else if (newEvent.authorizationState is td.AuthorizationStateReady) {
           _router.toRoot();

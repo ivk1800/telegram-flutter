@@ -10,7 +10,7 @@ class SessionRepositoryImpl implements ISessionRepository {
   final TdClient client;
 
   @override
-  Stream<List<td.Session>> get activeSessions => client
-      .sendFunction<td.Sessions>(td.GetActiveSessions())
+  Stream<List<td.Session>> get activeSessions => Stream<td.Sessions>.fromFuture(
+          client.send<td.Sessions>(td.GetActiveSessions()))
       .map((td.Sessions event) => event.sessions);
 }

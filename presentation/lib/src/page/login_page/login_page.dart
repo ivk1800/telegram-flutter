@@ -36,14 +36,13 @@ class LoginPageState extends State<LoginPage> {
               ),
               OutlinedButton(
                   onPressed: () {
-                    var d = td.SetAuthenticationPhoneNumber(
-                        phoneNumber: _phoneNumberController.text,
-                        settings: td.PhoneNumberAuthenticationSettings(
-                            isCurrentPhoneNumber: true,
-                            allowFlashCall: false,
-                            allowSmsRetrieverApi: false));
-                    d.extra = 'qwqe';
-                    appComponent.getTdClient().clientSend(d);
+                    appComponent.getTdClient().send<td.Ok>(
+                        td.SetAuthenticationPhoneNumber(
+                            phoneNumber: _phoneNumberController.text,
+                            settings: td.PhoneNumberAuthenticationSettings(
+                                isCurrentPhoneNumber: true,
+                                allowFlashCall: false,
+                                allowSmsRetrieverApi: false)));
                   },
                   child: Text('send phone')),
               TextField(
@@ -54,7 +53,7 @@ class LoginPageState extends State<LoginPage> {
               ),
               OutlinedButton(
                   onPressed: () {
-                    appComponent.getTdClient().clientSend(
+                    appComponent.getTdClient().send<td.Ok>(
                         td.CheckAuthenticationCode(code: _codeController.text));
                   },
                   child: Text('send code')),
