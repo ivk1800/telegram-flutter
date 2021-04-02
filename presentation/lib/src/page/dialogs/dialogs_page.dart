@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/presentation.dart';
+import 'package:presentation/src/model/tile/tile.dart';
 import 'package:presentation/src/tile/tile.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:jugger/jugger.dart' as j;
@@ -35,12 +36,13 @@ class DialogsPageState extends State<DialogsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<List<td.Chat>>(
+      body: StreamBuilder<List<ChatTileModel>>(
         stream: viewModel.chats,
-        initialData: const <td.Chat>[],
-        builder:
-            (BuildContext context, AsyncSnapshot<List<td.Chat>?> snapshot) {
-          final List<td.Chat> chats = snapshot.data ?? const <td.Chat>[];
+        initialData: const <ChatTileModel>[],
+        builder: (BuildContext context,
+            AsyncSnapshot<List<ChatTileModel>?> snapshot) {
+          final List<ChatTileModel> chats =
+              snapshot.data ?? const <ChatTileModel>[];
 
           return ListView.builder(
             itemCount: chats.length,

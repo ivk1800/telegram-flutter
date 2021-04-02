@@ -10,4 +10,7 @@ class DefaultStringProvider implements IStringsProvider {
 
   @override
   String get settings => 'Settings';
+
+  @override
+  String get sticker => 'Sticker';
 }
