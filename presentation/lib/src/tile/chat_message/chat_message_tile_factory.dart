@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:presentation/src/widget/widget.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:jugger/jugger.dart' as j;
 
@@ -8,8 +9,10 @@ import 'message_text_tile_factory.dart';
 
 class ChatMessageTileFactory {
   @j.inject
-  ChatMessageTileFactory(this._messageTextFactory, this._addMembersFactory);
+  ChatMessageTileFactory(this._messageTextFactory, this._addMembersFactory,
+      this._avatarWidgetFactory);
 
+  final AvatarWidgetFactory _avatarWidgetFactory;
   final MessageTextTileFactory _messageTextFactory;
   final AddMembersTileFactory _addMembersFactory;
 

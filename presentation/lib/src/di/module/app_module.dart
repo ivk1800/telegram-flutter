@@ -30,6 +30,10 @@ abstract class AppModule {
 
   @j.singleton
   @j.bind
+  IFileRepository bindFileRepository(FileRepositoryImpl impl);
+
+  @j.singleton
+  @j.bind
   ISessionRepository bindSessionRepository(SessionRepositoryImpl impl);
 
   @j.singleton
