@@ -1,5 +1,5 @@
 import 'package:presentation/presentation.dart';
 
-void main() {
-  launch();
+void main() async {
+  await launch();
 }

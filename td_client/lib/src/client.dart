@@ -23,4 +23,7 @@ class TdClient {
 
   Future<T> send<T extends td.TdObject>(td.TdFunction object) async =>
       _client.send(object);
+
+  Future<T> execute<T extends td.TdObject>(td.TdFunction object) async =>
+      _client.execute(object);
 }

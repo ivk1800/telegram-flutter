@@ -10,6 +10,7 @@ import 'package:tdlib/td_client.dart';
 class ChatRepositoryImpl extends IChatRepository {
   @j.inject
   ChatRepositoryImpl(this._client) {
+    /*
     Stream<td.Chats>.fromFuture(_client.send<td.Chats>(td.GetChats(
       offsetChatId: 0,
       offsetOrder: 9223372036854775807,
@@ -55,6 +56,7 @@ class ChatRepositoryImpl extends IChatRepository {
         _chatsSubject.add(_chats.values.toList());
       }
     });
+     */
   }
 
   final TdClient _client;
@@ -70,4 +72,35 @@ class ChatRepositoryImpl extends IChatRepository {
   @override
   Future<td.Chat> getChat(int id) =>
       _client.send<td.Chat>(td.GetChat(chatId: id));
+
+  @override
+  Future<List<td.Chat>> getChats(
+      {required int offsetChatId,
+      required int offsetOrder,
+      required int limit,
+      required td.ChatList chatList}) async {
+    final List<td.Chat> chats = <td.Chat>[];
+
+    final td.Chats result = await _client.send<td.Chats>(td.GetChats(
+      offsetChatId: offsetChatId,
+      offsetOrder: offsetOrder,
+      chatList: chatList,
+      limit: limit,
+    ));
+
+    chats.addAll(await Stream<td.Chat>.fromFutures(result.chatIds
+            .map((int e) => _client.send<td.Chat>(td.GetChat(chatId: e))))
+        .toList());
+
+    if (chats.length < limit && chats.isNotEmpty) {
+      final td.Chat lastChat = chats.last;
+      chats.addAll(await getChats(
+          chatList: chatList,
+          limit: limit - chats.length,
+          offsetChatId: lastChat.id,
+          offsetOrder: lastChat.positions[0].order));
+    }
+
+    return chats.take(limit).toList();
+  }
 }
