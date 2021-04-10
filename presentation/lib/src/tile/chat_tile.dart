@@ -17,43 +17,25 @@ class ChatTileFactory {
     return InkWell(
       onTap: () => onTap.call(chat.id),
       child: Padding(
-        padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
+        padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 65,
-              height: 65,
-              child: _avatarWidgetFactory.create(context, chat.photoId),
-            ),
+          children: <Widget>[
+            _avatarWidgetFactory.create(context, chat.photoId),
             const SizedBox(
-              width: 12,
+              width: 8,
             ),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text.rich(
-                    chat.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6!
-                        .copyWith(fontSize: 19),
-                  ),
+                children: <Widget>[
+                  _buildFirstLine(context, chat),
                   const SizedBox(
                     height: 4,
                   ),
-                  Text.rich(chat.subtitle,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .caption!
-                          .copyWith(fontSize: 19))
+                  _buildSecondLine(context, chat)
                 ],
               ),
             )
@@ -61,5 +43,34 @@ class ChatTileFactory {
         ),
       ),
     );
+  }
+
+  Widget _buildFirstLine(BuildContext context, ChatTileModel chat) {
+    return Row(
+      children: [
+        Expanded(
+          child: Text.rich(
+            chat.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style:
+                Theme.of(context).textTheme.headline6!.copyWith(fontSize: 19),
+          ),
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Text(chat.lastMessageDate ?? '',
+            style:
+                Theme.of(context).textTheme.headline6!.copyWith(fontSize: 17))
+      ],
+    );
+  }
+
+  Widget _buildSecondLine(BuildContext context, ChatTileModel chat) {
+    return Text.rich(chat.subtitle,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 19));
   }
 }

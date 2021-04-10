@@ -43,5 +43,13 @@ abstract class AppModule {
 
   @j.singleton
   @j.provide
+  static DateFormatter provideDateFormatter() => DateFormatter();
+
+  @j.singleton
+  @j.provide
+  static DateParser provideDateParser() => DateParser();
+
+  @j.singleton
+  @j.provide
   static IStringsProvider provideStringsProvider() => DefaultStringProvider();
 }

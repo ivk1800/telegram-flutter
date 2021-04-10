@@ -24,6 +24,10 @@ abstract class AppComponent {
 
   IStringsProvider getStringsProvider();
 
+  DateFormatter getDateFormatter();
+
+  DateParser getDateParser();
+
   void injectDialogsState(DialogsPageState state);
 }
 

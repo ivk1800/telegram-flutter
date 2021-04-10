@@ -21,10 +21,10 @@ class ChatListInteractor {
 
   void load() {
     Stream<List<td.Chat>>.fromFuture(_chatRepository.getChats(
-        offsetChatId: 0,
-        offsetOrder: numerics.int64MaxValue,
-        chatList: const td.ChatListMain(),
-        limit: 30))
+            offsetChatId: 0,
+            offsetOrder: numerics.int64MaxValue,
+            chatList: const td.ChatListMain(),
+            limit: 30))
         .listen((List<td.Chat> event) {
       _chatsSubject.add(event
           .map((td.Chat chat) => _chatTileModelMapper.mapToModel(chat))
