@@ -21,7 +21,8 @@ class ChatTileFactory {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            _avatarWidgetFactory.create(context, chat.photoId),
+            _avatarWidgetFactory.create(context,
+                chatId: chat.id, imageId: chat.photoId, radius: 30),
             const SizedBox(
               width: 8,
             ),
@@ -54,15 +55,14 @@ class ChatTileFactory {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style:
-                Theme.of(context).textTheme.headline6!.copyWith(fontSize: 19),
+                Theme.of(context).textTheme.headline6!.copyWith(fontSize: 16),
           ),
         ),
         const SizedBox(
           width: 8,
         ),
         Text(chat.lastMessageDate ?? '',
-            style:
-                Theme.of(context).textTheme.headline6!.copyWith(fontSize: 17))
+            style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 14))
       ],
     );
   }
@@ -71,6 +71,6 @@ class ChatTileFactory {
     return Text.rich(chat.subtitle,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 19));
+        style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16));
   }
 }

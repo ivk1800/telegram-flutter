@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,9 +11,21 @@ class AvatarWidgetFactory {
 
   final IFileRepository _fileRepository;
 
-  Widget create(BuildContext context, int? imageId) {
+  /// https://github.com/DrKLO/Telegram/blob/ca13bc972dda0498b8ffb40276423a49325cd26d/TMessagesProj/src/main/java/org/telegram/ui/ActionBar/Theme.java#L119
+  List<Color> colors = <Color>[
+    const Color(0xffe56555),
+    const Color(0xfff28c48),
+    const Color(0xff8e85ee),
+    const Color(0xff76c84d),
+    const Color(0xff5fbed5),
+    const Color(0xff549cdd),
+    const Color(0xfff2749a),
+  ];
+
+  Widget create(BuildContext context,
+      {required double radius, required int chatId, int? imageId}) {
     if (imageId == null) {
-      return const CircleAvatar(maxRadius: _AvatarRadius);
+      return _createDefaultAvatar(radius: radius, chatId: chatId);
     }
 
     return FutureBuilder<td.LocalFile>(
@@ -23,16 +34,18 @@ class AvatarWidgetFactory {
         final String? path = snapshot.data?.path;
 
         if (path == null) {
-          return const CircleAvatar(
-            maxRadius: _AvatarRadius,
-          );
+          return _createDefaultAvatar(radius: radius, chatId: chatId);
         }
 
         return CircleAvatar(
-            maxRadius: _AvatarRadius, backgroundImage: FileImage(File(path)));
+            maxRadius: radius, backgroundImage: FileImage(File(path)));
       },
     );
   }
 
-  static const double _AvatarRadius = 30;
+  Widget _createDefaultAvatar({required double radius, required int chatId}) {
+    return CircleAvatar(
+        backgroundColor: colors[(chatId % colors.length).abs()],
+        maxRadius: radius);
+  }
 }
