@@ -365,6 +365,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.td.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_WORKSPACE = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Profile;
@@ -421,6 +422,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -492,6 +494,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.td.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_WORKSPACE = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -514,6 +517,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.td.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_WORKSPACE = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
