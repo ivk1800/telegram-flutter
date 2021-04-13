@@ -1,9 +1,10 @@
 import 'package:core/core.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:presentation/presentation.dart';
+import 'package:presentation/src/util/chat/list/chat_list.dart';
+import 'package:tdlib/td_api.dart' as td;
 import 'package:presentation/src/model/model.dart';
 import 'package:presentation/src/navigation/navigation.dart';
-
-import 'chat_list_interactor.dart';
 
 class DialogsViewModel extends BaseViewModel {
   @j.inject
@@ -17,7 +18,16 @@ class DialogsViewModel extends BaseViewModel {
 
   Stream<List<ChatTileModel>> get chats => _interactor.chats;
 
-  void onChatClick(int id) {
+  void onChatTap(int id) {
     _router.toChat(id);
+  }
+
+  void onChatPinToggleTap(int id) {
+    final td.Chat chat = _interactor.getChat(id);
+
+    appComponent.getTdClient().send<td.Ok>(td.ToggleChatIsPinned(
+        chatList: const td.ChatListMain(),
+        chatId: chat.id,
+        isPinned: !chat.positions[0].isPinned));
   }
 }

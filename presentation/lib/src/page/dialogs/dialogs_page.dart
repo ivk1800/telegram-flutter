@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/presentation.dart';
 import 'package:presentation/src/model/tile/tile.dart';
 import 'package:presentation/src/tile/tile.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:presentation/src/di/component/screen/chats_list_screen_component.dart';
 import 'package:jugger/jugger.dart' as j;
 
 import 'dialogs_view_model.dart';
@@ -14,7 +13,7 @@ class DialogsPage extends StatefulWidget {
   DialogsPageState createState() => DialogsPageState();
 }
 
-class DialogsPageState extends State<DialogsPage> {
+class DialogsPageState extends State<DialogsPage> implements ChatTileListener {
   @j.inject
   late ChatTileFactory chatTileFactory;
 
@@ -23,7 +22,7 @@ class DialogsPageState extends State<DialogsPage> {
 
   @override
   void initState() {
-    appComponent.injectDialogsState(this);
+    inject();
     super.initState();
   }
 
@@ -47,12 +46,17 @@ class DialogsPageState extends State<DialogsPage> {
           return ListView.builder(
             itemCount: chats.length,
             itemBuilder: (BuildContext context, int index) {
-              return chatTileFactory.create(
-                  context, chats[index], viewModel.onChatClick);
+              return chatTileFactory.create(context, chats[index]);
             },
           );
         },
       ),
     );
   }
+
+  @override
+  void onChatTap(int id) => viewModel.onChatTap(id);
+
+  @override
+  void onTogglePinTap(int id) => viewModel.onChatPinToggleTap(id);
 }
