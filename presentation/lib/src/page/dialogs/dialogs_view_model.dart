@@ -30,4 +30,10 @@ class DialogsViewModel extends BaseViewModel {
         chatId: chat.id,
         isPinned: !chat.positions[0].isPinned));
   }
+
+  @override
+  void dispose() {
+    _interactor.dispose();
+    super.dispose();
+  }
 }
