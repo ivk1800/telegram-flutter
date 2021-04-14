@@ -1,21 +1,31 @@
+import 'package:core/core.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:td_client/td_client.dart';
 import 'package:jugger/jugger.dart' as j;
 
 import 'chat_updates_provider.dart';
 
-class UpdatesProvider implements IChatUpdatesProvider {
+class UpdatesProvider
+    implements IChatUpdatesProvider, IConnectionStateUpdatesProvider {
   @j.inject
   UpdatesProvider({required TdClient client}) : _client = client;
 
   final TdClient _client;
 
   @override
-  Stream<td.Update> get chatUpdates => _client.events.filterChatUpdates();
+  Stream<td.Update> get chatUpdates => _client.events.chatUpdatesFilter();
+
+  @override
+  Stream<td.UpdateConnectionState> get connectionStateUpdates =>
+      _client.events.connectionStateUpdatesFilter();
 }
 
 extension Sd on Stream<td.TdObject> {
-  Stream<td.Update> filterChatUpdates() => where((td.TdObject event) =>
+  Stream<td.UpdateConnectionState> connectionStateUpdatesFilter() =>
+      where((td.TdObject event) => event is td.UpdateConnectionState)
+          .cast<td.UpdateConnectionState>();
+
+  Stream<td.Update> chatUpdatesFilter() => where((td.TdObject event) =>
       event is td.UpdateNewChat ||
       event is td.UpdateChatTitle ||
       event is td.UpdateChatPhoto ||

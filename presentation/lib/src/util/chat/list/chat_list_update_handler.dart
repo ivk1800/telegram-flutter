@@ -29,14 +29,22 @@ class ChatListUpdateHandler {
   Map<int, ChatData> get _chats => _holder.chatsData;
 
   void handleNewChat({required td.Chat chat}) {
+    if (chat.positions.isEmpty) {
+      _chats[chat.id] = _toChatData(chat);
+      return;
+    }
     assert(chat.positions.length == 1);
+
     final int order = chat.positions[0].order;
     _orderedChats.add(OrderedChat(chatId: chat.id, order: order));
 
-    final ChatData node =
-        ChatData(chat: chat, model: _chatTileModelMapper.mapToModel(chat));
-    assert(node.chat.positions.length == 1);
-    _chats[chat.id] = node;
+    final ChatData data = _toChatData(chat);
+    assert(data.chat.positions.length == 1);
+    _chats[chat.id] = data;
+  }
+
+  ChatData _toChatData(td.Chat chat) {
+    return ChatData(chat: chat, model: _chatTileModelMapper.mapToModel(chat));
   }
 
   void handleNewPosition(int chatId, td.ChatPosition position) {

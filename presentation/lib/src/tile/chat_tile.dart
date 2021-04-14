@@ -30,7 +30,7 @@ class ChatTileFactory {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               _avatarWidgetFactory.create(context,
-                  chatId: chat.id, imageId: chat.photoId, radius: 30),
+                  chatId: chat.id, imageId: chat.photoId, radius: 27),
               const SizedBox(
                 width: 8,
               ),

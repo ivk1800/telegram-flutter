@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/presentation.dart';
-import 'package:presentation/src/navigation/navigation.dart';
 import 'package:presentation/src/page/dialogs/dialogs_page.dart';
-import 'package:presentation/src/util/string_provider.dart';
-import 'package:presentation/src/di/component/screen/profile_screen_component.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:presentation/src/widget/widget.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
@@ -14,14 +12,22 @@ class RootPage extends StatefulWidget {
 }
 
 class RootPageState extends State<RootPage> {
+  @j.inject
+  late ConnectionStateWidgetFactory connectionStateWidgetFactory;
+
   @override
   void initState() {
+    appComponent.injectRootPageState(this);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: connectionStateWidgetFactory.create(
+              context, (BuildContext context) => const Text('Telegram')),
+        ),
         drawer: Drawer(
           child: ListView(
             // Important: Remove any padding from the ListView.
@@ -87,9 +93,6 @@ class RootPageState extends State<RootPage> {
               ),
             ],
           ),
-        ),
-        appBar: AppBar(
-          title: const Text('Telegram'),
         ),
         body: const DialogsPage());
   }
