@@ -32,6 +32,10 @@ abstract class AppComponent {
 
   IChatUpdatesProvider getChatUpdatesProvider();
 
+  IConnectivityProvider getConnectivityProvider();
+
+  IAppLifecycleStateProvider getIAppLifecycleStateProvider();
+
   void injectRootPageState(RootPageState state);
 }
 

@@ -37,6 +37,15 @@ abstract class AppModule {
   ISessionRepository bindSessionRepository(SessionRepositoryImpl impl);
 
   @j.singleton
+  @j.bind
+  IConnectivityProvider bindConnectivityProvider(ConnectivityProviderImpl impl);
+
+  @j.singleton
+  @j.bind
+  IAppLifecycleStateProvider bindAppLifecycleStateProvider(
+      AppLifecycleStateProviderImpl impl);
+
+  @j.singleton
   @j.provide
   static INavigationRouter provideRootNavigationRouter() =>
       RootNavigationRouter(MyApp.navigatorKey);

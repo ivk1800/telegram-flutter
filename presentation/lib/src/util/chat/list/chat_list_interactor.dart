@@ -83,7 +83,9 @@ class ChatListInteractor implements IChatsHolder {
         _chatListUpdateHandler.handleLastMessage(
             event.chatId, event.lastMessage);
         _chatListUpdateHandler.handleNewPosition(
-            event.chatId, event.positions.first);
+            //TODO  event.positions may be empty
+            event.chatId,
+            event.positions.first);
         _dispatchChats();
       }
     }

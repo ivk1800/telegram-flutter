@@ -1,17 +1,32 @@
+import 'dart:ui';
+
 import 'package:core/core.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:presentation/src/navigation/navigation.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:jugger/jugger.dart' as j;
+import 'package:rxdart/rxdart.dart';
 
 class AppDelegate {
   @j.inject
-  AppDelegate(this._client, this._router, this._optionsManager) {
+  AppDelegate(
+      {required TdClient client,
+      required INavigationRouter router,
+      required IAppLifecycleStateProvider appLifecycleStateProvider,
+      required IConnectivityProvider connectivityProvider,
+      required OptionsManager optionsManager})
+      : _router = router,
+        _client = client,
+        _appLifecycleStateProvider = appLifecycleStateProvider,
+        _connectivityProvider = connectivityProvider,
+        _optionsManager = optionsManager {
     _init();
   }
 
   final INavigationRouter _router;
+  final IConnectivityProvider _connectivityProvider;
+  final IAppLifecycleStateProvider _appLifecycleStateProvider;
   final TdClient _client;
   final OptionsManager _optionsManager;
 
@@ -24,6 +39,18 @@ class AppDelegate {
   }
 
   void _init() {
+    _connectivityProvider.onStatusChange
+        .startWith(_connectivityProvider.status)
+        .listen((ConnectivityStatus status) {
+      _client.send(td.SetNetworkType(type: status.toNetworkType()));
+    });
+
+    _appLifecycleStateProvider.onStateChange
+        .where((AppLifecycleState state) => state == AppLifecycleState.resumed)
+        .map((AppLifecycleState event) => _connectivityProvider.status)
+        .listen((ConnectivityStatus event) {
+      _client.send(td.SetNetworkType(type: event.toNetworkType()));
+    });
     _client.events.listen((td.TdObject newEvent) async {
       if (newEvent is td.UpdateAuthorizationState) {
         if (newEvent.authorizationState
