@@ -31,7 +31,7 @@ class AvatarWidgetFactory {
     return FutureBuilder<td.LocalFile>(
       future: _fileRepository.getLocalFile(imageId),
       builder: (BuildContext context, AsyncSnapshot<td.LocalFile> snapshot) {
-        final String? path = snapshot.data?.path;
+        final String? path = _fileRepository.getPathOrNull(imageId);
 
         if (path == null) {
           return _createDefaultAvatar(radius: radius, chatId: chatId);

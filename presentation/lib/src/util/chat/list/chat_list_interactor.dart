@@ -86,6 +86,10 @@ class ChatListInteractor {
       if (handleLastMessage || handleNewPositions) {
         _dispatchChats();
       }
+    } else if (event is td.UpdateChatReadInbox) {
+      if (_chatListUpdateHandler.handleUpdateChatReadInbox(event)) {
+        _dispatchChats();
+      }
     }
   }
 }

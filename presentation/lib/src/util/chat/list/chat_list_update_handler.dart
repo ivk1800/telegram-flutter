@@ -92,6 +92,23 @@ class ChatListUpdateHandler {
     chatData.model = _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }
+
+  bool handleUpdateChatReadInbox(td.UpdateChatReadInbox update) {
+    final ChatData? chatData = _getChatData(update.chatId);
+
+    if (chatData == null) {
+      return false;
+    }
+
+    chatData.chat = chatData.chat.copy(
+        unreadCount: update.unreadCount,
+        lastReadInboxMessageId: update.lastReadInboxMessageId);
+
+    chatData.model = _chatTileModelMapper.mapToModel(chatData.chat);
+    return true;
+  }
+
+  ChatData? _getChatData(int chatId) => _chats[chatId];
 }
 
 extension _ChatExtensions on td.Chat {

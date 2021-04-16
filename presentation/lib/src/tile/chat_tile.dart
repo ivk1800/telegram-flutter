@@ -100,9 +100,27 @@ class ChatTileFactory {
   }
 
   Widget _buildSecondLine(BuildContext context, ChatTileModel chat) {
-    return Text.rich(chat.subtitle,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16));
+    final List<Widget> children = <Widget>[
+        Expanded(
+          child: Text.rich(chat.subtitle,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16)),
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+
+      ];
+
+    if (chat.unreadMessagesCount > 0) {
+      children.add(Chip(
+          labelPadding: EdgeInsets.zero,
+          label: Text('${chat.unreadMessagesCount}')
+      ));
+    }
+    return Row(
+      children: children,
+    );
   }
 }

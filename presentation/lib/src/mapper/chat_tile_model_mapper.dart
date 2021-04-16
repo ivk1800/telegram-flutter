@@ -16,6 +16,7 @@ class ChatTileModelMapper {
   ChatTileModel mapToModel(td.Chat chat) {
     assert(chat.positions.length == 1);
     return ChatTileModel(
+        unreadMessagesCount: chat.unreadCount,
         isPinned: chat.positions[0].isPinned,
         lastMessageDate: _dateFormatter.formatChatLastMessageDateOrNull(
             _dateParser.parseUnixTimeStampToDateOrNull(chat.lastMessage?.date)),

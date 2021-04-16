@@ -20,6 +20,7 @@ class FileRepositoryImpl implements IFileRepository {
   final TdClient _client;
 
   final Map<int, Future<td.LocalFile>> _cache = <int, Future<td.LocalFile>>{};
+  final Map<int, String> _pathCache = <int, String>{};
 
   @override
   Future<td.LocalFile> getLocalFile(int id) {
@@ -28,6 +29,7 @@ class FileRepositoryImpl implements IFileRepository {
         () =>
             _client.send<td.File>(td.GetFile(fileId: id)).then((td.File value) {
               if (value.local.isDownloadingCompleted) {
+                _pathCache[id] = value.local.path;
                 return Future<td.LocalFile>.value(value.local);
               }
 
@@ -39,8 +41,12 @@ class FileRepositoryImpl implements IFileRepository {
                       offset: 0,
                       synchronous: true))
                   .then((td.File value) {
+                    _pathCache[id] = value.local.path;
                 return value.local;
               });
             }));
   }
+
+  @override
+  String? getPathOrNull(int id) => _pathCache[id];
 }
