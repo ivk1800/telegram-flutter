@@ -1,41 +1,44 @@
+import 'package:core/core.dart';
 import 'package:presentation/src/mapper/mapper.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:jugger/jugger.dart' as j;
 import 'package:tdlib/td_client.dart';
+import 'dart:collection';
+import 'package:collection/collection.dart';
 import 'package:presentation/src/model/model.dart';
 import 'chat_data.dart';
+import 'chat_list.dart';
+import 'chat_list_config.dart';
 import 'ordered_chat.dart';
-
-abstract class IChatsHolder {
-  Set<OrderedChat> get orderedChats;
-
-  Map<int, ChatData> get chatsData;
-}
 
 class ChatListUpdateHandler {
   @j.inject
-  ChatListUpdateHandler(this._chatTileModelMapper);
+  ChatListUpdateHandler(
+      {required IChatRepository chatRepository,
+      required ChatListConfig chatListConfig,
+      required IChatsHolder chatsHolder,
+      required ChatTileModelMapper chatTileModelMapper})
+      : _chatTileModelMapper = chatTileModelMapper,
+        _chatListConfig = chatListConfig,
+        _chatsHolder = chatsHolder,
+        _chatRepository = chatRepository;
 
   final ChatTileModelMapper _chatTileModelMapper;
+  final IChatsHolder _chatsHolder;
+  final IChatRepository _chatRepository;
+  final ChatListConfig _chatListConfig;
 
-  late IChatsHolder _holder;
+  Set<OrderedChat> get _orderedChats => _chatsHolder.orderedChats;
 
-  void bind(IChatsHolder holder) {
-    _holder = holder;
-  }
-
-  Set<OrderedChat> get _orderedChats => _holder.orderedChats;
-
-  Map<int, ChatData> get _chats => _holder.chatsData;
+  Map<int, ChatData> get _chats => _chatsHolder.chatsData;
 
   void handleNewChat({required td.Chat chat}) {
     if (chat.positions.isEmpty) {
-      _chats[chat.id] = _toChatData(chat);
       return;
     }
     assert(chat.positions.length == 1);
 
-    final int order = chat.positions[0].order;
+    final int order = chat.getPosition().order;
     _orderedChats.add(OrderedChat(chatId: chat.id, order: order));
 
     final ChatData data = _toChatData(chat);
@@ -47,24 +50,53 @@ class ChatListUpdateHandler {
     return ChatData(chat: chat, model: _chatTileModelMapper.mapToModel(chat));
   }
 
-  void handleNewPosition(int chatId, td.ChatPosition position) {
+  bool handleNewPositions(int chatId, List<td.ChatPosition> positions) {
+    final td.ChatPosition? position = positions.firstWhereOrNull(
+        (td.ChatPosition position) =>
+            position.list.getConstructor() ==
+            _chatListConfig.chatList.getConstructor());
+
+    if (position != null) {
+      return handleNewPosition(chatId, position);
+    }
+    return false;
+  }
+
+  bool handleNewPosition(int chatId, td.ChatPosition position) {
+    if (!_chats.containsKey(chatId)) {
+      return false;
+    }
+
     final ChatData chatData = _chats[chatId]!;
     assert(chatData.chat.positions.length == 1);
-    assert(_orderedChats.remove(OrderedChat(
-        chatId: chatData.chat.id, order: chatData.chat.positions[0].order)));
-
+    final bool remove = _orderedChats.remove(OrderedChat(
+        chatId: chatData.chat.id, order: chatData.chat.getPosition().order));
+    assert(remove);
     chatData.chat = chatData.chat.copy(positions: <td.ChatPosition>[position]);
     chatData.model = chatData.model.copy(isPinned: position.isPinned);
 
     _orderedChats
         .add(OrderedChat(chatId: chatData.chat.id, order: position.order));
+
+    return true;
   }
 
-  void handleLastMessage(int chatId, td.Message? message) {
+  bool handleLastMessage(int chatId, td.Message? message) {
+    if (!_chats.containsKey(chatId)) {
+      return false;
+    }
     final ChatData chatData = _chats[chatId]!;
     chatData.chat = chatData.chat.copy(lastMessage: message);
     // ignore: flutter_style_todos
     //TODO(Ivan): map only changed part
     chatData.model = _chatTileModelMapper.mapToModel(chatData.chat);
+    return true;
+  }
+}
+
+extension _ChatExtensions on td.Chat {
+  td.ChatPosition getPosition() {
+    assert(positions.length == 1);
+    return positions[0];
   }
 }
