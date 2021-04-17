@@ -12,7 +12,11 @@ abstract class ChatTileListener {
 
 class ChatTileFactory {
   @j.inject
-  ChatTileFactory(this._avatarWidgetFactory, this._listener);
+  ChatTileFactory(
+      {required AvatarWidgetFactory avatarWidgetFactory,
+      required ChatTileListener listener})
+      : _avatarWidgetFactory = avatarWidgetFactory,
+        _listener = listener;
 
   final AvatarWidgetFactory _avatarWidgetFactory;
   final ChatTileListener _listener;
@@ -101,23 +105,21 @@ class ChatTileFactory {
 
   Widget _buildSecondLine(BuildContext context, ChatTileModel chat) {
     final List<Widget> children = <Widget>[
-        Expanded(
-          child: Text.rich(chat.subtitle,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16)),
-        ),
-        const SizedBox(
-          width: 8,
-        ),
-
-      ];
+      Expanded(
+        child: Text.rich(chat.subtitle,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16)),
+      ),
+      const SizedBox(
+        width: 8,
+      ),
+    ];
 
     if (chat.unreadMessagesCount > 0) {
       children.add(Chip(
           labelPadding: EdgeInsets.zero,
-          label: Text('${chat.unreadMessagesCount}')
-      ));
+          label: Text('${chat.unreadMessagesCount}')));
     }
     return Row(
       children: children,

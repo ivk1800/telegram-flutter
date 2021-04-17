@@ -7,7 +7,8 @@ import 'package:jugger/jugger.dart' as j;
 
 class AvatarWidgetFactory {
   @j.inject
-  AvatarWidgetFactory(this._fileRepository);
+  AvatarWidgetFactory({required IFileRepository fileRepository})
+      : _fileRepository = fileRepository;
 
   final IFileRepository _fileRepository;
 

@@ -41,7 +41,7 @@ class FileRepositoryImpl implements IFileRepository {
                       offset: 0,
                       synchronous: true))
                   .then((td.File value) {
-                    _pathCache[id] = value.local.path;
+                _pathCache[id] = value.local.path;
                 return value.local;
               });
             }));

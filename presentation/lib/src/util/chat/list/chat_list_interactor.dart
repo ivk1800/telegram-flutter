@@ -81,8 +81,7 @@ class ChatListInteractor {
       final bool handleLastMessage = _chatListUpdateHandler.handleLastMessage(
           event.chatId, event.lastMessage);
       final bool handleNewPositions = _chatListUpdateHandler.handleNewPositions(
-          event.chatId,
-          event.positions);
+          event.chatId, event.positions);
       if (handleLastMessage || handleNewPositions) {
         _dispatchChats();
       }
