@@ -133,7 +133,8 @@ class ChatTileFactory {
     widgets.add(Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: subtitleWidgets,),
+        children: subtitleWidgets,
+      ),
     ));
     if (model.isPinned) {
       widgets.add(const Align(
@@ -157,12 +158,12 @@ class ChatTileFactory {
 
     return Expanded(
         child: Text(
-          model.firstSubtitle!,
-          maxLines: model.secondSubtitle != null ? 1 : 2,
-          textAlign: TextAlign.start,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.subtitle1!.copyWith(color: theme.primaryColor),
-        ));
+      model.firstSubtitle!,
+      maxLines: model.secondSubtitle != null ? 1 : 2,
+      textAlign: TextAlign.start,
+      overflow: TextOverflow.ellipsis,
+      style: theme.textTheme.subtitle1!.copyWith(color: theme.primaryColor),
+    ));
   }
 
   Widget? _createSecondSubtitle(BuildContext context, ChatTileModel model) {
@@ -174,12 +175,12 @@ class ChatTileFactory {
 
     return Expanded(
         child: Text(
-          model.secondSubtitle!,
-          maxLines: model.firstSubtitle != null ? 1 : 2,
-          textAlign: TextAlign.start,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.subtitle1!.copyWith(color: Colors.grey[600]),
-        ));
+      model.secondSubtitle!,
+      maxLines: model.firstSubtitle != null ? 1 : 2,
+      textAlign: TextAlign.start,
+      overflow: TextOverflow.ellipsis,
+      style: theme.textTheme.subtitle1!.copyWith(color: Colors.grey[600]),
+    ));
   }
 
   void _showContextAlertDialog(

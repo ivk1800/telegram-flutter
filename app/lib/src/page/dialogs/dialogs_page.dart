@@ -20,14 +20,23 @@ class DialogsPageState extends State<DialogsPage> implements ChatTileListener {
   @j.inject
   late DialogsViewModel viewModel;
 
+  final ScrollController scrollController = ScrollController();
+
   @override
   void initState() {
     inject();
     super.initState();
+    scrollController.addListener(() {
+      final double extentAfter = scrollController.position.extentAfter;
+      if (extentAfter < 200) {
+        viewModel.onScroll();
+      }
+    });
   }
 
   @override
   void dispose() {
+    scrollController.dispose();
     viewModel.dispose();
     super.dispose();
   }
@@ -43,14 +52,17 @@ class DialogsPageState extends State<DialogsPage> implements ChatTileListener {
           final List<ChatTileModel> chats =
               snapshot.data ?? const <ChatTileModel>[];
 
-          return ListView.separated(
-            separatorBuilder: (BuildContext context, int index) {
-              return Divider(indent: 72, height: 0, color: Colors.grey[400]);
-            },
-            itemCount: chats.length,
-            itemBuilder: (BuildContext context, int index) {
-              return chatTileFactory.create(context, chats[index]);
-            },
+          return Scrollbar(
+            child: ListView.separated(
+              controller: scrollController,
+              separatorBuilder: (BuildContext context, int index) {
+                return Divider(indent: 72, height: 0, color: Colors.grey[400]);
+              },
+              itemCount: chats.length,
+              itemBuilder: (BuildContext context, int index) {
+                return chatTileFactory.create(context, chats[index]);
+              },
+            ),
           );
         },
       ),

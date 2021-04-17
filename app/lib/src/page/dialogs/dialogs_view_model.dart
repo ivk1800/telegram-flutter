@@ -31,6 +31,10 @@ class DialogsViewModel extends BaseViewModel {
         isPinned: !chat.positions[0].isPinned));
   }
 
+  void onScroll() {
+    _interactor.load();
+  }
+
   @override
   void dispose() {
     _interactor.dispose();

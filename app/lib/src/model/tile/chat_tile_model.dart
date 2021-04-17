@@ -2,18 +2,18 @@ import 'package:flutter/painting.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatTileModel {
-  ChatTileModel(
-      {this.photoId,
-      required this.id,
-      required this.unreadMessagesCount,
-      required this.isPinned,
-      required this.isOfficial,
-      required this.isMuted,
-      required this.lastMessageDate,
-      required this.title,
-      required this.firstSubtitle,
-      required this.secondSubtitle,
-      });
+  ChatTileModel({
+    this.photoId,
+    required this.id,
+    required this.unreadMessagesCount,
+    required this.isPinned,
+    required this.isOfficial,
+    required this.isMuted,
+    required this.lastMessageDate,
+    required this.title,
+    required this.firstSubtitle,
+    required this.secondSubtitle,
+  });
 
   final bool isPinned;
   final int id;
@@ -28,18 +28,17 @@ class ChatTileModel {
 }
 
 extension ChatTileModelExtension on ChatTileModel {
-  ChatTileModel copy({
-    bool? isPinned,
-    int? id,
-    int? unreadMessagesCount,
-    String? lastMessageDate,
-    int? photoId,
-    bool? isOfficial,
-    bool? isMuted,
-    String? title,
-    String? firstSubtitle,
-    String? secondSubtitle
-  }) =>
+  ChatTileModel copy(
+          {bool? isPinned,
+          int? id,
+          int? unreadMessagesCount,
+          String? lastMessageDate,
+          int? photoId,
+          bool? isOfficial,
+          bool? isMuted,
+          String? title,
+          String? firstSubtitle,
+          String? secondSubtitle}) =>
       ChatTileModel(
         isPinned: isPinned ?? this.isPinned,
         id: id ?? this.id,

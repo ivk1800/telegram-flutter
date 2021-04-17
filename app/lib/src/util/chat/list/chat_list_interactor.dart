@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:core/core.dart';
 import 'package:presentation/src/model/model.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:collection/collection.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:jugger/jugger.dart' as j;
 import 'package:dart_numerics/dart_numerics.dart' as numerics;
@@ -22,7 +23,29 @@ class ChatListInteractor {
         _chatsHolder = chatsHolder,
         _chatListConfig = chatListConfig,
         _chatListUpdateHandler = chatListUpdateHandler,
-        _chatUpdatesProvider = chatUpdatesProvider;
+        _chatUpdatesProvider = chatUpdatesProvider {
+    _loader = Loader<td.Chat>(
+      builder: () {
+        final OrderedChat? lastChat = _chatsHolder.orderedChats.lastOrNull;
+        return Stream<List<td.Chat>>.fromFuture(_chatRepository.getChats(
+            offsetChatId: lastChat?.chatId ?? 0,
+            offsetOrder: lastChat?.order ?? numerics.int64MaxValue,
+            chatList: _chatListConfig.chatList,
+            limit: 30));
+      },
+      onResult: (List<td.Chat> newChats) {
+        for (final td.Chat chat in newChats) {
+          _chatListUpdateHandler.handleNewChat(chat: chat);
+        }
+        _dispatchChats();
+        _chatUpdatesSubscription ??=
+            _chatUpdatesProvider.chatUpdates.listen(_handleChatUpdate);
+      },
+      onError: (dynamic error) {},
+    );
+  }
+
+  late Loader<td.Chat> _loader;
 
   final ChatListUpdateHandler _chatListUpdateHandler;
 
@@ -48,20 +71,7 @@ class ChatListInteractor {
   }
 
   void load() {
-    Stream<List<td.Chat>>.fromFuture(_chatRepository.getChats(
-            offsetChatId: 0,
-            offsetOrder: numerics.int64MaxValue,
-            chatList: _chatListConfig.chatList,
-            limit: 30))
-        .listen((List<td.Chat> newChats) {
-      for (final td.Chat chat in newChats) {
-        _chatListUpdateHandler.handleNewChat(chat: chat);
-      }
-      _dispatchChats();
-
-      _chatUpdatesSubscription =
-          _chatUpdatesProvider.chatUpdates.listen(_handleChatUpdate);
-    });
+    _loader.load();
   }
 
   void _dispatchChats() {

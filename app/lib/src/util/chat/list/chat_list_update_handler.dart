@@ -108,15 +108,16 @@ class ChatListUpdateHandler {
     return true;
   }
 
-  bool handleUpdateChatNotificationSettings(td.UpdateChatNotificationSettings update) {
+  bool handleUpdateChatNotificationSettings(
+      td.UpdateChatNotificationSettings update) {
     final ChatData? chatData = _getChatData(update.chatId);
 
     if (chatData == null) {
       return false;
     }
 
-    chatData.chat = chatData.chat.copy(
-        notificationSettings: update.notificationSettings);
+    chatData.chat =
+        chatData.chat.copy(notificationSettings: update.notificationSettings);
 
     chatData.model = _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
