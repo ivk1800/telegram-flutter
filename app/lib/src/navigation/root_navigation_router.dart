@@ -62,11 +62,6 @@ class RootNavigationRouter implements INavigationRouter {
   }
 
   PageRoute<dynamic> _defaultRoute(WidgetBuilder builder) {
-    return PageRouteBuilder<dynamic>(
-      pageBuilder: (BuildContext context, Animation<double> animation1,
-              Animation<double> animation2) =>
-          builder.call(context),
-      transitionDuration: const Duration(seconds: 0),
-    );
+    return MaterialPageRoute<dynamic>(builder: builder);
   }
 }

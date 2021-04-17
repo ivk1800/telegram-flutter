@@ -27,6 +27,12 @@ class RootPageState extends State<RootPage> {
         appBar: AppBar(
           title: connectionStateWidgetFactory.create(
               context, (BuildContext context) => const Text('Telegram')),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {},
+            ),
+          ],
         ),
         drawer: Drawer(
           child: ListView(

@@ -89,6 +89,10 @@ class ChatListInteractor {
       if (_chatListUpdateHandler.handleUpdateChatReadInbox(event)) {
         _dispatchChats();
       }
+    } else if (event is td.UpdateChatNotificationSettings) {
+      if (_chatListUpdateHandler.handleUpdateChatNotificationSettings(event)) {
+        _dispatchChats();
+      }
     }
   }
 }

@@ -49,6 +49,11 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
       client: widget.client,
       child: MaterialApp(
         navigatorKey: MyApp.navigatorKey,
+        theme: ThemeData(
+          platform: TargetPlatform.iOS,
+          primaryColor: const Color(0xff5682a3),
+          accentColor: const Color(0xff598fba),
+        ),
         home: Container(),
       ),
     );

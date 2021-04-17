@@ -43,7 +43,10 @@ class DialogsPageState extends State<DialogsPage> implements ChatTileListener {
           final List<ChatTileModel> chats =
               snapshot.data ?? const <ChatTileModel>[];
 
-          return ListView.builder(
+          return ListView.separated(
+            separatorBuilder: (BuildContext context, int index) {
+              return Divider(indent: 72, height: 0, color: Colors.grey[400]);
+            },
             itemCount: chats.length,
             itemBuilder: (BuildContext context, int index) {
               return chatTileFactory.create(context, chats[index]);

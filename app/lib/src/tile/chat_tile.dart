@@ -22,41 +22,164 @@ class ChatTileFactory {
   final ChatTileListener _listener;
 
   Widget create(BuildContext context, ChatTileModel chat) {
+    return _create(context, chat);
+  }
+
+  Widget _create(BuildContext context, ChatTileModel model) {
     return InkWell(
-      onLongPress: () => _showContextAlertDialog(context: context, chat: chat),
-      key: ObjectKey(chat.id),
-      onTap: () => _listener.onChatTap(chat.id),
-      child: Container(
-        color: chat.isPinned ? Colors.grey : Colors.transparent,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              _avatarWidgetFactory.create(context,
-                  chatId: chat.id, imageId: chat.photoId, radius: 27),
-              const SizedBox(
-                width: 8,
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    _buildFirstLine(context, chat),
-                    const SizedBox(
-                      height: 4,
+      onLongPress: () => _showContextAlertDialog(context: context, chat: model),
+      key: ObjectKey(model.id),
+      onTap: () => _listener.onChatTap(model.id),
+      child: Ink(
+        color: model.isPinned ? Colors.grey[200] : null,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 75,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+                    child: _avatarWidgetFactory.create(context,
+                        chatId: model.id, imageId: model.photoId, radius: 27),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 8.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          _buildFirstRow(context, model),
+                          Flexible(
+                            child: _buildSecondRow(context, model),
+                          ),
+                        ],
+                      ),
                     ),
-                    _buildSecondLine(context, chat)
-                  ],
-                ),
-              )
-            ],
-          ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  Widget _buildFirstRow(BuildContext context, ChatTileModel model) {
+    final ThemeData theme = Theme.of(context);
+
+    final List<Widget> widgets = <Widget>[];
+    widgets.add(
+      Flexible(
+        child: _buildTitle(context, model),
+      ),
+    );
+    widgets.add(Text(model.lastMessageDate ?? '',
+        style: theme.textTheme.caption!.copyWith(fontSize: 14)));
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      children: widgets,
+    );
+  }
+
+  Widget _buildTitle(BuildContext context, ChatTileModel model) {
+    final List<Widget> widgets = <Widget>[
+      Flexible(
+        child: Text(model.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+      ),
+    ];
+
+    if (model.isOfficial) {
+      widgets.add(
+        const Icon(Icons.star_sharp, color: Colors.green, size: 15),
+      );
+    }
+
+    if (model.isMuted) {
+      widgets.add(const Icon(Icons.volume_off, color: Colors.grey, size: 15));
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: widgets,
+    );
+  }
+
+  Widget _buildSecondRow(BuildContext context, ChatTileModel model) {
+    final List<Widget> widgets = <Widget>[];
+    final List<Widget> subtitleWidgets = <Widget>[];
+
+    final Widget? firstSubtitle = _createFirstSubtitle(context, model);
+    final Widget? secondSubtitle = _createSecondSubtitle(context, model);
+
+    if (firstSubtitle != null) {
+      subtitleWidgets.add(firstSubtitle);
+    }
+
+    if (secondSubtitle != null) {
+      subtitleWidgets.add(secondSubtitle);
+    }
+
+    widgets.add(Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: subtitleWidgets,),
+    ));
+    if (model.isPinned) {
+      widgets.add(const Align(
+          alignment: Alignment.bottomCenter,
+          child: Icon(Icons.push_pin_rounded, size: 18, color: Colors.grey)));
+    }
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      children: widgets,
+    );
+  }
+
+  Widget? _createFirstSubtitle(BuildContext context, ChatTileModel model) {
+    final ThemeData theme = Theme.of(context);
+
+    if (model.firstSubtitle == null) {
+      return null;
+    }
+
+    return Expanded(
+        child: Text(
+          model.firstSubtitle!,
+          maxLines: model.secondSubtitle != null ? 1 : 2,
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+          style: theme.textTheme.subtitle1!.copyWith(color: theme.primaryColor),
+        ));
+  }
+
+  Widget? _createSecondSubtitle(BuildContext context, ChatTileModel model) {
+    final ThemeData theme = Theme.of(context);
+
+    if (model.secondSubtitle == null) {
+      return null;
+    }
+
+    return Expanded(
+        child: Text(
+          model.secondSubtitle!,
+          maxLines: model.firstSubtitle != null ? 1 : 2,
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+          style: theme.textTheme.subtitle1!.copyWith(color: Colors.grey[600]),
+        ));
   }
 
   void _showContextAlertDialog(
@@ -80,49 +203,5 @@ class ChatTileFactory {
         },
       ),
     ));
-  }
-
-  Widget _buildFirstLine(BuildContext context, ChatTileModel chat) {
-    return Row(
-      children: [
-        Expanded(
-          child: Text.rich(
-            chat.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style:
-                Theme.of(context).textTheme.headline6!.copyWith(fontSize: 16),
-          ),
-        ),
-        const SizedBox(
-          width: 8,
-        ),
-        Text(chat.lastMessageDate ?? '',
-            style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 14))
-      ],
-    );
-  }
-
-  Widget _buildSecondLine(BuildContext context, ChatTileModel chat) {
-    final List<Widget> children = <Widget>[
-      Expanded(
-        child: Text.rich(chat.subtitle,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16)),
-      ),
-      const SizedBox(
-        width: 8,
-      ),
-    ];
-
-    if (chat.unreadMessagesCount > 0) {
-      children.add(Chip(
-          labelPadding: EdgeInsets.zero,
-          label: Text('${chat.unreadMessagesCount}')));
-    }
-    return Row(
-      children: children,
-    );
   }
 }

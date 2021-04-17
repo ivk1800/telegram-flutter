@@ -12,34 +12,13 @@ class DemoChatListPage extends StatefulWidget {
 
 class _DemoChatListPageState extends State<DemoChatListPage>
     implements ChatTileListener {
-  final List<ChatTileModel> _models = <ChatTileModel>[
-    ChatTileModel(
-        id: 1,
-        unreadMessagesCount: 0,
-        isPinned: true,
-        lastMessageDate: '20:12',
-        title: const TextSpan(text: 'title'),
-        subtitle: const TextSpan(text: 'subtitle')),
-    ChatTileModel(
-        id: 2,
-        unreadMessagesCount: 0,
-        isPinned: false,
-        lastMessageDate: '20:12',
-        title: const TextSpan(text: 'title'),
-        subtitle: const TextSpan(text: 'subtitle')),
-    ChatTileModel(
-        id: 3,
-        unreadMessagesCount: 10,
-        isPinned: false,
-        lastMessageDate: '20:12',
-        title: const TextSpan(text: 'title'),
-        subtitle: const TextSpan(text: 'subtitle'))
-  ];
+  late List<ChatTileModel> _models;
   late ChatTileFactory _chatTileFactory;
 
   @override
   void initState() {
     super.initState();
+    _models = _createModels();
     final AvatarWidgetFactory avatarWidgetFactory =
         AvatarWidgetFactory(fileRepository: DemoFileRepository());
     _chatTileFactory = ChatTileFactory(
@@ -71,4 +50,53 @@ class _DemoChatListPageState extends State<DemoChatListPage>
   void onTogglePinTap(int id) {
     // TODO: implement onTogglePinTap
   }
+
+  List<ChatTileModel> _createModels() => <ChatTileModel>[
+        _createModel(id: 1, isPinned: true),
+        _createModel(
+          id: 2,
+        ),
+        _createModel(
+          id: 3,
+          isOfficial: true,
+        ),
+        _createModel(id: 4, isMuted: true),
+        _createModel(
+          id: 5,
+          isOfficial: true,
+          isMuted: true,
+        ),
+        _createModel(
+          id: 6,
+        ),
+        _createModel(id: 7, firstSubtitle: 'add user')
+      ];
+
+  ChatTileModel _createModel({
+    bool isPinned = false,
+    int id = 0,
+    int unreadMessagesCount = 0,
+    String? lastMessageDate = '12:43',
+    int? photoId,
+    bool isOfficial = false,
+    bool isMuted = false,
+    String title = 'title',
+    String? firstSubtitle,
+    String? secondSubtitle = _messageText,
+  }) {
+    return ChatTileModel(
+        id: id,
+        unreadMessagesCount: unreadMessagesCount,
+        isPinned: isPinned,
+        isOfficial: isOfficial,
+        photoId: photoId,
+        isMuted: isMuted,
+        lastMessageDate: lastMessageDate,
+        title: title,
+        firstSubtitle: firstSubtitle,
+        secondSubtitle: secondSubtitle);
+  }
+
+  static const String _messageText =
+      '🎉 More good news – I am happy to share that Telegram has raised over 1 billion by selling bonds (a form of debt) ';
 }
