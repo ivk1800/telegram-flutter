@@ -103,4 +103,8 @@ class ChatRepositoryImpl extends IChatRepository {
 
     return chats.take(limit).toList();
   }
+
+  @override
+  Future<td.Supergroup> getSupergroup(int id) =>
+      _client.send<td.Supergroup>(td.GetSupergroup(supergroupId: id));
 }

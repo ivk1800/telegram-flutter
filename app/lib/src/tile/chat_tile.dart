@@ -99,7 +99,7 @@ class ChatTileFactory {
       ),
     ];
 
-    if (model.isOfficial) {
+    if (model.isVerified) {
       widgets.add(
         const Icon(Icons.star_sharp, color: Colors.green, size: 15),
       );

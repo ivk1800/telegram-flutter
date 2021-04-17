@@ -33,9 +33,9 @@ class ChatListInteractor {
             chatList: _chatListConfig.chatList,
             limit: 30));
       },
-      onResult: (List<td.Chat> newChats) {
+      onResult: (List<td.Chat> newChats) async {
         for (final td.Chat chat in newChats) {
-          _chatListUpdateHandler.handleNewChat(chat: chat);
+          await _chatListUpdateHandler.handleNewChat(chat: chat);
         }
         _dispatchChats();
         _chatUpdatesSubscription ??=
@@ -67,6 +67,7 @@ class ChatListInteractor {
   td.Chat getChat(int id) => _chatsHolder.chatsData[id]!.chat;
 
   void dispose() {
+    _chatListUpdateHandler.dispose();
     _chatUpdatesSubscription?.cancel();
   }
 
@@ -81,26 +82,27 @@ class ChatListInteractor {
         .toList());
   }
 
-  void _handleChatUpdate(td.Update event) {
+  Future<void> _handleChatUpdate(td.Update event) async {
     if (event is td.UpdateChatPosition) {
-      if (_chatListUpdateHandler.handleNewPosition(
+      if (await _chatListUpdateHandler.handleNewPosition(
           event.chatId, event.position)) {
         _dispatchChats();
       }
     } else if (event is td.UpdateChatLastMessage) {
-      final bool handleLastMessage = _chatListUpdateHandler.handleLastMessage(
-          event.chatId, event.lastMessage);
-      final bool handleNewPositions = _chatListUpdateHandler.handleNewPositions(
-          event.chatId, event.positions);
+      final bool handleLastMessage = await _chatListUpdateHandler
+          .handleLastMessage(event.chatId, event.lastMessage);
+      final bool handleNewPositions = await _chatListUpdateHandler
+          .handleNewPositions(event.chatId, event.positions);
       if (handleLastMessage || handleNewPositions) {
         _dispatchChats();
       }
     } else if (event is td.UpdateChatReadInbox) {
-      if (_chatListUpdateHandler.handleUpdateChatReadInbox(event)) {
+      if (await _chatListUpdateHandler.handleUpdateChatReadInbox(event)) {
         _dispatchChats();
       }
     } else if (event is td.UpdateChatNotificationSettings) {
-      if (_chatListUpdateHandler.handleUpdateChatNotificationSettings(event)) {
+      if (await _chatListUpdateHandler
+          .handleUpdateChatNotificationSettings(event)) {
         _dispatchChats();
       }
     }

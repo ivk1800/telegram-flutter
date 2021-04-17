@@ -1,7 +1,5 @@
 import 'package:core/core.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/presentation.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatViewModel extends BaseViewModel {

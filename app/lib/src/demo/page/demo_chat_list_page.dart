@@ -58,12 +58,12 @@ class _DemoChatListPageState extends State<DemoChatListPage>
         ),
         _createModel(
           id: 3,
-          isOfficial: true,
+          isVerified: true,
         ),
         _createModel(id: 4, isMuted: true),
         _createModel(
           id: 5,
-          isOfficial: true,
+          isVerified: true,
           isMuted: true,
         ),
         _createModel(
@@ -78,7 +78,7 @@ class _DemoChatListPageState extends State<DemoChatListPage>
     int unreadMessagesCount = 0,
     String? lastMessageDate = '12:43',
     int? photoId,
-    bool isOfficial = false,
+    bool isVerified = false,
     bool isMuted = false,
     String title = 'title',
     String? firstSubtitle,
@@ -88,7 +88,7 @@ class _DemoChatListPageState extends State<DemoChatListPage>
         id: id,
         unreadMessagesCount: unreadMessagesCount,
         isPinned: isPinned,
-        isOfficial: isOfficial,
+        isVerified: isVerified,
         photoId: photoId,
         isMuted: isMuted,
         lastMessageDate: lastMessageDate,

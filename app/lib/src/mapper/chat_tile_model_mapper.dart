@@ -1,5 +1,5 @@
 import 'package:core/core.dart';
-import 'package:presentation/src/widget/span/span.dart';
+import 'package:tuple/tuple.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:presentation/src/model/model.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -7,18 +7,24 @@ import 'package:jugger/jugger.dart' as j;
 class ChatTileModelMapper {
   @j.inject
   ChatTileModelMapper(
-      {required DateFormatter dateFormatter, required DateParser dateParser})
+      {required DateFormatter dateFormatter,
+      required DateParser dateParser,
+      required IChatRepository chatRepository})
       : _dateFormatter = dateFormatter,
+        _chatRepository = chatRepository,
         _dateParser = dateParser;
 
+  final IChatRepository _chatRepository;
   final DateFormatter _dateFormatter;
   final DateParser _dateParser;
 
-  ChatTileModel mapToModel(td.Chat chat) {
+  Future<ChatTileModel> mapToModel(td.Chat chat) async {
+    final Tuple2<String?, String?> subtitles = _getSubtitles(chat);
+
     assert(chat.positions.length == 1);
     return ChatTileModel(
       isMuted: chat.notificationSettings.muteFor > 0,
-      isOfficial: false,
+      isVerified: await getVerified(chat),
       unreadMessagesCount: chat.unreadCount,
       isPinned: chat.positions[0].isPinned,
       lastMessageDate: _dateFormatter.formatChatLastMessageDateOrNull(
@@ -26,38 +32,55 @@ class ChatTileModelMapper {
       id: chat.id,
       photoId: chat.photo?.small.id,
       title: chat.title,
-      firstSubtitle: _getFirstSubtitle(chat),
-      secondSubtitle: _getSecondSubtitle(chat),
+      firstSubtitle: subtitles.item1,
+      secondSubtitle: subtitles.item2,
     );
   }
 
-  String? _getFirstSubtitle(td.Chat chat) {
-    return null;
+  Future<bool> getVerified(td.Chat chat) async {
+    if (chat.type.getConstructor() == td.ChatTypeSupergroup.CONSTRUCTOR) {
+      final td.ChatTypeSupergroup supergroupType =
+          chat.type as td.ChatTypeSupergroup;
+      return (await _chatRepository.getSupergroup(supergroupType.supergroupId))
+          .isVerified;
+    }
+    return false;
   }
 
-  String? _getSecondSubtitle(td.Chat chat) {
+  Tuple2<String?, String?> _getSubtitles(td.Chat chat) {
     final td.Message? message = chat.lastMessage;
     if (message == null) {
-      return null;
+      return const Tuple2<String?, String?>(null, null);
     }
 
     final td.MessageContent content = message.content;
     switch (content.getConstructor()) {
       case td.MessageText.CONSTRUCTOR:
         {
-          return _createForMessageText(content as td.MessageText);
+          final td.MessageText m = content as td.MessageText;
+          if (message.sender is td.MessageSenderUser) {
+            final td.MessageSenderUser senderUser =
+                message.sender as td.MessageSenderUser;
+          }
+          return Tuple2<String?, String?>(null, m.text.text);
         }
       case td.MessageSticker.CONSTRUCTOR:
         {
-          return _createForMessageSticker(content as td.MessageSticker);
+          final td.MessageSticker m = content as td.MessageSticker;
+          return Tuple2<String?, String?>('Sticker', m.sticker.emoji);
         }
       case td.MessagePhoto.CONSTRUCTOR:
         {
-          return _createForMessagePhoto(content as td.MessagePhoto);
+          final td.MessagePhoto m = content as td.MessagePhoto;
+          return Tuple2<String?, String?>('Photo', m.caption.text);
         }
     }
 
-    return content.runtimeType.toString();
+    return Tuple2<String?, String?>(null, content.runtimeType.toString());
+  }
+
+  String? _getFirstSubtitle(td.Chat chat) {
+    return null;
   }
 
   String _createForMessageText(td.MessageText message) {

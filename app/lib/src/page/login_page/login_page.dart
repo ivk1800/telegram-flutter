@@ -30,7 +30,7 @@ class LoginPageState extends State<LoginPage> {
             children: [
               TextField(
                 controller: _phoneNumberController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'phone',
                 ),
               ),
@@ -44,10 +44,10 @@ class LoginPageState extends State<LoginPage> {
                                 allowFlashCall: false,
                                 allowSmsRetrieverApi: false)));
                   },
-                  child: Text('send phone')),
+                  child: const Text('send phone')),
               TextField(
                 controller: _codeController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'code',
                 ),
               ),
@@ -56,7 +56,7 @@ class LoginPageState extends State<LoginPage> {
                     appComponent.getTdClient().send<td.Ok>(
                         td.CheckAuthenticationCode(code: _codeController.text));
                   },
-                  child: Text('send code')),
+                  child: const Text('send code')),
             ],
           ),
         ));

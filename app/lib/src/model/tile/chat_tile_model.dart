@@ -1,13 +1,10 @@
-import 'package:flutter/painting.dart';
-import 'package:tdlib/td_api.dart' as td;
-
 class ChatTileModel {
   ChatTileModel({
     this.photoId,
     required this.id,
     required this.unreadMessagesCount,
     required this.isPinned,
-    required this.isOfficial,
+    required this.isVerified,
     required this.isMuted,
     required this.lastMessageDate,
     required this.title,
@@ -20,7 +17,7 @@ class ChatTileModel {
   final String? lastMessageDate;
   final int unreadMessagesCount;
   final int? photoId;
-  final bool isOfficial;
+  final bool isVerified;
   final bool isMuted;
   final String title;
   final String? firstSubtitle;
@@ -34,7 +31,7 @@ extension ChatTileModelExtension on ChatTileModel {
           int? unreadMessagesCount,
           String? lastMessageDate,
           int? photoId,
-          bool? isOfficial,
+          bool? isVerified,
           bool? isMuted,
           String? title,
           String? firstSubtitle,
@@ -43,7 +40,7 @@ extension ChatTileModelExtension on ChatTileModel {
         isPinned: isPinned ?? this.isPinned,
         id: id ?? this.id,
         isMuted: isMuted ?? this.isMuted,
-        isOfficial: isOfficial ?? this.isOfficial,
+        isVerified: isVerified ?? this.isVerified,
         unreadMessagesCount: unreadMessagesCount ?? this.unreadMessagesCount,
         firstSubtitle: firstSubtitle ?? this.firstSubtitle,
         secondSubtitle: secondSubtitle ?? this.secondSubtitle,
