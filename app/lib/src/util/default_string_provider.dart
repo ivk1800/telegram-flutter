@@ -13,4 +13,16 @@ class DefaultStringProvider implements IStringsProvider {
 
   @override
   String get sticker => 'Sticker';
+
+  @override
+  String get connectionStateConnecting => 'Connecting...';
+
+  @override
+  String get connectionStateConnectingToProxy => 'Connecting to proxy';
+
+  @override
+  String get connectionStateUpdating => 'Updating';
+
+  @override
+  String get connectionStateWaitingForNetwork => 'Waiting for network...';
 }
