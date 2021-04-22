@@ -25,6 +25,12 @@ apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['../../../tdlib/android']
+        }
+    }
+
     compileSdkVersion 30
 
     defaultConfig {
