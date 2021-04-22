@@ -10,8 +10,8 @@ dependencies:
   rxdart: ^0.26.0
   tdlib:
     git:
-      url: git@github.com:ivk1800/tdlib.git
-      ref: c64fe7a47969ea2491e154c27b645aa9a6a6f830
+      url: git@github.com:ivk1800/tdlib.dart.git
+      ref: 2a29b25e4d6114ca67d72668f590bb4a5dae9c02
   flutter:
     sdk: flutter
 

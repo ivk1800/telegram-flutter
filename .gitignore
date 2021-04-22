@@ -2,3 +2,4 @@
 *.jugger.dart
 .metadata
 *.g.dart
+tdlib
