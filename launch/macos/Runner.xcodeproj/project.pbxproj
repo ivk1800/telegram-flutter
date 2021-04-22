@@ -21,8 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		2C2451082616526A003D2B55 /* libtdjson.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C2451072616526A003D2B55 /* libtdjson.dylib */; };
-		2C2451092616526F003D2B55 /* libtdjson.dylib in Bundle Framework */ = {isa = PBXBuildFile; fileRef = 2C2451072616526A003D2B55 /* libtdjson.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2CE495502631F0F100EDD46C /* libtdjson.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE4954F2631F0F100EDD46C /* libtdjson.dylib */; };
+		2CE495522631F10E00EDD46C /* libtdjson.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 2CE4954F2631F0F100EDD46C /* libtdjson.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		335BBD1B22A9A15E00E9071D /* GeneratedPluginRegistrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */; };
 		33CC10F12044A3C60003C045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC10F02044A3C60003C045 /* AppDelegate.swift */; };
 		33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F22044A3C60003C045 /* Assets.xcassets */; };
@@ -42,21 +42,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		33CC110E2044A8840003C045 /* Bundle Framework */ = {
+		2CE495342631F02700EDD46C /* Embed Libraries */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2C2451092616526F003D2B55 /* libtdjson.dylib in Bundle Framework */,
+				2CE495522631F10E00EDD46C /* libtdjson.dylib in Embed Libraries */,
 			);
-			name = "Bundle Framework";
+			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2C2451072616526A003D2B55 /* libtdjson.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libtdjson.dylib; sourceTree = "<group>"; };
+		2CE4954F2631F0F100EDD46C /* libtdjson.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtdjson.dylib; path = ../../tdlib/macos/libtdjson.dylib; sourceTree = "<group>"; };
 		333000ED22D3DE5D00554162 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
 		335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedPluginRegistrant.swift; sourceTree = "<group>"; };
 		33CC10ED2044A3C60003C045 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C2451082616526A003D2B55 /* libtdjson.dylib in Frameworks */,
+				2CE495502631F0F100EDD46C /* libtdjson.dylib in Frameworks */,
 				DDBBF41FA02F6EC78E36B986 /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,6 +106,7 @@
 		33CC10E42044A3C60003C045 = {
 			isa = PBXGroup;
 			children = (
+				2CE4954F2631F0F100EDD46C /* libtdjson.dylib */,
 				33FAB671232836740065AC1E /* Runner */,
 				33CEB47122A05771004F2AC0 /* Flutter */,
 				33CC10EE2044A3C60003C045 /* Products */,
@@ -164,14 +165,12 @@
 				94769062FA07616C2FE3827B /* Pods-Runner.release.xcconfig */,
 				EBEA54D042E9F2386D69CACB /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		D73912EC22F37F3D000D13A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C2451072616526A003D2B55 /* libtdjson.dylib */,
 				C9AB9ACCD83619E8B8D8EAC7 /* Pods_Runner.framework */,
 			);
 			name = Frameworks;
@@ -188,9 +187,9 @@
 				33CC10E92044A3C60003C045 /* Sources */,
 				33CC10EA2044A3C60003C045 /* Frameworks */,
 				33CC10EB2044A3C60003C045 /* Resources */,
-				33CC110E2044A8840003C045 /* Bundle Framework */,
 				3399D490228B24CF009A79C7 /* ShellScript */,
 				FA088EF61AD92E10FC640CD9 /* [CP] Embed Pods Frameworks */,
+				2CE495342631F02700EDD46C /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -435,6 +434,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../tdlib/macos",
 				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -565,6 +565,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../tdlib/macos",
 				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -589,6 +590,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/../../tdlib/macos",
 				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
