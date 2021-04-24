@@ -40,6 +40,8 @@ analyzer:
     unnecessary_null_comparison: ignore
   exclude:
     - "bin/cache/**"
+    # Ignore protoc generated files
+    - "dev/tools/lib/proto/*"
 
 linter:
   rules:
@@ -102,7 +104,7 @@ linter:
     # - constant_identifier_names # needs an opt-out https://github.com/dart-lang/linter/issues/204
     - control_flow_in_finally
     # - curly_braces_in_flow_control_structures # not required by flutter style
-    - deprecated_consistency
+    # - deprecated_consistency
     # - diagnostic_describe_all_properties # not yet tested
     - directives_ordering
     # - do_not_use_environment # we do this commonly

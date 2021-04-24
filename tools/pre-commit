@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source $HOME/.bash_profile
+
+bash flutter format -n --set-exit-if-changed .
+result=$?
+
+
+if [ $result -ne 0 ]; then
+echo 'run flutter format .'
+	exit 1
+fi
