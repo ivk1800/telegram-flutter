@@ -25,4 +25,7 @@ class DefaultStringProvider implements IStringsProvider {
 
   @override
   String get connectionStateWaitingForNetwork => 'Waiting for network...';
+
+  @override
+  String get folders => 'Folders';
 }

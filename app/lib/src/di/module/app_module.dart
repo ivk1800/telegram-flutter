@@ -38,6 +38,10 @@ abstract class AppModule {
 
   @j.singleton
   @j.bind
+  IChatFilterRepository bindChatFilterRepository(ChatFilterRepositoryImpl impl);
+
+  @j.singleton
+  @j.bind
   IConnectivityProvider bindConnectivityProvider(ConnectivityProviderImpl impl);
 
   @j.singleton

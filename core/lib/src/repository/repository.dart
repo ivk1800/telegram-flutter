@@ -1,6 +1,8 @@
+export 'chat_filter_repository.dart';
 export 'chat_message_repository.dart';
 export 'chat_repository.dart';
 export 'file_repository.dart';
+export 'impl/chat_filter_repository_impl.dart';
 export 'impl/chat_message_repository_impl.dart';
 export 'impl/chat_repository_impl.dart';
 export 'impl/file_repository_impl.dart';

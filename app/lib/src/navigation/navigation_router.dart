@@ -10,4 +10,6 @@ abstract class INavigationRouter {
   void toLogin();
 
   void toRoot();
+
+  void toFolders();
 }

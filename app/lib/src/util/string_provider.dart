@@ -1,6 +1,8 @@
 abstract class IStringsProvider {
   String get settings;
 
+  String get folders;
+
   String get devices;
 
   String get sticker;

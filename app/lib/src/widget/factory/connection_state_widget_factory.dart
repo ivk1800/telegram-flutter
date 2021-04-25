@@ -14,6 +14,7 @@ class ConnectionStateWidgetFactory {
       required IConnectionStateUpdatesProvider connectionStateUpdatesProvider})
       : _connectionStateUpdatesProvider = connectionStateUpdatesProvider,
         _stringsProvider = stringsProvider {
+    //TODO need unsubscribe
     _connectionStateUpdatesProvider.connectionStateUpdates
         .listen((td.UpdateConnectionState event) {
       _connectionStateSubject.add(event.state);

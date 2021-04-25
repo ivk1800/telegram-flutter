@@ -20,6 +20,8 @@ abstract class AppComponent {
 
   IFileRepository getIFileRepository();
 
+  IChatFilterRepository getChatFilterRepository();
+
   IChatMessageRepository getChatMessageRepository();
 
   INavigationRouter getNavigationRouter();
@@ -31,6 +33,10 @@ abstract class AppComponent {
   DateParser getDateParser();
 
   IChatUpdatesProvider getChatUpdatesProvider();
+
+  IChatFiltersUpdatesProvider getChatFiltersUpdatesProvider();
+
+  IConnectionStateUpdatesProvider getConnectionStateUpdatesProvider();
 
   IConnectivityProvider getConnectivityProvider();
 

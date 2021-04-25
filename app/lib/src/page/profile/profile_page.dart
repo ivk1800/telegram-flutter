@@ -38,6 +38,11 @@ class ProfilePageState extends State<ProfilePage> {
             ),
           ),
           ListTile(
+            onTap: router.toFolders,
+            leading: const Icon(Icons.folder_open),
+            title: Text(stringsProvider.folders),
+          ),
+          ListTile(
             onTap: router.toSessionsScreen,
             leading: const Icon(Icons.devices),
             title: Text(stringsProvider.devices),

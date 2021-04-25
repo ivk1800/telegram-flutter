@@ -1,0 +1,2 @@
+cd ..
+flutter format .

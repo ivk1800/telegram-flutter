@@ -15,6 +15,8 @@ Future<void> launch() async {
 
   // runDemo();
   appComponent = JuggerAppComponentBuilder().build();
+  //init repo
+  appComponent.getChatFilterRepository();
 
   runApp(MyApp(
     client: appComponent.getTdClient(),

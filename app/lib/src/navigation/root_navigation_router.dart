@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:presentation/src/feature/folders/feature_folders.dart';
 import 'package:presentation/src/page/page.dart';
 
 import 'navigation_router.dart';
@@ -46,6 +47,14 @@ class RootNavigationRouter implements INavigationRouter {
     );
     _navigationKey.currentState
         ?.pushAndRemoveUntil<dynamic>(route, (Route<dynamic> route) => false);
+  }
+
+  @override
+  void toFolders() {
+    final PageRoute<dynamic> route = _defaultRoute(
+      (BuildContext context) => const FoldersSetupPage(),
+    );
+    _push(route);
   }
 
   @override
