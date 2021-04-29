@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jext/jext.dart';
+import 'package:presentation/presentation.dart';
+import 'package:presentation/src/feature/folders/di/folders_setup_screen_component.jugger.dart';
 import 'package:presentation/src/feature/folders/feature_folders.dart';
 import 'package:presentation/src/page/page.dart';
 
@@ -52,7 +55,7 @@ class RootNavigationRouter implements INavigationRouter {
   @override
   void toFolders() {
     final PageRoute<dynamic> route = _defaultRoute(
-      (BuildContext context) => const FoldersSetupPage(),
+      (BuildContext context) => const FoldersSetupPage().wrap(),
     );
     _push(route);
   }

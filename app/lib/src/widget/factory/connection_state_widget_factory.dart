@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:presentation/src/util/util.dart';
@@ -7,18 +9,14 @@ import 'package:jugger/jugger.dart' as j;
 
 typedef ConnectionReadyWidgetFactory = Widget Function(BuildContext context);
 
-class ConnectionStateWidgetFactory {
+class ConnectionStateWidgetFactory implements j.IDisposable {
   @j.inject
   ConnectionStateWidgetFactory(
       {required IStringsProvider stringsProvider,
       required IConnectionStateUpdatesProvider connectionStateUpdatesProvider})
       : _connectionStateUpdatesProvider = connectionStateUpdatesProvider,
         _stringsProvider = stringsProvider {
-    //TODO need unsubscribe
-    _connectionStateUpdatesProvider.connectionStateUpdates
-        .listen((td.UpdateConnectionState event) {
-      _connectionStateSubject.add(event.state);
-    });
+    _init();
   }
 
   final IStringsProvider _stringsProvider;
@@ -28,6 +26,7 @@ class ConnectionStateWidgetFactory {
           const td.ConnectionStateWaitingForNetwork());
 
   final IConnectionStateUpdatesProvider _connectionStateUpdatesProvider;
+  late StreamSubscription<dynamic> _connectionStateUpdatesSubscription;
 
   Widget create(
       BuildContext context, ConnectionReadyWidgetFactory readyWidgetFactory) {
@@ -47,6 +46,19 @@ class ConnectionStateWidgetFactory {
         return readyWidgetFactory.call(context);
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _connectionStateUpdatesSubscription.cancel();
+  }
+
+  void _init() {
+    _connectionStateUpdatesSubscription = _connectionStateUpdatesProvider
+        .connectionStateUpdates
+        .listen((td.UpdateConnectionState event) {
+      _connectionStateSubject.add(event.state);
+    });
   }
 
   String? _getStateText(td.ConnectionState state) {

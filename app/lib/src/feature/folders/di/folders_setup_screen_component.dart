@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+import 'package:jext/jext.dart';
 import 'package:presentation/presentation.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/di/component/app_component.dart';
@@ -7,9 +9,8 @@ import 'folders_setup_screen_component.jugger.dart';
 
 @j.Component(
     modules: <Type>[FoldersSetupModule], dependencies: <Type>[AppComponent])
-abstract class FoldersSetupComponent {
-  void inject(FoldersSetupPageState target);
-}
+abstract class FoldersSetupComponent
+    implements IWidgetStateComponent<FoldersSetupPage, FoldersSetupPageState> {}
 
 @j.module
 abstract class FoldersSetupModule {}
@@ -23,12 +24,13 @@ abstract class FoldersSetupComponentBuilder {
   FoldersSetupComponent build();
 }
 
-extension FoldersSetupInject on FoldersSetupPageState {
-  void inject() {
-    final FoldersSetupComponent component = JuggerFoldersSetupComponentBuilder()
-        .screen(this)
-        .appComponent(appComponent)
-        .build();
-    component.inject(this);
-  }
+extension FoldersSetupComponentExt on FoldersSetupPage {
+  Widget wrap() => ComponentHolder<FoldersSetupPage, FoldersSetupPageState>(
+        componentFactory: (FoldersSetupPageState state) =>
+            JuggerFoldersSetupComponentBuilder()
+                .screen(state)
+                .appComponent(appComponent)
+                .build(),
+        child: this,
+      );
 }
