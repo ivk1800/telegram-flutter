@@ -115,20 +115,34 @@ class ChatListUpdateHandler {
   }
 
   Future<bool> _handleNewPosition(int chatId, td.ChatPosition position) async {
-    if (!_chats.containsKey(chatId)) {
+    if (position.list != _chatListConfig.chatList) {
       return false;
+    }
+
+    if (!_chats.containsKey(chatId)) {
+      final bool handleNewChatResult =
+          await _handleNewChat(chat: await _chatRepository.getChat(chatId));
+      assert(handleNewChatResult);
     }
 
     final ChatData chatData = _chats[chatId]!;
     assert(chatData.chat.positions.length == 1);
-    final bool remove = _orderedChats.remove(OrderedChat(
+    final bool removedPrevChat = _orderedChats.remove(OrderedChat(
         chatId: chatData.chat.id, order: chatData.chat.getPosition().order));
-    assert(remove);
-    chatData.chat = chatData.chat.copy(positions: <td.ChatPosition>[position]);
-    chatData.model = chatData.model.copy(isPinned: position.isPinned);
+    assert(removedPrevChat);
 
-    _orderedChats
-        .add(OrderedChat(chatId: chatData.chat.id, order: position.order));
+    if (position.order == 0) {
+      final ChatData? removeChat = _chats.remove(chatId);
+      assert(removeChat != null);
+    } else {
+      final OrderedChat newOrderedChat =
+          OrderedChat(chatId: chatData.chat.id, order: position.order);
+      chatData.chat =
+          chatData.chat.copy(positions: <td.ChatPosition>[position]);
+      chatData.model = chatData.model.copy(isPinned: position.isPinned);
+      final bool add = _orderedChats.add(newOrderedChat);
+      assert(add);
+    }
 
     return true;
   }

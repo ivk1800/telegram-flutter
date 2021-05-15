@@ -105,6 +105,13 @@ class ChatListInteractor {
           .handleUpdateChatNotificationSettings(event)) {
         _dispatchChats();
       }
+    } else if (event is td.UpdateNewChat) {
+      /// chat without positions(is empty)
+      /// fetch actual chat from repo
+      if (await _chatListUpdateHandler.handleNewChat(
+          chat: await _chatRepository.getChat(event.chat.id))) {
+        _dispatchChats();
+      }
     }
   }
 }
