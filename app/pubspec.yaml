@@ -16,6 +16,8 @@ dependencies:
   rxdart: ^0.26.0
   core:
     path: ../core
+  coreui:
+    path: ../coreui
   path_provider: ^2.0.1
   jugger:
     git:
