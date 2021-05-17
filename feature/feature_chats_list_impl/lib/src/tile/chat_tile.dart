@@ -1,8 +1,9 @@
+import 'package:coreui/coreui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/src/model/model.dart';
-import 'package:presentation/src/widget/widget.dart';
 import 'package:jugger/jugger.dart' as j;
+
+import 'chat_tile_model.dart';
 
 abstract class ChatTileListener {
   void onChatTap(int id);

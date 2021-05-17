@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

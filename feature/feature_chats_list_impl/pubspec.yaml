@@ -6,6 +6,15 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  coreui:
+    path: ../../coreui
+  dart_numerics: ^0.0.5
+  core_utils:
+    path: ../../core_utils
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  core_arch:
+    path: ../../core_arch
   feature_chats_list_api:
     path: ../feature_chats_list_api
   jext:

@@ -1,8 +1,6 @@
 import 'package:intl/intl.dart';
-import 'package:jugger/jugger.dart' as j;
 
 class DateFormatter {
-  @j.inject
   DateFormatter();
 
   final DateFormat _lastDayDateFormat = DateFormat('HH:mm');

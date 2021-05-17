@@ -1,7 +1,4 @@
-import 'package:jugger/jugger.dart' as j;
-
 class DateParser {
-  @j.inject
   DateParser();
 
   DateTime parseUnixTimeStampToDate(int timestamp) =>

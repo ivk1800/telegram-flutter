@@ -5,6 +5,9 @@ cd ..
 cd core/
 flutter packages get
 cd ..
+cd core_utils/
+flutter packages get
+cd ..
 cd core_arch/
 flutter packages get
 cd ..

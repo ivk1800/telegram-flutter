@@ -1,6 +1,3 @@
-import 'package:core/core.dart';
-import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';

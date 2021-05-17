@@ -1,8 +1,8 @@
+import 'package:coreui/coreui.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/presentation.dart';
-import 'package:presentation/src/page/dialogs/dialogs_page.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/widget/widget.dart';
+import 'package:presentation/src/feature/feature.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
@@ -15,9 +15,15 @@ class RootPageState extends State<RootPage> {
   @j.inject
   late ConnectionStateWidgetFactory connectionStateWidgetFactory;
 
+  @j.inject
+  late FeatureFactory featureFactory;
+  late Widget _list;
+
   @override
   void initState() {
     appComponent.injectRootPageState(this);
+    _list =
+        featureFactory.createChatsListFeatureApi().screenWidgetFactory.create();
     super.initState();
   }
 
@@ -100,6 +106,6 @@ class RootPageState extends State<RootPage> {
             ],
           ),
         ),
-        body: const DialogsPage());
+        body: _list);
   }
 }

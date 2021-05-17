@@ -7,6 +7,8 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  core_utils:
+    path: ../core_utils
   core_tdlib_api:
     path: ../core_tdlib_api
   core_tdlib_impl:

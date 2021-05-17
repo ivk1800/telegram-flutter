@@ -1,10 +1,9 @@
 import 'dart:collection';
 
-import 'package:presentation/src/util/chat/list/chat_data.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/util/chat/list/ordered_chat.dart';
-
+import 'chat_data.dart';
 import 'chat_list.dart';
+import 'ordered_chat.dart';
 
 class SimpleChatsHolder implements IChatsHolder {
   @j.inject

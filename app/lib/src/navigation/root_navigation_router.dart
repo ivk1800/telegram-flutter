@@ -1,14 +1,13 @@
+import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jext/jext.dart';
-import 'package:presentation/presentation.dart';
-import 'package:presentation/src/feature/folders/di/folders_setup_screen_component.jugger.dart';
 import 'package:presentation/src/feature/folders/feature_folders.dart';
 import 'package:presentation/src/page/page.dart';
 
 import 'navigation_router.dart';
 
-class RootNavigationRouter implements INavigationRouter {
+class RootNavigationRouter
+    implements INavigationRouter, IChatsListScreenRouter {
   RootNavigationRouter(GlobalKey<NavigatorState> navigationKey)
       : _navigationKey = navigationKey;
 

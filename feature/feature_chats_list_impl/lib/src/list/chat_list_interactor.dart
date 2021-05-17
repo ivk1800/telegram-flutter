@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:presentation/src/model/model.dart';
+import 'package:feature_chats_list_impl/src/util/loader.dart';
+import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:collection/collection.dart';
 import 'package:tdlib/td_api.dart' as td;
