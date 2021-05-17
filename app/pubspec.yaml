@@ -7,6 +7,18 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  feature_main_screen_api:
+    path: ../feature/feature_main_screen_api
+  feature_main_screen_impl:
+    path: ../feature/feature_main_screen_impl
+  feature_global_search_api:
+    path: ../feature/feature_global_search_api
+  feature_global_search_impl:
+      path: ../feature/feature_global_search_impl
+  feature_chats_list_api:
+    path: ../feature/feature_chats_list_api
+  feature_chats_list_impl:
+    path: ../feature/feature_chats_list_impl
   jext:
     git:
       url: git@github.com:ivk1800/jugger.dart.git

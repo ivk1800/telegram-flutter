@@ -12,3 +12,21 @@ cd td_client/
 cd ..
 cd coreui/
 flutter packages get
+cd ../feature/
+cd feature_chats_list_api/
+flutter packages get
+cd ..
+cd feature_chats_list_impl/
+flutter packages get
+cd ..
+cd feature_global_search_api/
+flutter packages get
+cd ..
+cd feature_global_search_impl/
+flutter packages get
+cd ..
+cd feature_main_screen_api/
+flutter packages get
+cd ..
+cd feature_main_screen_impl/
+flutter packages get

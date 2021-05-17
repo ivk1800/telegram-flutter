@@ -10,7 +10,11 @@ import 'folders_setup_screen_component.jugger.dart';
 @j.Component(
     modules: <Type>[FoldersSetupModule], dependencies: <Type>[AppComponent])
 abstract class FoldersSetupComponent
-    implements IWidgetStateComponent<FoldersSetupPage, FoldersSetupPageState> {}
+    implements IWidgetStateComponent<FoldersSetupPage, FoldersSetupPageState> {
+  //TODO workaround, method in interface not generated
+  @override
+  void inject(FoldersSetupPageState screenState);
+}
 
 @j.module
 abstract class FoldersSetupModule {}

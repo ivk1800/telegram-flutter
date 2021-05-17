@@ -1,9 +1,3 @@
-.idea
-*.jugger.dart
-.metadata
-*.g.dart
-tdlib
-
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
