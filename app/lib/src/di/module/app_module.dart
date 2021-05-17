@@ -64,8 +64,9 @@ abstract class AppModule {
 
   @j.singleton
   @j.provide
-  static RootNavigationRouter provideNavigationRouter() =>
-      RootNavigationRouter(MyApp.navigatorKey);
+  static RootNavigationRouter provideNavigationRouter(
+          FeatureFactory featureFactory) =>
+      RootNavigationRouter(MyApp.navigatorKey, featureFactory);
 
   @j.singleton
   @j.provide

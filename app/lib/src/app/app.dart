@@ -48,6 +48,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return TdImageLoader(
       client: widget.client,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         navigatorKey: MyApp.navigatorKey,
         theme: ThemeData(
           platform: TargetPlatform.iOS,

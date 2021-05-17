@@ -1,6 +1,7 @@
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/feature/folders/feature_folders.dart';
 import 'package:presentation/src/page/page.dart';
 
@@ -8,10 +9,13 @@ import 'navigation_router.dart';
 
 class RootNavigationRouter
     implements INavigationRouter, IChatsListScreenRouter {
-  RootNavigationRouter(GlobalKey<NavigatorState> navigationKey)
-      : _navigationKey = navigationKey;
+  RootNavigationRouter(
+      GlobalKey<NavigatorState> navigationKey, FeatureFactory featureFactory)
+      : _navigationKey = navigationKey,
+        _featureFactory = featureFactory;
 
   final GlobalKey<NavigatorState> _navigationKey;
+  final FeatureFactory _featureFactory;
 
   @override
   void back() {
@@ -62,7 +66,10 @@ class RootNavigationRouter
   @override
   void toRoot() {
     final PageRoute<dynamic> route = _defaultRoute(
-      (BuildContext context) => const RootPage(),
+      (BuildContext context) => _featureFactory
+          .createMainScreenFeature()
+          .screenWidgetFactory
+          .create(),
     );
     _navigationKey.currentState
         ?.pushAndRemoveUntil<dynamic>(route, (Route<dynamic> route) => false);
