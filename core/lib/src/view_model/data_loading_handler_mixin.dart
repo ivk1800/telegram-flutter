@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:rxdart/rxdart.dart';
 
-import 'base_view_model.dart';
+import 'package:core_arch/core_arch.dart';
 
 mixin DataLoadingHandlerMixin<D> on BaseViewModel {
   final BehaviorSubject<DataLoadingState<D>> _loadingStateStream =

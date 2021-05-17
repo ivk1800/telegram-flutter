@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core_arch/core_arch.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/presentation.dart';
 import 'package:presentation/src/util/chat/list/chat_list.dart';

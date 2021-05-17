@@ -9,8 +9,6 @@ import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/feature/feature.dart';
-import 'package:presentation/src/feature/feature_factory.dart';
-import 'package:td_client/td_client.dart';
 
 abstract class FeatureModule {
   @j.bind
