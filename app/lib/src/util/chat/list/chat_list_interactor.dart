@@ -68,6 +68,7 @@ class ChatListInteractor {
   td.Chat getChat(int id) => _chatsHolder.chatsData[id]!.chat;
 
   void dispose() {
+    _loader.dispose();
     _chatListUpdateHandler.dispose();
     _chatUpdatesSubscription?.cancel();
   }
