@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/di/module/app_module.dart';
 import 'package:presentation/src/di/module/td_module.dart';

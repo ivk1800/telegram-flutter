@@ -7,6 +7,10 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  core_tdlib_api:
+    path: ../core_tdlib_api
+  core_tdlib_impl:
+    path: ../core_tdlib_impl
   feature_main_screen_api:
     path: ../feature/feature_main_screen_api
   feature_main_screen_impl:

@@ -1,9 +1,7 @@
-import 'package:core/core.dart';
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:td_client/td_client.dart';
 import 'package:jugger/jugger.dart' as j;
-
-import 'chat_updates_provider.dart';
 
 class UpdatesProvider
     implements

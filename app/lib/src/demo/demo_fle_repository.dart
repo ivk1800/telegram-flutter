@@ -1,3 +1,4 @@
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:core/core.dart';
 

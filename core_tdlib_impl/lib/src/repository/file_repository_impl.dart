@@ -1,4 +1,4 @@
-import 'package:core/src/repository/repository.dart';
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;

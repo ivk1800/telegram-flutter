@@ -1,6 +1,4 @@
-import 'package:collection/collection.dart';
-import 'package:core/core.dart';
-import 'package:core/src/repository/chat_repository.dart';
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:td_client/td_client.dart';

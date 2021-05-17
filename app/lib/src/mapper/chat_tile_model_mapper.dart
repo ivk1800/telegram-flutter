@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tuple/tuple.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:presentation/src/model/model.dart';
