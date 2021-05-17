@@ -28,7 +28,7 @@ dev_dependencies:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger_generator
-      ref: a2e9b96e474656bfab70c51e9b903fc9e33b23d0
+      ref: 40368af6eb3789951facb8e15d5c0d0706c95750
   build_runner: ^1.10.2
 
 flutter:
