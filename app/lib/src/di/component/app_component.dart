@@ -3,6 +3,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/di/module/app_module.dart';
 import 'package:presentation/src/di/module/td_module.dart';
+import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/navigation/navigation.dart';
 import 'package:presentation/src/page/page.dart';
 import 'package:presentation/src/util/util.dart';
@@ -42,6 +43,8 @@ abstract class AppComponent {
   IConnectivityProvider getConnectivityProvider();
 
   IAppLifecycleStateProvider getIAppLifecycleStateProvider();
+
+  FeatureFactory getFeatureFactory();
 
   void injectRootPageState(RootPageState state);
 }

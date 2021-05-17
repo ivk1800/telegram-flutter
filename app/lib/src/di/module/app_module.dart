@@ -4,12 +4,22 @@ import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/presentation.dart';
 import 'package:presentation/src/app/app.dart';
+import 'package:presentation/src/di/component/feature_component.jugger.dart';
+import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/navigation/navigation.dart';
 import 'package:presentation/src/util/util.dart';
 import 'package:td_client/td_client.dart';
 
 @j.module
 abstract class AppModule {
+  @j.singleton
+  @j.provide
+  static FeatureFactory provideFeatureFactory() {
+    return FeatureFactory(
+        featureComponent:
+            JuggerFeatureComponentBuilder().appComponent(appComponent).build());
+  }
+
   @j.singleton
   @j.provide
   static TdClient provideTdClient() {
