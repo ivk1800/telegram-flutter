@@ -5,12 +5,10 @@ import 'package:flutter/widgets.dart';
 class SplitView extends StatefulWidget {
   const SplitView({
     required this.rightContainerPlaceholderBuilder,
-    required this.leftContainerInitialWidgetBuilder,
     Key? key,
   }) : super(key: key);
 
   final WidgetBuilder rightContainerPlaceholderBuilder;
-  final WidgetBuilder leftContainerInitialWidgetBuilder;
 
   @override
   SplitViewState createState() => SplitViewState();
@@ -29,10 +27,10 @@ enum ContainerType { Left, Right, Top }
 
 class _PageNode {
   _PageNode({required this.container, required this.page, int? order})
-      : timestamp = order ?? DateTime.now().millisecondsSinceEpoch;
+      : order = order ?? DateTime.now().millisecondsSinceEpoch;
 
   final ContainerType container;
-  final int timestamp;
+  final int order;
 
   final Page<dynamic> page;
 }
@@ -53,16 +51,10 @@ class SplitViewState extends State<SplitView> {
   @override
   void initState() {
     super.initState();
-    _leftRootPage = _PageNode(
-        order: 0,
-        container: ContainerType.Left,
-        page: _SimplePage(
-            builder: widget.leftContainerInitialWidgetBuilder,
-            containerType: ContainerType.Left,
-            key: UniqueKey()));
+    _leftRootPage = _createLeftRootPage(Container());
 
     _rightRootPage = _PageNode(
-        order: -1,
+        order: RightRootPageIndex,
         container: ContainerType.Left,
         page: _SimplePage(
             builder: widget.rightContainerPlaceholderBuilder,
@@ -74,36 +66,79 @@ class SplitViewState extends State<SplitView> {
     _topPages = <_PageNode>[];
   }
 
-  void push(WidgetBuilder builder, ContainerType containerType) {
+  void popUntilRoot(ContainerType container) {
     setState(() {
-      switch (containerType) {
+      switch (container) {
         case ContainerType.Left:
-          _leftPages.add(_PageNode(
-              container: containerType,
-              page: _SimplePage(
-                  builder: builder,
-                  containerType: containerType,
-                  key: UniqueKey())));
+          _leftPages.removeWhere(
+              (_PageNode element) => element.order != LeftRootPageIndex);
           break;
         case ContainerType.Right:
-          _rightPages.add(_PageNode(
-              container: containerType,
-              page: _SimplePage(
-                  builder: builder,
-                  containerType: containerType,
-                  key: UniqueKey())));
+          _rightPages.removeWhere(
+              (_PageNode element) => element.order != RightRootPageIndex);
           break;
         case ContainerType.Top:
-          _topPages.add(_PageNode(
-              container: containerType,
-              page: _SimplePage(
-                  builder: builder,
-                  containerType: containerType,
-                  key: UniqueKey())));
+          _topPages.clear();
           break;
       }
       _invalidatePages();
     });
+  }
+
+  void pushAllReplacement(
+      {required LocalKey key,
+      required WidgetBuilder builder,
+      required ContainerType container}) {
+    setState(() {
+      popUntilRoot(container);
+      push(key: key, builder: builder, container: container);
+      _invalidatePages();
+    });
+  }
+
+  void setLeftRootPage(Widget widget) {
+    setState(() {
+      _leftRootPage = _createLeftRootPage(widget);
+      final int indexOfRootPage = _leftPages.indexOf(_leftPages.firstWhere(
+          (_PageNode element) => element.order == LeftRootPageIndex));
+      _leftPages[indexOfRootPage] = _leftRootPage;
+      _invalidatePages();
+    });
+  }
+
+  void push(
+      {required LocalKey key,
+      required WidgetBuilder builder,
+      required ContainerType container}) {
+    _push(_SimplePage(key: key, builder: builder, containerType: container),
+        container);
+  }
+
+  void _push(MyPage<dynamic> page, ContainerType containerType) {
+    setState(() {
+      switch (containerType) {
+        case ContainerType.Left:
+          _leftPages.add(_PageNode(container: containerType, page: page));
+          break;
+        case ContainerType.Right:
+          _rightPages.add(_PageNode(container: containerType, page: page));
+          break;
+        case ContainerType.Top:
+          _topPages.add(_PageNode(container: containerType, page: page));
+          break;
+      }
+      _invalidatePages();
+    });
+  }
+
+  _PageNode _createLeftRootPage(Widget widget) {
+    return _PageNode(
+        order: LeftRootPageIndex,
+        container: ContainerType.Left,
+        page: _SimplePage(
+            builder: (_) => widget,
+            containerType: ContainerType.Left,
+            key: UniqueKey()));
   }
 
   void _onWidthChanged(double width) {
@@ -124,10 +159,20 @@ class SplitViewState extends State<SplitView> {
     if (_isCompact) {
       _compactPages = (_leftPages + _rightPages + _topPages)
         ..removeWhere((_PageNode element) => element == _rightRootPage)
-        ..sort(
-            (_PageNode a, _PageNode b) => a.timestamp.compareTo(b.timestamp));
+        ..sort((_PageNode a, _PageNode b) => a.order.compareTo(b.order));
     } else {
       _compactPages = const <_PageNode>[];
+    }
+  }
+
+  bool hasKey(LocalKey key, ContainerType container) {
+    switch (container) {
+      case ContainerType.Left:
+        return _leftPages.hasKey(key);
+      case ContainerType.Right:
+        return _rightPages.hasKey(key);
+      case ContainerType.Top:
+        return _topPages.hasKey(key);
     }
   }
 
@@ -158,9 +203,7 @@ class SplitViewState extends State<SplitView> {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                setState(() {
-                  _topPages.clear();
-                });
+                popUntilRoot(ContainerType.Top);
               },
               child: Container(
                 height: double.infinity,
@@ -293,6 +336,9 @@ class SplitViewState extends State<SplitView> {
       },
     );
   }
+
+  static const int LeftRootPageIndex = 0;
+  static const int RightRootPageIndex = -1;
 }
 
 abstract class MyPage<T> extends Page<T> {
@@ -319,4 +365,9 @@ class _SimplePage extends MyPage<dynamic> {
         settings: this,
         builder: (BuildContext context) => builder.call(context));
   }
+}
+
+extension _Extensions on List<_PageNode> {
+  bool hasKey(LocalKey key) =>
+      any((_PageNode element) => element.page.key == key);
 }

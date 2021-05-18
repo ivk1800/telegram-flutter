@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/src/app/app_delegate.dart';
 import 'package:presentation/src/widget/widget.dart';
+import 'package:split_view/split_view.dart';
 import 'package:td_client/td_client.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/di/component/app_delegate_component.dart';
@@ -10,6 +11,8 @@ class MyApp extends StatefulWidget {
 
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
+  static final GlobalKey<SplitViewState> splitViewNavigatorKey =
+      GlobalKey<SplitViewState>();
 
   final TdClient client;
 
@@ -55,7 +58,16 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
           primaryColor: const Color(0xff5682a3),
           accentColor: const Color(0xff598fba),
         ),
-        home: Container(),
+        home: SplitView(
+          key: MyApp.splitViewNavigatorKey,
+          rightContainerPlaceholderBuilder: (BuildContext context) =>
+              // TODO extract to strings
+              const Material(
+            child: Center(
+              child: Text('Select a chat to start messaging'),
+            ),
+          ),
+        ),
       ),
     );
   }

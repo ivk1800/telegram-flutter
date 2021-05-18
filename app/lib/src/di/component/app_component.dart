@@ -6,6 +6,7 @@ import 'package:presentation/src/di/module/app_module.dart';
 import 'package:presentation/src/di/module/td_module.dart';
 import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/navigation/navigation.dart';
+import 'package:presentation/src/navigation/split_navigation_router.dart';
 import 'package:presentation/src/page/page.dart';
 import 'package:presentation/src/util/util.dart';
 import 'package:td_client/td_client.dart';
@@ -30,6 +31,10 @@ abstract class AppComponent {
   INavigationRouter getNavigationRouter();
 
   RootNavigationRouter getRootNavigationRouter();
+
+  SplitNavigationRouter getSplitNavigationRouter();
+
+  SplitNavigationInfoProvider getSplitNavigationInfoProvider();
 
   IStringsProvider getStringsProvider();
 

@@ -8,6 +8,7 @@ import 'package:presentation/src/app/app.dart';
 import 'package:presentation/src/di/component/feature_component.jugger.dart';
 import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/navigation/navigation.dart';
+import 'package:presentation/src/navigation/split_navigation_router.dart';
 import 'package:presentation/src/util/util.dart';
 import 'package:td_client/td_client.dart';
 
@@ -70,9 +71,20 @@ abstract class AppModule {
 
   @j.singleton
   @j.provide
+  static SplitNavigationInfoProvider provideSplitNavigationInfoProvider() =>
+      SplitNavigationInfoProvider(MyApp.splitViewNavigatorKey);
+
+  @j.singleton
+  @j.provide
+  static SplitNavigationRouter provideSplitViewNavigationRouter(
+          FeatureFactory featureFactory) =>
+      SplitNavigationRouter(MyApp.splitViewNavigatorKey, featureFactory);
+
+  @j.singleton
+  @j.provide
   static INavigationRouter provideRootNavigationRouter(
-          RootNavigationRouter rootNavigationRouter) =>
-      rootNavigationRouter;
+          SplitNavigationRouter splitViewNavigationRouter) =>
+      splitViewNavigationRouter;
 
   @j.singleton
   @j.provide

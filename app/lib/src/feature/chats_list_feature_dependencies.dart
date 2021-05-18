@@ -12,20 +12,20 @@ class ChatsListFeatureDependencies implements IChatsListFeatureDependencies {
       required DateFormatter dateFormatter,
       required DateParser dateParser,
       required IFileRepository fileRepository,
-      required RootNavigationRouter navigationRouter})
+      required IChatsListScreenRouter router})
       : _chatRepository = chatRepository,
         _chatUpdatesProvider = chatUpdatesProvider,
         _dateFormatter = dateFormatter,
         _dateParser = dateParser,
         _fileRepository = fileRepository,
-        _navigationRouter = navigationRouter;
+        _router = router;
 
   final IChatRepository _chatRepository;
   final IChatUpdatesProvider _chatUpdatesProvider;
   final DateFormatter _dateFormatter;
   final DateParser _dateParser;
   final IFileRepository _fileRepository;
-  final RootNavigationRouter _navigationRouter;
+  final IChatsListScreenRouter _router;
 
   @override
   IChatRepository get chatRepository => _chatRepository;
@@ -43,5 +43,5 @@ class ChatsListFeatureDependencies implements IChatsListFeatureDependencies {
   IFileRepository get fileRepository => _fileRepository;
 
   @override
-  IChatsListScreenRouter get router => _navigationRouter;
+  IChatsListScreenRouter get router => _router;
 }
