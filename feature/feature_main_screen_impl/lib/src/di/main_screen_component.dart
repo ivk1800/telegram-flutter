@@ -1,3 +1,4 @@
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
@@ -40,6 +41,12 @@ abstract class FoldersSetupModule {
   static IChatsListWidgetFactory provideChatsListWidgetFactory(
           IChatsListFeatureApi api) =>
       api.screenWidgetFactory;
+
+  @j.provide
+  @j.singleton
+  static IConnectionStateUpdatesProvider provideConnectionStateUpdatesProvider(
+          IMainScreenFeatureDependencies dependencies) =>
+      dependencies.connectionStateUpdatesProvider;
 }
 
 @j.componentBuilder

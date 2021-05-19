@@ -9,7 +9,6 @@ typedef ColorProvider = Color Function(bool isActive);
 class TgSwitchedAppBar extends StatefulWidget implements PreferredSizeWidget {
   TgSwitchedAppBar({
     Key? key,
-    this.title,
     required this.leadingIconProvider,
     required this.navigationIconTap,
     required this.iconColorProvider,
@@ -27,7 +26,6 @@ class TgSwitchedAppBar extends StatefulWidget implements PreferredSizeWidget {
   final VoidCallback navigationIconTap;
   final ActionWidgetsBuilder actionWidgetsBuilder;
   final LeadingIconProvider leadingIconProvider;
-  final Widget? title;
   final PreferredSizeWidget? bottom;
 
   @override

@@ -1,5 +1,6 @@
 library feature_main_screen_impl;
 
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
@@ -24,6 +25,8 @@ abstract class IMainScreenFeatureDependencies {
   IGlobalSearchFeatureApi get globalSearchFeatureApi;
 
   IChatsListFeatureApi get chatsListFeatureApi;
+
+  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider;
 }
 
 class _ScreenWidgetFactory implements IMainScreenWidgetFactory {

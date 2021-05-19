@@ -26,6 +26,9 @@ class MainPageState extends State<MainPage>
   @j.inject
   late IChatsListWidgetFactory chatsListWidgetFactory;
 
+  @j.inject
+  late ConnectionStateWidgetFactory connectionStateWidgetFactory;
+
   _ScreenState _screenState = _ScreenState.Default;
 
   final GlobalObjectKey<TgSwitchedAppBarState> appbarKey =
@@ -85,7 +88,6 @@ class MainPageState extends State<MainPage>
           key: scaffoldKey,
           appBar: TgSwitchedAppBar(
             key: appbarKey,
-            title: Text('chats'),
             iconColorProvider: (isActive) {
               if (isActive) {
                 switch (_screenState) {
@@ -230,10 +232,7 @@ class MainPageState extends State<MainPage>
                     }
                 }
               } else {
-                return Align(
-                  child: Text('chats'),
-                  alignment: Alignment.centerLeft,
-                );
+                return _buildTitleWidget(context);
               }
             },
             leadingIconProvider: (bool isActive) {
@@ -254,6 +253,17 @@ class MainPageState extends State<MainPage>
             },
             child: _searchActive ? buildSearchView() : buildListView(),
           )),
+    );
+  }
+
+  Widget _buildTitleWidget(BuildContext context) {
+    return Align(
+      child:
+          connectionStateWidgetFactory.create(context, (BuildContext context) {
+        // TODO extract text to stings
+        return const Text('Telegram');
+      }),
+      alignment: Alignment.centerLeft,
     );
   }
 
