@@ -6,8 +6,7 @@ import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/feature/feature.dart';
-import 'package:presentation/src/navigation/chats_list_screen_router_impl.dart';
-import 'package:presentation/src/navigation/split_navigation_router.dart';
+import 'package:presentation/src/navigation/navigation.dart';
 
 @j.module
 abstract class FeatureModule {
@@ -44,4 +43,7 @@ abstract class FeatureModule {
   @j.bind
   IChatsListScreenRouter bindChatsListScreenRouter(
       ChatsListScreenRouterImpl impl);
+
+  @j.bind
+  IMainScreenRouter bindMainScreenRouter(MainScreenRouterImpl impl);
 }

@@ -64,6 +64,14 @@ class SplitNavigationRouter implements INavigationRouter {
         ?.pushAllReplacement(key: key, builder: builder, container: container);
   }
 
+  void push(
+      {required LocalKey key,
+      required WidgetBuilder builder,
+      required ContainerType container}) {
+    _navigationKey.currentState
+        ?.push(key: key, builder: builder, container: container);
+  }
+
   bool hasKey(LocalKey key, ContainerType container) =>
       _navigationKey.currentState?.hasKey(key, container) ?? false;
 

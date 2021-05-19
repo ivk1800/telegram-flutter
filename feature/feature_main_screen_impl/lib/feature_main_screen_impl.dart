@@ -7,7 +7,10 @@ import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:flutter/widgets.dart';
 import 'src/di/main_screen_component.dart';
 
+import 'src/main_screen_router.dart';
 import 'src/screen/main_page.dart';
+
+export 'src/main_screen_router.dart';
 
 class MainScreenFeatureApi implements IMainScreenFeatureApi {
   MainScreenFeatureApi({required this.dependencies})
@@ -27,6 +30,8 @@ abstract class IMainScreenFeatureDependencies {
   IChatsListFeatureApi get chatsListFeatureApi;
 
   IConnectionStateUpdatesProvider get connectionStateUpdatesProvider;
+
+  IMainScreenRouter get router;
 }
 
 class _ScreenWidgetFactory implements IMainScreenWidgetFactory {

@@ -47,6 +47,12 @@ abstract class FoldersSetupModule {
   static IConnectionStateUpdatesProvider provideConnectionStateUpdatesProvider(
           IMainScreenFeatureDependencies dependencies) =>
       dependencies.connectionStateUpdatesProvider;
+
+  @j.provide
+  @j.singleton
+  static IMainScreenRouter provideMainRouter(
+          IMainScreenFeatureDependencies dependencies) =>
+      dependencies.router;
 }
 
 @j.componentBuilder

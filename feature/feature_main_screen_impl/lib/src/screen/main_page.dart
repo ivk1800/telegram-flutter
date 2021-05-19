@@ -1,6 +1,7 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
+import 'package:feature_main_screen_impl/src/screen/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -242,7 +243,7 @@ class MainPageState extends State<MainPage>
               return AnimatedIcons.menu_arrow;
             },
           ),
-          drawer: Drawer(),
+          drawer: _buildDrawer(),
           body: AnimatedSwitcher(
             duration: Duration(milliseconds: 200),
             transitionBuilder: (Widget child, Animation<double> animation) {
@@ -287,6 +288,88 @@ class MainPageState extends State<MainPage>
     //     return _chatTileFactory.create(context, chatTileModel);
     //   },
     // );
+  }
+
+  Widget _buildDrawer() {
+    return Drawer(
+      child: ListView(
+        // Important: Remove any padding from the ListView.
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const SizedBox(height: 70, width: 70, child: CircleAvatar()),
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(context).accentColor,
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            leading: const Icon(Icons.people),
+            title: const Text('New Group'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            leading: const Icon(Icons.person),
+            title: const Text('Contacts'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            leading: const Icon(Icons.call),
+            title: const Text('Calls'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            leading: const Icon(Icons.emoji_people),
+            title: const Text('People Nearby'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            leading: const Icon(Icons.bookmark_border),
+            title: const Text('Saved Messages'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
+              viewModel.onMenuItemTao(MenuItem.Settings);
+            },
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
+          ),
+          const Divider(),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            leading: const Icon(Icons.person_add_outlined),
+            title: const Text('Invite Firends'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            leading: const Icon(Icons.help_outline),
+            title: const Text('Telegram FAQ'),
+          ),
+        ],
+      ),
+    );
   }
 }
 
