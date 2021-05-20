@@ -15,6 +15,10 @@ dependencies:
     path: ../core_tdlib_api
   core_tdlib_impl:
     path: ../core_tdlib_impl
+  feature_chat_impl:
+    path: ../feature/feature_chat_impl
+  feature_chat_api:
+    path: ../feature/feature_chat_api
   feature_main_screen_api:
     path: ../feature/feature_main_screen_api
   feature_main_screen_impl:

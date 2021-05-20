@@ -1,3 +1,4 @@
+import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -41,7 +42,10 @@ class RootNavigationRouter
   @override
   void toChat(int chatId) {
     final PageRoute<dynamic> route = _defaultRoute(
-      (BuildContext context) => ChatPage(chatId: chatId),
+      (BuildContext context) => _featureFactory
+          .createChatFeatureApi()
+          .screenWidgetFactory
+          .create(chatId),
     );
     _push(route);
   }

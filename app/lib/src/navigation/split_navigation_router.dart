@@ -33,11 +33,6 @@ class SplitNavigationRouter implements INavigationRouter {
   }
 
   @override
-  void toChat(int chatId) {
-    _push(ChatPage(chatId: chatId), ContainerType.Right);
-  }
-
-  @override
   void toLogin() {
     _push(const LoginPage(), ContainerType.Top);
   }

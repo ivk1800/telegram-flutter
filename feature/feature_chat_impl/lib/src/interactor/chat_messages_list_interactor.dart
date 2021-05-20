@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
@@ -9,11 +9,12 @@ import 'package:tdlib/td_api.dart' as td;
 class ChatMessagesInteractor {
   @j.inject
   ChatMessagesInteractor(
-      this._chatRepository, this._messageRepository, this._chatId);
+      this._chatRepository, this._messageRepository, this._chatArgs);
 
   final IChatRepository _chatRepository;
   final IChatMessageRepository _messageRepository;
-  final int _chatId;
+  // TODO refactor
+  final ChatArgs _chatArgs;
 
   final BehaviorSubject<List<td.Message>> _messagesSubject =
       BehaviorSubject<List<td.Message>>.seeded(<td.Message>[]);
@@ -42,7 +43,8 @@ class ChatMessagesInteractor {
     _subscription?.cancel();
 
     _subscription = _messageRepository
-        .getMessages(chatId: _chatId, fromMessageId: fromMessageId, limit: 30)
+        .getMessages(
+            chatId: _chatArgs.chatId, fromMessageId: fromMessageId, limit: 30)
         .listen((List<td.Message> messages) {
       _messagesSubject.add(_messagesSubject.value!..addAll(messages));
       _isIdle = messages.isNotEmpty;

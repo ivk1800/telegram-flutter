@@ -1,3 +1,4 @@
+import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
@@ -17,4 +18,7 @@ class FeatureFactory {
 
   IGlobalSearchFeatureApi createGlobalSearchFeatureApi() =>
       _featureComponent.getGlobalSearchFeatureApi();
+
+  IChatFeatureApi createChatFeatureApi() =>
+      _featureComponent.getChatListFeatureApi();
 }

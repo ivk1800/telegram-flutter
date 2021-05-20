@@ -1,22 +1,21 @@
+import 'package:coreui/coreui.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/src/di/component/screen/chat_screen_component.dart';
+import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/tile/chat_message/chat_message.dart';
-import 'package:presentation/src/tile/tile.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 import 'chat_view_model.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key, required this.chatId}) : super(key: key);
-
-  final int chatId;
+  const ChatPage({Key? key}) : super(key: key);
 
   @override
   ChatPageState createState() => ChatPageState();
 }
 
-class ChatPageState extends State<ChatPage> {
+class ChatPageState extends State<ChatPage>
+    with StateInjectorMixin<ChatPage, ChatPageState> {
   @j.inject
   late ChatMessageTileFactory chatMessageTileFactory;
 
@@ -25,9 +24,11 @@ class ChatPageState extends State<ChatPage> {
   @j.inject
   late ChatViewModel viewModel;
 
+  @j.inject
+  late ConnectionStateWidgetFactory connectionStateWidgetFactory;
+
   @override
   void initState() {
-    inject();
     super.initState();
 
     scrollController.addListener(() {
@@ -49,7 +50,8 @@ class ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat'),
+        title: connectionStateWidgetFactory.create(
+            context, (_) => const Text('Chat')),
       ),
       body: StreamBuilder<List<td.Message>>(
         stream: viewModel.messages,
