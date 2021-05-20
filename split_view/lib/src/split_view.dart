@@ -183,11 +183,7 @@ class SplitViewState extends State<SplitView> {
         _onWidthChanged(constraints.maxWidth);
         Widget finalWidget;
         if (constraints.maxWidth > 500) {
-          if (_topPages.isNotEmpty) {
-            finalWidget = _buildAllContainersTogether(context);
-          } else {
-            finalWidget = _buildLeftAndRightContainersTogether(context);
-          }
+          finalWidget = _buildAllContainersTogether(context);
         } else {
           finalWidget = _buildCompactContainer(context);
         }
@@ -196,8 +192,9 @@ class SplitViewState extends State<SplitView> {
     );
   }
 
-  Widget _buildTopContainer(BuildContext context) {
+  Widget _buildTopContainer(Key key, BuildContext context) {
     return Align(
+        key: key,
         alignment: Alignment.center,
         child: Stack(
           children: <Widget>[
@@ -217,14 +214,21 @@ class SplitViewState extends State<SplitView> {
                 constraints:
                     const BoxConstraints(maxHeight: 600, maxWidth: 500),
                 padding: const EdgeInsets.only(top: 48, bottom: 48),
-                child: ClipRect(
-                  child: _buildNavigator(<Page<dynamic>>[
-                        _SimplePage(
-                            key: UniqueKey(),
-                            builder: widget.rightContainerPlaceholderBuilder,
-                            containerType: ContainerType.Right)
-                      ] +
-                      _topPages.map((_PageNode e) => e.page).toList()),
+                child: Card(
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 40,
+                  child: ClipRect(
+                    child: _buildNavigator(<Page<dynamic>>[
+                          _SimplePage(
+                              key: UniqueKey(),
+                              builder: widget.rightContainerPlaceholderBuilder,
+                              containerType: ContainerType.Right)
+                        ] +
+                        _topPages.map((_PageNode e) => e.page).toList()),
+                  ),
                 ),
               ),
             )
@@ -236,7 +240,21 @@ class SplitViewState extends State<SplitView> {
     return Stack(
       children: <Widget>[
         _buildLeftAndRightContainersTogether(context),
-        _buildTopContainer(context)
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(
+              child: child,
+              opacity: animation,
+            );
+          },
+          // TODO rename keys
+          child: _topPages.isEmpty
+              ? const SizedBox(
+                  key: ValueKey<dynamic>('hide'),
+                )
+              : _buildTopContainer(const ValueKey<dynamic>('show'), context),
+        )
       ],
     );
   }
@@ -361,10 +379,29 @@ class _SimplePage extends MyPage<dynamic> {
 
   @override
   Route<dynamic> createRoute(BuildContext context) {
-    return MaterialPageRoute<dynamic>(
+    return _PageRoute<dynamic>(
         settings: this,
         builder: (BuildContext context) => builder.call(context));
   }
+}
+
+class _PageRoute<T> extends MaterialPageRoute<T> {
+  _PageRoute({
+    required RouteSettings? settings,
+    required WidgetBuilder builder,
+  }) : super(builder: builder, settings: settings);
+//
+// @override
+// Widget buildTransitions(BuildContext context, Animation<double> animation,
+//     Animation<double> secondaryAnimation, Widget child) {
+//   return child;
+// }
+//
+// @override
+// Duration get transitionDuration => const Duration();
+//
+// @override
+// Duration get reverseTransitionDuration => const Duration();
 }
 
 extension _Extensions on List<_PageNode> {
