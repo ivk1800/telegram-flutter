@@ -1,38 +1,40 @@
-import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
-import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
+import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/src/feature/feature.dart';
+import 'package:jugger/jugger.dart' as j;
+import 'package:presentation/src/feature/folders/feature_folders.dart';
 import 'package:presentation/src/page/page.dart';
 import 'package:split_view/split_view.dart';
-import 'package:jugger/jugger.dart' as j;
 
 import 'navigation.dart';
 
-class MainScreenRouterImpl implements IMainScreenRouter {
+class SettingsScreenRouterImpl implements ISettingsScreenRouter {
   @j.inject
-  MainScreenRouterImpl(
-      FeatureFactory featureFactory,
+  SettingsScreenRouterImpl(
       SplitNavigationInfoProvider splitNavigationInfoProvider,
       KeyGenerator keyGenerator,
       SplitNavigationRouter navigationRouter)
       : _navigationRouter = navigationRouter,
-        _featureFactory = featureFactory,
         _splitNavigationInfoProvider = splitNavigationInfoProvider,
         _keyGenerator = keyGenerator;
 
   final SplitNavigationInfoProvider _splitNavigationInfoProvider;
   final KeyGenerator _keyGenerator;
   final SplitNavigationRouter _navigationRouter;
-  final FeatureFactory _featureFactory;
 
   @override
-  void toSettings() {
+  void toFolders() {
     _navigationRouter.push(
         key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createSettingsFeatureApi()
-            .screenWidgetFactory
-            .create(),
+        builder: (BuildContext context) => const FoldersSetupPage().wrap(),
+        container: ContainerType.Top);
+  }
+
+  @override
+  void toSessions() {
+    _navigationRouter.push(
+        key: UniqueKey(),
+        builder: (BuildContext context) => const SessionsPage(),
         container: ContainerType.Top);
   }
 }

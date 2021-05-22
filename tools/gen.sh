@@ -13,3 +13,6 @@ flutter packages pub run build_runner build
 cd ../feature_chat_impl/
 echo 'generate for feature_chat_impl'
 flutter packages pub run build_runner build
+cd ../feature_settings_impl/
+echo 'generate for feature_settings_impl'
+flutter packages pub run build_runner build

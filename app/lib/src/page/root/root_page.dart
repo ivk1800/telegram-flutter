@@ -87,7 +87,7 @@ class RootPageState extends State<RootPage> {
               ListTile(
                 onTap: () {
                   Navigator.of(context).pop();
-                  appComponent.getNavigationRouter().toRootSettingsScreen();
+                  // appComponent.getNavigationRouter().toRootSettingsScreen();
                 },
                 leading: const Icon(Icons.settings),
                 title: const Text('Settings'),

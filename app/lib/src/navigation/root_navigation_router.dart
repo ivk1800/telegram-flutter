@@ -24,14 +24,6 @@ class RootNavigationRouter
   }
 
   @override
-  void toRootSettingsScreen() {
-    final PageRoute<dynamic> route = _defaultRoute(
-      (BuildContext context) => const ProfilePage(),
-    );
-    _push(route);
-  }
-
-  @override
   void toSessionsScreen() {
     final PageRoute<dynamic> route = _defaultRoute(
       (BuildContext context) => const SessionsPage(),

@@ -23,11 +23,6 @@ class SplitNavigationRouter implements INavigationRouter {
   }
 
   @override
-  void toRootSettingsScreen() {
-    _push(const ProfilePage(), ContainerType.Top);
-  }
-
-  @override
   void toSessionsScreen() {
     _push(const SessionsPage(), ContainerType.Top);
   }

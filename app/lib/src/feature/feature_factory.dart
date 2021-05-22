@@ -2,6 +2,7 @@ import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
+import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:presentation/src/di/component/feature_component.dart';
 
 class FeatureFactory {
@@ -21,4 +22,7 @@ class FeatureFactory {
 
   IChatFeatureApi createChatFeatureApi() =>
       _featureComponent.getChatListFeatureApi();
+
+  ISettingsFeatureApi createSettingsFeatureApi() =>
+      _featureComponent.getSettingsFeatureApi();
 }

@@ -41,3 +41,7 @@ cd feature_main_screen_impl/
 flutter packages get
 cd ../feature_chat_impl/
 flutter packages get
+cd ../feature_settings_impl/
+flutter packages get
+cd ../feature_settings_api/
+flutter packages get
