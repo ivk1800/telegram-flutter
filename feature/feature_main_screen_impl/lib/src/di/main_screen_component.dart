@@ -6,6 +6,7 @@ import 'package:feature_main_screen_impl/src/screen/main_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:localization_api/localization_api.dart';
 
 import 'main_screen_component.jugger.dart';
 
@@ -53,6 +54,12 @@ abstract class FoldersSetupModule {
   static IMainScreenRouter provideMainRouter(
           IMainScreenFeatureDependencies dependencies) =>
       dependencies.router;
+
+  @j.provide
+  @j.singleton
+  static ILocalizationManager provideLocalizationManager(
+          IMainScreenFeatureDependencies dependencies) =>
+      dependencies.localizationManager;
 }
 
 @j.componentBuilder

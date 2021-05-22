@@ -1,0 +1,17 @@
+name: localization_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  xml: ^5.1.1
+  localization_api:
+    path: ../localization_api
+  flutter:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/translations/en.xml

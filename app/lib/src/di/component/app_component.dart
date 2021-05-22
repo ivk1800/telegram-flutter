@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:localization_api/localization_api.dart';
 import 'package:presentation/src/di/module/app_module.dart';
 import 'package:presentation/src/di/module/td_module.dart';
 import 'package:presentation/src/feature/feature.dart';
@@ -54,10 +55,15 @@ abstract class AppComponent {
 
   FeatureFactory getFeatureFactory();
 
+  ILocalizationManager getLocalizationManager();
+
   void injectRootPageState(RootPageState state);
 }
 
 @j.componentBuilder
 abstract class AppComponentBuilder {
+  AppComponentBuilder localizationManager(
+      ILocalizationManager localizationManager);
+
   AppComponent build();
 }

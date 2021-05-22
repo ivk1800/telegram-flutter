@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:localization_impl/localization_impl.dart';
 import 'package:presentation/src/app/app.dart';
 import 'package:presentation/src/di/component/app_component.jugger.dart';
 import 'package:td_client/td_client.dart';
@@ -13,7 +14,12 @@ Future<void> launch() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // runDemo();
-  appComponent = JuggerAppComponentBuilder().build();
+  final LocalizationManager localizationManager = LocalizationManager();
+  await localizationManager.init('en', 'en');
+
+  appComponent = JuggerAppComponentBuilder()
+      .localizationManager(localizationManager)
+      .build();
   //init repo
   appComponent.getChatFilterRepository();
 

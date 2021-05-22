@@ -15,8 +15,11 @@ cd launch/
 flutter packages get
 cd ..
 cd td_client/
-cd ..
-cd coreui/
+cd ../localization_api/
+flutter packages get
+cd ../localization_impl
+flutter packages get
+cd ../coreui/
 flutter packages get
 cd ../feature/
 cd feature_chats_list_api/

@@ -5,6 +5,7 @@ import 'package:feature_main_screen_impl/src/screen/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:localization_api/localization_api.dart';
 import 'main_view_model.dart';
 
 class MainPage extends StatefulWidget {
@@ -20,6 +21,9 @@ class MainPageState extends State<MainPage>
     with TickerProviderStateMixin, StateInjectorMixin<MainPage, MainPageState> {
   @j.inject
   late MainViewModel viewModel;
+
+  @j.inject
+  late ILocalizationManager localizationManager;
 
   @j.inject
   late IGlobalSearchWidgetFactory globalSearchWidgetFactory;
@@ -365,7 +369,7 @@ class MainPageState extends State<MainPage>
               Navigator.of(context).pop();
             },
             leading: const Icon(Icons.help_outline),
-            title: const Text('Telegram FAQ'),
+            title: Text(localizationManager.getString('TelegramFeatures')),
           ),
         ],
       ),
