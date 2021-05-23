@@ -34,6 +34,7 @@ class ChatListInteractor {
             limit: 30));
       },
       onResult: (List<td.Chat> newChats) async {
+        _done = true;
         for (final td.Chat chat in newChats) {
           await _chatListUpdateHandler.handleNewChat(chat: chat);
         }
@@ -44,6 +45,8 @@ class ChatListInteractor {
       onError: (dynamic error) {},
     );
   }
+
+  late bool _done = false;
 
   late Loader<td.Chat> _loader;
 
@@ -73,6 +76,9 @@ class ChatListInteractor {
   }
 
   void load() {
+    if (_done) {
+      return;
+    }
     _loader.load();
   }
 
