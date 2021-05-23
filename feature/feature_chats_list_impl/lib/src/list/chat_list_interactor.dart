@@ -6,7 +6,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:collection/collection.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:jugger/jugger.dart' as j;
-import 'package:dart_numerics/dart_numerics.dart' as numerics;
 
 import 'chat_list.dart';
 import 'chat_list_update_handler.dart';
@@ -30,7 +29,7 @@ class ChatListInteractor {
         final OrderedChat? lastChat = _chatsHolder.orderedChats.lastOrNull;
         return Stream<List<td.Chat>>.fromFuture(_chatRepository.getChats(
             offsetChatId: lastChat?.chatId ?? 0,
-            offsetOrder: lastChat?.order ?? numerics.int64MaxValue,
+            offsetOrder: lastChat?.order ?? 9223372036854775807,
             chatList: _chatListConfig.chatList,
             limit: 30));
       },

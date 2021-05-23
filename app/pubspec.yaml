@@ -48,7 +48,6 @@ dependencies:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jext
       ref: fc73e9fae90539ba0c4b03a531802ceb4547bcb6
-  dart_numerics: ^0.0.5
   rxdart: ^0.26.0
   core:
     path: ../core
@@ -71,7 +70,7 @@ dev_dependencies:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger_generator
-      ref: 40368af6eb3789951facb8e15d5c0d0706c95750
+      ref: ebf47e38b00f38c21aed7787f438202eeb847ef9
   analyzer: ^1.1.0
   build_runner: ^1.10.2
   flutter_test:

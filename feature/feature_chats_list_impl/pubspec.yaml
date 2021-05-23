@@ -8,7 +8,7 @@ environment:
 dependencies:
   coreui:
     path: ../../coreui
-  dart_numerics: ^0.0.5
+  tuple: ^2.0.0
   core_utils:
     path: ../../core_utils
   core_tdlib_api:
@@ -37,7 +37,7 @@ dev_dependencies:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger_generator
-      ref: 40368af6eb3789951facb8e15d5c0d0706c95750
+      ref: ebf47e38b00f38c21aed7787f438202eeb847ef9
   build_runner: ^1.10.2
 
 flutter:
