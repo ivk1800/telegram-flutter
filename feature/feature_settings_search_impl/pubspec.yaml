@@ -1,4 +1,4 @@
-name: feature_settings_impl
+name: feature_settings_search_impl
 publish_to: 'none'
 
 environment:
@@ -6,14 +6,15 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  feature_settings_search_api:
-    path: ../feature_settings_search_api
+  rxdart: ^0.26.0
+  core_arch:
+    path: ../../core_arch
   core_tdlib_api:
     path: ../../core_tdlib_api
   localization_api:
     path: ../../localization_api
-  feature_settings_api:
-    path: ../feature_settings_api
+  feature_settings_search_api:
+    path: ../feature_settings_search_api
   coreui:
     path: ../../coreui
   jext:

@@ -8,6 +8,8 @@ import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
+import 'package:feature_settings_search_api/feature_settings_search_api.dart';
+import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/feature/chat_feature_dependencies.dart';
 import 'package:presentation/src/feature/feature.dart';
@@ -35,6 +37,10 @@ abstract class FeatureModule {
   @j.bind
   ISettingsFeatureDependencies bindSettingsFeatureDependencies(
       SettingsFeatureDependencies impl);
+
+  @j.bind
+  ISettingsSearchFeatureDependencies bindSettingsSearchFeatureDependencies(
+      SettingsSearchFeatureDependencies impl);
 
   @j.provide
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
@@ -66,6 +72,11 @@ abstract class FeatureModule {
     return SettingsFeatureApi(dependencies: dependencies);
   }
 
+  @j.provide
+  static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
+          ISettingsSearchFeatureDependencies dependencies) =>
+      SettingsSearchFeatureApi(dependencies: dependencies);
+
   @j.bind
   IChatsListScreenRouter bindChatsListScreenRouter(
       ChatsListScreenRouterImpl impl);
@@ -78,4 +89,8 @@ abstract class FeatureModule {
 
   @j.bind
   ISettingsScreenRouter bindSettingsScreenRouter(SettingsScreenRouterImpl impl);
+
+  @j.bind
+  ISettingsSearchScreenRouter bindSettingsSearchScreenRouter(
+      SettingsSearchScreenRouterImpl impl);
 }

@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 typedef ActionWidgetsBuilder = List<Widget> Function(
     BuildContext context, bool isAcive);
 typedef WidgetBuilder = Widget Function(BuildContext context, bool isAcive);
-typedef LeadingIconProvider = AnimatedIconData Function(bool isActive);
+typedef LeadingAnimationIconProvider = AnimatedIconData Function(bool isActive);
+typedef LeadingIconProvider = IconData Function(bool isActive);
 typedef ColorProvider = Color Function(bool isActive);
 
 class TgSwitchedAppBar extends StatefulWidget implements PreferredSizeWidget {
   TgSwitchedAppBar({
     Key? key,
-    required this.leadingIconProvider,
     required this.navigationIconTap,
     required this.iconColorProvider,
     required this.backgroundColorProvider,
     required this.titleBuilder,
     required this.actionWidgetsBuilder,
+    this.leadingAnimatedIconProvider,
+    this.leadingIconProvider,
     this.bottom,
   })  : preferredSize = Size.fromHeight(
             kToolbarHeight + (bottom?.preferredSize.height ?? 0.0)),
@@ -25,7 +27,8 @@ class TgSwitchedAppBar extends StatefulWidget implements PreferredSizeWidget {
   final ColorProvider iconColorProvider;
   final VoidCallback navigationIconTap;
   final ActionWidgetsBuilder actionWidgetsBuilder;
-  final LeadingIconProvider leadingIconProvider;
+  final LeadingAnimationIconProvider? leadingAnimatedIconProvider;
+  final LeadingIconProvider? leadingIconProvider;
   final PreferredSizeWidget? bottom;
 
   @override
@@ -95,10 +98,12 @@ class TgSwitchedAppBarState extends State<TgSwitchedAppBar>
         key: key,
         leading: IconButton(
           // color: _navigationIconColorTween.value,
-          icon: AnimatedIcon(
-            progress: _animationController,
-            icon: widget.leadingIconProvider.call(_isActive),
-          ),
+          icon: widget.leadingAnimatedIconProvider != null
+              ? AnimatedIcon(
+                  progress: _animationController,
+                  icon: widget.leadingAnimatedIconProvider!.call(_isActive),
+                )
+              : Icon(widget.leadingIconProvider!.call(_isActive)),
           onPressed: widget.navigationIconTap,
         ),
         title: widget.titleBuilder.call(context, _isActive),

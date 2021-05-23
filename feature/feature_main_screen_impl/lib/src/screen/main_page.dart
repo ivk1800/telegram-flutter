@@ -46,10 +46,10 @@ class MainPageState extends State<MainPage>
     super.initState();
     _searchQueryController.addListener(() {
       setState(() {
-        final bool _prevValue = _showClearQuery;
-        _showClearQuery = _searchQueryController.text.isNotEmpty;
-        if (_showClearQuery != _prevValue) {
-          if (_showClearQuery) {
+        final bool _prevValue = _showClearButtonQuery;
+        _showClearButtonQuery = _searchQueryController.text.isNotEmpty;
+        if (_showClearButtonQuery != _prevValue) {
+          if (_showClearButtonQuery) {
             _animationController.forward();
           } else {
             _animationController.reverse();
@@ -67,7 +67,7 @@ class MainPageState extends State<MainPage>
   }
 
   bool _searchActive = false;
-  bool _showClearQuery = false;
+  bool _showClearButtonQuery = false;
 
   late FocusNode myFocusNode;
   late Animation<Size?> _navigationIconColorTween;
@@ -240,7 +240,7 @@ class MainPageState extends State<MainPage>
                 return _buildTitleWidget(context);
               }
             },
-            leadingIconProvider: (bool isActive) {
+            leadingAnimatedIconProvider: (bool isActive) {
               if (_screenState == _ScreenState.MultiSelect) {
                 return AnimatedIcons.menu_close;
               }

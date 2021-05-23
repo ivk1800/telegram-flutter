@@ -1,6 +1,7 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_impl/src/screen/settings_page.dart';
+import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -17,6 +18,18 @@ abstract class SettingsScreenComponent
 
 @j.module
 abstract class SettingsModule {
+  @j.provide
+  @j.singleton
+  static ISettingsSearchWidgetFactory provideSettingsSearchWidgetFactory(
+          ISettingsSearchFeatureApi api) =>
+      api.screenWidgetFactory;
+
+  @j.provide
+  @j.singleton
+  static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
+          ISettingsFeatureDependencies dependencies) =>
+      dependencies.settingsSearchFeatureApi;
+
   @j.provide
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
