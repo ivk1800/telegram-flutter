@@ -49,3 +49,5 @@ cd ../feature_settings_search_impl/
 flutter packages get
 cd ../feature_settings_search_api/
 flutter packages get
+cd ../feature_dev/
+flutter packages get

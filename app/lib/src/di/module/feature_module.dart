@@ -1,7 +1,9 @@
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
+import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
@@ -15,6 +17,7 @@ import 'package:presentation/src/feature/chat_feature_dependencies.dart';
 import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/navigation/chat_screen_router_impl.dart';
 import 'package:presentation/src/navigation/navigation.dart';
+import 'package:td_client/td_client.dart';
 
 @j.module
 abstract class FeatureModule {
@@ -76,6 +79,13 @@ abstract class FeatureModule {
   static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
           ISettingsSearchFeatureDependencies dependencies) =>
       SettingsSearchFeatureApi(dependencies: dependencies);
+
+  @j.provide
+  static DevFeature provideDevFeature(TdClient client,
+          IConnectionStateUpdatesProvider connectionStateUpdatesProvider) =>
+      DevFeature(
+          connectionStateUpdatesProvider: connectionStateUpdatesProvider,
+          client: client);
 
   @j.bind
   IChatsListScreenRouter bindChatsListScreenRouter(

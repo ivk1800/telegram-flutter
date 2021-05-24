@@ -8,10 +8,13 @@ class MainViewModel implements j.IDisposable {
 
   final IMainScreenRouter _router;
 
-  void onMenuItemTao(MenuItem item) {
+  void onMenuItemTap(MenuItem item) {
     switch (item) {
       case MenuItem.Settings:
         _router.toSettings();
+        break;
+      case MenuItem.Dev:
+        _router.toDev();
         break;
     }
   }

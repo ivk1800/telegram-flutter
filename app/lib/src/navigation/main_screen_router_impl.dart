@@ -35,4 +35,13 @@ class MainScreenRouterImpl implements IMainScreenRouter {
             .create(),
         container: ContainerType.Top);
   }
+
+  @override
+  void toDev() {
+    _navigationRouter.push(
+        key: UniqueKey(),
+        builder: (BuildContext context) =>
+            _featureFactory.createDevFeature().createRootWidget(),
+        container: ContainerType.Top);
+  }
 }

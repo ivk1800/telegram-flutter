@@ -316,6 +316,14 @@ class MainPageState extends State<MainPage>
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
+              viewModel.onMenuItemTap(MenuItem.Dev);
+            },
+            leading: const Icon(Icons.developer_board),
+            title: const Text('Dev'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
             },
             leading: const Icon(Icons.people),
             title: const Text('New Group'),
@@ -351,7 +359,7 @@ class MainPageState extends State<MainPage>
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
-              viewModel.onMenuItemTao(MenuItem.Settings);
+              viewModel.onMenuItemTap(MenuItem.Settings);
             },
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),

@@ -17,5 +17,8 @@ cd ../feature_settings_impl/
 echo 'generate for feature_settings_impl'
 flutter packages pub run build_runner build
 cd ../feature_settings_search_impl/
-echo 'generate for feature_settings_impl'
+echo 'generate for feature_settings_search_impl'
+flutter packages pub run build_runner build
+cd ../feature_dev/
+echo 'generate for feature_dev'
 flutter packages pub run build_runner build
