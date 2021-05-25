@@ -1,3 +1,7 @@
-<!--https://translations.telegram.org/en/android/general/TelegramFeatures-->
-<string lang="TelegramFeatures">Telegram Features</string>
-
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--https://translations.telegram.org/en/android/general/TelegramFeatures-->
+    <string lang="TelegramFeatures">Telegram Features</string>
+    <!--https://translations.telegram.org/en/android/settings/PrivacySettings-->
+    <string lang="PrivacySettings">Privacy and Security</string>
+</resources>

@@ -2,6 +2,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/feature/folders/feature_folders.dart';
 import 'package:presentation/src/page/page.dart';
 import 'package:split_view/split_view.dart';
@@ -11,15 +12,11 @@ import 'navigation.dart';
 class SettingsScreenRouterImpl implements ISettingsScreenRouter {
   @j.inject
   SettingsScreenRouterImpl(
-      SplitNavigationInfoProvider splitNavigationInfoProvider,
-      KeyGenerator keyGenerator,
-      SplitNavigationRouter navigationRouter)
+      FeatureFactory featureFactory, SplitNavigationRouter navigationRouter)
       : _navigationRouter = navigationRouter,
-        _splitNavigationInfoProvider = splitNavigationInfoProvider,
-        _keyGenerator = keyGenerator;
+        _featureFactory = featureFactory;
 
-  final SplitNavigationInfoProvider _splitNavigationInfoProvider;
-  final KeyGenerator _keyGenerator;
+  final FeatureFactory _featureFactory;
   final SplitNavigationRouter _navigationRouter;
 
   @override
@@ -35,6 +32,17 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
     _navigationRouter.push(
         key: UniqueKey(),
         builder: (BuildContext context) => const SessionsPage(),
+        container: ContainerType.Top);
+  }
+
+  @override
+  void toPrivacySettings() {
+    _navigationRouter.push(
+        key: UniqueKey(),
+        builder: (BuildContext context) => _featureFactory
+            .createPrivacySettingsFeatureApi()
+            .screenWidgetFactory
+            .create(),
         container: ContainerType.Top);
   }
 }

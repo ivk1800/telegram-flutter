@@ -2,6 +2,7 @@ import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
+import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -24,6 +25,8 @@ abstract class FeatureComponent {
   ISettingsSearchFeatureApi getSettingsSearchFeatureApi();
 
   DevFeature getDevFeature();
+
+  IPrivacySettingsFeatureApi getPrivacySettingsFeatureApi();
 }
 
 @j.componentBuilder

@@ -8,6 +8,8 @@ import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
+import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
+import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
@@ -21,6 +23,8 @@ import 'package:td_client/td_client.dart';
 
 @j.module
 abstract class FeatureModule {
+  // region dependencies
+
   @j.bind
   IMainScreenFeatureDependencies bindMainScreenFeatureDependencies(
       MainScreenFeatureDependencies impl);
@@ -44,6 +48,14 @@ abstract class FeatureModule {
   @j.bind
   ISettingsSearchFeatureDependencies bindSettingsSearchFeatureDependencies(
       SettingsSearchFeatureDependencies impl);
+
+  @j.bind
+  IPrivacySettingsFeatureDependencies bindPrivacySettingsFeatureDependencies(
+      PrivacySettingsFeatureDependencies impl);
+
+  // endregion
+
+  // region api
 
   @j.provide
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
@@ -81,11 +93,20 @@ abstract class FeatureModule {
       SettingsSearchFeatureApi(dependencies: dependencies);
 
   @j.provide
+  static IPrivacySettingsFeatureApi providePrivacySettingsFeatureApi(
+          IPrivacySettingsFeatureDependencies dependencies) =>
+      PrivacySettingsFeatureApi(dependencies: dependencies);
+
+  // endregion
+
+  @j.provide
   static DevFeature provideDevFeature(TdClient client,
           IConnectionStateUpdatesProvider connectionStateUpdatesProvider) =>
       DevFeature(
           connectionStateUpdatesProvider: connectionStateUpdatesProvider,
           client: client);
+
+  // region router
 
   @j.bind
   IChatsListScreenRouter bindChatsListScreenRouter(
@@ -103,4 +124,10 @@ abstract class FeatureModule {
   @j.bind
   ISettingsSearchScreenRouter bindSettingsSearchScreenRouter(
       SettingsSearchScreenRouterImpl impl);
+
+  @j.bind
+  IPrivacySettingsScreenRouter bindPrivacySettingsScreenRouter(
+      PrivacySettingsScreenRouterImpl impl);
+
+  // endregion
 }

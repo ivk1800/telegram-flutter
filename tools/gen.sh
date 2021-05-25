@@ -22,3 +22,6 @@ flutter packages pub run build_runner build
 cd ../feature_dev/
 echo 'generate for feature_dev'
 flutter packages pub run build_runner build
+cd ../feature_privacy_settings_impl/
+echo 'generate for feature_privacy_settings_impl'
+flutter packages pub run build_runner build

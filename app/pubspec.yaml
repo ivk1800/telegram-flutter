@@ -9,6 +9,10 @@ environment:
 dependencies:
   feature_dev:
     path: ../feature/feature_dev
+  feature_privacy_settings_api:
+    path: ../feature/feature_privacy_settings_api
+  feature_privacy_settings_impl:
+    path: ../feature/feature_privacy_settings_impl
   feature_settings_search_api:
     path: ../feature/feature_settings_search_api
   feature_settings_search_impl:

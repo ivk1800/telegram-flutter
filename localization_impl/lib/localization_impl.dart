@@ -38,10 +38,14 @@ class LocalizationManager implements ILocalizationManager {
 
     final Map<String, String> strings = <String, String>{};
 
-    final Iterable<XmlElement> nodes = document.nodes.whereType<XmlElement>();
-    for (final XmlNode node in nodes) {
-      final XmlAttribute stringAttribute = node.attributes[0];
-      strings[stringAttribute.value] = node.children[0].toString();
+    final XmlElement resNode = document.nodes
+        .firstWhere((XmlNode node) => node is XmlElement) as XmlElement;
+
+    final Iterable<XmlElement> stringNodes =
+        resNode.nodes.whereType<XmlElement>();
+    for (final XmlNode stringNode in stringNodes) {
+      final XmlAttribute stringAttribute = stringNode.attributes[0];
+      strings[stringAttribute.value] = stringNode.children[0].toString();
     }
 
     return strings;
