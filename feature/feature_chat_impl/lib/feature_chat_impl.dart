@@ -37,7 +37,7 @@ abstract class IChatFeatureDependencies {
 
   DateParser get dateParser;
 
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider;
 }
 
 class _ChatsListWidgetFactory implements IChatWidgetFactory {

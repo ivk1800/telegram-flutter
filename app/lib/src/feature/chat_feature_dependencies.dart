@@ -16,26 +16,26 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
       required DateParser dateParser,
       required DateFormatter dateFormatter,
       required IChatRepository chatRepository,
-      required IConnectionStateUpdatesProvider connectionStateUpdatesProvider})
+      required IConnectionStateProvider connectionStateProvider})
       : _fileRepository = fileRepository,
         _dateParser = dateParser,
         _dateFormatter = dateFormatter,
         _chatRepository = chatRepository,
         _chatMessageRepository = chatMessageRepository,
         _router = router,
-        _connectionStateUpdatesProvider = connectionStateUpdatesProvider;
+        _connectionStateProvider = connectionStateProvider;
 
   final IFileRepository _fileRepository;
   final IChatMessageRepository _chatMessageRepository;
-  final IConnectionStateUpdatesProvider _connectionStateUpdatesProvider;
+  final IConnectionStateProvider _connectionStateProvider;
   final IChatScreenRouter _router;
   final DateParser _dateParser;
   final DateFormatter _dateFormatter;
   final IChatRepository _chatRepository;
 
   @override
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider =>
-      _connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider =>
+      _connectionStateProvider;
 
   @override
   IChatMessageRepository get chatMessageRepository => _chatMessageRepository;

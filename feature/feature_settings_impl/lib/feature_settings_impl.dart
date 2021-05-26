@@ -27,7 +27,7 @@ abstract class ISettingsFeatureDependencies {
 
   ISettingsScreenRouter get router;
 
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider;
 
   ISettingsSearchFeatureApi get settingsSearchFeatureApi;
 }

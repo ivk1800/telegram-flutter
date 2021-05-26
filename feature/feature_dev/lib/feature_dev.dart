@@ -9,11 +9,10 @@ import 'package:td_client/td_client.dart';
 
 class DevFeature {
   @j.provide
-  DevFeature(
-      {required this.client, required this.connectionStateUpdatesProvider});
+  DevFeature({required this.client, required this.connectionStateProvider});
 
   final TdClient client;
-  final IConnectionStateUpdatesProvider connectionStateUpdatesProvider;
+  final IConnectionStateProvider connectionStateProvider;
 
   Widget createRootWidget() =>
       DevWidget(child: const RootPage(), devFeature: this);

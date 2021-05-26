@@ -12,16 +12,16 @@ class MainScreenFeatureDependencies implements IMainScreenFeatureDependencies {
       required IGlobalSearchFeatureApi globalSearchFeatureApi,
       required IMainScreenRouter router,
       required ILocalizationManager localizationManager,
-      required IConnectionStateUpdatesProvider connectionStateUpdatesProvider})
+      required IConnectionStateProvider connectionStateProvider})
       : _chatsListFeatureApi = chatsListFeatureApi,
         _globalSearchFeatureApi = globalSearchFeatureApi,
         _router = router,
         _localizationManager = localizationManager,
-        _connectionStateUpdatesProvider = connectionStateUpdatesProvider;
+        _connectionStateProvider = connectionStateProvider;
 
   final IChatsListFeatureApi _chatsListFeatureApi;
   final IGlobalSearchFeatureApi _globalSearchFeatureApi;
-  final IConnectionStateUpdatesProvider _connectionStateUpdatesProvider;
+  final IConnectionStateProvider _connectionStateProvider;
   final IMainScreenRouter _router;
   final ILocalizationManager _localizationManager;
 
@@ -32,8 +32,8 @@ class MainScreenFeatureDependencies implements IMainScreenFeatureDependencies {
   IGlobalSearchFeatureApi get globalSearchFeatureApi => _globalSearchFeatureApi;
 
   @override
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider =>
-      _connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider =>
+      _connectionStateProvider;
 
   @override
   IMainScreenRouter get router => _router;

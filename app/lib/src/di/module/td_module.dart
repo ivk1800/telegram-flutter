@@ -20,6 +20,6 @@ abstract class TdModule {
 
   @j.singleton
   @j.bind
-  IConnectionStateUpdatesProvider bindConnectionStateUpdatesProvider(
-      UpdatesProvider impl);
+  IConnectionStateProvider bindConnectionStateProvider(
+      ConnectionStateProviderImpl impl);
 }

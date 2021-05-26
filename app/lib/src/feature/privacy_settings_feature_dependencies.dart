@@ -13,15 +13,15 @@ class PrivacySettingsFeatureDependencies
   @j.inject
   PrivacySettingsFeatureDependencies({
     required IPrivacySettingsScreenRouter router,
-    required IConnectionStateUpdatesProvider connectionStateUpdatesProvider,
+    required IConnectionStateProvider connectionStateProvider,
     required ILocalizationManager localizationManager,
   })   : _router = router,
-        _connectionStateUpdatesProvider = connectionStateUpdatesProvider,
+        _connectionStateProvider = connectionStateProvider,
         _localizationManager = localizationManager;
 
   final IPrivacySettingsScreenRouter _router;
   final ILocalizationManager _localizationManager;
-  final IConnectionStateUpdatesProvider _connectionStateUpdatesProvider;
+  final IConnectionStateProvider _connectionStateProvider;
 
   @override
   IPrivacySettingsScreenRouter get router => _router;
@@ -30,6 +30,6 @@ class PrivacySettingsFeatureDependencies
   ILocalizationManager get localizationManager => _localizationManager;
 
   @override
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider =>
-      _connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider =>
+      _connectionStateProvider;
 }

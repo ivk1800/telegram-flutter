@@ -32,9 +32,9 @@ abstract class SettingSearchModule {
 
   @j.provide
   @j.singleton
-  static IConnectionStateUpdatesProvider provideConnectionStateUpdatesProvider(
+  static IConnectionStateProvider provideconnectionStateProvider(
           ISettingsSearchFeatureDependencies dependencies) =>
-      dependencies.connectionStateUpdatesProvider;
+      dependencies.connectionStateProvider;
 
   @j.provide
   @j.singleton

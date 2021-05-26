@@ -18,9 +18,9 @@ abstract class DevModule {
 
   @j.provide
   @j.singleton
-  static IConnectionStateUpdatesProvider provideConnectionStateUpdatesProvider(
+  static IConnectionStateProvider provideconnectionStateProvider(
           DevFeature devFeature) =>
-      devFeature.connectionStateUpdatesProvider;
+      devFeature.connectionStateProvider;
 }
 
 @j.componentBuilder

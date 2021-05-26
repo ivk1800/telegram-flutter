@@ -25,3 +25,6 @@ flutter packages pub run build_runner build
 cd ../feature_privacy_settings_impl/
 echo 'generate for feature_privacy_settings_impl'
 flutter packages pub run build_runner build
+cd ../feature_notifications_settings_impl/
+echo 'generate for feature_notifications_settings_impl'
+flutter packages pub run build_runner build

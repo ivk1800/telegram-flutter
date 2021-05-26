@@ -27,9 +27,9 @@ abstract class NotificationsSettingsModule {
 
   @j.provide
   @j.singleton
-  static IConnectionStateUpdatesProvider provideConnectionStateUpdatesProvider(
+  static IConnectionStateProvider provideConnectionStateProvider(
           INotificationsSettingsFeatureDependencies dependencies) =>
-      dependencies.connectionStateUpdatesProvider;
+      dependencies.connectionStateProvider;
 
   @j.provide
   @j.singleton

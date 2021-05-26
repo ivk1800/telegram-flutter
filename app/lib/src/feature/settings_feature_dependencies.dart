@@ -12,16 +12,16 @@ class SettingsFeatureDependencies implements ISettingsFeatureDependencies {
   SettingsFeatureDependencies({
     required ISettingsScreenRouter router,
     required ISettingsSearchFeatureApi settingsSearchFeatureApi,
-    required IConnectionStateUpdatesProvider connectionStateUpdatesProvider,
+    required IConnectionStateProvider connectionStateProvider,
     required ILocalizationManager localizationManager,
   })   : _router = router,
         _settingsSearchFeatureApi = settingsSearchFeatureApi,
-        _connectionStateUpdatesProvider = connectionStateUpdatesProvider,
+        _connectionStateProvider = connectionStateProvider,
         _localizationManager = localizationManager;
 
   final ISettingsScreenRouter _router;
   final ILocalizationManager _localizationManager;
-  final IConnectionStateUpdatesProvider _connectionStateUpdatesProvider;
+  final IConnectionStateProvider _connectionStateProvider;
   final ISettingsSearchFeatureApi _settingsSearchFeatureApi;
 
   @override
@@ -31,8 +31,8 @@ class SettingsFeatureDependencies implements ISettingsFeatureDependencies {
   ILocalizationManager get localizationManager => _localizationManager;
 
   @override
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider =>
-      _connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider =>
+      _connectionStateProvider;
 
   @override
   ISettingsSearchFeatureApi get settingsSearchFeatureApi =>

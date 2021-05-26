@@ -8,16 +8,15 @@ typedef ConnectionReadyWidgetFactory = Widget Function(BuildContext context);
 class ConnectionStateWidgetFactory {
   @j.inject
   ConnectionStateWidgetFactory(
-      {required IConnectionStateUpdatesProvider connectionStateUpdatesProvider})
-      : _connectionStateUpdatesProvider = connectionStateUpdatesProvider;
+      {required IConnectionStateProvider connectionStateProvider})
+      : _connectionStateProvider = connectionStateProvider;
 
-  final IConnectionStateUpdatesProvider _connectionStateUpdatesProvider;
+  final IConnectionStateProvider _connectionStateProvider;
 
   Widget create(
       BuildContext context, ConnectionReadyWidgetFactory readyWidgetFactory) {
     return StreamBuilder<td.ConnectionState>(
-      stream: _connectionStateUpdatesProvider.connectionStateUpdates
-          .map((td.UpdateConnectionState event) => event.state),
+      stream: _connectionStateProvider.connectionStateAsStream,
       builder:
           (BuildContext context, AsyncSnapshot<td.ConnectionState> snapshot) {
         final td.ConnectionState? state = snapshot.data;

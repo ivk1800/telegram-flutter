@@ -54,3 +54,7 @@ flutter packages get
 cd ../feature_privacy_settings_api/
 flutter packages get
 cd ../feature_privacy_settings_impl/
+flutter packages get
+cd ../feature_notifications_settings_api/
+flutter packages get
+cd ../feature_notifications_settings_impl/

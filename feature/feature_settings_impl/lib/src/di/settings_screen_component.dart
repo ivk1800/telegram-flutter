@@ -38,9 +38,9 @@ abstract class SettingsModule {
 
   @j.provide
   @j.singleton
-  static IConnectionStateUpdatesProvider provideConnectionStateUpdatesProvider(
+  static IConnectionStateProvider provideconnectionStateProvider(
           ISettingsFeatureDependencies dependencies) =>
-      dependencies.connectionStateUpdatesProvider;
+      dependencies.connectionStateProvider;
 
   @j.provide
   @j.singleton

@@ -47,7 +47,7 @@ abstract class AppComponent {
 
   IChatFiltersUpdatesProvider getChatFiltersUpdatesProvider();
 
-  IConnectionStateUpdatesProvider getConnectionStateUpdatesProvider();
+  IConnectionStateProvider getConnectionStateProvider();
 
   IConnectivityProvider getConnectivityProvider();
 

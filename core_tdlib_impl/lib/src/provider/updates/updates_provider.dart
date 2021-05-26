@@ -4,10 +4,7 @@ import 'package:td_client/td_client.dart';
 import 'package:jugger/jugger.dart' as j;
 
 class UpdatesProvider
-    implements
-        IChatUpdatesProvider,
-        IConnectionStateUpdatesProvider,
-        IChatFiltersUpdatesProvider {
+    implements IChatUpdatesProvider, IChatFiltersUpdatesProvider {
   @j.inject
   UpdatesProvider({required TdClient client}) : _client = client;
 
@@ -16,7 +13,6 @@ class UpdatesProvider
   @override
   Stream<td.Update> get chatUpdates => _client.events.chatUpdatesFilter();
 
-  @override
   Stream<td.UpdateConnectionState> get connectionStateUpdates =>
       _client.events.connectionStateUpdatesFilter();
 

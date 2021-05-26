@@ -12,15 +12,15 @@ class SettingsSearchFeatureDependencies
   @j.inject
   SettingsSearchFeatureDependencies({
     required ISettingsSearchScreenRouter router,
-    required IConnectionStateUpdatesProvider connectionStateUpdatesProvider,
+    required IConnectionStateProvider connectionStateProvider,
     required ILocalizationManager localizationManager,
   })   : _router = router,
-        _connectionStateUpdatesProvider = connectionStateUpdatesProvider,
+        _connectionStateProvider = connectionStateProvider,
         _localizationManager = localizationManager;
 
   final ISettingsSearchScreenRouter _router;
   final ILocalizationManager _localizationManager;
-  final IConnectionStateUpdatesProvider _connectionStateUpdatesProvider;
+  final IConnectionStateProvider _connectionStateProvider;
 
   @override
   ISettingsSearchScreenRouter get router => _router;
@@ -29,6 +29,6 @@ class SettingsSearchFeatureDependencies
   ILocalizationManager get localizationManager => _localizationManager;
 
   @override
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider =>
-      _connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider =>
+      _connectionStateProvider;
 }

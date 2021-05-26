@@ -114,11 +114,10 @@ abstract class FeatureModule {
   // endregion
 
   @j.provide
-  static DevFeature provideDevFeature(TdClient client,
-          IConnectionStateUpdatesProvider connectionStateUpdatesProvider) =>
+  static DevFeature provideDevFeature(
+          TdClient client, IConnectionStateProvider connectionStateProvider) =>
       DevFeature(
-          connectionStateUpdatesProvider: connectionStateUpdatesProvider,
-          client: client);
+          connectionStateProvider: connectionStateProvider, client: client);
 
   // region router
 

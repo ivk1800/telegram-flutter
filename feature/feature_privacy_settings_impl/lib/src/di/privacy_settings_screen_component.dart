@@ -26,9 +26,9 @@ abstract class PrivacySettingsModule {
 
   @j.provide
   @j.singleton
-  static IConnectionStateUpdatesProvider provideConnectionStateUpdatesProvider(
+  static IConnectionStateProvider provideconnectionStateProvider(
           IPrivacySettingsFeatureDependencies dependencies) =>
-      dependencies.connectionStateUpdatesProvider;
+      dependencies.connectionStateProvider;
 
   @j.provide
   @j.singleton

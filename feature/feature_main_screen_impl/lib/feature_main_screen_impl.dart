@@ -30,7 +30,7 @@ abstract class IMainScreenFeatureDependencies {
 
   IChatsListFeatureApi get chatsListFeatureApi;
 
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider;
 
   IMainScreenRouter get router;
 

@@ -28,7 +28,7 @@ abstract class IPrivacySettingsFeatureDependencies {
 
   IPrivacySettingsScreenRouter get router;
 
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider;
 }
 
 class _ScreenWidgetFactory implements IPrivacySettingsWidgetFactory {

@@ -20,9 +20,9 @@ abstract class ChatScreenComponent
 abstract class FoldersSetupModule {
   @j.provide
   @j.singleton
-  static IConnectionStateUpdatesProvider provideConnectionStateUpdatesProvider(
+  static IConnectionStateProvider provideconnectionStateProvider(
           IChatFeatureDependencies dependencies) =>
-      dependencies.connectionStateUpdatesProvider;
+      dependencies.connectionStateProvider;
 
   @j.provide
   @j.singleton

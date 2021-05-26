@@ -30,7 +30,7 @@ abstract class INotificationsSettingsFeatureDependencies {
 
   INotificationsSettingsScreenRouter get router;
 
-  IConnectionStateUpdatesProvider get connectionStateUpdatesProvider;
+  IConnectionStateProvider get connectionStateProvider;
 }
 
 class _ScreenWidgetFactory implements INotificationsSettingsWidgetFactory {
