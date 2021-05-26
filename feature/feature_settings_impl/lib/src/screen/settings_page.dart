@@ -123,6 +123,11 @@ class SettingsPageState extends State<SettingsPage>
           onTap: router.toPrivacySettings,
           leading: const Icon(Icons.lock_open),
           title: Text(localizationManager.getString('PrivacySettings')),
+        ),
+        ListTile(
+          onTap: router.toNotificationsSettings,
+          leading: const Icon(Icons.notifications_none),
+          title: Text(localizationManager.getString('NotificationsAndSounds')),
         )
       ]).toList(),
     );

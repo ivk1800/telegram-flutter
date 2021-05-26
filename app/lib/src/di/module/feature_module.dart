@@ -8,6 +8,8 @@ import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
+import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
+import 'package:feature_notifications_settings_impl/feature_notifications_settings_impl.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
@@ -19,6 +21,7 @@ import 'package:presentation/src/feature/chat_feature_dependencies.dart';
 import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/navigation/chat_screen_router_impl.dart';
 import 'package:presentation/src/navigation/navigation.dart';
+import 'package:presentation/src/navigation/notifications_settings_screen_router_impl.dart';
 import 'package:td_client/td_client.dart';
 
 @j.module
@@ -52,6 +55,11 @@ abstract class FeatureModule {
   @j.bind
   IPrivacySettingsFeatureDependencies bindPrivacySettingsFeatureDependencies(
       PrivacySettingsFeatureDependencies impl);
+
+  @j.bind
+  INotificationsSettingsFeatureDependencies
+      bindNotificationsSettingsFeatureDependencies(
+          NotificationsSettingsFeatureDependencies impl);
 
   // endregion
 
@@ -97,6 +105,12 @@ abstract class FeatureModule {
           IPrivacySettingsFeatureDependencies dependencies) =>
       PrivacySettingsFeatureApi(dependencies: dependencies);
 
+  @j.provide
+  static INotificationsSettingsFeatureApi
+      provideNotificationsSettingsFeatureApi(
+              INotificationsSettingsFeatureDependencies dependencies) =>
+          NotificationsSettingsFeatureApi(dependencies: dependencies);
+
   // endregion
 
   @j.provide
@@ -128,6 +142,10 @@ abstract class FeatureModule {
   @j.bind
   IPrivacySettingsScreenRouter bindPrivacySettingsScreenRouter(
       PrivacySettingsScreenRouterImpl impl);
+
+  @j.bind
+  INotificationsSettingsScreenRouter bindNotificationsSettingsScreenRouter(
+      NotificationsSettingsScreenRouterImpl impl);
 
   // endregion
 }

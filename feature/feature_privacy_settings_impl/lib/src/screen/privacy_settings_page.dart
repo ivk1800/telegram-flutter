@@ -30,8 +30,8 @@ class PrivacySettingsPageState extends State<PrivacySettingsPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: connectionStateWidgetFactory.create(
-            context, (_) => const Text('PrivacySettings')),
+        title: connectionStateWidgetFactory.create(context,
+            (_) => Text(localizationManager.getString('PrivacySettings'))),
       ),
       body: Container(),
     );
