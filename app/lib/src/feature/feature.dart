@@ -5,5 +5,6 @@ export 'global_search_feature_dependencies.dart';
 export 'main_screen_feature_dependencies.dart';
 export 'notifications_settings_feature_dependencies.dart';
 export 'privacy_settings_feature_dependencies.dart';
+export 'chat_settings_feature_dependencies.dart';
 export 'settings_feature_dependencies.dart';
 export 'settings_search_feature_dependencies.dart';

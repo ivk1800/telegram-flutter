@@ -1,3 +1,4 @@
+import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_dev/feature_dev.dart';
@@ -33,6 +34,8 @@ abstract class FeatureComponent {
   INotificationsSettingsFeatureApi getNotificationsSettingsFeatureApi();
 
   IDataSettingsFeatureApi getDataSettingsFeatureApi();
+
+  IChatSettingsFeatureApi getChatSettingsFeatureApi();
 }
 
 @j.componentBuilder

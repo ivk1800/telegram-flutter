@@ -8,4 +8,6 @@ abstract class ISettingsScreenRouter {
   void toNotificationsSettings();
 
   void toDataSettings();
+
+  void toChatSettings();
 }

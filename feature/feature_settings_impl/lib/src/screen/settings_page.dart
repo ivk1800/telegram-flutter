@@ -133,6 +133,11 @@ class SettingsPageState extends State<SettingsPage>
           onTap: router.toDataSettings,
           leading: const Icon(Icons.data_usage),
           title: Text(localizationManager.getString('DataSettings')),
+        ),
+        ListTile(
+          onTap: router.toChatSettings,
+          leading: const Icon(Icons.chat_bubble_outline),
+          title: Text(localizationManager.getString('ChatSettings')),
         )
       ]).toList(),
     );

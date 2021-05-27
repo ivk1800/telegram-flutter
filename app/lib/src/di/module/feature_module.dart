@@ -14,6 +14,8 @@ import 'package:feature_notifications_settings_api/feature_notifications_setting
 import 'package:feature_notifications_settings_impl/feature_notifications_settings_impl.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
+import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
+import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
@@ -65,6 +67,10 @@ abstract class FeatureModule {
   @j.bind
   IDataSettingsFeatureDependencies bindDataSettingsFeatureDependencies(
       DataSettingsFeatureDependencies impl);
+
+  @j.bind
+  IChatSettingsFeatureDependencies bindChatSettingsFeatureDependencies(
+      ChatSettingsFeatureDependencies impl);
 
   // endregion
 
@@ -121,6 +127,11 @@ abstract class FeatureModule {
           IDataSettingsFeatureDependencies dependencies) =>
       DataSettingsFeatureApi(dependencies: dependencies);
 
+  @j.provide
+  static IChatSettingsFeatureApi provideChatSettingsFeatureApi(
+          IChatSettingsFeatureDependencies dependencies) =>
+      ChatSettingsFeatureApi(dependencies: dependencies);
+
   // endregion
 
   @j.provide
@@ -159,6 +170,10 @@ abstract class FeatureModule {
   @j.bind
   IDataSettingsScreenRouter bindDataSettingsScreenRouter(
       DataSettingsScreenRouterImpl impl);
+
+  @j.bind
+  IChatSettingsScreenRouter bindChatSettingsScreenRouter(
+      ChatSettingsScreenRouterImpl impl);
 
   // endregion
 }

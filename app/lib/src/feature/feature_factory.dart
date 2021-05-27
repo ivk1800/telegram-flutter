@@ -1,4 +1,5 @@
 import 'package:feature_chat_api/feature_chat_api.dart';
+import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_dev/feature_dev.dart';
@@ -42,6 +43,9 @@ class FeatureFactory {
 
   IDataSettingsFeatureApi createDataSettingsFeatureApi() =>
       _featureComponent.getDataSettingsFeatureApi();
+
+  IChatSettingsFeatureApi createChatSettingsFeatureApi() =>
+      _featureComponent.getChatSettingsFeatureApi();
 
   DevFeature createDevFeature() => _featureComponent.getDevFeature();
 }

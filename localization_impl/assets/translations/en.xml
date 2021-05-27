@@ -8,4 +8,6 @@
     <string lang="NotificationsAndSounds">Notifications and Sounds</string>
     <!--https://translations.telegram.org/en/android/settings/DataSettings-->
     <string lang="DataSettings">Data and Storage</string>
+    <!--https://translations.telegram.org/en/android/settings/ChatSettings-->
+    <string lang="ChatSettings">Chat Settings</string>
 </resources>

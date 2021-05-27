@@ -4,24 +4,24 @@ import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
-import 'data_settings_view_model.dart';
+import 'chat_settings_view_model.dart';
 
-class DataSettingsPage extends StatefulWidget {
-  const DataSettingsPage({Key? key}) : super(key: key);
+class ChatSettingsPage extends StatefulWidget {
+  const ChatSettingsPage({Key? key}) : super(key: key);
 
   @override
-  DataSettingsPageState createState() => DataSettingsPageState();
+  ChatSettingsPageState createState() => ChatSettingsPageState();
 }
 
-class DataSettingsPageState extends State<DataSettingsPage>
+class ChatSettingsPageState extends State<ChatSettingsPage>
     with
         TickerProviderStateMixin,
-        StateInjectorMixin<DataSettingsPage, DataSettingsPageState> {
+        StateInjectorMixin<ChatSettingsPage, ChatSettingsPageState> {
   @j.inject
   late ILocalizationManager localizationManager;
 
   @j.inject
-  late DataSettingsViewModel viewModel;
+  late ChatSettingsViewModel viewModel;
 
   @j.inject
   late ConnectionStateWidgetFactory connectionStateWidgetFactory;
@@ -33,7 +33,7 @@ class DataSettingsPageState extends State<DataSettingsPage>
         title: connectionStateWidgetFactory.create(
             context,
             (_) => connectionStateWidgetFactory.create(context,
-                (_) => Text(localizationManager.getString('DataSettings')))),
+                (_) => Text(localizationManager.getString('ChatSettings')))),
       ),
     );
   }
