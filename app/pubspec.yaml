@@ -9,6 +9,10 @@ environment:
 dependencies:
   feature_dev:
     path: ../feature/feature_dev
+  feature_data_settings_api:
+    path: ../feature/feature_data_settings_api
+  feature_data_settings_impl:
+    path: ../feature/feature_data_settings_impl
   feature_notifications_settings_api:
     path: ../feature/feature_notifications_settings_api
   feature_notifications_settings_impl:

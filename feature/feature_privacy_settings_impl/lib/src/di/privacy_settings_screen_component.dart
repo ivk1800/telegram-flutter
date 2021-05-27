@@ -38,16 +38,16 @@ abstract class PrivacySettingsModule {
 }
 
 @j.componentBuilder
-abstract class NameComponentBuilder {
-  NameComponentBuilder screenState(PrivacySettingsPageState screen);
+abstract class PrivacySettingsComponentBuilder {
+  PrivacySettingsComponentBuilder screenState(PrivacySettingsPageState screen);
 
-  NameComponentBuilder dependencies(
+  PrivacySettingsComponentBuilder dependencies(
       IPrivacySettingsFeatureDependencies dependencies);
 
   PrivacySettingsScreenComponent build();
 }
 
-extension NameComponentExt on PrivacySettingsPage {
+extension PrivacySettingsComponentExt on PrivacySettingsPage {
   Widget wrap(IPrivacySettingsFeatureDependencies dependencies) =>
       ComponentHolder<PrivacySettingsPage, PrivacySettingsPageState>(
         componentFactory: (PrivacySettingsPageState state) =>

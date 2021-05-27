@@ -1,4 +1,5 @@
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
+import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
@@ -30,6 +31,8 @@ abstract class FeatureComponent {
   IPrivacySettingsFeatureApi getPrivacySettingsFeatureApi();
 
   INotificationsSettingsFeatureApi getNotificationsSettingsFeatureApi();
+
+  IDataSettingsFeatureApi getDataSettingsFeatureApi();
 }
 
 @j.componentBuilder

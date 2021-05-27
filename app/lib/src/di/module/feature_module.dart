@@ -3,6 +3,8 @@ import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
+import 'package:feature_data_settings_api/feature_data_settings_api.dart';
+import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
@@ -60,6 +62,9 @@ abstract class FeatureModule {
   INotificationsSettingsFeatureDependencies
       bindNotificationsSettingsFeatureDependencies(
           NotificationsSettingsFeatureDependencies impl);
+  @j.bind
+  IDataSettingsFeatureDependencies bindDataSettingsFeatureDependencies(
+      DataSettingsFeatureDependencies impl);
 
   // endregion
 
@@ -111,6 +116,11 @@ abstract class FeatureModule {
               INotificationsSettingsFeatureDependencies dependencies) =>
           NotificationsSettingsFeatureApi(dependencies: dependencies);
 
+  @j.provide
+  static IDataSettingsFeatureApi provideDataSettingsFeatureApi(
+          IDataSettingsFeatureDependencies dependencies) =>
+      DataSettingsFeatureApi(dependencies: dependencies);
+
   // endregion
 
   @j.provide
@@ -145,6 +155,10 @@ abstract class FeatureModule {
   @j.bind
   INotificationsSettingsScreenRouter bindNotificationsSettingsScreenRouter(
       NotificationsSettingsScreenRouterImpl impl);
+
+  @j.bind
+  IDataSettingsScreenRouter bindDataSettingsScreenRouter(
+      DataSettingsScreenRouterImpl impl);
 
   // endregion
 }

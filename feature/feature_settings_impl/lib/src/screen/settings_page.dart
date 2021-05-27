@@ -128,6 +128,11 @@ class SettingsPageState extends State<SettingsPage>
           onTap: router.toNotificationsSettings,
           leading: const Icon(Icons.notifications_none),
           title: Text(localizationManager.getString('NotificationsAndSounds')),
+        ),
+        ListTile(
+          onTap: router.toDataSettings,
+          leading: const Icon(Icons.data_usage),
+          title: Text(localizationManager.getString('DataSettings')),
         )
       ]).toList(),
     );

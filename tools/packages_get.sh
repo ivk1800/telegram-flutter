@@ -58,3 +58,7 @@ flutter packages get
 cd ../feature_notifications_settings_api/
 flutter packages get
 cd ../feature_notifications_settings_impl/
+flutter packages get
+cd ../feature_data_settings_api/
+flutter packages get
+cd ../feature_data_settings_impl/

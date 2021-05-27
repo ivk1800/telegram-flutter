@@ -76,16 +76,16 @@ abstract class SettingSearchModule {
 }
 
 @j.componentBuilder
-abstract class NameComponentBuilder {
-  NameComponentBuilder screenState(SettingsSearchPageState screen);
+abstract class SettingsSearchComponentBuilder {
+  SettingsSearchComponentBuilder screenState(SettingsSearchPageState screen);
 
-  NameComponentBuilder dependencies(
+  SettingsSearchComponentBuilder dependencies(
       ISettingsSearchFeatureDependencies dependencies);
 
   SettingsSearchScreenComponent build();
 }
 
-extension NameComponentExt on SettingsSearchPage {
+extension SettingsSearchComponentExt on SettingsSearchPage {
   Widget wrap(ISettingsSearchFeatureDependencies dependencies) =>
       ComponentHolder<SettingsSearchPage, SettingsSearchPageState>(
         componentFactory: (SettingsSearchPageState state) =>

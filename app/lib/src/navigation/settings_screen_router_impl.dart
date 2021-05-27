@@ -56,4 +56,15 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
             .create(),
         container: ContainerType.Top);
   }
+
+  @override
+  void toDataSettings() {
+    _navigationRouter.push(
+        key: UniqueKey(),
+        builder: (BuildContext context) => _featureFactory
+            .createNotificationsSettingsFeatureApi()
+            .screenWidgetFactory
+            .create(),
+        container: ContainerType.Top);
+  }
 }

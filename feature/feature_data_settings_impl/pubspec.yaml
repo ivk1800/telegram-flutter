@@ -1,0 +1,40 @@
+name: feature_data_settings_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  core_arch:
+    path: ../../core_arch
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  localization_api:
+    path: ../../localization_api
+  feature_data_settings_api:
+    path: ../feature_data_settings_api
+  coreui:
+    path: ../../coreui
+  jext:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jext
+      ref: fc73e9fae90539ba0c4b03a531802ceb4547bcb6
+  jugger:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jugger
+      ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  jugger_generator:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jugger_generator
+      ref: 40368af6eb3789951facb8e15d5c0d0706c95750
+  build_runner: ^1.10.2
+
+flutter:

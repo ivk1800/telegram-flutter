@@ -6,4 +6,6 @@ abstract class ISettingsScreenRouter {
   void toPrivacySettings();
 
   void toNotificationsSettings();
+
+  void toDataSettings();
 }

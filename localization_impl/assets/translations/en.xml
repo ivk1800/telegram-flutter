@@ -6,4 +6,6 @@
     <string lang="PrivacySettings">Privacy and Security</string>
     <!--https://translations.telegram.org/en/android/settings/NotificationsAndSounds-->
     <string lang="NotificationsAndSounds">Notifications and Sounds</string>
+    <!--https://translations.telegram.org/en/android/settings/DataSettings-->
+    <string lang="DataSettings">Data and Storage</string>
 </resources>
