@@ -28,7 +28,7 @@ class ChatMessagesInteractor {
     final td.Chat chat = await _chatRepository.getChat(chatId);
 
     if (chat.lastMessage != null) {
-      load(chat.lastMessage!.id);
+      load(0);
     }
   }
 

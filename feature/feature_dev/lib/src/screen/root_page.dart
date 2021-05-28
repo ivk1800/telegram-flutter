@@ -1,4 +1,5 @@
 import 'package:coreui/coreui.dart';
+import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:flutter/material.dart';
@@ -62,7 +63,13 @@ class RootPageState extends State<RootPage> {
               )
             ],
           ),
-          const Divider()
+          const Divider(),
+          OutlinedButton(
+            onPressed: () {
+              DevWidget.of(context).devFeature.router.toEventsList();
+            },
+            child: const Text('Events'),
+          )
         ],
       ),
     );

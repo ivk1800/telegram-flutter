@@ -1,5 +1,6 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_dev/feature_dev.dart';
+import 'package:feature_dev/src/screen/events_list_page.dart';
 import 'package:feature_dev/src/screen/root_page.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:td_client/td_client.dart';
@@ -7,6 +8,8 @@ import 'package:td_client/td_client.dart';
 @j.Component(modules: <Type>[DevModule])
 abstract class DevComponent {
   void injectRootState(RootPageState state);
+
+  void injectEventsListState(EventsListPageState state);
 
   TdClient getTdClient();
 }

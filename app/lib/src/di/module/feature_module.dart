@@ -24,6 +24,7 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/feature/chat_feature_dependencies.dart';
 import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/navigation/chat_screen_router_impl.dart';
+import 'package:presentation/src/navigation/dev_router_impl.dart';
 import 'package:presentation/src/navigation/navigation.dart';
 import 'package:presentation/src/navigation/notifications_settings_screen_router_impl.dart';
 import 'package:td_client/td_client.dart';
@@ -64,6 +65,7 @@ abstract class FeatureModule {
   INotificationsSettingsFeatureDependencies
       bindNotificationsSettingsFeatureDependencies(
           NotificationsSettingsFeatureDependencies impl);
+
   @j.bind
   IDataSettingsFeatureDependencies bindDataSettingsFeatureDependencies(
       DataSettingsFeatureDependencies impl);
@@ -135,10 +137,12 @@ abstract class FeatureModule {
   // endregion
 
   @j.provide
-  static DevFeature provideDevFeature(
-          TdClient client, IConnectionStateProvider connectionStateProvider) =>
+  static DevFeature provideDevFeature(IDevFeatureRouter router, TdClient client,
+          IConnectionStateProvider connectionStateProvider) =>
       DevFeature(
-          connectionStateProvider: connectionStateProvider, client: client);
+          router: router,
+          connectionStateProvider: connectionStateProvider,
+          client: client);
 
   // region router
 
@@ -174,6 +178,9 @@ abstract class FeatureModule {
   @j.bind
   IChatSettingsScreenRouter bindChatSettingsScreenRouter(
       ChatSettingsScreenRouterImpl impl);
+
+  @j.bind
+  IDevFeatureRouter bindDevFeatureRouter(DevScreenRouterImpl impl);
 
   // endregion
 }
