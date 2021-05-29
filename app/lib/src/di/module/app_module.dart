@@ -49,6 +49,10 @@ abstract class AppModule {
 
   @j.singleton
   @j.bind
+  IBackgroundRepository bindBackgroundRepository(BackgroundRepositoryImpl impl);
+
+  @j.singleton
+  @j.bind
   ISessionRepository bindSessionRepository(SessionRepositoryImpl impl);
 
   @j.singleton

@@ -16,6 +16,8 @@ import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
+import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
+import 'package:feature_wallpappers_impl/feature_wallpappers_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
@@ -73,6 +75,10 @@ abstract class FeatureModule {
   @j.bind
   IChatSettingsFeatureDependencies bindChatSettingsFeatureDependencies(
       ChatSettingsFeatureDependencies impl);
+
+  @j.bind
+  IWallpappersFeatureDependencies bindWallpappersFeatureDependencies(
+      WallpappersFeatureDependencies impl);
 
   // endregion
 
@@ -134,6 +140,11 @@ abstract class FeatureModule {
           IChatSettingsFeatureDependencies dependencies) =>
       ChatSettingsFeatureApi(dependencies: dependencies);
 
+  @j.provide
+  static IWallpappersFeatureApi provideWallpappersFeatureApi(
+          IWallpappersFeatureDependencies dependencies) =>
+      WallpappersFeatureApi(dependencies: dependencies);
+
   // endregion
 
   @j.provide
@@ -181,6 +192,10 @@ abstract class FeatureModule {
 
   @j.bind
   IDevFeatureRouter bindDevFeatureRouter(DevScreenRouterImpl impl);
+
+  @j.bind
+  IWallpappersScreenRouter bindWallpappersScreenRouter(
+      WallpappersScreenRouterImpl impl);
 
   // endregion
 }

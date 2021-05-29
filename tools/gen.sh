@@ -33,4 +33,5 @@ echo 'generate for feature_data_settings_impl'
 flutter packages pub run build_runner build
 cd ../feature_chat_settings_impl/
 echo 'generate for feature_chat_settings_impl'
-flutter packages pub run build_runner build
+cd ../feature_wallpappers_impl/
+echo 'generate for feature_wallpappers_impl'

@@ -10,4 +10,6 @@
     <string lang="DataSettings">Data and Storage</string>
     <!--https://translations.telegram.org/en/android/settings/ChatSettings-->
     <string lang="ChatSettings">Chat Settings</string>
+    <!--https://translations.telegram.org/en/android/settings/ChatBackground-->
+    <string lang="ChatBackground">Chat Background</string>
 </resources>

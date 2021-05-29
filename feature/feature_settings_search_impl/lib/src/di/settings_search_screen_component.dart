@@ -59,7 +59,7 @@ abstract class SettingSearchModule {
   @j.singleton
   static ListAdapter provideListAdapter(
           Map<Type, IListAdapterDelegate<ITileModel>> delegates) =>
-      ListAdapter(delegates);
+      ListAdapter(delegates: delegates);
 
   // TODO replace by Bind
   @j.provide

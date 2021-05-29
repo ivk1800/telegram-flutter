@@ -1,43 +1,32 @@
 
 cd ../app/
 flutter packages get
-cd ..
-cd core/
+cd ../core/
 flutter packages get
-cd ..
-cd core_utils/
+cd ../core_utils/
 flutter packages get
-cd ..
-cd core_arch/
+cd ../core_arch/
 flutter packages get
-cd ..
-cd launch/
+cd ../launch/
 flutter packages get
-cd ..
-cd td_client/
+cd ../td_client/
 cd ../localization_api/
 flutter packages get
 cd ../localization_impl
 flutter packages get
 cd ../coreui/
 flutter packages get
-cd ../feature/
-cd feature_chats_list_api/
+cd ../feature/feature_chats_list_api/
 flutter packages get
-cd ..
-cd feature_chats_list_impl/
+cd ../feature_chats_list_impl/
 flutter packages get
-cd ..
-cd feature_global_search_api/
+cd ../feature_global_search_api/
 flutter packages get
-cd ..
-cd feature_global_search_impl/
+cd ../feature_global_search_impl/
 flutter packages get
-cd ..
-cd feature_main_screen_api/
+cd ../feature_main_screen_api/
 flutter packages get
-cd ..
-cd feature_main_screen_impl/
+cd ../feature_main_screen_impl/
 flutter packages get
 cd ../feature_chat_impl/
 flutter packages get
@@ -66,3 +55,6 @@ flutter packages get
 cd ../feature_chat_settings_api/
 flutter packages get
 cd ../feature_chat_settings_impl/
+cd ../feature_wallpappers_api/
+flutter packages get
+cd ../feature_wallpappers_impl/

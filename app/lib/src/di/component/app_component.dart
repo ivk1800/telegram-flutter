@@ -29,6 +29,8 @@ abstract class AppComponent {
 
   IChatMessageRepository getChatMessageRepository();
 
+  IBackgroundRepository getBackgroundRepository();
+
   INavigationRouter getNavigationRouter();
 
   RootNavigationRouter getRootNavigationRouter();

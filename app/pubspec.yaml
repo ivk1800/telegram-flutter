@@ -13,6 +13,10 @@ dependencies:
     path: ../feature/feature_chat_settings_api
   feature_chat_settings_impl:
     path: ../feature/feature_chat_settings_impl
+  feature_wallpappers_api:
+    path: ../feature/feature_wallpappers_api
+  feature_wallpappers_impl:
+    path: ../feature/feature_wallpappers_impl
   feature_data_settings_api:
     path: ../feature/feature_data_settings_api
   feature_data_settings_impl:

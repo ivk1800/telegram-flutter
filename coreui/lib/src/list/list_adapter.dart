@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class ListAdapter {
-  ListAdapter(this.delegates);
+  ListAdapter({required this.delegates});
 
   final Map<Type, IListAdapterDelegate<ITileModel>> delegates;
 

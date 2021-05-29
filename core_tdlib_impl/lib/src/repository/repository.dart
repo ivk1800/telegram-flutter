@@ -1,3 +1,4 @@
+export 'background_repository_impl.dart';
 export 'chat_filter_repository_impl.dart';
 export 'chat_message_repository_impl.dart';
 export 'chat_repository_impl.dart';
