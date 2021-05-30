@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:coreui/coreui.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class EventsListPage extends StatefulWidget {
 
 class EventsListPageState extends State<EventsListPage> {
   @j.inject
-  late ConnectionStateWidgetFactory connectionStateWidgetFactory;
+  late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
 
   late ScrollController _scrollController;
 

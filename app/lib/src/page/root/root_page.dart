@@ -1,4 +1,4 @@
-import 'package:coreui/coreui.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:flutter/material.dart';
 import 'package:presentation/presentation.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -13,7 +13,7 @@ class RootPage extends StatefulWidget {
 
 class RootPageState extends State<RootPage> {
   @j.inject
-  late ConnectionStateWidgetFactory connectionStateWidgetFactory;
+  late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
 
   @j.inject
   late FeatureFactory featureFactory;

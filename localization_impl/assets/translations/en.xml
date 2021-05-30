@@ -12,4 +12,26 @@
     <string lang="ChatSettings">Chat Settings</string>
     <!--https://translations.telegram.org/en/android/settings/ChatBackground-->
     <string lang="ChatBackground">Chat Background</string>
+    <!--https://translations.telegram.org/en/android/groups_and_channels/Settings-->
+    <string lang="Settings">Settings</string>
+    <!--https://translations.telegram.org/en/android/settings/SettingsHelp-->
+    <string lang="SettingsHelp">Help</string>
+    <!--https://translations.telegram.org/en/android/settings/AskAQuestion-->
+    <string lang="AskAQuestion">Ask a Question</string>
+    <!--https://translations.telegram.org/en/android/settings/TelegramFAQ-->
+    <string lang="TelegramFAQ">Telegram FAQ</string>
+    <!--https://translations.telegram.org/en/android/settings/PrivacyPolicy-->
+    <string lang="PrivacyPolicy">Privacy Policy</string>
+    <!--https://translations.telegram.org/en/android/settings/SetProfilePhoto-->
+    <string lang="SetProfilePhoto">Set Profile Photo</string>
+    <!--https://translations.telegram.org/en/android/settings/Account-->
+    <string lang="Account">Account</string>
+    <!--https://translations.telegram.org/en/android/settings/TapToChangePhone-->
+    <string lang="TapToChangePhone">Tap to change phone number</string>
+    <!--https://translations.telegram.org/en/android/profile/Username-->
+    <string lang="Username">Username</string>
+    <!--https://translations.telegram.org/en/android/settings/UserBio-->
+    <string lang="UserBio">Bio</string>
+    <!--https://translations.telegram.org/en/android/settings/UserBioDetail-->
+    <string lang="UserBioDetail">Add a few words about yourself</string>
 </resources>

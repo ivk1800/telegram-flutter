@@ -1,5 +1,4 @@
-import 'package:coreui/coreui.dart';
-import 'package:feature_dev/feature_dev.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class RootPage extends StatefulWidget {
 
 class RootPageState extends State<RootPage> {
   @j.inject
-  late ConnectionStateWidgetFactory connectionStateWidgetFactory;
+  late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
 
   @override
   void initState() {

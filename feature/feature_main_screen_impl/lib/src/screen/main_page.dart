@@ -1,4 +1,4 @@
-import 'package:coreui/coreui.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_impl/src/screen/menu_item.dart';
@@ -32,12 +32,12 @@ class MainPageState extends State<MainPage>
   late IChatsListWidgetFactory chatsListWidgetFactory;
 
   @j.inject
-  late ConnectionStateWidgetFactory connectionStateWidgetFactory;
+  late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
 
   _ScreenState _screenState = _ScreenState.Default;
 
-  final GlobalObjectKey<TgSwitchedAppBarState> appbarKey =
-      const GlobalObjectKey<TgSwitchedAppBarState>('MainAppbar');
+  final GlobalObjectKey<tg.TgSwitchedAppBarState> appbarKey =
+      const GlobalObjectKey<tg.TgSwitchedAppBarState>('MainAppbar');
   final GlobalObjectKey<ScaffoldState> scaffoldKey =
       const GlobalObjectKey<ScaffoldState>('MainScaffold');
 
@@ -91,7 +91,7 @@ class MainPageState extends State<MainPage>
       },
       child: Scaffold(
           key: scaffoldKey,
-          appBar: TgSwitchedAppBar(
+          appBar: tg.TgSwitchedAppBar(
             key: appbarKey,
             iconColorProvider: (isActive) {
               if (isActive) {

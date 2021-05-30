@@ -1,4 +1,4 @@
-import 'package:coreui/coreui.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,8 @@ class SettingsPageState extends State<SettingsPage>
         TickerProviderStateMixin,
         StateInjectorMixin<SettingsPage, SettingsPageState> {
   // TODO maybe conflict
-  final GlobalObjectKey<TgSwitchedAppBarState> appbarKey =
-      const GlobalObjectKey<TgSwitchedAppBarState>('SettingsAppbar');
+  final GlobalObjectKey<tg.TgSwitchedAppBarState> appbarKey =
+      const GlobalObjectKey<tg.TgSwitchedAppBarState>('SettingsAppbar');
 
   @j.inject
   late ILocalizationManager localizationManager;
@@ -28,7 +28,7 @@ class SettingsPageState extends State<SettingsPage>
   late ISettingsScreenRouter router;
 
   @j.inject
-  late ConnectionStateWidgetFactory connectionStateWidgetFactory;
+  late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
 
   @j.inject
   late ISettingsSearchWidgetFactory settingsSearchWidgetFactory;
@@ -97,7 +97,7 @@ class SettingsPageState extends State<SettingsPage>
           },
           child: _searchActive
               ? _buildSearchWidget(context)
-              : _buildDefaultWidget(context),
+              : SingleChildScrollView(child: _buildDefaultWidget(context)),
         ),
       ),
     );
@@ -107,44 +107,91 @@ class SettingsPageState extends State<SettingsPage>
       settingsSearchWidgetFactory.create();
 
   Widget _buildDefaultWidget(BuildContext context) {
+    final Color accentColor = Theme.of(context).accentColor;
     return Column(
-      children: ListTile.divideTiles(context: context, tiles: [
-        ListTile(
-          onTap: router.toFolders,
-          leading: const Icon(Icons.folder_open),
-          title: const Text('Folders'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        tg.TextCell(
+          titleColor: accentColor,
+          leading: Icon(
+            Icons.add_a_photo_outlined,
+            color: accentColor,
+          ),
+          title: _getString('SetProfilePhoto'),
         ),
-        ListTile(
-          onTap: router.toSessions,
-          leading: const Icon(Icons.devices),
-          title: const Text('Devices'),
+        const tg.SectionDivider(),
+        tg.Section(
+          text: _getString('Account'),
         ),
-        ListTile(
-          onTap: router.toPrivacySettings,
-          leading: const Icon(Icons.lock_open),
-          title: Text(localizationManager.getString('PrivacySettings')),
+        tg.TextCell(
+          title: '123',
+          subtitle: _getString('TapToChangePhone'),
         ),
-        ListTile(
+        const tg.Divider(),
+        tg.TextCell(
+          title: 'None',
+          subtitle: _getString('Username'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          title: _getString('UserBio'),
+          subtitle: _getString('UserBioDetail'),
+        ),
+        const tg.SectionDivider(),
+        tg.Section(
+          text: _getString('Settings'),
+        ),
+        tg.TextCell(
           onTap: router.toNotificationsSettings,
           leading: const Icon(Icons.notifications_none),
-          title: Text(localizationManager.getString('NotificationsAndSounds')),
+          title: _getString('NotificationsAndSounds'),
         ),
-        ListTile(
+        const tg.Divider(),
+        tg.TextCell(
+          onTap: router.toPrivacySettings,
+          leading: const Icon(Icons.lock_open),
+          title: _getString('PrivacySettings'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
           onTap: router.toDataSettings,
           leading: const Icon(Icons.data_usage),
-          title: Text(localizationManager.getString('DataSettings')),
+          title: _getString('DataSettings'),
         ),
-        ListTile(
+        const tg.Divider(),
+        tg.TextCell(
           onTap: router.toChatSettings,
           leading: const Icon(Icons.chat_bubble_outline),
-          title: Text(localizationManager.getString('ChatSettings')),
-        )
-      ]).toList(),
+          title: _getString('ChatSettings'),
+        ),
+        const tg.SectionDivider(),
+        tg.Section(
+          text: _getString('SettingsHelp'),
+        ),
+        tg.TextCell(
+          leading: const Icon(Icons.chat),
+          title: _getString('AskAQuestion'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          leading: const Icon(Icons.help_outline),
+          title: _getString('TelegramFAQ'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          leading: const Icon(Icons.shield),
+          title: _getString('PrivacyPolicy'),
+        ),
+        const tg.Annotation(
+          align: TextAlign.center,
+          text: 'Todo: add app version information',
+        ),
+      ],
     );
   }
 
   PreferredSizeWidget _buildAppbar(BuildContext context) {
-    return TgSwitchedAppBar(
+    return tg.TgSwitchedAppBar(
       key: appbarKey,
       iconColorProvider: (bool isActive) {
         return Colors.white;
@@ -247,6 +294,8 @@ class SettingsPageState extends State<SettingsPage>
       alignment: Alignment.centerLeft,
     );
   }
+
+  String _getString(String key) => localizationManager.getString(key);
 }
 
 enum _ScreenState { Default, Search }
