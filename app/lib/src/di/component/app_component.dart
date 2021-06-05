@@ -21,6 +21,8 @@ abstract class AppComponent {
 
   IChatRepository getChatRepository();
 
+  IStickerRepository getStickerRepository();
+
   ISessionRepository getSessionRepository();
 
   IFileRepository getIFileRepository();

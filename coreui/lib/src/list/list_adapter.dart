@@ -6,6 +6,8 @@ class ListAdapter {
   final Map<Type, IListAdapterDelegate<ITileModel>> delegates;
 
   Widget create(BuildContext context, ITileModel model) {
+    assert(delegates.containsKey(model.runtimeType),
+        'missing delegate for type ${model.runtimeType}');
     return delegates[model.runtimeType]!.create(context, model);
   }
 

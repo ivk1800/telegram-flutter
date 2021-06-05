@@ -21,8 +21,10 @@ class Divider extends StatelessWidget {
         return 16;
       case DividerIndent.Large:
         return 68;
+      case DividerIndent.None:
+        return 0;
     }
   }
 }
 
-enum DividerIndent { Small, Large }
+enum DividerIndent { None, Small, Large }

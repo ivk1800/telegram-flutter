@@ -7,6 +7,7 @@ import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
+import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -39,6 +40,8 @@ abstract class FeatureComponent {
   IChatSettingsFeatureApi getChatSettingsFeatureApi();
 
   IWallpappersFeatureApi getWallpappersFeatureApi();
+
+  IStickersFeatureApi getStickersFeatureApi();
 }
 
 @j.componentBuilder

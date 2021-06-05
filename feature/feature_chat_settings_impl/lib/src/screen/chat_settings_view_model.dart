@@ -7,4 +7,6 @@ class ChatSettingsViewModel extends BaseViewModel {
   ChatSettingsViewModel({required IChatSettingsScreenRouter router})
       : _router = router;
   final IChatSettingsScreenRouter _router;
+
+  void onStickersAndMasksTap() => _router.toStickersAndMasks();
 }

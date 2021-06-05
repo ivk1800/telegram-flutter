@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  path_provider: ^2.0.1
+  flutter_svg: ^0.22.0
   coreui:
     path: ../../coreui
   core_utils:

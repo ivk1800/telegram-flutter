@@ -55,6 +55,11 @@ flutter packages get
 cd ../feature_chat_settings_api/
 flutter packages get
 cd ../feature_chat_settings_impl/
+flutter packages get
 cd ../feature_wallpappers_api/
 flutter packages get
 cd ../feature_wallpappers_impl/
+flutter packages get
+cd ../feature_stickers_api/
+flutter packages get
+cd ../feature_stickers_impl/

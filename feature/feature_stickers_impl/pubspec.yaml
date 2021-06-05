@@ -1,0 +1,25 @@
+name: feature_stickers_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  provider: ^5.0.0
+  equatable: ^2.0.0
+  flutter_bloc: ^7.0.1
+  core_arch:
+    path: ../../core_arch
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  localization_api:
+    path: ../../localization_api
+  feature_stickers_api:
+    path: ../feature_stickers_api
+  coreui:
+    path: ../../coreui
+  flutter:
+    sdk: flutter
+
+flutter:

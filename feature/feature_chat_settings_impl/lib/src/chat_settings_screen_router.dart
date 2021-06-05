@@ -1,1 +1,3 @@
-abstract class IChatSettingsScreenRouter {}
+abstract class IChatSettingsScreenRouter {
+  void toStickersAndMasks();
+}

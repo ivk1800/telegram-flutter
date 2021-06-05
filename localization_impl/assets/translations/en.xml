@@ -32,6 +32,28 @@
     <string lang="Username">Username</string>
     <!--https://translations.telegram.org/en/android/settings/UserBio-->
     <string lang="UserBio">Bio</string>
-    <!--https://translations.telegram.org/en/android/settings/UserBioDetail-->
+    <!-- https://translations.telegram.org/en/android/settings/UserBioDetail -->
     <string lang="UserBioDetail">Add a few words about yourself</string>
+    <!-- https://translations.telegram.org/en/android/settings/StickersAndMasks -->
+    <string lang="StickersAndMasks">Stickers and Masks</string>
+    <!-- https://translations.telegram.org/en/android/settings/SuggestStickers -->
+    <string lang="SuggestStickers">Suggest stickers by emoji</string>
+    <!-- https://translations.telegram.org/en/android/settings/LoopAnimatedStickers -->
+    <string lang="LoopAnimatedStickers">Loop Animated Stickers</string>
+    <!-- https://translations.telegram.org/en/android/unsorted/LoopAnimatedStickersInfo -->
+    <string lang="LoopAnimatedStickersInfo">Animated stickers will play continuously in chats.</string>
+    <!-- https://translations.telegram.org/en/android/settings/FeaturedStickers -->
+    <string lang="FeaturedStickers">Trending Stickers</string>
+    <!-- https://translations.telegram.org/en/android/settings/Masks -->
+    <string lang="Masks">Masks</string>
+    <!-- https://translations.telegram.org/en/android/settings/StickersBotInfo -->
+    <string lang="StickersBotInfo">Artists are welcome to add their own sticker sets using our @stickers bot.</string>
+    <!-- https://translations.telegram.org/en/android/settings/SuggestStickersAll -->
+    <string lang="SuggestStickersAll">All Sets</string>
+    <!-- https://translations.telegram.org/en/android/settings/SuggestStickersInstalled -->
+    <string lang="SuggestStickersInstalled">My Sets</string>
+    <!-- https://translations.telegram.org/en/android/settings/SuggestStickersNone -->
+    <string lang="SuggestStickersNone">None</string>
+    <!-- https://translations.telegram.org/en/android/settings/ArchivedStickers -->
+    <string lang="ArchivedStickers">Archived Stickers</string>
 </resources>

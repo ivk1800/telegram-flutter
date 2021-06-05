@@ -18,6 +18,8 @@ import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
 import 'package:feature_wallpappers_impl/feature_wallpappers_impl.dart';
+import 'package:feature_stickers_api/feature_stickers_api.dart';
+import 'package:feature_stickers_impl/feature_stickers_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
@@ -29,6 +31,7 @@ import 'package:presentation/src/navigation/chat_screen_router_impl.dart';
 import 'package:presentation/src/navigation/dev_router_impl.dart';
 import 'package:presentation/src/navigation/navigation.dart';
 import 'package:presentation/src/navigation/notifications_settings_screen_router_impl.dart';
+import 'package:presentation/src/navigation/stickers_feature_router.dart';
 import 'package:td_client/td_client.dart';
 
 @j.module
@@ -79,6 +82,10 @@ abstract class FeatureModule {
   @j.bind
   IWallpappersFeatureDependencies bindWallpappersFeatureDependencies(
       WallpappersFeatureDependencies impl);
+
+  @j.bind
+  IStickersFeatureDependencies bindStickersFeatureDependencies(
+      StickersFeatureDependencies impl);
 
   // endregion
 
@@ -145,6 +152,11 @@ abstract class FeatureModule {
           IWallpappersFeatureDependencies dependencies) =>
       WallpappersFeatureApi(dependencies: dependencies);
 
+  @j.provide
+  static IStickersFeatureApi provideStickersFeatureApi(
+          IStickersFeatureDependencies dependencies) =>
+      StickersFeatureApi(dependencies: dependencies);
+
   // endregion
 
   @j.provide
@@ -196,6 +208,10 @@ abstract class FeatureModule {
   @j.bind
   IWallpappersScreenRouter bindWallpappersScreenRouter(
       WallpappersScreenRouterImpl impl);
+
+  @j.bind
+  IStickersFeatureRouter bindStickersFeatureRouter(
+      StickersFeatureRouterImpl impl);
 
   // endregion
 }
