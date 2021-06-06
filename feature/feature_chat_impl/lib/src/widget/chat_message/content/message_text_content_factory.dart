@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:tdlib/td_api.dart' as td;
 
-class MessageTextTileFactory {
+class MessageTextContentFactory {
   @j.inject
-  MessageTextTileFactory();
+  MessageTextContentFactory();
 
   Widget create(
       BuildContext context, td.Message message, td.MessageText content) {
-    return Card(
-      child: ListTile(title: Text(content.text.text)),
-    );
+    return Text(content.text.text);
   }
 }

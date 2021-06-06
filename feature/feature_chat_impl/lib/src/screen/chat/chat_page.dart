@@ -17,7 +17,7 @@ class ChatPage extends StatefulWidget {
 class ChatPageState extends State<ChatPage>
     with StateInjectorMixin<ChatPage, ChatPageState> {
   @j.inject
-  late ChatMessageTileFactory chatMessageTileFactory;
+  late ChatMessageFactory chatMessageTileFactory;
 
   final ScrollController scrollController = ScrollController();
 

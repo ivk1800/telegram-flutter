@@ -11,6 +11,10 @@ import 'src/di/chat_screen_component.dart';
 
 export 'src/chat_screen_router.dart';
 
+export 'src/widget/bubble/bubble.dart';
+export 'src/widget/bubble/bubble_clipper.dart';
+export 'src/widget/message/message_skeleton.dart';
+
 class ChatFeatureApi implements IChatFeatureApi {
   ChatFeatureApi({required this.dependencies})
       : _chatWidgetFactory =
