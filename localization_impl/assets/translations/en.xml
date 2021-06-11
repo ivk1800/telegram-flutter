@@ -56,4 +56,30 @@
     <string lang="SuggestStickersNone">None</string>
     <!-- https://translations.telegram.org/en/android/settings/ArchivedStickers -->
     <string lang="ArchivedStickers">Archived Stickers</string>
+    <!-- https://translations.telegram.org/en/android/settings/AutoNightTheme -->
+    <string lang="AutoNightTheme">Auto-Night Mode</string>
+    <!-- https://translations.telegram.org/en/android/settings/ChromeCustomTabs -->
+    <string lang="ChromeCustomTabs">In-App Browser</string>
+    <!-- https://translations.telegram.org/en/android/settings/DirectShare -->
+    <string lang="DirectShare">Direct Share</string>
+    <!-- https://translations.telegram.org/en/android/settings/ChromeCustomTabsInfo -->
+    <string lang="ChromeCustomTabsInfo">Open external links within the app</string>
+    <!-- https://translations.telegram.org/en/android/settings/DirectShareInfo -->
+    <string lang="DirectShareInfo">Show recent chats in Android share menu</string>
+    <!-- https://translations.telegram.org/en/android/settings/EnableAnimations -->
+    <string lang="EnableAnimations">Enable Animations</string>
+    <!-- https://translations.telegram.org/en/android/settings/LargeEmoji -->
+    <string lang="LargeEmoji">Large Emoji</string>
+    <!-- https://translations.telegram.org/en/android/settings/RaiseToSpeak -->
+    <string lang="RaiseToSpeak">Raise to Speak</string>
+    <!-- https://translations.telegram.org/en/android/settings/SendByEnter -->
+    <string lang="SendByEnter">Send by Enter</string>
+    <!-- https://translations.telegram.org/en/android/settings/SaveToGallerySettings -->
+    <string lang="SaveToGallerySettings">Save to Gallery</string>
+    <!-- https://translations.telegram.org/en/android/settings/DistanceUnits -->
+    <string lang="DistanceUnits">Distance Units</string>
+    <!-- https://translations.telegram.org/en/android/settings/DistanceUnitsAutomatic -->
+    <string lang="DistanceUnitsAutomatic">Automatic</string>
+    <!-- https://translations.telegram.org/en/android/settings/ChangeChatBackground -->
+    <string lang="ChangeChatBackground">Change Chat Background</string>
 </resources>

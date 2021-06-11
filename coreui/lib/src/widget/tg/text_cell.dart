@@ -53,12 +53,26 @@ class TextCell extends StatelessWidget {
       title: title,
       titleColor: titleColor,
       subtitle: subtitle,
-      valueWidget: Switch(
-        value: value,
-        onChanged: onChanged,
-      ),
+      valueWidget: onTap != null
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const VerticalDivider(),
+                Switch(
+                  value: value,
+                  onChanged: onChanged,
+                )
+              ],
+            )
+          : Switch(
+              value: value,
+              onChanged: onChanged,
+            ),
       leading: leading,
-      onTap: onTap,
+      onTap: onTap ??
+          () {
+            onChanged(!value);
+          },
     );
   }
 
