@@ -1,41 +1,23 @@
-import 'package:coreui/coreui.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:flutter/material.dart';
-import 'package:jext/jext.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:provider/provider.dart';
 
-import 'notifications_settings_view_model.dart';
-
-class NotificationsSettingsPage extends StatefulWidget {
+class NotificationsSettingsPage extends StatelessWidget {
   const NotificationsSettingsPage({Key? key}) : super(key: key);
 
   @override
-  NotificationsSettingsPageState createState() =>
-      NotificationsSettingsPageState();
-}
-
-class NotificationsSettingsPageState extends State<NotificationsSettingsPage>
-    with
-        TickerProviderStateMixin,
-        StateInjectorMixin<NotificationsSettingsPage,
-            NotificationsSettingsPageState> {
-  @j.inject
-  late ILocalizationManager localizationManager;
-
-  @j.inject
-  late NotificationsSettingsViewModel viewModel;
-
-  @j.inject
-  late ConnectionStateWidgetFactory connectionStateWidgetFactory;
-
-  @override
   Widget build(BuildContext context) {
+    final ILocalizationManager localizationManager = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: connectionStateWidgetFactory.create(
+        title: Provider.of<tg.ConnectionStateWidgetFactory>(context).create(
             context,
             (_) =>
                 Text(localizationManager.getString('NotificationsAndSounds'))),
+      ),
+      body: Center(
+        child: Text(localizationManager.getString('NotificationsAndSounds')),
       ),
     );
   }

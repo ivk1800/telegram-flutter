@@ -1,7 +1,7 @@
 import 'package:coreui/coreui.dart';
 
 class FaqResultTileModel implements ITileModel {
-  FaqResultTileModel(
+  const FaqResultTileModel(
       {required this.title, required this.subtitle, required this.url});
 
   final String title;

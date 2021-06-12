@@ -26,4 +26,15 @@ class ChatSettingsScreenRouterImpl implements IChatSettingsScreenRouter {
             .create(),
         container: ContainerType.Top);
   }
+
+  @override
+  void toWallPapers() {
+    _navigationRouter.push(
+        key: UniqueKey(),
+        builder: (BuildContext context) => _featureFactory
+            .createWallpappersFeatureApi()
+            .screenWidgetFactory
+            .create(),
+        container: ContainerType.Top);
+  }
 }

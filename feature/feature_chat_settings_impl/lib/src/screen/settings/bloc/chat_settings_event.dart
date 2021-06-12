@@ -15,6 +15,10 @@ class StickersAndMasksTap extends ActionEvent {
   const StickersAndMasksTap();
 }
 
+class WallpapersTap extends ActionEvent {
+  const WallpapersTap();
+}
+
 class LoadingEvent extends ChatSettingsEvent {
   const LoadingEvent();
 }

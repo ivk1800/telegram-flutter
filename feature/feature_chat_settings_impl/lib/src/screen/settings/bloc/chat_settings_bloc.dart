@@ -10,8 +10,6 @@ class ChatSettingsBloc extends Bloc<ChatSettingsEvent, ChatSettingsState> {
         super(const DefaultState());
   final IChatSettingsScreenRouter _router;
 
-  void onStickersAndMasksTap() => _router.toStickersAndMasks();
-
   @override
   Stream<ChatSettingsState> mapEventToState(ChatSettingsEvent event) async* {
     if (event is ActionEvent) {
@@ -24,6 +22,9 @@ class ChatSettingsBloc extends Bloc<ChatSettingsEvent, ChatSettingsState> {
     switch (event.runtimeType) {
       case StickersAndMasksTap:
         _router.toStickersAndMasks();
+        return;
+      case WallpapersTap:
+        _router.toWallPapers();
         return;
     }
   }

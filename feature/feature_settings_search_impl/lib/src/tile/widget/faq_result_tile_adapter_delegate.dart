@@ -3,26 +3,22 @@ import 'package:feature_settings_search_impl/src/tile/model/faq_result_tile_mode
 import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
 
+typedef FaqResultTapCallback = void Function(BuildContext context, String url);
+
 class FaqResultTileAdapterDelegate
     implements IListAdapterDelegate<FaqResultTileModel> {
   @j.inject
-  FaqResultTileAdapterDelegate({required IFaqResultTileListener listener})
-      : _listener = listener;
+  FaqResultTileAdapterDelegate({required FaqResultTapCallback tap})
+      : _tap = tap;
 
-  final IFaqResultTileListener _listener;
+  final FaqResultTapCallback _tap;
 
   @override
   Widget create(BuildContext context, FaqResultTileModel model) {
     return ListTile(
-      onTap: () {
-        _listener.onFaqResultTap(model.url);
-      },
+      onTap: () => _tap(context, model.url),
       title: Text(model.title),
       subtitle: Text(model.subtitle),
     );
   }
-}
-
-abstract class IFaqResultTileListener {
-  void onFaqResultTap(String url);
 }

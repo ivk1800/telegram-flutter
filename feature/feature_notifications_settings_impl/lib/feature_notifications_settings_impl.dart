@@ -3,11 +3,9 @@ library feature_notifications_settings_impl;
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_notifications_settings_impl/src/notifications_settings_screen_router.dart';
-import 'package:flutter/widgets.dart';
-import 'src/di/notifications_settings_screen_component.dart';
 import 'package:localization_api/localization_api.dart';
 
-import 'src/screen/notifications_settings_page.dart';
+import 'src/widget/factory/notifications_settings_widget_factory.dart';
 
 export 'src/notifications_settings_screen_router.dart';
 
@@ -16,7 +14,7 @@ class NotificationsSettingsFeatureApi
   NotificationsSettingsFeatureApi(
       {required INotificationsSettingsFeatureDependencies dependencies})
       : _settingsWidgetFactory =
-            _ScreenWidgetFactory(dependencies: dependencies);
+            NotificationsSettingsWidgetFactory(dependencies: dependencies);
 
   final INotificationsSettingsWidgetFactory _settingsWidgetFactory;
 
@@ -31,13 +29,4 @@ abstract class INotificationsSettingsFeatureDependencies {
   INotificationsSettingsScreenRouter get router;
 
   IConnectionStateProvider get connectionStateProvider;
-}
-
-class _ScreenWidgetFactory implements INotificationsSettingsWidgetFactory {
-  _ScreenWidgetFactory({required this.dependencies});
-
-  final INotificationsSettingsFeatureDependencies dependencies;
-
-  @override
-  Widget create() => const NotificationsSettingsPage().wrap(dependencies);
 }

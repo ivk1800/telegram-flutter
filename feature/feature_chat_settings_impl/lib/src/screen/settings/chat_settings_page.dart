@@ -38,6 +38,7 @@ class ChatSettingsPageState extends State<ChatSettingsPage> {
       children: <Widget>[
         const tg.SectionDivider(),
         tg.TextCell(
+          onTap: () => bloc.add(const WallpapersTap()),
           titleColor: accentColor,
           title: localizationManager.getString('ChangeChatBackground'),
           leading: Icon(
