@@ -6,6 +6,7 @@ import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:localization_api/localization_api.dart';
 
 class ChatFeatureDependencies implements IChatFeatureDependencies {
   @j.inject
@@ -14,11 +15,13 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
       required IChatMessageRepository chatMessageRepository,
       required IChatScreenRouter router,
       required DateParser dateParser,
+      required ILocalizationManager localizationManager,
       required DateFormatter dateFormatter,
       required IChatRepository chatRepository,
       required IConnectionStateProvider connectionStateProvider})
       : _fileRepository = fileRepository,
         _dateParser = dateParser,
+        _localizationManager = localizationManager,
         _dateFormatter = dateFormatter,
         _chatRepository = chatRepository,
         _chatMessageRepository = chatMessageRepository,
@@ -32,6 +35,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
   final DateParser _dateParser;
   final DateFormatter _dateFormatter;
   final IChatRepository _chatRepository;
+  final ILocalizationManager _localizationManager;
 
   @override
   IConnectionStateProvider get connectionStateProvider =>
@@ -54,4 +58,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
 
   @override
   IChatScreenRouter get router => _router;
+
+  @override
+  ILocalizationManager get localizationManager => _localizationManager;
 }

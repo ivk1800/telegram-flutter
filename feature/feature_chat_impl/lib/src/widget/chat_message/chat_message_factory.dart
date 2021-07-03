@@ -11,8 +11,13 @@ import 'content/message_text_content_factory.dart';
 
 class ChatMessageFactory {
   @j.inject
-  ChatMessageFactory(this._messageTextFactory, this._addMembersFactory,
-      this._avatarWidgetFactory);
+  ChatMessageFactory(
+      {required MessageTextContentFactory messageTextFactory,
+      required AddMembersTileFactory addMembersFactory,
+      required AvatarWidgetFactory avatarWidgetFactory})
+      : _avatarWidgetFactory = avatarWidgetFactory,
+        _addMembersFactory = addMembersFactory,
+        _messageTextFactory = messageTextFactory;
 
   final AvatarWidgetFactory _avatarWidgetFactory;
   final MessageTextContentFactory _messageTextFactory;

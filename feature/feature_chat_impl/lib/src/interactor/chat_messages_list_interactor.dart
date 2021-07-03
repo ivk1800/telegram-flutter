@@ -9,10 +9,16 @@ import 'package:tdlib/td_api.dart' as td;
 class ChatMessagesInteractor {
   @j.inject
   ChatMessagesInteractor(
-      this._chatRepository, this._messageRepository, this._chatArgs);
+      {required IChatRepository chatRepository,
+      required IChatMessageRepository messageRepository,
+      required ChatArgs chatArgs})
+      : _chatRepository = chatRepository,
+        _messageRepository = messageRepository,
+        _chatArgs = chatArgs;
 
   final IChatRepository _chatRepository;
   final IChatMessageRepository _messageRepository;
+
   // TODO refactor
   final ChatArgs _chatArgs;
 
