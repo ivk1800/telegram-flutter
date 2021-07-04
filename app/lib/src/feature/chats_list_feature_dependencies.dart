@@ -2,18 +2,23 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:localization_api/localization_api.dart';
 import 'package:presentation/src/navigation/navigation.dart';
 
 class ChatsListFeatureDependencies implements IChatsListFeatureDependencies {
   @j.inject
   ChatsListFeatureDependencies(
       {required IChatRepository chatRepository,
+      required IUserRepository userRepository,
+      required ILocalizationManager localizationManager,
       required IChatUpdatesProvider chatUpdatesProvider,
       required DateFormatter dateFormatter,
       required DateParser dateParser,
       required IFileRepository fileRepository,
       required IChatsListScreenRouter router})
       : _chatRepository = chatRepository,
+        _userRepository = userRepository,
+        _localizationManager = localizationManager,
         _chatUpdatesProvider = chatUpdatesProvider,
         _dateFormatter = dateFormatter,
         _dateParser = dateParser,
@@ -21,6 +26,8 @@ class ChatsListFeatureDependencies implements IChatsListFeatureDependencies {
         _router = router;
 
   final IChatRepository _chatRepository;
+  final IUserRepository _userRepository;
+  final ILocalizationManager _localizationManager;
   final IChatUpdatesProvider _chatUpdatesProvider;
   final DateFormatter _dateFormatter;
   final DateParser _dateParser;
@@ -44,4 +51,10 @@ class ChatsListFeatureDependencies implements IChatsListFeatureDependencies {
 
   @override
   IChatsListScreenRouter get router => _router;
+
+  @override
+  IUserRepository get userRepository => _userRepository;
+
+  @override
+  ILocalizationManager get localizationManager => _localizationManager;
 }

@@ -6,9 +6,12 @@ import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/src/chats_list_screen_router.dart';
 import 'package:feature_chats_list_impl/src/screen/chats_list_page.dart';
 import 'package:flutter/widgets.dart';
+import 'package:localization_api/localization_api.dart';
 import 'src/di/chats_list_screen_component.dart';
 
 export 'src/chats_list_screen_router.dart';
+export 'src/tile/chat_tile.dart';
+export 'src/tile/chat_tile_model.dart';
 
 class ChatsListFeatureApi implements IChatsListFeatureApi {
   ChatsListFeatureApi({required this.dependencies})
@@ -35,6 +38,10 @@ abstract class IChatsListFeatureDependencies {
   DateParser get dateParser;
 
   IChatUpdatesProvider get chatUpdatesProvider;
+
+  IUserRepository get userRepository;
+
+  ILocalizationManager get localizationManager;
 }
 
 class _ChatsListWidgetFactory implements IChatsListWidgetFactory {

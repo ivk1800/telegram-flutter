@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  localization_api:
+    path: ../../localization_api
   coreui:
     path: ../../coreui
   tuple: ^2.0.0

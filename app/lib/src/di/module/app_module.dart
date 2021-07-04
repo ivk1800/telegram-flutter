@@ -49,6 +49,10 @@ abstract class AppModule {
 
   @j.singleton
   @j.bind
+  IUserRepository bindUserRepository(UserRepositoryImpl impl);
+
+  @j.singleton
+  @j.bind
   IStickerRepository bindStickerRepository(StickerRepositoryImpl impl);
 
   @j.singleton

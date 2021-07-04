@@ -82,4 +82,6 @@
     <string lang="DistanceUnitsAutomatic">Automatic</string>
     <!-- https://translations.telegram.org/en/android/settings/ChangeChatBackground -->
     <string lang="ChangeChatBackground">Change Chat Background</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/EventLogGroupJoined -->
+    <string lang="EventLogGroupJoined">%s joined the group</string>
 </resources>

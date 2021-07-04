@@ -23,6 +23,8 @@ abstract class AppComponent {
 
   IStickerRepository getStickerRepository();
 
+  IUserRepository getUserRepository();
+
   ISessionRepository getSessionRepository();
 
   IFileRepository getIFileRepository();

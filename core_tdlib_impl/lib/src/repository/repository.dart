@@ -5,3 +5,4 @@ export 'chat_repository_impl.dart';
 export 'file_repository_impl.dart';
 export 'session_repository_impl.dart';
 export 'sticker_repository_impl.dart';
+export 'user_repository_impl.dart';

@@ -2,6 +2,7 @@ library localization_impl;
 
 import 'dart:async' show Future;
 
+import 'package:sprintf/sprintf.dart';
 import 'package:xml/xml.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -24,6 +25,14 @@ class LocalizationManager implements ILocalizationManager {
   @override
   String getString(String key, [String defaultValue = '']) =>
       _currentStrings[key] ?? _defaultStrings[key] ?? defaultValue;
+
+  @override
+  String getStringFormatted(String key, List<dynamic> formatArgs,
+      [String defaultValue = '']) {
+    final String s =
+        _currentStrings[key] ?? _defaultStrings[key] ?? defaultValue;
+    return sprintf(s, formatArgs);
+  }
 
   @override
   Future<void> setLanguage(String language) async {

@@ -7,6 +7,7 @@ import 'package:feature_chats_list_impl/src/screen/chats_list_page.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jext/jext.dart';
+import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:jugger/jugger.dart' as j;
 
@@ -46,6 +47,18 @@ abstract class FoldersSetupModule {
   static IFileRepository provideFileRepository(
           IChatsListFeatureDependencies dependencies) =>
       dependencies.fileRepository;
+
+  @j.provide
+  @j.singleton
+  static IUserRepository provideUserRepository(
+          IChatsListFeatureDependencies dependencies) =>
+      dependencies.userRepository;
+
+  @j.provide
+  @j.singleton
+  static ILocalizationManager provideLocalizationManager(
+          IChatsListFeatureDependencies dependencies) =>
+      dependencies.localizationManager;
 
   @j.provide
   @j.singleton
