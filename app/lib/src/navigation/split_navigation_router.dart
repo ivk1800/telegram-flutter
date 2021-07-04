@@ -39,10 +39,21 @@ class SplitNavigationRouter implements INavigationRouter {
 
   @override
   void toRoot() {
-    _navigationKey.currentState?.popUntilRoot(ContainerType.Left);
-    _navigationKey.currentState?.popUntilRoot(ContainerType.Top);
-    _navigationKey.currentState?.popUntilRoot(ContainerType.Right);
-    _navigationKey.currentState?.setLeftRootPage(
+    final SplitViewState? currentState = _navigationKey.currentState;
+    if (currentState == null) {
+      return;
+    }
+
+    currentState.popUntilRoot(ContainerType.Left);
+    currentState.popUntilRoot(ContainerType.Top);
+    currentState.popUntilRoot(ContainerType.Right);
+    currentState.setRightContainerPlaceholder(const Material(
+      child: Center(
+        // TODO extract to strings
+        child: Text('Select a chat to start messaging'),
+      ),
+    ));
+    currentState.setLeftRootPage(
         _featureFactory.createMainScreenFeature().screenWidgetFactory.create());
   }
 

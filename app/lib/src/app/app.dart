@@ -58,14 +58,11 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
           primaryColor: const Color(0xff5682a3),
           accentColor: const Color(0xff598fba),
         ),
-        home: SplitView(
-          key: MyApp.splitViewNavigatorKey,
-          rightContainerPlaceholderBuilder: (BuildContext context) =>
-              // TODO extract to strings
-              const Material(
-            child: Center(
-              child: Text('Select a chat to start messaging'),
-            ),
+        home: Container(
+          // TODO maybe add color property to SplitView?
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: SplitView(
+            key: MyApp.splitViewNavigatorKey,
           ),
         ),
       ),

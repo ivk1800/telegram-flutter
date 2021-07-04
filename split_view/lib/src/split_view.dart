@@ -1,15 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
+import 'container_divider.dart';
+
+class Config {
+  const Config({
+    required this.leftContainerWidth,
+    required this.minLeftContainerWidth,
+    required this.maxLeftContainerWidth,
+    required this.minRightContainerWidth,
+    required this.maxCompactWidth,
+    required this.isDraggableDivider,
+  });
+
+  final double leftContainerWidth;
+  final double minLeftContainerWidth;
+  final double maxLeftContainerWidth;
+  final double minRightContainerWidth;
+  final double maxCompactWidth;
+
+  final bool isDraggableDivider;
+}
 
 class SplitView extends StatefulWidget {
   const SplitView({
-    required this.rightContainerPlaceholderBuilder,
+    this.config = const Config(
+      minLeftContainerWidth: 290,
+      leftContainerWidth: 350,
+      maxLeftContainerWidth: 400,
+      isDraggableDivider: true,
+      minRightContainerWidth: 500,
+      maxCompactWidth: 699,
+    ),
     Key? key,
   }) : super(key: key);
 
-  final WidgetBuilder rightContainerPlaceholderBuilder;
+  final Config config;
 
   @override
   SplitViewState createState() => SplitViewState();
@@ -47,37 +73,12 @@ class SplitViewState extends State<SplitView> {
   late List<_PageNode> _compactPages = const <_PageNode>[];
   bool _isCompact = false;
 
-  // bool _isCanPopTopContainer = true;
-
-  double _leftContainerWidth = 450;
-
-  // bool get isCanPopTopContainer => _isCanPopTopContainer;
-
-  // set isCanPopTopContainer(bool value) {
-  //   setState(() {
-  //     _isCanPopTopContainer = value;
-  //   });
-  // }
-
-  // void setCanPopTopContainer(bool value) {
-  //   setState(() {
-  //     _isCanPopTopContainer = value;
-  //   });
-  // }
+  double _leftContainerWidth = 0;
 
   @override
   void initState() {
     super.initState();
-    // _leftRootPage = _createLeftRootPage(Container());
-    //
-    // _rightRootPage = _PageNode(
-    //     order: RightRootPageIndex,
-    //     container: ContainerType.Left,
-    //     page: _SimplePage(
-    //         animated: false,
-    //         builder: widget.rightContainerPlaceholderBuilder,
-    //         containerType: ContainerType.Right,
-    //         key: UniqueKey()));
+    _leftContainerWidth = widget.config.leftContainerWidth;
 
     _leftPages = <_PageNode>[];
     _rightPages = <_PageNode>[];
@@ -101,6 +102,26 @@ class SplitViewState extends State<SplitView> {
       }
       _invalidatePages();
     });
+  }
+
+  bool _removeTop(ContainerType container) {
+    bool _tryRemoveTop(List<_PageNode> pages) {
+      if (pages.isNotEmpty) {
+        pages.removeLast();
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    switch (container) {
+      case ContainerType.Left:
+        return _tryRemoveTop(_leftPages);
+      case ContainerType.Right:
+        return _tryRemoveTop(_rightPages);
+      case ContainerType.Top:
+        return _tryRemoveTop(_topPages);
+    }
   }
 
   void pushAllReplacement(
@@ -179,7 +200,7 @@ class SplitViewState extends State<SplitView> {
   }
 
   void _onWidthChanged(double width) {
-    if (width <= 500) {
+    if (width <= widget.config.maxCompactWidth) {
       if (!_isCompact) {
         _isCompact = true;
         _invalidatePages();
@@ -215,11 +236,59 @@ class SplitViewState extends State<SplitView> {
 
   @override
   Widget build(BuildContext context) {
+    return WillPopScope(
+      child: _buildAdaptiveWidget(),
+      onWillPop: () async {
+        if (_isCompact) {
+          if (_compactPages.isNotEmpty) {
+            // first node is root page
+            if (_compactPages.length == 1) {
+              return true;
+            } else {
+              setState(() {
+                _compactPages.removeLast();
+              });
+            }
+            return false;
+          }
+        }
+
+        if (_topPages.isNotEmpty) {
+          if (_leftPages.isEmpty && _rightPages.isEmpty) {
+            return true;
+          } else {
+            setState(() {
+              _topPages.removeLast();
+            });
+          }
+          return false;
+        } else if (_rightPages.isNotEmpty) {
+          setState(() {
+            _rightPages.removeLast();
+          });
+          return false;
+        } else if (_leftPages.isNotEmpty) {
+          // first node is root page
+          if (_leftPages.length == 1) {
+            return true;
+          } else {
+            setState(() {
+              _leftPages.removeLast();
+            });
+          }
+          return false;
+        }
+        return true;
+      },
+    );
+  }
+
+  Widget _buildAdaptiveWidget() {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         _onWidthChanged(constraints.maxWidth);
         Widget finalWidget;
-        if (constraints.maxWidth > 500) {
+        if (constraints.maxWidth > widget.config.maxCompactWidth) {
           finalWidget = _buildAllContainersTogether(context);
         } else {
           finalWidget = _buildCompactContainer(context);
@@ -297,51 +366,65 @@ class SplitViewState extends State<SplitView> {
               ? const SizedBox(
                   key: ValueKey<dynamic>('hide'),
                 )
-              : _buildTopContainer(const ValueKey<dynamic>('show'), context),
+              : wrapWithoutTopPadding(
+                  _buildTopContainer(const ValueKey<dynamic>('show'), context)),
         )
       ],
     );
   }
 
-  Widget _buildLeftAndRightContainersTogether(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        ClipRect(
-          child: Container(
-            child: _buildLeftContainer(context),
-            constraints: BoxConstraints.expand(width: _leftContainerWidth),
-          ),
-        ),
-        _buildDraggableDivider(),
-        _buildRightContainer(context)
-      ],
+  Widget wrapWithoutTopPadding(Widget child) {
+    final MediaQueryData baseMediaQuery = MediaQuery.of(context);
+    return MediaQuery(
+      data: baseMediaQuery.copyWith(
+          padding: baseMediaQuery.padding.copyWith(top: 0)),
+      child: child,
     );
   }
 
-  Widget _buildDraggableDivider() {
-    return MouseRegion(
-      cursor: SystemMouseCursors.resizeColumn,
-      child: Listener(
-        onPointerMove: (PointerMoveEvent event) {
-          setState(() {
-            _leftContainerWidth = event.position.dx;
-          });
-        },
-        child: Container(
-          color: Colors.transparent,
-          constraints:
-              const BoxConstraints.expand(width: 3, height: double.infinity),
-          child: Row(
-            children: [
-              Container(
-                color: Colors.grey,
-                width: 1,
+  Widget _buildLeftAndRightContainersTogether(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Row(
+          children: <Widget>[
+            ClipRect(
+              child: Container(
+                child: _buildLeftContainer(context),
+                constraints: BoxConstraints.expand(width: _leftContainerWidth),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
+            if (_leftPages.isNotEmpty || _rightPages.isNotEmpty)
+              _buildDraggableDivider(constraints.maxWidth),
+            _buildRightContainer(context)
+          ],
+        );
+      },
     );
+  }
+
+  Widget _buildDraggableDivider(double maxWidth) {
+    final Container divider = Container(
+      color: Colors.transparent,
+      constraints:
+          const BoxConstraints.expand(width: 3, height: double.infinity),
+      child: const ContainerDivider(),
+    );
+    if (widget.config.isDraggableDivider) {
+      return MouseRegion(
+        cursor: SystemMouseCursors.resizeColumn,
+        child: Listener(
+          onPointerMove: (PointerMoveEvent event) {
+            setState(() {
+              _leftContainerWidth = event.position.dx.clamp(
+                  widget.config.minLeftContainerWidth,
+                  widget.config.maxLeftContainerWidth);
+            });
+          },
+          child: divider,
+        ),
+      );
+    }
+    return divider;
   }
 
   Widget _buildLeftContainer(BuildContext context) {
