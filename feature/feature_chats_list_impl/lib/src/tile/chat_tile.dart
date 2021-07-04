@@ -26,6 +26,7 @@ class ChatTileFactory {
     return _create(context, chat);
   }
 
+  // TODO: fix overflow for subtitle with emoji
   Widget _create(BuildContext context, ChatTileModel model) {
     return InkWell(
       onLongPress: () => _showContextAlertDialog(context: context, chat: model),
@@ -163,7 +164,8 @@ class ChatTileFactory {
       maxLines: model.secondSubtitle != null ? 1 : 2,
       textAlign: TextAlign.start,
       overflow: TextOverflow.ellipsis,
-      style: theme.textTheme.subtitle1!.copyWith(color: theme.primaryColor),
+      style: theme.textTheme.subtitle1!
+          .copyWith(height: kFontHeight, color: theme.primaryColor),
     ));
   }
 
@@ -180,7 +182,8 @@ class ChatTileFactory {
       maxLines: model.firstSubtitle != null ? 1 : 2,
       textAlign: TextAlign.start,
       overflow: TextOverflow.ellipsis,
-      style: theme.textTheme.subtitle1!.copyWith(color: Colors.grey[600]),
+      style: theme.textTheme.subtitle1!
+          .copyWith(height: kFontHeight, color: Colors.grey[600]),
     ));
   }
 
@@ -206,4 +209,6 @@ class ChatTileFactory {
       ),
     ));
   }
+
+  static const double kFontHeight = 1.2;
 }
