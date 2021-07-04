@@ -4,6 +4,7 @@ import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tdlib/td_client.dart';
 
+// TODO handle user updates and invalidate cache
 class UserRepositoryImpl extends IUserRepository {
   @j.inject
   UserRepositoryImpl(this._client);
