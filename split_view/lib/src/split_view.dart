@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 
 class SplitView extends StatefulWidget {
@@ -40,29 +41,46 @@ class SplitViewState extends State<SplitView> {
   late List<_PageNode> _rightPages;
   late List<_PageNode> _topPages;
 
-  late _PageNode _leftRootPage;
-  late _PageNode _rightRootPage;
+  _PageNode? _leftRootPage;
+  Widget _rightContainerPlaceholder = Container();
 
   late List<_PageNode> _compactPages = const <_PageNode>[];
   bool _isCompact = false;
 
+  // bool _isCanPopTopContainer = true;
+
   double _leftContainerWidth = 450;
+
+  // bool get isCanPopTopContainer => _isCanPopTopContainer;
+
+  // set isCanPopTopContainer(bool value) {
+  //   setState(() {
+  //     _isCanPopTopContainer = value;
+  //   });
+  // }
+
+  // void setCanPopTopContainer(bool value) {
+  //   setState(() {
+  //     _isCanPopTopContainer = value;
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
-    _leftRootPage = _createLeftRootPage(Container());
+    // _leftRootPage = _createLeftRootPage(Container());
+    //
+    // _rightRootPage = _PageNode(
+    //     order: RightRootPageIndex,
+    //     container: ContainerType.Left,
+    //     page: _SimplePage(
+    //         animated: false,
+    //         builder: widget.rightContainerPlaceholderBuilder,
+    //         containerType: ContainerType.Right,
+    //         key: UniqueKey()));
 
-    _rightRootPage = _PageNode(
-        order: RightRootPageIndex,
-        container: ContainerType.Left,
-        page: _SimplePage(
-            builder: widget.rightContainerPlaceholderBuilder,
-            containerType: ContainerType.Right,
-            key: UniqueKey()));
-
-    _leftPages = <_PageNode>[_leftRootPage];
-    _rightPages = <_PageNode>[_rightRootPage];
+    _leftPages = <_PageNode>[];
+    _rightPages = <_PageNode>[];
     _topPages = <_PageNode>[];
   }
 
@@ -98,10 +116,15 @@ class SplitViewState extends State<SplitView> {
 
   void setLeftRootPage(Widget widget) {
     setState(() {
-      _leftRootPage = _createLeftRootPage(widget);
-      final int indexOfRootPage = _leftPages.indexOf(_leftPages.firstWhere(
-          (_PageNode element) => element.order == LeftRootPageIndex));
-      _leftPages[indexOfRootPage] = _leftRootPage;
+      if (_leftRootPage == null) {
+        _leftRootPage = _createLeftRootPage(widget);
+        _leftPages.add(_leftRootPage!);
+      } else {
+        _leftRootPage = _createLeftRootPage(widget);
+        final int indexOfRootPage = _leftPages.indexOf(_leftPages.firstWhere(
+            (_PageNode element) => element.order == LeftRootPageIndex));
+        _leftPages[indexOfRootPage] = _leftRootPage!;
+      }
       _invalidatePages();
     });
   }
@@ -110,8 +133,19 @@ class SplitViewState extends State<SplitView> {
       {required LocalKey key,
       required WidgetBuilder builder,
       required ContainerType container}) {
-    _push(_SimplePage(key: key, builder: builder, containerType: container),
+    _push(
+        _SimplePage(
+            key: key,
+            animateRouterProvider: () => _shouldAnimate(key, container),
+            builder: builder,
+            containerType: container),
         container);
+  }
+
+  void setRightContainerPlaceholder(Widget widget) {
+    setState(() {
+      _rightContainerPlaceholder = widget;
+    });
   }
 
   void _push(MyPage<dynamic> page, ContainerType containerType) {
@@ -132,13 +166,16 @@ class SplitViewState extends State<SplitView> {
   }
 
   _PageNode _createLeftRootPage(Widget widget) {
+    final UniqueKey key = UniqueKey();
     return _PageNode(
         order: LeftRootPageIndex,
         container: ContainerType.Left,
         page: _SimplePage(
             builder: (_) => widget,
+            animateRouterProvider: () =>
+                _shouldAnimate(key, ContainerType.Left),
             containerType: ContainerType.Left,
-            key: UniqueKey()));
+            key: key));
   }
 
   void _onWidthChanged(double width) {
@@ -158,7 +195,7 @@ class SplitViewState extends State<SplitView> {
   void _invalidatePages() {
     if (_isCompact) {
       _compactPages = (_leftPages + _rightPages + _topPages)
-        ..removeWhere((_PageNode element) => element == _rightRootPage)
+        // todo fix order if first pushed top
         ..sort((_PageNode a, _PageNode b) => a.order.compareTo(b.order));
     } else {
       _compactPages = const <_PageNode>[];
@@ -193,6 +230,8 @@ class SplitViewState extends State<SplitView> {
   }
 
   Widget _buildTopContainer(Key key, BuildContext context) {
+    final bool isNotSinglePage =
+        _leftPages.isNotEmpty || _rightPages.isNotEmpty;
     return Align(
         key: key,
         alignment: Alignment.center,
@@ -200,7 +239,9 @@ class SplitViewState extends State<SplitView> {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                popUntilRoot(ContainerType.Top);
+                if (isNotSinglePage) {
+                  popUntilRoot(ContainerType.Top);
+                }
               },
               child: Container(
                 height: double.infinity,
@@ -222,10 +263,13 @@ class SplitViewState extends State<SplitView> {
                   elevation: 40,
                   child: ClipRect(
                     child: _buildNavigator(<Page<dynamic>>[
-                          _SimplePage(
-                              key: UniqueKey(),
-                              builder: widget.rightContainerPlaceholderBuilder,
-                              containerType: ContainerType.Right)
+                          // add stub page for trigger navigation button
+                          if (isNotSinglePage)
+                            _SimplePage(
+                                key: UniqueKey(),
+                                animateRouterProvider: () => false,
+                                builder: (_) => Container(),
+                                containerType: ContainerType.Top)
                         ] +
                         _topPages.map((_PageNode e) => e.page).toList()),
                   ),
@@ -262,17 +306,19 @@ class SplitViewState extends State<SplitView> {
   Widget _buildLeftAndRightContainersTogether(BuildContext context) {
     return Row(
       children: <Widget>[
-        Container(
-          child: _buildLeftContainer(context),
-          constraints: BoxConstraints.expand(width: _leftContainerWidth),
+        ClipRect(
+          child: Container(
+            child: _buildLeftContainer(context),
+            constraints: BoxConstraints.expand(width: _leftContainerWidth),
+          ),
         ),
-        _buildDragableDivider(),
+        _buildDraggableDivider(),
         _buildRightContainer(context)
       ],
     );
   }
 
-  Widget _buildDragableDivider() {
+  Widget _buildDraggableDivider() {
     return MouseRegion(
       cursor: SystemMouseCursors.resizeColumn,
       child: Listener(
@@ -299,21 +345,59 @@ class SplitViewState extends State<SplitView> {
   }
 
   Widget _buildLeftContainer(BuildContext context) {
-    assert(_leftPages.isNotEmpty);
+    if (_leftPages.isEmpty) {
+      return const SizedBox();
+    }
     return _buildNavigator(_leftPages.map((_PageNode e) => e.page).toList());
   }
 
   Widget _buildCompactContainer(BuildContext context) {
-    assert(_compactPages.isNotEmpty);
+    if (_compactPages.isEmpty) {
+      return const SizedBox();
+    }
     return _buildNavigator(_compactPages.map((_PageNode e) => e.page).toList());
   }
 
   Widget _buildRightContainer(BuildContext context) {
-    assert(_rightPages.isNotEmpty);
+    if (_rightPages.isEmpty) {
+      return Expanded(child: _rightContainerPlaceholder);
+    }
+    final List<Page<dynamic>> pages =
+        _rightPages.map((_PageNode e) => e.page).toList();
+    final UniqueKey key = UniqueKey();
     return Expanded(
         child: ClipRect(
-      child: _buildNavigator(_rightPages.map((_PageNode e) => e.page).toList()),
+      child: _buildNavigator(<Page<dynamic>>[
+            // add stub page for trigger navigation button
+            _SimplePage(
+                key: key,
+                animateRouterProvider: () =>
+                    _shouldAnimate(key, ContainerType.Top),
+                builder: (_) => Container(),
+                containerType: ContainerType.Top)
+          ] +
+          pages),
     ));
+  }
+
+  bool _shouldAnimate(LocalKey key, ContainerType container) {
+    bool shouldAnimate(List<_PageNode> pages) {
+      final int indexWhere =
+          pages.indexWhere((_PageNode element) => element.page.key == key);
+      return indexWhere > 0;
+    }
+
+    if (_isCompact) {
+      return shouldAnimate(_compactPages);
+    }
+    switch (container) {
+      case ContainerType.Left:
+        return shouldAnimate(_leftPages);
+      case ContainerType.Right:
+        return shouldAnimate(_rightPages);
+      case ContainerType.Top:
+        return shouldAnimate(_topPages);
+    }
   }
 
   Widget _buildNavigator(List<Page<dynamic>> pages) {
@@ -368,40 +452,53 @@ abstract class MyPage<T> extends Page<T> {
   final ContainerType container;
 }
 
+typedef _AnimateRouterProvider = bool Function();
+
 class _SimplePage extends MyPage<dynamic> {
   const _SimplePage({
     required this.builder,
+    required this.animateRouterProvider,
     required ContainerType containerType,
     required LocalKey key,
   }) : super(key: key, container: containerType);
 
   final WidgetBuilder builder;
+  final _AnimateRouterProvider animateRouterProvider;
 
   @override
   Route<dynamic> createRoute(BuildContext context) {
-    return _PageRoute<dynamic>(
+    return _DefaultRoute<dynamic>(
         settings: this,
+        routerDurationProvider: () {
+          if (!animateRouterProvider()) {
+            return const Duration();
+          }
+          return null;
+        },
         builder: (BuildContext context) => builder.call(context));
   }
 }
 
-class _PageRoute<T> extends MaterialPageRoute<T> {
-  _PageRoute({
+typedef _RouterDurationProvider = Duration? Function();
+
+class _DefaultRoute<T> extends MaterialPageRoute<T> {
+  _DefaultRoute({
     required RouteSettings? settings,
     required WidgetBuilder builder,
+    required this.routerDurationProvider,
   }) : super(builder: builder, settings: settings);
-//
-// @override
-// Widget buildTransitions(BuildContext context, Animation<double> animation,
-//     Animation<double> secondaryAnimation, Widget child) {
-//   return child;
-// }
-//
-// @override
-// Duration get transitionDuration => const Duration();
-//
-// @override
-// Duration get reverseTransitionDuration => const Duration();
+
+  final _RouterDurationProvider routerDurationProvider;
+
+  @override
+  Duration get transitionDuration {
+    return routerDurationProvider() ?? super.transitionDuration;
+  }
+
+  @override
+  Duration get reverseTransitionDuration {
+    return routerDurationProvider() ?? super.reverseTransitionDuration;
+  }
 }
 
 extension _Extensions on List<_PageNode> {
