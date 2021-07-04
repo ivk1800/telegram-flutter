@@ -14,7 +14,7 @@ class SettingsFeatureDependencies implements ISettingsFeatureDependencies {
     required ISettingsSearchFeatureApi settingsSearchFeatureApi,
     required IConnectionStateProvider connectionStateProvider,
     required ILocalizationManager localizationManager,
-  })   : _router = router,
+  })  : _router = router,
         _settingsSearchFeatureApi = settingsSearchFeatureApi,
         _connectionStateProvider = connectionStateProvider,
         _localizationManager = localizationManager;

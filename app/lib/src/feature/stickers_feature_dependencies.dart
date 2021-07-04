@@ -10,7 +10,7 @@ class StickersFeatureDependencies implements IStickersFeatureDependencies {
     required IStickerRepository stickerRepository,
     required IStickersFeatureRouter router,
     required ILocalizationManager localizationManager,
-  })   : _connectionStateProvider = connectionStateProvider,
+  })  : _connectionStateProvider = connectionStateProvider,
         _stickerRepository = stickerRepository,
         _router = router,
         _localizationManager = localizationManager;

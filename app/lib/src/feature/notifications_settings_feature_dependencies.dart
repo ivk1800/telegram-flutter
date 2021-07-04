@@ -10,7 +10,7 @@ class NotificationsSettingsFeatureDependencies
     required INotificationsSettingsScreenRouter router,
     required IConnectionStateProvider connectionStateProvider,
     required ILocalizationManager localizationManager,
-  })   : _router = router,
+  })  : _router = router,
         _connectionStateProvider = connectionStateProvider,
         _localizationManager = localizationManager;
 

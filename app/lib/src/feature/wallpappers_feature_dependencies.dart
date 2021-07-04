@@ -13,7 +13,7 @@ class WallpappersFeatureDependencies
     required IBackgroundRepository backgroundRepository,
     required IConnectionStateProvider connectionStateProvider,
     required ILocalizationManager localizationManager,
-  })   : _router = router,
+  })  : _router = router,
         _fileRepository = fileRepository,
         _backgroundRepository = backgroundRepository,
         _connectionStateProvider = connectionStateProvider,
