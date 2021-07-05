@@ -10,6 +10,8 @@ import 'package:feature_chat_impl/src/tile/widget/message_tile_adapter_delegate.
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/content/add_members_tile_factory.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/content/message_text_content_factory.dart';
+import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
@@ -21,7 +23,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
   final IChatFeatureDependencies dependencies;
 
   @override
-  Widget create(int chatId) {
+  Widget create(BuildContext context, int chatId) {
     final ChatArgs chatArgs = ChatArgs(chatId);
     final MessageTextContentFactory messageTextContentFactory =
         MessageTextContentFactory();
@@ -56,7 +58,13 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                     messageRepository: dependencies.chatMessageRepository),
                 args: chatArgs,
               ),
-          child: const ChatPage()),
+          child: ChatTheme(
+            data: ChatThemeData.raw(
+                bubbleOutgoingColor: Color.fromARGB(255, 239, 255, 221),
+                bubbleColor: Colors.white,
+                bubbleTextStyle: Theme.of(context).textTheme.subtitle1!),
+            child: const ChatPage(),
+          )),
     );
   }
 }

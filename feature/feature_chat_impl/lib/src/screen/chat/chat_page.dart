@@ -40,6 +40,7 @@ class ChatPageState extends State<ChatPage> {
     final ConnectionStateWidgetFactory connectionStateWidgetFactory =
         Provider.of(context);
     return Scaffold(
+      backgroundColor: Colors.lightBlue,
       appBar: AppBar(
         title: connectionStateWidgetFactory.create(
             context, (_) => const Text('Chat')),

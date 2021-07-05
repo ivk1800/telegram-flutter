@@ -7,5 +7,5 @@ abstract class IChatFeatureApi {
 }
 
 abstract class IChatWidgetFactory {
-  Widget create(int chatId);
+  Widget create(BuildContext context, int chatId);
 }

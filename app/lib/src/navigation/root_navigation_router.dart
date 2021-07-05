@@ -37,7 +37,7 @@ class RootNavigationRouter
       (BuildContext context) => _featureFactory
           .createChatFeatureApi()
           .screenWidgetFactory
-          .create(chatId),
+          .create(context, chatId),
     );
     _push(route);
   }

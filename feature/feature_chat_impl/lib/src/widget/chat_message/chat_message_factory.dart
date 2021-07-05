@@ -1,6 +1,7 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/widget/bubble/bubble.dart';
 import 'package:feature_chat_impl/src/widget/message/message_skeleton.dart';
+import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tdlib/td_api.dart' as td;
@@ -37,11 +38,14 @@ class ChatMessageFactory {
   }
 
   Widget _buildMessageBubble(BuildContext context, td.Message message) {
+    final ChatThemeData theme = ChatTheme.of(context);
     return Bubble(
         radius: 10,
         child: Container(
             padding: const EdgeInsets.all(8),
-            color: Colors.grey,
+            color: message.isOutgoing
+                ? theme.bubbleOutgoingColor
+                : theme.bubbleColor,
             child: MessageSkeleton(
               content: _buildContent(context, message),
               // content: Container(color: Colors.blue, height: 30,),
@@ -71,9 +75,8 @@ class ChatMessageFactory {
 
     return Text(
       'not implemented ${message.content.runtimeType}',
-      style: Theme.of(context)
-          .textTheme
-          .subtitle1!
+      style: ChatTheme.of(context)
+          .bubbleTextStyle
           .copyWith(color: Colors.redAccent),
     );
   }
