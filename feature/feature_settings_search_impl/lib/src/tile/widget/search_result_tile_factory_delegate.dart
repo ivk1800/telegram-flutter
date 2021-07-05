@@ -6,10 +6,10 @@ import 'package:jugger/jugger.dart' as j;
 typedef SearchResultTapCallback = void Function(
     BuildContext context, SearchResultType type);
 
-class SearchResultTileAdapterDelegate
-    implements IListAdapterDelegate<SearchResultTileModel> {
+class SearchResultTileFactoryDelegate
+    implements ITileFactoryDelegate<SearchResultTileModel> {
   @j.inject
-  SearchResultTileAdapterDelegate({required SearchResultTapCallback tap})
+  SearchResultTileFactoryDelegate({required SearchResultTapCallback tap})
       : _tap = tap;
 
   final SearchResultTapCallback _tap;

@@ -6,8 +6,8 @@ import 'package:feature_settings_search_impl/src/screen/search/bloc/search_setti
 import 'package:feature_settings_search_impl/src/screen/settings_search_page.dart';
 import 'package:feature_settings_search_impl/src/tile/model/faq_result_tile_model.dart';
 import 'package:feature_settings_search_impl/src/tile/model/search_result_tile_model.dart';
-import 'package:feature_settings_search_impl/src/tile/widget/faq_result_tile_adapter_delegate.dart';
-import 'package:feature_settings_search_impl/src/tile/widget/search_result_tile_adapter_delegate.dart';
+import 'package:feature_settings_search_impl/src/tile/widget/faq_result_tile_factory_delegate.dart';
+import 'package:feature_settings_search_impl/src/tile/widget/search_result_tile_factory_delegate.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
@@ -23,15 +23,15 @@ class SearchSettingsWidgetFactory implements ISettingsSearchWidgetFactory {
         providers: <Provider<dynamic>>[
           Provider<ILocalizationManager>.value(
               value: dependencies.localizationManager),
-          Provider<ListAdapter>.value(
-              value: ListAdapter(
-                  delegates: <Type, IListAdapterDelegate<ITileModel>>{
-                FaqResultTileModel: FaqResultTileAdapterDelegate(
+          Provider<TileFactory>.value(
+              value: TileFactory(
+                  delegates: <Type, ITileFactoryDelegate<ITileModel>>{
+                FaqResultTileModel: FaqResultTileFactoryDelegate(
                     tap: (BuildContext context, String url) {
                   BlocProvider.of<SearchSettingsBloc>(context)
                       .add(FaqResultTap(url: url));
                 }),
-                SearchResultTileModel: SearchResultTileAdapterDelegate(
+                SearchResultTileModel: SearchResultTileFactoryDelegate(
                     tap: (BuildContext context, SearchResultType type) {
                   BlocProvider.of<SearchSettingsBloc>(context)
                       .add(SearchResultTap(type: type));

@@ -3,9 +3,9 @@ import 'package:feature_chat_impl/src/tile/model/message_tile_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message_factory.dart';
 import 'package:flutter/material.dart';
 
-class MessageTileAdapterDelegate
-    implements IListAdapterDelegate<MessageTileModel> {
-  MessageTileAdapterDelegate({required ChatMessageFactory chatMessageFactory})
+class MessageTileFactoryDelegate
+    implements ITileFactoryDelegate<MessageTileModel> {
+  MessageTileFactoryDelegate({required ChatMessageFactory chatMessageFactory})
       : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;

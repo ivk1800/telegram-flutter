@@ -21,9 +21,9 @@ class StickersWidgetFactory implements IStickersWidgetFactory {
         providers: <Provider<dynamic>>[
           Provider<ILocalizationManager>.value(
               value: dependencies.localizationManager),
-          Provider<ListAdapter>.value(
-              value: ListAdapter(
-                  delegates: <Type, IListAdapterDelegate<ITileModel>>{
+          Provider<TileFactory>.value(
+              value: TileFactory(
+                  delegates: <Type, ITileFactoryDelegate<ITileModel>>{
                 StickerSetTileModel: StickerSetTileFactoryDelegate(
                   tap: (BuildContext context, int setId) {
                     BlocProvider.of<StickersBloc>(context)

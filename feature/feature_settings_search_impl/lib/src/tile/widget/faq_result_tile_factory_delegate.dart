@@ -5,10 +5,10 @@ import 'package:jugger/jugger.dart' as j;
 
 typedef FaqResultTapCallback = void Function(BuildContext context, String url);
 
-class FaqResultTileAdapterDelegate
-    implements IListAdapterDelegate<FaqResultTileModel> {
+class FaqResultTileFactoryDelegate
+    implements ITileFactoryDelegate<FaqResultTileModel> {
   @j.inject
-  FaqResultTileAdapterDelegate({required FaqResultTapCallback tap})
+  FaqResultTileFactoryDelegate({required FaqResultTapCallback tap})
       : _tap = tap;
 
   final FaqResultTapCallback _tap;

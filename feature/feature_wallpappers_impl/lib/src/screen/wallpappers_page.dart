@@ -24,7 +24,7 @@ class WallpappersPage extends GetView<WallpappersController> {
       );
 
   Widget _buildGridView(List<ITileModel> tileModels, double width) {
-    final ListAdapter listAdapter = GetInstance().find<ListAdapter>();
+    final TileFactory tileFactory = GetInstance().find<TileFactory>();
 
     return StaggeredGridView.countBuilder(
         crossAxisCount: CrossAxisCount,
@@ -34,7 +34,7 @@ class WallpappersPage extends GetView<WallpappersController> {
         mainAxisSpacing: 8,
         padding: const EdgeInsets.all(10.0),
         itemBuilder: (BuildContext context, int index) =>
-            listAdapter.create(context, tileModels[index]),
+            tileFactory.create(context, tileModels[index]),
         staggeredTileBuilder: (int index) {
           return StaggeredTile.extent(2, width / (CrossAxisCount / 2) * 1.5);
         });

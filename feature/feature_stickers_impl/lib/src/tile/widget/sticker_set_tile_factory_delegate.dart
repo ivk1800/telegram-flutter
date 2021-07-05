@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 typedef StickerSetTapCallback = void Function(BuildContext context, int setId);
 
 class StickerSetTileFactoryDelegate
-    implements IListAdapterDelegate<StickerSetTileModel> {
+    implements ITileFactoryDelegate<StickerSetTileModel> {
   StickerSetTileFactoryDelegate({required StickerSetTapCallback tap})
       : _tap = tap;
 

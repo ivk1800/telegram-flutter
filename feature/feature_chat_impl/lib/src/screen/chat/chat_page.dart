@@ -60,7 +60,7 @@ class ChatPageState extends State<ChatPage> {
   }
 
   Widget _buildMessagesState(BuildContext context, DefaultState state) {
-    final ListAdapter listAdapter = Provider.of(context);
+    final TileFactory tileFactory = Provider.of(context);
     return Scrollbar(
       child: ListView.builder(
         controller: scrollController,
@@ -68,7 +68,7 @@ class ChatPageState extends State<ChatPage> {
         itemCount: state.tiles.length,
         itemBuilder: (BuildContext context, int index) {
           final ITileModel tileModel = state.tiles[index];
-          return listAdapter.create(context, tileModel);
+          return tileFactory.create(context, tileModel);
         },
       ),
     );

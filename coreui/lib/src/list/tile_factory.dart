@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 
-class ListAdapter {
-  ListAdapter({required this.delegates});
+class TileFactory {
+  TileFactory({required this.delegates});
 
-  final Map<Type, IListAdapterDelegate<ITileModel>> delegates;
+  final Map<Type, ITileFactoryDelegate<ITileModel>> delegates;
 
   Widget create(BuildContext context, ITileModel model) {
     assert(delegates.containsKey(model.runtimeType),
@@ -19,6 +19,6 @@ class ListAdapter {
 
 abstract class ITileModel {}
 
-abstract class IListAdapterDelegate<M> {
+abstract class ITileFactoryDelegate<M> {
   Widget create(BuildContext context, M model);
 }

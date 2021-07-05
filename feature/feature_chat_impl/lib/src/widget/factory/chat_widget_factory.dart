@@ -6,7 +6,7 @@ import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
 import 'package:feature_chat_impl/src/tile/model/message_tile_model.dart';
-import 'package:feature_chat_impl/src/tile/widget/message_tile_adapter_delegate.dart';
+import 'package:feature_chat_impl/src/tile/widget/message_tile_factory_delegate.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/content/add_members_tile_factory.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/content/message_text_content_factory.dart';
@@ -36,10 +36,10 @@ class ChatWidgetFactory implements IChatWidgetFactory {
         addMembersFactory: addMembersTileFactory);
     return MultiProvider(
       providers: <Provider<dynamic>>[
-        Provider<tg.ListAdapter>.value(
-            value: tg.ListAdapter(
-                delegates: <Type, tg.IListAdapterDelegate<tg.ITileModel>>{
-              MessageTileModel: MessageTileAdapterDelegate(
+        Provider<tg.TileFactory>.value(
+            value: tg.TileFactory(
+                delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
+              MessageTileModel: MessageTileFactoryDelegate(
                   chatMessageFactory: chatMessageFactory),
             })),
         Provider<ChatMessageFactory>.value(value: chatMessageFactory),
@@ -60,7 +60,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
               ),
           child: ChatTheme(
             data: ChatThemeData.raw(
-                bubbleOutgoingColor: Color.fromARGB(255, 239, 255, 221),
+                bubbleOutgoingColor: const Color.fromARGB(255, 239, 255, 221),
                 bubbleColor: Colors.white,
                 bubbleTextStyle: Theme.of(context).textTheme.subtitle1!),
             child: const ChatPage(),

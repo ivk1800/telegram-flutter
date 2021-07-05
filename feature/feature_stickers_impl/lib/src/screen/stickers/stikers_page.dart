@@ -36,7 +36,7 @@ class StickersPage extends StatelessWidget {
 
   Widget _buildDefaultWidget(BuildContext context, DefaultState state) {
     final ILocalizationManager localizationManager = Provider.of(context);
-    final tg.ListAdapter listAdapter = Provider.of<tg.ListAdapter>(context);
+    final tg.TileFactory tileFactory = Provider.of<tg.TileFactory>(context);
     final StickersBloc bloc = BlocProvider.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +84,7 @@ class StickersPage extends StatelessWidget {
           shrinkWrap: true,
           itemCount: state.tiles.length,
           itemBuilder: (BuildContext context, int index) =>
-              listAdapter.create(context, state.tiles[index]),
+              tileFactory.create(context, state.tiles[index]),
           separatorBuilder: (BuildContext context, int index) => const Divider(
             height: 1,
           ),

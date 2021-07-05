@@ -11,7 +11,7 @@ import 'package:localization_api/localization_api.dart';
 
 import 'src/screen/wallpappers_controller.dart';
 import 'src/tile/model/wallpaper_tile_model.dart';
-import 'src/tile/widget/wallpapper_tile_adapter_delegate.dart';
+import 'src/tile/widget/wallpapper_tile_factory_delegate.dart';
 
 export 'src/wallpappers_screen_router.dart';
 
@@ -51,12 +51,12 @@ class _ScreenWidgetFactory implements IWallpappersWidgetFactory {
         backgroundRepository: Get.find<IBackgroundRepository>()));
     Get.lazyPut(() => dependencies.backgroundRepository);
     Get.lazyPut(
-        () => ListAdapter(delegates: <Type, IListAdapterDelegate<ITileModel>>{
-              WallpaperTileModel: Get.find<WallpapperTileAdapterDelegate>(),
+        () => TileFactory(delegates: <Type, ITileFactoryDelegate<ITileModel>>{
+              WallpaperTileModel: Get.find<WallpapperTileFactoryDelegate>(),
             }));
     Get.lazyPut(() => dependencies.fileRepository);
     Get.lazyPut(() => dependencies.localizationManager);
-    Get.lazyPut(() => WallpapperTileAdapterDelegate(
+    Get.lazyPut(() => WallpapperTileFactoryDelegate(
         imageWidgetFactory: Get.find<ImageWidgetFactory>()));
     Get.lazyPut(
         () => ImageWidgetFactory(fileRepository: Get.find<IFileRepository>()));

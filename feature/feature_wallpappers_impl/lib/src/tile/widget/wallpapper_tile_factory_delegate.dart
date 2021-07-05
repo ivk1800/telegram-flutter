@@ -2,9 +2,9 @@ import 'package:coreui/coreui.dart';
 import 'package:feature_wallpappers_impl/src/tile/model/wallpaper_tile_model.dart';
 import 'package:flutter/material.dart';
 
-class WallpapperTileAdapterDelegate
-    implements IListAdapterDelegate<WallpaperTileModel> {
-  WallpapperTileAdapterDelegate(
+class WallpapperTileFactoryDelegate
+    implements ITileFactoryDelegate<WallpaperTileModel> {
+  WallpapperTileFactoryDelegate(
       {required ImageWidgetFactory imageWidgetFactory})
       : _imageWidgetFactory = imageWidgetFactory;
 

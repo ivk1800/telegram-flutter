@@ -13,7 +13,7 @@ class SettingsSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ILocalizationManager localizationManager = Provider.of(context);
-    final ListAdapter listAdapter = Provider.of(context);
+    final TileFactory tileFactory = Provider.of(context);
     return BlocBuilder<SearchSettingsBloc, SearchSettingsState>(
         builder: (BuildContext context, SearchSettingsState state) {
       switch (state.runtimeType) {
@@ -24,7 +24,7 @@ class SettingsSearchPage extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (BuildContext context, int index) {
                 final ITileModel tileModel = items[index];
-                return listAdapter.create(context, tileModel);
+                return tileFactory.create(context, tileModel);
               },
             );
           }
@@ -49,7 +49,7 @@ class SettingsSearchPage extends StatelessWidget {
 //   late ConnectionStateWidgetFactory connectionStateWidgetFactory;
 //
 //   @j.inject
-//   late ListAdapter listAdapter;
+//   late TileFactory tileFactory;
 //
 //   @override
 //   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class SettingsSearchPage extends StatelessWidget {
 //             itemCount: items.length,
 //             itemBuilder: (BuildContext context, int index) {
 //               final ITileModel tileModel = items[index];
-//               return listAdapter.create(context, tileModel);
+//               return tileFactory.create(context, tileModel);
 //             },
 //           );
 //         }
