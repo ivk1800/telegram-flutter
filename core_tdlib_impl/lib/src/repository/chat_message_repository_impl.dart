@@ -17,8 +17,8 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
             chatId: chatId, fromMessageId: fromMessageId, limit: limit)
         .flatMap((List<td.Message> messages) {
       if (messages.isNotEmpty && messages.length != limit) {
-        return _getMessages(
-                chatId: chatId, fromMessageId: fromMessageId, limit: limit)
+        return getMessages(
+                chatId: chatId, fromMessageId: messages.last.id, limit: limit)
             .map((List<td.Message> additionalMessages) =>
                 messages..addAll(additionalMessages));
       }
