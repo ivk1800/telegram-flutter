@@ -24,30 +24,37 @@ class ChatMessageFactory {
   final MessageTextContentFactory _messageTextFactory;
   final AddMembersTileFactory _addMembersFactory;
 
-  Widget create(BuildContext context, td.Message message) {
+  Widget create(
+      {required int id,
+      required BuildContext context,
+      required bool isOutgoing,
+      required Widget body}) {
     return Align(
-      alignment: message.isOutgoing ? Alignment.topRight : Alignment.topLeft,
+      key: ValueKey<int>(id),
+      alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           constraints: const BoxConstraints(maxWidth: 500),
-          child: _buildMessageBubble(context, message),
+          child: _buildMessageBubble(
+              context: context, isOutgoing: isOutgoing, body: body),
         ),
       ),
     );
   }
 
-  Widget _buildMessageBubble(BuildContext context, td.Message message) {
+  Widget _buildMessageBubble(
+      {required BuildContext context,
+      required bool isOutgoing,
+      required Widget body}) {
     final ChatThemeData theme = ChatTheme.of(context);
     return Bubble(
         radius: 10,
         child: Container(
             padding: const EdgeInsets.all(8),
-            color: message.isOutgoing
-                ? theme.bubbleOutgoingColor
-                : theme.bubbleColor,
+            color: isOutgoing ? theme.bubbleOutgoingColor : theme.bubbleColor,
             child: MessageSkeleton(
-              content: _buildContent(context, message),
+              content: body,
               // content: Container(color: Colors.blue, height: 30,),
               shortInfo: Padding(
                 padding: const EdgeInsets.only(left: 4, top: 4),

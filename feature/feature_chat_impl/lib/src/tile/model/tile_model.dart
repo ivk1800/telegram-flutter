@@ -1,0 +1,9 @@
+export 'message_animation_tile_model.dart';
+export 'message_audio_tile_model.dart';
+export 'message_document_tile_model.dart';
+export 'message_expired_photo_tile_model.dart';
+export 'message_photo_tile_model.dart';
+export 'message_sticker_tile_model.dart';
+export 'message_text_tile_model.dart';
+export 'message_video_tile_model.dart';
+export 'unknown_message_tile_model.dart';

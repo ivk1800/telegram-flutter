@@ -2,11 +2,12 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
+import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
-import 'package:feature_chat_impl/src/tile/model/message_tile_model.dart';
-import 'package:feature_chat_impl/src/tile/widget/message_tile_factory_delegate.dart';
+import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
+import 'package:feature_chat_impl/src/tile/widget/tile_widget.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/content/add_members_tile_factory.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/content/message_text_content_factory.dart';
@@ -36,12 +37,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
         addMembersFactory: addMembersTileFactory);
     return MultiProvider(
       providers: <Provider<dynamic>>[
-        Provider<tg.TileFactory>.value(
-            value: tg.TileFactory(
-                delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
-              MessageTileModel: MessageTileFactoryDelegate(
-                  chatMessageFactory: chatMessageFactory),
-            })),
+        _createTileFactoryProvider(chatMessageFactory: chatMessageFactory),
         Provider<ChatMessageFactory>.value(value: chatMessageFactory),
         Provider<ILocalizationManager>.value(
             value: dependencies.localizationManager),
@@ -55,6 +51,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                 messagesInteractor: ChatMessagesInteractor(
                     chatRepository: dependencies.chatRepository,
                     chatArgs: chatArgs,
+                    messageTileMapper: MessageTileMapper(),
                     messageRepository: dependencies.chatMessageRepository),
                 args: chatArgs,
               ),
@@ -67,4 +64,30 @@ class ChatWidgetFactory implements IChatWidgetFactory {
           )),
     );
   }
+
+  Provider<tg.TileFactory> _createTileFactoryProvider(
+          {required ChatMessageFactory chatMessageFactory}) =>
+      Provider<tg.TileFactory>.value(
+          value: tg.TileFactory(
+              delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
+            MessageAnimationTileModel: MessageAnimationTileFactoryDelegate(
+                chatMessageFactory: chatMessageFactory),
+            MessageAudioTileModel: MessageAudioTileFactoryDelegate(
+                chatMessageFactory: chatMessageFactory),
+            MessageDocumentTileModel: MessageDocumentTileFactoryDelegate(
+                chatMessageFactory: chatMessageFactory),
+            MessageExpiredPhotoTileModel:
+                MessageExpiredPhotoTileFactoryDelegate(
+                    chatMessageFactory: chatMessageFactory),
+            MessagePhotoTileModel: MessagePhotoTileFactoryDelegate(
+                chatMessageFactory: chatMessageFactory),
+            MessageStickerTileModel: MessageStickerTileFactoryDelegate(
+                chatMessageFactory: chatMessageFactory),
+            MessageTextTileModel: MessageTextTileFactoryDelegate(
+                chatMessageFactory: chatMessageFactory),
+            MessageVideoTileModel: MessageVideoTileFactoryDelegate(
+                chatMessageFactory: chatMessageFactory),
+            UnknownMessageTileModel: UnknownMessageTileFactoryDelegate(
+                chatMessageFactory: chatMessageFactory),
+          }));
 }

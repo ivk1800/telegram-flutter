@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:coreui/coreui.dart';
+import 'package:collection/collection.dart';
+import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
@@ -11,22 +14,26 @@ class ChatMessagesInteractor {
   ChatMessagesInteractor(
       {required IChatRepository chatRepository,
       required IChatMessageRepository messageRepository,
+      required MessageTileMapper messageTileMapper,
       required ChatArgs chatArgs})
       : _chatRepository = chatRepository,
+        _messageTileMapper = messageTileMapper,
         _messageRepository = messageRepository,
         _chatArgs = chatArgs;
 
   final IChatRepository _chatRepository;
   final IChatMessageRepository _messageRepository;
+  final MessageTileMapper _messageTileMapper;
 
   // TODO refactor
   final ChatArgs _chatArgs;
 
-  final BehaviorSubject<List<td.Message>> _messagesSubject =
-      BehaviorSubject<List<td.Message>>.seeded(<td.Message>[]);
+  final BehaviorSubject<List<ITileModel>> _messagesSubject =
+      BehaviorSubject<List<ITileModel>>.seeded(<ITileModel>[]);
 
-  Stream<List<td.Message>> get messages => _messagesSubject;
+  Stream<List<ITileModel>> get messages => _messagesSubject;
 
+  td.Message? _last;
   bool _isIdle = true;
   StreamSubscription<List<td.Message>>? _subscription;
 
@@ -40,7 +47,9 @@ class ChatMessagesInteractor {
 
   void loadMore() {
     if (_isIdle) {
-      load(_messagesSubject.value!.last.id);
+      if (_last != null) {
+        load(_last!.id);
+      }
     }
   }
 
@@ -52,7 +61,11 @@ class ChatMessagesInteractor {
         .getMessages(
             chatId: _chatArgs.chatId, fromMessageId: fromMessageId, limit: 30)
         .listen((List<td.Message> messages) {
-      _messagesSubject.add(_messagesSubject.value!..addAll(messages));
+      final List<ITileModel> list = _messagesSubject.value!.toList()
+        ..addAll(messages.map((td.Message message) =>
+            _messageTileMapper.mapToTileModel(message)));
+      _messagesSubject.add(list);
+      _last = messages.lastOrNull;
       _isIdle = messages.isNotEmpty;
     });
   }
