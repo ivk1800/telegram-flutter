@@ -1,6 +1,3 @@
-import 'package:flutter/painting.dart';
-import 'package:coreui/coreui.dart';
-
 import 'base_message_tile_model.dart';
 
 class MessageAnimationTileModel extends BaseMessageTileModel {

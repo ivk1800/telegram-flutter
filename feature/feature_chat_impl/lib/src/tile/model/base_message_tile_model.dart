@@ -1,4 +1,3 @@
-import 'package:tdlib/td_api.dart' as td;
 import 'package:coreui/coreui.dart';
 
 abstract class BaseMessageTileModel implements ITileModel {
