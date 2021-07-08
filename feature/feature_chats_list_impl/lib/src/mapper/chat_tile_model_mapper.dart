@@ -6,28 +6,27 @@ import 'package:tuple/tuple.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:jugger/jugger.dart' as j;
 
+import 'chat_preview_data_resolver.dart';
+
 class ChatTileModelMapper {
   @j.inject
   ChatTileModelMapper(
       {required DateFormatter dateFormatter,
-      required IUserRepository userRepository,
       required DateParser dateParser,
-      required ILocalizationManager localizationManager,
+      required ChatPreviewDataResolver previewDataResolver,
       required IChatRepository chatRepository})
       : _dateFormatter = dateFormatter,
-        _userRepository = userRepository,
-        _localizationManager = localizationManager,
+        _previewDataResolver = previewDataResolver,
         _chatRepository = chatRepository,
         _dateParser = dateParser;
 
   final IChatRepository _chatRepository;
-  final IUserRepository _userRepository;
-  final ILocalizationManager _localizationManager;
+  final ChatPreviewDataResolver _previewDataResolver;
   final DateFormatter _dateFormatter;
   final DateParser _dateParser;
 
   Future<ChatTileModel> mapToModel(td.Chat chat) async {
-    final Tuple2<String?, String?> subtitles = await _getSubtitles(chat);
+    final ChatPreviewData preview = await _previewDataResolver.resolve(chat);
 
     assert(chat.positions.length == 1);
     return ChatTileModel(
@@ -40,8 +39,8 @@ class ChatTileModelMapper {
       id: chat.id,
       photoId: chat.photo?.small.id,
       title: chat.title,
-      firstSubtitle: subtitles.item1,
-      secondSubtitle: subtitles.item2,
+      firstSubtitle: preview.firstText,
+      secondSubtitle: preview.secondText,
     );
   }
 
@@ -53,78 +52,6 @@ class ChatTileModelMapper {
           .isVerified;
     }
     return false;
-  }
-
-  Future<Tuple2<String?, String?>> _getSubtitles(td.Chat chat) async {
-    final td.Message? message = chat.lastMessage;
-    if (message == null) {
-      return const Tuple2<String?, String?>(null, null);
-    }
-
-    final td.MessageContent content = message.content;
-    switch (content.getConstructor()) {
-      case td.MessageText.CONSTRUCTOR:
-        {
-          final td.MessageText m = content as td.MessageText;
-          if (message.sender is td.MessageSenderUser) {
-            final td.MessageSenderUser senderUser =
-                message.sender as td.MessageSenderUser;
-            final td.User user =
-                await _userRepository.getUser(senderUser.userId);
-            return Tuple2<String?, String?>(user.firstName, m.text.text);
-          }
-          return Tuple2<String?, String?>(null, m.text.text);
-        }
-      case td.MessageSticker.CONSTRUCTOR:
-        {
-          final td.MessageSticker m = content as td.MessageSticker;
-          return Tuple2<String?, String?>('Sticker', m.sticker.emoji);
-        }
-      case td.MessagePhoto.CONSTRUCTOR:
-        {
-          final td.MessagePhoto m = content as td.MessagePhoto;
-          return Tuple2<String?, String?>('Photo', m.caption.text);
-        }
-      case td.MessageChatAddMembers.CONSTRUCTOR:
-        {
-          final td.MessageChatAddMembers m =
-              content as td.MessageChatAddMembers;
-          final Iterable<Future<String>> userNamesFutures =
-              m.memberUserIds.map((int userId) async {
-            final td.User user = await _userRepository.getUser(userId);
-            return '${user.firstName} ${user.lastName}';
-          });
-          final String joinedUsernames = await Future.wait(userNamesFutures)
-              .then((List<String> users) => users.join(', '));
-          return Tuple2<String?, String?>(
-              _localizationManager.getStringFormatted(
-                  'EventLogGroupJoined', <dynamic>[joinedUsernames]),
-              null);
-        }
-      case td.MessageDocument.CONSTRUCTOR:
-        {
-          final td.MessageDocument m = content as td.MessageDocument;
-          return Tuple2<String?, String?>('📎 ${m.caption.text}', null);
-        }
-    }
-
-    return Tuple2<String?, String?>(null, content.runtimeType.toString());
-  }
-
-  String? _getFirstSubtitle(td.Chat chat) {
-    return null;
-  }
-
-  String _createForMessageText(td.MessageText message) {
-    return message.text.text;
-  }
-
-  String _createForMessageSticker(td.MessageSticker message) {
-    return message.sticker.emoji;
-  }
-
-  String _createForMessagePhoto(td.MessagePhoto message) {
-    return message.caption.text;
   }
 
   String createForFormattedText(td.FormattedText text) {
