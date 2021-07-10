@@ -64,6 +64,14 @@ class ChatListUpdateHandler {
   Future<bool> handleUpdateChatReadInbox(td.UpdateChatReadInbox update) =>
       _enqueue(() => _handleUpdateChatReadInbox(update));
 
+  Future<bool> handleUpdateChatUnreadMentionCount(
+          td.UpdateChatUnreadMentionCount update) =>
+      _enqueue(() => _handleUpdateChatUnreadMentionCount(update));
+
+  Future<bool> handleUpdateMessageMentionRead(
+          td.UpdateMessageMentionRead update) =>
+      _enqueue(() => _handleUpdateMessageMentionRead(update));
+
   Future<bool> handleUpdateChatNotificationSettings(
           td.UpdateChatNotificationSettings update) =>
       _enqueue(() => _handleUpdateChatNotificationSettings(update));
@@ -167,7 +175,41 @@ class ChatListUpdateHandler {
 
     chatData.chat = chatData.chat.copy(
         unreadCount: update.unreadCount,
+        // all messages was read, set 0 to MentionCount
+        // because Update for it not incoming
+        unreadMentionCount:
+            update.unreadCount == 0 ? 0 : chatData.chat.unreadMentionCount,
         lastReadInboxMessageId: update.lastReadInboxMessageId);
+
+    chatData.model = await _chatTileModelMapper.mapToModel(chatData.chat);
+    return true;
+  }
+
+  Future<bool> _handleUpdateChatUnreadMentionCount(
+      td.UpdateChatUnreadMentionCount update) async {
+    final ChatData? chatData = _getChatData(update.chatId);
+
+    if (chatData == null) {
+      return false;
+    }
+
+    chatData.chat =
+        chatData.chat.copy(unreadMentionCount: update.unreadMentionCount);
+
+    chatData.model = await _chatTileModelMapper.mapToModel(chatData.chat);
+    return true;
+  }
+
+  Future<bool> _handleUpdateMessageMentionRead(
+      td.UpdateMessageMentionRead update) async {
+    final ChatData? chatData = _getChatData(update.chatId);
+
+    if (chatData == null) {
+      return false;
+    }
+
+    chatData.chat =
+        chatData.chat.copy(unreadMentionCount: update.unreadMentionCount);
 
     chatData.model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;

@@ -119,6 +119,15 @@ class ChatListInteractor {
           chat: await _chatRepository.getChat(event.chat.id))) {
         _dispatchChats();
       }
+    } else if (event is td.UpdateChatUnreadMentionCount) {
+      if (await _chatListUpdateHandler
+          .handleUpdateChatUnreadMentionCount(event)) {
+        _dispatchChats();
+      }
+    } else if (event is td.UpdateMessageMentionRead) {
+      if (await _chatListUpdateHandler.handleUpdateMessageMentionRead(event)) {
+        _dispatchChats();
+      }
     }
   }
 }

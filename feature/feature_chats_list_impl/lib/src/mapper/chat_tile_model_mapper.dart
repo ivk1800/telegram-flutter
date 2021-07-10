@@ -34,6 +34,7 @@ class ChatTileModelMapper {
       isVerified: await getVerified(chat),
       unreadMessagesCount: chat.unreadCount,
       isPinned: chat.positions[0].isPinned,
+      isMentioned: chat.unreadMentionCount > 0,
       lastMessageDate: _dateFormatter.formatChatLastMessageDateOrNull(
           _dateParser.parseUnixTimeStampToDateOrNull(chat.lastMessage?.date)),
       id: chat.id,
