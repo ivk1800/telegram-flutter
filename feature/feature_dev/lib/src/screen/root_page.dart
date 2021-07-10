@@ -3,6 +3,7 @@ import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:demo/demo.dart' as demo;
 
 class RootPage extends StatefulWidget {
   const RootPage({
@@ -68,6 +69,16 @@ class RootPageState extends State<RootPage> {
               DevWidget.of(context).devFeature.router.toEventsList();
             },
             child: const Text('Events'),
+          ),
+          const Divider(),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true)
+                  .push<dynamic>(MaterialPageRoute<dynamic>(
+                builder: (BuildContext context) => demo.createDemoRootPage(),
+              ));
+            },
+            child: const Text('Demo'),
           )
         ],
       ),

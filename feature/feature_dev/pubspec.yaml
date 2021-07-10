@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  demo:
+    path: ../../demo
   rxdart: ^0.26.0
   core_tdlib_api:
     path: ../../core_tdlib_api

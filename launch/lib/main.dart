@@ -1,5 +1,7 @@
-import 'package:presentation/presentation.dart';
+import 'package:presentation/presentation.dart' as app;
+// import 'package:demo/demo.dart' as demo;
 
-void main() async {
-  await launch();
+Future<void> main() async {
+  await app.launch();
+  // await demo.launch();
 }

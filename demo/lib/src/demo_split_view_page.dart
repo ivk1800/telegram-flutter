@@ -1,31 +1,23 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:split_view/split_view.dart';
 
-class TestApp extends StatelessWidget {
-  const TestApp({Key? key}) : super(key: key);
+class DemoSplitViewPage extends StatefulWidget {
+  const DemoSplitViewPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(),
-    );
-  }
+  _DemoSplitViewPageState createState() => _DemoSplitViewPageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class _DemoSplitViewPageState extends State<DemoSplitViewPage> {
   static final GlobalKey<SplitViewState> _navigationKey =
       GlobalKey<SplitViewState>();
 
   int _count = 0;
+
+  final Random _random = Random();
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +40,25 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         ElevatedButton(
             onPressed: () {
-              _navigationKey.currentState
-                  ?.setLeftRootPage(_buildPage('Root left'));
+              Navigator.of(context).pop();
+            },
+            child: const Text('back')),
+        ElevatedButton(
+            onPressed: () {
+              _navigationKey.currentState?.setLeftRootPage(
+                  _buildPage(title: 'Root left', color: _generateColor()));
             },
             child: const Text('set root left')),
         ElevatedButton(
             onPressed: () {
               _count++;
+              final int c = _count;
+              final Color color = _generateColor();
+
               _navigationKey.currentState?.push(
                   key: UniqueKey(),
                   builder: (_) {
-                    return _buildPage('left $_count');
+                    return _buildPage(title: 'left $c', color: color);
                   },
                   container: ContainerType.Left);
             },
@@ -66,10 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ElevatedButton(
             onPressed: () {
               _count++;
+              final int c = _count;
+              final Color color = _generateColor();
               _navigationKey.currentState?.push(
                   key: UniqueKey(),
                   builder: (_) {
-                    return _buildPage('top $_count');
+                    return _buildPage(title: 'top $c', color: color);
                   },
                   container: ContainerType.Top);
             },
@@ -77,10 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ElevatedButton(
             onPressed: () {
               _count++;
+              final int c = _count;
+              final Color color = _generateColor();
               _navigationKey.currentState?.push(
                   key: UniqueKey(),
                   builder: (_) {
-                    return _buildPage('right $_count');
+                    return _buildPage(title: 'right $c', color: color);
                   },
                   container: ContainerType.Right);
             },
@@ -107,7 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
               currentState.popUntilRoot(ContainerType.Left);
               currentState.popUntilRoot(ContainerType.Top);
               currentState.popUntilRoot(ContainerType.Right);
-              currentState.setLeftRootPage(_buildPage('root left $_count'));
+              currentState.setLeftRootPage(_buildPage(
+                  title: 'root left $_count', color: _generateColor()));
               currentState.setRightContainerPlaceholder(Container(
                 color: Colors.redAccent,
                 child: const Material(
@@ -120,8 +125,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildPage(String title) {
+  Color _generateColor() {
+    return Color.fromARGB(
+      255,
+      _random.nextInt(256),
+      _random.nextInt(256),
+      _random.nextInt(256),
+    );
+  }
+
+  Widget _buildPage({required String title, required Color color}) {
     return Scaffold(
+      backgroundColor: color,
       appBar: AppBar(
         title: Text(title),
       ),
