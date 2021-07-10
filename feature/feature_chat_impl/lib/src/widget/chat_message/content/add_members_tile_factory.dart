@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:jugger/jugger.dart' as j;
 
+@Deprecated('to remove')
 class AddMembersTileFactory {
   @j.inject
   AddMembersTileFactory();

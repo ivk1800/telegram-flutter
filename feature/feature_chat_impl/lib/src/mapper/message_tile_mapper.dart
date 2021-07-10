@@ -332,7 +332,16 @@ class MessageTileMapper {
           return MessageVideoNoteTileModel(
             id: message.id,
             isOutgoing: message.isOutgoing,
-            minithumbnail: m.videoNote.minithumbnail?.toMinithumbnail(),
+            type: notImplementedText,
+          );
+        }
+      case td.MessageVideo.CONSTRUCTOR:
+        {
+          final td.MessageVideo m = message.content.cast();
+          return MessageVideoTileModel(
+            id: message.id,
+            isOutgoing: message.isOutgoing,
+            minithumbnail: m.video.minithumbnail?.toMinithumbnail(),
           );
         }
       case td.MessageVoiceChatEnded.CONSTRUCTOR:

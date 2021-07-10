@@ -32,6 +32,12 @@ class ChatThemeData {
     required this.bubbleTextStyle,
   });
 
+  factory ChatThemeData.light({required BuildContext context}) =>
+      ChatThemeData.raw(
+          bubbleOutgoingColor: const Color.fromARGB(255, 239, 255, 221),
+          bubbleColor: Colors.white,
+          bubbleTextStyle: Theme.of(context).textTheme.subtitle1!);
+
   final Color bubbleOutgoingColor;
   final Color bubbleColor;
   final TextStyle bubbleTextStyle;

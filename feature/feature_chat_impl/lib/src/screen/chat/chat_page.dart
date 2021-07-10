@@ -64,12 +64,7 @@ class ChatPageState extends State<ChatPage> {
   Widget _wrapToChatContext({required Widget child}) => LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return ChatContext(
-              data: ChatContextData.raw(
-                width: constraints.maxWidth,
-                horizontalPadding: 8.0,
-                maxWidth: 500,
-                maxMediaHeight: 450,
-              ),
+              data: ChatContextData.desktop(maxWidth: constraints.maxWidth),
               child: child);
         },
       );

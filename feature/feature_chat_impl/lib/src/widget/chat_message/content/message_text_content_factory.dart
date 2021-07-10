@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:tdlib/td_api.dart' as td;
 
+@Deprecated('to remove')
 class MessageTextContentFactory {
   @j.inject
   MessageTextContentFactory();

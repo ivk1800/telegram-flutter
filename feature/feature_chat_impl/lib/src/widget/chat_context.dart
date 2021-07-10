@@ -32,6 +32,14 @@ class ChatContextData {
     required this.horizontalPadding,
   });
 
+  factory ChatContextData.desktop({required double maxWidth}) =>
+      ChatContextData.raw(
+        width: maxWidth,
+        horizontalPadding: 8.0,
+        maxWidth: 500,
+        maxMediaHeight: 450,
+      );
+
   final double maxWidth;
   final double maxMediaHeight;
   final double width;

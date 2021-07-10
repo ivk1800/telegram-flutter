@@ -9,14 +9,14 @@ import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/tile_widget.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/content/add_members_tile_factory.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/content/message_text_content_factory.dart';
 import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
+
+import 'messages_tile_factory_factory.dart';
 
 class ChatWidgetFactory implements IChatWidgetFactory {
   ChatWidgetFactory({required this.dependencies});
@@ -26,18 +26,20 @@ class ChatWidgetFactory implements IChatWidgetFactory {
   @override
   Widget create(BuildContext context, int chatId) {
     final ChatArgs chatArgs = ChatArgs(chatId);
-    final MessageTextContentFactory messageTextContentFactory =
-        MessageTextContentFactory();
+
+    final MessagesTileFactoryFactory tileFactoryFactory =
+        MessagesTileFactoryFactory();
+
     final tg.AvatarWidgetFactory avatarWidgetFactory =
         tg.AvatarWidgetFactory(fileRepository: dependencies.fileRepository);
-    final AddMembersTileFactory addMembersTileFactory = AddMembersTileFactory();
     final ChatMessageFactory chatMessageFactory = ChatMessageFactory(
-        messageTextFactory: messageTextContentFactory,
-        avatarWidgetFactory: avatarWidgetFactory,
-        addMembersFactory: addMembersTileFactory);
+      avatarWidgetFactory: avatarWidgetFactory,
+    );
     return MultiProvider(
       providers: <Provider<dynamic>>[
-        _createTileFactoryProvider(chatMessageFactory: chatMessageFactory),
+        Provider<tg.TileFactory>.value(
+            value: tileFactoryFactory.create(
+                chatMessageFactory: chatMessageFactory)),
         Provider<ChatMessageFactory>.value(value: chatMessageFactory),
         Provider<ILocalizationManager>.value(
             value: dependencies.localizationManager),
@@ -56,10 +58,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                 args: chatArgs,
               ),
           child: ChatTheme(
-            data: ChatThemeData.raw(
-                bubbleOutgoingColor: const Color.fromARGB(255, 239, 255, 221),
-                bubbleColor: Colors.white,
-                bubbleTextStyle: Theme.of(context).textTheme.subtitle1!),
+            data: ChatThemeData.light(context: context),
             child: const ChatPage(),
           )),
     );

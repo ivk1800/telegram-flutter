@@ -1,7 +1,6 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/util/minithumbnail.dart';
-import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message_factory.dart';
 import 'package:feature_chat_impl/src/widget/media_widget.dart';
 import 'package:flutter/material.dart';
