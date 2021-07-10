@@ -1,0 +1,22 @@
+name: fake
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  core_tdlib_api:
+    path: ../core_tdlib_api
+  td_client:
+    path: ../td_client
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/messages/

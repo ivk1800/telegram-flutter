@@ -1,0 +1,123 @@
+{
+  "id": 8089763840,
+  "sender": {
+    "chat_id": -1001005980967,
+    "@type": "messageSenderChat"
+  },
+  "chat_id": -1001005980967,
+  "sending_state": null,
+  "scheduling_state": null,
+  "is_outgoing": false,
+  "is_pinned": false,
+  "can_be_edited": false,
+  "can_be_forwarded": true,
+  "can_be_deleted_only_for_self": false,
+  "can_be_deleted_for_all_users": false,
+  "can_get_statistics": false,
+  "can_get_message_thread": false,
+  "is_channel_post": true,
+  "contains_unread_mention": false,
+  "date": 1625700962,
+  "edit_date": 0,
+  "forward_info": null,
+  "interaction_info": {
+    "view_count": 17923,
+    "forward_count": 182,
+    "reply_info": null,
+    "@type": "messageInteractionInfo"
+  },
+  "reply_in_chat_id": 0,
+  "reply_to_message_id": 0,
+  "message_thread_id": 0,
+  "ttl": 0,
+  "ttl_expires_in": 0.0,
+  "via_bot_user_id": 0,
+  "author_signature": "",
+  "media_album_id": "0",
+  "restriction_reason": "",
+  "content": {
+    "video": {
+      "duration": 9,
+      "width": 712,
+      "height": 400,
+      "file_name": "805c8aefaed.mp4",
+      "mime_type": "video/mp4",
+      "has_stickers": false,
+      "supports_streaming": true,
+      "minithumbnail": {
+        "width": 40,
+        "height": 22,
+        "data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAWACgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCqkQ5yoPOa0IY0RAQCOOhpoCoATTJJztOPlHrSGRyODKehDcYqtM6KpKdTxUyDehO5PvfdY81UnUgndnOehpFLQakzA43YB60VGg3OBRVEWNRpQFYsMk96rNKSwYdByAaKKQyWW7MqbTGg9wKqSfMVySeKKKVrFR1dggX/AElB+NFFFMT3P//Z",
+        "@type": "minithumbnail"
+      },
+      "thumbnail": {
+        "format": {
+          "@type": "thumbnailFormatJpeg"
+        },
+        "width": 320,
+        "height": 180,
+        "file": {
+          "id": 536,
+          "size": 10478,
+          "expected_size": 10478,
+          "local": {
+            "path": "",
+            "can_be_downloaded": true,
+            "can_be_deleted": false,
+            "is_downloading_active": false,
+            "is_downloading_completed": false,
+            "download_offset": 0,
+            "downloaded_prefix_size": 0,
+            "downloaded_size": 0,
+            "@type": "localFile"
+          },
+          "remote": {
+            "id": "AAMCAgADGQEAA0xg6bJ63PCliVw4M_I8H7jLe7j5wQAC4AUAAqwRgElZzuRMfp7-fYv0LpQuAAMBAAdtAAMXJAACHgQ",
+            "unique_id": "AQADi_QulC4AAxckAAI",
+            "is_uploading_active": false,
+            "is_uploading_completed": true,
+            "uploaded_size": 10478,
+            "@type": "remoteFile"
+          },
+          "@type": "file"
+        },
+        "@type": "thumbnail"
+      },
+      "video": {
+        "id": 537,
+        "size": 666880,
+        "expected_size": 666880,
+        "local": {
+          "path": "",
+          "can_be_downloaded": true,
+          "can_be_deleted": false,
+          "is_downloading_active": false,
+          "is_downloading_completed": false,
+          "download_offset": 0,
+          "downloaded_prefix_size": 0,
+          "downloaded_size": 0,
+          "@type": "localFile"
+        },
+        "remote": {
+          "id": "BAACAgIAAxkBAANMYOmyetzwpYlcODPyPB-4y3u4-cEAAuAFAAKsEYBJWc7kTH6e_n0eBA",
+          "unique_id": "AgAD4AUAAqwRgEk",
+          "is_uploading_active": false,
+          "is_uploading_completed": true,
+          "uploaded_size": 666880,
+          "@type": "remoteFile"
+        },
+        "@type": "file"
+      },
+      "@type": "video"
+    },
+    "caption": {
+      "text": "",
+      "entities": [],
+      "@type": "formattedText"
+    },
+    "is_secret": false,
+    "@type": "messageVideo"
+  },
+  "reply_markup": null,
+  "@type": "message"
+}
