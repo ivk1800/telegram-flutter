@@ -25,6 +25,8 @@ class EventsListPageState extends State<EventsListPage> {
 
   late StreamSubscription<List<td.TdObject>> _eventsSubscription;
 
+  bool _scrollToLast = true;
+
   @override
   void initState() {
     DevWidget.of(context).devComponent.injectEventsListState(this);
@@ -35,7 +37,9 @@ class EventsListPageState extends State<EventsListPage> {
         .listen((List<td.TdObject> events) {
       setState(() {
         _events = events;
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+        if (_scrollToLast) {
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+        }
       });
     });
     super.initState();
@@ -44,6 +48,7 @@ class EventsListPageState extends State<EventsListPage> {
   @override
   void dispose() {
     _eventsSubscription.cancel();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -53,10 +58,29 @@ class EventsListPageState extends State<EventsListPage> {
       appBar: AppBar(
         title: connectionStateWidgetFactory.create(
             context, (BuildContext context) => const Text('Events')),
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  _scrollController
+                      .jumpTo(_scrollController.position.maxScrollExtent);
+                });
+              },
+              icon: const Icon(Icons.vertical_align_top)),
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  _scrollToLast = !_scrollToLast;
+                });
+              },
+              icon: Icon(
+                  _scrollToLast ? Icons.push_pin : Icons.push_pin_outlined)),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: ListView.separated(
+          reverse: true,
           controller: _scrollController,
           itemCount: _events.length,
           itemBuilder: (BuildContext context, int index) {
