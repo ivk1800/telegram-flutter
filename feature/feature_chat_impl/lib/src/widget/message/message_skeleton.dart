@@ -66,11 +66,13 @@ class _BodyRenderBox extends RenderBox
     // final _ParentData firstParentData = second.parentData! as _ParentData;
     final _ParentData secondParentData = second.parentData! as _ParentData;
 
+    // TODO width of second may be great then first
+
     secondParentData.offset =
-        Offset(constraints.maxWidth - second.size.width, first.size.height);
+        Offset(first.size.width - second.size.width, first.size.height);
 
     size = constraints.constrain(
-        Size(constraints.maxWidth, first.size.height + second.size.height));
+        Size(first.size.width, first.size.height + second.size.height));
   }
 
   void _handleRenderParagraph(RenderParagraph first) {

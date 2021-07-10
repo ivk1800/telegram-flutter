@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
+import 'package:feature_chat_impl/src/util/minithumbnail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tdlib/td_api.dart' as td;
 
@@ -246,9 +249,10 @@ class MessageTileMapper {
         {
           final td.MessagePhoto m = message.content.cast();
           return MessagePhotoTileModel(
-              id: message.id,
-              isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+            id: message.id,
+            minithumbnail: m.photo.minithumbnail?.toMinithumbnail(),
+            isOutgoing: message.isOutgoing,
+          );
         }
       case td.MessagePinMessage.CONSTRUCTOR:
         {
@@ -326,9 +330,10 @@ class MessageTileMapper {
         {
           final td.MessageVideoNote m = message.content.cast();
           return MessageVideoNoteTileModel(
-              id: message.id,
-              isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+            id: message.id,
+            isOutgoing: message.isOutgoing,
+            minithumbnail: m.videoNote.minithumbnail?.toMinithumbnail(),
+          );
         }
       case td.MessageVoiceChatEnded.CONSTRUCTOR:
         {
@@ -373,4 +378,15 @@ class MessageTileMapper {
 
 extension ContentExtension on td.MessageContent {
   T cast<T extends td.MessageContent>() => this as T;
+}
+
+extension MinithumbnailExtensions on td.Minithumbnail {
+  Minithumbnail? toMinithumbnail() {
+    if (this != null) {
+      return Minithumbnail(
+          data: const Base64Decoder().convert(data),
+          width: width.toDouble(),
+          height: height.toDouble());
+    }
+  }
 }

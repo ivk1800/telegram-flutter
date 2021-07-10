@@ -138,16 +138,71 @@ class ChatTileFactory {
         children: subtitleWidgets,
       ),
     ));
-    if (model.isPinned) {
+    if (model.isPinned &&
+        model.unreadMessagesCount == 0 &&
+        !model.isMentioned) {
       widgets.add(const Align(
           alignment: Alignment.bottomCenter,
           child: Icon(Icons.push_pin_rounded, size: 18, color: Colors.grey)));
+    }
+
+    // todo extract colors to theme
+    if (model.isMentioned) {
+      widgets.add(Align(
+          alignment: Alignment.bottomCenter,
+          child: _buildCircle(
+              context: context, text: '@', color: Colors.lightGreen)));
+    }
+
+    if ((model.unreadMessagesCount > 1 && model.isMentioned) ||
+        (!model.isMentioned && model.unreadMessagesCount > 0)) {
+      if (model.isMentioned) {
+        widgets.add(const SizedBox(
+          width: 4,
+        ));
+      }
+      widgets.add(Align(
+          alignment: Alignment.bottomCenter,
+          child: _buildCircle(
+              context: context,
+              text: '${model.unreadMessagesCount}',
+              color: model.isMuted ? Colors.blueGrey : Colors.lightGreen)));
     }
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: widgets,
+    );
+  }
+
+  // todo need improvements, fix horizontal padding, text align
+  Widget _buildCircle(
+      {required BuildContext context,
+      required String text,
+      required Color color}) {
+    return Container(
+      constraints: const BoxConstraints(minWidth: 20, maxHeight: 20),
+      child: Align(
+          alignment: Alignment.center,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 3, right: 4),
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .caption!
+                  // todo magic number height, need refactor
+                  .copyWith(height: 1.05, color: Colors.white),
+              // style: TextStyle(height: 1.025, color: Colors.white),
+            ),
+          )),
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(10),
+      ),
     );
   }
 

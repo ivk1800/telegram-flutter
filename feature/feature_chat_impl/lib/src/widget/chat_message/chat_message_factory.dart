@@ -1,5 +1,6 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/widget/bubble/bubble.dart';
+import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:feature_chat_impl/src/widget/message/message_skeleton.dart';
 import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
 import 'package:flutter/material.dart';
@@ -29,13 +30,14 @@ class ChatMessageFactory {
       required BuildContext context,
       required bool isOutgoing,
       required Widget body}) {
+    final ChatContextData chatContext = ChatContext.of(context);
     return Align(
       key: ValueKey<int>(id),
       alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          constraints: const BoxConstraints(maxWidth: 500),
+          constraints: BoxConstraints(maxWidth: chatContext.maxWidth),
           child: _buildMessageBubble(
               context: context, isOutgoing: isOutgoing, body: body),
         ),
@@ -64,27 +66,5 @@ class ChatMessageFactory {
                 ),
               ),
             )));
-  }
-
-  Widget _buildContent(BuildContext context, td.Message message) {
-    switch (message.content.getConstructor()) {
-      case td.MessageText.CONSTRUCTOR:
-        {
-          return _messageTextFactory.create(
-              context, message, message.content as td.MessageText);
-        }
-      case td.MessageChatAddMembers.CONSTRUCTOR:
-        {
-          return _addMembersFactory.create(
-              context, message, message.content as td.MessageChatAddMembers);
-        }
-    }
-
-    return Text(
-      'not implemented ${message.content.runtimeType}',
-      style: ChatTheme.of(context)
-          .bubbleTextStyle
-          .copyWith(color: Colors.redAccent),
-    );
   }
 }

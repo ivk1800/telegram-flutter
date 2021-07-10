@@ -1,6 +1,7 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_event.dart';
+import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +51,8 @@ class ChatPageState extends State<ChatPage> {
         switch (state.runtimeType) {
           case DefaultState:
             {
-              return _buildMessagesState(context, state as DefaultState);
+              return _wrapToChatContext(
+                  child: _buildMessagesState(context, state as DefaultState));
             }
         }
 
@@ -58,6 +60,19 @@ class ChatPageState extends State<ChatPage> {
       }),
     );
   }
+
+  Widget _wrapToChatContext({required Widget child}) => LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return ChatContext(
+              data: ChatContextData.raw(
+                width: constraints.maxWidth,
+                horizontalPadding: 8.0,
+                maxWidth: 500,
+                maxMediaHeight: 450,
+              ),
+              child: child);
+        },
+      );
 
   Widget _buildMessagesState(BuildContext context, DefaultState state) {
     final TileFactory tileFactory = Provider.of(context);
