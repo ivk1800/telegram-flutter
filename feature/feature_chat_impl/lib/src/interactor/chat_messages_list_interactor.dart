@@ -29,7 +29,7 @@ class ChatMessagesInteractor {
   final ChatArgs _chatArgs;
 
   final BehaviorSubject<List<ITileModel>> _messagesSubject =
-      BehaviorSubject<List<ITileModel>>.seeded(<ITileModel>[]);
+      BehaviorSubject<List<ITileModel>>();
 
   Stream<List<ITileModel>> get messages => _messagesSubject;
 
@@ -61,9 +61,10 @@ class ChatMessagesInteractor {
         .getMessages(
             chatId: _chatArgs.chatId, fromMessageId: fromMessageId, limit: 30)
         .listen((List<td.Message> messages) {
-      final List<ITileModel> list = _messagesSubject.value!.toList()
-        ..addAll(messages.map((td.Message message) =>
-            _messageTileMapper.mapToTileModel(message)));
+      final List<ITileModel> list = (_messagesSubject.value ?? <ITileModel>[])
+          .toList()
+            ..addAll(messages.map((td.Message message) =>
+                _messageTileMapper.mapToTileModel(message)));
       _messagesSubject.add(list);
       _last = messages.lastOrNull;
       _isIdle = messages.isNotEmpty;

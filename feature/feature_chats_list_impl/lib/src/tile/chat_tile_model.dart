@@ -6,6 +6,7 @@ class ChatTileModel {
     required this.isPinned,
     required this.isVerified,
     required this.isMuted,
+    required this.isMentioned,
     required this.lastMessageDate,
     required this.title,
     required this.firstSubtitle,
@@ -19,6 +20,7 @@ class ChatTileModel {
   final int? photoId;
   final bool isVerified;
   final bool isMuted;
+  final bool isMentioned;
   final String title;
   final String? firstSubtitle;
   final String? secondSubtitle;
@@ -32,6 +34,7 @@ extension ChatTileModelExtension on ChatTileModel {
           String? lastMessageDate,
           int? photoId,
           bool? isVerified,
+          bool? isMentioned,
           bool? isMuted,
           String? title,
           String? firstSubtitle,
@@ -40,6 +43,7 @@ extension ChatTileModelExtension on ChatTileModel {
         isPinned: isPinned ?? this.isPinned,
         id: id ?? this.id,
         isMuted: isMuted ?? this.isMuted,
+        isMentioned: isMentioned ?? this.isMentioned,
         isVerified: isVerified ?? this.isVerified,
         unreadMessagesCount: unreadMessagesCount ?? this.unreadMessagesCount,
         firstSubtitle: firstSubtitle ?? this.firstSubtitle,
