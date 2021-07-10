@@ -14,7 +14,13 @@ cd ../localization_api/
 flutter packages get
 cd ../localization_impl
 flutter packages get
+cd ../split_view
+flutter packages get
 cd ../coreui/
+flutter packages get
+cd ../fake/
+flutter packages get
+cd ../demo/
 flutter packages get
 cd ../feature/feature_chats_list_api/
 flutter packages get
