@@ -24,26 +24,31 @@ class ChatContext extends StatelessWidget {
   }
 }
 
+enum MediaType { Video, Photo, Animation }
+
 class ChatContextData {
   const ChatContextData.raw({
     required this.maxWidth,
-    required this.maxMediaHeight,
     required this.width,
     required this.horizontalPadding,
+    required this.mediaConstraints,
   });
 
   factory ChatContextData.desktop({required double maxWidth}) =>
       ChatContextData.raw(
-        width: maxWidth,
-        horizontalPadding: 8.0,
-        maxWidth: 500,
-        maxMediaHeight: 450,
-      );
+          width: maxWidth,
+          horizontalPadding: 8.0,
+          maxWidth: 500,
+          mediaConstraints: <MediaType, Size>{
+            MediaType.Video: const Size(double.infinity, 450),
+            MediaType.Photo: const Size(double.infinity, 450),
+            MediaType.Animation: const Size(300, 300),
+          });
 
   final double maxWidth;
-  final double maxMediaHeight;
   final double width;
   final double horizontalPadding;
+  final Map<MediaType, Size> mediaConstraints;
 }
 
 class _InheritedContext extends InheritedTheme {

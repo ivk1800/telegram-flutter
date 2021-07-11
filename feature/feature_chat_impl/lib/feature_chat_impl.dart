@@ -10,6 +10,7 @@ import 'src/widget/factory/chat_widget_factory.dart';
 
 export 'src/chat_screen_router.dart';
 export 'src/mapper/message_tile_mapper.dart';
+export 'src/resolver/formatted_text_resolver.dart';
 export 'src/tile/model/tile_model.dart';
 export 'src/tile/widget/tile_widget.dart';
 export 'src/widget/bubble/bubble.dart';

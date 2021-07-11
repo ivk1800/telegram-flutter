@@ -7,10 +7,11 @@ import 'package:flutter/rendering.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class DemoMessagePage extends StatefulWidget {
-  const DemoMessagePage({Key? key, required this.fakeMessageFileName})
+  const DemoMessagePage({Key? key, required this.message, required this.title})
       : super(key: key);
 
-  final String fakeMessageFileName;
+  final td.Message message;
+  final String title;
 
   @override
   _DemoMessagePageState createState() => _DemoMessagePageState();
@@ -18,7 +19,7 @@ class DemoMessagePage extends StatefulWidget {
 
 class _DemoMessagePageState extends State<DemoMessagePage> {
   late tg.TileFactory _tileFactory;
-  late fake.FakeMessagesProvider _fakeMessagesProvider;
+
   late chat_impl.MessageTileMapper _messageTileMapper;
 
   @override
@@ -31,35 +32,28 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
       avatarWidgetFactory:
           tg.AvatarWidgetFactory(fileRepository: fakeFileRepository),
     );
-
+    final chat_impl.FormattedTextResolver formattedTextResolver =
+        chat_impl.FormattedTextResolver();
     _tileFactory = chat_impl.MessagesTileFactoryFactory()
         .create(chatMessageFactory: chatMessageFactory);
 
-    _fakeMessagesProvider = fake.FakeMessagesProvider();
-    _messageTileMapper = chat_impl.MessageTileMapper();
+    // _fakeMessagesProvider = fake.FakeMessagesProvider();
+    _messageTileMapper = chat_impl.MessageTileMapper(
+        formattedTextResolver: formattedTextResolver);
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(widget.fakeMessageFileName),
+          title: Text(widget.title),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.yellow,
         body: _wrapToRequiredWidgets(child: _buildMessage()),
       );
 
-  FutureBuilder<tg.ITileModel> _buildMessage() => FutureBuilder<tg.ITileModel>(
-        future: _fakeMessagesProvider
-            .getMessageByFileName(widget.fakeMessageFileName)
-            .then(
-                (td.Message value) => _messageTileMapper.mapToTileModel(value)),
-        builder:
-            (BuildContext context, AsyncSnapshot<tg.ITileModel?> snapshot) {
-          if (!snapshot.hasData) {
-            return const SizedBox();
-          }
-          return _tileFactory.create(context, snapshot.data!);
-        },
+  Widget _buildMessage() => Builder(
+        builder: (BuildContext context) => _tileFactory.create(
+            context, _messageTileMapper.mapToTileModel(widget.message)),
       );
 
   chat_impl.ChatTheme _wrapToRequiredWidgets({required Widget child}) =>

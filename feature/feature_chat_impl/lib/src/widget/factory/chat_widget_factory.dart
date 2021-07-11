@@ -3,6 +3,7 @@ import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
+import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
@@ -35,6 +36,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
     final ChatMessageFactory chatMessageFactory = ChatMessageFactory(
       avatarWidgetFactory: avatarWidgetFactory,
     );
+    final FormattedTextResolver formattedTextResolver = FormattedTextResolver();
     return MultiProvider(
       providers: <Provider<dynamic>>[
         Provider<tg.TileFactory>.value(
@@ -53,7 +55,8 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                 messagesInteractor: ChatMessagesInteractor(
                     chatRepository: dependencies.chatRepository,
                     chatArgs: chatArgs,
-                    messageTileMapper: MessageTileMapper(),
+                    messageTileMapper: MessageTileMapper(
+                        formattedTextResolver: formattedTextResolver),
                     messageRepository: dependencies.chatMessageRepository),
                 args: chatArgs,
               ),

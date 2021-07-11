@@ -1,12 +1,18 @@
 import 'dart:convert';
 
 import 'package:coreui/coreui.dart';
+import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/util/minithumbnail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class MessageTileMapper {
+  MessageTileMapper({required FormattedTextResolver formattedTextResolver})
+      : _formattedTextResolver = formattedTextResolver;
+
+  final FormattedTextResolver _formattedTextResolver;
+
   ITileModel mapToTileModel(td.Message message) {
     final td.MessageContent content = message.content;
     final String notImplementedText =
@@ -16,9 +22,11 @@ class MessageTileMapper {
         {
           final td.MessageAnimation m = message.content.cast();
           return MessageAnimationTileModel(
-              id: message.id,
-              isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+            id: message.id,
+            isOutgoing: message.isOutgoing,
+            caption: _formattedTextResolver.resolve(m.caption),
+            minithumbnail: m.animation.minithumbnail?.toMinithumbnail(),
+          );
         }
       case td.MessageAudio.CONSTRUCTOR:
         {
@@ -252,6 +260,7 @@ class MessageTileMapper {
             id: message.id,
             minithumbnail: m.photo.minithumbnail?.toMinithumbnail(),
             isOutgoing: message.isOutgoing,
+            caption: _formattedTextResolver.resolve(m.caption),
           );
         }
       case td.MessagePinMessage.CONSTRUCTOR:
@@ -341,6 +350,7 @@ class MessageTileMapper {
           return MessageVideoTileModel(
             id: message.id,
             isOutgoing: message.isOutgoing,
+            caption: _formattedTextResolver.resolve(m.caption),
             minithumbnail: m.video.minithumbnail?.toMinithumbnail(),
           );
         }

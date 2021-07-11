@@ -1,0 +1,117 @@
+{
+  "id": 82837504,
+  "sender": {
+    "user_id": 1641398323,
+    "@type": "messageSenderUser"
+  },
+  "chat_id": 1641398323,
+  "sending_state": null,
+  "scheduling_state": null,
+  "is_outgoing": true,
+  "is_pinned": false,
+  "can_be_edited": true,
+  "can_be_forwarded": true,
+  "can_be_deleted_only_for_self": true,
+  "can_be_deleted_for_all_users": false,
+  "can_get_statistics": false,
+  "can_get_message_thread": false,
+  "is_channel_post": false,
+  "contains_unread_mention": false,
+  "date": 1625948549,
+  "edit_date": 1625992521,
+  "forward_info": null,
+  "interaction_info": null,
+  "reply_in_chat_id": 0,
+  "reply_to_message_id": 0,
+  "message_thread_id": 0,
+  "ttl": 0,
+  "ttl_expires_in": 0.0,
+  "via_bot_user_id": 0,
+  "author_signature": "",
+  "media_album_id": "0",
+  "restriction_reason": "",
+  "content": {
+    "animation": {
+      "duration": 2,
+      "width": 258,
+      "height": 258,
+      "file_name": "mp4.mp4",
+      "mime_type": "video/mp4",
+      "has_stickers": false,
+      "minithumbnail": {
+        "width": 40,
+        "height": 40,
+        "data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAoACgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCwNuOaikkVOp59KV3CIWPaqDPuJJPNNWHZvYcZX3kgkDPSrUcyvx0PoapZFAIp2Q2pdjSoqOGTfHknkdaKkkeVDDBGR70m1R0UfgKQEqBvP404MG6HNSxpiYH92mmKNusYFO3YbGD9cUpIAyaQ7laaMRrhCfn65op07KwBB6UVaLTuWyqkYIpnkp2yD7GiigytcQxv2cfiKaYHb7ziiigVrh9mQjDEn9KKKKCr2P/Z",
+        "@type": "minithumbnail"
+      },
+      "thumbnail": {
+        "format": {
+          "@type": "thumbnailFormatMpeg4"
+        },
+        "width": 150,
+        "height": 150,
+        "file": {
+          "id": 549,
+          "size": 16727,
+          "expected_size": 16727,
+          "local": {
+            "path": "",
+            "can_be_downloaded": true,
+            "can_be_deleted": false,
+            "is_downloading_active": false,
+            "is_downloading_completed": false,
+            "download_offset": 0,
+            "downloaded_prefix_size": 0,
+            "downloaded_size": 0,
+            "@type": "localFile"
+          },
+          "remote": {
+            "id": "AAMCBAADGQEAA09g6rnXQ-uSy87CvroV_FD3ZcnCnQACdwIAAoreTVOSFHseW4Y014BcYTJdAAMBAAd2AAOxTwACHgQ",
+            "unique_id": "AQADgFxhMl0AA7FPAAI",
+            "is_uploading_active": false,
+            "is_uploading_completed": true,
+            "uploaded_size": 16727,
+            "@type": "remoteFile"
+          },
+          "@type": "file"
+        },
+        "@type": "thumbnail"
+      },
+      "animation": {
+        "id": 548,
+        "size": 55096,
+        "expected_size": 55096,
+        "local": {
+          "path": "",
+          "can_be_downloaded": true,
+          "can_be_deleted": false,
+          "is_downloading_active": false,
+          "is_downloading_completed": false,
+          "download_offset": 0,
+          "downloaded_prefix_size": 0,
+          "downloaded_size": 0,
+          "@type": "localFile"
+        },
+        "remote": {
+          "id": "CgACAgQAAxkBAANPYOq510PrksvOwr66FfxQ92XJwp0AAncCAAKK3k1TkhR7HluGNNceBA",
+          "unique_id": "AgADdwIAAoreTVM",
+          "is_uploading_active": false,
+          "is_uploading_completed": true,
+          "uploaded_size": 55096,
+          "@type": "remoteFile"
+        },
+        "@type": "file"
+      },
+      "@type": "animation"
+    },
+    "caption": {
+      "text": "",
+      "entities": [],
+      "@type": "formattedText"
+    },
+    "is_secret": false,
+    "@type": "messageAnimation"
+  },
+  "reply_markup": null,
+  "@type": "message"
+}

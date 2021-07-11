@@ -1,0 +1,79 @@
+{
+  "id": 162529280,
+  "sender": {
+    "chat_id": -1001006503122,
+    "@type": "messageSenderChat"
+  },
+  "chat_id": -1001006503122,
+  "sending_state": null,
+  "scheduling_state": null,
+  "is_outgoing": false,
+  "is_pinned": false,
+  "can_be_edited": false,
+  "can_be_forwarded": true,
+  "can_be_deleted_only_for_self": false,
+  "can_be_deleted_for_all_users": false,
+  "can_get_statistics": false,
+  "can_get_message_thread": true,
+  "is_channel_post": true,
+  "contains_unread_mention": false,
+  "date": 1616509895,
+  "edit_date": 0,
+  "forward_info": null,
+  "interaction_info": {
+    "view_count": 1277560,
+    "forward_count": 5335,
+    "reply_info": {
+      "reply_count": 8510,
+      "recent_repliers": [
+        {
+          "user_id": 1720585303,
+          "@type": "messageSenderUser"
+        },
+        {
+          "user_id": 1414938975,
+          "@type": "messageSenderUser"
+        },
+        {
+          "user_id": 1152035594,
+          "@type": "messageSenderUser"
+        }
+      ],
+      "last_read_inbox_message_id": 0,
+      "last_read_outbox_message_id": 0,
+      "last_message_id": 1225968844800,
+      "@type": "messageReplyInfo"
+    },
+    "@type": "messageInteractionInfo"
+  },
+  "reply_in_chat_id": 0,
+  "reply_to_message_id": 0,
+  "message_thread_id": 0,
+  "ttl": 0,
+  "ttl_expires_in": 0.0,
+  "via_bot_user_id": 0,
+  "author_signature": "",
+  "media_album_id": "0",
+  "restriction_reason": "",
+  "content": {
+    "text": {
+      "text": "🎉 More good news – I am happy to share that Telegram has raised over $1 billion by selling bonds (a form of debt) to some of the largest and most knowledgeable investors from all over the world. This will enable Telegram to continue growing globally while sticking to its values and remaining independent. These resources will also fuel the monetization strategy I outlined in December. \n\nAs I said when launching Telegram almost 8 years ago, the end goal for Telegram is to become a financially sustainable project that can serve humanity for decades (or centuries) to come. Today's news is another step towards that goal.",
+      "entities": [
+        {
+          "offset": 366,
+          "length": 8,
+          "type": {
+            "url": "https://t.me/durov/142",
+            "@type": "textEntityTypeTextUrl"
+          },
+          "@type": "textEntity"
+        }
+      ],
+      "@type": "formattedText"
+    },
+    "web_page": null,
+    "@type": "messageText"
+  },
+  "reply_markup": null,
+  "@type": "message"
+}

@@ -1,8 +1,11 @@
 import 'package:coreui/coreui.dart';
+import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/util/minithumbnail.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message_factory.dart';
 import 'package:feature_chat_impl/src/widget/media_widget.dart';
+import 'package:feature_chat_impl/src/widget/message_composite_text.dart';
+import 'package:feature_chat_impl/src/widget/not_implemented_placeholder.dart';
 import 'package:flutter/material.dart';
 
 class MessageVideoTileFactoryDelegate
@@ -15,16 +18,28 @@ class MessageVideoTileFactoryDelegate
 
   @override
   Widget create(BuildContext context, MessageVideoTileModel model) {
-    return _chatMessageFactory.create(
-      id: model.id,
-      context: context,
-      isOutgoing: model.isOutgoing,
-      body: MediaWidget(
-          child: Image.memory(
-            model.minithumbnail!.data!,
-            fit: BoxFit.fill,
-          ),
-          aspectRatio: model.minithumbnail!.aspectRatio()),
-    );
+    return _chatMessageFactory.createFromBlocks(
+        id: model.id,
+        context: context,
+        isOutgoing: model.isOutgoing,
+        blocks: <Widget>[
+          MediaWrapper(
+              type: MediaType.Video,
+              child: Container(
+                color: Colors.black,
+                child: const NotImplementedPlaceholder(
+                  additional: 'MessageVideo',
+                ),
+              ),
+              aspectRatio: model.minithumbnail!.aspectRatio()),
+          if (model.caption != null)
+            MessageCaption(
+              text: model.caption!,
+              shortInfo: Text(
+                '22:46',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+        ]);
   }
 }
