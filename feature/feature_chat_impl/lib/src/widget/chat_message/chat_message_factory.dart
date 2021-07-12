@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/widget/bubble/bubble.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';

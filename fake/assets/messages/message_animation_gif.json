@@ -1,10 +1,10 @@
 {
   "id": 82837504,
   "sender": {
-    "user_id": 1641398323,
+    "user_id": 1,
     "@type": "messageSenderUser"
   },
-  "chat_id": 1641398323,
+  "chat_id": 1,
   "sending_state": null,
   "scheduling_state": null,
   "is_outgoing": true,

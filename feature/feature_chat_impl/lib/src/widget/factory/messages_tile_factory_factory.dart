@@ -1,16 +1,20 @@
 import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/tile_widget.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 
 // FactoryFactory :)
 class MessagesTileFactoryFactory {
-  tg.TileFactory create({required ChatMessageFactory chatMessageFactory}) {
+  tg.TileFactory create(
+      {required ChatMessageFactory chatMessageFactory,
+      required ShortInfoFactory shortInfoFactory}) {
     return tg
         .TileFactory(delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
       MessageAnimationTileModel: MessageAnimationTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
       MessageAudioTileModel: MessageAudioTileFactoryDelegate(
+          shortInfoFactory: shortInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageBasicGroupChatCreateTileModel:
           MessageBasicGroupChatCreateTileFactoryDelegate(

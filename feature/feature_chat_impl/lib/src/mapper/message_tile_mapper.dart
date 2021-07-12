@@ -31,10 +31,14 @@ class MessageTileMapper {
       case td.MessageAudio.CONSTRUCTOR:
         {
           final td.MessageAudio m = message.content.cast();
+          final Duration duration = Duration(seconds: m.audio.duration);
           return MessageAudioTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              performer: m.audio.performer,
+              totalDuration:
+                  '${duration.inMinutes.remainder(60)}:${duration.inSeconds.remainder(60)}',
+              title: m.audio.title);
         }
       case td.MessageBasicGroupChatCreate.CONSTRUCTOR:
         {

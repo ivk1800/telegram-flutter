@@ -76,6 +76,8 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
               (td.Message value) => value.copy(
                   content: (value.content as td.MessageAnimation)
                       .copy(caption: _fakeFormattedText())))),
+      _MessageData(
+          name: 'message audio', message: _getMessage('message_audio_1')),
     ];
   }
 

@@ -17,6 +17,7 @@ export 'src/widget/bubble/bubble.dart';
 export 'src/widget/bubble/bubble_clipper.dart';
 export 'src/widget/chat_context.dart';
 export 'src/widget/chat_message/chat_message_factory.dart';
+export 'src/widget/chat_message/short_info_factory.dart';
 export 'src/widget/factory/messages_tile_factory_factory.dart';
 export 'src/widget/message/message_skeleton.dart';
 export 'src/widget/theme/chat_theme.dart';

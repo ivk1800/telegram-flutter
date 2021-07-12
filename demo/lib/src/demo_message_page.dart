@@ -32,10 +32,13 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
       avatarWidgetFactory:
           tg.AvatarWidgetFactory(fileRepository: fakeFileRepository),
     );
+    final chat_impl.ShortInfoFactory shortInfoFactory =
+        chat_impl.ShortInfoFactory();
     final chat_impl.FormattedTextResolver formattedTextResolver =
         chat_impl.FormattedTextResolver();
-    _tileFactory = chat_impl.MessagesTileFactoryFactory()
-        .create(chatMessageFactory: chatMessageFactory);
+    _tileFactory = chat_impl.MessagesTileFactoryFactory().create(
+        chatMessageFactory: chatMessageFactory,
+        shortInfoFactory: shortInfoFactory);
 
     // _fakeMessagesProvider = fake.FakeMessagesProvider();
     _messageTileMapper = chat_impl.MessageTileMapper(

@@ -1,10 +1,10 @@
 {
   "id": 8089763840,
   "sender": {
-    "chat_id": -1001005980967,
+    "chat_id": 1,
     "@type": "messageSenderChat"
   },
-  "chat_id": -1001005980967,
+  "chat_id": 1,
   "sending_state": null,
   "scheduling_state": null,
   "is_outgoing": false,
