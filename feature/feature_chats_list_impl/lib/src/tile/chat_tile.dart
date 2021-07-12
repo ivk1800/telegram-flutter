@@ -97,7 +97,11 @@ class ChatTileFactory {
         child: Text(model.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            // todo font height, need refactor
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                height: kFontHeight)),
       ),
     ];
 
