@@ -73,6 +73,8 @@ class ChatPageState extends State<ChatPage> {
     final TileFactory tileFactory = Provider.of(context);
     return Scrollbar(
       child: ListView.builder(
+        // todo extract to config
+        padding: const EdgeInsets.all(8),
         controller: scrollController,
         reverse: true,
         itemCount: state.tiles.length,

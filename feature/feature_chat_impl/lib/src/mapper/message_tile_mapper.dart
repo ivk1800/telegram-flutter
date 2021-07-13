@@ -5,13 +5,18 @@ import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/util/minithumbnail.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class MessageTileMapper {
-  MessageTileMapper({required FormattedTextResolver formattedTextResolver})
-      : _formattedTextResolver = formattedTextResolver;
+  MessageTileMapper(
+      {required FormattedTextResolver formattedTextResolver,
+      required ILocalizationManager localizationManager})
+      : _localizationManager = localizationManager,
+        _formattedTextResolver = formattedTextResolver;
 
   final FormattedTextResolver _formattedTextResolver;
+  final ILocalizationManager _localizationManager;
 
   ITileModel mapToTileModel(td.Message message) {
     final td.MessageContent content = message.content;
@@ -45,8 +50,11 @@ class MessageTileMapper {
           final td.MessageBasicGroupChatCreate m = message.content.cast();
           return MessageBasicGroupChatCreateTileModel(
               id: message.id,
-              isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              // todo add a tap for username
+              // todo add username
+              text: TextSpan(
+                  text: _localizationManager.getStringFormatted(
+                      'ActionCreateGroup', <dynamic>['todo'])));
         }
       case td.MessageCall.CONSTRUCTOR:
         {

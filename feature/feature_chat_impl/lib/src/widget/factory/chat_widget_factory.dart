@@ -56,6 +56,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                     chatRepository: dependencies.chatRepository,
                     chatArgs: chatArgs,
                     messageTileMapper: MessageTileMapper(
+                        localizationManager: dependencies.localizationManager,
                         formattedTextResolver: formattedTextResolver),
                     messageRepository: dependencies.chatMessageRepository),
                 args: chatArgs,

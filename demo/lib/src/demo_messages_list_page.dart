@@ -78,6 +78,9 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
                       .copy(caption: _fakeFormattedText())))),
       _MessageData(
           name: 'message audio', message: _getMessage('message_audio_1')),
+      _MessageData(
+          name: 'basic_group_chat_create',
+          message: _getMessage('basic_group_chat_create')),
     ];
   }
 

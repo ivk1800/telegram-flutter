@@ -4,6 +4,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart' as chat_impl;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:localization_impl/localization_impl.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class DemoMessagePage extends StatefulWidget {
@@ -22,9 +23,20 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
 
   late chat_impl.MessageTileMapper _messageTileMapper;
 
+  bool _isReady = false;
+
   @override
   void initState() {
     super.initState();
+    _init().then((_) {
+      setState(() {
+        _isReady = true;
+      });
+      return null;
+    });
+  }
+
+  Future<void> _init() async {
     final fake.FakeFileRepository fakeFileRepository =
         fake.FakeFileRepository();
     final chat_impl.ChatMessageFactory chatMessageFactory =
@@ -40,8 +52,11 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
         chatMessageFactory: chatMessageFactory,
         shortInfoFactory: shortInfoFactory);
 
-    // _fakeMessagesProvider = fake.FakeMessagesProvider();
+    final LocalizationManager localizationManager = LocalizationManager();
+    await localizationManager.init('en', 'en');
+
     _messageTileMapper = chat_impl.MessageTileMapper(
+        localizationManager: localizationManager,
         formattedTextResolver: formattedTextResolver);
   }
 
@@ -51,7 +66,13 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
           title: Text(widget.title),
         ),
         backgroundColor: Colors.yellow,
-        body: _wrapToRequiredWidgets(child: _buildMessage()),
+        body: _isReady
+            ? _wrapToRequiredWidgets(
+                child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: _buildMessage(),
+              ))
+            : const SizedBox(),
       );
 
   Widget _buildMessage() => Builder(

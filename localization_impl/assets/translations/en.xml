@@ -84,4 +84,6 @@
     <string lang="ChangeChatBackground">Change Chat Background</string>
     <!-- https://translations.telegram.org/en/android/groups_and_channels/EventLogGroupJoined -->
     <string lang="EventLogGroupJoined">%s joined the group</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/ActionCreateGroup -->
+    <string lang="ActionCreateGroup">%s created the group</string>
 </resources>

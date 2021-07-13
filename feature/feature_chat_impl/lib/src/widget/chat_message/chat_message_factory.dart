@@ -16,6 +16,36 @@ class ChatMessageFactory {
 
   final AvatarWidgetFactory _avatarWidgetFactory;
 
+  Widget createChatNotificationFromText(
+      {required int id,
+      required BuildContext context,
+      required InlineSpan text}) {
+    return createChatNotification(
+        id: id,
+        context: context,
+        body: Text.rich(
+          text,
+          // todo extract style
+          style: const TextStyle(color: Colors.white),
+        ));
+  }
+
+  Widget createChatNotification(
+      {required int id, required BuildContext context, required Widget body}) {
+    return Align(
+      key: ValueKey<int>(id),
+      alignment: Alignment.topCenter,
+      child: Container(
+        child: body,
+        padding: const EdgeInsets.only(top: 3, bottom: 3, left: 6, right: 6),
+        decoration: BoxDecoration(
+            // todo extract color to styles
+            color: Colors.black.withAlpha(60),
+            borderRadius: const BorderRadius.all(Radius.circular(16.0))),
+      ),
+    );
+  }
+
   @Deprecated('use another')
   Widget create(
       {required int id,
