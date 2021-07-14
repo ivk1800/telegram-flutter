@@ -24,7 +24,7 @@ class _DemoSplitViewPageState extends State<DemoSplitViewPage> {
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Stack(
-        children: [
+        children: <Widget>[
           SplitView(
             key: _navigationKey,
           ),
@@ -37,7 +37,7 @@ class _DemoSplitViewPageState extends State<DemoSplitViewPage> {
   Column buildColumn() {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
+      children: <Widget>[
         ElevatedButton(
             onPressed: () {
               Navigator.of(context).pop();

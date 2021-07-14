@@ -1,3 +1,4 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
@@ -28,6 +29,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
 
     final MessagesTileFactoryFactory tileFactoryFactory =
         MessagesTileFactoryFactory();
+    final DateParser dateParser = DateParser();
 
     final tg.AvatarWidgetFactory avatarWidgetFactory =
         tg.AvatarWidgetFactory(fileRepository: dependencies.fileRepository);
@@ -56,6 +58,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                     chatRepository: dependencies.chatRepository,
                     chatArgs: chatArgs,
                     messageTileMapper: MessageTileMapper(
+                        dateParser: dateParser,
                         localizationManager: dependencies.localizationManager,
                         formattedTextResolver: formattedTextResolver),
                     messageRepository: dependencies.chatMessageRepository),

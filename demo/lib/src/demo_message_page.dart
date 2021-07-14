@@ -1,4 +1,6 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:demo/src/message_data.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:feature_chat_impl/feature_chat_impl.dart' as chat_impl;
 import 'package:flutter/cupertino.dart';
@@ -7,12 +9,15 @@ import 'package:flutter/rendering.dart';
 import 'package:localization_impl/localization_impl.dart';
 import 'package:tdlib/td_api.dart' as td;
 
-class DemoMessagePage extends StatefulWidget {
-  const DemoMessagePage({Key? key, required this.message, required this.title})
-      : super(key: key);
+import 'message_bundle.dart';
 
-  final td.Message message;
-  final String title;
+class DemoMessagePage extends StatefulWidget {
+  const DemoMessagePage({
+    Key? key,
+    required this.bundle,
+  }) : super(key: key);
+
+  final MessageBundle bundle;
 
   @override
   _DemoMessagePageState createState() => _DemoMessagePageState();
@@ -24,10 +29,13 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
   late chat_impl.MessageTileMapper _messageTileMapper;
 
   bool _isReady = false;
+  bool _isShowAll = true;
+  late MessageData _currentMessage;
 
   @override
   void initState() {
     super.initState();
+    _currentMessage = widget.bundle.messages.first;
     _init().then((_) {
       setState(() {
         _isReady = true;
@@ -55,7 +63,10 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
     final LocalizationManager localizationManager = LocalizationManager();
     await localizationManager.init('en', 'en');
 
+    final DateParser dateParser = DateParser();
+
     _messageTileMapper = chat_impl.MessageTileMapper(
+        dateParser: dateParser,
         localizationManager: localizationManager,
         formattedTextResolver: formattedTextResolver);
   }
@@ -63,21 +74,66 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(_currentMessage.name),
         ),
         backgroundColor: Colors.yellow,
-        body: _isReady
-            ? _wrapToRequiredWidgets(
-                child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: _buildMessage(),
-              ))
-            : const SizedBox(),
+        body: Column(
+          children: <Widget>[
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text('show all'),
+                Switch(
+                    value: _isShowAll,
+                    onChanged: (bool newValue) {
+                      setState(() {
+                        _isShowAll = newValue;
+                      });
+                    }),
+              ],
+            ),
+            if (!_isShowAll) _buildMessageDropdownButton(),
+            if (_isShowAll)
+              _buildAllMessages()
+            else
+              _buildSingleMessage(_currentMessage.messageFactory())
+          ],
+        ),
       );
 
-  Widget _buildMessage() => Builder(
+  Widget _buildAllMessages() => Expanded(
+        child: ListView.separated(
+            itemBuilder: (BuildContext context, int index) {
+              final MessageData messageData = widget.bundle.messages[index];
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(messageData.name),
+                  _buildSingleMessage(messageData.messageFactory())
+                ],
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(
+                  height: 8,
+                ),
+            itemCount: widget.bundle.messages.length),
+      );
+
+  Widget _buildSingleMessage(Future<td.Message> future) =>
+      FutureBuilder<td.Message>(
+        future: future,
+        builder: (BuildContext context, AsyncSnapshot<td.Message> snapshot) {
+          if (_isReady && snapshot.hasData) {
+            return _wrapToRequiredWidgets(child: _buildMessage(snapshot.data!));
+          }
+          return const SizedBox();
+        },
+      );
+
+  Widget _buildMessage(td.Message message) => Builder(
         builder: (BuildContext context) => _tileFactory.create(
-            context, _messageTileMapper.mapToTileModel(widget.message)),
+            context, _messageTileMapper.mapToTileModel(message)),
       );
 
   chat_impl.ChatTheme _wrapToRequiredWidgets({required Widget child}) =>
@@ -91,5 +147,24 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
             child: child,
           ),
         ),
+      );
+
+  DropdownButton<MessageData> _buildMessageDropdownButton() =>
+      DropdownButton<MessageData>(
+        value: _currentMessage,
+        items: widget.bundle.messages
+            .map<DropdownMenuItem<MessageData>>((MessageData value) {
+          return DropdownMenuItem<MessageData>(
+            value: value,
+            child: Text(
+              value.name,
+            ),
+          );
+        }).toList(),
+        onChanged: (MessageData? message) {
+          setState(() {
+            _currentMessage = message!;
+          });
+        },
       );
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
@@ -8,17 +9,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
+import 'message_call_tile_model_mapper.dart';
+
 class MessageTileMapper {
   MessageTileMapper(
       {required FormattedTextResolver formattedTextResolver,
+      required DateParser dateParser,
       required ILocalizationManager localizationManager})
       : _localizationManager = localizationManager,
+        _messageCallTileModelMapper = MessageCallTileModelMapper(
+          localizationManager: localizationManager,
+          dateParser: dateParser,
+        ),
         _formattedTextResolver = formattedTextResolver;
 
   final FormattedTextResolver _formattedTextResolver;
   final ILocalizationManager _localizationManager;
 
+  final MessageCallTileModelMapper _messageCallTileModelMapper;
+
   ITileModel mapToTileModel(td.Message message) {
+    print(json.encode(message.toJson()));
+
     final td.MessageContent content = message.content;
     final String notImplementedText =
         'not implemented ${message.content.runtimeType.toString()}';
@@ -58,11 +70,8 @@ class MessageTileMapper {
         }
       case td.MessageCall.CONSTRUCTOR:
         {
-          final td.MessageCall m = message.content.cast();
-          return MessageCallTileModel(
-              id: message.id,
-              isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+          return _messageCallTileModelMapper.mapToTileModel(
+              message: message, content: message.content.cast());
         }
       case td.MessageChatAddMembers.CONSTRUCTOR:
         {

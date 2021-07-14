@@ -1,8 +1,10 @@
+import 'package:demo/src/message_bundle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:fake/fake.dart' as fake;
 import 'demo_message_page.dart';
+import 'message_data.dart';
 
 class DemoMessageListPage extends StatefulWidget {
   const DemoMessageListPage({
@@ -15,13 +17,13 @@ class DemoMessageListPage extends StatefulWidget {
 
 class _DemoMessageListPageState extends State<DemoMessageListPage> {
   late fake.FakeMessagesProvider _fakeMessagesProvider;
-  late List<_MessageData> _messagesData;
+  late List<MessageBundle> _messages;
 
   @override
   void initState() {
     super.initState();
     _fakeMessagesProvider = fake.FakeMessagesProvider();
-    _messagesData = _createMessages();
+    _messages = _createMessages();
   }
 
   @override
@@ -31,18 +33,16 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
         title: const Text('messages'),
       ),
       body: ListView.separated(
-        itemCount: _messagesData.length,
+        itemCount: _messages.length,
         itemBuilder: (BuildContext context, int index) {
-          final _MessageData messageData = _messagesData[index];
+          final MessageBundle bundle = _messages[index];
           return ListTile(
-            title: Text(messageData.name),
+            title: Text(bundle.name),
             onTap: () async {
-              final td.Message message = await messageData.message;
               Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
                 builder: (BuildContext context) {
                   return DemoMessagePage(
-                    title: messageData.name,
-                    message: message,
+                    bundle: bundle,
                   );
                 },
               ));
@@ -56,31 +56,101 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
     );
   }
 
-  List<_MessageData> _createMessages() {
-    return <_MessageData>[
-      _MessageData(name: '16:9 video', message: _getMessage('message_video_1')),
-      _MessageData(
-          name: '16:9 video with caption',
-          message: _getMessage('message_video_1').then((td.Message value) =>
-              value.copy(
-                  content: (value.content as td.MessageVideo)
-                      .copy(caption: _fakeFormattedText())))),
-      _MessageData(
-          name: 'message text1', message: _getMessage('message_text_1')),
-      _MessageData(
-          name: 'message animation(gif)',
-          message: _getMessage('message_animation_gif')),
-      _MessageData(
-          name: 'message animation(gif) with caption',
-          message: _getMessage('message_animation_gif').then(
-              (td.Message value) => value.copy(
-                  content: (value.content as td.MessageAnimation)
-                      .copy(caption: _fakeFormattedText())))),
-      _MessageData(
-          name: 'message audio', message: _getMessage('message_audio_1')),
-      _MessageData(
-          name: 'basic_group_chat_create',
-          message: _getMessage('basic_group_chat_create')),
+  List<MessageBundle> _createMessages() {
+    return <MessageBundle>[
+      MessageBundle(
+        name: 'message animation',
+        messages: <MessageData>[
+          MessageData(
+              name: 'gif',
+              messageFactory: () => _getMessage('message_animation_gif')),
+          MessageData(
+              name: 'gif with caption',
+              messageFactory: () => _getMessage('message_animation_gif').then(
+                  (td.Message value) => value.copy(
+                      content: (value.content as td.MessageAnimation)
+                          .copy(caption: _fakeFormattedText())))),
+        ],
+      ),
+      MessageBundle(
+        name: 'message audio',
+        messages: <MessageData>[
+          MessageData(
+              name: 'audio1',
+              messageFactory: () => _getMessage('message_audio_1')),
+        ],
+      ),
+      MessageBundle(
+        name: 'message basic group chat create',
+        messages: <MessageData>[
+          MessageData(
+              name: 'basic_group_chat_create',
+              messageFactory: () => _getMessage('basic_group_chat_create')),
+        ],
+      ),
+      MessageBundle(
+        name: 'message call',
+        messages: <MessageData>[
+          MessageData(
+              name: 'outgoing hang up',
+              messageFactory: () => _getMessage('message_call_incoming_hang_up')
+                  .then((td.Message value) => value.copy(
+                      isOutgoing: true,
+                      content: (value.content as td.MessageCall).copy(
+                          duration: 1,
+                          discardReason: const td.CallDiscardReasonHungUp())))),
+          MessageData(
+              name: 'incoming hang up',
+              messageFactory: () =>
+                  _getMessage('message_call_incoming_hang_up')),
+          MessageData(
+              name: 'incoming missed',
+              messageFactory: () => _getMessage('message_call_incoming_hang_up')
+                  .then((td.Message value) => value.copy(
+                      isOutgoing: false,
+                      content: (value.content as td.MessageCall).copy(
+                          duration: 0,
+                          discardReason: const td.CallDiscardReasonMissed())))),
+          MessageData(
+              name: 'outgoing declined',
+              messageFactory: () => _getMessage('message_call_incoming_hang_up')
+                  .then((td.Message value) => value.copy(
+                      isOutgoing: true,
+                      content: (value.content as td.MessageCall).copy(
+                          discardReason:
+                              const td.CallDiscardReasonDeclined())))),
+          MessageData(
+              name: 'outgoing missed',
+              messageFactory: () => _getMessage('message_call_incoming_hang_up')
+                  .then((td.Message value) => value.copy(
+                      isOutgoing: true,
+                      content: (value.content as td.MessageCall).copy(
+                          duration: 0,
+                          discardReason: const td.CallDiscardReasonMissed())))),
+        ],
+      ),
+      MessageBundle(
+        name: 'message text',
+        messages: <MessageData>[
+          MessageData(
+              name: 'text1',
+              messageFactory: () => _getMessage('message_text_1')),
+        ],
+      ),
+      MessageBundle(
+        name: 'video',
+        messages: <MessageData>[
+          MessageData(
+              name: '16:9',
+              messageFactory: () => _getMessage('message_video_1')),
+          MessageData(
+              name: '16:9 with caption',
+              messageFactory: () => _getMessage('message_video_1').then(
+                  (td.Message value) => value.copy(
+                      content: (value.content as td.MessageVideo)
+                          .copy(caption: _fakeFormattedText())))),
+        ],
+      ),
     ];
   }
 
@@ -97,12 +167,4 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
       'veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex '
       'ea commodo consequat. Duis aute irure dolor in reprehenderit in '
       'voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
-}
-
-class _MessageData {
-  _MessageData({required this.name, required this.message});
-
-  final String name;
-
-  final Future<td.Message> message;
 }

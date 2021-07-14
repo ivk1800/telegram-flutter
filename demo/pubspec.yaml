@@ -6,6 +6,9 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  intl: ^0.17.0
+  core_utils:
+    path: ../core_utils
   localization_impl:
     path: ../localization_impl
   feature_chat_impl:

@@ -21,7 +21,7 @@ class _DemoPageState extends State<DemoPage> {
         title: const Text('demo'),
       ),
       body: Column(
-        children: [
+        children: <Widget>[
           OutlinedButton(
               onPressed: () {
                 Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
