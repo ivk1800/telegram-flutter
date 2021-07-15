@@ -98,4 +98,6 @@
     <string lang="CallMessageOutgoingMissed">Cancelled Call</string>
     <!-- https://translations.telegram.org/en/android/private_chats/CallMessageOutgoing -->
     <string lang="CallMessageOutgoing">Outgoing Call</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/EventLogGroupJoined -->
+    <string lang="EventLogGroupJoined">%s joined the group</string>
 </resources>

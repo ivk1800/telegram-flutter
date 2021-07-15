@@ -1,5 +1,6 @@
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:coreui/coreui.dart';
 import 'package:demo/src/message_data.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:feature_chat_impl/feature_chat_impl.dart' as chat_impl;
@@ -47,6 +48,11 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
   Future<void> _init() async {
     final fake.FakeFileRepository fakeFileRepository =
         fake.FakeFileRepository();
+
+    final fake.FakeUserProvider fakeUserProvider = fake.FakeUserProvider();
+    final fake.FakeUserRepository fakeUserRepository =
+        fake.FakeUserRepository(fakeUserProvider: fakeUserProvider);
+
     final chat_impl.ChatMessageFactory chatMessageFactory =
         chat_impl.ChatMessageFactory(
       avatarWidgetFactory:
@@ -66,6 +72,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
     final DateParser dateParser = DateParser();
 
     _messageTileMapper = chat_impl.MessageTileMapper(
+        userRepository: fakeUserRepository,
         dateParser: dateParser,
         localizationManager: localizationManager,
         formattedTextResolver: formattedTextResolver);
@@ -121,9 +128,15 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
       );
 
   Widget _buildSingleMessage(Future<td.Message> future) =>
-      FutureBuilder<td.Message>(
-        future: future,
-        builder: (BuildContext context, AsyncSnapshot<td.Message> snapshot) {
+      FutureBuilder<ITileModel>(
+        future: future.then(
+            (td.Message message) => _messageTileMapper.mapToTileModel(message)),
+        builder: (BuildContext context, AsyncSnapshot<ITileModel> snapshot) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
+            return Text(snapshot.error.toString());
+          }
+
           if (_isReady && snapshot.hasData) {
             return _wrapToRequiredWidgets(child: _buildMessage(snapshot.data!));
           }
@@ -131,9 +144,9 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
         },
       );
 
-  Widget _buildMessage(td.Message message) => Builder(
-        builder: (BuildContext context) => _tileFactory.create(
-            context, _messageTileMapper.mapToTileModel(message)),
+  Widget _buildMessage(ITileModel tileModel) => Builder(
+        builder: (BuildContext context) =>
+            _tileFactory.create(context, tileModel),
       );
 
   chat_impl.ChatTheme _wrapToRequiredWidgets({required Widget child}) =>

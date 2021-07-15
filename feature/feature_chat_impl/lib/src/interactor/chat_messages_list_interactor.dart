@@ -35,7 +35,7 @@ class ChatMessagesInteractor {
 
   td.Message? _last;
   bool _isIdle = true;
-  StreamSubscription<List<td.Message>>? _subscription;
+  StreamSubscription<_Result>? _subscription;
 
   void init(int chatId) async {
     final td.Chat chat = await _chatRepository.getChat(chatId);
@@ -60,18 +60,35 @@ class ChatMessagesInteractor {
     _subscription = _messageRepository
         .getMessages(
             chatId: _chatArgs.chatId, fromMessageId: fromMessageId, limit: 30)
-        .listen((List<td.Message> messages) {
+        .asyncMap((List<td.Message> messages) async {
+      return _Result(
+          messages: messages, tileModels: await _mapToTileModels(messages));
+    }).listen((_Result _result) {
       final List<ITileModel> list = (_messagesSubject.value ?? <ITileModel>[])
           .toList()
-            ..addAll(messages.map((td.Message message) =>
-                _messageTileMapper.mapToTileModel(message)));
+            ..addAll(_result.tileModels);
       _messagesSubject.add(list);
-      _last = messages.lastOrNull;
-      _isIdle = messages.isNotEmpty;
+      _last = _result.messages.lastOrNull;
+      _isIdle = _result.messages.isNotEmpty;
     });
+  }
+
+  Future<List<ITileModel>> _mapToTileModels(List<td.Message> messages) async {
+    final Stream<ITileModel> tileModels =
+        Stream<td.Message>.fromIterable(messages).asyncMap(
+            (td.Message message) => _messageTileMapper.mapToTileModel(message));
+    return tileModels.toList();
   }
 
   void dispose() {
     _subscription?.cancel();
   }
+}
+
+class _Result {
+  _Result({required this.messages, required this.tileModels});
+
+  final List<td.Message> messages;
+
+  final List<ITileModel> tileModels;
 }

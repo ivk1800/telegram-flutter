@@ -1,6 +1,6 @@
-import 'base_message_tile_model.dart';
+import 'base_conversation_message_tile_model.dart';
 
-class MessageAudioTileModel extends BaseMessageTileModel {
+class MessageAudioTileModel extends BaseConversationMessageTileModel {
   const MessageAudioTileModel({
     required int id,
     required bool isOutgoing,

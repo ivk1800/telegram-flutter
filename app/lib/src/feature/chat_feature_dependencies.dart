@@ -15,12 +15,14 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
       required IChatMessageRepository chatMessageRepository,
       required IChatScreenRouter router,
       required DateParser dateParser,
+      required IUserRepository userRepository,
       required ILocalizationManager localizationManager,
       required DateFormatter dateFormatter,
       required IChatRepository chatRepository,
       required IConnectionStateProvider connectionStateProvider})
       : _fileRepository = fileRepository,
         _dateParser = dateParser,
+        _userRepository = userRepository,
         _localizationManager = localizationManager,
         _dateFormatter = dateFormatter,
         _chatRepository = chatRepository,
@@ -36,6 +38,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
   final DateFormatter _dateFormatter;
   final IChatRepository _chatRepository;
   final ILocalizationManager _localizationManager;
+  final IUserRepository _userRepository;
 
   @override
   IConnectionStateProvider get connectionStateProvider =>
@@ -61,4 +64,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
 
   @override
   ILocalizationManager get localizationManager => _localizationManager;
+
+  @override
+  IUserRepository get userRepository => _userRepository;
 }

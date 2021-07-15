@@ -1,0 +1,79 @@
+{
+  "id": 1,
+  "first_name": "fake first name",
+  "last_name": "fake last name",
+  "username": "fakeUser",
+  "phone_number": "",
+  "status": {
+    "expires": 1626357622,
+    "@type": "userStatusOnline"
+  },
+  "profile_photo": {
+    "id": "1",
+    "small": {
+      "id": 1,
+      "size": 11517,
+      "expected_size": 11517,
+      "local": {
+        "path": "file.jpg",
+        "can_be_downloaded": true,
+        "can_be_deleted": true,
+        "is_downloading_active": false,
+        "is_downloading_completed": true,
+        "download_offset": 0,
+        "downloaded_prefix_size": 11517,
+        "downloaded_size": 11517,
+        "@type": "localFile"
+      },
+      "remote": {
+        "id": "123",
+        "unique_id": "1234",
+        "is_uploading_active": false,
+        "is_uploading_completed": true,
+        "uploaded_size": 11517,
+        "@type": "remoteFile"
+      },
+      "@type": "file"
+    },
+    "big": {
+      "id": 2,
+      "size": 0,
+      "expected_size": 0,
+      "local": {
+        "path": "",
+        "can_be_downloaded": true,
+        "can_be_deleted": false,
+        "is_downloading_active": false,
+        "is_downloading_completed": false,
+        "download_offset": 0,
+        "downloaded_prefix_size": 0,
+        "downloaded_size": 0,
+        "@type": "localFile"
+      },
+      "remote": {
+        "id": "123",
+        "unique_id": "1234",
+        "is_uploading_active": false,
+        "is_uploading_completed": true,
+        "uploaded_size": 0,
+        "@type": "remoteFile"
+      },
+      "@type": "file"
+    },
+    "has_animation": false,
+    "@type": "profilePhoto"
+  },
+  "is_contact": false,
+  "is_mutual_contact": false,
+  "is_verified": false,
+  "is_support": false,
+  "restriction_reason": "",
+  "is_scam": false,
+  "is_fake": false,
+  "have_access": true,
+  "type": {
+    "@type": "userTypeRegular"
+  },
+  "language_code": "",
+  "@type": "user"
+}

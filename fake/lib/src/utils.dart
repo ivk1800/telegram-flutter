@@ -9,3 +9,10 @@ Future<td.Message> getMessage(String fileName) async {
   return td.Message.fromJson(
       json.decoder.convert(rawJson) as Map<String, dynamic>)!;
 }
+
+Future<td.User> getUser(String fileName) async {
+  final String rawJson =
+      await rootBundle.loadString('packages/fake/assets/users/$fileName.json');
+  return td.User.fromJson(
+      json.decoder.convert(rawJson) as Map<String, dynamic>)!;
+}

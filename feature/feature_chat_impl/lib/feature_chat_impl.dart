@@ -39,6 +39,8 @@ abstract class IChatFeatureDependencies {
 
   IFileRepository get fileRepository;
 
+  IUserRepository get userRepository;
+
   IChatMessageRepository get chatMessageRepository;
 
   IChatScreenRouter get router;

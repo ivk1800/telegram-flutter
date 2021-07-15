@@ -6,6 +6,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  username_generator: ^1.3.0
   core_tdlib_api:
     path: ../core_tdlib_api
   td_client:
@@ -20,3 +21,4 @@ dev_dependencies:
 flutter:
   assets:
     - assets/messages/
+    - assets/users/

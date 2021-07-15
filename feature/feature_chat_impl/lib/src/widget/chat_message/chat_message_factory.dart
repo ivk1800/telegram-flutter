@@ -25,6 +25,7 @@ class ChatMessageFactory {
         context: context,
         body: Text.rich(
           text,
+          textAlign: TextAlign.center,
           // todo extract style
           style: const TextStyle(color: Colors.white),
         ));

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
@@ -15,8 +16,10 @@ class MessageTileMapper {
   MessageTileMapper(
       {required FormattedTextResolver formattedTextResolver,
       required DateParser dateParser,
+      required IUserRepository userRepository,
       required ILocalizationManager localizationManager})
       : _localizationManager = localizationManager,
+        _userRepository = userRepository,
         _messageCallTileModelMapper = MessageCallTileModelMapper(
           localizationManager: localizationManager,
           dateParser: dateParser,
@@ -25,12 +28,11 @@ class MessageTileMapper {
 
   final FormattedTextResolver _formattedTextResolver;
   final ILocalizationManager _localizationManager;
+  final IUserRepository _userRepository;
 
   final MessageCallTileModelMapper _messageCallTileModelMapper;
 
-  ITileModel mapToTileModel(td.Message message) {
-    print(json.encode(message.toJson()));
-
+  Future<ITileModel> mapToTileModel(td.Message message) async {
     final td.MessageContent content = message.content;
     final String notImplementedText =
         'not implemented ${message.content.runtimeType.toString()}';
@@ -76,10 +78,27 @@ class MessageTileMapper {
       case td.MessageChatAddMembers.CONSTRUCTOR:
         {
           final td.MessageChatAddMembers m = message.content.cast();
+
+          final String joinedUserNames =
+              (await Stream<int>.fromIterable(m.memberUserIds)
+                      .asyncMap((int userId) async {
+            final td.User user = await _userRepository.getUser(userId);
+            // todo extract to extension for concat first and last names
+            return <String>[user.firstName, user.lastName]
+                .where((String element) {
+              // todo check by isNotBlack
+              return element.isNotEmpty;
+            }).join(' ');
+          }).toList())
+                  .join(', ');
+
           return MessageChatAddMembersTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              title: TextSpan(
+                  //todo add taps for users
+                  text: _localizationManager.getStringFormatted(
+                      'EventLogGroupJoined', <dynamic>[joinedUserNames])));
         }
       case td.MessageChatChangePhoto.CONSTRUCTOR:
         {

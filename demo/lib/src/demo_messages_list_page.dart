@@ -151,6 +151,20 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
                           .copy(caption: _fakeFormattedText())))),
         ],
       ),
+      MessageBundle(
+        name: 'message chat add members',
+        messages: <MessageData>[
+          MessageData(
+              name: 'single',
+              messageFactory: () => _getMessage('message_chat_add_members')),
+          MessageData(
+              name: 'multiple',
+              messageFactory: () => _getMessage('message_chat_add_members')
+                  .then((td.Message value) => value.copy(
+                      content: (value.content as td.MessageChatAddMembers)
+                          .copy(memberUserIds: <int>[1, 2, 3])))),
+        ],
+      ),
     ];
   }
 
