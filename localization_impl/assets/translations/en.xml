@@ -100,4 +100,6 @@
     <string lang="CallMessageOutgoing">Outgoing Call</string>
     <!-- https://translations.telegram.org/en/android/groups_and_channels/EventLogGroupJoined -->
     <string lang="EventLogGroupJoined">%s joined the group</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/ActionChangedPhoto -->
+    <string lang="ActionChangedPhoto">%s changed the group photo</string>
 </resources>

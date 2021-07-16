@@ -165,6 +165,14 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
                           .copy(memberUserIds: <int>[1, 2, 3])))),
         ],
       ),
+      MessageBundle(
+        name: 'message chat change photo',
+        messages: <MessageData>[
+          MessageData(
+              name: 'chat change photo',
+              messageFactory: () => _getMessage('message_chat_change_photo')),
+        ],
+      ),
     ];
   }
 

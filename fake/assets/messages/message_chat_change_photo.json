@@ -1,0 +1,148 @@
+{
+  "id": 1,
+  "sender": {
+    "user_id": 2,
+    "@type": "messageSenderUser"
+  },
+  "chat_id": 3,
+  "sending_state": null,
+  "scheduling_state": null,
+  "is_outgoing": false,
+  "is_pinned": false,
+  "can_be_edited": false,
+  "can_be_forwarded": false,
+  "can_be_deleted_only_for_self": true,
+  "can_be_deleted_for_all_users": false,
+  "can_get_statistics": false,
+  "can_get_message_thread": false,
+  "is_channel_post": false,
+  "contains_unread_mention": false,
+  "date": 1626372720,
+  "edit_date": 0,
+  "forward_info": null,
+  "interaction_info": null,
+  "reply_in_chat_id": 0,
+  "reply_to_message_id": 0,
+  "message_thread_id": 0,
+  "ttl": 0,
+  "ttl_expires_in": 0.0,
+  "via_bot_user_id": 0,
+  "author_signature": "",
+  "media_album_id": "0",
+  "restriction_reason": "",
+  "content": {
+    "photo": {
+      "id": "4",
+      "added_date": 1626372720,
+      "minithumbnail": {
+        "width": 40,
+        "height": 40,
+        "data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAoACgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwAayRS/2eIFkOFEgBB9Sc9vSlisUkUKY0G8845wR6H+lW1kjkjlRn25Y4Ynr6fhTI12OGjJwowM9znmspSSV7lpO9rEbWdrueOMEMAe/B9agaxE8CiMIoHIO0Bjx3q+8mSxRArNwzH0qvaxYmkKsRsIAHbpUyqRWqZSTt7xjT27wNtbn3HSiuhuYY5QplGY8/OM457GitYyTVzOxXTcsUTBNy7OQOtPW4ZwNsEpHsKEZQSkbqwU/KVOeKlRyuTH0PVB6+orlUY81pmrbtdDMTSg4TYPVuv5UWyiN5VX1H8qm89ccB2ftlSB/hRGmxTnlick0VeSMbIm7e4lycWsuf7tFRzyRswikZQhPzEnHHpRV0YtwC6W5hW9y0OBklBkgA45rWjnR497EL0yynIB96KK1nTUtxRbTsSC4hH/AC3Wo7m9EUQcAkNwG7UUVlGjG+pcnZGTcXTTZUZCHBKk5yfWiiiulIxP/9k=",
+        "@type": "minithumbnail"
+      },
+      "sizes": [
+        {
+          "type": "a",
+          "photo": {
+            "id": 1,
+            "size": 11861,
+            "expected_size": 11861,
+            "local": {
+              "path": "",
+              "can_be_downloaded": true,
+              "can_be_deleted": false,
+              "is_downloading_active": false,
+              "is_downloading_completed": false,
+              "download_offset": 0,
+              "downloaded_prefix_size": 0,
+              "downloaded_size": 0,
+              "@type": "localFile"
+            },
+            "remote": {
+              "id": "AgACAgIAAxkBAANzYPB6cNsNkA70gC15U3Vph5wKS08AAie3MRtqQoFL6VbLEJDqmQ8SK6epLgADAQADAgADYQADf4gBAAEeBA",
+              "unique_id": "AQADEiunqS4AA3-IAQAB",
+              "is_uploading_active": false,
+              "is_uploading_completed": true,
+              "uploaded_size": 11861,
+              "@type": "remoteFile"
+            },
+            "@type": "file"
+          },
+          "width": 160,
+          "height": 160,
+          "progressive_sizes": [],
+          "@type": "photoSize"
+        },
+        {
+          "type": "b",
+          "photo": {
+            "id": 2,
+            "size": 22417,
+            "expected_size": 22417,
+            "local": {
+              "path": "",
+              "can_be_downloaded": true,
+              "can_be_deleted": false,
+              "is_downloading_active": false,
+              "is_downloading_completed": false,
+              "download_offset": 0,
+              "downloaded_prefix_size": 0,
+              "downloaded_size": 0,
+              "@type": "localFile"
+            },
+            "remote": {
+              "id": "AgACAgIAAxkBAANzYPB6cNsNkA70gC15U3Vph5wKS08AAie3MRtqQoFL6VbLEJDqmQ8SK6epLgADAQADAgADYgADgIgBAAEeBA",
+              "unique_id": "AQADEiunqS4AA4CIAQAB",
+              "is_uploading_active": false,
+              "is_uploading_completed": true,
+              "uploaded_size": 22417,
+              "@type": "remoteFile"
+            },
+            "@type": "file"
+          },
+          "width": 320,
+          "height": 320,
+          "progressive_sizes": [],
+          "@type": "photoSize"
+        },
+        {
+          "type": "c",
+          "photo": {
+            "id": 3,
+            "size": 69270,
+            "expected_size": 69270,
+            "local": {
+              "path": "",
+              "can_be_downloaded": true,
+              "can_be_deleted": false,
+              "is_downloading_active": false,
+              "is_downloading_completed": false,
+              "download_offset": 0,
+              "downloaded_prefix_size": 0,
+              "downloaded_size": 0,
+              "@type": "localFile"
+            },
+            "remote": {
+              "id": "AgACAgIAAxkBAANzYPB6cNsNkA70gC15U3Vph5wKS08AAie3MRtqQoFL6VbLEJDqmQ8SK6epLgADAQADAgADYwADgYgBAAEeBA",
+              "unique_id": "AQADEiunqS4AA4GIAQAB",
+              "is_uploading_active": false,
+              "is_uploading_completed": true,
+              "uploaded_size": 69270,
+              "@type": "remoteFile"
+            },
+            "@type": "file"
+          },
+          "width": 640,
+          "height": 640,
+          "progressive_sizes": [],
+          "@type": "photoSize"
+        }
+      ],
+      "animation": null,
+      "@type": "chatPhoto"
+    },
+    "@type": "messageChatChangePhoto"
+  },
+  "reply_markup": null,
+  "@type": "message"
+}

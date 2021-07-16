@@ -21,15 +21,12 @@ class ChatMessageFactory {
       required BuildContext context,
       required InlineSpan text}) {
     return createChatNotification(
-        id: id,
-        context: context,
-        body: Text.rich(
-          text,
-          textAlign: TextAlign.center,
-          // todo extract style
-          style: const TextStyle(color: Colors.white),
-        ));
+        id: id, context: context, body: _buildTextNotification(text));
   }
+
+  // todo move to another class for message parts
+  Widget createChatNotificationBubbleFromText({required InlineSpan text}) =>
+      _buildNotificationBubble(_buildTextNotification(text));
 
   Widget createChatNotification(
       {required int id, required BuildContext context, required Widget body}) {
@@ -79,25 +76,66 @@ class ChatMessageFactory {
     );
   }
 
+  Widget createCustom(
+      {required int id,
+      required BuildContext context,
+      required AlignmentGeometry alignment,
+      required Widget body}) {
+    return _buildBaseMessage(
+        id: id, alignment: alignment, context: context, body: body);
+  }
+
   Widget createFromBlocks(
       {required int id,
       required BuildContext context,
       required bool isOutgoing,
       required List<Widget> blocks}) {
+    return _buildBaseMessage(
+        id: id,
+        alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
+        context: context,
+        body: _buildMessageBubble(
+            context: context,
+            isOutgoing: isOutgoing,
+            child: MessageContent(
+              children: blocks,
+            )));
+  }
+
+  Container _buildNotificationBubble(Widget body) {
+    return Container(
+      child: body,
+      padding: const EdgeInsets.only(top: 3, bottom: 3, left: 6, right: 6),
+      decoration: BoxDecoration(
+          // todo extract color to styles
+          color: Colors.black.withAlpha(60),
+          borderRadius: const BorderRadius.all(Radius.circular(16.0))),
+    );
+  }
+
+  Text _buildTextNotification(InlineSpan text) {
+    return Text.rich(
+      text,
+      textAlign: TextAlign.center,
+      // todo extract style
+      style: const TextStyle(color: Colors.white),
+    );
+  }
+
+  Widget _buildBaseMessage(
+      {required int id,
+      required AlignmentGeometry alignment,
+      required BuildContext context,
+      required Widget body}) {
     final ChatContextData chatContext = ChatContext.of(context);
     return Align(
       key: ValueKey<int>(id),
-      alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
+      alignment: alignment,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           constraints: BoxConstraints(maxWidth: chatContext.maxWidth),
-          child: _buildMessageBubble(
-              context: context,
-              isOutgoing: isOutgoing,
-              child: MessageContent(
-                children: blocks,
-              )),
+          child: body,
         ),
       ),
     );

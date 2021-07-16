@@ -1,9 +1,8 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message_factory.dart';
+import 'package:feature_chat_impl/src/util/minithumbnail_extensions.dart';
 import 'package:flutter/material.dart';
-
-import 'not_implemented.dart';
 
 class MessageChatChangePhotoTileFactoryDelegate
     implements ITileFactoryDelegate<MessageChatChangePhotoTileModel> {
@@ -15,10 +14,23 @@ class MessageChatChangePhotoTileFactoryDelegate
 
   @override
   Widget create(BuildContext context, MessageChatChangePhotoTileModel model) {
-    return _chatMessageFactory.create(
+    return _chatMessageFactory.createCustom(
         id: model.id,
         context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+        alignment: Alignment.center,
+        body: Column(
+          children: <Widget>[
+            _chatMessageFactory.createChatNotificationBubbleFromText(
+                text: model.title),
+            const SizedBox(
+              height: 8,
+            ),
+            // todo implement avatar loading
+            CircleAvatar(
+              radius: 90,
+              backgroundImage: model.minithumbnail?.toMemoryImage(),
+            )
+          ],
+        ));
   }
 }

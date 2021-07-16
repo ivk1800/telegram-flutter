@@ -104,9 +104,13 @@ class MessageTileMapper {
         {
           final td.MessageChatChangePhoto m = message.content.cast();
           return MessageChatChangePhotoTileModel(
-              id: message.id,
-              isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+            id: message.id,
+            // todo missing user name
+            title: TextSpan(
+                text: _getStringFormatted(
+                    'ActionChangedPhoto', <dynamic>['todo'])),
+            minithumbnail: m.photo.minithumbnail?.toMinithumbnail(),
+          );
         }
       case td.MessageChatChangeTitle.CONSTRUCTOR:
         {
@@ -433,12 +437,17 @@ class MessageTileMapper {
         isOutgoing: message.isOutgoing,
         type: notImplementedText);
   }
+
+  String _getStringFormatted(String key, List<dynamic> formatArgs,
+          [String defaultValue = '']) =>
+      _localizationManager.getStringFormatted(key, formatArgs);
 }
 
 extension ContentExtension on td.MessageContent {
   T cast<T extends td.MessageContent>() => this as T;
 }
 
+// todo extract to common module
 extension MinithumbnailExtensions on td.Minithumbnail {
   Minithumbnail? toMinithumbnail() {
     if (this != null) {
