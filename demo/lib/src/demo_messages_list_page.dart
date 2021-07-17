@@ -138,13 +138,13 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
         ],
       ),
       MessageBundle(
-        name: 'video',
+        name: 'message video',
         messages: <MessageData>[
           MessageData(
-              name: '16:9',
+              name: 'video 16:9',
               messageFactory: () => _getMessage('message_video_1')),
           MessageData(
-              name: '16:9 with caption',
+              name: 'video 16:9 with caption',
               messageFactory: () => _getMessage('message_video_1').then(
                   (td.Message value) => value.copy(
                       content: (value.content as td.MessageVideo)
@@ -195,6 +195,14 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
           MessageData(
               name: 'chat delete member',
               messageFactory: () => _getMessage('message_chat_delete_member')),
+        ],
+      ),
+      MessageBundle(
+        name: 'message_chat_delete_photo',
+        messages: <MessageData>[
+          MessageData(
+              name: 'chat delete photo',
+              messageFactory: () => _getMessage('message_chat_delete_photo')),
         ],
       ),
     ];

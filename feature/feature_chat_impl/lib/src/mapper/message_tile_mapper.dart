@@ -33,6 +33,8 @@ class MessageTileMapper {
   final MessageCallTileModelMapper _messageCallTileModelMapper;
 
   Future<ITileModel> mapToTileModel(td.Message message) async {
+    print(json.encoder.convert(message.toJson()));
+
     final td.MessageContent content = message.content;
     final String notImplementedText =
         'not implemented ${message.content.runtimeType.toString()}';
@@ -130,6 +132,7 @@ class MessageTileMapper {
           return MessageChatDeleteMemberTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
+              // todo missing user name
               title: TextSpan(
                   text: _getStringFormatted('ActionKickUser', <dynamic>[
                 'todo',
@@ -143,11 +146,13 @@ class MessageTileMapper {
         }
       case td.MessageChatDeletePhoto.CONSTRUCTOR:
         {
-          final td.MessageChatDeletePhoto m = message.content.cast();
           return MessageChatDeletePhotoTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              // todo missing user name
+              title: TextSpan(
+                  text: _getStringFormatted(
+                      'ActionRemovedPhoto', <dynamic>['todo'])));
         }
       case td.MessageChatJoinByLink.CONSTRUCTOR:
         {
