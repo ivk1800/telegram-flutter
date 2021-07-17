@@ -110,4 +110,6 @@
     <string lang="ActionKickUser">%s removed %s</string>
     <!-- https://translations.telegram.org/en/android/chat_list/ActionRemovedPhoto -->
     <string lang="ActionRemovedPhoto">%s removed the group photo</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/ActionInviteUser -->
+    <string lang="ActionInviteUser">%s joined the group via invite link</string>
 </resources>

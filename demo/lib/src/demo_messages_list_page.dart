@@ -205,6 +205,14 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
               messageFactory: () => _getMessage('message_chat_delete_photo')),
         ],
       ),
+      MessageBundle(
+        name: 'message_chat_join_by_link',
+        messages: <MessageData>[
+          MessageData(
+              name: 'chat join by link',
+              messageFactory: () => _getMessage('message_chat_join_by_link')),
+        ],
+      ),
     ];
   }
 

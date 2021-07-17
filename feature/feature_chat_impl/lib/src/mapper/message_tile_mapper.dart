@@ -156,11 +156,13 @@ class MessageTileMapper {
         }
       case td.MessageChatJoinByLink.CONSTRUCTOR:
         {
-          final td.MessageChatJoinByLink m = message.content.cast();
           return MessageChatJoinByLinkTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              // todo missing user name
+              title: TextSpan(
+                  text: _getStringFormatted(
+                      'ActionInviteUser', <dynamic>['todo'])));
         }
       case td.MessageChatSetTtl.CONSTRUCTOR:
         {
