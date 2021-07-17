@@ -102,4 +102,6 @@
     <string lang="EventLogGroupJoined">%s joined the group</string>
     <!-- https://translations.telegram.org/en/android/groups_and_channels/ActionChangedPhoto -->
     <string lang="ActionChangedPhoto">%s changed the group photo</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/ActionMigrateFromGroupNotify -->
+    <string lang="ActionMigrateFromGroupNotify">%s was upgraded to a supergroup</string>
 </resources>

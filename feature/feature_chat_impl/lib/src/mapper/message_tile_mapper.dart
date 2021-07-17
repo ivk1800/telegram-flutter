@@ -158,7 +158,9 @@ class MessageTileMapper {
           return MessageChatUpgradeFromTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              title: TextSpan(
+                  text: _getStringFormatted(
+                      'ActionMigrateFromGroupNotify', <dynamic>[m.title])));
         }
       case td.MessageChatUpgradeTo.CONSTRUCTOR:
         {

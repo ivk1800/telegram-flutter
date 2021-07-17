@@ -18,6 +18,13 @@ class MessageAnimationTileFactoryDelegate
 
   @override
   Widget create(BuildContext context, MessageAnimationTileModel model) {
+    // todo handle nullable minithumbnail
+    if (model.minithumbnail == null) {
+      return const NotImplementedPlaceholder(
+        additional: 'minithumbnail is null',
+      );
+    }
+
     return _chatMessageFactory.createFromBlocks(
         id: model.id,
         context: context,
