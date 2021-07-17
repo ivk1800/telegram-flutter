@@ -118,7 +118,10 @@ class MessageTileMapper {
           return MessageChatChangeTitleTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              // todo missing user name
+              title: TextSpan(
+                  text: _getStringFormatted(
+                      'ActionChangedTitle', <dynamic>['todo', m.title])));
         }
       case td.MessageChatDeleteMember.CONSTRUCTOR:
         {

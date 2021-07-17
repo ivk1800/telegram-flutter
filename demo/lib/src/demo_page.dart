@@ -22,23 +22,22 @@ class _DemoPageState extends State<DemoPage> {
       ),
       body: Column(
         children: <Widget>[
-          OutlinedButton(
-              onPressed: () {
+          ListTile(
+            onTap: () {
+              Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
+                builder: (BuildContext context) => const DemoMessageListPage(),
+              ));
+            },
+            title: const Text('messages'),
+          ),
+          const Divider(),
+          ListTile(
+              onTap: () {
                 Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) =>
-                      const DemoMessageListPage(),
+                  builder: (BuildContext context) => const DemoSplitViewPage(),
                 ));
               },
-              child: const Text('messages')),
-          OutlinedButton(
-              onPressed: () {
-                Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) {
-                    return const DemoSplitViewPage();
-                  },
-                ));
-              },
-              child: const Text('split view'))
+              title: const Text('split view')),
         ],
       ),
     );

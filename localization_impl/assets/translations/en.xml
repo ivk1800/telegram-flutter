@@ -104,4 +104,6 @@
     <string lang="ActionChangedPhoto">%s changed the group photo</string>
     <!-- https://translations.telegram.org/en/android/groups_and_channels/ActionMigrateFromGroupNotify -->
     <string lang="ActionMigrateFromGroupNotify">%s was upgraded to a supergroup</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/ActionChangedTitle -->
+    <string lang="ActionChangedTitle">%s changed the group name to %s</string>
 </resources>

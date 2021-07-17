@@ -15,10 +15,7 @@ class MessageChatChangeTitleTileFactoryDelegate
 
   @override
   Widget create(BuildContext context, MessageChatChangeTitleTileModel model) {
-    return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+    return _chatMessageFactory.createChatNotificationFromText(
+        id: model.id, context: context, text: model.title);
   }
 }
