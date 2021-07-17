@@ -126,10 +126,20 @@ class MessageTileMapper {
       case td.MessageChatDeleteMember.CONSTRUCTOR:
         {
           final td.MessageChatDeleteMember m = message.content.cast();
+          final td.User user = await _userRepository.getUser(m.userId);
           return MessageChatDeleteMemberTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              title: TextSpan(
+                  text: _getStringFormatted('ActionKickUser', <dynamic>[
+                'todo',
+                // todo extract to extension for concat first and last names
+                (<String>[user.firstName, user.lastName]
+                    .where((String element) {
+                  // todo check by isNotBlack
+                  return element.isNotEmpty;
+                }).join(' '))
+              ])));
         }
       case td.MessageChatDeletePhoto.CONSTRUCTOR:
         {

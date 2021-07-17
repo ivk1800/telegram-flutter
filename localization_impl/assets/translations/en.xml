@@ -106,4 +106,6 @@
     <string lang="ActionMigrateFromGroupNotify">%s was upgraded to a supergroup</string>
     <!-- https://translations.telegram.org/en/android/private_chats/ActionChangedTitle -->
     <string lang="ActionChangedTitle">%s changed the group name to %s</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/ActionKickUser -->
+    <string lang="ActionKickUser">%s removed %s</string>
 </resources>

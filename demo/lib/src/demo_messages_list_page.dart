@@ -189,6 +189,14 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
               messageFactory: () => _getMessage('message_chat_change_title')),
         ],
       ),
+      MessageBundle(
+        name: 'message chat delete member',
+        messages: <MessageData>[
+          MessageData(
+              name: 'chat delete member',
+              messageFactory: () => _getMessage('message_chat_delete_member')),
+        ],
+      ),
     ];
   }
 
