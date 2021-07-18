@@ -192,10 +192,12 @@ class MessageTileMapper {
       case td.MessageChatUpgradeTo.CONSTRUCTOR:
         {
           final td.MessageChatUpgradeTo m = message.content.cast();
-          return MessageChatUpgradeToTileModel(
+          return MessageChatUpgradeFromTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              title: TextSpan(
+                  text: _localizationManager
+                      .getString('ActionMigrateFromGroup')));
         }
       case td.MessageContactRegistered.CONSTRUCTOR:
         {

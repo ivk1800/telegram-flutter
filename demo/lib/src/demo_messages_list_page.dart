@@ -227,6 +227,14 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
                       ))),
         ],
       ),
+      MessageBundle(
+        name: 'message_chat_upgrade_to',
+        messages: <MessageData>[
+          MessageData(
+              name: 'chat upgrade to',
+              messageFactory: () => _getMessage('message_chat_upgrade_to'))
+        ],
+      ),
     ];
   }
 
