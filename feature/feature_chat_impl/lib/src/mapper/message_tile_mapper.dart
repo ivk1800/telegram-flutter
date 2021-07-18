@@ -201,11 +201,11 @@ class MessageTileMapper {
         }
       case td.MessageContactRegistered.CONSTRUCTOR:
         {
-          final td.MessageContactRegistered m = message.content.cast();
           return MessageContactRegisteredTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              title: TextSpan(
+                  text: _localizationManager.getString('ContactJoined')));
         }
       case td.MessageContact.CONSTRUCTOR:
         {

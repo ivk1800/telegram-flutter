@@ -235,6 +235,11 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
               messageFactory: () => _getMessage('message_chat_upgrade_to'))
         ],
       ),
+      MessageBundle(name: 'message_contact_registered', messages: <MessageData>[
+        MessageData(
+            name: 'contact registered',
+            messageFactory: () => _getMessage('message_contact_registered')),
+      ]),
     ];
   }
 

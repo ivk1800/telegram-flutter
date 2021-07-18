@@ -118,4 +118,6 @@
     <string lang="MessageLifetimeChangedOutgoing">You set the self-destruct timer to %s</string>
     <!-- https://translations.telegram.org/en/android/chat_list/ActionMigrateFromGroup -->
     <string lang="ActionMigrateFromGroup">This group was upgraded to a supergroup</string>
+    <!-- https://translations.telegram.org/en/android/settings/ContactJoined -->
+    <string lang="ContactJoined">Contact joined Telegram</string>
 </resources>
