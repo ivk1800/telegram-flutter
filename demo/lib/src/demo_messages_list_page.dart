@@ -213,6 +213,20 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
               messageFactory: () => _getMessage('message_chat_join_by_link')),
         ],
       ),
+      MessageBundle(
+        name: 'message chat set ttl',
+        messages: <MessageData>[
+          MessageData(
+              name: 'chat set ttl',
+              messageFactory: () => _getMessage('message_chat_set_ttl')),
+          MessageData(
+              name: 'chat set ttl(outgoing)',
+              messageFactory: () => _getMessage('message_chat_set_ttl')
+                  .then((td.Message value) => value.copy(
+                        isOutgoing: true,
+                      ))),
+        ],
+      ),
     ];
   }
 

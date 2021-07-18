@@ -40,9 +40,9 @@ class ChatMessagesInteractor {
   void init(int chatId) async {
     final td.Chat chat = await _chatRepository.getChat(chatId);
 
-    if (chat.lastMessage != null) {
-      load(0);
-    }
+    // if (chat.lastMessage != null) {
+    load(0);
+    // }
   }
 
   void loadMore() {

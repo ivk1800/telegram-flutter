@@ -167,10 +167,17 @@ class MessageTileMapper {
       case td.MessageChatSetTtl.CONSTRUCTOR:
         {
           final td.MessageChatSetTtl m = message.content.cast();
+          // todo format ttl to human string
           return MessageChatSetTtlTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              title: TextSpan(
+                  text: message.isOutgoing
+                      ? _getStringFormatted(
+                          'MessageLifetimeChangedOutgoing', <dynamic>['todo'])
+                      : _getStringFormatted('MessageLifetimeChanged',
+                          // todo missing user name
+                          <dynamic>['todo', 'todo'])));
         }
       case td.MessageChatUpgradeFrom.CONSTRUCTOR:
         {
