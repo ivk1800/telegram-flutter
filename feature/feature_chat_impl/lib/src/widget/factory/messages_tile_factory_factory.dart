@@ -3,11 +3,13 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/tile_widget.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
+import 'package:localization_api/localization_api.dart';
 
 // FactoryFactory :)
 class MessagesTileFactoryFactory {
   tg.TileFactory create(
       {required ChatMessageFactory chatMessageFactory,
+      required ILocalizationManager localizationManager,
       required ShortInfoFactory shortInfoFactory}) {
     return tg
         .TileFactory(delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
@@ -45,6 +47,8 @@ class MessagesTileFactoryFactory {
       MessageChatUpgradeToTileModel: MessageChatUpgradeToTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
       MessageContactTileModel: MessageContactTileFactoryDelegate(
+          localizationManager: localizationManager,
+          shortInfoFactory: shortInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageContactRegisteredTileModel:
           MessageContactRegisteredTileFactoryDelegate(

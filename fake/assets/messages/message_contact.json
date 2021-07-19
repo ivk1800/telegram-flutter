@@ -1,0 +1,46 @@
+{
+  "id": 1,
+  "sender": {
+    "user_id": 2,
+    "@type": "messageSenderUser"
+  },
+  "chat_id": 3,
+  "sending_state": null,
+  "scheduling_state": null,
+  "is_outgoing": true,
+  "is_pinned": false,
+  "can_be_edited": false,
+  "can_be_forwarded": true,
+  "can_be_deleted_only_for_self": true,
+  "can_be_deleted_for_all_users": true,
+  "can_get_statistics": false,
+  "can_get_message_thread": false,
+  "is_channel_post": false,
+  "contains_unread_mention": false,
+  "date": 1626625336,
+  "edit_date": 0,
+  "forward_info": null,
+  "interaction_info": null,
+  "reply_in_chat_id": 0,
+  "reply_to_message_id": 0,
+  "message_thread_id": 0,
+  "ttl": 0,
+  "ttl_expires_in": 0.0,
+  "via_bot_user_id": 0,
+  "author_signature": "",
+  "media_album_id": "0",
+  "restriction_reason": "",
+  "content": {
+    "contact": {
+      "phone_number": "+",
+      "first_name": "TEST_USER",
+      "last_name": "",
+      "vcard": "BEGIN:VCARD\nVERSION:3.0\nFN:TEST_USER\nTEL;MOBILE:+null\nEND:VCARD",
+      "user_id": 0,
+      "@type": "contact"
+    },
+    "@type": "messageContact"
+  },
+  "reply_markup": null,
+  "@type": "message"
+}

@@ -120,4 +120,6 @@
     <string lang="ActionMigrateFromGroup">This group was upgraded to a supergroup</string>
     <!-- https://translations.telegram.org/en/android/settings/ContactJoined -->
     <string lang="ContactJoined">Contact joined Telegram</string>
+    <!-- https://translations.telegram.org/en/android/general/ViewContact -->
+    <string lang="ViewContact">VIEW CONTACT</string>
 </resources>

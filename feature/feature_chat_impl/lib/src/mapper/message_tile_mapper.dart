@@ -210,10 +210,21 @@ class MessageTileMapper {
       case td.MessageContact.CONSTRUCTOR:
         {
           final td.MessageContact m = message.content.cast();
+          final td.Contact contact = m.contact;
+
+          // todo extact data from vcard
           return MessageContactTileModel(
-              id: message.id,
-              isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+            id: message.id,
+            isOutgoing: message.isOutgoing,
+            title: // todo extract to extension for concat first and last names
+                <String>[contact.firstName, contact.lastName]
+                    .where((String element) {
+              // todo check by isNotBlack
+              return element.isNotEmpty;
+            }).join(' '),
+            // todo phone number may be missing
+            subtitle: contact.phoneNumber,
+          );
         }
       case td.MessageCustomServiceAction.CONSTRUCTOR:
         {

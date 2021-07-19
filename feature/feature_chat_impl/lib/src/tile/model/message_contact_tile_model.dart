@@ -4,8 +4,10 @@ class MessageContactTileModel extends BaseMessageTileModel {
   const MessageContactTileModel({
     required int id,
     required bool isOutgoing,
-    required this.type,
+    required this.title,
+    required this.subtitle,
   }) : super(isOutgoing: isOutgoing, id: id);
 
-  final String type;
+  final String title;
+  final String subtitle;
 }

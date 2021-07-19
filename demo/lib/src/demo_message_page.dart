@@ -46,6 +46,9 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
   }
 
   Future<void> _init() async {
+    final LocalizationManager localizationManager = LocalizationManager();
+    await localizationManager.init('en', 'en');
+
     final fake.FakeFileRepository fakeFileRepository =
         fake.FakeFileRepository();
 
@@ -63,11 +66,9 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
     final chat_impl.FormattedTextResolver formattedTextResolver =
         chat_impl.FormattedTextResolver();
     _tileFactory = chat_impl.MessagesTileFactoryFactory().create(
+        localizationManager: localizationManager,
         chatMessageFactory: chatMessageFactory,
         shortInfoFactory: shortInfoFactory);
-
-    final LocalizationManager localizationManager = LocalizationManager();
-    await localizationManager.init('en', 'en');
 
     final DateParser dateParser = DateParser();
 

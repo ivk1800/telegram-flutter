@@ -27,6 +27,7 @@ class MessageAudioTileFactoryDelegate
         isOutgoing: model.isOutgoing,
         blocks: <Widget>[
           Padding(
+            // todo symetric?
             padding: EdgeInsets.only(
                 top: chatContext.verticalPadding,
                 bottom: chatContext.verticalPadding,

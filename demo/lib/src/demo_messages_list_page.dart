@@ -240,6 +240,11 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
             name: 'contact registered',
             messageFactory: () => _getMessage('message_contact_registered')),
       ]),
+      MessageBundle(name: 'message_contact', messages: <MessageData>[
+        MessageData(
+            name: 'message contact',
+            messageFactory: () => _getMessage('message_contact')),
+      ])
     ];
   }
 

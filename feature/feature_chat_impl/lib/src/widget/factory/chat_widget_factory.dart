@@ -43,6 +43,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
         Provider<tg.TileFactory>.value(
             value: tileFactoryFactory.create(
                 shortInfoFactory: shortInfoFactory,
+                localizationManager: dependencies.localizationManager,
                 chatMessageFactory: chatMessageFactory)),
         Provider<ChatMessageFactory>.value(value: chatMessageFactory),
         Provider<ILocalizationManager>.value(
