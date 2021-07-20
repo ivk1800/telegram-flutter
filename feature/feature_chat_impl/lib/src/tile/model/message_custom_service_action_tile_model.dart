@@ -4,8 +4,8 @@ class MessageCustomServiceActionTileModel extends BaseMessageTileModel {
   const MessageCustomServiceActionTileModel({
     required int id,
     required bool isOutgoing,
-    required this.type,
+    required this.title,
   }) : super(isOutgoing: isOutgoing, id: id);
 
-  final String type;
+  final String title;
 }

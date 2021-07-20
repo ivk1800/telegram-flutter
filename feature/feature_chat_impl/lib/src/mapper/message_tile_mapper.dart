@@ -230,9 +230,7 @@ class MessageTileMapper {
         {
           final td.MessageCustomServiceAction m = message.content.cast();
           return MessageCustomServiceActionTileModel(
-              id: message.id,
-              isOutgoing: message.isOutgoing,
-              type: notImplementedText);
+              id: message.id, isOutgoing: message.isOutgoing, title: m.text);
         }
       case td.MessageDice.CONSTRUCTOR:
         {
