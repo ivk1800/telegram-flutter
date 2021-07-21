@@ -10,11 +10,14 @@ import 'package:flutter/material.dart';
 
 class MessageVideoTileFactoryDelegate
     implements ITileFactoryDelegate<MessageVideoTileModel> {
-  MessageVideoTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageVideoTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+    required ReplyInfoFactory replyInfoFactory,
+  })  : _chatMessageFactory = chatMessageFactory,
+        _replyInfoFactory = replyInfoFactory;
 
   final ChatMessageFactory _chatMessageFactory;
+  final ReplyInfoFactory _replyInfoFactory;
 
   @override
   Widget create(BuildContext context, MessageVideoTileModel model) {
@@ -25,10 +28,11 @@ class MessageVideoTileFactoryDelegate
       );
     }
 
-    return _chatMessageFactory.createFromBlocks(
+    return _chatMessageFactory.createConversationMessage(
         id: model.id,
-        context: context,
         isOutgoing: model.isOutgoing,
+        context: context,
+        reply: _replyInfoFactory.createFromMessageModel(context, model),
         blocks: <Widget>[
           MediaWrapper(
               type: MediaType.Video,

@@ -3,6 +3,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/tile_widget.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/reply_info_factory.dart';
 import 'package:localization_api/localization_api.dart';
 
 // FactoryFactory :)
@@ -10,18 +11,22 @@ class MessagesTileFactoryFactory {
   tg.TileFactory create(
       {required ChatMessageFactory chatMessageFactory,
       required ILocalizationManager localizationManager,
+      required ReplyInfoFactory replyInfoFactory,
       required ShortInfoFactory shortInfoFactory}) {
     return tg
         .TileFactory(delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
       MessageAnimationTileModel: MessageAnimationTileFactoryDelegate(
+          replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageAudioTileModel: MessageAudioTileFactoryDelegate(
+          replyInfoFactory: replyInfoFactory,
           shortInfoFactory: shortInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageBasicGroupChatCreateTileModel:
           MessageBasicGroupChatCreateTileFactoryDelegate(
               chatMessageFactory: chatMessageFactory),
       MessageCallTileModel: MessageCallTileFactoryDelegate(
+          replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageChatAddMembersTileModel: MessageChatAddMembersTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
@@ -47,6 +52,7 @@ class MessagesTileFactoryFactory {
       MessageChatUpgradeToTileModel: MessageChatUpgradeToTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
       MessageContactTileModel: MessageContactTileFactoryDelegate(
+          replyInfoFactory: replyInfoFactory,
           localizationManager: localizationManager,
           shortInfoFactory: shortInfoFactory,
           chatMessageFactory: chatMessageFactory),
@@ -88,6 +94,7 @@ class MessagesTileFactoryFactory {
           MessagePaymentSuccessfulTileFactoryDelegate(
               chatMessageFactory: chatMessageFactory),
       MessagePhotoTileModel: MessagePhotoTileFactoryDelegate(
+          replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessagePinMessageTileModel: MessagePinMessageTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
@@ -105,6 +112,7 @@ class MessagesTileFactoryFactory {
           MessageSupergroupChatCreateTileFactoryDelegate(
               chatMessageFactory: chatMessageFactory),
       MessageTextTileModel: MessageTextTileFactoryDelegate(
+          replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageUnsupportedTileModel: MessageUnsupportedTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
@@ -113,6 +121,7 @@ class MessagesTileFactoryFactory {
       MessageVideoNoteTileModel: MessageVideoNoteTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
       MessageVideoTileModel: MessageVideoTileFactoryDelegate(
+          replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageVoiceChatEndedTileModel: MessageVoiceChatEndedTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),

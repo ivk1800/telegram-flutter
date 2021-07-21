@@ -1,13 +1,13 @@
+import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
 import 'package:flutter/painting.dart';
 
-import 'base_message_tile_model.dart';
-
-class MessageTextTileModel extends BaseMessageTileModel {
+class MessageTextTileModel extends BaseConversationMessageTileModel {
   const MessageTextTileModel({
     required int id,
     required bool isOutgoing,
+    required ReplyInfo? replyInfo,
     required this.text,
-  }) : super(isOutgoing: isOutgoing, id: id);
+  }) : super(isOutgoing: isOutgoing, id: id, replyInfo: replyInfo);
 
   final InlineSpan text;
 }

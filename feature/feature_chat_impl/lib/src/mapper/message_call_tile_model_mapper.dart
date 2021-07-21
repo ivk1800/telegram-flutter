@@ -5,27 +5,33 @@ import 'package:intl/intl.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
+import 'message_reply_info_mapper.dart';
+
 class MessageCallTileModelMapper {
   MessageCallTileModelMapper(
       {required ILocalizationManager localizationManager,
+      required MessageReplyInfoMapper messageReplyInfoMapper,
       required DateParser dateParser})
       : _localizationManager = localizationManager,
+        _messageReplyInfoMapper = messageReplyInfoMapper,
         _dateParser = dateParser;
 
   final DateFormat _callDateFormat = DateFormat('HH:mm');
 
   final ILocalizationManager _localizationManager;
+  final MessageReplyInfoMapper _messageReplyInfoMapper;
   final DateParser _dateParser;
 
-  ITileModel mapToTileModel({
+  Future<ITileModel> mapToTileModel({
     required td.Message message,
     required td.MessageCall content,
-  }) {
+  }) async {
     final DateTime callDate =
         _dateParser.parseUnixTimeStampToDate(message.date);
     // todo handle video calls
     return MessageCallTileModel(
         id: message.id,
+        replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
         isOutgoing: message.isOutgoing,
         duration: _getDuration(content.duration),
         date: _callDateFormat.format(callDate),

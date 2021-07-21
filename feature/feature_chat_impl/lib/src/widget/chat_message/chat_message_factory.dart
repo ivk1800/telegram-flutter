@@ -85,6 +85,21 @@ class ChatMessageFactory {
         id: id, alignment: alignment, context: context, body: body);
   }
 
+  Widget createConversationMessage({
+    required int id,
+    required BuildContext context,
+    required Widget? reply,
+    required List<Widget> blocks,
+    required bool isOutgoing,
+  }) {
+    return createFromBlocks(
+      id: id,
+      context: context,
+      isOutgoing: isOutgoing,
+      blocks: <Widget>[if (reply != null) reply] + blocks,
+    );
+  }
+
   Widget createFromBlocks(
       {required int id,
       required BuildContext context,

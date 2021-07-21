@@ -9,6 +9,7 @@ import 'src/chat_screen_router.dart';
 import 'src/widget/factory/chat_widget_factory.dart';
 
 export 'src/chat_screen_router.dart';
+export 'src/mapper/message_reply_info_mapper.dart';
 export 'src/mapper/message_tile_mapper.dart';
 export 'src/resolver/formatted_text_resolver.dart';
 export 'src/tile/model/tile_model.dart';
@@ -17,6 +18,7 @@ export 'src/widget/bubble/bubble.dart';
 export 'src/widget/bubble/bubble_clipper.dart';
 export 'src/widget/chat_context.dart';
 export 'src/widget/chat_message/chat_message_factory.dart';
+export 'src/widget/chat_message/reply_info_factory.dart';
 export 'src/widget/chat_message/short_info_factory.dart';
 export 'src/widget/factory/messages_tile_factory_factory.dart';
 export 'src/widget/message/message_skeleton.dart';

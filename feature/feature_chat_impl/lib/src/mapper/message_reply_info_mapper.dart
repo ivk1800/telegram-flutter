@@ -1,0 +1,49 @@
+import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
+
+import 'package:tdlib/td_api.dart' as td;
+
+class MessageReplyInfoMapper {
+  MessageReplyInfoMapper({
+    required IChatMessageRepository messageRepository,
+    required IUserRepository userRepository,
+    required IChatRepository chatRepository,
+  })  : _messageRepository = messageRepository,
+        _chatRepository = chatRepository,
+        _userRepository = userRepository;
+
+  final IChatMessageRepository _messageRepository;
+  final IUserRepository _userRepository;
+  final IChatRepository _chatRepository;
+
+  Future<ReplyInfo?> mapToReplyInfo(td.Message message) async {
+    if (message.replyInChatId == 0 || message.replyToMessageId == 0) {
+      return null;
+    }
+
+    final td.Message replyMessage = await _messageRepository.getMessage(
+        chatId: message.replyInChatId, messageId: message.replyToMessageId);
+    return ReplyInfo(
+        replyToMessageId: message.replyToMessageId,
+        title: await getSenderNameToDisplay(message.sender),
+        subtitle: replyMessage.content.runtimeType.toString());
+  }
+
+  Future<String> getSenderNameToDisplay(td.MessageSender sender) async {
+    switch (sender.getConstructor()) {
+      case td.MessageSenderUser.CONSTRUCTOR:
+        {
+          final td.User user = await _userRepository
+              .getUser((sender as td.MessageSenderUser).userId);
+          return '${user.firstName} ${user.lastName}';
+        }
+      case td.MessageSenderChat.CONSTRUCTOR:
+        {
+          final td.Chat chat = await _chatRepository
+              .getChat((sender as td.MessageSenderChat).chatId);
+          return chat.title;
+        }
+    }
+    return '';
+  }
+}

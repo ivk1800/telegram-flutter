@@ -31,6 +31,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
 
   bool _isReady = false;
   bool _isShowAll = true;
+  bool _withReply = false;
   late MessageData _currentMessage;
 
   @override
@@ -51,8 +52,16 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
 
     final fake.FakeFileRepository fakeFileRepository =
         fake.FakeFileRepository();
+    final fake.FakeMessagesProvider fakeMessagesProvider =
+        fake.FakeMessagesProvider();
+    final fake.FakeChatMessageRepository fakeChatMessageRepository =
+        fake.FakeChatMessageRepository(fakeMessages: <td.Message>[
+      await fakeMessagesProvider.getMessageVideo1()
+    ]);
 
     final fake.FakeUserProvider fakeUserProvider = fake.FakeUserProvider();
+    final fake.FakeChatRepository fakeChatRepository =
+        fake.FakeChatRepository();
     final fake.FakeUserRepository fakeUserRepository =
         fake.FakeUserRepository(fakeUserProvider: fakeUserProvider);
 
@@ -63,9 +72,18 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
     );
     final chat_impl.ShortInfoFactory shortInfoFactory =
         chat_impl.ShortInfoFactory();
+    final chat_impl.ReplyInfoFactory replyInfoFactory =
+        chat_impl.ReplyInfoFactory();
+    final chat_impl.MessageReplyInfoMapper messageReplyInfoMapper =
+        chat_impl.MessageReplyInfoMapper(
+      chatRepository: fakeChatRepository,
+      userRepository: fakeUserRepository,
+      messageRepository: fakeChatMessageRepository,
+    );
     final chat_impl.FormattedTextResolver formattedTextResolver =
         chat_impl.FormattedTextResolver();
     _tileFactory = chat_impl.MessagesTileFactoryFactory().create(
+        replyInfoFactory: replyInfoFactory,
         localizationManager: localizationManager,
         chatMessageFactory: chatMessageFactory,
         shortInfoFactory: shortInfoFactory);
@@ -74,6 +92,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
 
     _messageTileMapper = chat_impl.MessageTileMapper(
         userRepository: fakeUserRepository,
+        messageReplyInfoMapper: messageReplyInfoMapper,
         dateParser: dateParser,
         localizationManager: localizationManager,
         formattedTextResolver: formattedTextResolver);
@@ -100,6 +119,19 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
                     }),
               ],
             ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text('with reply'),
+                Switch(
+                    value: _withReply,
+                    onChanged: (bool newValue) {
+                      setState(() {
+                        _withReply = !_withReply;
+                      });
+                    }),
+              ],
+            ),
             if (!_isShowAll) _buildMessageDropdownButton(),
             if (_isShowAll)
               _buildAllMessages()
@@ -113,11 +145,14 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
         child: ListView.separated(
             itemBuilder: (BuildContext context, int index) {
               final MessageData messageData = widget.bundle.messages[index];
+              final Future<td.Message> messageFuture =
+                  messageData.messageFactory();
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(messageData.name),
-                  _buildSingleMessage(messageData.messageFactory())
+                  _buildSingleMessage(
+                      _withReply ? messageFuture.withReply() : messageFuture)
                 ],
               );
             },
@@ -181,4 +216,9 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
           });
         },
       );
+}
+
+extension MessageFutureExt on Future<td.Message> {
+  Future<td.Message> withReply() => then(
+      (td.Message value) => value.copy(replyToMessageId: 1, replyInChatId: 1));
 }

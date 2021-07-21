@@ -17,4 +17,10 @@ class FakeChatMessageRepository implements IChatMessageRepository {
 
     return Stream<List<td.Message>>.value(messages);
   }
+
+  @override
+  Future<td.Message> getMessage(
+      {required int chatId, required int messageId}) async {
+    return fakeMessages.first;
+  }
 }

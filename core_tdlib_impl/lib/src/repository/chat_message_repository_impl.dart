@@ -27,6 +27,14 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
     });
   }
 
+  @override
+  Future<td.Message> getMessage({required int chatId, required int messageId}) {
+    return _client.send<td.Message>(td.GetMessage(
+      chatId: chatId,
+      messageId: messageId,
+    ));
+  }
+
   Stream<List<td.Message>> _getMessages(
           {required int chatId,
           required int fromMessageId,

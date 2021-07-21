@@ -10,14 +10,17 @@ class MessageContactTileFactoryDelegate
   MessageContactTileFactoryDelegate(
       {required ChatMessageFactory chatMessageFactory,
       required ILocalizationManager localizationManager,
+      required ReplyInfoFactory replyInfoFactory,
       required ShortInfoFactory shortInfoFactory})
       : _chatMessageFactory = chatMessageFactory,
+        _replyInfoFactory = replyInfoFactory,
         _localizationManager = localizationManager,
         _shortInfoFactory = shortInfoFactory;
 
   final ChatMessageFactory _chatMessageFactory;
   final ShortInfoFactory _shortInfoFactory;
   final ILocalizationManager _localizationManager;
+  final ReplyInfoFactory _replyInfoFactory;
 
   @override
   Widget create(BuildContext context, MessageContactTileModel model) {
@@ -25,10 +28,11 @@ class MessageContactTileFactoryDelegate
     // todo specify value from ref(ios, android)
     // todo move to config
     const double maxWidth = 220;
-    return _chatMessageFactory.createFromBlocks(
+    return _chatMessageFactory.createConversationMessage(
         id: model.id,
         isOutgoing: model.isOutgoing,
         context: context,
+        reply: _replyInfoFactory.createFromMessageModel(context, model),
         blocks: <Widget>[
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: maxWidth),

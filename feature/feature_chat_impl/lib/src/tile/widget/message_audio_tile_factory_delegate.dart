@@ -10,21 +10,25 @@ class MessageAudioTileFactoryDelegate
     implements ITileFactoryDelegate<MessageAudioTileModel> {
   MessageAudioTileFactoryDelegate(
       {required ShortInfoFactory shortInfoFactory,
+      required ReplyInfoFactory replyInfoFactory,
       required ChatMessageFactory chatMessageFactory})
       : _shortInfoFactory = shortInfoFactory,
+        _replyInfoFactory = replyInfoFactory,
         _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
   final ShortInfoFactory _shortInfoFactory;
+  final ReplyInfoFactory _replyInfoFactory;
 
   @override
   Widget create(BuildContext context, MessageAudioTileModel model) {
     final ChatContextData chatContext = ChatContext.of(context);
     final ThemeData theme = Theme.of(context);
-    return _chatMessageFactory.createFromBlocks(
+    return _chatMessageFactory.createConversationMessage(
         id: model.id,
-        context: context,
         isOutgoing: model.isOutgoing,
+        context: context,
+        reply: _replyInfoFactory.createFromMessageModel(context, model),
         blocks: <Widget>[
           Padding(
             // todo symetric?

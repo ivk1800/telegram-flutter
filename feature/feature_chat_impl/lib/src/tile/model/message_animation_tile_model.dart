@@ -6,9 +6,10 @@ class MessageAnimationTileModel extends BaseConversationMessageTileModel {
   const MessageAnimationTileModel({
     required int id,
     required bool isOutgoing,
+    required ReplyInfo? replyInfo,
     required this.minithumbnail,
     required this.caption,
-  }) : super(isOutgoing: isOutgoing, id: id);
+  }) : super(isOutgoing: isOutgoing, id: id, replyInfo: replyInfo);
 
   final Minithumbnail? minithumbnail;
   final InlineSpan? caption;

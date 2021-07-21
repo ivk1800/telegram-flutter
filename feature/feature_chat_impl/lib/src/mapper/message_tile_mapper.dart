@@ -11,23 +11,28 @@ import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 import 'message_call_tile_model_mapper.dart';
+import 'message_reply_info_mapper.dart';
 
 class MessageTileMapper {
   MessageTileMapper(
       {required FormattedTextResolver formattedTextResolver,
       required DateParser dateParser,
       required IUserRepository userRepository,
+      required MessageReplyInfoMapper messageReplyInfoMapper,
       required ILocalizationManager localizationManager})
       : _localizationManager = localizationManager,
         _userRepository = userRepository,
+        _messageReplyInfoMapper = messageReplyInfoMapper,
         _messageCallTileModelMapper = MessageCallTileModelMapper(
           localizationManager: localizationManager,
           dateParser: dateParser,
+          messageReplyInfoMapper: messageReplyInfoMapper,
         ),
         _formattedTextResolver = formattedTextResolver;
 
   final FormattedTextResolver _formattedTextResolver;
   final ILocalizationManager _localizationManager;
+  final MessageReplyInfoMapper _messageReplyInfoMapper;
   final IUserRepository _userRepository;
 
   final MessageCallTileModelMapper _messageCallTileModelMapper;
@@ -44,6 +49,7 @@ class MessageTileMapper {
           final td.MessageAnimation m = message.content.cast();
           return MessageAnimationTileModel(
             id: message.id,
+            replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),
             minithumbnail: m.animation.minithumbnail?.toMinithumbnail(),
@@ -55,6 +61,7 @@ class MessageTileMapper {
           final Duration duration = Duration(seconds: m.audio.duration);
           return MessageAudioTileModel(
               id: message.id,
+              replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
               isOutgoing: message.isOutgoing,
               performer: m.audio.performer,
               totalDuration:
@@ -215,6 +222,7 @@ class MessageTileMapper {
           // todo extact data from vcard
           return MessageContactTileModel(
             id: message.id,
+            replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
             isOutgoing: message.isOutgoing,
             title: // todo extract to extension for concat first and last names
                 <String>[contact.firstName, contact.lastName]
@@ -342,6 +350,7 @@ class MessageTileMapper {
           final td.MessagePhoto m = message.content.cast();
           return MessagePhotoTileModel(
             id: message.id,
+            replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
             minithumbnail: m.photo.minithumbnail?.toMinithumbnail(),
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),
@@ -400,6 +409,7 @@ class MessageTileMapper {
           final td.MessageText m = message.content.cast();
           return MessageTextTileModel(
               id: message.id,
+              replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
               isOutgoing: message.isOutgoing,
               text: TextSpan(text: m.text.text));
         }
@@ -433,6 +443,7 @@ class MessageTileMapper {
           final td.MessageVideo m = message.content.cast();
           return MessageVideoTileModel(
             id: message.id,
+            replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),
             minithumbnail: m.video.minithumbnail?.toMinithumbnail(),

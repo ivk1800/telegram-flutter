@@ -9,6 +9,7 @@ import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/reply_info_factory.dart';
 import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -38,10 +39,18 @@ class ChatWidgetFactory implements IChatWidgetFactory {
     );
     final FormattedTextResolver formattedTextResolver = FormattedTextResolver();
     final ShortInfoFactory shortInfoFactory = ShortInfoFactory();
+    final ReplyInfoFactory replyInfoFactory = ReplyInfoFactory();
+    final MessageReplyInfoMapper messageReplyInfoMapper =
+        MessageReplyInfoMapper(
+      chatRepository: dependencies.chatRepository,
+      userRepository: dependencies.userRepository,
+      messageRepository: dependencies.chatMessageRepository,
+    );
     return MultiProvider(
       providers: <Provider<dynamic>>[
         Provider<tg.TileFactory>.value(
             value: tileFactoryFactory.create(
+                replyInfoFactory: replyInfoFactory,
                 shortInfoFactory: shortInfoFactory,
                 localizationManager: dependencies.localizationManager,
                 chatMessageFactory: chatMessageFactory)),
@@ -59,6 +68,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                     chatRepository: dependencies.chatRepository,
                     chatArgs: chatArgs,
                     messageTileMapper: MessageTileMapper(
+                        messageReplyInfoMapper: messageReplyInfoMapper,
                         userRepository: dependencies.userRepository,
                         dateParser: dateParser,
                         localizationManager: dependencies.localizationManager,
