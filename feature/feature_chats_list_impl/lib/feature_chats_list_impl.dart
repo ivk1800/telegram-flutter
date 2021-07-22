@@ -5,6 +5,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/src/chats_list_screen_router.dart';
 import 'package:feature_chats_list_impl/src/screen/chats_list_page.dart';
+import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'src/di/chats_list_screen_component.dart';
@@ -42,6 +43,8 @@ abstract class IChatsListFeatureDependencies {
   IUserRepository get userRepository;
 
   ILocalizationManager get localizationManager;
+
+  IMessagePreviewResolver get messagePreviewResolver;
 }
 
 class _ChatsListWidgetFactory implements IChatsListWidgetFactory {

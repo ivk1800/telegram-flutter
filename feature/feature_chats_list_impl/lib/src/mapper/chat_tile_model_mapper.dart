@@ -1,32 +1,30 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
-import 'package:localization_api/localization_api.dart';
-import 'package:tuple/tuple.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:jugger/jugger.dart' as j;
-
-import 'chat_preview_data_resolver.dart';
+import 'package:tdlib/td_api.dart' as td;
 
 class ChatTileModelMapper {
   @j.inject
   ChatTileModelMapper(
       {required DateFormatter dateFormatter,
       required DateParser dateParser,
-      required ChatPreviewDataResolver previewDataResolver,
+      required IMessagePreviewResolver previewDataResolver,
       required IChatRepository chatRepository})
       : _dateFormatter = dateFormatter,
-        _previewDataResolver = previewDataResolver,
+        _messagePreviewResolver = previewDataResolver,
         _chatRepository = chatRepository,
         _dateParser = dateParser;
 
   final IChatRepository _chatRepository;
-  final ChatPreviewDataResolver _previewDataResolver;
+  final IMessagePreviewResolver _messagePreviewResolver;
   final DateFormatter _dateFormatter;
   final DateParser _dateParser;
 
   Future<ChatTileModel> mapToModel(td.Chat chat) async {
-    final ChatPreviewData preview = await _previewDataResolver.resolve(chat);
+    final MessagePreviewData preview =
+        await _messagePreviewResolver.resolveFromChatOrEmpty(chat);
 
     assert(chat.positions.length == 1);
     return ChatTileModel(

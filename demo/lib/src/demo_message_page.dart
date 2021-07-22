@@ -4,6 +4,7 @@ import 'package:coreui/coreui.dart';
 import 'package:demo/src/message_data.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:feature_chat_impl/feature_chat_impl.dart' as chat_impl;
+import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -76,6 +77,13 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
         chat_impl.ReplyInfoFactory();
     final chat_impl.MessageReplyInfoMapper messageReplyInfoMapper =
         chat_impl.MessageReplyInfoMapper(
+      messagePreviewResolver: MessagePreviewResolver(
+        mode: Mode.ReplyPreview,
+        messageRepository: fakeChatMessageRepository,
+        chatRepository: fakeChatRepository,
+        userRepository: fakeUserRepository,
+        localizationManager: localizationManager,
+      ),
       chatRepository: fakeChatRepository,
       userRepository: fakeUserRepository,
       messageRepository: fakeChatMessageRepository,

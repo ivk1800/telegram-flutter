@@ -3,6 +3,7 @@ library feature_chat_impl;
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
+import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'src/chat_screen_router.dart';
@@ -54,4 +55,6 @@ abstract class IChatFeatureDependencies {
   IConnectionStateProvider get connectionStateProvider;
 
   ILocalizationManager get localizationManager;
+
+  IMessagePreviewResolver get messagePreviewResolver;
 }

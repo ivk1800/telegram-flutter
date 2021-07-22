@@ -5,6 +5,7 @@ import 'package:feature_chats_list_impl/src/chats_list_screen_router.dart';
 import 'package:feature_chats_list_impl/src/list/chat_list.dart';
 import 'package:feature_chats_list_impl/src/screen/chats_list_page.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile.dart';
+import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jext/jext.dart';
 import 'package:localization_api/localization_api.dart';
@@ -83,6 +84,12 @@ abstract class FoldersSetupModule {
   static IChatUpdatesProvider provideChatUpdatesProvider(
           IChatsListFeatureDependencies dependencies) =>
       dependencies.chatUpdatesProvider;
+
+  @j.provide
+  @j.singleton
+  static IMessagePreviewResolver provideMessagePreviewResolver(
+          IChatsListFeatureDependencies dependencies) =>
+      dependencies.messagePreviewResolver;
 }
 
 @j.componentBuilder

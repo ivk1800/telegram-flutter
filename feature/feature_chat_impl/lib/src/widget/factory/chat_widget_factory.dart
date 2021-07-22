@@ -42,6 +42,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
     final ReplyInfoFactory replyInfoFactory = ReplyInfoFactory();
     final MessageReplyInfoMapper messageReplyInfoMapper =
         MessageReplyInfoMapper(
+      messagePreviewResolver: dependencies.messagePreviewResolver,
       chatRepository: dependencies.chatRepository,
       userRepository: dependencies.userRepository,
       messageRepository: dependencies.chatMessageRepository,

@@ -5,6 +5,8 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
+import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
+import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
@@ -28,8 +30,15 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
         _chatRepository = chatRepository,
         _chatMessageRepository = chatMessageRepository,
         _router = router,
+        _messagePreviewResolver = MessagePreviewResolver(
+            messageRepository: chatMessageRepository,
+            mode: Mode.ReplyPreview,
+            chatRepository: chatRepository,
+            userRepository: userRepository,
+            localizationManager: localizationManager),
         _connectionStateProvider = connectionStateProvider;
 
+  final IMessagePreviewResolver _messagePreviewResolver;
   final IFileRepository _fileRepository;
   final IChatMessageRepository _chatMessageRepository;
   final IConnectionStateProvider _connectionStateProvider;
@@ -67,4 +76,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
 
   @override
   IUserRepository get userRepository => _userRepository;
+
+  @override
+  IMessagePreviewResolver get messagePreviewResolver => _messagePreviewResolver;
 }

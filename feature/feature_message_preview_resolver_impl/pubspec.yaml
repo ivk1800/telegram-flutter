@@ -1,0 +1,20 @@
+name: feature_message_preview_resolver_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  core_utils:
+    path: ../../core_utils
+  localization_api:
+    path: ../../localization_api
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  feature_message_preview_resolver:
+    path: ../feature_message_preview_resolver
+  flutter:
+    sdk: flutter
+
+flutter:

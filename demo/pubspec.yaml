@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  feature_message_preview_resolver_impl:
+    path: ../feature/feature_message_preview_resolver_impl
   intl: ^0.17.0
   core_utils:
     path: ../core_utils
