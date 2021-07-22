@@ -4,6 +4,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
+import 'package:feature_chat_impl/src/resolver/sender_name_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/util/minithumbnail.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,18 +19,22 @@ class MessageTileMapper {
       {required FormattedTextResolver formattedTextResolver,
       required DateParser dateParser,
       required IUserRepository userRepository,
+      required SenderNameResolver senderNameResolver,
       required MessageReplyInfoMapper messageReplyInfoMapper,
       required ILocalizationManager localizationManager})
       : _localizationManager = localizationManager,
         _userRepository = userRepository,
+        _senderNameResolver = senderNameResolver,
         _messageReplyInfoMapper = messageReplyInfoMapper,
         _messageCallTileModelMapper = MessageCallTileModelMapper(
+          senderNameResolver: senderNameResolver,
           localizationManager: localizationManager,
           dateParser: dateParser,
           messageReplyInfoMapper: messageReplyInfoMapper,
         ),
         _formattedTextResolver = formattedTextResolver;
 
+  final SenderNameResolver _senderNameResolver;
   final FormattedTextResolver _formattedTextResolver;
   final ILocalizationManager _localizationManager;
   final MessageReplyInfoMapper _messageReplyInfoMapper;
@@ -49,6 +54,7 @@ class MessageTileMapper {
           final td.MessageAnimation m = message.content.cast();
           return MessageAnimationTileModel(
             id: message.id,
+            senderName: await _senderNameResolver.resolve(message.sender),
             replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),
@@ -61,6 +67,7 @@ class MessageTileMapper {
           final Duration duration = Duration(seconds: m.audio.duration);
           return MessageAudioTileModel(
               id: message.id,
+              senderName: await _senderNameResolver.resolve(message.sender),
               replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
               isOutgoing: message.isOutgoing,
               performer: m.audio.performer,
@@ -222,6 +229,7 @@ class MessageTileMapper {
           // todo extact data from vcard
           return MessageContactTileModel(
             id: message.id,
+            senderName: await _senderNameResolver.resolve(message.sender),
             replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
             isOutgoing: message.isOutgoing,
             title: // todo extract to extension for concat first and last names
@@ -350,6 +358,7 @@ class MessageTileMapper {
           final td.MessagePhoto m = message.content.cast();
           return MessagePhotoTileModel(
             id: message.id,
+            senderName: await _senderNameResolver.resolve(message.sender),
             replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
             minithumbnail: m.photo.minithumbnail?.toMinithumbnail(),
             isOutgoing: message.isOutgoing,
@@ -409,6 +418,7 @@ class MessageTileMapper {
           final td.MessageText m = message.content.cast();
           return MessageTextTileModel(
               id: message.id,
+              senderName: await _senderNameResolver.resolve(message.sender),
               replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
               isOutgoing: message.isOutgoing,
               text: TextSpan(text: m.text.text));
@@ -443,6 +453,7 @@ class MessageTileMapper {
           final td.MessageVideo m = message.content.cast();
           return MessageVideoTileModel(
             id: message.id,
+            senderName: await _senderNameResolver.resolve(message.sender),
             replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),

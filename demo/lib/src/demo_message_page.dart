@@ -75,6 +75,8 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
         chat_impl.ShortInfoFactory();
     final chat_impl.ReplyInfoFactory replyInfoFactory =
         chat_impl.ReplyInfoFactory();
+    final chat_impl.SenderTitleFactory senderTitleFactory =
+        chat_impl.SenderTitleFactory();
     final chat_impl.MessageReplyInfoMapper messageReplyInfoMapper =
         chat_impl.MessageReplyInfoMapper(
       messagePreviewResolver: MessagePreviewResolver(
@@ -91,6 +93,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
     final chat_impl.FormattedTextResolver formattedTextResolver =
         chat_impl.FormattedTextResolver();
     _tileFactory = chat_impl.MessagesTileFactoryFactory().create(
+        senderTitleFactory: senderTitleFactory,
         replyInfoFactory: replyInfoFactory,
         localizationManager: localizationManager,
         chatMessageFactory: chatMessageFactory,
@@ -99,6 +102,10 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
     final DateParser dateParser = DateParser();
 
     _messageTileMapper = chat_impl.MessageTileMapper(
+        senderNameResolver: chat_impl.SenderNameResolver(
+          userRepository: fakeUserRepository,
+          chatRepository: fakeChatRepository,
+        ),
         userRepository: fakeUserRepository,
         messageReplyInfoMapper: messageReplyInfoMapper,
         dateParser: dateParser,

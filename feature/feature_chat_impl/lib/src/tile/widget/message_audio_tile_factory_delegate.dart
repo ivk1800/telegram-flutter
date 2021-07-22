@@ -2,6 +2,7 @@ import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message_factory.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/sender_title_factory.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/short_info_factory.dart';
 import 'package:feature_chat_impl/src/widget/message_text.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +12,14 @@ class MessageAudioTileFactoryDelegate
   MessageAudioTileFactoryDelegate(
       {required ShortInfoFactory shortInfoFactory,
       required ReplyInfoFactory replyInfoFactory,
+      required SenderTitleFactory senderTitleFactory,
       required ChatMessageFactory chatMessageFactory})
       : _shortInfoFactory = shortInfoFactory,
         _replyInfoFactory = replyInfoFactory,
+        _senderTitleFactory = senderTitleFactory,
         _chatMessageFactory = chatMessageFactory;
 
+  final SenderTitleFactory _senderTitleFactory;
   final ChatMessageFactory _chatMessageFactory;
   final ShortInfoFactory _shortInfoFactory;
   final ReplyInfoFactory _replyInfoFactory;
@@ -28,6 +32,7 @@ class MessageAudioTileFactoryDelegate
         id: model.id,
         isOutgoing: model.isOutgoing,
         context: context,
+        senderTitle: _senderTitleFactory.createFromMessageModel(context, model),
         reply: _replyInfoFactory.createFromMessageModel(context, model),
         blocks: <Widget>[
           Padding(

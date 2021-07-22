@@ -89,6 +89,7 @@ class ChatMessageFactory {
     required int id,
     required BuildContext context,
     required Widget? reply,
+    required Widget? senderTitle,
     required List<Widget> blocks,
     required bool isOutgoing,
   }) {
@@ -96,7 +97,11 @@ class ChatMessageFactory {
       id: id,
       context: context,
       isOutgoing: isOutgoing,
-      blocks: <Widget>[if (reply != null) reply] + blocks,
+      blocks: <Widget>[
+            if (senderTitle != null) senderTitle,
+            if (reply != null) reply,
+          ] +
+          blocks,
     );
   }
 

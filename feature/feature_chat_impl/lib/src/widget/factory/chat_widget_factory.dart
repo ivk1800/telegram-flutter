@@ -5,11 +5,13 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
+import 'package:feature_chat_impl/src/resolver/sender_name_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/reply_info_factory.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/sender_title_factory.dart';
 import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -40,6 +42,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
     final FormattedTextResolver formattedTextResolver = FormattedTextResolver();
     final ShortInfoFactory shortInfoFactory = ShortInfoFactory();
     final ReplyInfoFactory replyInfoFactory = ReplyInfoFactory();
+    final SenderTitleFactory senderTitleFactory = SenderTitleFactory();
     final MessageReplyInfoMapper messageReplyInfoMapper =
         MessageReplyInfoMapper(
       messagePreviewResolver: dependencies.messagePreviewResolver,
@@ -51,6 +54,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
       providers: <Provider<dynamic>>[
         Provider<tg.TileFactory>.value(
             value: tileFactoryFactory.create(
+                senderTitleFactory: senderTitleFactory,
                 replyInfoFactory: replyInfoFactory,
                 shortInfoFactory: shortInfoFactory,
                 localizationManager: dependencies.localizationManager,
@@ -69,6 +73,10 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                     chatRepository: dependencies.chatRepository,
                     chatArgs: chatArgs,
                     messageTileMapper: MessageTileMapper(
+                        senderNameResolver: SenderNameResolver(
+                          chatRepository: dependencies.chatRepository,
+                          userRepository: dependencies.userRepository,
+                        ),
                         messageReplyInfoMapper: messageReplyInfoMapper,
                         userRepository: dependencies.userRepository,
                         dateParser: dateParser,

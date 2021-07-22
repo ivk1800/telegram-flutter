@@ -3,6 +3,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/util/minithumbnail.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message_factory.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/sender_title_factory.dart';
 import 'package:feature_chat_impl/src/widget/media_widget.dart';
 import 'package:feature_chat_impl/src/widget/message_composite_text.dart';
 import 'package:feature_chat_impl/src/widget/not_implemented_placeholder.dart';
@@ -12,12 +13,15 @@ class MessageAnimationTileFactoryDelegate
     implements ITileFactoryDelegate<MessageAnimationTileModel> {
   MessageAnimationTileFactoryDelegate({
     required ChatMessageFactory chatMessageFactory,
+    required SenderTitleFactory senderTitleFactory,
     required ReplyInfoFactory replyInfoFactory,
   })  : _chatMessageFactory = chatMessageFactory,
+        _senderTitleFactory = senderTitleFactory,
         _replyInfoFactory = replyInfoFactory;
 
   final ChatMessageFactory _chatMessageFactory;
   final ReplyInfoFactory _replyInfoFactory;
+  final SenderTitleFactory _senderTitleFactory;
 
   @override
   Widget create(BuildContext context, MessageAnimationTileModel model) {
@@ -32,6 +36,7 @@ class MessageAnimationTileFactoryDelegate
         id: model.id,
         context: context,
         isOutgoing: model.isOutgoing,
+        senderTitle: _senderTitleFactory.createFromMessageModel(context, model),
         reply: _replyInfoFactory.createFromMessageModel(context, model),
         blocks: <Widget>[
           MediaWrapper(

@@ -25,6 +25,7 @@ class MessageReplyInfoMapper {
       return null;
     }
 
+    // todo message may be not found
     final td.Message replyMessage = await _messageRepository.getMessage(
         chatId: message.replyInChatId, messageId: message.replyToMessageId);
 
@@ -34,7 +35,6 @@ class MessageReplyInfoMapper {
     return ReplyInfo(
         replyToMessageId: message.replyToMessageId,
         title: preview.firstText.orEmpty(),
-        // title: await getSenderNameToDisplay(message.sender),
         subtitle: preview.secondText.orEmpty());
   }
 

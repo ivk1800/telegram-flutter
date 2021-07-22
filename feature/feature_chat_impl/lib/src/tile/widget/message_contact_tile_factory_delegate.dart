@@ -2,6 +2,7 @@ import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message_factory.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/sender_title_factory.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
@@ -10,10 +11,12 @@ class MessageContactTileFactoryDelegate
   MessageContactTileFactoryDelegate(
       {required ChatMessageFactory chatMessageFactory,
       required ILocalizationManager localizationManager,
+      required SenderTitleFactory senderTitleFactory,
       required ReplyInfoFactory replyInfoFactory,
       required ShortInfoFactory shortInfoFactory})
       : _chatMessageFactory = chatMessageFactory,
         _replyInfoFactory = replyInfoFactory,
+        _senderTitleFactory = senderTitleFactory,
         _localizationManager = localizationManager,
         _shortInfoFactory = shortInfoFactory;
 
@@ -21,6 +24,7 @@ class MessageContactTileFactoryDelegate
   final ShortInfoFactory _shortInfoFactory;
   final ILocalizationManager _localizationManager;
   final ReplyInfoFactory _replyInfoFactory;
+  final SenderTitleFactory _senderTitleFactory;
 
   @override
   Widget create(BuildContext context, MessageContactTileModel model) {
@@ -32,6 +36,7 @@ class MessageContactTileFactoryDelegate
         id: model.id,
         isOutgoing: model.isOutgoing,
         context: context,
+        senderTitle: _senderTitleFactory.createFromMessageModel(context, model),
         reply: _replyInfoFactory.createFromMessageModel(context, model),
         blocks: <Widget>[
           ConstrainedBox(
