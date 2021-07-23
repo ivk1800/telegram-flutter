@@ -1,6 +1,8 @@
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:flutter/material.dart';
 
+import 'message/message_skeleton.dart';
+
 class MessageText extends StatelessWidget {
   const MessageText({Key? key, required this.text, required this.shortInfo})
       : super(key: key);

@@ -1,25 +1,19 @@
-import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/component/message_mapper_component.dart';
+import 'package:feature_chat_impl/src/component/message_tile_factory_component.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
-import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
-import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
-import 'package:feature_chat_impl/src/resolver/sender_name_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/reply_info_factory.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/sender_title_factory.dart';
 import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
-
-import 'messages_tile_factory_factory.dart';
 
 class ChatWidgetFactory implements IChatWidgetFactory {
   ChatWidgetFactory({required this.dependencies});
@@ -30,35 +24,34 @@ class ChatWidgetFactory implements IChatWidgetFactory {
   Widget create(BuildContext context, int chatId) {
     final ChatArgs chatArgs = ChatArgs(chatId);
 
-    final MessagesTileFactoryFactory tileFactoryFactory =
-        MessagesTileFactoryFactory();
-    final DateParser dateParser = DateParser();
-
     final tg.AvatarWidgetFactory avatarWidgetFactory =
         tg.AvatarWidgetFactory(fileRepository: dependencies.fileRepository);
     final ChatMessageFactory chatMessageFactory = ChatMessageFactory(
       avatarWidgetFactory: avatarWidgetFactory,
     );
-    final FormattedTextResolver formattedTextResolver = FormattedTextResolver();
-    final ShortInfoFactory shortInfoFactory = ShortInfoFactory();
-    final ReplyInfoFactory replyInfoFactory = ReplyInfoFactory();
-    final SenderTitleFactory senderTitleFactory = SenderTitleFactory();
-    final MessageReplyInfoMapper messageReplyInfoMapper =
-        MessageReplyInfoMapper(
-      messagePreviewResolver: dependencies.messagePreviewResolver,
-      chatRepository: dependencies.chatRepository,
-      userRepository: dependencies.userRepository,
-      messageRepository: dependencies.chatMessageRepository,
+    final MessageTileFactoryComponent messageFactoryComponent =
+        MessageTileFactoryComponent(
+      dependencies: MessageTileFactoryDependencies(
+        localizationManager: dependencies.localizationManager,
+        fileRepository: dependencies.fileRepository,
+      ),
     );
+
+    final MessageMapperComponent messageMapperComponent =
+        MessageMapperComponent(
+      dependencies: MessageMapperDependencies(
+        localizationManager: dependencies.localizationManager,
+        fileRepository: dependencies.fileRepository,
+        chatRepository: dependencies.chatRepository,
+        userRepository: dependencies.userRepository,
+        chatMessageRepository: dependencies.chatMessageRepository,
+        messagePreviewResolver: dependencies.messagePreviewResolver,
+      ),
+    );
+
     return MultiProvider(
       providers: <Provider<dynamic>>[
-        Provider<tg.TileFactory>.value(
-            value: tileFactoryFactory.create(
-                senderTitleFactory: senderTitleFactory,
-                replyInfoFactory: replyInfoFactory,
-                shortInfoFactory: shortInfoFactory,
-                localizationManager: dependencies.localizationManager,
-                chatMessageFactory: chatMessageFactory)),
+        Provider<tg.TileFactory>.value(value: messageFactoryComponent.create()),
         Provider<ChatMessageFactory>.value(value: chatMessageFactory),
         Provider<ILocalizationManager>.value(
             value: dependencies.localizationManager),
@@ -72,16 +65,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                 messagesInteractor: ChatMessagesInteractor(
                     chatRepository: dependencies.chatRepository,
                     chatArgs: chatArgs,
-                    messageTileMapper: MessageTileMapper(
-                        senderNameResolver: SenderNameResolver(
-                          chatRepository: dependencies.chatRepository,
-                          userRepository: dependencies.userRepository,
-                        ),
-                        messageReplyInfoMapper: messageReplyInfoMapper,
-                        userRepository: dependencies.userRepository,
-                        dateParser: dateParser,
-                        localizationManager: dependencies.localizationManager,
-                        formattedTextResolver: formattedTextResolver),
+                    messageTileMapper: messageMapperComponent.create(),
                     messageRepository: dependencies.chatMessageRepository),
                 args: chatArgs,
               ),

@@ -66,51 +66,27 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
     final fake.FakeUserRepository fakeUserRepository =
         fake.FakeUserRepository(fakeUserProvider: fakeUserProvider);
 
-    final chat_impl.ChatMessageFactory chatMessageFactory =
-        chat_impl.ChatMessageFactory(
-      avatarWidgetFactory:
-          tg.AvatarWidgetFactory(fileRepository: fakeFileRepository),
-    );
-    final chat_impl.ShortInfoFactory shortInfoFactory =
-        chat_impl.ShortInfoFactory();
-    final chat_impl.ReplyInfoFactory replyInfoFactory =
-        chat_impl.ReplyInfoFactory();
-    final chat_impl.SenderTitleFactory senderTitleFactory =
-        chat_impl.SenderTitleFactory();
-    final chat_impl.MessageReplyInfoMapper messageReplyInfoMapper =
-        chat_impl.MessageReplyInfoMapper(
-      messagePreviewResolver: MessagePreviewResolver(
-        mode: Mode.ReplyPreview,
-        messageRepository: fakeChatMessageRepository,
-        chatRepository: fakeChatRepository,
-        userRepository: fakeUserRepository,
-        localizationManager: localizationManager,
-      ),
+    _tileFactory = chat_impl.MessageTileFactoryComponent(
+        dependencies: chat_impl.MessageTileFactoryDependencies(
+      fileRepository: fakeFileRepository,
+      localizationManager: localizationManager,
+    )).create();
+
+    _messageTileMapper = chat_impl.MessageMapperComponent(
+        dependencies: chat_impl.MessageMapperDependencies(
+      chatMessageRepository: fakeChatMessageRepository,
       chatRepository: fakeChatRepository,
       userRepository: fakeUserRepository,
-      messageRepository: fakeChatMessageRepository,
-    );
-    final chat_impl.FormattedTextResolver formattedTextResolver =
-        chat_impl.FormattedTextResolver();
-    _tileFactory = chat_impl.MessagesTileFactoryFactory().create(
-        senderTitleFactory: senderTitleFactory,
-        replyInfoFactory: replyInfoFactory,
-        localizationManager: localizationManager,
-        chatMessageFactory: chatMessageFactory,
-        shortInfoFactory: shortInfoFactory);
-
-    final DateParser dateParser = DateParser();
-
-    _messageTileMapper = chat_impl.MessageTileMapper(
-        senderNameResolver: chat_impl.SenderNameResolver(
-          userRepository: fakeUserRepository,
-          chatRepository: fakeChatRepository,
-        ),
+      messagePreviewResolver: MessagePreviewResolver(
         userRepository: fakeUserRepository,
-        messageReplyInfoMapper: messageReplyInfoMapper,
-        dateParser: dateParser,
+        chatRepository: fakeChatRepository,
         localizationManager: localizationManager,
-        formattedTextResolver: formattedTextResolver);
+        mode: Mode.ReplyPreview,
+        messageRepository: fakeChatMessageRepository,
+      ),
+      fileRepository: fakeFileRepository,
+      localizationManager: localizationManager,
+    )).create();
   }
 
   @override
