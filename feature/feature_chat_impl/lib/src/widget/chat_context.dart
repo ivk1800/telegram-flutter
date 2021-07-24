@@ -39,7 +39,7 @@ class ChatContextData {
       ChatContextData.raw(
           width: maxWidth,
           horizontalPadding: 8.0,
-          verticalPadding: 8.0,
+          verticalPadding: 4.0,
           maxWidth: 500,
           mediaConstraints: <MediaType, Size>{
             MediaType.Video: const Size(double.infinity, 450),

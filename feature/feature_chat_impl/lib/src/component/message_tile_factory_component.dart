@@ -29,7 +29,9 @@ class MessageTileFactoryComponent {
     final MessagesTileFactoryFactory tileFactoryFactory =
         MessagesTileFactoryFactory();
 
-    final ShortInfoFactory shortInfoFactory = ShortInfoFactory();
+    final ShortInfoFactory shortInfoFactory = ShortInfoFactory(
+      localizationManager: _dependencies.localizationManager,
+    );
     final ReplyInfoFactory replyInfoFactory = ReplyInfoFactory();
     final SenderTitleFactory senderTitleFactory = SenderTitleFactory();
 

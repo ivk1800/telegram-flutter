@@ -74,6 +74,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
 
     _messageTileMapper = chat_impl.MessageMapperComponent(
         dependencies: chat_impl.MessageMapperDependencies(
+      dateParser: DateParser(),
       chatMessageRepository: fakeChatMessageRepository,
       chatRepository: fakeChatRepository,
       userRepository: fakeUserRepository,

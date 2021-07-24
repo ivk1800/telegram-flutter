@@ -122,4 +122,6 @@
     <string lang="ContactJoined">Contact joined Telegram</string>
     <!-- https://translations.telegram.org/en/android/general/ViewContact -->
     <string lang="ViewContact">VIEW CONTACT</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/EditedMessage -->
+    <string lang="EditedMessage">edited</string>
 </resources>

@@ -40,6 +40,7 @@ class ChatWidgetFactory implements IChatWidgetFactory {
     final MessageMapperComponent messageMapperComponent =
         MessageMapperComponent(
       dependencies: MessageMapperDependencies(
+        dateParser: dependencies.dateParser,
         localizationManager: dependencies.localizationManager,
         fileRepository: dependencies.fileRepository,
         chatRepository: dependencies.chatRepository,

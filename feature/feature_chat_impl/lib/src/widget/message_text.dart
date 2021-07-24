@@ -1,4 +1,3 @@
-import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:flutter/material.dart';
 
 import 'message/message_skeleton.dart';

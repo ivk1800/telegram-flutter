@@ -1,4 +1,5 @@
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
+import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,12 @@ class ReplyInfoFactory {
     BuildContext context,
     Widget child,
   ) {
+    final ChatContextData chatContextData = ChatContext.of(context);
     return Padding(
-      padding: const EdgeInsets.only(
-        right: 8,
-        top: 8,
-        bottom: 8,
+      padding: EdgeInsets.only(
+        right: chatContextData.horizontalPadding,
+        top: chatContextData.verticalPadding,
+        bottom: chatContextData.verticalPadding,
       ),
       child: CustomPaint(
         child: Padding(

@@ -9,15 +9,18 @@ class MessageAnimationTileFactoryDelegate
     implements ITileFactoryDelegate<MessageAnimationTileModel> {
   MessageAnimationTileFactoryDelegate({
     required ChatMessageFactory chatMessageFactory,
+    required ShortInfoFactory shortInfoFactory,
     required SenderTitleFactory senderTitleFactory,
     required ReplyInfoFactory replyInfoFactory,
   })  : _chatMessageFactory = chatMessageFactory,
+        _shortInfoFactory = shortInfoFactory,
         _senderTitleFactory = senderTitleFactory,
         _replyInfoFactory = replyInfoFactory;
 
   final ChatMessageFactory _chatMessageFactory;
   final ReplyInfoFactory _replyInfoFactory;
   final SenderTitleFactory _senderTitleFactory;
+  final ShortInfoFactory _shortInfoFactory;
 
   @override
   Widget create(BuildContext context, MessageAnimationTileModel model) {
@@ -47,10 +50,8 @@ class MessageAnimationTileFactoryDelegate
           if (model.caption != null)
             MessageCaption(
               text: model.caption!,
-              shortInfo: Text(
-                '22:46',
-                style: Theme.of(context).textTheme.caption,
-              ),
+              shortInfo:
+                  _shortInfoFactory.create(context, model.additionalInfo),
             ),
         ]);
   }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
+import 'package:feature_chat_impl/src/mapper/additional_info_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/resolver/sender_name_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
@@ -21,12 +22,15 @@ class MessageTileMapper {
       required IUserRepository userRepository,
       required SenderNameResolver senderNameResolver,
       required MessageReplyInfoMapper messageReplyInfoMapper,
+      required AdditionalInfoMapper additionalInfoMapper,
       required ILocalizationManager localizationManager})
       : _localizationManager = localizationManager,
         _userRepository = userRepository,
         _senderNameResolver = senderNameResolver,
         _messageReplyInfoMapper = messageReplyInfoMapper,
+        _additionalInfoMapper = additionalInfoMapper,
         _messageCallTileModelMapper = MessageCallTileModelMapper(
+          additionalInfoMapper: additionalInfoMapper,
           senderNameResolver: senderNameResolver,
           localizationManager: localizationManager,
           dateParser: dateParser,
@@ -35,6 +39,7 @@ class MessageTileMapper {
         _formattedTextResolver = formattedTextResolver;
 
   final SenderNameResolver _senderNameResolver;
+  final AdditionalInfoMapper _additionalInfoMapper;
   final FormattedTextResolver _formattedTextResolver;
   final ILocalizationManager _localizationManager;
   final MessageReplyInfoMapper _messageReplyInfoMapper;
@@ -56,6 +61,7 @@ class MessageTileMapper {
             id: message.id,
             senderName: await _senderNameResolver.resolve(message.sender),
             replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
+            additionalInfo: await _additionalInfoMapper.map(message),
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),
             minithumbnail: m.animation.minithumbnail?.toMinithumbnail(),
@@ -69,6 +75,7 @@ class MessageTileMapper {
               id: message.id,
               senderName: await _senderNameResolver.resolve(message.sender),
               replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
+              additionalInfo: await _additionalInfoMapper.map(message),
               isOutgoing: message.isOutgoing,
               performer: m.audio.performer,
               totalDuration:
@@ -231,6 +238,7 @@ class MessageTileMapper {
             id: message.id,
             senderName: await _senderNameResolver.resolve(message.sender),
             replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
+            additionalInfo: await _additionalInfoMapper.map(message),
             isOutgoing: message.isOutgoing,
             title: // todo extract to extension for concat first and last names
                 <String>[contact.firstName, contact.lastName]
@@ -360,6 +368,7 @@ class MessageTileMapper {
             id: message.id,
             senderName: await _senderNameResolver.resolve(message.sender),
             replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
+            additionalInfo: await _additionalInfoMapper.map(message),
             minithumbnail: m.photo.minithumbnail?.toMinithumbnail(),
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),
@@ -420,6 +429,7 @@ class MessageTileMapper {
               id: message.id,
               senderName: await _senderNameResolver.resolve(message.sender),
               replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
+              additionalInfo: await _additionalInfoMapper.map(message),
               isOutgoing: message.isOutgoing,
               text: TextSpan(text: m.text.text));
         }
@@ -455,6 +465,7 @@ class MessageTileMapper {
             id: message.id,
             senderName: await _senderNameResolver.resolve(message.sender),
             replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
+            additionalInfo: await _additionalInfoMapper.map(message),
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),
             minithumbnail: m.video.minithumbnail?.toMinithumbnail(),

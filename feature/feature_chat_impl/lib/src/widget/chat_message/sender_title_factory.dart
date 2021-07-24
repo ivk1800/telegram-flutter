@@ -20,6 +20,7 @@ class SenderTitleFactory {
       padding: EdgeInsets.only(
         top: chatContext.verticalPadding,
         right: chatContext.horizontalPadding,
+        bottom: chatContext.verticalPadding,
         left: chatContext.horizontalPadding,
       ),
       child: Text(

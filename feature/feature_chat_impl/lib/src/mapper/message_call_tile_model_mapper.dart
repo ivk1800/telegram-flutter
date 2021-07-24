@@ -6,16 +6,19 @@ import 'package:intl/intl.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
+import 'additional_info_mapper.dart';
 import 'message_reply_info_mapper.dart';
 
 class MessageCallTileModelMapper {
   MessageCallTileModelMapper(
       {required ILocalizationManager localizationManager,
       required SenderNameResolver senderNameResolver,
+      required AdditionalInfoMapper additionalInfoMapper,
       required MessageReplyInfoMapper messageReplyInfoMapper,
       required DateParser dateParser})
       : _localizationManager = localizationManager,
         _senderNameResolver = senderNameResolver,
+        _additionalInfoMapper = additionalInfoMapper,
         _messageReplyInfoMapper = messageReplyInfoMapper,
         _dateParser = dateParser;
 
@@ -24,6 +27,7 @@ class MessageCallTileModelMapper {
   final SenderNameResolver _senderNameResolver;
   final ILocalizationManager _localizationManager;
   final MessageReplyInfoMapper _messageReplyInfoMapper;
+  final AdditionalInfoMapper _additionalInfoMapper;
   final DateParser _dateParser;
 
   Future<ITileModel> mapToTileModel({
@@ -37,6 +41,7 @@ class MessageCallTileModelMapper {
         id: message.id,
         senderName: await _senderNameResolver.resolve(message.sender),
         replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
+        additionalInfo: await _additionalInfoMapper.map(message),
         isOutgoing: message.isOutgoing,
         duration: _getDuration(content.duration),
         date: _callDateFormat.format(callDate),

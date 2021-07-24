@@ -6,12 +6,14 @@ class MessageContactTileModel extends BaseConversationMessageTileModel {
     required String? senderName,
     required bool isOutgoing,
     required ReplyInfo? replyInfo,
+    required AdditionalInfo additionalInfo,
     required this.title,
     required this.subtitle,
   }) : super(
           isOutgoing: isOutgoing,
           id: id,
           replyInfo: replyInfo,
+          additionalInfo: additionalInfo,
           senderName: senderName,
         );
 

@@ -1,6 +1,7 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/mapper/additional_info_mapper.dart';
 import 'package:feature_chat_impl/src/mapper/message_reply_info_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/resolver/sender_name_resolver.dart';
@@ -10,6 +11,7 @@ import 'package:localization_api/localization_api.dart';
 class MessageMapperDependencies {
   const MessageMapperDependencies({
     required this.fileRepository,
+    required this.dateParser,
     required this.chatRepository,
     required this.userRepository,
     required this.chatMessageRepository,
@@ -17,6 +19,7 @@ class MessageMapperDependencies {
     required this.localizationManager,
   });
 
+  final DateParser dateParser;
   final ILocalizationManager localizationManager;
   final IFileRepository fileRepository;
   final IChatRepository chatRepository;
@@ -40,12 +43,17 @@ class MessageMapperComponent {
       messageRepository: _dependencies.chatMessageRepository,
     );
 
+    final AdditionalInfoMapper additionalInfoMapper = AdditionalInfoMapper(
+      dateParser: _dependencies.dateParser,
+    );
+
     return MessageTileMapper(
         senderNameResolver: SenderNameResolver(
           chatRepository: _dependencies.chatRepository,
           userRepository: _dependencies.userRepository,
         ),
         messageReplyInfoMapper: messageReplyInfoMapper,
+        additionalInfoMapper: additionalInfoMapper,
         userRepository: _dependencies.userRepository,
         dateParser: DateParser(),
         localizationManager: _dependencies.localizationManager,

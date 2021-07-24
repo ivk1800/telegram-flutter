@@ -80,7 +80,8 @@ class MessageContactTileFactoryDelegate
                     alignment: Alignment.centerRight,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 4, top: 4),
-                      child: _shortInfoFactory.create(context),
+                      child: _shortInfoFactory.create(
+                          context, model.additionalInfo),
                     ),
                   )
                 ],

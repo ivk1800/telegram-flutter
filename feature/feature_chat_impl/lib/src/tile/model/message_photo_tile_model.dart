@@ -8,12 +8,14 @@ class MessagePhotoTileModel extends BaseConversationMessageTileModel {
     required String? senderName,
     required bool isOutgoing,
     required ReplyInfo? replyInfo,
+    required AdditionalInfo additionalInfo,
     required this.minithumbnail,
     required this.caption,
   }) : super(
           isOutgoing: isOutgoing,
           id: id,
           replyInfo: replyInfo,
+          additionalInfo: additionalInfo,
           senderName: senderName,
         );
 

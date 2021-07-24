@@ -10,14 +10,17 @@ class MessageVideoTileFactoryDelegate
   MessageVideoTileFactoryDelegate({
     required ChatMessageFactory chatMessageFactory,
     required SenderTitleFactory senderTitleFactory,
+    required ShortInfoFactory shortInfoFactory,
     required ReplyInfoFactory replyInfoFactory,
   })  : _chatMessageFactory = chatMessageFactory,
+        _shortInfoFactory = shortInfoFactory,
         _senderTitleFactory = senderTitleFactory,
         _replyInfoFactory = replyInfoFactory;
 
   final SenderTitleFactory _senderTitleFactory;
   final ChatMessageFactory _chatMessageFactory;
   final ReplyInfoFactory _replyInfoFactory;
+  final ShortInfoFactory _shortInfoFactory;
 
   @override
   Widget create(BuildContext context, MessageVideoTileModel model) {
@@ -47,10 +50,8 @@ class MessageVideoTileFactoryDelegate
           if (model.caption != null)
             MessageCaption(
               text: model.caption!,
-              shortInfo: Text(
-                '22:46',
-                style: Theme.of(context).textTheme.caption,
-              ),
+              shortInfo:
+                  _shortInfoFactory.create(context, model.additionalInfo),
             ),
         ]);
   }

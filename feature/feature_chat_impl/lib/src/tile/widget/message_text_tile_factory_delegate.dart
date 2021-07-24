@@ -1,9 +1,6 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/chat_message_factory.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/reply_info_factory.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/sender_title_factory.dart';
-import 'package:feature_chat_impl/src/widget/message_composite_text.dart';
+import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
 
 class MessageTextTileFactoryDelegate
@@ -11,14 +8,17 @@ class MessageTextTileFactoryDelegate
   MessageTextTileFactoryDelegate({
     required ChatMessageFactory chatMessageFactory,
     required SenderTitleFactory senderTitleFactory,
+    required ShortInfoFactory shortInfoFactory,
     required ReplyInfoFactory replyInfoFactory,
   })  : _chatMessageFactory = chatMessageFactory,
         _senderTitleFactory = senderTitleFactory,
+        _shortInfoFactory = shortInfoFactory,
         _replyInfoFactory = replyInfoFactory;
 
   final ChatMessageFactory _chatMessageFactory;
   final ReplyInfoFactory _replyInfoFactory;
   final SenderTitleFactory _senderTitleFactory;
+  final ShortInfoFactory _shortInfoFactory;
 
   @override
   Widget create(BuildContext context, MessageTextTileModel model) {
@@ -31,10 +31,7 @@ class MessageTextTileFactoryDelegate
         blocks: <Widget>[
           MessageCaption(
             text: model.text,
-            shortInfo: Text(
-              '22:46',
-              style: Theme.of(context).textTheme.caption,
-            ),
+            shortInfo: _shortInfoFactory.create(context, model.additionalInfo),
           ),
         ]);
   }

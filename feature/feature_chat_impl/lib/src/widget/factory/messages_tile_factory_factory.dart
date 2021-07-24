@@ -16,6 +16,7 @@ class MessagesTileFactoryFactory {
     return tg
         .TileFactory(delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
       MessageAnimationTileModel: MessageAnimationTileFactoryDelegate(
+          shortInfoFactory: shortInfoFactory,
           senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
@@ -98,6 +99,7 @@ class MessagesTileFactoryFactory {
           MessagePaymentSuccessfulTileFactoryDelegate(
               chatMessageFactory: chatMessageFactory),
       MessagePhotoTileModel: MessagePhotoTileFactoryDelegate(
+          shortInfoFactory: shortInfoFactory,
           senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
@@ -117,6 +119,7 @@ class MessagesTileFactoryFactory {
           MessageSupergroupChatCreateTileFactoryDelegate(
               chatMessageFactory: chatMessageFactory),
       MessageTextTileModel: MessageTextTileFactoryDelegate(
+          shortInfoFactory: shortInfoFactory,
           senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
@@ -127,6 +130,7 @@ class MessagesTileFactoryFactory {
       MessageVideoNoteTileModel: MessageVideoNoteTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
       MessageVideoTileModel: MessageVideoTileFactoryDelegate(
+          shortInfoFactory: shortInfoFactory,
           senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),

@@ -75,7 +75,8 @@ class MessageAudioTileFactoryDelegate
                           text: '00:00 / ${model.totalDuration}',
                           style: theme.textTheme.caption,
                         ),
-                        shortInfo: _shortInfoFactory.create(context),
+                        shortInfo: _shortInfoFactory.create(
+                            context, model.additionalInfo),
                       )
                     ],
                   ),
