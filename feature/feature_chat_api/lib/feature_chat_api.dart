@@ -3,9 +3,9 @@ library feature_chat_api;
 import 'package:flutter/widgets.dart';
 
 abstract class IChatFeatureApi {
-  IChatWidgetFactory get screenWidgetFactory;
+  IChatScreenFactory get chatScreenFactory;
 }
 
-abstract class IChatWidgetFactory {
+abstract class IChatScreenFactory {
   Widget create(BuildContext context, int chatId);
 }

@@ -36,7 +36,7 @@ class RootNavigationRouter
     final PageRoute<dynamic> route = _defaultRoute(
       (BuildContext context) => _featureFactory
           .createChatFeatureApi()
-          .screenWidgetFactory
+          .chatScreenFactory
           .create(context, chatId),
     );
     _push(route);

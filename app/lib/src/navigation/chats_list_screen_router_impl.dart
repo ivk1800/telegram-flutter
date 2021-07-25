@@ -36,7 +36,7 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
           key: key,
           builder: (BuildContext context) => _featureFactory
               .createChatFeatureApi()
-              .screenWidgetFactory
+              .chatScreenFactory
               .create(context, id),
           container: ContainerType.Right);
     }

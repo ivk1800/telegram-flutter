@@ -21,14 +21,14 @@ export 'src/widget/theme/chat_theme.dart';
 
 class ChatFeatureApi implements IChatFeatureApi {
   ChatFeatureApi({required this.dependencies})
-      : _chatWidgetFactory = ChatWidgetFactory(dependencies: dependencies);
+      : _chatScreenFactory = ChatScreenFactory(dependencies: dependencies);
 
-  final IChatWidgetFactory _chatWidgetFactory;
+  final IChatScreenFactory _chatScreenFactory;
 
   final IChatFeatureDependencies dependencies;
 
   @override
-  IChatWidgetFactory get screenWidgetFactory => _chatWidgetFactory;
+  IChatScreenFactory get chatScreenFactory => _chatScreenFactory;
 }
 
 abstract class IChatFeatureDependencies {

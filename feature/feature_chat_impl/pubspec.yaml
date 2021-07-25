@@ -24,8 +24,21 @@ dependencies:
     path: ../../core_tdlib_api
   feature_chat_api:
     path: ../feature_chat_api
+  jugger:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jugger
+      ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
 
   flutter:
     sdk: flutter
+
+dev_dependencies:
+  jugger_generator:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jugger_generator
+      ref: ebf47e38b00f38c21aed7787f438202eeb847ef9
+  build_runner: ^1.10.2
 
 flutter:

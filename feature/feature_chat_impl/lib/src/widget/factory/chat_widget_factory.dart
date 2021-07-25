@@ -1,9 +1,7 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
-import 'package:feature_chat_impl/src/component/message_mapper_component.dart';
-import 'package:feature_chat_impl/src/component/message_tile_factory_component.dart';
-import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
+import 'package:feature_chat_impl/src/di/di.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
@@ -16,75 +14,50 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
-class ChatWidgetFactory implements IChatWidgetFactory {
-  ChatWidgetFactory({required this.dependencies});
+class ChatScreenFactory implements IChatScreenFactory {
+  ChatScreenFactory({required this.dependencies});
 
   final IChatFeatureDependencies dependencies;
 
   @override
   Widget create(BuildContext context, int chatId) {
-    final ChatArgs chatArgs = ChatArgs(chatId);
-
-    final tg.AvatarWidgetFactory avatarWidgetFactory =
-        tg.AvatarWidgetFactory(fileRepository: dependencies.fileRepository);
-    final ChatMessageFactory chatMessageFactory = ChatMessageFactory(
-      avatarWidgetFactory: avatarWidgetFactory,
-    );
-
-    final MessageMapperComponent messageMapperComponent =
-        MessageMapperComponent(
-      dependencies: MessageMapperDependencies(
-        dateParser: dependencies.dateParser,
-        localizationManager: dependencies.localizationManager,
-        fileRepository: dependencies.fileRepository,
-        chatRepository: dependencies.chatRepository,
-        userRepository: dependencies.userRepository,
-        chatMessageRepository: dependencies.chatMessageRepository,
-        messagePreviewResolver: dependencies.messagePreviewResolver,
+    return Provider<ChatScreenComponent>(
+      create: (_) => JuggerChatScreenComponentBuilder()
+          .dependencies(dependencies)
+          .chatArgs(ChatArgs(chatId))
+          .build(),
+      child: MultiProvider(
+        providers: <Provider<dynamic>>[
+          Provider<tg.TileFactory>(
+            create: (BuildContext context) =>
+                context.getComponent().getTileFactory(),
+          ),
+          Provider<ChatMessageFactory>(
+            create: (BuildContext context) =>
+                context.getComponent().getChatMessageFactory(),
+          ),
+          Provider<ILocalizationManager>(
+            create: (BuildContext context) =>
+                context.getComponent().getLocalizationManager(),
+          ),
+          Provider<tg.ConnectionStateWidgetFactory>(
+            create: (BuildContext context) =>
+                context.getComponent().getConnectionStateWidgetFactory(),
+          ),
+        ],
+        child: BlocProvider<ChatBloc>(
+            create: (BuildContext context) =>
+                context.getComponent().getChatBloc(),
+            child: ChatTheme(
+              data: ChatThemeData.light(context: context),
+              child: const ChatPage(),
+            )),
       ),
-    );
-
-    final ChatMessagesInteractor chatMessagesInteractor =
-        ChatMessagesInteractor(
-      chatRepository: dependencies.chatRepository,
-      chatArgs: chatArgs,
-      messageTileMapper: messageMapperComponent.create(),
-      messageRepository: dependencies.chatMessageRepository,
-    );
-
-    final MessageTileFactoryComponent messageFactoryComponent =
-        MessageTileFactoryComponent(
-      dependencies: MessageTileFactoryDependencies(
-        messageWallContext: MessageWallContextImpl(
-          chatMessagesInteractor: chatMessagesInteractor,
-        ),
-        localizationManager: dependencies.localizationManager,
-        fileRepository: dependencies.fileRepository,
-      ),
-    );
-
-    return MultiProvider(
-      providers: <Provider<dynamic>>[
-        Provider<tg.TileFactory>.value(value: messageFactoryComponent.create()),
-        Provider<ChatMessageFactory>.value(value: chatMessageFactory),
-        Provider<ILocalizationManager>.value(
-            value: dependencies.localizationManager),
-        Provider<tg.ConnectionStateWidgetFactory>.value(
-            value: tg.ConnectionStateWidgetFactory(
-                connectionStateProvider: dependencies.connectionStateProvider))
-      ],
-      child: BlocProvider<ChatBloc>(
-          create: (BuildContext context) {
-            return ChatBloc(
-              router: dependencies.router,
-              messagesInteractor: chatMessagesInteractor,
-              args: chatArgs,
-            );
-          },
-          child: ChatTheme(
-            data: ChatThemeData.light(context: context),
-            child: const ChatPage(),
-          )),
     );
   }
+}
+
+extension _ContextExt on BuildContext {
+  ChatScreenComponent getComponent() =>
+      Provider.of<ChatScreenComponent>(this, listen: false);
 }
