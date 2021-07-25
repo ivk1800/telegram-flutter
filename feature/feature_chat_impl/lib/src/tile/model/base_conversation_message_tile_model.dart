@@ -3,15 +3,15 @@ import 'base_message_tile_model.dart';
 abstract class BaseConversationMessageTileModel extends BaseMessageTileModel {
   const BaseConversationMessageTileModel({
     required int id,
-    required this.senderName,
+    required this.senderInfo,
     required bool isOutgoing,
     required this.replyInfo,
     required this.additionalInfo,
   }) : super(id: id, isOutgoing: isOutgoing);
 
   final ReplyInfo? replyInfo;
-  final String? senderName;
   final AdditionalInfo additionalInfo;
+  final SenderInfo senderInfo;
 }
 
 class ReplyInfo {
@@ -23,6 +23,18 @@ class ReplyInfo {
   final int replyToMessageId;
   final String title;
   final String subtitle;
+}
+
+class SenderInfo {
+  const SenderInfo({
+    required this.id,
+    required this.senderName,
+    required this.senderPhotoId,
+  });
+
+  final int id;
+  final String senderName;
+  final int? senderPhotoId;
 }
 
 class AdditionalInfo {

@@ -23,6 +23,7 @@ class AvatarWidgetFactory {
     const Color(0xfff2749a),
   ];
 
+  // todo rename chatId to some another name
   Widget create(BuildContext context,
       {required double radius, required int chatId, int? imageId}) {
     if (imageId == null) {

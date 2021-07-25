@@ -3,7 +3,7 @@ import 'base_conversation_message_tile_model.dart';
 class MessageContactTileModel extends BaseConversationMessageTileModel {
   const MessageContactTileModel({
     required int id,
-    required String? senderName,
+    required SenderInfo senderInfo,
     required bool isOutgoing,
     required ReplyInfo? replyInfo,
     required AdditionalInfo additionalInfo,
@@ -14,7 +14,7 @@ class MessageContactTileModel extends BaseConversationMessageTileModel {
           id: id,
           replyInfo: replyInfo,
           additionalInfo: additionalInfo,
-          senderName: senderName,
+          senderInfo: senderInfo,
         );
 
   final String title;

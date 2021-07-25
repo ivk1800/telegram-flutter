@@ -15,7 +15,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         _router = router,
         _messagesInteractor = messagesInteractor,
         super(const LoadingState()) {
-    _messagesInteractor.messages.listen((List<ITileModel> tiles) {
+    _messagesInteractor.messagesStream.listen((List<ITileModel> tiles) {
       emit(DefaultState(tiles: tiles));
     });
     _messagesInteractor.init(_args.chatId);

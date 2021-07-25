@@ -1,7 +1,10 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
+import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/tile_widget.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:localization_api/localization_api.dart';
 
@@ -12,17 +15,22 @@ class MessagesTileFactoryFactory {
       required ILocalizationManager localizationManager,
       required ReplyInfoFactory replyInfoFactory,
       required SenderTitleFactory senderTitleFactory,
+      required SenderAvatarFactory senderAvatarFactory,
+      required MessageComponentResolver messageComponentResolver,
+      required IMessageWallContext messageWallContext,
       required ShortInfoFactory shortInfoFactory}) {
     return tg
         .TileFactory(delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
       MessageAnimationTileModel: MessageAnimationTileFactoryDelegate(
           shortInfoFactory: shortInfoFactory,
+          senderAvatarFactory: senderAvatarFactory,
           senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageAudioTileModel: MessageAudioTileFactoryDelegate(
           senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
+          senderAvatarFactory: senderAvatarFactory,
           shortInfoFactory: shortInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageBasicGroupChatCreateTileModel:
@@ -30,6 +38,7 @@ class MessagesTileFactoryFactory {
               chatMessageFactory: chatMessageFactory),
       MessageCallTileModel: MessageCallTileFactoryDelegate(
           senderTitleFactory: senderTitleFactory,
+          senderAvatarFactory: senderAvatarFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageChatAddMembersTileModel: MessageChatAddMembersTileFactoryDelegate(
@@ -58,6 +67,7 @@ class MessagesTileFactoryFactory {
       MessageContactTileModel: MessageContactTileFactoryDelegate(
           senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
+          senderAvatarFactory: senderAvatarFactory,
           localizationManager: localizationManager,
           shortInfoFactory: shortInfoFactory,
           chatMessageFactory: chatMessageFactory),
@@ -100,6 +110,7 @@ class MessagesTileFactoryFactory {
               chatMessageFactory: chatMessageFactory),
       MessagePhotoTileModel: MessagePhotoTileFactoryDelegate(
           shortInfoFactory: shortInfoFactory,
+          senderAvatarFactory: senderAvatarFactory,
           senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
@@ -119,8 +130,8 @@ class MessagesTileFactoryFactory {
           MessageSupergroupChatCreateTileFactoryDelegate(
               chatMessageFactory: chatMessageFactory),
       MessageTextTileModel: MessageTextTileFactoryDelegate(
+          messageComponentResolver: messageComponentResolver,
           shortInfoFactory: shortInfoFactory,
-          senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageUnsupportedTileModel: MessageUnsupportedTileFactoryDelegate(
@@ -131,6 +142,7 @@ class MessagesTileFactoryFactory {
           chatMessageFactory: chatMessageFactory),
       MessageVideoTileModel: MessageVideoTileFactoryDelegate(
           shortInfoFactory: shortInfoFactory,
+          senderAvatarFactory: senderAvatarFactory,
           senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),

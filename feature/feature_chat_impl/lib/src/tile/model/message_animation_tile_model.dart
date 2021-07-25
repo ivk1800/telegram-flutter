@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 class MessageAnimationTileModel extends BaseConversationMessageTileModel {
   const MessageAnimationTileModel({
     required int id,
-    required String? senderName,
+    required SenderInfo senderInfo,
     required bool isOutgoing,
     required ReplyInfo? replyInfo,
     required AdditionalInfo additionalInfo,
@@ -16,7 +16,7 @@ class MessageAnimationTileModel extends BaseConversationMessageTileModel {
           id: id,
           replyInfo: replyInfo,
           additionalInfo: additionalInfo,
-          senderName: senderName,
+          senderInfo: senderInfo,
         );
 
   final Minithumbnail? minithumbnail;

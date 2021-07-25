@@ -3,7 +3,7 @@ import 'base_conversation_message_tile_model.dart';
 class MessageAudioTileModel extends BaseConversationMessageTileModel {
   const MessageAudioTileModel({
     required int id,
-    required String? senderName,
+    required SenderInfo senderInfo,
     required bool isOutgoing,
     required ReplyInfo? replyInfo,
     required AdditionalInfo additionalInfo,
@@ -15,7 +15,7 @@ class MessageAudioTileModel extends BaseConversationMessageTileModel {
           id: id,
           additionalInfo: additionalInfo,
           replyInfo: replyInfo,
-          senderName: senderName,
+          senderInfo: senderInfo,
         );
 
   final String title;

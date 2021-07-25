@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 class MessageTextTileModel extends BaseConversationMessageTileModel {
   const MessageTextTileModel({
     required int id,
-    required String? senderName,
+    required SenderInfo senderInfo,
     required bool isOutgoing,
     required ReplyInfo? replyInfo,
     required AdditionalInfo additionalInfo,
@@ -14,7 +14,7 @@ class MessageTextTileModel extends BaseConversationMessageTileModel {
           id: id,
           replyInfo: replyInfo,
           additionalInfo: additionalInfo,
-          senderName: senderName,
+          senderInfo: senderInfo,
         );
 
   final InlineSpan text;

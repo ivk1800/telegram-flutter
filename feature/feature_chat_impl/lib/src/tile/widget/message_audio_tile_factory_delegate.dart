@@ -1,6 +1,7 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +10,11 @@ class MessageAudioTileFactoryDelegate
   MessageAudioTileFactoryDelegate(
       {required ShortInfoFactory shortInfoFactory,
       required ReplyInfoFactory replyInfoFactory,
+      required SenderAvatarFactory senderAvatarFactory,
       required SenderTitleFactory senderTitleFactory,
       required ChatMessageFactory chatMessageFactory})
       : _shortInfoFactory = shortInfoFactory,
+        _senderAvatarFactory = senderAvatarFactory,
         _replyInfoFactory = replyInfoFactory,
         _senderTitleFactory = senderTitleFactory,
         _chatMessageFactory = chatMessageFactory;
@@ -20,6 +23,7 @@ class MessageAudioTileFactoryDelegate
   final ChatMessageFactory _chatMessageFactory;
   final ShortInfoFactory _shortInfoFactory;
   final ReplyInfoFactory _replyInfoFactory;
+  final SenderAvatarFactory _senderAvatarFactory;
 
   @override
   Widget create(BuildContext context, MessageAudioTileModel model) {
@@ -31,6 +35,7 @@ class MessageAudioTileFactoryDelegate
         context: context,
         senderTitle: _senderTitleFactory.createFromMessageModel(context, model),
         reply: _replyInfoFactory.createFromMessageModel(context, model),
+        avatar: _senderAvatarFactory.create(context, model.senderInfo),
         blocks: <Widget>[
           Padding(
             // todo symetric?

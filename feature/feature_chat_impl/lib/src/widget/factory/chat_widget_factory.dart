@@ -7,6 +7,7 @@ import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.d
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
+import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
 import 'package:flutter/material.dart';
@@ -29,13 +30,6 @@ class ChatWidgetFactory implements IChatWidgetFactory {
     final ChatMessageFactory chatMessageFactory = ChatMessageFactory(
       avatarWidgetFactory: avatarWidgetFactory,
     );
-    final MessageTileFactoryComponent messageFactoryComponent =
-        MessageTileFactoryComponent(
-      dependencies: MessageTileFactoryDependencies(
-        localizationManager: dependencies.localizationManager,
-        fileRepository: dependencies.fileRepository,
-      ),
-    );
 
     final MessageMapperComponent messageMapperComponent =
         MessageMapperComponent(
@@ -50,6 +44,25 @@ class ChatWidgetFactory implements IChatWidgetFactory {
       ),
     );
 
+    final ChatMessagesInteractor chatMessagesInteractor =
+        ChatMessagesInteractor(
+      chatRepository: dependencies.chatRepository,
+      chatArgs: chatArgs,
+      messageTileMapper: messageMapperComponent.create(),
+      messageRepository: dependencies.chatMessageRepository,
+    );
+
+    final MessageTileFactoryComponent messageFactoryComponent =
+        MessageTileFactoryComponent(
+      dependencies: MessageTileFactoryDependencies(
+        messageWallContext: MessageWallContextImpl(
+          chatMessagesInteractor: chatMessagesInteractor,
+        ),
+        localizationManager: dependencies.localizationManager,
+        fileRepository: dependencies.fileRepository,
+      ),
+    );
+
     return MultiProvider(
       providers: <Provider<dynamic>>[
         Provider<tg.TileFactory>.value(value: messageFactoryComponent.create()),
@@ -61,15 +74,13 @@ class ChatWidgetFactory implements IChatWidgetFactory {
                 connectionStateProvider: dependencies.connectionStateProvider))
       ],
       child: BlocProvider<ChatBloc>(
-          create: (BuildContext context) => ChatBloc(
-                router: dependencies.router,
-                messagesInteractor: ChatMessagesInteractor(
-                    chatRepository: dependencies.chatRepository,
-                    chatArgs: chatArgs,
-                    messageTileMapper: messageMapperComponent.create(),
-                    messageRepository: dependencies.chatMessageRepository),
-                args: chatArgs,
-              ),
+          create: (BuildContext context) {
+            return ChatBloc(
+              router: dependencies.router,
+              messagesInteractor: chatMessagesInteractor,
+              args: chatArgs,
+            );
+          },
           child: ChatTheme(
             data: ChatThemeData.light(context: context),
             child: const ChatPage(),

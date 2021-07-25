@@ -31,7 +31,9 @@ class ChatMessagesInteractor {
   final BehaviorSubject<List<ITileModel>> _messagesSubject =
       BehaviorSubject<List<ITileModel>>();
 
-  Stream<List<ITileModel>> get messages => _messagesSubject;
+  List<ITileModel> get messages => _messagesSubject.value ?? <ITileModel>[];
+
+  Stream<List<ITileModel>> get messagesStream => _messagesSubject;
 
   td.Message? _last;
   bool _isIdle = true;

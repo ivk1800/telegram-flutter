@@ -4,14 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SenderTitleFactory {
-  Widget? createFromMessageModel(
+  Widget createFromMessageModel(
     BuildContext context,
     BaseConversationMessageTileModel messageModel,
   ) {
-    final String? senderName = messageModel.senderName;
-    if (senderName == null) {
-      return null;
-    }
+    final String senderName = messageModel.senderInfo.senderName;
 
     final ThemeData theme = Theme.of(context);
     final ChatContextData chatContext = ChatContext.of(context);

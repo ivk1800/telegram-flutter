@@ -1,8 +1,9 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
 import 'package:tdlib/td_api.dart' as td;
 
-class SenderNameResolver {
-  SenderNameResolver(
+class SenderInfoMapper {
+  SenderInfoMapper(
       {required IUserRepository userRepository,
       required IChatRepository chatRepository})
       : _userRepository = userRepository,
@@ -11,21 +12,30 @@ class SenderNameResolver {
 
   final IChatRepository _chatRepository;
 
-  Future<String?> resolve(td.MessageSender sender) async {
+  Future<SenderInfo> map(td.MessageSender sender) async {
     switch (sender.getConstructor()) {
       case td.MessageSenderUser.CONSTRUCTOR:
         {
           final td.User user = await _userRepository
               .getUser((sender as td.MessageSenderUser).userId);
-          return '${user.firstName} ${user.lastName}';
+          return SenderInfo(
+            id: user.id,
+            senderName: '${user.firstName} ${user.lastName}',
+            senderPhotoId: user.profilePhoto?.small.id,
+          );
         }
       case td.MessageSenderChat.CONSTRUCTOR:
         {
           final td.Chat chat = await _chatRepository
               .getChat((sender as td.MessageSenderChat).chatId);
-          return chat.title;
+          return SenderInfo(
+            id: chat.id,
+            senderName: chat.title,
+            senderPhotoId: chat.photo?.small.id,
+          );
         }
     }
-    return null;
+
+    throw Exception('unknown sender ${sender.runtimeType}');
   }
 }

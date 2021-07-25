@@ -4,7 +4,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/mapper/additional_info_mapper.dart';
 import 'package:feature_chat_impl/src/mapper/message_reply_info_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
-import 'package:feature_chat_impl/src/resolver/sender_name_resolver.dart';
+import 'package:feature_chat_impl/src/mapper/sender_info_mapper.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:localization_api/localization_api.dart';
 
@@ -48,7 +48,7 @@ class MessageMapperComponent {
     );
 
     return MessageTileMapper(
-        senderNameResolver: SenderNameResolver(
+        senderInfoMapper: SenderInfoMapper(
           chatRepository: _dependencies.chatRepository,
           userRepository: _dependencies.userRepository,
         ),

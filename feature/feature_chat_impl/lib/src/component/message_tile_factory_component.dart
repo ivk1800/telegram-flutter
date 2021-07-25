@@ -1,8 +1,11 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
+import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/reply_info_factory.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_title_factory.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/short_info_factory.dart';
 import 'package:feature_chat_impl/src/widget/factory/messages_tile_factory_factory.dart';
@@ -12,10 +15,12 @@ class MessageTileFactoryDependencies {
   const MessageTileFactoryDependencies({
     required this.fileRepository,
     required this.localizationManager,
+    required this.messageWallContext,
   });
 
   final ILocalizationManager localizationManager;
   final IFileRepository fileRepository;
+  final IMessageWallContext messageWallContext;
 }
 
 class MessageTileFactoryComponent {
@@ -41,7 +46,19 @@ class MessageTileFactoryComponent {
       avatarWidgetFactory: avatarWidgetFactory,
     );
 
+    final SenderAvatarFactory senderAvatarFactory =
+        SenderAvatarFactory(avatarWidgetFactory: avatarWidgetFactory);
+
+    final MessageComponentResolver componentResolver = MessageComponentResolver(
+      senderAvatarFactory: senderAvatarFactory,
+      messageWallContext: _dependencies.messageWallContext,
+      senderTitleFactory: senderTitleFactory,
+    );
+
     return tileFactoryFactory.create(
+      messageComponentResolver: componentResolver,
+      senderAvatarFactory: senderAvatarFactory,
+      messageWallContext: _dependencies.messageWallContext,
       senderTitleFactory: senderTitleFactory,
       replyInfoFactory: replyInfoFactory,
       shortInfoFactory: shortInfoFactory,

@@ -92,11 +92,13 @@ class ChatMessageFactory {
     required Widget? senderTitle,
     required List<Widget> blocks,
     required bool isOutgoing,
+    required Widget? avatar,
   }) {
     return createFromBlocks(
       id: id,
       context: context,
       isOutgoing: isOutgoing,
+      leading: avatar,
       blocks: <Widget>[
             if (senderTitle != null) senderTitle,
             if (reply != null) reply,
@@ -105,21 +107,41 @@ class ChatMessageFactory {
     );
   }
 
-  Widget createFromBlocks(
-      {required int id,
-      required BuildContext context,
-      required bool isOutgoing,
-      required List<Widget> blocks}) {
-    return _buildBaseMessage(
-        id: id,
-        alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
+  Widget createFromBlocks({
+    required int id,
+    required BuildContext context,
+    required bool isOutgoing,
+    required List<Widget> blocks,
+    Widget? leading,
+  }) {
+    final Widget bubble = _buildMessageBubble(
         context: context,
-        body: _buildMessageBubble(
-            context: context,
-            isOutgoing: isOutgoing,
-            child: MessageContent(
-              children: blocks,
-            )));
+        isOutgoing: isOutgoing,
+        child: MessageContent(
+          children: blocks,
+        ));
+    return _buildBaseMessage(
+      id: id,
+      alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
+      context: context,
+      body: _buildWithLeading(leading: leading, body: bubble),
+    );
+  }
+
+  Widget _buildWithLeading({
+    required Widget? leading,
+    required Widget body,
+  }) {
+    if (leading == null) {
+      return body;
+    }
+
+    return Row(
+      // todo need pass from args for different cases
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[leading, Flexible(child: body)],
+    );
   }
 
   Container _buildNotificationBubble(Widget body) {
@@ -152,7 +174,7 @@ class ChatMessageFactory {
       key: ValueKey<int>(id),
       alignment: alignment,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(top: 8, right: 8, bottom: 8),
         child: Container(
           constraints: BoxConstraints(maxWidth: chatContext.maxWidth),
           child: body,

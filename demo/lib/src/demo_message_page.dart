@@ -68,6 +68,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
 
     _tileFactory = chat_impl.MessageTileFactoryComponent(
         dependencies: chat_impl.MessageTileFactoryDependencies(
+      messageWallContext: FakeMessageWallContext(),
       fileRepository: fakeFileRepository,
       localizationManager: localizationManager,
     )).create();
@@ -213,4 +214,12 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
 extension MessageFutureExt on Future<td.Message> {
   Future<td.Message> withReply() => then(
       (td.Message value) => value.copy(replyToMessageId: 1, replyInChatId: 1));
+}
+
+class FakeMessageWallContext implements chat_impl.IMessageWallContext {
+  @override
+  bool isDisplayAvatarFor(int messageId) => true;
+
+  @override
+  bool isDisplaySenderNameFor(int messageId) => true;
 }

@@ -3,7 +3,7 @@ import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_
 class MessageCallTileModel extends BaseConversationMessageTileModel {
   const MessageCallTileModel({
     required int id,
-    required String? senderName,
+    required SenderInfo senderInfo,
     required bool isOutgoing,
     required ReplyInfo? replyInfo,
     required AdditionalInfo additionalInfo,
@@ -15,7 +15,7 @@ class MessageCallTileModel extends BaseConversationMessageTileModel {
           id: id,
           additionalInfo: additionalInfo,
           replyInfo: replyInfo,
-          senderName: senderName,
+          senderInfo: senderInfo,
         );
 
   final String? duration;

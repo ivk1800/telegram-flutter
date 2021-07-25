@@ -74,7 +74,7 @@ class ChatPageState extends State<ChatPage> {
     return Scrollbar(
       child: ListView.builder(
         // todo extract to config
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
         controller: scrollController,
         reverse: true,
         itemCount: state.tiles.length,

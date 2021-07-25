@@ -1,7 +1,7 @@
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
-import 'package:feature_chat_impl/src/resolver/sender_name_resolver.dart';
+import 'package:feature_chat_impl/src/mapper/sender_info_mapper.dart';
 import 'package:intl/intl.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
@@ -12,19 +12,19 @@ import 'message_reply_info_mapper.dart';
 class MessageCallTileModelMapper {
   MessageCallTileModelMapper(
       {required ILocalizationManager localizationManager,
-      required SenderNameResolver senderNameResolver,
+      required SenderInfoMapper senderInfoResolver,
       required AdditionalInfoMapper additionalInfoMapper,
       required MessageReplyInfoMapper messageReplyInfoMapper,
       required DateParser dateParser})
       : _localizationManager = localizationManager,
-        _senderNameResolver = senderNameResolver,
+        _senderInfoResolver = senderInfoResolver,
         _additionalInfoMapper = additionalInfoMapper,
         _messageReplyInfoMapper = messageReplyInfoMapper,
         _dateParser = dateParser;
 
   final DateFormat _callDateFormat = DateFormat('HH:mm');
 
-  final SenderNameResolver _senderNameResolver;
+  final SenderInfoMapper _senderInfoResolver;
   final ILocalizationManager _localizationManager;
   final MessageReplyInfoMapper _messageReplyInfoMapper;
   final AdditionalInfoMapper _additionalInfoMapper;
@@ -39,7 +39,7 @@ class MessageCallTileModelMapper {
     // todo handle video calls
     return MessageCallTileModel(
         id: message.id,
-        senderName: await _senderNameResolver.resolve(message.sender),
+        senderInfo: await _senderInfoResolver.map(message.sender),
         replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
         additionalInfo: await _additionalInfoMapper.map(message),
         isOutgoing: message.isOutgoing,
