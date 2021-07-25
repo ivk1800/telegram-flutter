@@ -1,9 +1,7 @@
-import 'dart:ui';
-
 import 'package:connectivity/connectivity.dart' as c;
 import 'package:core/core.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:rxdart/rxdart.dart';
 
 import 'connectivity_provider.dart';
 

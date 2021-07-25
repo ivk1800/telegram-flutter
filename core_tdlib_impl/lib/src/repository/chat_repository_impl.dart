@@ -3,7 +3,6 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
-import 'package:tdlib/td_client.dart';
 
 class ChatRepositoryImpl extends IChatRepository {
   @j.inject
@@ -59,7 +58,7 @@ class ChatRepositoryImpl extends IChatRepository {
 
   final TdClient _client;
 
-  final Map<int, td.Chat> _chats = <int, td.Chat>{};
+  // final Map<int, td.Chat> _chats = <int, td.Chat>{};
 
   final BehaviorSubject<List<td.Chat>> _chatsSubject =
       BehaviorSubject<List<td.Chat>>();

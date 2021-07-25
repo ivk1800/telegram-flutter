@@ -10,7 +10,7 @@ mixin DefaultDataLoadingWidgetDelegateMixin<D>
     return Center(
         child: Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
+      children: <Widget>[
         const Text('Error'),
         Text(error.toString()),
         MaterialButton(

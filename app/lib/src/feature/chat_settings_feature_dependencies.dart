@@ -1,5 +1,4 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';

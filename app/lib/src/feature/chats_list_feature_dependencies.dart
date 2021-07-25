@@ -5,7 +5,6 @@ import 'package:feature_message_preview_resolver/feature_message_preview_resolve
 import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
-import 'package:presentation/src/navigation/navigation.dart';
 
 class ChatsListFeatureDependencies implements IChatsListFeatureDependencies {
   @j.inject

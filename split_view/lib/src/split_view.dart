@@ -554,7 +554,7 @@ class _SimplePage extends MyPage<dynamic> {
         settings: this,
         routerDurationProvider: () {
           if (!animateRouterProvider()) {
-            return const Duration();
+            return Duration.zero;
           }
           return null;
         },

@@ -1,9 +1,8 @@
-import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/feature/feature.dart';
 import 'package:split_view/split_view.dart';
-import 'package:jugger/jugger.dart' as j;
 
 import 'navigation.dart';
 

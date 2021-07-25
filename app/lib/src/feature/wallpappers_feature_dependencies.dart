@@ -1,5 +1,4 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
 import 'package:feature_wallpappers_impl/feature_wallpappers_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';

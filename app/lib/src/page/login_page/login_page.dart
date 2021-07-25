@@ -27,7 +27,7 @@ class LoginPageState extends State<LoginPage> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            children: [
+            children: <Widget>[
               TextField(
                 controller: _phoneNumberController,
                 decoration: const InputDecoration(

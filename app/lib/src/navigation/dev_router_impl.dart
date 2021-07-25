@@ -1,4 +1,3 @@
-import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;

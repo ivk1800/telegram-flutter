@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/src/util/string_provider.dart';
-import 'package:presentation/src/widget/widget.dart';
 
 import 'folders_setup_view_model.dart';
 

@@ -50,9 +50,8 @@ class RootPageState extends State<RootPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const SizedBox(
-                        height: 70, width: 70, child: CircleAvatar()),
+                  children: const <Widget>[
+                    SizedBox(height: 70, width: 70, child: CircleAvatar()),
                   ],
                 ),
                 decoration: BoxDecoration(

@@ -5,7 +5,7 @@ import 'package:tdlib/td_api.dart' as td;
 
 class StickerRepositoryImpl implements IStickerRepository {
   @j.inject
-  StickerRepositoryImpl(this._client) {}
+  StickerRepositoryImpl(this._client);
 
   final TdClient _client;
 

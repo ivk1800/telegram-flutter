@@ -1,9 +1,5 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
-import 'package:feature_global_search_api/feature_global_search_api.dart';
-import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
-import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
@@ -35,8 +31,4 @@ class DataSettingsFeatureDependencies
   @override
   IConnectionStateProvider get connectionStateProvider =>
       _connectionStateProvider;
-
-  @override
-  ISettingsSearchFeatureApi get settingsSearchFeatureApi =>
-      _settingsSearchFeatureApi;
 }

@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:presentation/presentation.dart';
 import 'package:presentation/src/app/app.dart';

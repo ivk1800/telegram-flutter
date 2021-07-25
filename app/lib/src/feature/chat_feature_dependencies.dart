@@ -1,10 +1,6 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:core_utils/src/date_formatter.dart';
-import 'package:core_utils/src/date_parser.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
-import 'package:feature_chats_list_api/feature_chats_list_api.dart';
-import 'package:feature_global_search_api/feature_global_search_api.dart';
-import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
 import 'package:jugger/jugger.dart' as j;
