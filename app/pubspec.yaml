@@ -7,6 +7,10 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  feature_chat_header_info_api:
+    path: ../feature/feature_chat_header_info_api
+  feature_chat_header_info_impl:
+    path: ../feature/feature_chat_header_info_impl
   feature_message_preview_resolver:
     path: ../feature/feature_message_preview_resolver
   feature_message_preview_resolver_impl:

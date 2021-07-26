@@ -7,6 +7,8 @@ environment:
 
 dependencies:
   intl: ^0.17.0
+  feature_chat_header_info_api:
+    path: ../feature_chat_header_info_api
   feature_message_preview_resolver:
     path: ../feature_message_preview_resolver
   localization_api:

@@ -2,6 +2,7 @@ import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_event.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
+import 'package:feature_chat_impl/src/widget/factory/chat_header_info_factory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -38,27 +39,31 @@ class ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ConnectionStateWidgetFactory connectionStateWidgetFactory =
-        Provider.of(context);
-    return Scaffold(
-      backgroundColor: Colors.lightBlue,
-      appBar: AppBar(
-        title: connectionStateWidgetFactory.create(
-            context, (_) => const Text('Chat')),
-      ),
-      body: BlocBuilder<ChatBloc, ChatState>(
-          builder: (BuildContext context, ChatState state) {
-        switch (state.runtimeType) {
-          case DefaultState:
-            {
-              return _wrapToChatContext(
-                  child: _buildMessagesState(context, state as DefaultState));
-            }
-        }
+    final ChatHeaderInfoFactory chatHeaderInfoFactory = Provider.of(context);
 
-        return const Center(child: CircularProgressIndicator());
-      }),
-    );
+    return BlocBuilder<ChatBloc, ChatState>(
+        builder: (BuildContext context, ChatState state) {
+      return Scaffold(
+        backgroundColor: Colors.lightBlue,
+        appBar: AppBar(
+          titleSpacing: 0.0,
+          title: chatHeaderInfoFactory.create(
+              context: context, info: state.headerState.info),
+        ),
+        body: Builder(builder: (BuildContext context) {
+          switch (state.bodyState.runtimeType) {
+            case DataBodyState:
+              {
+                return _wrapToChatContext(
+                    child: _buildMessagesState(
+                        context, state.bodyState as DataBodyState));
+              }
+          }
+
+          return const Center(child: CircularProgressIndicator());
+        }),
+      );
+    });
   }
 
   Widget _wrapToChatContext({required Widget child}) => LayoutBuilder(
@@ -69,7 +74,7 @@ class ChatPageState extends State<ChatPage> {
         },
       );
 
-  Widget _buildMessagesState(BuildContext context, DefaultState state) {
+  Widget _buildMessagesState(BuildContext context, DataBodyState state) {
     final TileFactory tileFactory = Provider.of(context);
     return Scrollbar(
       child: ListView.builder(

@@ -1,5 +1,7 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
+import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
+import 'package:feature_chat_header_info_impl/feature_chat_header_info_impl.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
@@ -25,6 +27,7 @@ import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:localization_api/localization_api.dart';
 import 'package:presentation/src/feature/chat_feature_dependencies.dart';
 import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/navigation/chat_screen_router_impl.dart';
@@ -87,6 +90,24 @@ abstract class FeatureModule {
   IStickersFeatureDependencies bindStickersFeatureDependencies(
       StickersFeatureDependencies impl);
 
+  @j.provide
+  static ChatHeaderInfoFeatureDependencies
+      provideChatHeaderInfoFeatureDependencies(
+    IChatRepository chatRepository,
+    ILocalizationManager localizationManager,
+    IBasicGroupRepository basicGroupRepository,
+    ISuperGroupRepository superGroupRepository,
+    IUserRepository userRepository,
+  ) {
+    return ChatHeaderInfoFeatureDependencies(
+      chatRepository: chatRepository,
+      localizationManager: localizationManager,
+      basicGroupRepository: basicGroupRepository,
+      superGroupRepository: superGroupRepository,
+      userRepository: userRepository,
+    );
+  }
+
   // endregion
 
   // region api
@@ -101,6 +122,12 @@ abstract class FeatureModule {
   static IMainScreenFeatureApi provideMainScreenFeatureApi(
       IMainScreenFeatureDependencies dependencies) {
     return MainScreenFeatureApi(dependencies: dependencies);
+  }
+
+  @j.provide
+  static IChatHeaderInfoFeatureApi provideChatHeaderInfoFeatureApi(
+      ChatHeaderInfoFeatureDependencies dependencies) {
+    return ChatHeaderInfoFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
@@ -213,5 +240,5 @@ abstract class FeatureModule {
   IStickersFeatureRouter bindStickersFeatureRouter(
       StickersFeatureRouterImpl impl);
 
-  // endregion
+// endregion
 }

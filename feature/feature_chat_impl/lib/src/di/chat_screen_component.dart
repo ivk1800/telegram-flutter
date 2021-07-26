@@ -1,11 +1,13 @@
+import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
+import 'package:feature_chat_impl/src/widget/factory/chat_header_info_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:coreui/coreui.dart' as tg;
 import 'package:localization_api/localization_api.dart';
 
 @j.Component(modules: <Type>[ChatScreenModule])
@@ -18,7 +20,7 @@ abstract class ChatScreenComponent {
 
   ILocalizationManager getLocalizationManager();
 
-  tg.ConnectionStateWidgetFactory getConnectionStateWidgetFactory();
+  ChatHeaderInfoFactory getChatHeaderInfoFactory();
 
   ChatBloc getChatBloc();
 }
@@ -78,6 +80,17 @@ abstract class ChatScreenModule {
 
   @j.provide
   @j.singleton
+  static ChatHeaderInfoFactory provideChatHeaderInfoFactory(
+    tg.AvatarWidgetFactory avatarWidgetFactory,
+    tg.ConnectionStateWidgetFactory connectionStateWidgetFactory,
+  ) =>
+      ChatHeaderInfoFactory(
+        avatarWidgetFactory: avatarWidgetFactory,
+        connectionStateWidgetFactory: connectionStateWidgetFactory,
+      );
+
+  @j.provide
+  @j.singleton
   static ILocalizationManager provideLocalizationManager(
     IChatFeatureDependencies dependencies,
   ) =>
@@ -88,9 +101,11 @@ abstract class ChatScreenModule {
   static ChatBloc provideChatBloc(
     ChatArgs args,
     ChatMessagesInteractor chatMessagesInteractor,
+    IChatHeaderInfoInteractor headerInfoInteractor,
     IChatFeatureDependencies dependencies,
   ) =>
       ChatBloc(
+        headerInfoInteractor: headerInfoInteractor,
         router: dependencies.router,
         messagesInteractor: chatMessagesInteractor,
         args: args,
@@ -118,6 +133,15 @@ abstract class ChatScreenModule {
         messageTileMapper: messageTileMapper,
         messageRepository: dependencies.chatMessageRepository,
       );
+
+  @j.provide
+  @j.singleton
+  static IChatHeaderInfoInteractor provideChatHeaderInfoInteractor(
+    ChatArgs args,
+    IChatFeatureDependencies dependencies,
+  ) =>
+      dependencies.chatHeaderInfoFeatureApi
+          .getChatHeaderInfoInteractor(args.chatId);
 }
 
 @j.componentBuilder

@@ -124,4 +124,22 @@
     <string lang="ViewContact">VIEW CONTACT</string>
     <!-- https://translations.telegram.org/en/android/private_chats/EditedMessage -->
     <string lang="EditedMessage">edited</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/HiddenName -->
+    <string lang="HiddenName">Deleted Account</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/ALongTimeAgo -->
+    <string lang="ALongTimeAgo">last seen a long time ago</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/Bot -->
+    <string lang="Bot">bot</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/Online -->
+    <string lang="Online">online</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/OnlineCount -->
+    <string lang="OnlineCount">%s online</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/Lately -->
+    <string lang="Lately">last seen recently</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/WithinAWeek -->
+    <string lang="WithinAWeek">last seen within a week</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/WithinAMonth -->
+    <string lang="WithinAMonth">last seen within a month</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/Members -->
+    <string lang="Members">%s member(s)</string>
 </resources>

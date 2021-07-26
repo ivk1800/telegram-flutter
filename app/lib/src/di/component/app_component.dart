@@ -19,6 +19,10 @@ import 'package:td_client/td_client.dart';
 abstract class AppComponent {
   TdClient getTdClient();
 
+  IBasicGroupRepository getBasicGroupRepository();
+
+  ISuperGroupRepository getSuperGroupRepository();
+
   IChatRepository getChatRepository();
 
   IStickerRepository getStickerRepository();

@@ -68,6 +68,14 @@ abstract class AppModule {
 
   @j.singleton
   @j.bind
+  IBasicGroupRepository bindBasicGroupRepository(BasicGroupRepositoryImpl impl);
+
+  @j.singleton
+  @j.bind
+  ISuperGroupRepository bindSuperGroupRepository(SuperGroupRepositoryImpl impl);
+
+  @j.singleton
+  @j.bind
   IConnectivityProvider bindConnectivityProvider(ConnectivityProviderImpl impl);
 
   @j.singleton

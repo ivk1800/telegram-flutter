@@ -1,5 +1,6 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
@@ -16,6 +17,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
       required IUserRepository userRepository,
       required ILocalizationManager localizationManager,
       required DateFormatter dateFormatter,
+      required IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
       required IChatRepository chatRepository,
       required IConnectionStateProvider connectionStateProvider})
       : _fileRepository = fileRepository,
@@ -24,6 +26,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
         _localizationManager = localizationManager,
         _dateFormatter = dateFormatter,
         _chatRepository = chatRepository,
+        _chatHeaderInfoFeatureApi = chatHeaderInfoFeatureApi,
         _chatMessageRepository = chatMessageRepository,
         _router = router,
         _messagePreviewResolver = MessagePreviewResolver(
@@ -44,6 +47,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
   final IChatRepository _chatRepository;
   final ILocalizationManager _localizationManager;
   final IUserRepository _userRepository;
+  final IChatHeaderInfoFeatureApi _chatHeaderInfoFeatureApi;
 
   @override
   IConnectionStateProvider get connectionStateProvider =>
@@ -75,4 +79,8 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
 
   @override
   IMessagePreviewResolver get messagePreviewResolver => _messagePreviewResolver;
+
+  @override
+  IChatHeaderInfoFeatureApi get chatHeaderInfoFeatureApi =>
+      _chatHeaderInfoFeatureApi;
 }
