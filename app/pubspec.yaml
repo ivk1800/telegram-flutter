@@ -7,6 +7,10 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  feature_profile_api:
+    path: ../feature/feature_profile_api
+  feature_profile_impl:
+      path: ../feature/feature_profile_impl
   feature_chat_header_info_api:
     path: ../feature/feature_chat_header_info_api
   feature_chat_header_info_impl:

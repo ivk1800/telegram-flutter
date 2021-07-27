@@ -18,6 +18,8 @@ import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
+import 'package:feature_profile_api/feature_profile_api.dart';
+import 'package:feature_profile_impl/feature_profile_impl.dart';
 import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
 import 'package:feature_wallpappers_impl/feature_wallpappers_impl.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
@@ -97,6 +99,8 @@ abstract class FeatureModule {
     ILocalizationManager localizationManager,
     IBasicGroupRepository basicGroupRepository,
     ISuperGroupRepository superGroupRepository,
+    IConnectionStateProvider connectionStateProvider,
+    IFileRepository fileRepository,
     IUserRepository userRepository,
   ) {
     return ChatHeaderInfoFeatureDependencies(
@@ -105,8 +109,20 @@ abstract class FeatureModule {
       basicGroupRepository: basicGroupRepository,
       superGroupRepository: superGroupRepository,
       userRepository: userRepository,
+      connectionStateProvider: connectionStateProvider,
+      fileRepository: fileRepository,
     );
   }
+
+  @j.provide
+  static ProfileFeatureDependencies provideProfileFeatureDependencies(
+    IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
+    IUserRepository userRepository,
+  ) =>
+      ProfileFeatureDependencies(
+        userRepository: userRepository,
+        chatHeaderInfoFeatureApi: chatHeaderInfoFeatureApi,
+      );
 
   // endregion
 
@@ -183,6 +199,12 @@ abstract class FeatureModule {
   static IStickersFeatureApi provideStickersFeatureApi(
           IStickersFeatureDependencies dependencies) =>
       StickersFeatureApi(dependencies: dependencies);
+
+  @j.provide
+  static IProfileFeatureApi provideProfileFeatureApi(
+      ProfileFeatureDependencies dependencies) {
+    return ProfileFeatureApi(dependencies: dependencies);
+  }
 
   // endregion
 

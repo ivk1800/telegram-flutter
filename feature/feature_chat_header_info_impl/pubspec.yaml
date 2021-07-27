@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  coreui:
+    path: ../../coreui
   rxdart: ^0.26.0
   core_tdlib_api:
     path: ../../core_tdlib_api

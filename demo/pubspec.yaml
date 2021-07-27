@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  feature_chat_header_info_impl:
+    path: ../feature/feature_chat_header_info_impl
   feature_message_preview_resolver_impl:
     path: ../feature/feature_message_preview_resolver_impl
   intl: ^0.17.0
@@ -15,6 +17,8 @@ dependencies:
     path: ../localization_impl
   feature_chat_impl:
     path: ../feature/feature_chat_impl
+  feature_profile_impl:
+    path: ../feature/feature_profile_impl
   fake:
     path: ../fake
   coreui:

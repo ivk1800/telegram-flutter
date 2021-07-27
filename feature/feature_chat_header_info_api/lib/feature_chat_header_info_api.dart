@@ -1,7 +1,14 @@
 library feature_chat_header_info_api;
 
+import 'package:flutter/widgets.dart';
+
 abstract class IChatHeaderInfoFeatureApi {
   IChatHeaderInfoInteractor getChatHeaderInfoInteractor(int chatId);
+  IChatHeaderInfoFactory getChatHeaderInfoFactory();
+}
+
+abstract class IChatHeaderInfoFactory {
+  Widget create({required BuildContext context, required ChatHeaderInfo info});
 }
 
 abstract class IChatHeaderInfoInteractor {

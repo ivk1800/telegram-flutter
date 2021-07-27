@@ -5,7 +5,6 @@ import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.d
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
-import 'package:feature_chat_impl/src/widget/factory/chat_header_info_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
@@ -20,7 +19,7 @@ abstract class ChatScreenComponent {
 
   ILocalizationManager getLocalizationManager();
 
-  ChatHeaderInfoFactory getChatHeaderInfoFactory();
+  IChatHeaderInfoFactory getChatHeaderInfoFactory();
 
   ChatBloc getChatBloc();
 }
@@ -71,23 +70,10 @@ abstract class ChatScreenModule {
 
   @j.provide
   @j.singleton
-  static tg.ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
+  static IChatHeaderInfoFactory provideChatHeaderInfoFactory(
     IChatFeatureDependencies dependencies,
   ) =>
-      tg.ConnectionStateWidgetFactory(
-        connectionStateProvider: dependencies.connectionStateProvider,
-      );
-
-  @j.provide
-  @j.singleton
-  static ChatHeaderInfoFactory provideChatHeaderInfoFactory(
-    tg.AvatarWidgetFactory avatarWidgetFactory,
-    tg.ConnectionStateWidgetFactory connectionStateWidgetFactory,
-  ) =>
-      ChatHeaderInfoFactory(
-        avatarWidgetFactory: avatarWidgetFactory,
-        connectionStateWidgetFactory: connectionStateWidgetFactory,
-      );
+      dependencies.chatHeaderInfoFeatureApi.getChatHeaderInfoFactory();
 
   @j.provide
   @j.singleton

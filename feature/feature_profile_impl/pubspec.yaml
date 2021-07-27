@@ -1,0 +1,36 @@
+name: feature_profile_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  provider: ^5.0.0
+  equatable: ^2.0.0
+  flutter_bloc: ^7.0.1
+  feature_chat_header_info_api:
+    path: ../feature_chat_header_info_api
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  localization_api:
+    path: ../../localization_api
+  feature_profile_api:
+    path: ../feature_profile_api
+  flutter:
+    sdk: flutter
+  jugger:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jugger
+      ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
+
+dev_dependencies:
+  jugger_generator:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jugger_generator
+      ref: ebf47e38b00f38c21aed7787f438202eeb847ef9
+  build_runner: ^1.10.2
+
+flutter:

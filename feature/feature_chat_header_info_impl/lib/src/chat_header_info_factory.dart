@@ -2,7 +2,7 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:flutter/material.dart';
 
-class ChatHeaderInfoFactory {
+class ChatHeaderInfoFactory implements IChatHeaderInfoFactory {
   ChatHeaderInfoFactory({
     required tg.ConnectionStateWidgetFactory connectionStateWidgetFactory,
     required tg.AvatarWidgetFactory avatarWidgetFactory,
@@ -12,6 +12,7 @@ class ChatHeaderInfoFactory {
   final tg.ConnectionStateWidgetFactory _connectionStateWidgetFactory;
   final tg.AvatarWidgetFactory _avatarWidgetFactory;
 
+  @override
   Widget create({required BuildContext context, required ChatHeaderInfo info}) {
     return ListTile(
         contentPadding: EdgeInsets.zero,

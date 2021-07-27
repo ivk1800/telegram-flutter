@@ -8,7 +8,7 @@ import 'package:feature_message_preview_resolver/feature_message_preview_resolve
 import 'package:localization_api/localization_api.dart';
 
 import 'src/chat_screen_router.dart';
-import 'src/widget/factory/chat_widget_factory.dart';
+import 'src/widget/factory/chat_screen_factory.dart';
 
 export 'src/chat_screen_router.dart';
 export 'src/component/message_mapper_component.dart';

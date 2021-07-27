@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  feature_chat_header_info_api:
+    path: ../feature/feature_chat_header_info_api
   username_generator: ^1.3.0
   core_tdlib_api:
     path: ../core_tdlib_api

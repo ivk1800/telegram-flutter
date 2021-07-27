@@ -7,6 +7,7 @@ import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
+import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
@@ -54,6 +55,9 @@ class FeatureFactory {
 
   IStickersFeatureApi createStickersFeatureApi() =>
       _featureComponent.getStickersFeatureApi();
+
+  IProfileFeatureApi createProfileFeatureApi() =>
+      _featureComponent.getProfileFeatureApi();
 
   DevFeature createDevFeature() => _featureComponent.getDevFeature();
 }

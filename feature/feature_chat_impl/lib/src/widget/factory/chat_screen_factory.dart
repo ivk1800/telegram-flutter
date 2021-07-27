@@ -1,12 +1,12 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_api/feature_chat_api.dart';
+import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/di/di.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
-import 'package:feature_chat_impl/src/widget/factory/chat_header_info_factory.dart';
 import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -40,7 +40,7 @@ class ChatScreenFactory implements IChatScreenFactory {
             create: (BuildContext context) =>
                 context.getComponent().getLocalizationManager(),
           ),
-          Provider<ChatHeaderInfoFactory>(
+          Provider<IChatHeaderInfoFactory>(
             create: (BuildContext context) =>
                 context.getComponent().getChatHeaderInfoFactory(),
           ),
