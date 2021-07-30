@@ -118,9 +118,19 @@ abstract class FeatureModule {
   static ProfileFeatureDependencies provideProfileFeatureDependencies(
     IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
     IUserRepository userRepository,
+    ISuperGroupRepository superGroupRepository,
+    IBasicGroupRepository basicGroupRepository,
+    IChatMessageRepository messageRepository,
+    IChatRepository chatRepository,
+    ILocalizationManager localizationManager,
   ) =>
       ProfileFeatureDependencies(
+        localizationManager: localizationManager,
+        chatRepository: chatRepository,
+        messageRepository: messageRepository,
         userRepository: userRepository,
+        superGroupRepository: superGroupRepository,
+        basicGroupRepository: basicGroupRepository,
         chatHeaderInfoFeatureApi: chatHeaderInfoFeatureApi,
       );
 

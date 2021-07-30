@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
+import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
 
 class ProfileState extends Equatable {
   const ProfileState({
@@ -38,8 +39,12 @@ class LoadingBodyState extends BodyState {
 }
 
 class DataBodyState extends BodyState {
-  const DataBodyState();
+  const DataBodyState({
+    required this.content,
+  });
+
+  final ContentData content;
 
   @override
-  List<Object> get props => <Object>[];
+  List<Object> get props => <Object>[content];
 }

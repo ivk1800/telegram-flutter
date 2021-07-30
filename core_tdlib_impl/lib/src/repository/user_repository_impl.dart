@@ -17,4 +17,8 @@ class UserRepositoryImpl extends IUserRepository {
     return _cache.putIfAbsent(
         id, () => _client.send<td.User>(td.GetUser(userId: id)));
   }
+
+  @override
+  Future<td.UserFullInfo> getUserFullInfo(int id) =>
+      _client.send<td.UserFullInfo>(td.GetUserFullInfo(userId: id));
 }

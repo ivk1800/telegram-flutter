@@ -8,6 +8,7 @@ import 'package:feature_profile_impl/src/screen/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreenFactory implements IProfileScreenFactory {
@@ -28,6 +29,10 @@ class ProfileScreenFactory implements IProfileScreenFactory {
               Provider<IChatHeaderInfoFactory>(
                 create: (BuildContext context) =>
                     context.getComponent().getChatHeaderInfoFactory(),
+              ),
+              Provider<ILocalizationManager>(
+                create: (BuildContext context) =>
+                    context.getComponent().getLocalizationManager(),
               ),
             ],
             child: BlocProvider<ProfileBloc>(

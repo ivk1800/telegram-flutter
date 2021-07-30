@@ -29,8 +29,9 @@ class ChatSettingsPageState extends State<ChatSettingsPage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    final ILocalizationManager localizationManager = Provider.of(context);
-    final ChatSettingsBloc bloc = BlocProvider.of(context);
+    final ILocalizationManager localizationManager =
+        Provider.of(context, listen: false);
+    final ChatSettingsBloc bloc = BlocProvider.of(context, listen: false);
     final ThemeData theme = Theme.of(context);
     final Color accentColor = theme.accentColor;
     return Column(

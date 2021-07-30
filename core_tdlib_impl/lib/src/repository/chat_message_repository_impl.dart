@@ -47,4 +47,51 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
                   limit: limit,
                   onlyLocal: false)))
           .map((td.Messages event) => event.messages ?? <td.Message>[]);
+
+  @override
+  Future<List<td.Message>> findMessages({
+    required int chatId,
+    required int fromMessageId,
+    required int limit,
+    required td.SearchMessagesFilter filter,
+  }) {
+    return _get<td.Message>((td.Message? last) async {
+      return _client
+          .send<td.Messages>(td.SearchChatMessages(
+              chatId: chatId,
+              filter: filter,
+              fromMessageId: last?.id ?? fromMessageId,
+              limit: limit,
+              messageThreadId: 0,
+              offset: 0,
+              query: '',
+              sender: null))
+          .then((td.Messages value) => value.messages ?? <td.Message>[]);
+    }, limit);
+  }
+
+  Future<List<T>> _get<T>(
+      Future<List<T>> Function(T? last) fetcher, int limit) async {
+    final List<T> messages = await fetcher.call(null);
+
+    if (messages.isNotEmpty && messages.length != limit) {
+      final List<T> additionalMessages = await fetcher.call(messages.last);
+      messages.addAll(additionalMessages);
+    }
+
+    return messages;
+  }
+
+  @override
+  Future<int> getMessagesCount({
+    required int chatId,
+    required td.SearchMessagesFilter filter,
+  }) =>
+      _client
+          .send<td.Count>(td.GetChatMessageCount(
+            chatId: chatId,
+            filter: filter,
+            returnLocal: false,
+          ))
+          .then((td.Count value) => value.count);
 }

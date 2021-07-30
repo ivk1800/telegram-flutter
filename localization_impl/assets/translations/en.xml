@@ -142,4 +142,14 @@
     <string lang="WithinAMonth">last seen within a month</string>
     <!-- https://translations.telegram.org/en/android/chat_list/Members -->
     <string lang="Members">%s member(s)</string>
+    <!-- https://translations.telegram.org/en/android/settings/Info -->
+    <string lang="Info">Info</string>
+    <!-- https://translations.telegram.org/en/android/profile/Notifications -->
+    <string lang="Notifications">Notifications</string>
+    <!-- https://translations.telegram.org/en/android/settings/NotificationsOff -->
+    <string lang="NotificationsOff">Off</string>
+    <!-- https://translations.telegram.org/en/android/settings/NotificationsOn -->
+    <string lang="NotificationsOn">On</string>
+    <!-- https://translations.telegram.org/en/android/profile/SharedLinks -->
+    <string lang="SharedLinks">Links</string>
 </resources>

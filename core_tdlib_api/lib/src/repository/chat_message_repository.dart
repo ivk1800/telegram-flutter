@@ -5,4 +5,16 @@ abstract class IChatMessageRepository {
       {required int chatId, required int fromMessageId, required int limit});
 
   Future<td.Message> getMessage({required int chatId, required int messageId});
+
+  Future<List<td.Message>> findMessages({
+    required int chatId,
+    required int fromMessageId,
+    required int limit,
+    required td.SearchMessagesFilter filter,
+  });
+
+  Future<int> getMessagesCount({
+    required int chatId,
+    required td.SearchMessagesFilter filter,
+  });
 }

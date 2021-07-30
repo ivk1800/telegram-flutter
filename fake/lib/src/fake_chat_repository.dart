@@ -10,8 +10,7 @@ class FakeChatRepository implements IChatRepository {
 
   @override
   Future<td.Chat> getChat(int id) {
-    // TODO: implement getChat
-    throw UnimplementedError();
+    return Completer<td.Chat>().future;
   }
 
   @override
@@ -20,13 +19,11 @@ class FakeChatRepository implements IChatRepository {
       required int offsetOrder,
       required int limit,
       required td.ChatList chatList}) {
-    // TODO: implement getChats
-    throw UnimplementedError();
+    return Completer<List<td.Chat>>().future;
   }
 
   @override
   Future<td.Supergroup> getSupergroup(int id) {
-    // TODO: implement getSupergroup
-    throw UnimplementedError();
+    return Completer<td.Supergroup>().future;
   }
 }
