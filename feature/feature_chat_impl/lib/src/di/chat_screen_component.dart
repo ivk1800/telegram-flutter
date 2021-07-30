@@ -4,6 +4,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
+import 'package:feature_chat_impl/src/screen/chat/message_action_listener.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -48,9 +49,11 @@ abstract class ChatScreenModule {
   static tg.TileFactory provideTileFactory(
     ChatMessagesInteractor chatMessagesInteractor,
     IChatFeatureDependencies dependencies,
+    IMessageActionListener messageActionListener,
   ) =>
       MessageTileFactoryComponent(
         dependencies: MessageTileFactoryDependencies(
+          messageActionListener: messageActionListener,
           messageWallContext: MessageWallContextImpl(
             chatMessagesInteractor: chatMessagesInteractor,
           ),
@@ -66,6 +69,15 @@ abstract class ChatScreenModule {
   ) =>
       tg.AvatarWidgetFactory(
         fileRepository: dependencies.fileRepository,
+      );
+
+  @j.provide
+  @j.singleton
+  static IMessageActionListener provideMessageActionListener(
+    ChatBloc bloc,
+  ) =>
+      MessageActionListener(
+        bloc: bloc,
       );
 
   @j.provide

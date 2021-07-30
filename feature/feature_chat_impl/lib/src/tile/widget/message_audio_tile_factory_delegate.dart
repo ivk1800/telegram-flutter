@@ -1,7 +1,7 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
 
@@ -10,20 +10,17 @@ class MessageAudioTileFactoryDelegate
   MessageAudioTileFactoryDelegate(
       {required ShortInfoFactory shortInfoFactory,
       required ReplyInfoFactory replyInfoFactory,
-      required SenderAvatarFactory senderAvatarFactory,
-      required SenderTitleFactory senderTitleFactory,
+      required MessageComponentResolver messageComponentResolver,
       required ChatMessageFactory chatMessageFactory})
       : _shortInfoFactory = shortInfoFactory,
-        _senderAvatarFactory = senderAvatarFactory,
         _replyInfoFactory = replyInfoFactory,
-        _senderTitleFactory = senderTitleFactory,
+        _messageComponentResolver = messageComponentResolver,
         _chatMessageFactory = chatMessageFactory;
 
-  final SenderTitleFactory _senderTitleFactory;
   final ChatMessageFactory _chatMessageFactory;
   final ShortInfoFactory _shortInfoFactory;
   final ReplyInfoFactory _replyInfoFactory;
-  final SenderAvatarFactory _senderAvatarFactory;
+  final MessageComponentResolver _messageComponentResolver;
 
   @override
   Widget create(BuildContext context, MessageAudioTileModel model) {
@@ -33,9 +30,10 @@ class MessageAudioTileFactoryDelegate
         id: model.id,
         isOutgoing: model.isOutgoing,
         context: context,
-        senderTitle: _senderTitleFactory.createFromMessageModel(context, model),
+        senderTitle:
+            _messageComponentResolver.resolveSenderName(context, model),
         reply: _replyInfoFactory.createFromMessageModel(context, model),
-        avatar: _senderAvatarFactory.create(context, model.senderInfo),
+        avatar: _messageComponentResolver.resolveAvatar(context, model),
         blocks: <Widget>[
           Padding(
             // todo symetric?

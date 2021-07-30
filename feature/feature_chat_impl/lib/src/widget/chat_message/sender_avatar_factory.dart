@@ -10,14 +10,24 @@ class SenderAvatarFactory {
 
   final AvatarWidgetFactory _avatarWidgetFactory;
 
-  Widget create(BuildContext context, SenderInfo senderInfo) {
+  Widget create({
+    required BuildContext context,
+    required SenderInfo senderInfo,
+    required GestureTapCallback onTap,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(right: 8),
-      child: _avatarWidgetFactory.create(
-        context,
-        radius: 20,
-        chatId: senderInfo.id,
-        imageId: senderInfo.senderPhotoId,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: onTap,
+          child: _avatarWidgetFactory.create(
+            context,
+            radius: 20,
+            chatId: senderInfo.id,
+            imageId: senderInfo.senderPhotoId,
+          ),
+        ),
       ),
     );
   }

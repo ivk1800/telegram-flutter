@@ -5,11 +5,9 @@ import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
+import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
-
-import 'chat_event.dart';
-import 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatBloc(
@@ -42,6 +40,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       case ScrollEvent:
         {
           _messagesInteractor.loadMore();
+          break;
+        }
+      case SenderTapEvent:
+        {
+          _router.toChatProfile((event as SenderTapEvent).senderId);
+          break;
         }
     }
   }

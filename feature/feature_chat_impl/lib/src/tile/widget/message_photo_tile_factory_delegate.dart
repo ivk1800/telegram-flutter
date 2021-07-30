@@ -1,8 +1,8 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/util/minithumbnail.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
 
@@ -11,20 +11,17 @@ class MessagePhotoTileFactoryDelegate
   MessagePhotoTileFactoryDelegate({
     required ChatMessageFactory chatMessageFactory,
     required ShortInfoFactory shortInfoFactory,
-    required SenderAvatarFactory senderAvatarFactory,
-    required SenderTitleFactory senderTitleFactory,
+    required MessageComponentResolver messageComponentResolver,
     required ReplyInfoFactory replyInfoFactory,
   })  : _chatMessageFactory = chatMessageFactory,
-        _senderAvatarFactory = senderAvatarFactory,
+        _messageComponentResolver = messageComponentResolver,
         _shortInfoFactory = shortInfoFactory,
-        _senderTitleFactory = senderTitleFactory,
         _replyInfoFactory = replyInfoFactory;
 
   final ChatMessageFactory _chatMessageFactory;
   final ReplyInfoFactory _replyInfoFactory;
-  final SenderTitleFactory _senderTitleFactory;
   final ShortInfoFactory _shortInfoFactory;
-  final SenderAvatarFactory _senderAvatarFactory;
+  final MessageComponentResolver _messageComponentResolver;
 
   @override
   Widget create(BuildContext context, MessagePhotoTileModel model) {
@@ -39,9 +36,9 @@ class MessagePhotoTileFactoryDelegate
       id: model.id,
       isOutgoing: model.isOutgoing,
       context: context,
-      senderTitle: _senderTitleFactory.createFromMessageModel(context, model),
+      senderTitle: _messageComponentResolver.resolveSenderName(context, model),
       reply: _replyInfoFactory.createFromMessageModel(context, model),
-      avatar: _senderAvatarFactory.create(context, model.senderInfo),
+      avatar: _messageComponentResolver.resolveAvatar(context, model),
       blocks: <Widget>[
         MediaWrapper(
             type: MediaType.Animation,

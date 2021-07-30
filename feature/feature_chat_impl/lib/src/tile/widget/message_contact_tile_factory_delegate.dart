@@ -1,7 +1,7 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
-import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
@@ -11,14 +11,12 @@ class MessageContactTileFactoryDelegate
   MessageContactTileFactoryDelegate(
       {required ChatMessageFactory chatMessageFactory,
       required ILocalizationManager localizationManager,
-      required SenderTitleFactory senderTitleFactory,
-      required SenderAvatarFactory senderAvatarFactory,
+      required MessageComponentResolver messageComponentResolver,
       required ReplyInfoFactory replyInfoFactory,
       required ShortInfoFactory shortInfoFactory})
       : _chatMessageFactory = chatMessageFactory,
         _replyInfoFactory = replyInfoFactory,
-        _senderTitleFactory = senderTitleFactory,
-        _senderAvatarFactory = senderAvatarFactory,
+        _messageComponentResolver = messageComponentResolver,
         _localizationManager = localizationManager,
         _shortInfoFactory = shortInfoFactory;
 
@@ -26,8 +24,7 @@ class MessageContactTileFactoryDelegate
   final ShortInfoFactory _shortInfoFactory;
   final ILocalizationManager _localizationManager;
   final ReplyInfoFactory _replyInfoFactory;
-  final SenderTitleFactory _senderTitleFactory;
-  final SenderAvatarFactory _senderAvatarFactory;
+  final MessageComponentResolver _messageComponentResolver;
 
   @override
   Widget create(BuildContext context, MessageContactTileModel model) {
@@ -39,9 +36,10 @@ class MessageContactTileFactoryDelegate
         id: model.id,
         isOutgoing: model.isOutgoing,
         context: context,
-        senderTitle: _senderTitleFactory.createFromMessageModel(context, model),
+        senderTitle:
+            _messageComponentResolver.resolveSenderName(context, model),
         reply: _replyInfoFactory.createFromMessageModel(context, model),
-        avatar: _senderAvatarFactory.create(context, model.senderInfo),
+        avatar: _messageComponentResolver.resolveAvatar(context, model),
         blocks: <Widget>[
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: maxWidth),

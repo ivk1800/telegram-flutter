@@ -16,11 +16,17 @@ class MessageTileFactoryDependencies {
     required this.fileRepository,
     required this.localizationManager,
     required this.messageWallContext,
+    required this.messageActionListener,
   });
 
   final ILocalizationManager localizationManager;
   final IFileRepository fileRepository;
   final IMessageWallContext messageWallContext;
+  final IMessageActionListener messageActionListener;
+}
+
+abstract class IMessageActionListener {
+  void onSenderAvatarTap({required int senderId});
 }
 
 class MessageTileFactoryComponent {
@@ -53,6 +59,7 @@ class MessageTileFactoryComponent {
       senderAvatarFactory: senderAvatarFactory,
       messageWallContext: _dependencies.messageWallContext,
       senderTitleFactory: senderTitleFactory,
+      messageActionListener: _dependencies.messageActionListener,
     );
 
     return tileFactoryFactory.create(

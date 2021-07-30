@@ -32,7 +32,7 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:presentation/src/feature/chat_feature_dependencies.dart';
 import 'package:presentation/src/feature/feature.dart';
-import 'package:presentation/src/navigation/chat_screen_router_impl.dart';
+import 'package:presentation/src/navigation/common_screen_router_impl.dart';
 import 'package:presentation/src/navigation/dev_router_impl.dart';
 import 'package:presentation/src/navigation/navigation.dart';
 import 'package:presentation/src/navigation/notifications_settings_screen_router_impl.dart';
@@ -228,6 +228,17 @@ abstract class FeatureModule {
 
   // region router
 
+  @j.provide
+  @j.singleton
+  static CommonScreenRouterImpl provideCommonScreenRouter(
+    FeatureFactory featureFactory,
+    SplitNavigationRouter splitNavigationRouter,
+  ) =>
+      CommonScreenRouterImpl(
+        featureFactory: featureFactory,
+        navigationRouter: splitNavigationRouter,
+      );
+
   @j.bind
   IChatsListScreenRouter bindChatsListScreenRouter(
       ChatsListScreenRouterImpl impl);
@@ -236,7 +247,7 @@ abstract class FeatureModule {
   IMainScreenRouter bindMainScreenRouter(MainScreenRouterImpl impl);
 
   @j.bind
-  IChatScreenRouter bindChatScreenRouter(ChatScreenRouterImpl impl);
+  IChatScreenRouter bindChatScreenRouter(CommonScreenRouterImpl impl);
 
   @j.bind
   ISettingsScreenRouter bindSettingsScreenRouter(SettingsScreenRouterImpl impl);

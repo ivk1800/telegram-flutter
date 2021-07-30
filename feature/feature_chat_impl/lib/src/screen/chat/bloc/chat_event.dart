@@ -14,3 +14,9 @@ abstract class ActionEvent extends ChatEvent {
 class ScrollEvent extends ChatEvent {
   const ScrollEvent();
 }
+
+class SenderTapEvent extends ChatEvent {
+  const SenderTapEvent({required this.senderId});
+
+  final int senderId;
+}

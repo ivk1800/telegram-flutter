@@ -4,6 +4,7 @@ import 'package:coreui/coreui.dart';
 import 'package:demo/src/message_data.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:feature_chat_impl/feature_chat_impl.dart' as chat_impl;
+import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +70,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
     _tileFactory = chat_impl.MessageTileFactoryComponent(
         dependencies: chat_impl.MessageTileFactoryDependencies(
       messageWallContext: FakeMessageWallContext(),
+      messageActionListener: MessageActionListenerStub(),
       fileRepository: fakeFileRepository,
       localizationManager: localizationManager,
     )).create();
@@ -222,4 +224,9 @@ class FakeMessageWallContext implements chat_impl.IMessageWallContext {
 
   @override
   bool isDisplaySenderNameFor(int messageId) => true;
+}
+
+class MessageActionListenerStub implements IMessageActionListener {
+  @override
+  void onSenderAvatarTap({required int senderId}) {}
 }

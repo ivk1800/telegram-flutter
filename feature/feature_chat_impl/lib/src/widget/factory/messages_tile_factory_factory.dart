@@ -23,22 +23,19 @@ class MessagesTileFactoryFactory {
         .TileFactory(delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
       MessageAnimationTileModel: MessageAnimationTileFactoryDelegate(
           shortInfoFactory: shortInfoFactory,
-          senderAvatarFactory: senderAvatarFactory,
-          senderTitleFactory: senderTitleFactory,
+          messageComponentResolver: messageComponentResolver,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageAudioTileModel: MessageAudioTileFactoryDelegate(
-          senderTitleFactory: senderTitleFactory,
+          messageComponentResolver: messageComponentResolver,
           replyInfoFactory: replyInfoFactory,
-          senderAvatarFactory: senderAvatarFactory,
           shortInfoFactory: shortInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageBasicGroupChatCreateTileModel:
           MessageBasicGroupChatCreateTileFactoryDelegate(
               chatMessageFactory: chatMessageFactory),
       MessageCallTileModel: MessageCallTileFactoryDelegate(
-          senderTitleFactory: senderTitleFactory,
-          senderAvatarFactory: senderAvatarFactory,
+          messageComponentResolver: messageComponentResolver,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageChatAddMembersTileModel: MessageChatAddMembersTileFactoryDelegate(
@@ -65,9 +62,8 @@ class MessagesTileFactoryFactory {
       MessageChatUpgradeToTileModel: MessageChatUpgradeToTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
       MessageContactTileModel: MessageContactTileFactoryDelegate(
-          senderTitleFactory: senderTitleFactory,
+          messageComponentResolver: messageComponentResolver,
           replyInfoFactory: replyInfoFactory,
-          senderAvatarFactory: senderAvatarFactory,
           localizationManager: localizationManager,
           shortInfoFactory: shortInfoFactory,
           chatMessageFactory: chatMessageFactory),
@@ -109,9 +105,8 @@ class MessagesTileFactoryFactory {
           MessagePaymentSuccessfulTileFactoryDelegate(
               chatMessageFactory: chatMessageFactory),
       MessagePhotoTileModel: MessagePhotoTileFactoryDelegate(
+          messageComponentResolver: messageComponentResolver,
           shortInfoFactory: shortInfoFactory,
-          senderAvatarFactory: senderAvatarFactory,
-          senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessagePinMessageTileModel: MessagePinMessageTileFactoryDelegate(
@@ -141,9 +136,8 @@ class MessagesTileFactoryFactory {
       MessageVideoNoteTileModel: MessageVideoNoteTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
       MessageVideoTileModel: MessageVideoTileFactoryDelegate(
+          messageComponentResolver: messageComponentResolver,
           shortInfoFactory: shortInfoFactory,
-          senderAvatarFactory: senderAvatarFactory,
-          senderTitleFactory: senderTitleFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory),
       MessageVoiceChatEndedTileModel: MessageVoiceChatEndedTileFactoryDelegate(
