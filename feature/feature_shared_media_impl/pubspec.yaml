@@ -1,0 +1,16 @@
+name: feature_shared_media_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  feature_shared_media_api:
+    path: ../feature_shared_media_api
+  flutter:
+    sdk: flutter
+
+flutter:

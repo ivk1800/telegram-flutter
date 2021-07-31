@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
+import 'package:feature_profile_impl/src/profile_feature_router.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,11 +14,13 @@ import 'profile_state_ext.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc({
     required ProfileArgs args,
+    required IProfileFeatureRouter router,
     required IChatHeaderInfoInteractor headerInfoInteractor,
     required ContentInteractor contentInteractor,
     required IChatMessageRepository messageRepository,
   })  : _args = args,
         _contentInteractor = contentInteractor,
+        _router = router,
         _headerInfoInteractor = headerInfoInteractor,
         _messageRepository = messageRepository,
         super(ProfileState(
@@ -36,6 +39,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileArgs _args;
   final IChatMessageRepository _messageRepository;
   final ContentInteractor _contentInteractor;
+  final IProfileFeatureRouter _router;
   final IChatHeaderInfoInteractor _headerInfoInteractor;
   StreamSubscription<dynamic>? _compositeStateSubscription;
 
@@ -66,7 +70,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         print('NotificationToggleTap');
         return;
       case MessagesTap:
-        print('MessagesTap ${(event as MessagesTap).type}');
+        _router.toSharedMedia((event as MessagesTap).type);
         return;
     }
   }

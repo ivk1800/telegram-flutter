@@ -20,6 +20,8 @@ import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
+import 'package:feature_shared_media_api/feature_shared_media_api.dart';
+import 'package:feature_shared_media_impl/feature_shared_media_impl.dart';
 import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
 import 'package:feature_wallpappers_impl/feature_wallpappers_impl.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
@@ -122,9 +124,11 @@ abstract class FeatureModule {
     IBasicGroupRepository basicGroupRepository,
     IChatMessageRepository messageRepository,
     IChatRepository chatRepository,
+    IProfileFeatureRouter router,
     ILocalizationManager localizationManager,
   ) =>
       ProfileFeatureDependencies(
+        router: router,
         localizationManager: localizationManager,
         chatRepository: chatRepository,
         messageRepository: messageRepository,
@@ -132,6 +136,14 @@ abstract class FeatureModule {
         superGroupRepository: superGroupRepository,
         basicGroupRepository: basicGroupRepository,
         chatHeaderInfoFeatureApi: chatHeaderInfoFeatureApi,
+      );
+
+  @j.provide
+  static SharedMediaFeatureDependencies provideSharedMediaFeatureDependencies(
+    IChatMessageRepository messageRepository,
+  ) =>
+      SharedMediaFeatureDependencies(
+        messageRepository: messageRepository,
       );
 
   // endregion
@@ -216,6 +228,11 @@ abstract class FeatureModule {
     return ProfileFeatureApi(dependencies: dependencies);
   }
 
+  @j.provide
+  static ISharedMediaFeatureApi provideSharedMediaFeatureApi(
+          SharedMediaFeatureDependencies dependencies) =>
+      SharedMediaFeatureApi(dependencies: dependencies);
+
   // endregion
 
   @j.provide
@@ -248,6 +265,9 @@ abstract class FeatureModule {
 
   @j.bind
   IChatScreenRouter bindChatScreenRouter(CommonScreenRouterImpl impl);
+
+  @j.bind
+  IProfileFeatureRouter bindProfileFeatureRouter(CommonScreenRouterImpl impl);
 
   @j.bind
   ISettingsScreenRouter bindSettingsScreenRouter(SettingsScreenRouterImpl impl);

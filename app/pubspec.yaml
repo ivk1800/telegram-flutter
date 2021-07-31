@@ -7,6 +7,10 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  feature_shared_media_api:
+    path: ../feature/feature_shared_media_api
+  feature_shared_media_impl:
+    path: ../feature/feature_shared_media_impl
   feature_profile_api:
     path: ../feature/feature_profile_api
   feature_profile_impl:

@@ -5,7 +5,10 @@ import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:localization_api/localization_api.dart';
 
+import 'src/profile_feature_router.dart';
 import 'src/screen/factory/profile_screen_factory.dart';
+
+export 'src/profile_feature_router.dart';
 
 class ProfileFeatureApi implements IProfileFeatureApi {
   ProfileFeatureApi({required ProfileFeatureDependencies dependencies})
@@ -30,6 +33,7 @@ class ProfileFeatureDependencies {
     required this.superGroupRepository,
     required this.basicGroupRepository,
     required this.localizationManager,
+    required this.router,
   });
 
   final IUserRepository userRepository;
@@ -45,4 +49,6 @@ class ProfileFeatureDependencies {
   final IChatRepository chatRepository;
 
   final ILocalizationManager localizationManager;
+
+  final IProfileFeatureRouter router;
 }

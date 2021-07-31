@@ -1,6 +1,6 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
-import 'package:feature_profile_impl/src/shared_content_type.dart';
+import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;

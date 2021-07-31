@@ -42,6 +42,7 @@ abstract class ProfileScreenModule {
     ContentInteractor contentInteractor,
   ) =>
       ProfileBloc(
+        router: dependencies.router,
         args: args,
         headerInfoInteractor: dependencies.chatHeaderInfoFeatureApi
             .getChatHeaderInfoInteractor(args.id),

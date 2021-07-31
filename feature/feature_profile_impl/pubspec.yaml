@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  feature_shared_media_api:
+    path: ../feature_shared_media_api
   coreui:
     path: ../../coreui
   tuple: ^2.0.0

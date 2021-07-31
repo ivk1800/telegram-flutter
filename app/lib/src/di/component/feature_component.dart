@@ -7,6 +7,7 @@ import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
+import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
@@ -45,6 +46,8 @@ abstract class FeatureComponent {
   IStickersFeatureApi getStickersFeatureApi();
 
   IProfileFeatureApi getProfileFeatureApi();
+
+  ISharedMediaFeatureApi getSharedMediaFeatureApi();
 }
 
 @j.componentBuilder

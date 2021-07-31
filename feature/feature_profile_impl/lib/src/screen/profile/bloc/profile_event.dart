@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:feature_profile_impl/src/shared_content_type.dart';
+import 'package:feature_shared_media_api/src/shared_content_type.dart';
 
 abstract class ProfileEvent extends Equatable {
   const ProfileEvent();
