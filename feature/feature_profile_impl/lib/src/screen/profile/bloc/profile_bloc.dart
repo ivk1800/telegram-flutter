@@ -54,7 +54,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   void _handleActionEvent(ActionEvent event) {
     switch (event.runtimeType) {
       case NotificationTap:
-        print('NotificationTap');
+        _router.toQuickNotificationSettings();
         return;
       case NotificationToggleTap:
         final DataBodyState bodyState = state.bodyState as DataBodyState;

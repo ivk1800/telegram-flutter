@@ -152,4 +152,10 @@
     <string lang="NotificationsOn">On</string>
     <!-- https://translations.telegram.org/en/android/profile/SharedLinks -->
     <string lang="SharedLinks">Links</string>
+    <!-- https://translations.telegram.org/en/android/profile/NotificationsTurnOn -->
+    <string lang="NotificationsTurnOn">Turn On</string>
+    <!-- https://translations.telegram.org/en/android/profile/NotificationsTurnOff -->
+    <string lang="NotificationsTurnOff">Turn Off</string>
+    <!-- https://translations.telegram.org/en/android/profile/NotificationsCustomize -->
+    <string lang="NotificationsCustomize">Customize</string>
 </resources>

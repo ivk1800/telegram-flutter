@@ -32,6 +32,7 @@ import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:presentation/src/app/app.dart';
 import 'package:presentation/src/feature/chat_feature_dependencies.dart';
 import 'package:presentation/src/feature/feature.dart';
 import 'package:presentation/src/navigation/common_screen_router_impl.dart';
@@ -73,10 +74,18 @@ abstract class FeatureModule {
   IPrivacySettingsFeatureDependencies bindPrivacySettingsFeatureDependencies(
       PrivacySettingsFeatureDependencies impl);
 
-  @j.bind
-  INotificationsSettingsFeatureDependencies
-      bindNotificationsSettingsFeatureDependencies(
-          NotificationsSettingsFeatureDependencies impl);
+  @j.provide
+  static NotificationsSettingsFeatureDependencies
+      provideNotificationsSettingsFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ILocalizationManager localizationManager,
+    INotificationsSettingsScreenRouter router,
+  ) =>
+          NotificationsSettingsFeatureDependencies(
+            connectionStateProvider: connectionStateProvider,
+            localizationManager: localizationManager,
+            router: router,
+          );
 
   @j.bind
   IDataSettingsFeatureDependencies bindDataSettingsFeatureDependencies(
@@ -199,7 +208,7 @@ abstract class FeatureModule {
   @j.provide
   static INotificationsSettingsFeatureApi
       provideNotificationsSettingsFeatureApi(
-              INotificationsSettingsFeatureDependencies dependencies) =>
+              NotificationsSettingsFeatureDependencies dependencies) =>
           NotificationsSettingsFeatureApi(dependencies: dependencies);
 
   @j.provide
@@ -252,6 +261,7 @@ abstract class FeatureModule {
     SplitNavigationRouter splitNavigationRouter,
   ) =>
       CommonScreenRouterImpl(
+        dialogNavigatorKey: MyApp.navigatorKey,
         featureFactory: featureFactory,
         navigationRouter: splitNavigationRouter,
       );

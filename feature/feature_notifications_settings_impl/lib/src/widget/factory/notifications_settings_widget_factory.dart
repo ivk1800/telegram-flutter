@@ -10,7 +10,7 @@ class NotificationsSettingsWidgetFactory
     implements INotificationsSettingsWidgetFactory {
   NotificationsSettingsWidgetFactory({required this.dependencies});
 
-  final INotificationsSettingsFeatureDependencies dependencies;
+  final NotificationsSettingsFeatureDependencies dependencies;
 
   @override
   Widget create() => MultiProvider(
