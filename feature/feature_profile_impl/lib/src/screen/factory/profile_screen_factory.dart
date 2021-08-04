@@ -43,6 +43,5 @@ class ProfileScreenFactory implements IProfileScreenFactory {
 }
 
 extension _ContextExt on BuildContext {
-  ProfileScreenComponent getComponent() =>
-      Provider.of<ProfileScreenComponent>(this, listen: false);
+  ProfileScreenComponent getComponent() => read<ProfileScreenComponent>();
 }

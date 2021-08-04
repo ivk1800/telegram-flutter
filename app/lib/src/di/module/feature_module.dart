@@ -5,6 +5,8 @@ import 'package:feature_chat_header_info_impl/feature_chat_header_info_impl.dart
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
+import 'package:feature_country_api/feature_country_api.dart';
+import 'package:feature_country_impl/feature_country_impl.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
@@ -155,6 +157,14 @@ abstract class FeatureModule {
         messageRepository: messageRepository,
       );
 
+  @j.provide
+  static CountryFeatureDependencies provideCountryFeatureDependencies(
+    ILocalizationManager localizationManager,
+  ) =>
+      CountryFeatureDependencies(
+        localizationManager: localizationManager,
+      );
+
   // endregion
 
   // region api
@@ -241,6 +251,11 @@ abstract class FeatureModule {
   static ISharedMediaFeatureApi provideSharedMediaFeatureApi(
           SharedMediaFeatureDependencies dependencies) =>
       SharedMediaFeatureApi(dependencies: dependencies);
+
+  @j.provide
+  static ICountryFeatureApi provideCountryFeatureApi(
+          CountryFeatureDependencies dependencies) =>
+      CountryFeatureApi(dependencies: dependencies);
 
   // endregion
 

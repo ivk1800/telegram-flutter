@@ -1,0 +1,21 @@
+name: feature_country_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  provider: ^5.0.0
+  equatable: ^2.0.0
+  flutter_bloc: ^7.0.1
+  localization_api:
+    path: ../../localization_api
+  feature_country_api:
+    path: ../feature_country_api
+  flutter:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/countries.txt

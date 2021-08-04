@@ -158,4 +158,6 @@
     <string lang="NotificationsTurnOff">Turn Off</string>
     <!-- https://translations.telegram.org/en/android/profile/NotificationsCustomize -->
     <string lang="NotificationsCustomize">Customize</string>
+    <!-- https://translations.telegram.org/en/android/login/ChooseCountry -->
+    <string lang="ChooseCountry">Choose a country</string>
 </resources>

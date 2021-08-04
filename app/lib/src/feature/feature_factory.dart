@@ -1,6 +1,7 @@
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
+import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
@@ -64,4 +65,7 @@ class FeatureFactory {
       _featureComponent.getSharedMediaFeatureApi();
 
   DevFeature createDevFeature() => _featureComponent.getDevFeature();
+
+  ICountryFeatureApi createCountryFeatureApi() =>
+      _featureComponent.getCountryFeatureApi();
 }
