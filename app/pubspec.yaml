@@ -7,6 +7,12 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  dialog_api:
+    path: ../dialog_api
+  feature_country_api:
+    path: ../feature/feature_country_api
+  feature_country_impl:
+    path: ../feature/feature_country_impl
   feature_shared_media_api:
     path: ../feature/feature_shared_media_api
   feature_shared_media_impl:

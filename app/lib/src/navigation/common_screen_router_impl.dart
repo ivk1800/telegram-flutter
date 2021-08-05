@@ -1,3 +1,5 @@
+import 'package:dialog_api/dialog_api.dart';
+import 'package:dialog_api/dialog_api.dart' as dialog_api;
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
@@ -6,14 +8,13 @@ import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/app/app.dart';
 import 'package:presentation/src/feature/feature.dart';
 import 'package:split_view/split_view.dart';
 
 import 'navigation.dart';
 
 class CommonScreenRouterImpl
-    implements IChatScreenRouter, IProfileFeatureRouter {
+    implements IChatScreenRouter, IProfileFeatureRouter, IDialogRouter {
   @j.inject
   CommonScreenRouterImpl({
     required SplitNavigationRouter navigationRouter,
@@ -57,6 +58,46 @@ class CommonScreenRouterImpl
         .quickNotificationSettingsScreenFactory;
     _showDialog(
       builder: (BuildContext context) => factory.create(context: context),
+    );
+  }
+
+  @override
+  void toDialog(
+      {String? title,
+      required Body body,
+      List<dialog_api.Action> actions = const <dialog_api.Action>[]}) {
+    Widget? createContent() {
+      switch (body.runtimeType) {
+        case TextBody:
+          {
+            return Text((body as TextBody).text);
+          }
+      }
+
+      return null;
+    }
+
+    _showDialog(
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: title != null ? Text(title) : null,
+          content: createContent(),
+          actions: actions
+              .map((dialog_api.Action action) => TextButton(
+                    child: Text(action.text),
+                    onPressed: () {
+                      if (action.callback == null) {
+                        Navigator.of(context).pop();
+                      } else {
+                        if (action.callback!.call()) {
+                          Navigator.of(context).pop();
+                        }
+                      }
+                    },
+                  ))
+              .toList(),
+        );
+      },
     );
   }
 
