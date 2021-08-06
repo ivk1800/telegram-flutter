@@ -1,3 +1,4 @@
+import 'package:app/src/tdlib/config_provider.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
@@ -17,6 +18,8 @@ import 'package:td_client/td_client.dart';
   TdModule,
 ])
 abstract class AppComponent {
+  TdConfigProvider getTdConfigProvider();
+
   TdClient getTdClient();
 
   IBasicGroupRepository getBasicGroupRepository();

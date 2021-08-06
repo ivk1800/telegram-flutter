@@ -1,3 +1,4 @@
+import 'package:app/src/tdlib/config_provider.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
@@ -117,4 +118,8 @@ abstract class AppModule {
   @j.singleton
   @j.provide
   static IStringsProvider provideStringsProvider() => DefaultStringProvider();
+
+  @j.singleton
+  @j.provide
+  static TdConfigProvider provideTdConfigProvider() => TdConfigProvider();
 }

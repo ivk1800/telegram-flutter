@@ -1,9 +1,10 @@
 import 'dart:ui';
 
+import 'package:app/src/navigation/navigation.dart';
+import 'package:app/src/tdlib/config_provider.dart';
 import 'package:core/core.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:path_provider/path_provider.dart';
-import 'package:app/src/navigation/navigation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
@@ -13,11 +14,13 @@ class AppDelegate {
   AppDelegate(
       {required TdClient client,
       required INavigationRouter router,
+      required TdConfigProvider tdConfigProvider,
       required IAppLifecycleStateProvider appLifecycleStateProvider,
       required IConnectivityProvider connectivityProvider,
       required OptionsManager optionsManager})
       : _router = router,
         _client = client,
+        _tdConfigProvider = tdConfigProvider,
         _appLifecycleStateProvider = appLifecycleStateProvider,
         _connectivityProvider = connectivityProvider,
         _optionsManager = optionsManager {
@@ -29,6 +32,7 @@ class AppDelegate {
   final IAppLifecycleStateProvider _appLifecycleStateProvider;
   final TdClient _client;
   final OptionsManager _optionsManager;
+  final TdConfigProvider _tdConfigProvider;
 
   void onResume() {
     _optionsManager.setOnline(true);
@@ -71,12 +75,12 @@ class AppDelegate {
                   systemLanguageCode: 'en',
                   deviceModel: 'pixel',
                   applicationVersion: '1.0.0',
-                  apiId: 0,
-                  apiHash: '')));
+                  apiId: await _tdConfigProvider.getAppId(),
+                  apiHash: await _tdConfigProvider.getApiHash())));
         } else if (newEvent.authorizationState
             is td.AuthorizationStateWaitEncryptionKey) {
           _client.send<td.Ok>(td.CheckDatabaseEncryptionKey(
-              encryptionKey: 'mostrandomencryption'));
+              encryptionKey: await _tdConfigProvider.getEncryptionKey()));
         } else if (newEvent.authorizationState is td.AuthorizationStateReady) {
           _router.toRoot();
         } else if (newEvent.authorizationState
