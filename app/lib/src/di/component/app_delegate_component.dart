@@ -1,14 +1,14 @@
-import 'package:presentation/presentation.dart';
+import 'package:app/app.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/app/app.dart';
-import 'package:presentation/src/di/component/app_component.dart';
+import 'package:app/src/app/tg_app.dart';
+import 'package:app/src/di/component/app_component.dart';
 
 import 'app_delegate_component.jugger.dart';
 
 @j.Component(
     modules: <Type>[ChatScreenModule], dependencies: <Type>[AppComponent])
 abstract class AppDelegateComponent {
-  void inject(MyAppState state);
+  void inject(TgAppState state);
 }
 
 @j.module
@@ -18,12 +18,12 @@ abstract class ChatScreenModule {}
 abstract class AppDelegateComponentBuilder {
   AppDelegateComponentBuilder appComponent(AppComponent component);
 
-  AppDelegateComponentBuilder state(MyAppState state);
+  AppDelegateComponentBuilder state(TgAppState state);
 
   AppDelegateComponent build();
 }
 
-extension ProfileScreenInject on MyAppState {
+extension ProfileScreenInject on TgAppState {
   void inject() {
     final AppDelegateComponent component = JuggerAppDelegateComponentBuilder()
         .appComponent(appComponent)

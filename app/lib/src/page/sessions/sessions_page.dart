@@ -1,9 +1,9 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/src/page/page.dart';
-import 'package:presentation/src/tile/session_tile.dart';
-import 'package:presentation/src/util/string_provider.dart';
-import 'package:presentation/src/di/component/screen/sessions_screen_component.dart';
+import 'package:app/src/page/page.dart';
+import 'package:app/src/tile/session_tile.dart';
+import 'package:app/src/util/string_provider.dart';
+import 'package:app/src/di/component/screen/sessions_screen_component.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:tdlib/td_api.dart' as td;
 

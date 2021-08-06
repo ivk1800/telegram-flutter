@@ -1,6 +1,8 @@
+import 'package:app/src/feature/feature.dart';
 import 'package:dialog_api/dialog_api.dart';
 import 'package:dialog_api/dialog_api.dart' as dialog_api;
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
@@ -8,7 +10,6 @@ import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/feature/feature.dart';
 import 'package:split_view/split_view.dart';
 
 import 'navigation.dart';
@@ -59,6 +60,16 @@ class CommonScreenRouterImpl
     _showDialog(
       builder: (BuildContext context) => factory.create(context: context),
     );
+  }
+
+  @override
+  void toChooseCountry(void Function(Country country) callback) {
+    final IChooseCountryScreenFactory factory =
+        _featureFactory.createCountryFeatureApi().chooseCountryScreenFactory;
+    _navigationRouter.push(
+        key: UniqueKey(),
+        builder: (BuildContext context) => factory.create(context, callback),
+        container: ContainerType.Top);
   }
 
   @override

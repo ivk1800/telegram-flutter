@@ -1,9 +1,9 @@
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/src/feature/feature.dart';
-import 'package:presentation/src/feature/folders/feature_folders.dart';
-import 'package:presentation/src/page/page.dart';
+import 'package:app/src/feature/feature.dart';
+import 'package:app/src/feature/folders/feature_folders.dart';
+import 'package:app/src/page/page.dart';
 
 import 'navigation_router.dart';
 

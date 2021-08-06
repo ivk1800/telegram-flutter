@@ -14,7 +14,7 @@ import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
-import 'package:presentation/src/di/component/feature_component.dart';
+import 'package:app/src/di/component/feature_component.dart';
 
 class FeatureFactory {
   FeatureFactory({required FeatureComponent featureComponent})

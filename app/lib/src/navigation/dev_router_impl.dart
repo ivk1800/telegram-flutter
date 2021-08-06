@@ -1,7 +1,7 @@
 import 'package:feature_dev/feature_dev.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/feature/feature.dart';
+import 'package:app/src/feature/feature.dart';
 import 'package:split_view/split_view.dart';
 
 import 'navigation.dart';

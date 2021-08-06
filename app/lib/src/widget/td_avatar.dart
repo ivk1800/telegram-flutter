@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:presentation/src/widget/widget.dart';
+import 'package:app/src/widget/widget.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:flutter/widgets.dart';
 

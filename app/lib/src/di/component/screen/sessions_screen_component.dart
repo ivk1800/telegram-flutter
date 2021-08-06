@@ -1,8 +1,8 @@
-import 'package:presentation/presentation.dart';
+import 'package:app/app.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/di/component/app_component.dart';
-import 'package:presentation/src/di/component/screen/sessions_screen_component.jugger.dart';
-import 'package:presentation/src/page/page.dart';
+import 'package:app/src/di/component/app_component.dart';
+import 'package:app/src/di/component/screen/sessions_screen_component.jugger.dart';
+import 'package:app/src/page/page.dart';
 
 @j.Component(dependencies: <Type>[AppComponent])
 abstract class SessionsScreenComponent {

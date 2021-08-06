@@ -1,4 +1,4 @@
-name: app
+name: launch
 description: A new Flutter project.
 
 publish_to: 'none'
@@ -11,7 +11,7 @@ environment:
 dependencies:
   demo:
     path: ../demo
-  presentation:
+  app:
     path: ../app
   flutter:
     sdk: flutter

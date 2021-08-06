@@ -1,3 +1,4 @@
+import 'package:app/src/app/tg_app.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
@@ -34,14 +35,13 @@ import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
-import 'package:presentation/src/app/app.dart';
-import 'package:presentation/src/feature/chat_feature_dependencies.dart';
-import 'package:presentation/src/feature/feature.dart';
-import 'package:presentation/src/navigation/common_screen_router_impl.dart';
-import 'package:presentation/src/navigation/dev_router_impl.dart';
-import 'package:presentation/src/navigation/navigation.dart';
-import 'package:presentation/src/navigation/notifications_settings_screen_router_impl.dart';
-import 'package:presentation/src/navigation/stickers_feature_router.dart';
+import 'package:app/src/feature/chat_feature_dependencies.dart';
+import 'package:app/src/feature/feature.dart';
+import 'package:app/src/navigation/common_screen_router_impl.dart';
+import 'package:app/src/navigation/dev_router_impl.dart';
+import 'package:app/src/navigation/navigation.dart';
+import 'package:app/src/navigation/notifications_settings_screen_router_impl.dart';
+import 'package:app/src/navigation/stickers_feature_router.dart';
 import 'package:td_client/td_client.dart';
 
 @j.module
@@ -276,7 +276,7 @@ abstract class FeatureModule {
     SplitNavigationRouter splitNavigationRouter,
   ) =>
       CommonScreenRouterImpl(
-        dialogNavigatorKey: MyApp.navigatorKey,
+        dialogNavigatorKey: TgApp.navigatorKey,
         featureFactory: featureFactory,
         navigationRouter: splitNavigationRouter,
       );

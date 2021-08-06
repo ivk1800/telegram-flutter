@@ -1,6 +1,6 @@
 import 'package:feature_stickers_impl/feature_stickers_impl.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/src/feature/feature.dart';
+import 'package:app/src/feature/feature.dart';
 import 'package:split_view/split_view.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'navigation.dart';

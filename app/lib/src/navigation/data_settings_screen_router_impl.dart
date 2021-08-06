@@ -1,6 +1,6 @@
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/feature/feature.dart';
+import 'package:app/src/feature/feature.dart';
 
 import 'navigation.dart';
 

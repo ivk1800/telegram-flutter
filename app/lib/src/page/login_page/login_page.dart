@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/presentation.dart';
+import 'package:app/app.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class LoginPage extends StatefulWidget {

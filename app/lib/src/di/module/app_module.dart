@@ -3,13 +3,13 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/presentation.dart';
-import 'package:presentation/src/app/app.dart';
-import 'package:presentation/src/di/component/feature_component.jugger.dart';
-import 'package:presentation/src/feature/feature.dart';
-import 'package:presentation/src/navigation/navigation.dart';
-import 'package:presentation/src/navigation/split_navigation_router.dart';
-import 'package:presentation/src/util/util.dart';
+import 'package:app/src/app/tg_app.dart';
+import 'package:app/app.dart';
+import 'package:app/src/di/component/feature_component.jugger.dart';
+import 'package:app/src/feature/feature.dart';
+import 'package:app/src/navigation/navigation.dart';
+import 'package:app/src/navigation/split_navigation_router.dart';
+import 'package:app/src/util/util.dart';
 import 'package:td_client/td_client.dart';
 
 @j.module
@@ -87,18 +87,18 @@ abstract class AppModule {
   @j.provide
   static RootNavigationRouter provideNavigationRouter(
           FeatureFactory featureFactory) =>
-      RootNavigationRouter(MyApp.navigatorKey, featureFactory);
+      RootNavigationRouter(TgApp.navigatorKey, featureFactory);
 
   @j.singleton
   @j.provide
   static SplitNavigationInfoProvider provideSplitNavigationInfoProvider() =>
-      SplitNavigationInfoProvider(MyApp.splitViewNavigatorKey);
+      SplitNavigationInfoProvider(TgApp.splitViewNavigatorKey);
 
   @j.singleton
   @j.provide
   static SplitNavigationRouter provideSplitViewNavigationRouter(
           FeatureFactory featureFactory) =>
-      SplitNavigationRouter(MyApp.splitViewNavigatorKey, featureFactory);
+      SplitNavigationRouter(TgApp.splitViewNavigatorKey, featureFactory);
 
   @j.singleton
   @j.provide

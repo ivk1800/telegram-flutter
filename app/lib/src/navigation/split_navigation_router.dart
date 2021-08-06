@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:presentation/src/feature/feature.dart';
-import 'package:presentation/src/feature/folders/feature_folders.dart';
-import 'package:presentation/src/page/page.dart';
+import 'package:app/src/feature/feature.dart';
+import 'package:app/src/feature/folders/feature_folders.dart';
+import 'package:app/src/page/page.dart';
 import 'package:split_view/split_view.dart';
 
 import 'navigation_router.dart';

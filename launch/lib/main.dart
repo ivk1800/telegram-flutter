@@ -1,4 +1,4 @@
-import 'package:presentation/presentation.dart' as app;
+import 'package:app/app.dart' as app;
 // import 'package:demo/demo.dart' as demo;
 
 Future<void> main() async {

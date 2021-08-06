@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/src/app/app_delegate.dart';
-import 'package:presentation/src/widget/widget.dart';
+import 'package:app/src/app/app_delegate.dart';
+import 'package:app/src/widget/widget.dart';
 import 'package:split_view/split_view.dart';
 import 'package:td_client/td_client.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/di/component/app_delegate_component.dart';
+import 'package:app/src/di/component/app_delegate_component.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key, required this.client}) : super(key: key);
+class TgApp extends StatefulWidget {
+  const TgApp({Key? key, required this.client}) : super(key: key);
 
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
@@ -17,10 +17,10 @@ class MyApp extends StatefulWidget {
   final TdClient client;
 
   @override
-  MyAppState createState() => MyAppState();
+  TgAppState createState() => TgAppState();
 }
 
-class MyAppState extends State<MyApp> with WidgetsBindingObserver {
+class TgAppState extends State<TgApp> with WidgetsBindingObserver {
   @j.inject
   late AppDelegate appDelegate;
 
@@ -52,7 +52,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
       client: widget.client,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        navigatorKey: MyApp.navigatorKey,
+        navigatorKey: TgApp.navigatorKey,
         theme: ThemeData(
           platform: TargetPlatform.iOS,
           primaryColor: const Color(0xff5682a3),
@@ -62,7 +62,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
           // TODO maybe add color property to SplitView?
           color: Theme.of(context).scaffoldBackgroundColor,
           child: SplitView(
-            key: MyApp.splitViewNavigatorKey,
+            key: TgApp.splitViewNavigatorKey,
           ),
         ),
       ),

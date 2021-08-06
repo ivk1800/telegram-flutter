@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:core/core.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:path_provider/path_provider.dart';
-import 'package:presentation/src/navigation/navigation.dart';
+import 'package:app/src/navigation/navigation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;

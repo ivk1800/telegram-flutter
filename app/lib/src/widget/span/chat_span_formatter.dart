@@ -1,4 +1,4 @@
-import 'package:presentation/src/util/util.dart';
+import 'package:app/src/util/util.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:flutter/painting.dart';
 import 'package:jugger/jugger.dart' as j;

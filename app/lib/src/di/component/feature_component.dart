@@ -14,8 +14,8 @@ import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/di/component/app_component.dart';
-import 'package:presentation/src/di/module/feature_module.dart';
+import 'package:app/src/di/component/app_component.dart';
+import 'package:app/src/di/module/feature_module.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 
 @j.Component(modules: <Type>[FeatureModule], dependencies: <Type>[AppComponent])

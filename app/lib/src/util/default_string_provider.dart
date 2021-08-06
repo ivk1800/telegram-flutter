@@ -1,5 +1,5 @@
 import 'package:jugger/jugger.dart' as j;
-import 'package:presentation/src/util/string_provider.dart';
+import 'package:app/src/util/string_provider.dart';
 
 class DefaultStringProvider implements IStringsProvider {
   @j.inject
