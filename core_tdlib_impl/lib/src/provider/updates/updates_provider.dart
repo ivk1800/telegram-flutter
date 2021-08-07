@@ -4,7 +4,10 @@ import 'package:td_client/td_client.dart';
 import 'package:jugger/jugger.dart' as j;
 
 class UpdatesProvider
-    implements IChatUpdatesProvider, IChatFiltersUpdatesProvider {
+    implements
+        IChatUpdatesProvider,
+        IChatFiltersUpdatesProvider,
+        IAuthenticationStateUpdatesProvider {
   @j.inject
   UpdatesProvider({required TdClient client}) : _client = client;
 
@@ -19,6 +22,10 @@ class UpdatesProvider
   @override
   Stream<td.UpdateChatFilters> get chatFiltersUpdates =>
       _client.events.chatFiltersUpdatesFilter();
+
+  @override
+  Stream<td.UpdateAuthorizationState> get authorizationStateUpdates =>
+      _client.events.authorizationStateUpdatesFilter();
 }
 
 extension _UpdatesExtensions on Stream<td.TdObject> {
@@ -29,6 +36,10 @@ extension _UpdatesExtensions on Stream<td.TdObject> {
   Stream<td.UpdateConnectionState> connectionStateUpdatesFilter() =>
       where((td.TdObject event) => event is td.UpdateConnectionState)
           .cast<td.UpdateConnectionState>();
+
+  Stream<td.UpdateAuthorizationState> authorizationStateUpdatesFilter() =>
+      where((td.TdObject event) => event is td.UpdateAuthorizationState)
+          .cast<td.UpdateAuthorizationState>();
 
   Stream<td.Update> chatUpdatesFilter() => where((td.TdObject event) =>
       event is td.UpdateNewChat ||

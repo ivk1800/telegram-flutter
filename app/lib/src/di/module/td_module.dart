@@ -22,4 +22,9 @@ abstract class TdModule {
   @j.bind
   IConnectionStateProvider bindConnectionStateProvider(
       ConnectionStateProviderImpl impl);
+
+  @j.singleton
+  @j.bind
+  IAuthenticationStateUpdatesProvider bindAuthenticationStateUpdatesProvider(
+      UpdatesProvider impl);
 }
