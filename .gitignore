@@ -2,7 +2,8 @@
 *.jugger.dart
 .metadata
 *.g.dart
-tdlib
+/tdlib
+/app/assets/tdlib/config.txt
 
 .dart_tool/
 .flutter-plugins
