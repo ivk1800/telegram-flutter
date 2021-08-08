@@ -27,4 +27,11 @@ abstract class TdModule {
   @j.bind
   IAuthenticationStateUpdatesProvider bindAuthenticationStateUpdatesProvider(
       UpdatesProvider impl);
+
+  @j.singleton
+  @j.provide
+  static ITdFunctionExecutor provideTdFunctionExecutor(TdClient client) =>
+      TdFunctionExecutor(
+        client: client,
+      );
 }

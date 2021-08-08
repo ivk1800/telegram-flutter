@@ -1,7 +1,10 @@
 import 'dart:async';
+
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tdlib/td_client.dart' as tdc;
+
+export 'package:tdlib/td_client.dart' show TdFunctionError;
 
 class TdClient {
   late tdc.Client _client;

@@ -72,6 +72,8 @@ abstract class AppComponent {
 
   ILocalizationManager getLocalizationManager();
 
+  ITdFunctionExecutor getTdFunctionExecutor();
+
   void injectRootPageState(RootPageState state);
 }
 
