@@ -1,3 +1,4 @@
+import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:app/src/feature/feature.dart';
@@ -28,7 +29,13 @@ class SplitNavigationRouter implements INavigationRouter {
 
   @override
   void toLogin() {
-    _push(const LoginPage(), ContainerType.Top);
+    final IAuthScreenFactory factory =
+        _featureFactory.createAuthFeatureApi().authScreenFactory;
+    _push(Builder(
+      builder: (BuildContext context) {
+        return factory.create(context);
+      },
+    ), ContainerType.Top);
   }
 
   @override

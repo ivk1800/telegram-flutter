@@ -160,4 +160,28 @@
     <string lang="NotificationsCustomize">Customize</string>
     <!-- https://translations.telegram.org/en/android/login/ChooseCountry -->
     <string lang="ChooseCountry">Choose a country</string>
+    <!-- https://translations.telegram.org/en/android/login/SentAppCodeTitle -->
+    <string lang="SentAppCodeTitle">Check your Telegram messages</string>
+    <!-- https://translations.telegram.org/en/android/login/SentAppCode -->
+    <string lang="SentAppCode">We've sent the code to the **Telegram** app on your other device.</string>
+    <!-- https://translations.telegram.org/en/android/login/DidNotGetTheCodeSms -->
+    <string lang="DidNotGetTheCodeSms">Send the code as an SMS</string>
+    <!-- https://translations.telegram.org/en/android/login/ChooseCountry -->
+    <string lang="ChooseCountry">Choose a country</string>
+    <!-- https://translations.telegram.org/en/android/login/YourPhone -->
+    <string lang="YourPhone">Your Phone</string>
+    <!-- https://translations.telegram.org/en/android/login/StopVerification -->
+    <string lang="StopVerification">Do you want to stop the verification process?</string>
+    <!-- https://translations.telegram.org/en/android/login/AppName -->
+    <string lang="AppName">Telegram</string>
+    <!-- https://translations.telegram.org/en/android/login/Stop -->
+    <string lang="Stop">Stop</string>
+    <!-- https://translations.telegram.org/en/android/login/Continue -->
+    <string lang="Continue">Continue</string>
+    <!-- https://translations.telegram.org/en/android/login/WrongCountry -->
+    <string lang="WrongCountry">Invalid country code</string>
+    <!-- https://translations.telegram.org/en/android/login/OK -->
+    <string lang="OK">OK</string>
+    <!-- https://translations.telegram.org/en/android/login/StartText -->
+    <string lang="StartText">Please confirm your country code and enter your phone number.</string>
 </resources>

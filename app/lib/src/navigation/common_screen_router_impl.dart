@@ -1,6 +1,7 @@
 import 'package:app/src/feature/feature.dart';
 import 'package:dialog_api/dialog_api.dart';
 import 'package:dialog_api/dialog_api.dart' as dialog_api;
+import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
@@ -15,7 +16,11 @@ import 'package:split_view/split_view.dart';
 import 'navigation.dart';
 
 class CommonScreenRouterImpl
-    implements IChatScreenRouter, IProfileFeatureRouter, IDialogRouter {
+    implements
+        IChatScreenRouter,
+        IProfileFeatureRouter,
+        IDialogRouter,
+        IAuthFeatureRouter {
   @j.inject
   CommonScreenRouterImpl({
     required SplitNavigationRouter navigationRouter,

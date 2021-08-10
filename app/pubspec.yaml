@@ -9,6 +9,10 @@ environment:
 dependencies:
   dialog_api:
     path: ../dialog_api
+  feature_auth_api:
+    path: ../feature/feature_auth_api
+  feature_auth_impl:
+    path: ../feature/feature_auth_impl
   feature_country_api:
     path: ../feature/feature_country_api
   feature_country_impl:

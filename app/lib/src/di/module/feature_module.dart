@@ -1,9 +1,20 @@
 import 'package:app/src/app/tg_app.dart';
+import 'package:app/src/feature/chat_feature_dependencies.dart';
+import 'package:app/src/feature/feature.dart';
+import 'package:app/src/navigation/common_screen_router_impl.dart';
+import 'package:app/src/navigation/dev_router_impl.dart';
+import 'package:app/src/navigation/navigation.dart';
+import 'package:app/src/navigation/notifications_settings_screen_router_impl.dart';
+import 'package:app/src/navigation/stickers_feature_router.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:feature_auth_api/feature_auth_api.dart';
+import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_header_info_impl/feature_chat_header_info_impl.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
+import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
@@ -19,29 +30,20 @@ import 'package:feature_notifications_settings_api/feature_notifications_setting
 import 'package:feature_notifications_settings_impl/feature_notifications_settings_impl.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
-import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
-import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
-import 'package:feature_shared_media_api/feature_shared_media_api.dart';
-import 'package:feature_shared_media_impl/feature_shared_media_impl.dart';
-import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
-import 'package:feature_wallpappers_impl/feature_wallpappers_impl.dart';
-import 'package:feature_stickers_api/feature_stickers_api.dart';
-import 'package:feature_stickers_impl/feature_stickers_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
+import 'package:feature_shared_media_api/feature_shared_media_api.dart';
+import 'package:feature_shared_media_impl/feature_shared_media_impl.dart';
+import 'package:feature_stickers_api/feature_stickers_api.dart';
+import 'package:feature_stickers_impl/feature_stickers_impl.dart';
+import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
+import 'package:feature_wallpappers_impl/feature_wallpappers_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
-import 'package:app/src/feature/chat_feature_dependencies.dart';
-import 'package:app/src/feature/feature.dart';
-import 'package:app/src/navigation/common_screen_router_impl.dart';
-import 'package:app/src/navigation/dev_router_impl.dart';
-import 'package:app/src/navigation/navigation.dart';
-import 'package:app/src/navigation/notifications_settings_screen_router_impl.dart';
-import 'package:app/src/navigation/stickers_feature_router.dart';
 import 'package:td_client/td_client.dart';
 
 @j.module
@@ -165,6 +167,27 @@ abstract class FeatureModule {
         localizationManager: localizationManager,
       );
 
+  @j.provide
+  static AuthFeatureDependencies provideAuthFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ILocalizationManager localizationManager,
+    IAuthFeatureRouter router,
+    ITdFunctionExecutor functionExecutor,
+    IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
+    // todo maybe provide countryRepository from app component?
+    // todo with singleton scope?
+    FeatureFactory featureFactory,
+  ) =>
+      AuthFeatureDependencies(
+        connectionStateProvider: connectionStateProvider,
+        localizationManager: localizationManager,
+        router: router,
+        functionExecutor: functionExecutor,
+        authenticationStateUpdatesProvider: authenticationStateUpdatesProvider,
+        countryRepository:
+            featureFactory.createCountryFeatureApi().countryRepository,
+      );
+
   // endregion
 
   // region api
@@ -257,6 +280,11 @@ abstract class FeatureModule {
           CountryFeatureDependencies dependencies) =>
       CountryFeatureApi(dependencies: dependencies);
 
+  @j.provide
+  static IAuthFeatureApi provideAuthFeatureApi(
+          AuthFeatureDependencies dependencies) =>
+      AuthFeatureApi(dependencies: dependencies);
+
   // endregion
 
   @j.provide
@@ -327,6 +355,9 @@ abstract class FeatureModule {
   @j.bind
   IStickersFeatureRouter bindStickersFeatureRouter(
       StickersFeatureRouterImpl impl);
+
+  @j.bind
+  IAuthFeatureRouter bindAuthFeatureRouter(CommonScreenRouterImpl impl);
 
 // endregion
 }

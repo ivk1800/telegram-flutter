@@ -42,13 +42,7 @@ class RootNavigationRouter
   }
 
   @override
-  void toLogin() {
-    final PageRoute<dynamic> route = _defaultRoute(
-      (BuildContext context) => const LoginPage(),
-    );
-    _navigationKey.currentState
-        ?.pushAndRemoveUntil<dynamic>(route, (Route<dynamic> route) => false);
-  }
+  void toLogin() {}
 
   @override
   void toFolders() {

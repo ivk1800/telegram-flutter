@@ -1,3 +1,4 @@
+import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_country_api/feature_country_api.dart';
@@ -51,6 +52,8 @@ abstract class FeatureComponent {
   ISharedMediaFeatureApi getSharedMediaFeatureApi();
 
   ICountryFeatureApi getCountryFeatureApi();
+
+  IAuthFeatureApi getAuthFeatureApi();
 }
 
 @j.componentBuilder

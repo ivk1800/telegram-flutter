@@ -1,3 +1,4 @@
+import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
@@ -68,4 +69,7 @@ class FeatureFactory {
 
   ICountryFeatureApi createCountryFeatureApi() =>
       _featureComponent.getCountryFeatureApi();
+
+  IAuthFeatureApi createAuthFeatureApi() =>
+      _featureComponent.getAuthFeatureApi();
 }
