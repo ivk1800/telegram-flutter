@@ -13,12 +13,12 @@ class SettingsSearchViewModel extends BaseViewModel {
       : _router = router {
     _suggests.add(<ITileModel>[
       // TODO: implement all https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java#L7701
-      SearchResultTileModel(
+      const SearchResultTileModel(
           type: SearchResultType.NotificationsAndSounds,
           title: 'Notifications and Sounds',
           subtitle: null),
       // TODO: parse faq https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java#L7342
-      FaqResultTileModel(
+      const FaqResultTileModel(
           title: 'FAQ > General',
           subtitle: 'What is Telegram?',
           url: 'https://telegram.org/faq')

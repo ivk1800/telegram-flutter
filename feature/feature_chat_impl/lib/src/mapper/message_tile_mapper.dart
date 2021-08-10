@@ -48,8 +48,6 @@ class MessageTileMapper {
   final MessageCallTileModelMapper _messageCallTileModelMapper;
 
   Future<ITileModel> mapToTileModel(td.Message message) async {
-    print(json.encoder.convert(message.toJson()));
-
     final td.MessageContent content = message.content;
     final String notImplementedText =
         'not implemented ${message.content.runtimeType.toString()}';
@@ -511,8 +509,7 @@ class MessageTileMapper {
         type: notImplementedText);
   }
 
-  String _getStringFormatted(String key, List<dynamic> formatArgs,
-          [String defaultValue = '']) =>
+  String _getStringFormatted(String key, List<dynamic> formatArgs) =>
       _localizationManager.getStringFormatted(key, formatArgs);
 }
 

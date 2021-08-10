@@ -65,7 +65,7 @@ class SettingsPageState extends State<SettingsPage>
 
     // TODO refactor Size
     _navigationIconColorTween =
-        SizeTween(begin: const Size(0, 0), end: const Size(1, 1))
+        SizeTween(begin: Size.zero, end: const Size(1, 1))
             .animate(_animationController);
     myFocusNode = FocusNode();
   }

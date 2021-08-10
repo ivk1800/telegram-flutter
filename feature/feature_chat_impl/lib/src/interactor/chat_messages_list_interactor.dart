@@ -39,7 +39,7 @@ class ChatMessagesInteractor {
   bool _isIdle = true;
   StreamSubscription<_Result>? _subscription;
 
-  void init(int chatId) async {
+  Future<void> init(int chatId) async {
     final td.Chat chat = await _chatRepository.getChat(chatId);
 
     // if (chat.lastMessage != null) {

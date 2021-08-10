@@ -58,11 +58,12 @@ class MainPageState extends State<MainPage>
       });
     });
 
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 200));
 
-    _navigationIconColorTween = SizeTween(begin: Size(0, 0), end: Size(1, 1))
-        .animate(_animationController);
+    _navigationIconColorTween =
+        SizeTween(begin: Size.zero, end: const Size(1, 1))
+            .animate(_animationController);
     myFocusNode = FocusNode();
   }
 
@@ -93,7 +94,7 @@ class MainPageState extends State<MainPage>
           key: scaffoldKey,
           appBar: tg.TgSwitchedAppBar(
             key: appbarKey,
-            iconColorProvider: (isActive) {
+            iconColorProvider: (bool isActive) {
               if (isActive) {
                 switch (_screenState) {
                   case _ScreenState.Search:
@@ -226,7 +227,7 @@ class MainPageState extends State<MainPage>
                     }
                   case _ScreenState.MultiSelect:
                     {
-                      return Text(
+                      return const Text(
                         '1',
                         style: TextStyle(color: Colors.grey),
                       );
@@ -249,7 +250,7 @@ class MainPageState extends State<MainPage>
           ),
           drawer: _buildDrawer(),
           body: AnimatedSwitcher(
-            duration: Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 200),
             transitionBuilder: (Widget child, Animation<double> animation) {
               return FadeTransition(
                 child: child,
@@ -272,14 +273,7 @@ class MainPageState extends State<MainPage>
     );
   }
 
-  Widget buildSearchView() {
-    return globalSearchWidgetFactory.create();
-
-    return Container(
-      constraints: BoxConstraints.expand(),
-      key: ValueKey<int>(2),
-    );
-  }
+  Widget buildSearchView() => globalSearchWidgetFactory.create();
 
   Widget buildListView() {
     return chatsListWidgetFactory.create();

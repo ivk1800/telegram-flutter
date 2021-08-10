@@ -9,8 +9,8 @@ class BubbleClipper extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    double rightPadding = 0;
-    double leftPadding = 0;
+    const double rightPadding = 0;
+    const double leftPadding = 0;
 
     final Path path = Path()
       // start top left

@@ -9,27 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  final ScrollController scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    scrollController.addListener(() {
-      final double extentAfter = scrollController.position.extentAfter;
-      if (extentAfter < 200) {
-        print("qwe");
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
