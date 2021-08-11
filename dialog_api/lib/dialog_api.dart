@@ -17,9 +17,16 @@ class TextBody implements Body {
 }
 
 class Action {
-  Action({required this.text, this.callback});
+  Action({
+    required this.text,
+    this.callback,
+    this.type = ActionType.Default,
+  });
 
   final String text;
+  final ActionType type;
 
   final bool Function()? callback;
 }
+
+enum ActionType { Default, Attention }

@@ -95,12 +95,24 @@ class CommonScreenRouterImpl
 
     _showDialog(
       builder: (BuildContext context) {
+        Color? getActionColor(dialog_api.ActionType type) {
+          switch (type) {
+            case dialog_api.ActionType.Default:
+              return null;
+            case dialog_api.ActionType.Attention:
+              return Theme.of(context).errorColor;
+          }
+        }
+
         return AlertDialog(
           title: title != null ? Text(title) : null,
           content: createContent(),
           actions: actions
               .map((dialog_api.Action action) => TextButton(
-                    child: Text(action.text),
+                    child: Text(
+                      action.text,
+                      style: TextStyle(color: getActionColor(action.type)),
+                    ),
                     onPressed: () {
                       if (action.callback == null) {
                         Navigator.of(context).pop();
