@@ -24,6 +24,8 @@ import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
+import 'package:feature_logout_api/feature_logout_api.dart';
+import 'package:feature_logout_impl/feature_logout_impl.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
@@ -188,6 +190,24 @@ abstract class FeatureModule {
             featureFactory.createCountryFeatureApi().countryRepository,
       );
 
+  @j.provide
+  static LogoutFeatureDependencies provideLogoutFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ILocalizationManager localizationManager,
+    ILogoutFeatureRouter router,
+    ITdFunctionExecutor functionExecutor,
+    // todo maybe provide authenticationManager from app component?
+    // todo with singleton scope?
+    FeatureFactory featureFactory,
+  ) =>
+      LogoutFeatureDependencies(
+        connectionStateProvider: connectionStateProvider,
+        localizationManager: localizationManager,
+        router: router,
+        authenticationManager:
+            featureFactory.createAuthFeatureApi().authenticationManager,
+      );
+
   // endregion
 
   // region api
@@ -285,6 +305,11 @@ abstract class FeatureModule {
           AuthFeatureDependencies dependencies) =>
       AuthFeatureApi(dependencies: dependencies);
 
+  @j.provide
+  static ILogoutFeatureApi provideLogoutFeatureApi(
+          LogoutFeatureDependencies dependencies) =>
+      LogoutFeatureApi(dependencies: dependencies);
+
   // endregion
 
   @j.provide
@@ -359,5 +384,7 @@ abstract class FeatureModule {
   @j.bind
   IAuthFeatureRouter bindAuthFeatureRouter(CommonScreenRouterImpl impl);
 
+  @j.bind
+  ILogoutFeatureRouter bindLogoutFeatureRouter(CommonScreenRouterImpl impl);
 // endregion
 }

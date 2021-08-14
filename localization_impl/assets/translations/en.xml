@@ -184,4 +184,46 @@
     <string lang="OK">OK</string>
     <!-- https://translations.telegram.org/en/android/login/StartText -->
     <string lang="StartText">Please confirm your country code and enter your phone number.</string>
+    <!-- https://translations.telegram.org/en/android/settings/LogOutTitle -->
+    <string lang="LogOutTitle">Log Out</string>
+    <!-- https://translations.telegram.org/en/android/settings/AlternativeOptions -->
+    <string lang="AlternativeOptions">Alternative options</string>
+    <!-- https://translations.telegram.org/en/android/settings/AddAnotherAccount -->
+    <string lang="AddAnotherAccount">Add another account</string>
+    <!-- https://translations.telegram.org/en/android/settings/AddAnotherAccountInfo -->
+    <string lang="AddAnotherAccountInfo">Connect other Telegram accounts and easily switch between them.</string>
+    <!-- https://translations.telegram.org/en/android/settings/SetPasscode -->
+    <string lang="SetPasscode">SetPasscode</string>
+    <!-- https://translations.telegram.org/en/android/settings/SetPasscodeInfo -->
+    <string lang="SetPasscodeInfo">Lock the app with a passcode so that others can't open it.</string>
+    <!-- https://translations.telegram.org/en/android/settings/ClearCache -->
+    <string lang="ClearCache">Clear Cache</string>
+    <!-- https://translations.telegram.org/en/android/settings/ClearCacheInfo -->
+    <string lang="ClearCacheInfo">Free up disk space on your device; your media will stay in the cloud.</string>
+    <!-- https://translations.telegram.org/en/android/settings/ChangePhoneNumber -->
+    <string lang="ChangePhoneNumber">Change Phone Number</string>
+    <!-- https://translations.telegram.org/en/android/settings/ChangePhoneNumberInfo -->
+    <string lang="ChangePhoneNumberInfo">Move your account, chats and media to a new number.</string>
+    <!-- https://translations.telegram.org/en/android/settings/ContactSupport -->
+    <string lang="ContactSupport">Contact Support</string>
+    <!-- https://translations.telegram.org/en/android/settings/ContactSupportInfo -->
+    <string lang="ContactSupportInfo">Tell us about any issues; logging out doesn't usually help.</string>
+    <!-- https://translations.telegram.org/en/android/settings/LogOutInfo -->
+    <string lang="LogOutInfo">Logging out deactivates all Secret Chats.</string>
+    <!-- https://translations.telegram.org/en/android/settings/AskAQuestion -->
+    <string lang="AskAQuestion">Ask a Question</string>
+    <!-- https://translations.telegram.org/en/android/settings/AskAQuestionInfo -->
+    <string lang="AskAQuestionInfo">Please note that Telegram Support is done by volunteers. We try to respond as quickly as possible, but it may take a while.
+
+        Please take a look at the <![CDATA[<a href="https://telegram.org/faq#general-questions">Telegram FAQ</a>]]>: it has answers to most questions and important tips for <![CDATA[<a href="https://telegram.org/faq#troubleshooting">troubleshooting</a>]]>.</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/Cancel -->
+    <string lang="Cancel">Cancel</string>
+    <!-- https://translations.telegram.org/en/android/settings/AskButton -->
+    <string lang="AskButton">Ask a volunteer</string>
+    <!-- https://translations.telegram.org/en/android/settings/AreYouSureLogout -->
+    <string lang="AreYouSureLogout">Are you sure you want to log out?
+
+        Note that you can seamlessly use Telegram on all your devices at once.
+
+        Remember, logging out kills all your Secret Chats.</string>
 </resources>

@@ -1,0 +1,87 @@
+import 'package:dialog_api/dialog_api.dart';
+import 'package:feature_auth_api/feature_auth_api.dart';
+import 'package:feature_logout_impl/src/logout_feature_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization_api/localization_api.dart';
+
+import 'logout_event.dart';
+import 'logout_state.dart';
+
+class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
+  LogoutBloc({
+    required ILogoutFeatureRouter router,
+    required IAuthenticationManager authenticationManager,
+    required ILocalizationManager localizationManager,
+  })  : _authenticationManager = authenticationManager,
+        _router = router,
+        _localizationManager = localizationManager,
+        super(const LogoutState());
+
+  final ILogoutFeatureRouter _router;
+  final IAuthenticationManager _authenticationManager;
+  final ILocalizationManager _localizationManager;
+
+  @override
+  Stream<LogoutState> mapEventToState(LogoutEvent event) async* {
+    if (event is TapEvent) {
+      switch (event.tap) {
+        case TapType.AddAnotherAccount:
+          _router.toAddAccount();
+          break;
+        case TapType.SetPasscode:
+          _router.toPasscodeSettings();
+          break;
+        case TapType.ClearCache:
+          _router.toStorageUsageSettings();
+          break;
+        case TapType.ChangePhoneNumber:
+          _router.toChangeNumber();
+          break;
+        case TapType.ContactSupport:
+          _router.toDialog(
+            title: _getString('AskAQuestion'),
+            body: TextBody(text: 'AskAQuestionInfo'),
+            actions: <Action>[
+              Action(
+                text: _getString('Cancel'),
+                callback: () {
+                  return true;
+                },
+              ),
+              Action(
+                text: _getString('AskButton'),
+                callback: () {
+                  _router.toChat(0);
+                  return true;
+                },
+              ),
+            ],
+          );
+          break;
+        case TapType.LogOut:
+          _router.toDialog(
+            title: _getString('LogOutTitle'),
+            body: TextBody(text: _getString('AreYouSureLogout')),
+            actions: <Action>[
+              Action(
+                text: _getString('Cancel'),
+                callback: () {
+                  return true;
+                },
+              ),
+              Action(
+                type: ActionType.Attention,
+                text: _getString('LogOutTitle'),
+                callback: () {
+                  return true;
+                },
+              ),
+            ],
+          );
+          break;
+      }
+    }
+  }
+
+  String _getString(String key) => _localizationManager.getString(key);
+}

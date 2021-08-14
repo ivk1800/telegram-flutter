@@ -7,6 +7,10 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  feature_logout_api:
+    path: ../feature/feature_logout_api
+  feature_logout_impl:
+    path: ../feature/feature_logout_impl
   dialog_api:
     path: ../dialog_api
   feature_auth_api:

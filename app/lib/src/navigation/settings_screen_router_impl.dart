@@ -1,3 +1,5 @@
+import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
+import 'package:feature_logout_api/feature_logout_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -75,6 +77,18 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
             .createChatSettingsFeatureApi()
             .screenWidgetFactory
             .create(),
+        container: ContainerType.Top);
+  }
+
+  @override
+  void toLogOut() {
+    final ILogoutScreenFactory factory =
+        _featureFactory.createLogoutFeatureApi().logoutScreenFactory;
+    _navigationRouter.push(
+        key: UniqueKey(),
+        builder: (BuildContext context) {
+          return factory.create(context);
+        },
         container: ContainerType.Top);
   }
 }

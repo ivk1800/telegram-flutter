@@ -6,6 +6,7 @@ import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
+import 'package:feature_logout_api/feature_logout_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
@@ -72,4 +73,7 @@ class FeatureFactory {
 
   IAuthFeatureApi createAuthFeatureApi() =>
       _featureComponent.getAuthFeatureApi();
+
+  ILogoutFeatureApi createLogoutFeatureApi() =>
+      _featureComponent.getLogoutFeatureApi();
 }

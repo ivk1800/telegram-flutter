@@ -10,4 +10,6 @@ abstract class ISettingsScreenRouter {
   void toDataSettings();
 
   void toChatSettings();
+
+  void toLogOut();
 }

@@ -253,6 +253,7 @@ class SettingsPageState extends State<SettingsPage>
                 });
               },
             ),
+            _buildAppBarPopupMenu(),
           ];
         }
       },
@@ -284,6 +285,32 @@ class SettingsPageState extends State<SettingsPage>
     );
   }
 
+  Widget _buildAppBarPopupMenu() {
+    return PopupMenuButton<_AppBarMenu>(
+      onSelected: (_AppBarMenu value) {
+        switch (value) {
+          case _AppBarMenu.LogOut:
+            router.toLogOut();
+            break;
+        }
+      },
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<_AppBarMenu>>[
+        PopupMenuItem<_AppBarMenu>(
+          value: _AppBarMenu.LogOut,
+          child: _buildAppBarPopupMenuItem('Log out'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAppBarPopupMenuItem(String title) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const Icon(Icons.circle),
+      title: Text(title),
+    );
+  }
+
   Widget _buildTitleWidget(BuildContext context) {
     return Align(
       child:
@@ -297,5 +324,7 @@ class SettingsPageState extends State<SettingsPage>
 
   String _getString(String key) => localizationManager.getString(key);
 }
+
+enum _AppBarMenu { LogOut }
 
 enum _ScreenState { Default, Search }

@@ -4,6 +4,7 @@ import 'package:dialog_api/dialog_api.dart' as dialog_api;
 import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
+import 'package:feature_logout_impl/feature_logout_impl.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
@@ -20,6 +21,7 @@ class CommonScreenRouterImpl
         IChatScreenRouter,
         IProfileFeatureRouter,
         IDialogRouter,
+        ILogoutFeatureRouter,
         IAuthFeatureRouter {
   @j.inject
   CommonScreenRouterImpl({
@@ -129,6 +131,26 @@ class CommonScreenRouterImpl
     );
   }
 
+  @override
+  void toAddAccount() {
+    _showNotImplementedDialog();
+  }
+
+  @override
+  void toChangeNumber() {
+    _showNotImplementedDialog();
+  }
+
+  @override
+  void toPasscodeSettings() {
+    _showNotImplementedDialog();
+  }
+
+  @override
+  void toStorageUsageSettings() {
+    _showNotImplementedDialog();
+  }
+
   void _showDialog({required WidgetBuilder builder}) {
     final BuildContext? context = _dialogNavigatorKey.currentContext;
 
@@ -140,5 +162,9 @@ class CommonScreenRouterImpl
       context: context,
       builder: builder,
     );
+  }
+
+  void _showNotImplementedDialog() {
+    toDialog(body: TextBody(text: 'not implemented'));
   }
 }
