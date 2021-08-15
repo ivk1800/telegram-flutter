@@ -1,0 +1,17 @@
+name: feature_file_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  rxdart: ^0.26.0
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  feature_file_api:
+    path: ../feature_file_api
+  flutter:
+    sdk: flutter
+
+flutter:

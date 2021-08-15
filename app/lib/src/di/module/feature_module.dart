@@ -22,6 +22,8 @@ import 'package:feature_country_impl/feature_country_impl.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
+import 'package:feature_file_api/feature_file_api.dart';
+import 'package:feature_file_impl/feature_file_impl.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_logout_api/feature_logout_api.dart';
@@ -208,6 +210,18 @@ abstract class FeatureModule {
             featureFactory.createAuthFeatureApi().authenticationManager,
       );
 
+  @j.provide
+  static FileFeatureDependencies provideFileFeatureDependencies(
+    IFileRepository fileRepository,
+    IFileUpdatesProvider fileUpdatesProvider,
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      FileFeatureDependencies(
+        fileRepository: fileRepository,
+        fileUpdatesProvider: fileUpdatesProvider,
+        functionExecutor: functionExecutor,
+      );
+
   // endregion
 
   // region api
@@ -309,6 +323,11 @@ abstract class FeatureModule {
   static ILogoutFeatureApi provideLogoutFeatureApi(
           LogoutFeatureDependencies dependencies) =>
       LogoutFeatureApi(dependencies: dependencies);
+
+  @j.provide
+  static IFileFeatureApi provideFileFeatureApi(
+          FileFeatureDependencies dependencies) =>
+      FileFeatureApi(dependencies: dependencies);
 
   // endregion
 

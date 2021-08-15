@@ -7,6 +7,7 @@ class UpdatesProvider
     implements
         IChatUpdatesProvider,
         IChatFiltersUpdatesProvider,
+        IFileUpdatesProvider,
         IAuthenticationStateUpdatesProvider {
   @j.inject
   UpdatesProvider({required TdClient client}) : _client = client;
@@ -26,6 +27,9 @@ class UpdatesProvider
   @override
   Stream<td.UpdateAuthorizationState> get authorizationStateUpdates =>
       _client.events.authorizationStateUpdatesFilter();
+
+  @override
+  Stream<td.UpdateFile> get fileUpdates => _client.events.fileUpdatesFilter();
 }
 
 extension _UpdatesExtensions on Stream<td.TdObject> {
@@ -40,6 +44,10 @@ extension _UpdatesExtensions on Stream<td.TdObject> {
   Stream<td.UpdateAuthorizationState> authorizationStateUpdatesFilter() =>
       where((td.TdObject event) => event is td.UpdateAuthorizationState)
           .cast<td.UpdateAuthorizationState>();
+
+  Stream<td.UpdateFile> fileUpdatesFilter() =>
+      where((td.TdObject event) => event is td.UpdateFile)
+          .cast<td.UpdateFile>();
 
   Stream<td.Update> chatUpdatesFilter() => where((td.TdObject event) =>
       event is td.UpdateNewChat ||

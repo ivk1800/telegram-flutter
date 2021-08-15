@@ -29,6 +29,10 @@ abstract class TdModule {
       UpdatesProvider impl);
 
   @j.singleton
+  @j.bind
+  IFileUpdatesProvider bindFileUpdatesProvider(UpdatesProvider impl);
+
+  @j.singleton
   @j.provide
   static ITdFunctionExecutor provideTdFunctionExecutor(TdClient client) =>
       TdFunctionExecutor(

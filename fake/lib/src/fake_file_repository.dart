@@ -12,4 +12,10 @@ class FakeFileRepository implements IFileRepository {
 
   @override
   String? getPathOrNull(int id) => null;
+
+  @override
+  Future<td.File> getFile(int id) {
+    final Completer<td.File> completer = Completer<td.File>();
+    return completer.future;
+  }
 }

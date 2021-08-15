@@ -49,4 +49,8 @@ class FileRepositoryImpl implements IFileRepository {
 
   @override
   String? getPathOrNull(int id) => _pathCache[id];
+
+  @override
+  Future<td.File> getFile(int id) =>
+      _client.send<td.File>(td.GetFile(fileId: id));
 }

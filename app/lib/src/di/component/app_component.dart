@@ -60,6 +60,8 @@ abstract class AppComponent {
 
   IChatFiltersUpdatesProvider getChatFiltersUpdatesProvider();
 
+  IFileUpdatesProvider getFileUpdatesProvider();
+
   IAuthenticationStateUpdatesProvider getAuthenticationStateUpdatesProvider();
 
   IConnectionStateProvider getConnectionStateProvider();
