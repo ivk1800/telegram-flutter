@@ -5,6 +5,7 @@ import 'package:demo/src/message_data.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:feature_chat_impl/feature_chat_impl.dart' as chat_impl;
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +70,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
 
     _tileFactory = chat_impl.MessageTileFactoryComponent(
         dependencies: chat_impl.MessageTileFactoryDependencies(
+      fileDownloader: FakeFileDownloader(),
       messageWallContext: FakeMessageWallContext(),
       messageActionListener: MessageActionListenerStub(),
       fileRepository: fakeFileRepository,
@@ -229,4 +231,24 @@ class FakeMessageWallContext implements chat_impl.IMessageWallContext {
 class MessageActionListenerStub implements IMessageActionListener {
   @override
   void onSenderAvatarTap({required int senderId}) {}
+}
+
+class FakeFileDownloader implements IFileDownloader {
+  @override
+  Future<void> downloadFile(int fileId) {
+    // TODO: implement downloadFile
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<IFileDownloadState> getFileDownloadState(int fileId) {
+    // TODO: implement getFileDownloadState
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<IFileDownloadState> getFileDownloadStateStream(int fileId) {
+    // TODO: implement getFileDownloadStateStream
+    throw UnimplementedError();
+  }
 }

@@ -7,7 +7,6 @@ import 'package:feature_chat_impl/src/mapper/additional_info_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/mapper/sender_info_mapper.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
-import 'package:feature_chat_impl/src/util/minithumbnail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
@@ -370,6 +369,8 @@ class MessageTileMapper {
             minithumbnail: m.photo.minithumbnail?.toMinithumbnail(),
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),
+            // todo need preferred size for current screen resolution
+            photoId: m.photo.sizes.first.photo.id,
           );
         }
       case td.MessagePinMessage.CONSTRUCTOR:
@@ -467,6 +468,7 @@ class MessageTileMapper {
             isOutgoing: message.isOutgoing,
             caption: _formattedTextResolver.resolve(m.caption),
             minithumbnail: m.video.minithumbnail?.toMinithumbnail(),
+            thumbnailImageId: m.video.thumbnail?.file.id,
           );
         }
       case td.MessageVoiceChatEnded.CONSTRUCTOR:
@@ -515,16 +517,4 @@ class MessageTileMapper {
 
 extension ContentExtension on td.MessageContent {
   T cast<T extends td.MessageContent>() => this as T;
-}
-
-// todo extract to common module
-extension MinithumbnailExtensions on td.Minithumbnail {
-  Minithumbnail? toMinithumbnail() {
-    if (this != null) {
-      return Minithumbnail(
-          data: const Base64Decoder().convert(data),
-          width: width.toDouble(),
-          height: height.toDouble());
-    }
-  }
 }

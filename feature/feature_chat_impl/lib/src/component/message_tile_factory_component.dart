@@ -9,6 +9,7 @@ import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.
 import 'package:feature_chat_impl/src/widget/chat_message/sender_title_factory.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/short_info_factory.dart';
 import 'package:feature_chat_impl/src/widget/factory/messages_tile_factory_factory.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:localization_api/localization_api.dart';
 
 class MessageTileFactoryDependencies {
@@ -17,12 +18,14 @@ class MessageTileFactoryDependencies {
     required this.localizationManager,
     required this.messageWallContext,
     required this.messageActionListener,
+    required this.fileDownloader,
   });
 
   final ILocalizationManager localizationManager;
   final IFileRepository fileRepository;
   final IMessageWallContext messageWallContext;
   final IMessageActionListener messageActionListener;
+  final IFileDownloader fileDownloader;
 }
 
 abstract class IMessageActionListener {
@@ -63,6 +66,9 @@ class MessageTileFactoryComponent {
     );
 
     return tileFactoryFactory.create(
+      imageWidgetFactory: ImageWidgetFactory(
+        fileDownloader: _dependencies.fileDownloader,
+      ),
       messageComponentResolver: componentResolver,
       senderAvatarFactory: senderAvatarFactory,
       messageWallContext: _dependencies.messageWallContext,

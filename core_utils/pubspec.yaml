@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  core_tdlib_api:
+    path: ../core_tdlib_api
   intl: ^0.17.0
   flutter:
     sdk: flutter

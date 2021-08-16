@@ -53,6 +53,7 @@ abstract class ChatScreenModule {
   ) =>
       MessageTileFactoryComponent(
         dependencies: MessageTileFactoryDependencies(
+          fileDownloader: dependencies.fileDownloader,
           messageActionListener: messageActionListener,
           messageWallContext: MessageWallContextImpl(
             chatMessagesInteractor: chatMessagesInteractor,

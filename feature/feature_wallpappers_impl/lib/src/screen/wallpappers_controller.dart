@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_wallpappers_impl/src/tile/model/fill_wallpaper_tile_model.dart';
 import 'package:feature_wallpappers_impl/src/tile/model/pattern_wallpaper_tile_model.dart';
@@ -46,11 +47,10 @@ class WallpappersController extends SuperController<WallpappersState> {
             switch (background.type.getConstructor()) {
               case td.BackgroundTypeWallpaper.CONSTRUCTOR:
                 {
-                  final String? data = background.document?.minithumbnail?.data;
                   return WallpaperTileModel(
-                      minithumbnail: data != null
-                          ? const Base64Decoder().convert(data)
-                          : null);
+                    minithumbnail:
+                        background.document?.minithumbnail?.toMinithumbnail(),
+                  );
                 }
               case td.BackgroundTypePattern.CONSTRUCTOR:
                 {

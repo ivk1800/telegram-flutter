@@ -1,29 +1,133 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_utils/core_utils.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ImageWidgetFactory {
-  ImageWidgetFactory({required IFileRepository fileRepository})
-      : _fileRepository = fileRepository;
+  ImageWidgetFactory({
+    required IFileDownloader fileDownloader,
+  }) : _fileDownloader = fileDownloader;
 
-  final IFileRepository _fileRepository;
+  final IFileDownloader _fileDownloader;
 
-  Widget create(BuildContext context,
-      {Uint8List? minithumbnail, int? imageId}) {
-    if (minithumbnail == null) {
-      return Container(color: Colors.red);
+  Widget create(
+    BuildContext context, {
+    Minithumbnail? minithumbnail,
+    int? imageId,
+  }) {
+    return _ImageWidget(
+      fileDownloader: _fileDownloader,
+      minithumbnail: minithumbnail,
+      photoId: imageId,
+    );
+  }
+}
+
+class _ImageWidget extends StatefulWidget {
+  const _ImageWidget({
+    Key? key,
+    required this.photoId,
+    required this.minithumbnail,
+    required this.fileDownloader,
+  }) : super(key: key);
+
+  final int? photoId;
+  final Minithumbnail? minithumbnail;
+  final IFileDownloader fileDownloader;
+
+  @override
+  _ImageWidgetState createState() => _ImageWidgetState();
+}
+
+class _ImageWidgetState extends State<_ImageWidget> {
+  late Stream<String>? _stream;
+
+  @override
+  void initState() {
+    super.initState();
+    _initPhoto(widget.photoId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<String>(
+      stream: _stream,
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        final Minithumbnail? minithumbnail = widget.minithumbnail;
+        final String? path = snapshot.data;
+        return Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            if (minithumbnail != null) _buildMinithumbnail(minithumbnail),
+            _buildImage(path),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  void didUpdateWidget(_ImageWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.photoId != widget.photoId) {
+      _initPhoto(widget.photoId);
     }
+  }
 
+  void _initPhoto(int? photoId) {
+    if (photoId != null) {
+      final IFileDownloader fileDownloader = widget.fileDownloader;
+      fileDownloader.downloadFile(photoId).catchError((dynamic e) {
+        print(e);
+      });
+      _stream = fileDownloader
+          .getFileDownloadStateStream(photoId)
+          .where((IFileDownloadState event) => event is Completed)
+          .cast<Completed>()
+          .map((Completed event) => event.path);
+    } else {
+      // todo not updated if new photo id is null
+      _stream = null;
+    }
+  }
+
+  Widget _buildMinithumbnail(Minithumbnail minithumbnail) {
     return ClipRect(
       child: ImageFiltered(
-          imageFilter: ImageFilter.blur(sigmaY: 5, sigmaX: 5),
-          child: Image.memory(
-            minithumbnail,
-            fit: BoxFit.fill,
-          )),
+        imageFilter: ImageFilter.blur(
+          sigmaX: 5,
+          sigmaY: 5,
+        ),
+        child: Image.memory(
+          minithumbnail.data!,
+          fit: BoxFit.fill,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildImage(String? path) {
+    return AnimatedSwitcher(
+      layoutBuilder: (Widget? currentChild, List<Widget> previousChildren) {
+        return Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            ...previousChildren,
+            if (currentChild != null) currentChild,
+          ],
+        );
+      },
+      duration: const Duration(milliseconds: 300),
+      child: path == null
+          ? null
+          : Image.file(
+              File(path),
+              fit: BoxFit.fill,
+            ),
     );
   }
 }

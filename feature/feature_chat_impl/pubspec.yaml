@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  feature_file_api:
+    path: ../feature_file_api
   intl: ^0.17.0
   feature_chat_header_info_api:
     path: ../feature_chat_header_info_api

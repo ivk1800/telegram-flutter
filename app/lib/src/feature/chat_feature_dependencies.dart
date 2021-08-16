@@ -1,7 +1,9 @@
+import 'package:app/src/feature/feature.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -17,11 +19,13 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
       required IUserRepository userRepository,
       required ILocalizationManager localizationManager,
       required DateFormatter dateFormatter,
+      required FeatureFactory featureFactory,
       required IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
       required IChatRepository chatRepository,
       required IConnectionStateProvider connectionStateProvider})
       : _fileRepository = fileRepository,
         _dateParser = dateParser,
+        _fileDownloader = featureFactory.createFileFeatureApi().fileDownloader,
         _userRepository = userRepository,
         _localizationManager = localizationManager,
         _dateFormatter = dateFormatter,
@@ -48,6 +52,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
   final ILocalizationManager _localizationManager;
   final IUserRepository _userRepository;
   final IChatHeaderInfoFeatureApi _chatHeaderInfoFeatureApi;
+  final IFileDownloader _fileDownloader;
 
   @override
   IConnectionStateProvider get connectionStateProvider =>
@@ -83,4 +88,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
   @override
   IChatHeaderInfoFeatureApi get chatHeaderInfoFeatureApi =>
       _chatHeaderInfoFeatureApi;
+
+  @override
+  IFileDownloader get fileDownloader => _fileDownloader;
 }

@@ -9,7 +9,3 @@ class Minithumbnail {
 
   final double height;
 }
-
-extension MinithumbnailExtensions on Minithumbnail {
-  double aspectRatio() => width / height;
-}

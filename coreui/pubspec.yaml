@@ -7,6 +7,10 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  feature_file_api:
+    path: ../feature/feature_file_api
+  core_utils:
+    path: ../core_utils
   jugger:
     git:
       url: git@github.com:ivk1800/jugger.dart.git

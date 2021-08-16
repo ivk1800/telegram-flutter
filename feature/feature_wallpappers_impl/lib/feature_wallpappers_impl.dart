@@ -2,6 +2,7 @@ library feature_wallpappers_impl;
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
 import 'package:feature_wallpappers_impl/src/wallpappers_screen_router.dart';
 import 'package:feature_wallpappers_impl/src/screen/wallpappers_page.dart';
@@ -35,7 +36,7 @@ abstract class IWallpappersFeatureDependencies {
 
   IBackgroundRepository get backgroundRepository;
 
-  IFileRepository get fileRepository;
+  IFileDownloader get fileDownloader;
 }
 
 class _ScreenWidgetFactory implements IWallpappersWidgetFactory {
@@ -54,12 +55,12 @@ class _ScreenWidgetFactory implements IWallpappersWidgetFactory {
         () => TileFactory(delegates: <Type, ITileFactoryDelegate<ITileModel>>{
               WallpaperTileModel: Get.find<WallpapperTileFactoryDelegate>(),
             }));
-    Get.lazyPut(() => dependencies.fileRepository);
+    Get.lazyPut(() => dependencies.fileDownloader);
     Get.lazyPut(() => dependencies.localizationManager);
     Get.lazyPut(() => WallpapperTileFactoryDelegate(
         imageWidgetFactory: Get.find<ImageWidgetFactory>()));
     Get.lazyPut(
-        () => ImageWidgetFactory(fileRepository: Get.find<IFileRepository>()));
+        () => ImageWidgetFactory(fileDownloader: Get.find<IFileDownloader>()));
     Get.lazyPut(() => ConnectionStateWidgetFactory(
         connectionStateProvider: Get.find<IConnectionStateProvider>()));
     return const WallpappersPage();

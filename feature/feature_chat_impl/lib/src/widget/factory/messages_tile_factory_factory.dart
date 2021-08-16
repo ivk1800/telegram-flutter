@@ -1,4 +1,5 @@
 import 'package:coreui/coreui.dart' as tg;
+import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
@@ -6,19 +7,22 @@ import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/tile_widget.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:localization_api/localization_api.dart';
 
 // FactoryFactory :)
 class MessagesTileFactoryFactory {
-  tg.TileFactory create(
-      {required ChatMessageFactory chatMessageFactory,
-      required ILocalizationManager localizationManager,
-      required ReplyInfoFactory replyInfoFactory,
-      required SenderTitleFactory senderTitleFactory,
-      required SenderAvatarFactory senderAvatarFactory,
-      required MessageComponentResolver messageComponentResolver,
-      required IMessageWallContext messageWallContext,
-      required ShortInfoFactory shortInfoFactory}) {
+  tg.TileFactory create({
+    required ChatMessageFactory chatMessageFactory,
+    required ILocalizationManager localizationManager,
+    required ReplyInfoFactory replyInfoFactory,
+    required SenderTitleFactory senderTitleFactory,
+    required SenderAvatarFactory senderAvatarFactory,
+    required ImageWidgetFactory imageWidgetFactory,
+    required MessageComponentResolver messageComponentResolver,
+    required IMessageWallContext messageWallContext,
+    required ShortInfoFactory shortInfoFactory,
+  }) {
     return tg
         .TileFactory(delegates: <Type, tg.ITileFactoryDelegate<tg.ITileModel>>{
       MessageAnimationTileModel: MessageAnimationTileFactoryDelegate(
@@ -105,6 +109,7 @@ class MessagesTileFactoryFactory {
           MessagePaymentSuccessfulTileFactoryDelegate(
               chatMessageFactory: chatMessageFactory),
       MessagePhotoTileModel: MessagePhotoTileFactoryDelegate(
+          imageWidgetFactory: imageWidgetFactory,
           messageComponentResolver: messageComponentResolver,
           shortInfoFactory: shortInfoFactory,
           replyInfoFactory: replyInfoFactory,
@@ -136,6 +141,7 @@ class MessagesTileFactoryFactory {
       MessageVideoNoteTileModel: MessageVideoNoteTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory),
       MessageVideoTileModel: MessageVideoTileFactoryDelegate(
+          imageWidgetFactory: imageWidgetFactory,
           messageComponentResolver: messageComponentResolver,
           shortInfoFactory: shortInfoFactory,
           replyInfoFactory: replyInfoFactory,

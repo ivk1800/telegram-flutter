@@ -2,18 +2,22 @@ import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
-import 'package:feature_chat_impl/src/util/minithumbnail.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MessagePhotoTileFactoryDelegate
     implements ITileFactoryDelegate<MessagePhotoTileModel> {
   MessagePhotoTileFactoryDelegate({
     required ChatMessageFactory chatMessageFactory,
     required ShortInfoFactory shortInfoFactory,
+    required ImageWidgetFactory imageWidgetFactory,
     required MessageComponentResolver messageComponentResolver,
     required ReplyInfoFactory replyInfoFactory,
   })  : _chatMessageFactory = chatMessageFactory,
+        _imageWidgetFactory = imageWidgetFactory,
         _messageComponentResolver = messageComponentResolver,
         _shortInfoFactory = shortInfoFactory,
         _replyInfoFactory = replyInfoFactory;
@@ -21,17 +25,11 @@ class MessagePhotoTileFactoryDelegate
   final ChatMessageFactory _chatMessageFactory;
   final ReplyInfoFactory _replyInfoFactory;
   final ShortInfoFactory _shortInfoFactory;
+  final ImageWidgetFactory _imageWidgetFactory;
   final MessageComponentResolver _messageComponentResolver;
 
   @override
   Widget create(BuildContext context, MessagePhotoTileModel model) {
-    // todo handle nullable minithumbnail
-    if (model.minithumbnail == null) {
-      return const NotImplementedPlaceholder(
-        additional: 'minithumbnail is null',
-      );
-    }
-
     return _chatMessageFactory.createConversationMessage(
       id: model.id,
       isOutgoing: model.isOutgoing,
@@ -42,11 +40,10 @@ class MessagePhotoTileFactoryDelegate
       blocks: <Widget>[
         MediaWrapper(
             type: MediaType.Animation,
-            child: Container(
-              color: Colors.black,
-              child: const NotImplementedPlaceholder(
-                additional: 'MessagePhoto',
-              ),
+            child: _imageWidgetFactory.create(
+              context,
+              minithumbnail: model.minithumbnail,
+              imageId: model.photoId,
             ),
             aspectRatio: model.minithumbnail!.aspectRatio()),
         if (model.caption != null)
