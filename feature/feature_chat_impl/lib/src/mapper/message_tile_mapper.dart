@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/mapper/additional_info_mapper.dart';
-import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/mapper/sender_info_mapper.dart';
+import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:localization_api/localization_api.dart';

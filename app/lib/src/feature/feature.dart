@@ -8,4 +8,3 @@ export 'privacy_settings_feature_dependencies.dart';
 export 'settings_feature_dependencies.dart';
 export 'settings_search_feature_dependencies.dart';
 export 'stickers_feature_dependencies.dart';
-export 'wallpappers_feature_dependencies.dart';

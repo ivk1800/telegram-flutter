@@ -47,10 +47,10 @@ dependencies:
     path: ../feature/feature_chat_settings_api
   feature_chat_settings_impl:
     path: ../feature/feature_chat_settings_impl
-  feature_wallpappers_api:
-    path: ../feature/feature_wallpappers_api
-  feature_wallpappers_impl:
-    path: ../feature/feature_wallpappers_impl
+  feature_wallpapers_api:
+    path: ../feature/feature_wallpapers_api
+  feature_wallpapers_impl:
+    path: ../feature/feature_wallpapers_impl
   feature_stickers_api:
     path: ../feature/feature_stickers_api
   feature_stickers_impl:

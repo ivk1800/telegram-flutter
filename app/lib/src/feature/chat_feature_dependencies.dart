@@ -25,6 +25,7 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
       required IConnectionStateProvider connectionStateProvider})
       : _fileRepository = fileRepository,
         _dateParser = dateParser,
+        // todo move to app component global scope
         _fileDownloader = featureFactory.createFileFeatureApi().fileDownloader,
         _userRepository = userRepository,
         _localizationManager = localizationManager,

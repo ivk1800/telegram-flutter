@@ -44,8 +44,8 @@ import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:feature_shared_media_impl/feature_shared_media_impl.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_stickers_impl/feature_stickers_impl.dart';
-import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
-import 'package:feature_wallpappers_impl/feature_wallpappers_impl.dart';
+import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
+import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
@@ -103,9 +103,22 @@ abstract class FeatureModule {
   IChatSettingsFeatureDependencies bindChatSettingsFeatureDependencies(
       ChatSettingsFeatureDependencies impl);
 
-  @j.bind
-  IWallpappersFeatureDependencies bindWallpappersFeatureDependencies(
-      WallpappersFeatureDependencies impl);
+  @j.provide
+  static WallpapersFeatureDependencies provideWallpapersFeatureDependencies(
+    IBackgroundRepository backgroundRepository,
+    FeatureFactory featureFactory,
+    ILocalizationManager localizationManager,
+    IWallpapersFeatureRouter router,
+    IConnectionStateProvider connectionStateProvider,
+  ) =>
+      WallpapersFeatureDependencies(
+        localizationManager: localizationManager,
+        router: router,
+        connectionStateProvider: connectionStateProvider,
+        backgroundRepository: backgroundRepository,
+        // todo move to app component global scope
+        fileDownloader: featureFactory.createFileFeatureApi().fileDownloader,
+      );
 
   @j.bind
   IStickersFeatureDependencies bindStickersFeatureDependencies(
@@ -289,9 +302,9 @@ abstract class FeatureModule {
       ChatSettingsFeatureApi(dependencies: dependencies);
 
   @j.provide
-  static IWallpappersFeatureApi provideWallpappersFeatureApi(
-          IWallpappersFeatureDependencies dependencies) =>
-      WallpappersFeatureApi(dependencies: dependencies);
+  static IwallpapersFeatureApi providewallpapersFeatureApi(
+          WallpapersFeatureDependencies dependencies) =>
+      WallpapersFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IStickersFeatureApi provideStickersFeatureApi(
@@ -393,8 +406,8 @@ abstract class FeatureModule {
   IDevFeatureRouter bindDevFeatureRouter(DevScreenRouterImpl impl);
 
   @j.bind
-  IWallpappersScreenRouter bindWallpappersScreenRouter(
-      WallpappersScreenRouterImpl impl);
+  IWallpapersFeatureRouter bindwallpapersFeatureRouter(
+      CommonScreenRouterImpl impl);
 
   @j.bind
   IStickersFeatureRouter bindStickersFeatureRouter(

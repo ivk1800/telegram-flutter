@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 

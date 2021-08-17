@@ -18,7 +18,7 @@ import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
-import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
+import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:jugger/jugger.dart' as j;
 
 @j.Component(modules: <Type>[FeatureModule], dependencies: <Type>[AppComponent])
@@ -45,7 +45,7 @@ abstract class FeatureComponent {
 
   IChatSettingsFeatureApi getChatSettingsFeatureApi();
 
-  IWallpappersFeatureApi getWallpappersFeatureApi();
+  IwallpapersFeatureApi getwallpapersFeatureApi();
 
   IStickersFeatureApi getStickersFeatureApi();
 

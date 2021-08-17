@@ -13,7 +13,7 @@ import 'package:feature_notifications_settings_api/feature_notifications_setting
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
-import 'package:feature_wallpappers_api/feature_wallpappers_api.dart';
+import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
@@ -55,8 +55,8 @@ class FeatureFactory {
   IChatSettingsFeatureApi createChatSettingsFeatureApi() =>
       _featureComponent.getChatSettingsFeatureApi();
 
-  IWallpappersFeatureApi createWallpappersFeatureApi() =>
-      _featureComponent.getWallpappersFeatureApi();
+  IwallpapersFeatureApi createWallpapersFeatureApi() =>
+      _featureComponent.getwallpapersFeatureApi();
 
   IStickersFeatureApi createStickersFeatureApi() =>
       _featureComponent.getStickersFeatureApi();

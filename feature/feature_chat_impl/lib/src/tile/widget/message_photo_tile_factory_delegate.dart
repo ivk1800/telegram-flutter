@@ -1,12 +1,10 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
-import 'package:feature_file_api/feature_file_api.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MessagePhotoTileFactoryDelegate
     implements ITileFactoryDelegate<MessagePhotoTileModel> {

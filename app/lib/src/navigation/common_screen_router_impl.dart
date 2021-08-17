@@ -9,6 +9,7 @@ import 'package:feature_notifications_settings_api/feature_notifications_setting
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
+import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -19,6 +20,7 @@ import 'navigation.dart';
 class CommonScreenRouterImpl
     implements
         IChatScreenRouter,
+        IWallpapersFeatureRouter,
         IProfileFeatureRouter,
         IDialogRouter,
         ILogoutFeatureRouter,

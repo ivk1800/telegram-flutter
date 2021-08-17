@@ -2,12 +2,11 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
-import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/tile_widget.dart';
+import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
-import 'package:feature_file_api/feature_file_api.dart';
 import 'package:localization_api/localization_api.dart';
 
 // FactoryFactory :)

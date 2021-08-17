@@ -32,9 +32,9 @@ class ChatSettingsScreenRouterImpl implements IChatSettingsScreenRouter {
     _navigationRouter.push(
         key: UniqueKey(),
         builder: (BuildContext context) => _featureFactory
-            .createWallpappersFeatureApi()
-            .screenWidgetFactory
-            .create(),
+            .createWallpapersFeatureApi()
+            .wallpapersListScreenFactory
+            .create(context),
         container: ContainerType.Top);
   }
 }
