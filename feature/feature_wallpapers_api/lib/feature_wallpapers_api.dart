@@ -2,7 +2,7 @@ library feature_wallpapers_api;
 
 import 'package:flutter/widgets.dart';
 
-abstract class IwallpapersFeatureApi {
+abstract class IWallpapersFeatureApi {
   IWallpapersListScreenFactory get wallpapersListScreenFactory;
 }
 

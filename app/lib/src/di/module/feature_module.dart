@@ -302,7 +302,7 @@ abstract class FeatureModule {
       ChatSettingsFeatureApi(dependencies: dependencies);
 
   @j.provide
-  static IwallpapersFeatureApi providewallpapersFeatureApi(
+  static IWallpapersFeatureApi providewallpapersFeatureApi(
           WallpapersFeatureDependencies dependencies) =>
       WallpapersFeatureApi(dependencies: dependencies);
 

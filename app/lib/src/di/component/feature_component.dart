@@ -45,7 +45,7 @@ abstract class FeatureComponent {
 
   IChatSettingsFeatureApi getChatSettingsFeatureApi();
 
-  IwallpapersFeatureApi getwallpapersFeatureApi();
+  IWallpapersFeatureApi getwallpapersFeatureApi();
 
   IStickersFeatureApi getStickersFeatureApi();
 

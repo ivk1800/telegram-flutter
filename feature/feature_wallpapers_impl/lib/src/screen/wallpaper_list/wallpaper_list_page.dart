@@ -1,6 +1,7 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/bloc/wallpaper_list_bloc.dart';
 import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/bloc/wallpaper_list_state.dart';
+import 'package:feature_wallpapers_impl/src/tile/model/model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:localization_api/localization_api.dart';
@@ -68,11 +69,19 @@ class WallpaperListPage extends StatelessWidget {
         itemCount: tileModels.length,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
-        padding: const EdgeInsets.all(10.0),
+        // todo fix padding for bottom and top tiles
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         itemBuilder: (BuildContext context, int index) {
           return tileFactory.create(context, tileModels[index]);
         },
         staggeredTileBuilder: (int index) {
+          final tg.ITileModel tileModel = tileModels[index];
+
+          if (tileModel is TopGroupTileModel ||
+              tileModel is BottomGroupTileModel) {
+            return const StaggeredTile.fit(CrossAxisCount);
+          }
+
           return StaggeredTile.extent(2, width / (CrossAxisCount / 2) * 1.5);
         });
   }

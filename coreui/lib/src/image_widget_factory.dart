@@ -17,14 +17,18 @@ class ImageWidgetFactory {
     BuildContext context, {
     Minithumbnail? minithumbnail,
     int? imageId,
+    ImageLayoutBuilder? layoutBuilder,
   }) {
     return _ImageWidget(
       fileDownloader: _fileDownloader,
       minithumbnail: minithumbnail,
       photoId: imageId,
+      layoutBuilder: layoutBuilder,
     );
   }
 }
+
+typedef ImageLayoutBuilder = Widget Function(Widget imageWidget);
 
 class _ImageWidget extends StatefulWidget {
   const _ImageWidget({
@@ -32,11 +36,13 @@ class _ImageWidget extends StatefulWidget {
     required this.photoId,
     required this.minithumbnail,
     required this.fileDownloader,
+    this.layoutBuilder,
   }) : super(key: key);
 
   final int? photoId;
   final Minithumbnail? minithumbnail;
   final IFileDownloader fileDownloader;
+  final ImageLayoutBuilder? layoutBuilder;
 
   @override
   _ImageWidgetState createState() => _ImageWidgetState();
@@ -121,12 +127,19 @@ class _ImageWidgetState extends State<_ImageWidget> {
         );
       },
       duration: const Duration(milliseconds: 300),
-      child: path == null
-          ? null
-          : Image.file(
-              File(path),
-              fit: BoxFit.fill,
-            ),
+      child: path == null ? null : _build(path),
     );
+  }
+
+  Widget _build(String path) {
+    final Image image = Image.file(
+      File(path),
+      fit: BoxFit.fill,
+    );
+
+    if (widget.layoutBuilder != null) {
+      return widget.layoutBuilder!.call(image);
+    }
+    return image;
   }
 }

@@ -226,4 +226,12 @@
         Note that you can seamlessly use Telegram on all your devices at once.
 
         Remember, logging out kills all your Secret Chats.</string>
+    <!-- https://translations.telegram.org/en/android/settings/SelectFromGallery -->
+    <string lang="SelectFromGallery">Select from Gallery</string>
+    <!-- https://translations.telegram.org/en/android/settings/SetColor -->
+    <string lang="SetColor">Set a color</string>
+    <!-- https://translations.telegram.org/en/android/settings/ResetChatBackgrounds -->
+    <string lang="ResetChatBackgrounds">Reset Chat Backgrounds</string>
+    <!-- https://translations.telegram.org/en/android/settings/ResetChatBackgroundsInfo -->
+    <string lang="ResetChatBackgroundsInfo">Remove all uploaded chat backgrounds and restore the pre-installed ones.</string>
 </resources>
