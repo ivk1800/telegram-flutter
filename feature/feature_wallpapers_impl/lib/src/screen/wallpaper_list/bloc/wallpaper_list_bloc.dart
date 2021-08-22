@@ -14,23 +14,20 @@ import 'wallpaper_list_state.dart';
 class WallpaperListBloc extends Bloc<WallpaperListEvent, WallpaperListState> {
   WallpaperListBloc({required IBackgroundRepository backgroundRepository})
       : _backgroundRepository = backgroundRepository,
-        super(const LoadingState());
+        super(const WallpaperListState.loading());
 
   final IBackgroundRepository _backgroundRepository;
 
   @override
   Stream<WallpaperListState> mapEventToState(WallpaperListEvent event) async* {
-    switch (event.runtimeType) {
-      case InitEvent:
-        {
-          final WallpaperListState state = await _backgroundRepository
-              .backgrounds
-              .then((List<td.Background> backgrounds) =>
-                  WallpapersState(backgrounds: _mapTileModels(backgrounds)));
-          emit(state);
-          break;
-        }
-    }
+    yield* event.when(init: _handleInitEvent);
+  }
+
+  Stream<WallpaperListState> _handleInitEvent() async* {
+    final WallpaperListState state = await _backgroundRepository.backgrounds
+        .then((List<td.Background> backgrounds) =>
+            WallpaperListState(backgrounds: _mapTileModels(backgrounds)));
+    yield state;
   }
 
   List<ITileModel> _mapTileModels(List<td.Background> backgrounds) =>

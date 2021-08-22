@@ -39,6 +39,7 @@ analyzer:
     # Turned off until null-safe rollout is complete.
     unnecessary_null_comparison: ignore
   exclude:
+    - "**/*.freezed.dart"
     - "bin/cache/**"
     # Ignore protoc generated files
     - "dev/tools/lib/proto/*"

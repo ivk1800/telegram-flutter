@@ -1,22 +1,14 @@
 import 'package:coreui/coreui.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class WallpaperListState extends Equatable {
-  const WallpaperListState();
+part 'wallpaper_list_state.freezed.dart';
 
-  @override
-  List<Object> get props => <Object>[];
-}
+@freezed
+@immutable
+class WallpaperListState with _$WallpaperListState {
+  const factory WallpaperListState({
+    required List<ITileModel> backgrounds,
+  }) = Data;
 
-class LoadingState extends WallpaperListState {
-  const LoadingState();
-}
-
-class WallpapersState extends WallpaperListState {
-  const WallpapersState({required this.backgrounds});
-
-  final List<ITileModel> backgrounds;
-
-  @override
-  List<Object> get props => <Object>[backgrounds];
+  const factory WallpaperListState.loading() = Loading;
 }

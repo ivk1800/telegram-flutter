@@ -67,7 +67,7 @@ class WallpapersListScreenFactory implements IWallpapersListScreenFactory {
       child: BlocProvider<WallpaperListBloc>(
         create: (BuildContext context) => WallpaperListBloc(
           backgroundRepository: _dependencies.backgroundRepository,
-        )..add(const InitEvent()),
+        )..add(const WallpaperListEvent.init()),
         child: const WallpaperListPage(),
       ),
     );

@@ -34,26 +34,19 @@ class WallpaperListPage extends StatelessWidget {
   }
 
   Widget _stateToWidget(WallpaperListState state) {
-    switch (state.runtimeType) {
-      case LoadingState:
-        {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      case WallpapersState:
-        {
-          return LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) =>
-                _buildGridView(
-              context: context,
-              tileModels: (state as WallpapersState).backgrounds,
-              width: constraints.maxWidth,
-            ),
-          );
-        }
-    }
-    throw StateError('unexpected state ${state.runtimeType}');
+    return state.when(
+      (List<tg.ITileModel> backgrounds) => LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) =>
+            _buildGridView(
+          context: context,
+          tileModels: backgrounds,
+          width: constraints.maxWidth,
+        ),
+      ),
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 
   Widget _buildGridView({

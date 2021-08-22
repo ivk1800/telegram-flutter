@@ -1,12 +1,9 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class WallpaperListEvent extends Equatable {
-  const WallpaperListEvent();
+part 'wallpaper_list_event.freezed.dart';
 
-  @override
-  List<Object> get props => <Object>[];
-}
-
-class InitEvent extends WallpaperListEvent {
-  const InitEvent();
+@freezed
+@immutable
+class WallpaperListEvent with _$WallpaperListEvent {
+  const factory WallpaperListEvent.init() = Init;
 }
