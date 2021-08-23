@@ -15,9 +15,8 @@ dependencies:
     path: ../feature_message_preview_resolver
   localization_api:
     path: ../../localization_api
-  provider: ^5.0.0
   equatable: ^2.0.0
-  flutter_bloc: ^7.0.1
+  flutter_bloc: 7.2.0
   path_provider: ^2.0.1
   flutter_svg: ^0.22.0
   coreui:

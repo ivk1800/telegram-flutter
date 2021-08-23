@@ -17,9 +17,8 @@ dependencies:
     path: ../../core_tdlib_api
   localization_api:
     path: ../../localization_api
-  provider: ^5.0.0
   equatable: ^2.0.0
-  flutter_bloc: ^7.0.1
+  flutter_bloc: 7.2.0
   rxdart: ^0.26.0
   feature_auth_api:
     path: ../feature_auth_api

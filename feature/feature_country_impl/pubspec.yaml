@@ -6,9 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  provider: ^5.0.0
   equatable: ^2.0.0
-  flutter_bloc: ^7.0.1
+  flutter_bloc: 7.2.0
   localization_api:
     path: ../../localization_api
   feature_country_api:

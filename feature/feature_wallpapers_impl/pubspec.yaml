@@ -16,7 +16,7 @@ dependencies:
     path: ../../core_tdlib_api
   localization_api:
     path: ../../localization_api
-  flutter_bloc: ^7.0.1
+  flutter_bloc: 7.2.0
   feature_wallpapers_api:
     path: ../feature_wallpapers_api
   coreui:

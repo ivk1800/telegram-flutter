@@ -11,9 +11,8 @@ dependencies:
   coreui:
     path: ../../coreui
   tuple: ^2.0.0
-  provider: ^5.0.0
   equatable: ^2.0.0
-  flutter_bloc: ^7.0.1
+  flutter_bloc: 7.2.0
   feature_chat_header_info_api:
     path: ../feature_chat_header_info_api
   core_tdlib_api:
