@@ -1,11 +1,9 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class FileRepositoryImpl implements IFileRepository {
-  @j.inject
-  FileRepositoryImpl(this._client) {
+  FileRepositoryImpl({required TdClient client}) : _client = client {
     _client.events
         .where((td.TdObject event) => event is td.UpdateFile)
         .map((td.TdObject event) => event as td.UpdateFile)

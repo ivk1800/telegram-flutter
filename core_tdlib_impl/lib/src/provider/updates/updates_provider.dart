@@ -1,7 +1,6 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:td_client/td_client.dart';
-import 'package:jugger/jugger.dart' as j;
 
 class UpdatesProvider
     implements
@@ -9,8 +8,9 @@ class UpdatesProvider
         IChatFiltersUpdatesProvider,
         IFileUpdatesProvider,
         IAuthenticationStateUpdatesProvider {
-  @j.inject
-  UpdatesProvider({required TdClient client}) : _client = client;
+  UpdatesProvider({
+    required TdClient client,
+  }) : _client = client;
 
   final TdClient _client;
 

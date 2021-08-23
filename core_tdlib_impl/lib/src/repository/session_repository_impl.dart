@@ -1,16 +1,15 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:jugger/jugger.dart' as j;
-import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class SessionRepositoryImpl implements ISessionRepository {
-  @j.inject
-  SessionRepositoryImpl(this.client);
+  SessionRepositoryImpl({
+    required ITdFunctionExecutor functionExecutor,
+  }) : _functionExecutor = functionExecutor;
 
-  final TdClient client;
+  final ITdFunctionExecutor _functionExecutor;
 
   @override
   Stream<List<td.Session>> get activeSessions => Stream<td.Sessions>.fromFuture(
-          client.send<td.Sessions>(td.GetActiveSessions()))
+          _functionExecutor.send<td.Sessions>(td.GetActiveSessions()))
       .map((td.Sessions event) => event.sessions);
 }

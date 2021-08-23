@@ -1,16 +1,15 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tdlib/td_api.dart' as td;
-import 'package:td_client/td_client.dart';
-import 'package:jugger/jugger.dart' as j;
 
 class BackgroundRepositoryImpl implements IBackgroundRepository {
-  @j.inject
-  BackgroundRepositoryImpl(this._client);
+  BackgroundRepositoryImpl({
+    required ITdFunctionExecutor functionExecutor,
+  }) : _functionExecutor = functionExecutor;
 
-  final TdClient _client;
+  final ITdFunctionExecutor _functionExecutor;
 
   @override
-  Future<List<td.Background>> get backgrounds => _client
+  Future<List<td.Background>> get backgrounds => _functionExecutor
       .send<td.Backgrounds>(td.GetBackgrounds(forDarkTheme: false))
       .then((td.Backgrounds value) => value.backgrounds);
 }

@@ -1,14 +1,13 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
-import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatMessageRepositoryImpl implements IChatMessageRepository {
-  @j.inject
-  ChatMessageRepositoryImpl(this._client);
+  ChatMessageRepositoryImpl({
+    required ITdFunctionExecutor functionExecutor,
+  }) : _functionExecutor = functionExecutor;
 
-  final TdClient _client;
+  final ITdFunctionExecutor _functionExecutor;
 
   @override
   Stream<List<td.Message>> getMessages(
@@ -29,7 +28,7 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
 
   @override
   Future<td.Message> getMessage({required int chatId, required int messageId}) {
-    return _client.send<td.Message>(td.GetMessage(
+    return _functionExecutor.send<td.Message>(td.GetMessage(
       chatId: chatId,
       messageId: messageId,
     ));
@@ -39,7 +38,7 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
           {required int chatId,
           required int fromMessageId,
           required int limit}) =>
-      Stream<td.Messages>.fromFuture(_client.send<td.Messages>(
+      Stream<td.Messages>.fromFuture(_functionExecutor.send<td.Messages>(
               td.GetChatHistory(
                   chatId: chatId,
                   fromMessageId: fromMessageId,
@@ -56,7 +55,7 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
     required td.SearchMessagesFilter filter,
   }) {
     return _get<td.Message>((td.Message? last) async {
-      return _client
+      return _functionExecutor
           .send<td.Messages>(td.SearchChatMessages(
               chatId: chatId,
               filter: filter,
@@ -87,7 +86,7 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
     required int chatId,
     required td.SearchMessagesFilter filter,
   }) =>
-      _client
+      _functionExecutor
           .send<td.Count>(td.GetChatMessageCount(
             chatId: chatId,
             filter: filter,

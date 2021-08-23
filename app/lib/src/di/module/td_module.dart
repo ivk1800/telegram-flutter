@@ -10,27 +10,36 @@ abstract class TdModule {
       UpdatesProvider(client: client);
 
   @j.singleton
-  @j.bind
-  IChatUpdatesProvider bindChatUpdatesProvider(UpdatesProvider impl);
+  @j.provide
+  static IChatUpdatesProvider provideChatUpdatesProvider(
+          UpdatesProvider impl) =>
+      impl;
 
   @j.singleton
-  @j.bind
-  IChatFiltersUpdatesProvider bindChatFiltersUpdatesProvider(
-      UpdatesProvider impl);
+  @j.provide
+  static IChatFiltersUpdatesProvider provideChatFiltersUpdatesProvider(
+          UpdatesProvider impl) =>
+      impl;
 
   @j.singleton
-  @j.bind
-  IConnectionStateProvider bindConnectionStateProvider(
-      ConnectionStateProviderImpl impl);
+  @j.provide
+  static IConnectionStateProvider bindConnectionStateProvider(
+    UpdatesProvider updatesProvider,
+  ) =>
+      ConnectionStateProviderImpl(
+        updatesProvider: updatesProvider,
+      );
 
   @j.singleton
-  @j.bind
-  IAuthenticationStateUpdatesProvider bindAuthenticationStateUpdatesProvider(
-      UpdatesProvider impl);
+  @j.provide
+  static IAuthenticationStateUpdatesProvider
+      provideAuthenticationStateUpdatesProvider(UpdatesProvider impl) => impl;
 
   @j.singleton
-  @j.bind
-  IFileUpdatesProvider bindFileUpdatesProvider(UpdatesProvider impl);
+  @j.provide
+  static IFileUpdatesProvider provideFileUpdatesProvider(
+          UpdatesProvider impl) =>
+      impl;
 
   @j.singleton
   @j.provide

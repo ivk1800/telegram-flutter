@@ -1,17 +1,16 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:jugger/jugger.dart' as j;
-import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class StickerRepositoryImpl implements IStickerRepository {
-  @j.inject
-  StickerRepositoryImpl(this._client);
+  StickerRepositoryImpl({
+    required ITdFunctionExecutor functionExecutor,
+  }) : _functionExecutor = functionExecutor;
 
-  final TdClient _client;
+  final ITdFunctionExecutor _functionExecutor;
 
   @override
   Future<List<td.StickerSetInfo>> getInstalledStickers() {
-    return _client
+    return _functionExecutor
         .send<td.StickerSets>(td.GetInstalledStickerSets(isMasks: false))
         .then((td.StickerSets value) => value.sets);
   }

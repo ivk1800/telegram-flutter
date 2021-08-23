@@ -35,45 +35,92 @@ abstract class AppModule {
       OptionsManager(client);
 
   @j.singleton
-  @j.bind
-  IChatMessageRepository bindChatMessageRepository(
-      ChatMessageRepositoryImpl impl);
+  @j.provide
+  static IChatMessageRepository provideChatMessageRepository(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      ChatMessageRepositoryImpl(
+        functionExecutor: functionExecutor,
+      );
 
   @j.singleton
-  @j.bind
-  IChatRepository bindChatRepository(ChatRepositoryImpl impl);
+  @j.provide
+  static IChatRepository provideChatRepository(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      ChatRepositoryImpl(
+        functionExecutor: functionExecutor,
+      );
 
   @j.singleton
-  @j.bind
-  IFileRepository bindFileRepository(FileRepositoryImpl impl);
+  @j.provide
+  static IFileRepository provideFileRepository(
+    TdClient client,
+  ) =>
+      FileRepositoryImpl(
+        client: client,
+      );
 
   @j.singleton
-  @j.bind
-  IUserRepository bindUserRepository(UserRepositoryImpl impl);
+  @j.provide
+  static IUserRepository provideUserRepository(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      UserRepositoryImpl(functionExecutor: functionExecutor);
 
   @j.singleton
-  @j.bind
-  IStickerRepository bindStickerRepository(StickerRepositoryImpl impl);
+  @j.provide
+  static IStickerRepository provideStickerRepository(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      StickerRepositoryImpl(
+        functionExecutor: functionExecutor,
+      );
 
   @j.singleton
-  @j.bind
-  IBackgroundRepository bindBackgroundRepository(BackgroundRepositoryImpl impl);
+  @j.provide
+  static IBackgroundRepository provideBackgroundRepository(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      BackgroundRepositoryImpl(
+        functionExecutor: functionExecutor,
+      );
 
   @j.singleton
-  @j.bind
-  ISessionRepository bindSessionRepository(SessionRepositoryImpl impl);
+  @j.provide
+  static ISessionRepository provideSessionRepository(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      SessionRepositoryImpl(
+        functionExecutor: functionExecutor,
+      );
 
   @j.singleton
-  @j.bind
-  IChatFilterRepository bindChatFilterRepository(ChatFilterRepositoryImpl impl);
+  @j.provide
+  static IChatFilterRepository provideChatFilterRepository(
+    IChatFiltersUpdatesProvider chatFiltersUpdatesProvider,
+  ) =>
+      ChatFilterRepositoryImpl(
+        chatFiltersUpdatesProvider: chatFiltersUpdatesProvider,
+      );
 
   @j.singleton
-  @j.bind
-  IBasicGroupRepository bindBasicGroupRepository(BasicGroupRepositoryImpl impl);
+  @j.provide
+  static IBasicGroupRepository provideBasicGroupRepository(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      BasicGroupRepositoryImpl(
+        functionExecutor: functionExecutor,
+      );
 
   @j.singleton
-  @j.bind
-  ISuperGroupRepository bindSuperGroupRepository(SuperGroupRepositoryImpl impl);
+  @j.provide
+  static ISuperGroupRepository provideSuperGroupRepository(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      SuperGroupRepositoryImpl(
+        functionExecutor: functionExecutor,
+      );
 
   @j.singleton
   @j.bind

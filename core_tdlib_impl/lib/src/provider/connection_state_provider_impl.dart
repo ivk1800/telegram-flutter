@@ -2,12 +2,11 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
-import 'package:jugger/jugger.dart' as j;
 
 class ConnectionStateProviderImpl implements IConnectionStateProvider {
-  @j.inject
-  ConnectionStateProviderImpl(UpdatesProvider updatesProvider)
-      : _updatesProvider = updatesProvider {
+  ConnectionStateProviderImpl({
+    required UpdatesProvider updatesProvider,
+  }) : _updatesProvider = updatesProvider {
     // TODO: need dispose?
     _updatesProvider.connectionStateUpdates
         .listen((td.UpdateConnectionState event) {

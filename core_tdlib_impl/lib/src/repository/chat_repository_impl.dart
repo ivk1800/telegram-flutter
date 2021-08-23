@@ -1,12 +1,11 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
-import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatRepositoryImpl extends IChatRepository {
-  @j.inject
-  ChatRepositoryImpl(this._client) {
+  ChatRepositoryImpl({
+    required ITdFunctionExecutor functionExecutor,
+  }) : _functionExecutor = functionExecutor {
     /*
     Stream<td.Chats>.fromFuture(_client.send<td.Chats>(td.GetChats(
       offsetChatId: 0,
@@ -56,7 +55,7 @@ class ChatRepositoryImpl extends IChatRepository {
      */
   }
 
-  final TdClient _client;
+  final ITdFunctionExecutor _functionExecutor;
 
   // final Map<int, td.Chat> _chats = <int, td.Chat>{};
 
@@ -68,7 +67,7 @@ class ChatRepositoryImpl extends IChatRepository {
 
   @override
   Future<td.Chat> getChat(int id) =>
-      _client.send<td.Chat>(td.GetChat(chatId: id));
+      _functionExecutor.send<td.Chat>(td.GetChat(chatId: id));
 
   @override
   Future<List<td.Chat>> getChats(
@@ -78,15 +77,15 @@ class ChatRepositoryImpl extends IChatRepository {
       required td.ChatList chatList}) async {
     final List<td.Chat> chats = <td.Chat>[];
 
-    final td.Chats result = await _client.send<td.Chats>(td.GetChats(
+    final td.Chats result = await _functionExecutor.send<td.Chats>(td.GetChats(
       offsetChatId: offsetChatId,
       offsetOrder: offsetOrder,
       chatList: chatList,
       limit: limit,
     ));
 
-    chats.addAll(await Stream<td.Chat>.fromFutures(result.chatIds
-            .map((int e) => _client.send<td.Chat>(td.GetChat(chatId: e))))
+    chats.addAll(await Stream<td.Chat>.fromFutures(result.chatIds.map(
+            (int e) => _functionExecutor.send<td.Chat>(td.GetChat(chatId: e))))
         .toList());
 
     if (chats.length < limit && chats.isNotEmpty) {
@@ -103,5 +102,5 @@ class ChatRepositoryImpl extends IChatRepository {
 
   @override
   Future<td.Supergroup> getSupergroup(int id) =>
-      _client.send<td.Supergroup>(td.GetSupergroup(supergroupId: id));
+      _functionExecutor.send<td.Supergroup>(td.GetSupergroup(supergroupId: id));
 }
