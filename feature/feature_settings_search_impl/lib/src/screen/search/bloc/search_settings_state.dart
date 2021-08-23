@@ -1,5 +1,5 @@
-import 'package:coreui/coreui.dart' as tg;
 import 'package:equatable/equatable.dart';
+import 'package:tile/tile.dart';
 
 abstract class SearchSettingsState extends Equatable {
   const SearchSettingsState();
@@ -11,5 +11,5 @@ abstract class SearchSettingsState extends Equatable {
 class DefaultState extends SearchSettingsState {
   const DefaultState({required this.tileModels});
 
-  final List<tg.ITileModel> tileModels;
+  final List<ITileModel> tileModels;
 }

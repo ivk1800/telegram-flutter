@@ -1,10 +1,10 @@
 import 'package:core_utils/core_utils.dart';
-import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/mapper/sender_info_mapper.dart';
 import 'package:intl/intl.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
+import 'package:tile/tile.dart';
 
 import 'additional_info_mapper.dart';
 import 'message_reply_info_mapper.dart';

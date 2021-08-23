@@ -1,9 +1,10 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:coreui/coreui.dart';
 import 'package:feature_stickers_impl/feature_stickers_impl.dart';
 import 'package:feature_stickers_impl/src/tile/model/sticker_set_tile_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tdlib/td_api.dart' as td;
+import 'package:tile/tile.dart';
+
 import 'stickers_event.dart';
 import 'stickers_state.dart';
 

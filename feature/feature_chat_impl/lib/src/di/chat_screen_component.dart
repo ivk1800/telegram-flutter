@@ -9,12 +9,13 @@ import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:tile/tile.dart';
 
 @j.Component(modules: <Type>[ChatScreenModule])
 abstract class ChatScreenComponent {
   MessageTileMapper getMessageTileMapper();
 
-  tg.TileFactory getTileFactory();
+  TileFactory getTileFactory();
 
   ChatMessageFactory getChatMessageFactory();
 
@@ -46,7 +47,7 @@ abstract class ChatScreenModule {
 
   @j.provide
   @j.singleton
-  static tg.TileFactory provideTileFactory(
+  static TileFactory provideTileFactory(
     ChatMessagesInteractor chatMessagesInteractor,
     IChatFeatureDependencies dependencies,
     IMessageActionListener messageActionListener,

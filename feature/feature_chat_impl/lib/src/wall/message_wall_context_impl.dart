@@ -1,6 +1,6 @@
-import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
+import 'package:tile/tile.dart';
 
 import 'message_wall_context.dart';
 

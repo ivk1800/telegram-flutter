@@ -1,8 +1,8 @@
-import 'package:coreui/coreui.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_wallpapers_impl/src/tile/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
+import 'package:tile/tile.dart';
 
 class BottomGroupTileFactoryDelegate
     implements ITileFactoryDelegate<BottomGroupTileModel> {

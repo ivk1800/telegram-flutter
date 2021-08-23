@@ -1,6 +1,6 @@
-import 'package:coreui/coreui.dart';
 import 'package:equatable/equatable.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
+import 'package:tile/tile.dart';
 
 class ChatState extends Equatable {
   const ChatState({

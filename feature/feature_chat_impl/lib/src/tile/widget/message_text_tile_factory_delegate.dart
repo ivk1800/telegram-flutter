@@ -1,8 +1,8 @@
-import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
+import 'package:tile/tile.dart';
 
 class MessageTextTileFactoryDelegate
     implements ITileFactoryDelegate<MessageTextTileModel> {

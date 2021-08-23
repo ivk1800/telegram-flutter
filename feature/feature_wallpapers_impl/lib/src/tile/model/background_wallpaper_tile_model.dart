@@ -1,6 +1,5 @@
 import 'package:core_utils/core_utils.dart';
-
-import 'package:coreui/coreui.dart';
+import 'package:tile/tile.dart';
 
 class BackgroundWallpaperTileModel implements ITileModel {
   const BackgroundWallpaperTileModel({

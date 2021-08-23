@@ -1,7 +1,7 @@
-import 'package:coreui/coreui.dart';
 import 'package:feature_settings_search_impl/src/tile/model/search_result_tile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:tile/tile.dart';
 
 typedef SearchResultTapCallback = void Function(
     BuildContext context, SearchResultType type);

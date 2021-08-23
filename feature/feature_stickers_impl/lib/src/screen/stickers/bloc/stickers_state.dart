@@ -1,5 +1,5 @@
-import 'package:coreui/coreui.dart';
 import 'package:equatable/equatable.dart';
+import 'package:tile/tile.dart';
 
 abstract class StickersState extends Equatable {
   const StickersState();

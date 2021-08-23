@@ -1,6 +1,6 @@
-import 'package:coreui/coreui.dart';
 import 'package:feature_stickers_impl/src/tile/model/sticker_set_tile_model.dart';
 import 'package:flutter/material.dart';
+import 'package:tile/tile.dart';
 
 typedef StickerSetTapCallback = void Function(BuildContext context, int setId);
 

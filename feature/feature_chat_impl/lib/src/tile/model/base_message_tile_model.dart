@@ -1,4 +1,4 @@
-import 'package:coreui/coreui.dart';
+import 'package:tile/tile.dart';
 
 abstract class BaseMessageTileModel implements ITileModel {
   const BaseMessageTileModel({

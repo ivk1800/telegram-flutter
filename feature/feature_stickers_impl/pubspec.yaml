@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  tile:
+    path: ../../tile
   equatable: ^2.0.0
   flutter_bloc: 7.2.0
   core_arch:

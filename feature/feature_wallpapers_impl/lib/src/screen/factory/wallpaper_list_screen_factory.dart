@@ -1,4 +1,3 @@
-import 'package:coreui/coreui.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
@@ -15,6 +14,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
+import 'package:tile/tile.dart';
 
 class WallpapersListScreenFactory implements IWallpapersListScreenFactory {
   WallpapersListScreenFactory({
@@ -36,12 +36,12 @@ class WallpapersListScreenFactory implements IWallpapersListScreenFactory {
               delegates: <Type, ITileFactoryDelegate<ITileModel>>{
                 BackgroundWallpaperTileModel:
                     BackgroundWallpaperTileFactoryDelegate(
-                  imageWidgetFactory: ImageWidgetFactory(
+                  imageWidgetFactory: tg.ImageWidgetFactory(
                     fileDownloader: _dependencies.fileDownloader,
                   ),
                 ),
                 PatternWallpaperTileModel: PatternWallpaperTileFactoryDelegate(
-                  imageWidgetFactory: ImageWidgetFactory(
+                  imageWidgetFactory: tg.ImageWidgetFactory(
                     fileDownloader: _dependencies.fileDownloader,
                   ),
                 ),

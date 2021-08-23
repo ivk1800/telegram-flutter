@@ -1,6 +1,7 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_wallpapers_impl/src/tile/model/background_wallpaper_tile_model.dart';
 import 'package:flutter/material.dart';
+import 'package:tile/tile.dart';
 
 class BackgroundWallpaperTileFactoryDelegate
     implements ITileFactoryDelegate<BackgroundWallpaperTileModel> {

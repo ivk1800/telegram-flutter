@@ -1,4 +1,3 @@
-import 'package:coreui/coreui.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_bloc.dart';
 import 'package:feature_chat_impl/src/screen/chat/bloc/chat_event.dart';
@@ -6,6 +5,7 @@ import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:tile/tile.dart';
 
 import 'bloc/chat_state.dart';
 

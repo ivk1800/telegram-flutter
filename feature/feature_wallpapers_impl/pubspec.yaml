@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  tile:
+    path: ../../tile
   freezed_annotation: 0.14.2
   feature_file_api:
     path: ../feature_file_api

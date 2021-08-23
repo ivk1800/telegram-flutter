@@ -1,6 +1,4 @@
 import 'package:core_utils/core_utils.dart';
-import 'package:coreui/coreui.dart' as tg;
-import 'package:coreui/coreui.dart';
 import 'package:demo/src/message_data.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:feature_chat_impl/feature_chat_impl.dart' as chat_impl;
@@ -12,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:localization_impl/localization_impl.dart';
 import 'package:tdlib/td_api.dart' as td;
+import 'package:tile/tile.dart';
 
 import 'message_bundle.dart';
 
@@ -28,7 +27,7 @@ class DemoMessagePage extends StatefulWidget {
 }
 
 class _DemoMessagePageState extends State<DemoMessagePage> {
-  late tg.TileFactory _tileFactory;
+  late TileFactory _tileFactory;
 
   late chat_impl.MessageTileMapper _messageTileMapper;
 

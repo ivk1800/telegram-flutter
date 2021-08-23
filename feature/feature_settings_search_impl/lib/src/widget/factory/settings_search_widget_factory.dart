@@ -12,6 +12,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
+import 'package:tile/tile.dart';
 
 class SearchSettingsWidgetFactory implements ISettingsSearchWidgetFactory {
   SearchSettingsWidgetFactory({required this.dependencies});

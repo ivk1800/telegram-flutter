@@ -2,11 +2,12 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/bloc/wallpaper_list_bloc.dart';
 import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/bloc/wallpaper_list_state.dart';
 import 'package:feature_wallpapers_impl/src/tile/model/model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
+import 'package:tile/tile.dart';
 
 class WallpaperListPage extends StatelessWidget {
   const WallpaperListPage({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class WallpaperListPage extends StatelessWidget {
 
   Widget _stateToWidget(WallpaperListState state) {
     return state.when(
-      (List<tg.ITileModel> backgrounds) => LayoutBuilder(
+      (List<ITileModel> backgrounds) => LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) =>
             _buildGridView(
           context: context,
@@ -51,10 +52,10 @@ class WallpaperListPage extends StatelessWidget {
 
   Widget _buildGridView({
     required BuildContext context,
-    required List<tg.ITileModel> tileModels,
+    required List<ITileModel> tileModels,
     required double width,
   }) {
-    final tg.TileFactory tileFactory = context.read();
+    final TileFactory tileFactory = context.read();
 
     return StaggeredGridView.countBuilder(
         crossAxisCount: CrossAxisCount,
@@ -68,7 +69,7 @@ class WallpaperListPage extends StatelessWidget {
           return tileFactory.create(context, tileModels[index]);
         },
         staggeredTileBuilder: (int index) {
-          final tg.ITileModel tileModel = tileModels[index];
+          final ITileModel tileModel = tileModels[index];
 
           if (tileModel is TopGroupTileModel ||
               tileModel is BottomGroupTileModel) {

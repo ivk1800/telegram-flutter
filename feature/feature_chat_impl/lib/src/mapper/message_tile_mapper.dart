@@ -1,6 +1,5 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/mapper/additional_info_mapper.dart';
 import 'package:feature_chat_impl/src/mapper/sender_info_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
@@ -8,6 +7,7 @@ import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
+import 'package:tile/tile.dart';
 
 import 'message_call_tile_model_mapper.dart';
 import 'message_reply_info_mapper.dart';

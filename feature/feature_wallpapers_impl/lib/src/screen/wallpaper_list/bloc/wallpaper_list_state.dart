@@ -1,5 +1,5 @@
-import 'package:coreui/coreui.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:tile/tile.dart';
 
 part 'wallpaper_list_state.freezed.dart';
 

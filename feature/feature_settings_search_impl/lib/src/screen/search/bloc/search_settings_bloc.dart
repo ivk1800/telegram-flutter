@@ -1,8 +1,8 @@
-import 'package:coreui/coreui.dart';
 import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
 import 'package:feature_settings_search_impl/src/tile/model/faq_result_tile_model.dart';
 import 'package:feature_settings_search_impl/src/tile/model/search_result_tile_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tile/tile.dart';
 
 import 'search_settings_event.dart';
 import 'search_settings_state.dart';

@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
+import 'package:tile/tile.dart';
 
 import 'bloc/stickers_bloc.dart';
 import 'bloc/stickers_event.dart';
@@ -36,7 +37,7 @@ class StickersPage extends StatelessWidget {
 
   Widget _buildDefaultWidget(BuildContext context, DefaultState state) {
     final ILocalizationManager localizationManager = Provider.of(context);
-    final tg.TileFactory tileFactory = Provider.of<tg.TileFactory>(context);
+    final TileFactory tileFactory = Provider.of<TileFactory>(context);
     final StickersBloc bloc = BlocProvider.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

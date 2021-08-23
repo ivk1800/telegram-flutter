@@ -1,11 +1,10 @@
-import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
+import 'package:app/src/feature/feature.dart';
+import 'package:app/src/feature/folders/feature_folders.dart';
+import 'package:app/src/page/page.dart';
 import 'package:feature_logout_api/feature_logout_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:app/src/feature/feature.dart';
-import 'package:app/src/feature/folders/feature_folders.dart';
-import 'package:app/src/page/page.dart';
 import 'package:split_view/split_view.dart';
 
 import 'navigation.dart';

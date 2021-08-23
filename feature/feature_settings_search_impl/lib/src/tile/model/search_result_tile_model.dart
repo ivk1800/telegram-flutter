@@ -1,4 +1,4 @@
-import 'package:coreui/coreui.dart';
+import 'package:tile/tile.dart';
 
 class SearchResultTileModel implements ITileModel {
   const SearchResultTileModel(

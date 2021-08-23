@@ -1,4 +1,3 @@
-import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
@@ -13,6 +12,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
+import 'package:tile/tile.dart';
 
 class ChatScreenFactory implements IChatScreenFactory {
   ChatScreenFactory({required this.dependencies});
@@ -28,7 +28,7 @@ class ChatScreenFactory implements IChatScreenFactory {
           .build(),
       child: MultiProvider(
         providers: <Provider<dynamic>>[
-          Provider<tg.TileFactory>(
+          Provider<TileFactory>(
             create: (BuildContext context) =>
                 context.getComponent().getTileFactory(),
           ),

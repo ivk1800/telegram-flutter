@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-// todo move to separate module
+import 'tile_factory_delegate.dart';
+import 'tile_model.dart';
+
 class TileFactory {
   TileFactory({required this.delegates});
 
@@ -16,10 +18,4 @@ class TileFactory {
       BuildContext context, List<ITileModel> models, int index) {
     return create(context, models[index]);
   }
-}
-
-abstract class ITileModel {}
-
-abstract class ITileFactoryDelegate<M> {
-  Widget create(BuildContext context, M model);
 }

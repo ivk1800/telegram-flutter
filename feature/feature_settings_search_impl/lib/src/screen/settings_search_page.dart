@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
+import 'package:tile/tile.dart';
 
 import 'search/bloc/search_settings_bloc.dart';
 import 'search/bloc/search_settings_state.dart';

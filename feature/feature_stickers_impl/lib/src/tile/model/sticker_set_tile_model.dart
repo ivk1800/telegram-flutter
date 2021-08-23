@@ -1,4 +1,4 @@
-import 'package:coreui/coreui.dart';
+import 'package:tile/tile.dart';
 
 class StickerSetTileModel implements ITileModel {
   StickerSetTileModel(
