@@ -249,18 +249,19 @@ class MainPageState extends State<MainPage>
             },
           ),
           drawer: _buildDrawer(),
-          body: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 200),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return FadeTransition(
-                child: child,
-                opacity: animation,
-              );
-            },
-            child: _searchActive ? buildSearchView() : buildListView(),
-          )),
+          body: _buildBody(context)),
     );
   }
+
+  Widget _buildBody(BuildContext context) => Stack(
+        children: <Widget>[
+          buildListView(),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            child: _searchActive ? buildSearchView() : null,
+          )
+        ],
+      );
 
   Widget _buildTitleWidget(BuildContext context) {
     return Align(
@@ -273,7 +274,10 @@ class MainPageState extends State<MainPage>
     );
   }
 
-  Widget buildSearchView() => globalSearchWidgetFactory.create();
+  Widget buildSearchView() => Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: globalSearchWidgetFactory.create(),
+      );
 
   Widget buildListView() {
     return chatsListWidgetFactory.create();

@@ -87,24 +87,25 @@ class SettingsPageState extends State<SettingsPage>
       },
       child: Scaffold(
         appBar: _buildAppbar(context),
-        body: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return FadeTransition(
-              child: child,
-              opacity: animation,
-            );
-          },
-          child: _searchActive
-              ? _buildSearchWidget(context)
-              : SingleChildScrollView(child: _buildDefaultWidget(context)),
-        ),
+        body: _buildBody(context),
       ),
     );
   }
 
-  Widget _buildSearchWidget(BuildContext context) =>
-      settingsSearchWidgetFactory.create();
+  Widget _buildBody(BuildContext context) => Stack(
+        children: <Widget>[
+          SingleChildScrollView(child: _buildDefaultWidget(context)),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            child: _searchActive ? _buildSearchWidget(context) : null,
+          ),
+        ],
+      );
+
+  Widget _buildSearchWidget(BuildContext context) => Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: settingsSearchWidgetFactory.create(),
+      );
 
   Widget _buildDefaultWidget(BuildContext context) {
     final Color accentColor = Theme.of(context).accentColor;
