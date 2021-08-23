@@ -11,7 +11,7 @@ dependencies:
   tdlib:
     git:
       url: git@github.com:ivk1800/tdlib-dart.git
-      ref: v1
+      ref: d5f1be7c7bbfd7cdd1a21c1268714c4dffa500aa
   flutter:
     sdk: flutter
 
