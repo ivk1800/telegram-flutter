@@ -54,7 +54,10 @@ class LocalizationManager implements ILocalizationManager {
         resNode.nodes.whereType<XmlElement>();
     for (final XmlNode stringNode in stringNodes) {
       final XmlAttribute stringAttribute = stringNode.attributes[0];
-      strings[stringAttribute.value] = stringNode.children[0].toString();
+
+      final String key = stringAttribute.value;
+      assert(!strings.containsKey(key), 'duplicate string $key');
+      strings[key] = stringNode.children[0].toString();
     }
 
     return strings;
