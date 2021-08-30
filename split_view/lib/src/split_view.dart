@@ -246,11 +246,13 @@ class SplitViewState extends State<SplitView> {
               return true;
             } else {
               setState(() {
-                _compactPages.removeLast();
+                final _PageNode removed = _compactPages.removeLast();
+                _removeTopFromContainer(removed.container);
               });
             }
             return false;
           }
+          return true;
         }
 
         if (_topPages.isNotEmpty) {
@@ -493,26 +495,7 @@ class SplitViewState extends State<SplitView> {
         if (route.settings is MyPage) {
           setState(() {
             final MyPage<dynamic> myPage = route.settings as MyPage<dynamic>;
-            switch (myPage.container) {
-              case ContainerType.Left:
-                final _PageNode lastWhere = _leftPages.lastWhere(
-                    (_PageNode element) =>
-                        element.container == ContainerType.Left);
-                _leftPages.remove(lastWhere);
-                break;
-              case ContainerType.Right:
-                final _PageNode lastWhere = _rightPages.lastWhere(
-                    (_PageNode element) =>
-                        element.container == ContainerType.Right);
-                _rightPages.remove(lastWhere);
-                break;
-              case ContainerType.Top:
-                final _PageNode lastWhere = _topPages.lastWhere(
-                    (_PageNode element) =>
-                        element.container == ContainerType.Top);
-                _topPages.remove(lastWhere);
-                break;
-            }
+            _removeTopFromContainer(myPage.container);
             _invalidatePages();
           });
         }
@@ -520,6 +503,26 @@ class SplitViewState extends State<SplitView> {
         return true;
       },
     );
+  }
+
+  void _removeTopFromContainer(ContainerType container) {
+    switch (container) {
+      case ContainerType.Left:
+        final _PageNode lastWhere = _leftPages.lastWhere(
+            (_PageNode element) => element.container == ContainerType.Left);
+        _leftPages.remove(lastWhere);
+        break;
+      case ContainerType.Right:
+        final _PageNode lastWhere = _rightPages.lastWhere(
+            (_PageNode element) => element.container == ContainerType.Right);
+        _rightPages.remove(lastWhere);
+        break;
+      case ContainerType.Top:
+        final _PageNode lastWhere = _topPages.lastWhere(
+            (_PageNode element) => element.container == ContainerType.Top);
+        _topPages.remove(lastWhere);
+        break;
+    }
   }
 
   static const int LeftRootPageIndex = 0;
