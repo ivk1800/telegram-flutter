@@ -1,5 +1,5 @@
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
-import 'package:flutter/painting.dart';
+import 'package:rich_text_format/rich_text_format.dart';
 
 class MessageTextTileModel extends BaseConversationMessageTileModel {
   const MessageTextTileModel({
@@ -17,5 +17,5 @@ class MessageTextTileModel extends BaseConversationMessageTileModel {
           senderInfo: senderInfo,
         );
 
-  final InlineSpan text;
+  final RichText text;
 }

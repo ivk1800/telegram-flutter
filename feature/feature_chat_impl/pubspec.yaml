@@ -6,6 +6,10 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  rich_text_format_flutter:
+    path: ../../rich_text/rich_text_format_flutter
+  rich_text_format:
+    path: ../../rich_text/rich_text_format
   tile:
     path: ../../tile
   feature_file_api:

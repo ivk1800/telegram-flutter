@@ -1,11 +1,17 @@
-import 'package:flutter/rendering.dart';
+import 'package:rich_text_format/rich_text_format.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class FormattedTextResolver {
-  InlineSpan? resolve(td.FormattedText text) {
-    if (text.text.isEmpty) {
+  RichText resolve(td.FormattedText text) {
+    return PlainText(text: text.text);
+  }
+}
+
+extension FormattedTextResolverExt on FormattedTextResolver {
+  RichText? resolveOrNull(td.FormattedText? text) {
+    if (text == null) {
       return null;
     }
-    return TextSpan(text: text.text);
+    return resolve(text);
   }
 }

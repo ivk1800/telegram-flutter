@@ -6,6 +6,7 @@ import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:localization_api/localization_api.dart';
+import 'package:rich_text_format/rich_text_format.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
@@ -84,7 +85,7 @@ class MessageTileMapper {
               id: message.id,
               // todo add a tap for username
               // todo add username
-              text: TextSpan(
+              text: PlainText(
                   text: _localizationManager.getStringFormatted(
                       'ActionCreateGroup', <dynamic>['todo'])));
         }
@@ -124,7 +125,7 @@ class MessageTileMapper {
           return MessageChatChangePhotoTileModel(
             id: message.id,
             // todo missing user name
-            title: TextSpan(
+            title: PlainText(
                 text: _getStringFormatted(
                     'ActionChangedPhoto', <dynamic>['todo'])),
             minithumbnail: m.photo.minithumbnail?.toMinithumbnail(),
@@ -137,7 +138,7 @@ class MessageTileMapper {
               id: message.id,
               isOutgoing: message.isOutgoing,
               // todo missing user name
-              title: TextSpan(
+              title: PlainText(
                   text: _getStringFormatted(
                       'ActionChangedTitle', <dynamic>['todo', m.title])));
         }
@@ -149,7 +150,7 @@ class MessageTileMapper {
               id: message.id,
               isOutgoing: message.isOutgoing,
               // todo missing user name
-              title: TextSpan(
+              title: PlainText(
                   text: _getStringFormatted('ActionKickUser', <dynamic>[
                 'todo',
                 // todo extract to extension for concat first and last names
@@ -166,7 +167,7 @@ class MessageTileMapper {
               id: message.id,
               isOutgoing: message.isOutgoing,
               // todo missing user name
-              title: TextSpan(
+              title: PlainText(
                   text: _getStringFormatted(
                       'ActionRemovedPhoto', <dynamic>['todo'])));
         }
@@ -176,7 +177,7 @@ class MessageTileMapper {
               id: message.id,
               isOutgoing: message.isOutgoing,
               // todo missing user name
-              title: TextSpan(
+              title: PlainText(
                   text: _getStringFormatted(
                       'ActionInviteUser', <dynamic>['todo'])));
         }
@@ -187,7 +188,7 @@ class MessageTileMapper {
           return MessageChatSetTtlTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              title: TextSpan(
+              title: PlainText(
                   text: message.isOutgoing
                       ? _getStringFormatted(
                           'MessageLifetimeChangedOutgoing', <dynamic>['todo'])
@@ -201,7 +202,7 @@ class MessageTileMapper {
           return MessageChatUpgradeFromTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              title: TextSpan(
+              title: PlainText(
                   text: _getStringFormatted(
                       'ActionMigrateFromGroupNotify', <dynamic>[m.title])));
         }
@@ -211,7 +212,7 @@ class MessageTileMapper {
           return MessageChatUpgradeFromTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              title: TextSpan(
+              title: PlainText(
                   text: _localizationManager
                       .getString('ActionMigrateFromGroup')));
         }
@@ -220,7 +221,7 @@ class MessageTileMapper {
           return MessageContactRegisteredTileModel(
               id: message.id,
               isOutgoing: message.isOutgoing,
-              title: TextSpan(
+              title: PlainText(
                   text: _localizationManager.getString('ContactJoined')));
         }
       case td.MessageContact.CONSTRUCTOR:
@@ -428,7 +429,7 @@ class MessageTileMapper {
               replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
               additionalInfo: await _additionalInfoMapper.map(message),
               isOutgoing: message.isOutgoing,
-              text: TextSpan(text: m.text.text));
+              text: _formattedTextResolver.resolve(m.text));
         }
       case td.MessageUnsupported.CONSTRUCTOR:
         {

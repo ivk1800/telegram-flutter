@@ -1,4 +1,4 @@
-import 'package:flutter/rendering.dart';
+import 'package:rich_text_format/rich_text_format.dart';
 
 import 'base_message_tile_model.dart';
 
@@ -9,5 +9,5 @@ class MessageChatUpgradeToTileModel extends BaseMessageTileModel {
     required this.title,
   }) : super(isOutgoing: isOutgoing, id: id);
 
-  final InlineSpan title;
+  final RichText title;
 }

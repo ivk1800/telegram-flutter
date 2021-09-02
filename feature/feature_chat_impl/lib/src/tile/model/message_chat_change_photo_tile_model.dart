@@ -1,6 +1,7 @@
 import 'package:core_utils/core_utils.dart';
-import 'package:feature_chat_impl/src/tile/model/base_chat_notification_message_tile_model.dart';
-import 'package:flutter/rendering.dart';
+import 'package:rich_text_format/rich_text_format.dart';
+
+import 'base_chat_notification_message_tile_model.dart';
 
 class MessageChatChangePhotoTileModel
     extends BaseChatNotificationMessageTileModel {
@@ -11,5 +12,5 @@ class MessageChatChangePhotoTileModel
   }) : super(id: id);
 
   final Minithumbnail? minithumbnail;
-  final InlineSpan title;
+  final RichText title;
 }

@@ -1,6 +1,7 @@
 import 'package:core_utils/core_utils.dart';
-import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
-import 'package:flutter/rendering.dart';
+import 'package:rich_text_format/rich_text_format.dart';
+
+import 'base_conversation_message_tile_model.dart';
 
 class MessagePhotoTileModel extends BaseConversationMessageTileModel {
   const MessagePhotoTileModel({
@@ -21,6 +22,6 @@ class MessagePhotoTileModel extends BaseConversationMessageTileModel {
         );
 
   final Minithumbnail? minithumbnail;
-  final InlineSpan? caption;
+  final RichText? caption;
   final int photoId;
 }

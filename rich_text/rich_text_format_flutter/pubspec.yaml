@@ -1,0 +1,14 @@
+name: rich_text_format_flutter
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  rich_text_format:
+    path: ../rich_text_format
+  flutter:
+    sdk: flutter
+
+flutter:
