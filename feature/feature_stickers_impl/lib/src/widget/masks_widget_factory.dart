@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 class MasksWidgetFactory implements IMasksWidgetFactory {
   MasksWidgetFactory({required this.dependencies});
 
-  final IStickersFeatureDependencies dependencies;
+  final StickersFeatureDependencies dependencies;
 
   @override
   Widget create() => const MasksPage();

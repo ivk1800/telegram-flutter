@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 class StickerSetWidgetFactory implements IStickerSetWidgetFactory {
   StickerSetWidgetFactory({required this.dependencies});
 
-  final IStickersFeatureDependencies dependencies;
+  final StickersFeatureDependencies dependencies;
 
   @override
   Widget create(int setId) => const StickerSetPage();

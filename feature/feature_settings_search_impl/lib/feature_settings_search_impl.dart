@@ -9,9 +9,9 @@ import 'package:localization_api/localization_api.dart';
 export 'src/settings_search_screen_router.dart';
 
 class SettingsSearchFeatureApi implements ISettingsSearchFeatureApi {
-  SettingsSearchFeatureApi(
-      {required ISettingsSearchFeatureDependencies dependencies})
-      : _settingsWidgetFactory =
+  SettingsSearchFeatureApi({
+    required SettingsSearchFeatureDependencies dependencies,
+  }) : _settingsWidgetFactory =
             SearchSettingsWidgetFactory(dependencies: dependencies);
 
   final ISettingsSearchWidgetFactory _settingsWidgetFactory;
@@ -21,10 +21,16 @@ class SettingsSearchFeatureApi implements ISettingsSearchFeatureApi {
       _settingsWidgetFactory;
 }
 
-abstract class ISettingsSearchFeatureDependencies {
-  ILocalizationManager get localizationManager;
+class SettingsSearchFeatureDependencies {
+  const SettingsSearchFeatureDependencies({
+    required this.localizationManager,
+    required this.router,
+    required this.connectionStateProvider,
+  });
 
-  ISettingsSearchScreenRouter get router;
+  final ILocalizationManager localizationManager;
 
-  IConnectionStateProvider get connectionStateProvider;
+  final ISettingsSearchScreenRouter router;
+
+  final IConnectionStateProvider connectionStateProvider;
 }

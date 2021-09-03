@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 class TrendingStickersWidgetFactory implements ITrendingStickersWidgetFactory {
   TrendingStickersWidgetFactory({required this.dependencies});
 
-  final IStickersFeatureDependencies dependencies;
+  final StickersFeatureDependencies dependencies;
 
   @override
   Widget create() => const TrendingStickersPage();

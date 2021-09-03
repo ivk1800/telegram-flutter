@@ -15,7 +15,7 @@ import 'package:tile/tile.dart';
 class StickersWidgetFactory implements IStickersWidgetFactory {
   StickersWidgetFactory({required this.dependencies});
 
-  final IStickersFeatureDependencies dependencies;
+  final StickersFeatureDependencies dependencies;
 
   @override
   Widget create() => MultiProvider(

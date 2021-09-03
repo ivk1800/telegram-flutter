@@ -2,18 +2,20 @@ library feature_settings_impl;
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
-import 'package:feature_settings_impl/src/settings_screen_router.dart';
 import 'package:feature_settings_impl/src/screen/settings_page.dart';
+import 'package:feature_settings_impl/src/settings_screen_router.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
+
 import 'src/di/settings_screen_component.dart';
 
 export 'src/settings_screen_router.dart';
 
 class SettingsFeatureApi implements ISettingsFeatureApi {
-  SettingsFeatureApi({required ISettingsFeatureDependencies dependencies})
-      : _settingsWidgetFactory =
+  SettingsFeatureApi({
+    required SettingsFeatureDependencies dependencies,
+  }) : _settingsWidgetFactory =
             _ScreenWidgetFactory(dependencies: dependencies);
 
   final ISettingsWidgetFactory _settingsWidgetFactory;
@@ -22,20 +24,27 @@ class SettingsFeatureApi implements ISettingsFeatureApi {
   ISettingsWidgetFactory get screenWidgetFactory => _settingsWidgetFactory;
 }
 
-abstract class ISettingsFeatureDependencies {
-  ILocalizationManager get localizationManager;
+class SettingsFeatureDependencies {
+  const SettingsFeatureDependencies({
+    required this.localizationManager,
+    required this.router,
+    required this.connectionStateProvider,
+    required this.settingsSearchFeatureApi,
+  });
 
-  ISettingsScreenRouter get router;
+  final ILocalizationManager localizationManager;
 
-  IConnectionStateProvider get connectionStateProvider;
+  final ISettingsScreenRouter router;
 
-  ISettingsSearchFeatureApi get settingsSearchFeatureApi;
+  final IConnectionStateProvider connectionStateProvider;
+
+  final ISettingsSearchFeatureApi settingsSearchFeatureApi;
 }
 
 class _ScreenWidgetFactory implements ISettingsWidgetFactory {
   _ScreenWidgetFactory({required this.dependencies});
 
-  final ISettingsFeatureDependencies dependencies;
+  final SettingsFeatureDependencies dependencies;
 
   @override
   Widget create() => const SettingsPage().wrap(dependencies);

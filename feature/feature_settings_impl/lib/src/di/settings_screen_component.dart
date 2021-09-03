@@ -27,25 +27,25 @@ abstract class SettingsModule {
   @j.provide
   @j.singleton
   static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
-          ISettingsFeatureDependencies dependencies) =>
+          SettingsFeatureDependencies dependencies) =>
       dependencies.settingsSearchFeatureApi;
 
   @j.provide
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
-          ISettingsFeatureDependencies dependencies) =>
+          SettingsFeatureDependencies dependencies) =>
       dependencies.localizationManager;
 
   @j.provide
   @j.singleton
   static IConnectionStateProvider provideconnectionStateProvider(
-          ISettingsFeatureDependencies dependencies) =>
+          SettingsFeatureDependencies dependencies) =>
       dependencies.connectionStateProvider;
 
   @j.provide
   @j.singleton
   static ISettingsScreenRouter provideRouter(
-          ISettingsFeatureDependencies dependencies) =>
+          SettingsFeatureDependencies dependencies) =>
       dependencies.router;
 }
 
@@ -54,13 +54,13 @@ abstract class SettingsComponentBuilder {
   SettingsComponentBuilder screenState(SettingsPageState screen);
 
   SettingsComponentBuilder dependencies(
-      ISettingsFeatureDependencies dependencies);
+      SettingsFeatureDependencies dependencies);
 
   SettingsScreenComponent build();
 }
 
 extension SettingsComponentExt on SettingsPage {
-  Widget wrap(ISettingsFeatureDependencies dependencies) =>
+  Widget wrap(SettingsFeatureDependencies dependencies) =>
       ComponentHolder<SettingsPage, SettingsPageState>(
         componentFactory: (SettingsPageState state) =>
             JuggerSettingsScreenComponentBuilder()

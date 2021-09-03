@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 class GlobalSearchWidgetFactory implements IGlobalSearchWidgetFactory {
   GlobalSearchWidgetFactory({required this.dependencies});
 
-  final IGlobalSearchFeatureDependencies dependencies;
+  final GlobalSearchFeatureDependencies dependencies;
 
   @override
   Widget create() => const GlobalSearchPage();

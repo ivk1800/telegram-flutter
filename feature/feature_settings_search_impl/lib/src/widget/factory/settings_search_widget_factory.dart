@@ -17,7 +17,7 @@ import 'package:tile/tile.dart';
 class SearchSettingsWidgetFactory implements ISettingsSearchWidgetFactory {
   SearchSettingsWidgetFactory({required this.dependencies});
 
-  final ISettingsSearchFeatureDependencies dependencies;
+  final SettingsSearchFeatureDependencies dependencies;
 
   @override
   Widget create() => MultiProvider(

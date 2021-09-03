@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class PrivacySettingsWidgetFactory implements IPrivacySettingsWidgetFactory {
   PrivacySettingsWidgetFactory({required this.dependencies});
 
-  final IPrivacySettingsFeatureDependencies dependencies;
+  final PrivacySettingsFeatureDependencies dependencies;
 
   @override
   Widget create() => MultiProvider(

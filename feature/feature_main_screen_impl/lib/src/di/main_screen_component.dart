@@ -22,7 +22,7 @@ abstract class FoldersSetupModule {
   @j.provide
   @j.singleton
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
-          IMainScreenFeatureDependencies dependencies) =>
+          MainScreenFeatureDependencies dependencies) =>
       dependencies.globalSearchFeatureApi;
 
   @j.provide
@@ -34,7 +34,7 @@ abstract class FoldersSetupModule {
   @j.provide
   @j.singleton
   static IChatsListFeatureApi provideChatsListFeatureApi(
-          IMainScreenFeatureDependencies dependencies) =>
+          MainScreenFeatureDependencies dependencies) =>
       dependencies.chatsListFeatureApi;
 
   @j.provide
@@ -46,19 +46,19 @@ abstract class FoldersSetupModule {
   @j.provide
   @j.singleton
   static IConnectionStateProvider provideconnectionStateProvider(
-          IMainScreenFeatureDependencies dependencies) =>
+          MainScreenFeatureDependencies dependencies) =>
       dependencies.connectionStateProvider;
 
   @j.provide
   @j.singleton
   static IMainScreenRouter provideMainRouter(
-          IMainScreenFeatureDependencies dependencies) =>
+          MainScreenFeatureDependencies dependencies) =>
       dependencies.router;
 
   @j.provide
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
-          IMainScreenFeatureDependencies dependencies) =>
+          MainScreenFeatureDependencies dependencies) =>
       dependencies.localizationManager;
 }
 
@@ -67,13 +67,13 @@ abstract class FoldersSetupComponentBuilder {
   FoldersSetupComponentBuilder screenState(MainPageState screen);
 
   FoldersSetupComponentBuilder dependencies(
-      IMainScreenFeatureDependencies dependencies);
+      MainScreenFeatureDependencies dependencies);
 
   MainScreenComponent build();
 }
 
 extension FoldersSetupComponentExt on MainPage {
-  Widget wrap(IMainScreenFeatureDependencies dependencies) =>
+  Widget wrap(MainScreenFeatureDependencies dependencies) =>
       ComponentHolder<MainPage, MainPageState>(
         componentFactory: (MainPageState state) =>
             JuggerMainScreenComponentBuilder()

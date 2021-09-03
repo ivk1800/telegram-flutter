@@ -10,9 +10,9 @@ import 'src/widget/factory/privacy_settings_widget_factory.dart';
 export 'src/privacy_settings_screen_router.dart';
 
 class PrivacySettingsFeatureApi implements IPrivacySettingsFeatureApi {
-  PrivacySettingsFeatureApi(
-      {required IPrivacySettingsFeatureDependencies dependencies})
-      : _settingsWidgetFactory =
+  PrivacySettingsFeatureApi({
+    required PrivacySettingsFeatureDependencies dependencies,
+  }) : _settingsWidgetFactory =
             PrivacySettingsWidgetFactory(dependencies: dependencies);
 
   final IPrivacySettingsWidgetFactory _settingsWidgetFactory;
@@ -22,10 +22,16 @@ class PrivacySettingsFeatureApi implements IPrivacySettingsFeatureApi {
       _settingsWidgetFactory;
 }
 
-abstract class IPrivacySettingsFeatureDependencies {
-  ILocalizationManager get localizationManager;
+class PrivacySettingsFeatureDependencies {
+  const PrivacySettingsFeatureDependencies({
+    required this.localizationManager,
+    required this.router,
+    required this.connectionStateProvider,
+  });
 
-  IPrivacySettingsScreenRouter get router;
+  final ILocalizationManager localizationManager;
 
-  IConnectionStateProvider get connectionStateProvider;
+  final IPrivacySettingsScreenRouter router;
+
+  final IConnectionStateProvider connectionStateProvider;
 }

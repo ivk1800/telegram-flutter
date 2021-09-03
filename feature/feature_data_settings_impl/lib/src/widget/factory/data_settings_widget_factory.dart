@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class DataSettingsWidgetFactory implements IDataSettingsWidgetFactory {
   DataSettingsWidgetFactory({required this.dependencies});
 
-  final IDataSettingsFeatureDependencies dependencies;
+  final DataSettingsFeatureDependencies dependencies;
 
   @override
   Widget create() => MultiProvider(

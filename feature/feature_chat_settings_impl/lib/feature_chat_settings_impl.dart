@@ -15,9 +15,9 @@ import 'src/screen/settings/bloc/chat_settings_bloc.dart';
 export 'src/chat_settings_screen_router.dart';
 
 class ChatSettingsFeatureApi implements IChatSettingsFeatureApi {
-  ChatSettingsFeatureApi(
-      {required IChatSettingsFeatureDependencies dependencies})
-      : _settingsWidgetFactory =
+  ChatSettingsFeatureApi({
+    required ChatSettingsFeatureDependencies dependencies,
+  }) : _settingsWidgetFactory =
             _ScreenWidgetFactory(dependencies: dependencies);
 
   final IChatSettingsWidgetFactory _settingsWidgetFactory;
@@ -26,18 +26,24 @@ class ChatSettingsFeatureApi implements IChatSettingsFeatureApi {
   IChatSettingsWidgetFactory get screenWidgetFactory => _settingsWidgetFactory;
 }
 
-abstract class IChatSettingsFeatureDependencies {
-  ILocalizationManager get localizationManager;
+class ChatSettingsFeatureDependencies {
+  const ChatSettingsFeatureDependencies({
+    required this.localizationManager,
+    required this.router,
+    required this.connectionStateProvider,
+  });
 
-  IChatSettingsScreenRouter get router;
+  final ILocalizationManager localizationManager;
 
-  IConnectionStateProvider get connectionStateProvider;
+  final IChatSettingsScreenRouter router;
+
+  final IConnectionStateProvider connectionStateProvider;
 }
 
 class _ScreenWidgetFactory implements IChatSettingsWidgetFactory {
   _ScreenWidgetFactory({required this.dependencies});
 
-  final IChatSettingsFeatureDependencies dependencies;
+  final ChatSettingsFeatureDependencies dependencies;
 
   @override
   Widget create() => MultiProvider(

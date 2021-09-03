@@ -17,7 +17,7 @@ import 'package:tile/tile.dart';
 class ChatScreenFactory implements IChatScreenFactory {
   ChatScreenFactory({required this.dependencies});
 
-  final IChatFeatureDependencies dependencies;
+  final ChatFeatureDependencies dependencies;
 
   @override
   Widget create(BuildContext context, int chatId) {

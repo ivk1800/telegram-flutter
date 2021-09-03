@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 class ArchivedStickersWidgetFactory implements IArchivedStickersWidgetFactory {
   ArchivedStickersWidgetFactory({required this.dependencies});
 
-  final IStickersFeatureDependencies dependencies;
+  final StickersFeatureDependencies dependencies;
 
   @override
   Widget create() => const ArchivedStickersPage();

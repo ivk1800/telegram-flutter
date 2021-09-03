@@ -4,18 +4,20 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_stickers_impl/src/widget/stickers_widget_factory.dart';
 import 'package:localization_api/localization_api.dart';
+
 import 'src/stickers_feature_router.dart';
 import 'src/widget/archived_stickers_widget_factory.dart';
 import 'src/widget/masks_widget_factory.dart';
 import 'src/widget/stickers_set_widget_factory.dart';
 import 'src/widget/trending_stickers_widget_factory.dart';
+
 export 'src/stickers_feature_router.dart';
 
 class StickersFeatureApi implements IStickersFeatureApi {
-  StickersFeatureApi({required IStickersFeatureDependencies dependencies})
+  StickersFeatureApi({required StickersFeatureDependencies dependencies})
       : _dependencies = dependencies;
 
-  final IStickersFeatureDependencies _dependencies;
+  final StickersFeatureDependencies _dependencies;
 
   StickersWidgetFactory? _stickersWidgetFactory;
 
@@ -57,12 +59,19 @@ class StickersFeatureApi implements IStickersFeatureApi {
           StickerSetWidgetFactory(dependencies: _dependencies));
 }
 
-abstract class IStickersFeatureDependencies {
-  ILocalizationManager get localizationManager;
+class StickersFeatureDependencies {
+  const StickersFeatureDependencies({
+    required this.localizationManager,
+    required this.connectionStateProvider,
+    required this.stickerRepository,
+    required this.stickersFeatureRouter,
+  });
 
-  IConnectionStateProvider get connectionStateProvider;
+  final ILocalizationManager localizationManager;
 
-  IStickerRepository get stickerRepository;
+  final IConnectionStateProvider connectionStateProvider;
 
-  IStickersFeatureRouter get stickersFeatureRouter;
+  final IStickerRepository stickerRepository;
+
+  final IStickersFeatureRouter stickersFeatureRouter;
 }

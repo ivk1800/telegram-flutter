@@ -10,9 +10,9 @@ import 'src/widget/factory/data_settings_widget_factory.dart';
 export 'src/data_settings_screen_router.dart';
 
 class DataSettingsFeatureApi implements IDataSettingsFeatureApi {
-  DataSettingsFeatureApi(
-      {required IDataSettingsFeatureDependencies dependencies})
-      : _settingsWidgetFactory =
+  DataSettingsFeatureApi({
+    required DataSettingsFeatureDependencies dependencies,
+  }) : _settingsWidgetFactory =
             DataSettingsWidgetFactory(dependencies: dependencies);
 
   final IDataSettingsWidgetFactory _settingsWidgetFactory;
@@ -21,10 +21,16 @@ class DataSettingsFeatureApi implements IDataSettingsFeatureApi {
   IDataSettingsWidgetFactory get screenWidgetFactory => _settingsWidgetFactory;
 }
 
-abstract class IDataSettingsFeatureDependencies {
-  ILocalizationManager get localizationManager;
+class DataSettingsFeatureDependencies {
+  const DataSettingsFeatureDependencies({
+    required this.localizationManager,
+    required this.router,
+    required this.connectionStateProvider,
+  });
 
-  IDataSettingsScreenRouter get router;
+  final ILocalizationManager localizationManager;
 
-  IConnectionStateProvider get connectionStateProvider;
+  final IDataSettingsScreenRouter router;
+
+  final IConnectionStateProvider connectionStateProvider;
 }

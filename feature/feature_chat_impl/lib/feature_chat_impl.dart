@@ -23,39 +23,53 @@ export 'src/widget/chat_context.dart';
 export 'src/widget/theme/chat_theme.dart';
 
 class ChatFeatureApi implements IChatFeatureApi {
-  ChatFeatureApi({required this.dependencies})
-      : _chatScreenFactory = ChatScreenFactory(dependencies: dependencies);
+  ChatFeatureApi({
+    required ChatFeatureDependencies dependencies,
+  }) : _chatScreenFactory = ChatScreenFactory(dependencies: dependencies);
 
   final IChatScreenFactory _chatScreenFactory;
-
-  final IChatFeatureDependencies dependencies;
 
   @override
   IChatScreenFactory get chatScreenFactory => _chatScreenFactory;
 }
 
-abstract class IChatFeatureDependencies {
-  IChatRepository get chatRepository;
+class ChatFeatureDependencies {
+  const ChatFeatureDependencies({
+    required this.chatRepository,
+    required this.fileRepository,
+    required this.userRepository,
+    required this.chatMessageRepository,
+    required this.router,
+    required this.dateFormatter,
+    required this.dateParser,
+    required this.connectionStateProvider,
+    required this.localizationManager,
+    required this.messagePreviewResolver,
+    required this.chatHeaderInfoFeatureApi,
+    required this.fileDownloader,
+  });
 
-  IFileRepository get fileRepository;
+  final IChatRepository chatRepository;
 
-  IUserRepository get userRepository;
+  final IFileRepository fileRepository;
 
-  IChatMessageRepository get chatMessageRepository;
+  final IUserRepository userRepository;
 
-  IChatScreenRouter get router;
+  final IChatMessageRepository chatMessageRepository;
 
-  DateFormatter get dateFormatter;
+  final IChatScreenRouter router;
 
-  DateParser get dateParser;
+  final DateFormatter dateFormatter;
 
-  IConnectionStateProvider get connectionStateProvider;
+  final DateParser dateParser;
 
-  ILocalizationManager get localizationManager;
+  final IConnectionStateProvider connectionStateProvider;
 
-  IMessagePreviewResolver get messagePreviewResolver;
+  final ILocalizationManager localizationManager;
 
-  IChatHeaderInfoFeatureApi get chatHeaderInfoFeatureApi;
+  final IMessagePreviewResolver messagePreviewResolver;
 
-  IFileDownloader get fileDownloader;
+  final IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi;
+
+  final IFileDownloader fileDownloader;
 }

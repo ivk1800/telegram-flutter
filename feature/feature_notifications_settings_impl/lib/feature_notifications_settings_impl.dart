@@ -37,7 +37,7 @@ class NotificationsSettingsFeatureApi
 }
 
 class NotificationsSettingsFeatureDependencies {
-  NotificationsSettingsFeatureDependencies({
+  const NotificationsSettingsFeatureDependencies({
     required this.localizationManager,
     required this.router,
     required this.connectionStateProvider,

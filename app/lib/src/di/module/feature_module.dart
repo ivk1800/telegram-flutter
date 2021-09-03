@@ -1,5 +1,4 @@
 import 'package:app/src/app/tg_app.dart';
-import 'package:app/src/feature/chat_feature_dependencies.dart';
 import 'package:app/src/feature/feature.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/dev_router_impl.dart';
@@ -7,6 +6,7 @@ import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/notifications_settings_screen_router_impl.dart';
 import 'package:app/src/navigation/stickers_feature_router.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
@@ -30,6 +30,7 @@ import 'package:feature_logout_api/feature_logout_api.dart';
 import 'package:feature_logout_impl/feature_logout_impl.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
+import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_notifications_settings_impl/feature_notifications_settings_impl.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
@@ -54,40 +55,134 @@ import 'package:td_client/td_client.dart';
 abstract class FeatureModule {
   // region dependencies
 
-  @j.bind
-  IMainScreenFeatureDependencies bindMainScreenFeatureDependencies(
-    MainScreenFeatureDependencies impl,
-  );
+  @j.provide
+  static MainScreenFeatureDependencies provideMainScreenFeatureDependencies(
+    ILocalizationManager localizationManager,
+    IMainScreenRouter router,
+    // todo do not depend on feature
+    IGlobalSearchFeatureApi globalSearchFeatureApi,
+    // todo do not depend on feature
+    IChatsListFeatureApi chatsListFeatureApi,
+    IConnectionStateProvider connectionStateProvider,
+  ) =>
+      MainScreenFeatureDependencies(
+        localizationManager: localizationManager,
+        router: router,
+        connectionStateProvider: connectionStateProvider,
+        chatsListFeatureApi: chatsListFeatureApi,
+        globalSearchFeatureApi: globalSearchFeatureApi,
+      );
 
-  @j.bind
-  IChatsListFeatureDependencies bindChatsListFeatureDependencies(
-    ChatsListFeatureDependencies impl,
-  );
+  @j.provide
+  static ChatsListFeatureDependencies provideChatsListFeatureDependencies(
+    IChatRepository chatRepository,
+    IFileRepository fileRepository,
+    IChatsListScreenRouter router,
+    DateFormatter dateFormatter,
+    DateParser dateParser,
+    IChatUpdatesProvider chatUpdatesProvider,
+    IUserRepository userRepository,
+    ILocalizationManager localizationManager,
+    IChatMessageRepository chatMessageRepository,
+  ) =>
+      ChatsListFeatureDependencies(
+          router: router,
+          localizationManager: localizationManager,
+          userRepository: userRepository,
+          dateParser: dateParser,
+          dateFormatter: dateFormatter,
+          chatUpdatesProvider: chatUpdatesProvider,
+          chatRepository: chatRepository,
+          fileRepository: fileRepository,
+          messagePreviewResolver: MessagePreviewResolver(
+            messageRepository: chatMessageRepository,
+            chatRepository: chatRepository,
+            mode: Mode.ChatPreview,
+            userRepository: userRepository,
+            localizationManager: localizationManager,
+          ));
 
-  @j.bind
-  IGlobalSearchFeatureDependencies bindGlobalSearchFeatureDependencies(
-    GlobalSearchFeatureDependencies impl,
-  );
+  @j.provide
+  static GlobalSearchFeatureDependencies
+      provideGlobalSearchFeatureDependencies() =>
+          const GlobalSearchFeatureDependencies();
 
-  @j.bind
-  IChatFeatureDependencies bindChatFeatureDependencies(
-    ChatFeatureDependencies impl,
-  );
+  @j.provide
+  static ChatFeatureDependencies provideChatFeatureDependencies(
+    ILocalizationManager localizationManager,
+    DateParser dateParser,
+    IFileRepository fileRepository,
+    IUserRepository userRepository,
+    IChatScreenRouter router,
+    IChatMessageRepository chatMessageRepository,
+    IConnectionStateProvider connectionStateProvider,
+    IChatRepository chatRepository,
+    FeatureFactory featureFactory,
+    DateFormatter dateFormatter,
+    IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
+  ) =>
+      ChatFeatureDependencies(
+        dateFormatter: dateFormatter,
+        // todo move to app component global scope
+        fileDownloader: featureFactory.createFileFeatureApi().fileDownloader,
+        chatHeaderInfoFeatureApi: chatHeaderInfoFeatureApi,
+        chatRepository: chatRepository,
+        messagePreviewResolver: MessagePreviewResolver(
+          messageRepository: chatMessageRepository,
+          mode: Mode.ReplyPreview,
+          chatRepository: chatRepository,
+          userRepository: userRepository,
+          localizationManager: localizationManager,
+        ),
+        connectionStateProvider: connectionStateProvider,
+        chatMessageRepository: chatMessageRepository,
+        router: router,
+        localizationManager: localizationManager,
+        dateParser: dateParser,
+        fileRepository: fileRepository,
+        userRepository: userRepository,
+      );
 
-  @j.bind
-  ISettingsFeatureDependencies bindSettingsFeatureDependencies(
-    SettingsFeatureDependencies impl,
-  );
+  @j.provide
+  static SettingsFeatureDependencies provideSettingsFeatureDependencies(
+    ILocalizationManager localizationManager,
+    ISettingsScreenRouter router,
+    IConnectionStateProvider connectionStateProvider,
+    // todo do not depend on feature
+    ISettingsSearchFeatureApi settingsSearchFeatureApi,
+  ) =>
+      SettingsFeatureDependencies(
+        localizationManager: localizationManager,
+        router: router,
+        connectionStateProvider: connectionStateProvider,
+        settingsSearchFeatureApi: settingsSearchFeatureApi,
+      );
 
-  @j.bind
-  ISettingsSearchFeatureDependencies bindSettingsSearchFeatureDependencies(
-    SettingsSearchFeatureDependencies impl,
-  );
+  @j.provide
+  static SettingsSearchFeatureDependencies
+      provideSettingsSearchFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ISettingsSearchScreenRouter router,
+    ILocalizationManager localizationManager,
+  ) =>
+          SettingsSearchFeatureDependencies(
+            connectionStateProvider: connectionStateProvider,
+            router: router,
+            localizationManager: localizationManager,
+          );
 
-  @j.bind
-  IPrivacySettingsFeatureDependencies bindPrivacySettingsFeatureDependencies(
-    PrivacySettingsFeatureDependencies impl,
-  );
+  @j.provide
+  static PrivacySettingsFeatureDependencies
+      providePrivacySettingsFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    IPrivacySettingsScreenRouter router,
+    ILocalizationManager localizationManager,
+  ) =>
+          PrivacySettingsFeatureDependencies(
+            connectionStateProvider: connectionStateProvider,
+            router: router,
+            localizationManager: localizationManager,
+          );
 
   @j.provide
   static NotificationsSettingsFeatureDependencies
@@ -102,15 +197,29 @@ abstract class FeatureModule {
             router: router,
           );
 
-  @j.bind
-  IDataSettingsFeatureDependencies bindDataSettingsFeatureDependencies(
-    DataSettingsFeatureDependencies impl,
-  );
+  @j.provide
+  static DataSettingsFeatureDependencies provideDataSettingsFeatureDependencies(
+    ILocalizationManager localizationManager,
+    IDataSettingsScreenRouter router,
+    IConnectionStateProvider connectionStateProvider,
+  ) =>
+      DataSettingsFeatureDependencies(
+        localizationManager: localizationManager,
+        router: router,
+        connectionStateProvider: connectionStateProvider,
+      );
 
-  @j.bind
-  IChatSettingsFeatureDependencies bindChatSettingsFeatureDependencies(
-    ChatSettingsFeatureDependencies impl,
-  );
+  @j.provide
+  static ChatSettingsFeatureDependencies provideChatSettingsFeatureDependencies(
+    ILocalizationManager localizationManager,
+    IChatSettingsScreenRouter router,
+    IConnectionStateProvider connectionStateProvider,
+  ) =>
+      ChatSettingsFeatureDependencies(
+        localizationManager: localizationManager,
+        router: router,
+        connectionStateProvider: connectionStateProvider,
+      );
 
   @j.provide
   static WallpapersFeatureDependencies provideWallpapersFeatureDependencies(
@@ -129,10 +238,19 @@ abstract class FeatureModule {
         fileDownloader: featureFactory.createFileFeatureApi().fileDownloader,
       );
 
-  @j.bind
-  IStickersFeatureDependencies bindStickersFeatureDependencies(
-    StickersFeatureDependencies impl,
-  );
+  @j.provide
+  static StickersFeatureDependencies provideStickersFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ILocalizationManager localizationManager,
+    IStickerRepository stickerRepository,
+    IStickersFeatureRouter router,
+  ) =>
+      StickersFeatureDependencies(
+        connectionStateProvider: connectionStateProvider,
+        localizationManager: localizationManager,
+        stickerRepository: stickerRepository,
+        stickersFeatureRouter: router,
+      );
 
   @j.provide
   static ChatHeaderInfoFeatureDependencies
@@ -251,14 +369,14 @@ abstract class FeatureModule {
 
   @j.provide
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
-    IGlobalSearchFeatureDependencies dependencies,
+    GlobalSearchFeatureDependencies dependencies,
   ) {
     return GlobalSearchFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static IMainScreenFeatureApi provideMainScreenFeatureApi(
-    IMainScreenFeatureDependencies dependencies,
+    MainScreenFeatureDependencies dependencies,
   ) {
     return MainScreenFeatureApi(dependencies: dependencies);
   }
@@ -272,34 +390,34 @@ abstract class FeatureModule {
 
   @j.provide
   static IChatFeatureApi provideChatFeatureApi(
-    IChatFeatureDependencies dependencies,
+    ChatFeatureDependencies dependencies,
   ) {
     return ChatFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static IChatsListFeatureApi provideChatsListFeatureApi(
-    IChatsListFeatureDependencies dependencies,
+    ChatsListFeatureDependencies dependencies,
   ) {
     return ChatsListFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static ISettingsFeatureApi provideSettingsFeatureApi(
-    ISettingsFeatureDependencies dependencies,
+    SettingsFeatureDependencies dependencies,
   ) {
     return SettingsFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
-    ISettingsSearchFeatureDependencies dependencies,
+    SettingsSearchFeatureDependencies dependencies,
   ) =>
       SettingsSearchFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IPrivacySettingsFeatureApi providePrivacySettingsFeatureApi(
-    IPrivacySettingsFeatureDependencies dependencies,
+    PrivacySettingsFeatureDependencies dependencies,
   ) =>
       PrivacySettingsFeatureApi(dependencies: dependencies);
 
@@ -312,13 +430,13 @@ abstract class FeatureModule {
 
   @j.provide
   static IDataSettingsFeatureApi provideDataSettingsFeatureApi(
-    IDataSettingsFeatureDependencies dependencies,
+    DataSettingsFeatureDependencies dependencies,
   ) =>
       DataSettingsFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IChatSettingsFeatureApi provideChatSettingsFeatureApi(
-    IChatSettingsFeatureDependencies dependencies,
+    ChatSettingsFeatureDependencies dependencies,
   ) =>
       ChatSettingsFeatureApi(dependencies: dependencies);
 
@@ -330,7 +448,7 @@ abstract class FeatureModule {
 
   @j.provide
   static IStickersFeatureApi provideStickersFeatureApi(
-    IStickersFeatureDependencies dependencies,
+    StickersFeatureDependencies dependencies,
   ) =>
       StickersFeatureApi(dependencies: dependencies);
 
