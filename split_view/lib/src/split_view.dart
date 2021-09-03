@@ -67,6 +67,9 @@ class SplitViewState extends State<SplitView> {
   late List<_PageNode> _rightPages;
   late List<_PageNode> _topPages;
 
+  final GlobalKey<NavigatorState> _topNavigatorKey =
+      GlobalKey<NavigatorState>();
+
   _PageNode? _leftRootPage;
   Widget _rightContainerPlaceholder = Container();
 
@@ -240,19 +243,7 @@ class SplitViewState extends State<SplitView> {
       child: _buildAdaptiveWidget(),
       onWillPop: () async {
         if (_isCompact) {
-          if (_compactPages.isNotEmpty) {
-            // first node is root page
-            if (_compactPages.length == 1) {
-              return true;
-            } else {
-              setState(() {
-                final _PageNode removed = _compactPages.removeLast();
-                _removeTopFromContainer(removed.container);
-              });
-            }
-            return false;
-          }
-          return true;
+          return !(await _topNavigatorKey.currentState!.maybePop());
         }
 
         if (_topPages.isNotEmpty) {
@@ -440,7 +431,10 @@ class SplitViewState extends State<SplitView> {
     if (_compactPages.isEmpty) {
       return const SizedBox();
     }
-    return _buildNavigator(_compactPages.map((_PageNode e) => e.page).toList());
+    return _buildNavigator(
+      _compactPages.map((_PageNode e) => e.page).toList(),
+      key: _topNavigatorKey,
+    );
   }
 
   Widget _buildRightContainer(BuildContext context) {
@@ -485,8 +479,12 @@ class SplitViewState extends State<SplitView> {
     }
   }
 
-  Widget _buildNavigator(List<Page<dynamic>> pages) {
+  Widget _buildNavigator(
+    List<Page<dynamic>> pages, {
+    Key? key,
+  }) {
     return Navigator(
+      key: key,
       pages: pages,
       onPopPage: (Route<dynamic> route, dynamic result) {
         if (!route.didPop(result)) {
