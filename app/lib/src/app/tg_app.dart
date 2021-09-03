@@ -55,9 +55,10 @@ class TgAppState extends State<TgApp> with WidgetsBindingObserver {
         navigatorKey: TgApp.navigatorKey,
         theme: ThemeData(
           pageTransitionsTheme: const PageTransitionsTheme(
-              builders: <TargetPlatform, PageTransitionsBuilder>{
-                TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-              }),
+            builders: <TargetPlatform, PageTransitionsBuilder>{
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            },
+          ),
           platform: TargetPlatform.android,
           primaryColor: const Color(0xff5682a3),
           accentColor: const Color(0xff598fba),

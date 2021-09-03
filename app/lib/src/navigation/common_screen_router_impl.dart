@@ -46,9 +46,10 @@ class CommonScreenRouterImpl
     final IProfileScreenFactory factory =
         _featureFactory.createProfileFeatureApi().profileScreenFactory;
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => factory.create(context, chatId),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => factory.create(context, chatId),
+      container: ContainerType.Top,
+    );
   }
 
   @override
@@ -56,9 +57,10 @@ class CommonScreenRouterImpl
     final ISharedMediaScreenFactory factory =
         _featureFactory.createSharedMediaFeatureApi().sharedMediaScreenFactory;
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => factory.create(context, type),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => factory.create(context, type),
+      container: ContainerType.Top,
+    );
   }
 
   @override
@@ -76,16 +78,18 @@ class CommonScreenRouterImpl
     final IChooseCountryScreenFactory factory =
         _featureFactory.createCountryFeatureApi().chooseCountryScreenFactory;
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => factory.create(context, callback),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => factory.create(context, callback),
+      container: ContainerType.Top,
+    );
   }
 
   @override
-  void toDialog(
-      {String? title,
-      required Body body,
-      List<dialog_api.Action> actions = const <dialog_api.Action>[]}) {
+  void toDialog({
+    String? title,
+    required Body body,
+    List<dialog_api.Action> actions = const <dialog_api.Action>[],
+  }) {
     Widget? createContent() {
       switch (body.runtimeType) {
         case TextBody:

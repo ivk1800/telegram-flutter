@@ -12,8 +12,9 @@ import 'navigation.dart';
 class SettingsScreenRouterImpl implements ISettingsScreenRouter {
   @j.inject
   SettingsScreenRouterImpl(
-      FeatureFactory featureFactory, SplitNavigationRouter navigationRouter)
-      : _navigationRouter = navigationRouter,
+    FeatureFactory featureFactory,
+    SplitNavigationRouter navigationRouter,
+  )   : _navigationRouter = navigationRouter,
         _featureFactory = featureFactory;
 
   final FeatureFactory _featureFactory;
@@ -22,61 +23,67 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
   @override
   void toFolders() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => const FoldersSetupPage().wrap(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => const FoldersSetupPage().wrap(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toSessions() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => const SessionsPage(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => const SessionsPage(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toPrivacySettings() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createPrivacySettingsFeatureApi()
-            .screenWidgetFactory
-            .create(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createPrivacySettingsFeatureApi()
+          .screenWidgetFactory
+          .create(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toNotificationsSettings() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createNotificationsSettingsFeatureApi()
-            .screenWidgetFactory
-            .create(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createNotificationsSettingsFeatureApi()
+          .screenWidgetFactory
+          .create(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toDataSettings() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createDataSettingsFeatureApi()
-            .screenWidgetFactory
-            .create(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createDataSettingsFeatureApi()
+          .screenWidgetFactory
+          .create(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toChatSettings() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createChatSettingsFeatureApi()
-            .screenWidgetFactory
-            .create(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createChatSettingsFeatureApi()
+          .screenWidgetFactory
+          .create(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
@@ -84,10 +91,11 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
     final ILogoutScreenFactory factory =
         _featureFactory.createLogoutFeatureApi().logoutScreenFactory;
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) {
-          return factory.create(context);
-        },
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) {
+        return factory.create(context);
+      },
+      container: ContainerType.Top,
+    );
   }
 }

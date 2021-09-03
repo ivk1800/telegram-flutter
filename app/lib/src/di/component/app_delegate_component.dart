@@ -6,7 +6,9 @@ import 'package:app/src/di/component/app_component.dart';
 import 'app_delegate_component.jugger.dart';
 
 @j.Component(
-    modules: <Type>[ChatScreenModule], dependencies: <Type>[AppComponent])
+  modules: <Type>[ChatScreenModule],
+  dependencies: <Type>[AppComponent],
+)
 abstract class AppDelegateComponent {
   void inject(TgAppState state);
 }

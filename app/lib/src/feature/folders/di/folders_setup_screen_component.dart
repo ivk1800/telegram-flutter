@@ -8,7 +8,9 @@ import 'package:app/src/feature/folders/screen/folders_setup/folders_setup_page.
 import 'folders_setup_screen_component.jugger.dart';
 
 @j.Component(
-    modules: <Type>[FoldersSetupModule], dependencies: <Type>[AppComponent])
+  modules: <Type>[FoldersSetupModule],
+  dependencies: <Type>[AppComponent],
+)
 abstract class FoldersSetupComponent
     implements IWidgetStateComponent<FoldersSetupPage, FoldersSetupPageState> {
   //TODO workaround, method in interface not generated

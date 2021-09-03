@@ -11,14 +11,14 @@ import 'package:tdlib/td_api.dart' as td;
 
 class AppDelegate {
   @j.inject
-  AppDelegate(
-      {required TdClient client,
-      required INavigationRouter router,
-      required TdConfigProvider tdConfigProvider,
-      required IAppLifecycleStateProvider appLifecycleStateProvider,
-      required IConnectivityProvider connectivityProvider,
-      required OptionsManager optionsManager})
-      : _router = router,
+  AppDelegate({
+    required TdClient client,
+    required INavigationRouter router,
+    required TdConfigProvider tdConfigProvider,
+    required IAppLifecycleStateProvider appLifecycleStateProvider,
+    required IConnectivityProvider connectivityProvider,
+    required OptionsManager optionsManager,
+  })  : _router = router,
         _client = client,
         _tdConfigProvider = tdConfigProvider,
         _appLifecycleStateProvider = appLifecycleStateProvider,
@@ -59,28 +59,35 @@ class AppDelegate {
       if (newEvent is td.UpdateAuthorizationState) {
         if (newEvent.authorizationState
             is td.AuthorizationStateWaitTdlibParameters) {
-          _client.send<td.Ok>(td.SetTdlibParameters(
+          _client.send<td.Ok>(
+            td.SetTdlibParameters(
               parameters: td.TdlibParameters(
-                  systemVersion: '1',
-                  useTestDc: false,
-                  useSecretChats: false,
-                  useMessageDatabase: true,
-                  useFileDatabase: true,
-                  useChatInfoDatabase: true,
-                  ignoreFileNames: true,
-                  enableStorageOptimizer: true,
-                  filesDirectory: (await getApplicationSupportDirectory()).path,
-                  databaseDirectory:
-                      (await getApplicationSupportDirectory()).path,
-                  systemLanguageCode: 'en',
-                  deviceModel: 'pixel',
-                  applicationVersion: '1.0.0',
-                  apiId: await _tdConfigProvider.getAppId(),
-                  apiHash: await _tdConfigProvider.getApiHash())));
+                systemVersion: '1',
+                useTestDc: false,
+                useSecretChats: false,
+                useMessageDatabase: true,
+                useFileDatabase: true,
+                useChatInfoDatabase: true,
+                ignoreFileNames: true,
+                enableStorageOptimizer: true,
+                filesDirectory: (await getApplicationSupportDirectory()).path,
+                databaseDirectory:
+                    (await getApplicationSupportDirectory()).path,
+                systemLanguageCode: 'en',
+                deviceModel: 'pixel',
+                applicationVersion: '1.0.0',
+                apiId: await _tdConfigProvider.getAppId(),
+                apiHash: await _tdConfigProvider.getApiHash(),
+              ),
+            ),
+          );
         } else if (newEvent.authorizationState
             is td.AuthorizationStateWaitEncryptionKey) {
-          _client.send<td.Ok>(td.CheckDatabaseEncryptionKey(
-              encryptionKey: await _tdConfigProvider.getEncryptionKey()));
+          _client.send<td.Ok>(
+            td.CheckDatabaseEncryptionKey(
+              encryptionKey: await _tdConfigProvider.getEncryptionKey(),
+            ),
+          );
         } else if (newEvent.authorizationState is td.AuthorizationStateReady) {
           _router.toRoot();
         } else if (newEvent.authorizationState

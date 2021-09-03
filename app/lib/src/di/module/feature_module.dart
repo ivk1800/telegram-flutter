@@ -56,31 +56,38 @@ abstract class FeatureModule {
 
   @j.bind
   IMainScreenFeatureDependencies bindMainScreenFeatureDependencies(
-      MainScreenFeatureDependencies impl);
+    MainScreenFeatureDependencies impl,
+  );
 
   @j.bind
   IChatsListFeatureDependencies bindChatsListFeatureDependencies(
-      ChatsListFeatureDependencies impl);
+    ChatsListFeatureDependencies impl,
+  );
 
   @j.bind
   IGlobalSearchFeatureDependencies bindGlobalSearchFeatureDependencies(
-      GlobalSearchFeatureDependencies impl);
+    GlobalSearchFeatureDependencies impl,
+  );
 
   @j.bind
   IChatFeatureDependencies bindChatFeatureDependencies(
-      ChatFeatureDependencies impl);
+    ChatFeatureDependencies impl,
+  );
 
   @j.bind
   ISettingsFeatureDependencies bindSettingsFeatureDependencies(
-      SettingsFeatureDependencies impl);
+    SettingsFeatureDependencies impl,
+  );
 
   @j.bind
   ISettingsSearchFeatureDependencies bindSettingsSearchFeatureDependencies(
-      SettingsSearchFeatureDependencies impl);
+    SettingsSearchFeatureDependencies impl,
+  );
 
   @j.bind
   IPrivacySettingsFeatureDependencies bindPrivacySettingsFeatureDependencies(
-      PrivacySettingsFeatureDependencies impl);
+    PrivacySettingsFeatureDependencies impl,
+  );
 
   @j.provide
   static NotificationsSettingsFeatureDependencies
@@ -97,11 +104,13 @@ abstract class FeatureModule {
 
   @j.bind
   IDataSettingsFeatureDependencies bindDataSettingsFeatureDependencies(
-      DataSettingsFeatureDependencies impl);
+    DataSettingsFeatureDependencies impl,
+  );
 
   @j.bind
   IChatSettingsFeatureDependencies bindChatSettingsFeatureDependencies(
-      ChatSettingsFeatureDependencies impl);
+    ChatSettingsFeatureDependencies impl,
+  );
 
   @j.provide
   static WallpapersFeatureDependencies provideWallpapersFeatureDependencies(
@@ -122,7 +131,8 @@ abstract class FeatureModule {
 
   @j.bind
   IStickersFeatureDependencies bindStickersFeatureDependencies(
-      StickersFeatureDependencies impl);
+    StickersFeatureDependencies impl,
+  );
 
   @j.provide
   static ChatHeaderInfoFeatureDependencies
@@ -241,116 +251,139 @@ abstract class FeatureModule {
 
   @j.provide
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
-      IGlobalSearchFeatureDependencies dependencies) {
+    IGlobalSearchFeatureDependencies dependencies,
+  ) {
     return GlobalSearchFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static IMainScreenFeatureApi provideMainScreenFeatureApi(
-      IMainScreenFeatureDependencies dependencies) {
+    IMainScreenFeatureDependencies dependencies,
+  ) {
     return MainScreenFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static IChatHeaderInfoFeatureApi provideChatHeaderInfoFeatureApi(
-      ChatHeaderInfoFeatureDependencies dependencies) {
+    ChatHeaderInfoFeatureDependencies dependencies,
+  ) {
     return ChatHeaderInfoFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static IChatFeatureApi provideChatFeatureApi(
-      IChatFeatureDependencies dependencies) {
+    IChatFeatureDependencies dependencies,
+  ) {
     return ChatFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static IChatsListFeatureApi provideChatsListFeatureApi(
-      IChatsListFeatureDependencies dependencies) {
+    IChatsListFeatureDependencies dependencies,
+  ) {
     return ChatsListFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static ISettingsFeatureApi provideSettingsFeatureApi(
-      ISettingsFeatureDependencies dependencies) {
+    ISettingsFeatureDependencies dependencies,
+  ) {
     return SettingsFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
-          ISettingsSearchFeatureDependencies dependencies) =>
+    ISettingsSearchFeatureDependencies dependencies,
+  ) =>
       SettingsSearchFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IPrivacySettingsFeatureApi providePrivacySettingsFeatureApi(
-          IPrivacySettingsFeatureDependencies dependencies) =>
+    IPrivacySettingsFeatureDependencies dependencies,
+  ) =>
       PrivacySettingsFeatureApi(dependencies: dependencies);
 
   @j.provide
   static INotificationsSettingsFeatureApi
       provideNotificationsSettingsFeatureApi(
-              NotificationsSettingsFeatureDependencies dependencies) =>
+    NotificationsSettingsFeatureDependencies dependencies,
+  ) =>
           NotificationsSettingsFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IDataSettingsFeatureApi provideDataSettingsFeatureApi(
-          IDataSettingsFeatureDependencies dependencies) =>
+    IDataSettingsFeatureDependencies dependencies,
+  ) =>
       DataSettingsFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IChatSettingsFeatureApi provideChatSettingsFeatureApi(
-          IChatSettingsFeatureDependencies dependencies) =>
+    IChatSettingsFeatureDependencies dependencies,
+  ) =>
       ChatSettingsFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IWallpapersFeatureApi providewallpapersFeatureApi(
-          WallpapersFeatureDependencies dependencies) =>
+    WallpapersFeatureDependencies dependencies,
+  ) =>
       WallpapersFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IStickersFeatureApi provideStickersFeatureApi(
-          IStickersFeatureDependencies dependencies) =>
+    IStickersFeatureDependencies dependencies,
+  ) =>
       StickersFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IProfileFeatureApi provideProfileFeatureApi(
-      ProfileFeatureDependencies dependencies) {
+    ProfileFeatureDependencies dependencies,
+  ) {
     return ProfileFeatureApi(dependencies: dependencies);
   }
 
   @j.provide
   static ISharedMediaFeatureApi provideSharedMediaFeatureApi(
-          SharedMediaFeatureDependencies dependencies) =>
+    SharedMediaFeatureDependencies dependencies,
+  ) =>
       SharedMediaFeatureApi(dependencies: dependencies);
 
   @j.provide
   static ICountryFeatureApi provideCountryFeatureApi(
-          CountryFeatureDependencies dependencies) =>
+    CountryFeatureDependencies dependencies,
+  ) =>
       CountryFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IAuthFeatureApi provideAuthFeatureApi(
-          AuthFeatureDependencies dependencies) =>
+    AuthFeatureDependencies dependencies,
+  ) =>
       AuthFeatureApi(dependencies: dependencies);
 
   @j.provide
   static ILogoutFeatureApi provideLogoutFeatureApi(
-          LogoutFeatureDependencies dependencies) =>
+    LogoutFeatureDependencies dependencies,
+  ) =>
       LogoutFeatureApi(dependencies: dependencies);
 
   @j.provide
   static IFileFeatureApi provideFileFeatureApi(
-          FileFeatureDependencies dependencies) =>
+    FileFeatureDependencies dependencies,
+  ) =>
       FileFeatureApi(dependencies: dependencies);
 
   // endregion
 
   @j.provide
-  static DevFeature provideDevFeature(IDevFeatureRouter router, TdClient client,
-          IConnectionStateProvider connectionStateProvider) =>
+  static DevFeature provideDevFeature(
+    IDevFeatureRouter router,
+    TdClient client,
+    IConnectionStateProvider connectionStateProvider,
+  ) =>
       DevFeature(
-          router: router,
-          connectionStateProvider: connectionStateProvider,
-          client: client);
+        router: router,
+        connectionStateProvider: connectionStateProvider,
+        client: client,
+      );
 
   // region router
 
@@ -368,7 +401,8 @@ abstract class FeatureModule {
 
   @j.bind
   IChatsListScreenRouter bindChatsListScreenRouter(
-      ChatsListScreenRouterImpl impl);
+    ChatsListScreenRouterImpl impl,
+  );
 
   @j.bind
   IMainScreenRouter bindMainScreenRouter(MainScreenRouterImpl impl);
@@ -384,34 +418,41 @@ abstract class FeatureModule {
 
   @j.bind
   ISettingsSearchScreenRouter bindSettingsSearchScreenRouter(
-      SettingsSearchScreenRouterImpl impl);
+    SettingsSearchScreenRouterImpl impl,
+  );
 
   @j.bind
   IPrivacySettingsScreenRouter bindPrivacySettingsScreenRouter(
-      PrivacySettingsScreenRouterImpl impl);
+    PrivacySettingsScreenRouterImpl impl,
+  );
 
   @j.bind
   INotificationsSettingsScreenRouter bindNotificationsSettingsScreenRouter(
-      NotificationsSettingsScreenRouterImpl impl);
+    NotificationsSettingsScreenRouterImpl impl,
+  );
 
   @j.bind
   IDataSettingsScreenRouter bindDataSettingsScreenRouter(
-      DataSettingsScreenRouterImpl impl);
+    DataSettingsScreenRouterImpl impl,
+  );
 
   @j.bind
   IChatSettingsScreenRouter bindChatSettingsScreenRouter(
-      ChatSettingsScreenRouterImpl impl);
+    ChatSettingsScreenRouterImpl impl,
+  );
 
   @j.bind
   IDevFeatureRouter bindDevFeatureRouter(DevScreenRouterImpl impl);
 
   @j.bind
   IWallpapersFeatureRouter bindwallpapersFeatureRouter(
-      CommonScreenRouterImpl impl);
+    CommonScreenRouterImpl impl,
+  );
 
   @j.bind
   IStickersFeatureRouter bindStickersFeatureRouter(
-      StickersFeatureRouterImpl impl);
+    StickersFeatureRouterImpl impl,
+  );
 
   @j.bind
   IAuthFeatureRouter bindAuthFeatureRouter(CommonScreenRouterImpl impl);

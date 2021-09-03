@@ -8,8 +8,9 @@ import 'navigation.dart';
 class StickersFeatureRouterImpl implements IStickersFeatureRouter {
   @j.inject
   StickersFeatureRouterImpl(
-      FeatureFactory featureFactory, SplitNavigationRouter navigationRouter)
-      : _navigationRouter = navigationRouter,
+    FeatureFactory featureFactory,
+    SplitNavigationRouter navigationRouter,
+  )   : _navigationRouter = navigationRouter,
         _featureFactory = featureFactory;
 
   final SplitNavigationRouter _navigationRouter;
@@ -18,44 +19,48 @@ class StickersFeatureRouterImpl implements IStickersFeatureRouter {
   @override
   void toArchivedStickers() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createStickersFeatureApi()
-            .archivedStickersWidgetFactory
-            .create(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createStickersFeatureApi()
+          .archivedStickersWidgetFactory
+          .create(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toMasks() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createStickersFeatureApi()
-            .masksWidgetFactory
-            .create(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createStickersFeatureApi()
+          .masksWidgetFactory
+          .create(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toStickerSet(int setId) {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createStickersFeatureApi()
-            .stickerSetWidgetFactory
-            .create(setId),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createStickersFeatureApi()
+          .stickerSetWidgetFactory
+          .create(setId),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toTrendingStickers() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createStickersFeatureApi()
-            .trendingStickersWidgetFactory
-            .create(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createStickersFeatureApi()
+          .trendingStickersWidgetFactory
+          .create(),
+      container: ContainerType.Top,
+    );
   }
 }

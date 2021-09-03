@@ -30,7 +30,9 @@ class FoldersSetupPageState extends State<FoldersSetupPage>
     return Scaffold(
       appBar: AppBar(
         title: connectionStateWidgetFactory.create(
-            context, (BuildContext context) => Text(stringsProvider.folders)),
+          context,
+          (BuildContext context) => Text(stringsProvider.folders),
+        ),
       ),
       body: Text(stringsProvider.folders),
     );

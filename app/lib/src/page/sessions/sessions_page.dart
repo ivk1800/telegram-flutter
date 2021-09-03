@@ -54,8 +54,10 @@ class SessionsPageState extends State<SessionsPage>
           sessionTileFactory.create(context, data.thisSession),
           ListTile(
             onTap: () {},
-            title: Text('Terminate All Other Sessions',
-                style: TextStyle(color: theme.errorColor)),
+            title: Text(
+              'Terminate All Other Sessions',
+              style: TextStyle(color: theme.errorColor),
+            ),
           ),
           ListTile(
             onTap: () {},
@@ -73,9 +75,10 @@ class SessionsPageState extends State<SessionsPage>
           ),
           Column(
             children: ListTile.divideTiles(
-                context: context,
-                tiles: data.activeSessions.map((td.Session s) =>
-                    sessionTileFactory.create(context, s))).toList(),
+              context: context,
+              tiles: data.activeSessions
+                  .map((td.Session s) => sessionTileFactory.create(context, s)),
+            ).toList(),
           ),
           const ListTile(
             title: Text('Tap on a session to terminate.'),

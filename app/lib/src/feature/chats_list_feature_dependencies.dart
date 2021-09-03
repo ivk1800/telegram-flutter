@@ -8,17 +8,17 @@ import 'package:localization_api/localization_api.dart';
 
 class ChatsListFeatureDependencies implements IChatsListFeatureDependencies {
   @j.inject
-  ChatsListFeatureDependencies(
-      {required IChatRepository chatRepository,
-      required IUserRepository userRepository,
-      required IChatMessageRepository chatMessageRepository,
-      required ILocalizationManager localizationManager,
-      required IChatUpdatesProvider chatUpdatesProvider,
-      required DateFormatter dateFormatter,
-      required DateParser dateParser,
-      required IFileRepository fileRepository,
-      required IChatsListScreenRouter router})
-      : _chatRepository = chatRepository,
+  ChatsListFeatureDependencies({
+    required IChatRepository chatRepository,
+    required IUserRepository userRepository,
+    required IChatMessageRepository chatMessageRepository,
+    required ILocalizationManager localizationManager,
+    required IChatUpdatesProvider chatUpdatesProvider,
+    required DateFormatter dateFormatter,
+    required DateParser dateParser,
+    required IFileRepository fileRepository,
+    required IChatsListScreenRouter router,
+  })  : _chatRepository = chatRepository,
         _userRepository = userRepository,
         _localizationManager = localizationManager,
         _chatUpdatesProvider = chatUpdatesProvider,
@@ -26,11 +26,12 @@ class ChatsListFeatureDependencies implements IChatsListFeatureDependencies {
         _dateParser = dateParser,
         _fileRepository = fileRepository,
         _messagePreviewResolver = MessagePreviewResolver(
-            messageRepository: chatMessageRepository,
-            chatRepository: chatRepository,
-            mode: Mode.ChatPreview,
-            userRepository: userRepository,
-            localizationManager: localizationManager),
+          messageRepository: chatMessageRepository,
+          chatRepository: chatRepository,
+          mode: Mode.ChatPreview,
+          userRepository: userRepository,
+          localizationManager: localizationManager,
+        ),
         _router = router;
 
   final IMessagePreviewResolver _messagePreviewResolver;

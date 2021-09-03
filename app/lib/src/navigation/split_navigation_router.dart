@@ -10,8 +10,9 @@ import 'navigation_router.dart';
 
 class SplitNavigationRouter implements INavigationRouter {
   SplitNavigationRouter(
-      GlobalKey<SplitViewState> navigationKey, FeatureFactory featureFactory)
-      : _navigationKey = navigationKey,
+    GlobalKey<SplitViewState> navigationKey,
+    FeatureFactory featureFactory,
+  )   : _navigationKey = navigationKey,
         _featureFactory = featureFactory;
 
   final GlobalKey<SplitViewState> _navigationKey;
@@ -31,11 +32,14 @@ class SplitNavigationRouter implements INavigationRouter {
   void toLogin() {
     final IAuthScreenFactory factory =
         _featureFactory.createAuthFeatureApi().authScreenFactory;
-    _push(Builder(
-      builder: (BuildContext context) {
-        return factory.create(context);
-      },
-    ), ContainerType.Top);
+    _push(
+      Builder(
+        builder: (BuildContext context) {
+          return factory.create(context);
+        },
+      ),
+      ContainerType.Top,
+    );
   }
 
   @override
@@ -60,21 +64,24 @@ class SplitNavigationRouter implements INavigationRouter {
       ),
     ));
     currentState.setLeftRootPage(
-        _featureFactory.createMainScreenFeature().screenWidgetFactory.create());
+      _featureFactory.createMainScreenFeature().screenWidgetFactory.create(),
+    );
   }
 
-  void pushAllReplacement(
-      {required LocalKey key,
-      required WidgetBuilder builder,
-      required ContainerType container}) {
+  void pushAllReplacement({
+    required LocalKey key,
+    required WidgetBuilder builder,
+    required ContainerType container,
+  }) {
     _navigationKey.currentState
         ?.pushAllReplacement(key: key, builder: builder, container: container);
   }
 
-  void push(
-      {required LocalKey key,
-      required WidgetBuilder builder,
-      required ContainerType container}) {
+  void push({
+    required LocalKey key,
+    required WidgetBuilder builder,
+    required ContainerType container,
+  }) {
     _navigationKey.currentState
         ?.push(key: key, builder: builder, container: container);
   }

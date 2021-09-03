@@ -19,8 +19,9 @@ abstract class AppModule {
   @j.provide
   static FeatureFactory provideFeatureFactory() {
     return FeatureFactory(
-        featureComponent:
-            JuggerFeatureComponentBuilder().appComponent(appComponent).build());
+      featureComponent:
+          JuggerFeatureComponentBuilder().appComponent(appComponent).build(),
+    );
   }
 
   @j.singleton
@@ -129,12 +130,14 @@ abstract class AppModule {
   @j.singleton
   @j.bind
   IAppLifecycleStateProvider bindAppLifecycleStateProvider(
-      AppLifecycleStateProviderImpl impl);
+    AppLifecycleStateProviderImpl impl,
+  );
 
   @j.singleton
   @j.provide
   static RootNavigationRouter provideNavigationRouter(
-          FeatureFactory featureFactory) =>
+    FeatureFactory featureFactory,
+  ) =>
       RootNavigationRouter(TgApp.navigatorKey, featureFactory);
 
   @j.singleton
@@ -145,13 +148,15 @@ abstract class AppModule {
   @j.singleton
   @j.provide
   static SplitNavigationRouter provideSplitViewNavigationRouter(
-          FeatureFactory featureFactory) =>
+    FeatureFactory featureFactory,
+  ) =>
       SplitNavigationRouter(TgApp.splitViewNavigatorKey, featureFactory);
 
   @j.singleton
   @j.provide
   static INavigationRouter provideRootNavigationRouter(
-          SplitNavigationRouter splitViewNavigationRouter) =>
+    SplitNavigationRouter splitViewNavigationRouter,
+  ) =>
       splitViewNavigationRouter;
 
   @j.singleton

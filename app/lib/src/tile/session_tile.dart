@@ -19,7 +19,8 @@ class SessionTileFactory {
           : null,
       title: Text('${session.applicationName} ${session.applicationVersion}'),
       subtitle: Text(
-          '${session.deviceModel}, ${session.platform} ${session.systemVersion}, (${session.apiId}) \n${session.ip} - ${session.country}'),
+        '${session.deviceModel}, ${session.platform} ${session.systemVersion}, (${session.apiId}) \n${session.ip} - ${session.country}',
+      ),
     );
   }
 }

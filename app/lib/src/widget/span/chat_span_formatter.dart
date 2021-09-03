@@ -44,14 +44,20 @@ class ChatSpanFormatter {
 
   InlineSpan _createForMessageSticker(td.MessageSticker message) {
     return TextSpan(
-        text: message.sticker.emoji,
-        children: <InlineSpan>[TextSpan(text: _stringsProvider.sticker)]);
+      text: message.sticker.emoji,
+      children: <InlineSpan>[
+        TextSpan(text: _stringsProvider.sticker),
+      ],
+    );
   }
 
   InlineSpan _createForMessagePhoto(td.MessagePhoto message) {
     return TextSpan(
-        text: '🖼️ ',
-        children: <InlineSpan>[createForFormattedText(message.caption)]);
+      text: '🖼️ ',
+      children: <InlineSpan>[
+        createForFormattedText(message.caption),
+      ],
+    );
   }
 
   InlineSpan createForFormattedText(td.FormattedText text) {

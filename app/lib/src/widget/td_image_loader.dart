@@ -26,11 +26,12 @@ class TdImageLoaderState extends State<TdImageLoader> {
     if (!image.local.isDownloadingActive &&
         !image.local.isDownloadingCompleted) {
       widget.client.send<td.File>(td.DownloadFile(
-          fileId: image.id,
-          priority: 1,
-          limit: 0,
-          offset: 0,
-          synchronous: false));
+        fileId: image.id,
+        priority: 1,
+        limit: 0,
+        offset: 0,
+        synchronous: false,
+      ));
     }
   }
 }

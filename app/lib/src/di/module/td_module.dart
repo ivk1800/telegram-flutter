@@ -12,13 +12,15 @@ abstract class TdModule {
   @j.singleton
   @j.provide
   static IChatUpdatesProvider provideChatUpdatesProvider(
-          UpdatesProvider impl) =>
+    UpdatesProvider impl,
+  ) =>
       impl;
 
   @j.singleton
   @j.provide
   static IChatFiltersUpdatesProvider provideChatFiltersUpdatesProvider(
-          UpdatesProvider impl) =>
+    UpdatesProvider impl,
+  ) =>
       impl;
 
   @j.singleton
@@ -38,7 +40,8 @@ abstract class TdModule {
   @j.singleton
   @j.provide
   static IFileUpdatesProvider provideFileUpdatesProvider(
-          UpdatesProvider impl) =>
+    UpdatesProvider impl,
+  ) =>
       impl;
 
   @j.singleton

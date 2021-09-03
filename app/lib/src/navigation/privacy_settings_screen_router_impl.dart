@@ -6,10 +6,10 @@ import 'navigation.dart';
 class PrivacySettingsScreenRouterImpl implements IPrivacySettingsScreenRouter {
   @j.inject
   PrivacySettingsScreenRouterImpl(
-      SplitNavigationInfoProvider splitNavigationInfoProvider,
-      KeyGenerator keyGenerator,
-      SplitNavigationRouter navigationRouter)
-      : _navigationRouter = navigationRouter,
+    SplitNavigationInfoProvider splitNavigationInfoProvider,
+    KeyGenerator keyGenerator,
+    SplitNavigationRouter navigationRouter,
+  )   : _navigationRouter = navigationRouter,
         _splitNavigationInfoProvider = splitNavigationInfoProvider,
         _keyGenerator = keyGenerator;
 

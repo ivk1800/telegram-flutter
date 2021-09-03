@@ -10,8 +10,9 @@ import 'navigation_router.dart';
 class RootNavigationRouter
     implements INavigationRouter, IChatsListScreenRouter {
   RootNavigationRouter(
-      GlobalKey<NavigatorState> navigationKey, FeatureFactory featureFactory)
-      : _navigationKey = navigationKey,
+    GlobalKey<NavigatorState> navigationKey,
+    FeatureFactory featureFactory,
+  )   : _navigationKey = navigationKey,
         _featureFactory = featureFactory;
 
   final GlobalKey<NavigatorState> _navigationKey;

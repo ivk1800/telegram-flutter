@@ -9,11 +9,11 @@ import 'navigation.dart';
 class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
   @j.inject
   ChatsListScreenRouterImpl(
-      FeatureFactory featureFactory,
-      SplitNavigationInfoProvider splitNavigationInfoProvider,
-      KeyGenerator keyGenerator,
-      SplitNavigationRouter navigationRouter)
-      : _navigationRouter = navigationRouter,
+    FeatureFactory featureFactory,
+    SplitNavigationInfoProvider splitNavigationInfoProvider,
+    KeyGenerator keyGenerator,
+    SplitNavigationRouter navigationRouter,
+  )   : _navigationRouter = navigationRouter,
         _featureFactory = featureFactory,
         _splitNavigationInfoProvider = splitNavigationInfoProvider,
         _keyGenerator = keyGenerator;
@@ -32,12 +32,13 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
       // TODO
     } else {
       _navigationRouter.pushAllReplacement(
-          key: key,
-          builder: (BuildContext context) => _featureFactory
-              .createChatFeatureApi()
-              .chatScreenFactory
-              .create(context, id),
-          container: ContainerType.Right);
+        key: key,
+        builder: (BuildContext context) => _featureFactory
+            .createChatFeatureApi()
+            .chatScreenFactory
+            .create(context, id),
+        container: ContainerType.Right,
+      );
     }
   }
 }

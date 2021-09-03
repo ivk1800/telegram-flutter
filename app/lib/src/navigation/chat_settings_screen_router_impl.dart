@@ -9,8 +9,9 @@ import 'navigation.dart';
 class ChatSettingsScreenRouterImpl implements IChatSettingsScreenRouter {
   @j.inject
   ChatSettingsScreenRouterImpl(
-      FeatureFactory featureFactory, SplitNavigationRouter navigationRouter)
-      : _navigationRouter = navigationRouter,
+    FeatureFactory featureFactory,
+    SplitNavigationRouter navigationRouter,
+  )   : _navigationRouter = navigationRouter,
         _featureFactory = featureFactory;
 
   final FeatureFactory _featureFactory;
@@ -19,22 +20,24 @@ class ChatSettingsScreenRouterImpl implements IChatSettingsScreenRouter {
   @override
   void toStickersAndMasks() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createStickersFeatureApi()
-            .stickersWidgetFactory
-            .create(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createStickersFeatureApi()
+          .stickersWidgetFactory
+          .create(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toWallPapers() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createWallpapersFeatureApi()
-            .wallpapersListScreenFactory
-            .create(context),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createWallpapersFeatureApi()
+          .wallpapersListScreenFactory
+          .create(context),
+      container: ContainerType.Top,
+    );
   }
 }

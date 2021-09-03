@@ -9,11 +9,11 @@ import 'navigation.dart';
 class MainScreenRouterImpl implements IMainScreenRouter {
   @j.inject
   MainScreenRouterImpl(
-      FeatureFactory featureFactory,
-      SplitNavigationInfoProvider splitNavigationInfoProvider,
-      KeyGenerator keyGenerator,
-      SplitNavigationRouter navigationRouter)
-      : _navigationRouter = navigationRouter,
+    FeatureFactory featureFactory,
+    SplitNavigationInfoProvider splitNavigationInfoProvider,
+    KeyGenerator keyGenerator,
+    SplitNavigationRouter navigationRouter,
+  )   : _navigationRouter = navigationRouter,
         _featureFactory = featureFactory,
         _splitNavigationInfoProvider = splitNavigationInfoProvider,
         _keyGenerator = keyGenerator;
@@ -26,20 +26,22 @@ class MainScreenRouterImpl implements IMainScreenRouter {
   @override
   void toSettings() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) => _featureFactory
-            .createSettingsFeatureApi()
-            .screenWidgetFactory
-            .create(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) => _featureFactory
+          .createSettingsFeatureApi()
+          .screenWidgetFactory
+          .create(),
+      container: ContainerType.Top,
+    );
   }
 
   @override
   void toDev() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) =>
-            _featureFactory.createDevFeature().createRootWidget(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) =>
+          _featureFactory.createDevFeature().createRootWidget(),
+      container: ContainerType.Top,
+    );
   }
 }

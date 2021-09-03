@@ -7,8 +7,9 @@ import 'navigation.dart';
 class DataSettingsScreenRouterImpl implements IDataSettingsScreenRouter {
   @j.inject
   DataSettingsScreenRouterImpl(
-      FeatureFactory featureFactory, SplitNavigationRouter navigationRouter)
-      : _navigationRouter = navigationRouter,
+    FeatureFactory featureFactory,
+    SplitNavigationRouter navigationRouter,
+  )   : _navigationRouter = navigationRouter,
         _featureFactory = featureFactory;
 
   final FeatureFactory _featureFactory;

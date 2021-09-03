@@ -11,19 +11,19 @@ import 'package:localization_api/localization_api.dart';
 
 class ChatFeatureDependencies implements IChatFeatureDependencies {
   @j.inject
-  ChatFeatureDependencies(
-      {required IFileRepository fileRepository,
-      required IChatMessageRepository chatMessageRepository,
-      required IChatScreenRouter router,
-      required DateParser dateParser,
-      required IUserRepository userRepository,
-      required ILocalizationManager localizationManager,
-      required DateFormatter dateFormatter,
-      required FeatureFactory featureFactory,
-      required IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
-      required IChatRepository chatRepository,
-      required IConnectionStateProvider connectionStateProvider})
-      : _fileRepository = fileRepository,
+  ChatFeatureDependencies({
+    required IFileRepository fileRepository,
+    required IChatMessageRepository chatMessageRepository,
+    required IChatScreenRouter router,
+    required DateParser dateParser,
+    required IUserRepository userRepository,
+    required ILocalizationManager localizationManager,
+    required DateFormatter dateFormatter,
+    required FeatureFactory featureFactory,
+    required IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
+    required IChatRepository chatRepository,
+    required IConnectionStateProvider connectionStateProvider,
+  })  : _fileRepository = fileRepository,
         _dateParser = dateParser,
         // todo move to app component global scope
         _fileDownloader = featureFactory.createFileFeatureApi().fileDownloader,
@@ -35,11 +35,12 @@ class ChatFeatureDependencies implements IChatFeatureDependencies {
         _chatMessageRepository = chatMessageRepository,
         _router = router,
         _messagePreviewResolver = MessagePreviewResolver(
-            messageRepository: chatMessageRepository,
-            mode: Mode.ReplyPreview,
-            chatRepository: chatRepository,
-            userRepository: userRepository,
-            localizationManager: localizationManager),
+          messageRepository: chatMessageRepository,
+          mode: Mode.ReplyPreview,
+          chatRepository: chatRepository,
+          userRepository: userRepository,
+          localizationManager: localizationManager,
+        ),
         _connectionStateProvider = connectionStateProvider;
 
   final IMessagePreviewResolver _messagePreviewResolver;

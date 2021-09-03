@@ -82,7 +82,8 @@ abstract class AppComponent {
 @j.componentBuilder
 abstract class AppComponentBuilder {
   AppComponentBuilder localizationManager(
-      ILocalizationManager localizationManager);
+    ILocalizationManager localizationManager,
+  );
 
   AppComponent build();
 }

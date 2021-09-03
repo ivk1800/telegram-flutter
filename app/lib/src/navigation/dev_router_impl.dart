@@ -9,8 +9,9 @@ import 'navigation.dart';
 class DevScreenRouterImpl implements IDevFeatureRouter {
   @j.inject
   DevScreenRouterImpl(
-      SplitNavigationRouter navigationRouter, FeatureFactory featureFactory)
-      : _navigationRouter = navigationRouter,
+    SplitNavigationRouter navigationRouter,
+    FeatureFactory featureFactory,
+  )   : _navigationRouter = navigationRouter,
         _featureFactory = featureFactory;
 
   final SplitNavigationRouter _navigationRouter;
@@ -19,9 +20,10 @@ class DevScreenRouterImpl implements IDevFeatureRouter {
   @override
   void toEventsList() {
     _navigationRouter.push(
-        key: UniqueKey(),
-        builder: (BuildContext context) =>
-            _featureFactory.createDevFeature().createEventsListWidget(),
-        container: ContainerType.Top);
+      key: UniqueKey(),
+      builder: (BuildContext context) =>
+          _featureFactory.createDevFeature().createEventsListWidget(),
+      container: ContainerType.Top,
+    );
   }
 }

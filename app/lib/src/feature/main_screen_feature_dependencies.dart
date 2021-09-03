@@ -7,13 +7,13 @@ import 'package:localization_api/localization_api.dart';
 
 class MainScreenFeatureDependencies implements IMainScreenFeatureDependencies {
   @j.inject
-  MainScreenFeatureDependencies(
-      {required IChatsListFeatureApi chatsListFeatureApi,
-      required IGlobalSearchFeatureApi globalSearchFeatureApi,
-      required IMainScreenRouter router,
-      required ILocalizationManager localizationManager,
-      required IConnectionStateProvider connectionStateProvider})
-      : _chatsListFeatureApi = chatsListFeatureApi,
+  MainScreenFeatureDependencies({
+    required IChatsListFeatureApi chatsListFeatureApi,
+    required IGlobalSearchFeatureApi globalSearchFeatureApi,
+    required IMainScreenRouter router,
+    required ILocalizationManager localizationManager,
+    required IConnectionStateProvider connectionStateProvider,
+  })  : _chatsListFeatureApi = chatsListFeatureApi,
         _globalSearchFeatureApi = globalSearchFeatureApi,
         _router = router,
         _localizationManager = localizationManager,
