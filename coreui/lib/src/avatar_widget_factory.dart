@@ -24,8 +24,12 @@ class AvatarWidgetFactory {
   ];
 
   // todo rename chatId to some another name
-  Widget create(BuildContext context,
-      {required double radius, required int chatId, int? imageId}) {
+  Widget create(
+    BuildContext context, {
+    required double radius,
+    required int chatId,
+    int? imageId,
+  }) {
     if (imageId == null) {
       return _createDefaultAvatar(radius: radius, chatId: chatId);
     }
@@ -40,14 +44,17 @@ class AvatarWidgetFactory {
         }
 
         return CircleAvatar(
-            maxRadius: radius, backgroundImage: FileImage(File(path)));
+          maxRadius: radius,
+          backgroundImage: FileImage(File(path)),
+        );
       },
     );
   }
 
   Widget _createDefaultAvatar({required double radius, required int chatId}) {
     return CircleAvatar(
-        backgroundColor: colors[(chatId % colors.length).abs()],
-        maxRadius: radius);
+      backgroundColor: colors[(chatId % colors.length).abs()],
+      maxRadius: radius,
+    );
   }
 }

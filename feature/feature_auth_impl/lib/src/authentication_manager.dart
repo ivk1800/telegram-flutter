@@ -34,12 +34,13 @@ class AuthenticationManager implements IAuthenticationManager {
   @override
   Future<td.Ok> setAuthenticationPhoneNumber(String phoneNumber) =>
       _functionExecutor.send<td.Ok>(td.SetAuthenticationPhoneNumber(
-          phoneNumber: phoneNumber,
-          settings: td.PhoneNumberAuthenticationSettings(
-            allowSmsRetrieverApi: false,
-            allowFlashCall: false,
-            isCurrentPhoneNumber: false,
-          )));
+        phoneNumber: phoneNumber,
+        settings: td.PhoneNumberAuthenticationSettings(
+          allowSmsRetrieverApi: false,
+          allowFlashCall: false,
+          isCurrentPhoneNumber: false,
+        ),
+      ));
 
   @override
   Future<td.Ok> setTdlibParameters(td.SetTdlibParameters parameters) =>

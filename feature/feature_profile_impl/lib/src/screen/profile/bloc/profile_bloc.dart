@@ -25,12 +25,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         _messageRepository = messageRepository,
         super(ProfileState(
           headerState: HeaderState(
-              info: ChatHeaderInfo(
-            photoId: 0,
-            title: 'title',
-            chatId: args.id,
-            subtitle: 'subtitle',
-          )),
+            info: ChatHeaderInfo(
+              photoId: 0,
+              title: 'title',
+              chatId: args.id,
+              subtitle: 'subtitle',
+            ),
+          ),
           bodyState: const LoadingBodyState(),
         )) {
     _initCompositeStateSubscription();
@@ -97,11 +98,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     _compositeStateSubscription =
         Rx.combineLatest2<BodyState, HeaderState, ProfileState>(
-                body,
-                header,
-                (BodyState body, HeaderState header) =>
-                    ProfileState(headerState: header, bodyState: body))
-            .listen((ProfileState newState) {
+      body,
+      header,
+      (BodyState body, HeaderState header) =>
+          ProfileState(headerState: header, bodyState: body),
+    ).listen((ProfileState newState) {
       emit(newState);
     });
   }

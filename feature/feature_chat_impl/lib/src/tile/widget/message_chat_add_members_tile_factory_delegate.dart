@@ -5,15 +5,18 @@ import 'package:tile/tile.dart';
 
 class MessageChatAddMembersTileFactoryDelegate
     implements ITileFactoryDelegate<MessageChatAddMembersTileModel> {
-  MessageChatAddMembersTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageChatAddMembersTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(BuildContext context, MessageChatAddMembersTileModel model) {
     return _chatMessageFactory.createChatNotificationFromText(
-        id: model.id, context: context, text: model.title);
+      id: model.id,
+      context: context,
+      text: model.title,
+    );
   }
 }

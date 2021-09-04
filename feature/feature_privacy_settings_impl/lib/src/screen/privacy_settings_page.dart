@@ -12,8 +12,9 @@ class PrivacySettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Provider.of<tg.ConnectionStateWidgetFactory>(context).create(
-            context,
-            (_) => Text(localizationManager.getString('PrivacySettings'))),
+          context,
+          (_) => Text(localizationManager.getString('PrivacySettings')),
+        ),
       ),
       body: Center(
         child: Text(localizationManager.getString('PrivacySettings')),

@@ -10,13 +10,13 @@ import 'additional_info_mapper.dart';
 import 'message_reply_info_mapper.dart';
 
 class MessageCallTileModelMapper {
-  MessageCallTileModelMapper(
-      {required ILocalizationManager localizationManager,
-      required SenderInfoMapper senderInfoResolver,
-      required AdditionalInfoMapper additionalInfoMapper,
-      required MessageReplyInfoMapper messageReplyInfoMapper,
-      required DateParser dateParser})
-      : _localizationManager = localizationManager,
+  MessageCallTileModelMapper({
+    required ILocalizationManager localizationManager,
+    required SenderInfoMapper senderInfoResolver,
+    required AdditionalInfoMapper additionalInfoMapper,
+    required MessageReplyInfoMapper messageReplyInfoMapper,
+    required DateParser dateParser,
+  })  : _localizationManager = localizationManager,
         _senderInfoResolver = senderInfoResolver,
         _additionalInfoMapper = additionalInfoMapper,
         _messageReplyInfoMapper = messageReplyInfoMapper,
@@ -38,14 +38,15 @@ class MessageCallTileModelMapper {
         _dateParser.parseUnixTimeStampToDate(message.date);
     // todo handle video calls
     return MessageCallTileModel(
-        id: message.id,
-        senderInfo: await _senderInfoResolver.map(message.sender),
-        replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
-        additionalInfo: await _additionalInfoMapper.map(message),
-        isOutgoing: message.isOutgoing,
-        duration: _getDuration(content.duration),
-        date: _callDateFormat.format(callDate),
-        title: _toHumanString(message.isOutgoing, content.discardReason));
+      id: message.id,
+      senderInfo: await _senderInfoResolver.map(message.sender),
+      replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
+      additionalInfo: await _additionalInfoMapper.map(message),
+      isOutgoing: message.isOutgoing,
+      duration: _getDuration(content.duration),
+      date: _callDateFormat.format(callDate),
+      title: _toHumanString(message.isOutgoing, content.discardReason),
+    );
   }
 
   String? _getDuration(int durationSeconds) {

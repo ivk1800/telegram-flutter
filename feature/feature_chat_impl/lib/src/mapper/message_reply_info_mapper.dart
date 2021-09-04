@@ -27,15 +27,18 @@ class MessageReplyInfoMapper {
 
     // todo message may be not found
     final td.Message replyMessage = await _messageRepository.getMessage(
-        chatId: message.replyInChatId, messageId: message.replyToMessageId);
+      chatId: message.replyInChatId,
+      messageId: message.replyToMessageId,
+    );
 
     final MessagePreviewData preview =
         await _messagePreviewResolver.resolve(replyMessage);
 
     return ReplyInfo(
-        replyToMessageId: message.replyToMessageId,
-        title: preview.firstText.orEmpty(),
-        subtitle: preview.secondText.orEmpty());
+      replyToMessageId: message.replyToMessageId,
+      title: preview.firstText.orEmpty(),
+      subtitle: preview.secondText.orEmpty(),
+    );
   }
 
   Future<String> getSenderNameToDisplay(td.MessageSender sender) async {

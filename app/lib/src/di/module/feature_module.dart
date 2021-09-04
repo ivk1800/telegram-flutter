@@ -86,21 +86,22 @@ abstract class FeatureModule {
     IChatMessageRepository chatMessageRepository,
   ) =>
       ChatsListFeatureDependencies(
-          router: router,
-          localizationManager: localizationManager,
-          userRepository: userRepository,
-          dateParser: dateParser,
-          dateFormatter: dateFormatter,
-          chatUpdatesProvider: chatUpdatesProvider,
+        router: router,
+        localizationManager: localizationManager,
+        userRepository: userRepository,
+        dateParser: dateParser,
+        dateFormatter: dateFormatter,
+        chatUpdatesProvider: chatUpdatesProvider,
+        chatRepository: chatRepository,
+        fileRepository: fileRepository,
+        messagePreviewResolver: MessagePreviewResolver(
+          messageRepository: chatMessageRepository,
           chatRepository: chatRepository,
-          fileRepository: fileRepository,
-          messagePreviewResolver: MessagePreviewResolver(
-            messageRepository: chatMessageRepository,
-            chatRepository: chatRepository,
-            mode: Mode.ChatPreview,
-            userRepository: userRepository,
-            localizationManager: localizationManager,
-          ));
+          mode: Mode.ChatPreview,
+          userRepository: userRepository,
+          localizationManager: localizationManager,
+        ),
+      );
 
   @j.provide
   static GlobalSearchFeatureDependencies

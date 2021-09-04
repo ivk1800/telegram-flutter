@@ -16,20 +16,27 @@ class ChatMessageFactory {
 
   final AvatarWidgetFactory _avatarWidgetFactory;
 
-  Widget createChatNotificationFromText(
-      {required int id,
-      required BuildContext context,
-      required InlineSpan text}) {
+  Widget createChatNotificationFromText({
+    required int id,
+    required BuildContext context,
+    required InlineSpan text,
+  }) {
     return createChatNotification(
-        id: id, context: context, body: _buildTextNotification(text));
+      id: id,
+      context: context,
+      body: _buildTextNotification(text),
+    );
   }
 
   // todo move to another class for message parts
   Widget createChatNotificationBubbleFromText({required InlineSpan text}) =>
       _buildNotificationBubble(_buildTextNotification(text));
 
-  Widget createChatNotification(
-      {required int id, required BuildContext context, required Widget body}) {
+  Widget createChatNotification({
+    required int id,
+    required BuildContext context,
+    required Widget body,
+  }) {
     return Align(
       key: ValueKey<int>(id),
       alignment: Alignment.topCenter,
@@ -37,19 +44,21 @@ class ChatMessageFactory {
         child: body,
         padding: const EdgeInsets.only(top: 3, bottom: 3, left: 6, right: 6),
         decoration: BoxDecoration(
-            // todo extract color to styles
-            color: Colors.black.withAlpha(60),
-            borderRadius: const BorderRadius.all(Radius.circular(16.0))),
+          // todo extract color to styles
+          color: Colors.black.withAlpha(60),
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+        ),
       ),
     );
   }
 
   @Deprecated('use another')
-  Widget create(
-      {required int id,
-      required BuildContext context,
-      required bool isOutgoing,
-      required Widget body}) {
+  Widget create({
+    required int id,
+    required BuildContext context,
+    required bool isOutgoing,
+    required Widget body,
+  }) {
     final ChatContextData chatContext = ChatContext.of(context);
     return Align(
       key: ValueKey<int>(id),
@@ -59,30 +68,36 @@ class ChatMessageFactory {
         child: Container(
           constraints: BoxConstraints(maxWidth: chatContext.maxWidth),
           child: _buildMessageBubble(
-              context: context,
-              isOutgoing: isOutgoing,
-              child: MessageSkeleton(
-                content: body,
-                shortInfo: Padding(
-                  padding: const EdgeInsets.only(left: 4, top: 4),
-                  child: Text(
-                    '22:46',
-                    style: Theme.of(context).textTheme.caption,
-                  ),
+            context: context,
+            isOutgoing: isOutgoing,
+            child: MessageSkeleton(
+              content: body,
+              shortInfo: Padding(
+                padding: const EdgeInsets.only(left: 4, top: 4),
+                child: Text(
+                  '22:46',
+                  style: Theme.of(context).textTheme.caption,
                 ),
-              )),
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget createCustom(
-      {required int id,
-      required BuildContext context,
-      required AlignmentGeometry alignment,
-      required Widget body}) {
+  Widget createCustom({
+    required int id,
+    required BuildContext context,
+    required AlignmentGeometry alignment,
+    required Widget body,
+  }) {
     return _buildBaseMessage(
-        id: id, alignment: alignment, context: context, body: body);
+      id: id,
+      alignment: alignment,
+      context: context,
+      body: body,
+    );
   }
 
   Widget createConversationMessage({
@@ -115,11 +130,12 @@ class ChatMessageFactory {
     Widget? leading,
   }) {
     final Widget bubble = _buildMessageBubble(
-        context: context,
-        isOutgoing: isOutgoing,
-        child: MessageContent(
-          children: blocks,
-        ));
+      context: context,
+      isOutgoing: isOutgoing,
+      child: MessageContent(
+        children: blocks,
+      ),
+    );
     return _buildBaseMessage(
       id: id,
       alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
@@ -149,9 +165,10 @@ class ChatMessageFactory {
       child: body,
       padding: const EdgeInsets.only(top: 3, bottom: 3, left: 6, right: 6),
       decoration: BoxDecoration(
-          // todo extract color to styles
-          color: Colors.black.withAlpha(60),
-          borderRadius: const BorderRadius.all(Radius.circular(16.0))),
+        // todo extract color to styles
+        color: Colors.black.withAlpha(60),
+        borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+      ),
     );
   }
 
@@ -164,11 +181,12 @@ class ChatMessageFactory {
     );
   }
 
-  Widget _buildBaseMessage(
-      {required int id,
-      required AlignmentGeometry alignment,
-      required BuildContext context,
-      required Widget body}) {
+  Widget _buildBaseMessage({
+    required int id,
+    required AlignmentGeometry alignment,
+    required BuildContext context,
+    required Widget body,
+  }) {
     final ChatContextData chatContext = ChatContext.of(context);
     return Align(
       key: ValueKey<int>(id),
@@ -183,15 +201,18 @@ class ChatMessageFactory {
     );
   }
 
-  Widget _buildMessageBubble(
-      {required BuildContext context,
-      required bool isOutgoing,
-      required Widget child}) {
+  Widget _buildMessageBubble({
+    required BuildContext context,
+    required bool isOutgoing,
+    required Widget child,
+  }) {
     final ChatThemeData theme = ChatTheme.of(context);
     return Bubble(
-        radius: 10,
-        child: Container(
-            color: isOutgoing ? theme.bubbleOutgoingColor : theme.bubbleColor,
-            child: child));
+      radius: 10,
+      child: Container(
+        color: isOutgoing ? theme.bubbleOutgoingColor : theme.bubbleColor,
+        child: child,
+      ),
+    );
   }
 }

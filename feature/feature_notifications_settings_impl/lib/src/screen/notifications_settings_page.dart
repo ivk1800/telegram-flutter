@@ -12,9 +12,9 @@ class NotificationsSettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Provider.of<tg.ConnectionStateWidgetFactory>(context).create(
-            context,
-            (_) =>
-                Text(localizationManager.getString('NotificationsAndSounds'))),
+          context,
+          (_) => Text(localizationManager.getString('NotificationsAndSounds')),
+        ),
       ),
       body: Center(
         child: Text(localizationManager.getString('NotificationsAndSounds')),

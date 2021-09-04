@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class SharedMediaScreenFactory implements ISharedMediaScreenFactory {
-  SharedMediaScreenFactory(
-      {required SharedMediaFeatureDependencies dependencies})
-      : _dependencies = dependencies;
+  SharedMediaScreenFactory({
+    required SharedMediaFeatureDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final SharedMediaFeatureDependencies _dependencies;
 

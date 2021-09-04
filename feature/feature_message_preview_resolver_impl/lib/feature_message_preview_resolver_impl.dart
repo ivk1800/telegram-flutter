@@ -52,13 +52,17 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
         {
           final td.MessageSticker m = content as td.MessageSticker;
           return MessagePreviewData(
-              firstText: 'Sticker', secondText: m.sticker.emoji);
+            firstText: 'Sticker',
+            secondText: m.sticker.emoji,
+          );
         }
       case td.MessagePhoto.CONSTRUCTOR:
         {
           final td.MessagePhoto m = content as td.MessagePhoto;
           return MessagePreviewData(
-              firstText: 'Photo', secondText: m.caption.text);
+            firstText: 'Photo',
+            secondText: m.caption.text,
+          );
         }
       case td.MessageChatAddMembers.CONSTRUCTOR:
         {
@@ -72,15 +76,20 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
           final String joinedUsernames = await Future.wait(userNamesFutures)
               .then((List<String> users) => users.join(', '));
           return MessagePreviewData(
-              firstText: _localizationManager.getStringFormatted(
-                  'EventLogGroupJoined', <dynamic>[joinedUsernames]),
-              secondText: null);
+            firstText: _localizationManager.getStringFormatted(
+              'EventLogGroupJoined',
+              <dynamic>[joinedUsernames],
+            ),
+            secondText: null,
+          );
         }
       case td.MessageDocument.CONSTRUCTOR:
         {
           final td.MessageDocument m = content as td.MessageDocument;
           return MessagePreviewData(
-              firstText: '📎 ${m.caption.text}', secondText: null);
+            firstText: '📎 ${m.caption.text}',
+            secondText: null,
+          );
         }
       case td.MessageAnimation.CONSTRUCTOR:
         {
@@ -92,6 +101,8 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
     }
 
     return MessagePreviewData(
-        firstText: null, secondText: content.runtimeType.toString());
+      firstText: null,
+      secondText: content.runtimeType.toString(),
+    );
   }
 }

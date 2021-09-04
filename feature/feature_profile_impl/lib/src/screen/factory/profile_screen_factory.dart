@@ -25,20 +25,22 @@ class ProfileScreenFactory implements IProfileScreenFactory {
             .chatArgs(ProfileArgs(id))
             .build(),
         child: MultiProvider(
-            providers: <Provider<dynamic>>[
-              Provider<IChatHeaderInfoFactory>(
-                create: (BuildContext context) =>
-                    context.getComponent().getChatHeaderInfoFactory(),
-              ),
-              Provider<ILocalizationManager>(
-                create: (BuildContext context) =>
-                    context.getComponent().getLocalizationManager(),
-              ),
-            ],
-            child: BlocProvider<ProfileBloc>(
-                create: (BuildContext context) =>
-                    context.getComponent().getProfileBloc(),
-                child: const ProfilePage())),
+          providers: <Provider<dynamic>>[
+            Provider<IChatHeaderInfoFactory>(
+              create: (BuildContext context) =>
+                  context.getComponent().getChatHeaderInfoFactory(),
+            ),
+            Provider<ILocalizationManager>(
+              create: (BuildContext context) =>
+                  context.getComponent().getLocalizationManager(),
+            ),
+          ],
+          child: BlocProvider<ProfileBloc>(
+            create: (BuildContext context) =>
+                context.getComponent().getProfileBloc(),
+            child: const ProfilePage(),
+          ),
+        ),
       );
 }
 

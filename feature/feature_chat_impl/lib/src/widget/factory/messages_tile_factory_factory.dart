@@ -24,138 +24,184 @@ class MessagesTileFactoryFactory {
   }) {
     return TileFactory(delegates: <Type, ITileFactoryDelegate<ITileModel>>{
       MessageAnimationTileModel: MessageAnimationTileFactoryDelegate(
-          shortInfoFactory: shortInfoFactory,
-          messageComponentResolver: messageComponentResolver,
-          replyInfoFactory: replyInfoFactory,
-          chatMessageFactory: chatMessageFactory),
+        shortInfoFactory: shortInfoFactory,
+        messageComponentResolver: messageComponentResolver,
+        replyInfoFactory: replyInfoFactory,
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageAudioTileModel: MessageAudioTileFactoryDelegate(
-          messageComponentResolver: messageComponentResolver,
-          replyInfoFactory: replyInfoFactory,
-          shortInfoFactory: shortInfoFactory,
-          chatMessageFactory: chatMessageFactory),
+        messageComponentResolver: messageComponentResolver,
+        replyInfoFactory: replyInfoFactory,
+        shortInfoFactory: shortInfoFactory,
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageBasicGroupChatCreateTileModel:
           MessageBasicGroupChatCreateTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageCallTileModel: MessageCallTileFactoryDelegate(
-          messageComponentResolver: messageComponentResolver,
-          replyInfoFactory: replyInfoFactory,
-          chatMessageFactory: chatMessageFactory),
+        messageComponentResolver: messageComponentResolver,
+        replyInfoFactory: replyInfoFactory,
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageChatAddMembersTileModel: MessageChatAddMembersTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageChatChangePhotoTileModel:
           MessageChatChangePhotoTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageChatChangeTitleTileModel:
           MessageChatChangeTitleTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageChatDeleteMemberTileModel:
           MessageChatDeleteMemberTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageChatDeletePhotoTileModel:
           MessageChatDeletePhotoTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageChatJoinByLinkTileModel: MessageChatJoinByLinkTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageChatSetTtlTileModel: MessageChatSetTtlTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageChatUpgradeFromTileModel:
           MessageChatUpgradeFromTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageChatUpgradeToTileModel: MessageChatUpgradeToTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageContactTileModel: MessageContactTileFactoryDelegate(
-          messageComponentResolver: messageComponentResolver,
-          replyInfoFactory: replyInfoFactory,
-          localizationManager: localizationManager,
-          shortInfoFactory: shortInfoFactory,
-          chatMessageFactory: chatMessageFactory),
+        messageComponentResolver: messageComponentResolver,
+        replyInfoFactory: replyInfoFactory,
+        localizationManager: localizationManager,
+        shortInfoFactory: shortInfoFactory,
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageContactRegisteredTileModel:
           MessageContactRegisteredTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageCustomServiceActionTileModel:
           MessageCustomServiceActionTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageDiceTileModel: MessageDiceTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageDocumentTileModel: MessageDocumentTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageExpiredPhotoTileModel: MessageExpiredPhotoTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageExpiredVideoTileModel: MessageExpiredVideoTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageGameScoreTileModel: MessageGameScoreTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageGameTileModel: MessageGameTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageInviteVoiceChatParticipantsTileModel:
           MessageInviteVoiceChatParticipantsTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageInvoiceTileModel: MessageInvoiceTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageLocationTileModel: MessageLocationTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessagePassportDataReceivedTileModel:
           MessagePassportDataReceivedTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessagePassportDataSentTileModel:
           MessagePassportDataSentTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessagePaymentSuccessfulBotTileModel:
           MessagePaymentSuccessfulBotTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessagePaymentSuccessfulTileModel:
           MessagePaymentSuccessfulTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessagePhotoTileModel: MessagePhotoTileFactoryDelegate(
-          imageWidgetFactory: imageWidgetFactory,
-          messageComponentResolver: messageComponentResolver,
-          shortInfoFactory: shortInfoFactory,
-          replyInfoFactory: replyInfoFactory,
-          chatMessageFactory: chatMessageFactory),
+        imageWidgetFactory: imageWidgetFactory,
+        messageComponentResolver: messageComponentResolver,
+        shortInfoFactory: shortInfoFactory,
+        replyInfoFactory: replyInfoFactory,
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessagePinMessageTileModel: MessagePinMessageTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessagePollTileModel: MessagePollTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageProximityAlertTriggeredTileModel:
           MessageProximityAlertTriggeredTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageScreenshotTakenTileModel:
           MessageScreenshotTakenTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageStickerTileModel: MessageStickerTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageSupergroupChatCreateTileModel:
           MessageSupergroupChatCreateTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageTextTileModel: MessageTextTileFactoryDelegate(
-          messageComponentResolver: messageComponentResolver,
-          shortInfoFactory: shortInfoFactory,
-          replyInfoFactory: replyInfoFactory,
-          chatMessageFactory: chatMessageFactory),
+        messageComponentResolver: messageComponentResolver,
+        shortInfoFactory: shortInfoFactory,
+        replyInfoFactory: replyInfoFactory,
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageUnsupportedTileModel: MessageUnsupportedTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageVenueTileModel: MessageVenueTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageVideoNoteTileModel: MessageVideoNoteTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageVideoTileModel: MessageVideoTileFactoryDelegate(
-          imageWidgetFactory: imageWidgetFactory,
-          messageComponentResolver: messageComponentResolver,
-          shortInfoFactory: shortInfoFactory,
-          replyInfoFactory: replyInfoFactory,
-          chatMessageFactory: chatMessageFactory),
+        imageWidgetFactory: imageWidgetFactory,
+        messageComponentResolver: messageComponentResolver,
+        shortInfoFactory: shortInfoFactory,
+        replyInfoFactory: replyInfoFactory,
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageVoiceChatEndedTileModel: MessageVoiceChatEndedTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageVoiceChatStartedTileModel:
           MessageVoiceChatStartedTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageVoiceNoteTileModel: MessageVoiceNoteTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       MessageWebsiteConnectedTileModel:
           MessageWebsiteConnectedTileFactoryDelegate(
-              chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
       UnknownMessageTileModel: UnknownMessageTileFactoryDelegate(
-          chatMessageFactory: chatMessageFactory),
+        chatMessageFactory: chatMessageFactory,
+      ),
     });
   }
 }

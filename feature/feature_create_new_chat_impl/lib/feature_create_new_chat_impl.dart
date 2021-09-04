@@ -8,9 +8,9 @@ import 'src/screen/factory/create_new_secret_chat_screen_factory.dart';
 import 'src/screen/factory/new_chat_screen_factory.dart';
 
 class CreateNewChatFeatureApi implements ICreateNewChatFeatureApi {
-  CreateNewChatFeatureApi(
-      {required ICreateNewChatFeatureDependencies dependencies})
-      : _dependencies = dependencies;
+  CreateNewChatFeatureApi({
+    required ICreateNewChatFeatureDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final ICreateNewChatFeatureDependencies _dependencies;
 

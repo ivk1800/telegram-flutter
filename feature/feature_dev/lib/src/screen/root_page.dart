@@ -29,7 +29,9 @@ class RootPageState extends State<RootPage> {
     return Scaffold(
       appBar: AppBar(
         title: connectionStateWidgetFactory.create(
-            context, (BuildContext context) => const Text('Dev')),
+          context,
+          (BuildContext context) => const Text('Dev'),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +49,8 @@ class RootPageState extends State<RootPage> {
               OutlinedButton(
                 onPressed: () {
                   DevWidget.of(context).devFeature.client.send(
-                      td.SetNetworkType(type: const td.NetworkTypeNone()));
+                        td.SetNetworkType(type: const td.NetworkTypeNone()),
+                      );
                 },
                 child: const Text('NetworkTypeNone'),
               ),
@@ -57,10 +60,11 @@ class RootPageState extends State<RootPage> {
               OutlinedButton(
                 onPressed: () {
                   DevWidget.of(context).devFeature.client.send(
-                      td.SetNetworkType(type: const td.NetworkTypeWiFi()));
+                        td.SetNetworkType(type: const td.NetworkTypeWiFi()),
+                      );
                 },
                 child: const Text('NetworkTypeWiFi'),
-              )
+              ),
             ],
           ),
           const Divider(),
@@ -79,7 +83,7 @@ class RootPageState extends State<RootPage> {
               ));
             },
             child: const Text('Demo'),
-          )
+          ),
         ],
       ),
     );

@@ -39,88 +39,100 @@ class _DemoSplitViewPageState extends State<DemoSplitViewPage> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('back')),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('back'),
+        ),
         ElevatedButton(
-            onPressed: () {
-              _navigationKey.currentState?.setLeftRootPage(
-                  _buildPage(title: 'Root left', color: _generateColor()));
-            },
-            child: const Text('set root left')),
+          onPressed: () {
+            _navigationKey.currentState?.setLeftRootPage(
+              _buildPage(title: 'Root left', color: _generateColor()),
+            );
+          },
+          child: const Text('set root left'),
+        ),
         ElevatedButton(
-            onPressed: () {
-              _count++;
-              final int c = _count;
-              final Color color = _generateColor();
+          onPressed: () {
+            _count++;
+            final int c = _count;
+            final Color color = _generateColor();
 
-              _navigationKey.currentState?.push(
-                  key: UniqueKey(),
-                  builder: (_) {
-                    return _buildPage(title: 'left $c', color: color);
-                  },
-                  container: ContainerType.Left);
-            },
-            child: const Text('push left')),
+            _navigationKey.currentState?.push(
+              key: UniqueKey(),
+              builder: (_) {
+                return _buildPage(title: 'left $c', color: color);
+              },
+              container: ContainerType.Left,
+            );
+          },
+          child: const Text('push left'),
+        ),
         ElevatedButton(
-            onPressed: () {
-              _count++;
-              final int c = _count;
-              final Color color = _generateColor();
-              _navigationKey.currentState?.push(
-                  key: UniqueKey(),
-                  builder: (_) {
-                    return _buildPage(title: 'top $c', color: color);
-                  },
-                  container: ContainerType.Top);
-            },
-            child: const Text('push top')),
+          onPressed: () {
+            _count++;
+            final int c = _count;
+            final Color color = _generateColor();
+            _navigationKey.currentState?.push(
+              key: UniqueKey(),
+              builder: (_) {
+                return _buildPage(title: 'top $c', color: color);
+              },
+              container: ContainerType.Top,
+            );
+          },
+          child: const Text('push top'),
+        ),
         ElevatedButton(
-            onPressed: () {
-              _count++;
-              final int c = _count;
-              final Color color = _generateColor();
-              _navigationKey.currentState?.push(
-                  key: UniqueKey(),
-                  builder: (_) {
-                    return _buildPage(title: 'right $c', color: color);
-                  },
-                  container: ContainerType.Right);
-            },
-            child: const Text('push right')),
+          onPressed: () {
+            _count++;
+            final int c = _count;
+            final Color color = _generateColor();
+            _navigationKey.currentState?.push(
+              key: UniqueKey(),
+              builder: (_) {
+                return _buildPage(title: 'right $c', color: color);
+              },
+              container: ContainerType.Right,
+            );
+          },
+          child: const Text('push right'),
+        ),
         ElevatedButton(
-            onPressed: () {
-              _count++;
-              _navigationKey.currentState
-                  ?.setRightContainerPlaceholder(Container(
-                color: Colors.redAccent,
-                child: const Material(
-                  child: Center(child: Text('placeholder')),
-                ),
-              ));
-            },
-            child: const Text('set right placeholder')),
+          onPressed: () {
+            _count++;
+            _navigationKey.currentState?.setRightContainerPlaceholder(Container(
+              color: Colors.redAccent,
+              child: const Material(
+                child: Center(child: Text('placeholder')),
+              ),
+            ));
+          },
+          child: const Text('set right placeholder'),
+        ),
         ElevatedButton(
-            onPressed: () {
-              final SplitViewState? currentState = _navigationKey.currentState;
-              if (currentState == null) {
-                return;
-              }
-              _count++;
-              currentState.popUntilRoot(ContainerType.Left);
-              currentState.popUntilRoot(ContainerType.Top);
-              currentState.popUntilRoot(ContainerType.Right);
-              currentState.setLeftRootPage(_buildPage(
-                  title: 'root left $_count', color: _generateColor()));
-              currentState.setRightContainerPlaceholder(Container(
-                color: Colors.redAccent,
-                child: const Material(
-                  child: Center(child: Text('placeholder')),
-                ),
-              ));
-            },
-            child: const Text('set initial state')),
+          onPressed: () {
+            final SplitViewState? currentState = _navigationKey.currentState;
+            if (currentState == null) {
+              return;
+            }
+            _count++;
+            currentState.popUntilRoot(ContainerType.Left);
+            currentState.popUntilRoot(ContainerType.Top);
+            currentState.popUntilRoot(ContainerType.Right);
+            currentState.setLeftRootPage(_buildPage(
+              title: 'root left $_count',
+              color: _generateColor(),
+            ));
+            currentState.setRightContainerPlaceholder(Container(
+              color: Colors.redAccent,
+              child: const Material(
+                child: Center(child: Text('placeholder')),
+              ),
+            ));
+          },
+          child: const Text('set initial state'),
+        ),
       ],
     );
   }

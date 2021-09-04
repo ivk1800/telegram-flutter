@@ -8,19 +8,22 @@ import 'not_implemented.dart';
 class MessageInviteVoiceChatParticipantsTileFactoryDelegate
     implements
         ITileFactoryDelegate<MessageInviteVoiceChatParticipantsTileModel> {
-  MessageInviteVoiceChatParticipantsTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageInviteVoiceChatParticipantsTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(
-      BuildContext context, MessageInviteVoiceChatParticipantsTileModel model) {
+    BuildContext context,
+    MessageInviteVoiceChatParticipantsTileModel model,
+  ) {
     return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      body: NotImplementedWidget(type: model.type),
+    );
   }
 }

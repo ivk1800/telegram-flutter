@@ -74,7 +74,8 @@ class ContentInteractor {
           return _getContentForBasicGroup(
             messagesInfo,
             await _basicGroupRepository.getGroupFullInfo(
-                (chat.type as td.ChatTypeBasicGroup).basicGroupId),
+              (chat.type as td.ChatTypeBasicGroup).basicGroupId,
+            ),
             chat,
           );
         }
@@ -83,7 +84,8 @@ class ContentInteractor {
           return _getContentForSupergroup(
             messagesInfo,
             await _superGroupRepository.getGroupFullInfo(
-                (chat.type as td.ChatTypeSupergroup).supergroupId),
+              (chat.type as td.ChatTypeSupergroup).supergroupId,
+            ),
             chat,
           );
         }

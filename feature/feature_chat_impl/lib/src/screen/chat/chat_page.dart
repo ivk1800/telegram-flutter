@@ -42,35 +42,42 @@ class ChatPageState extends State<ChatPage> {
     final IChatHeaderInfoFactory chatHeaderInfoFactory = Provider.of(context);
 
     return BlocBuilder<ChatBloc, ChatState>(
-        builder: (BuildContext context, ChatState state) {
-      return Scaffold(
-        backgroundColor: Colors.lightBlue,
-        appBar: AppBar(
-          titleSpacing: 0.0,
-          title: chatHeaderInfoFactory.create(
-              context: context, info: state.headerState.info),
-        ),
-        body: Builder(builder: (BuildContext context) {
-          switch (state.bodyState.runtimeType) {
-            case DataBodyState:
-              {
-                return _wrapToChatContext(
+      builder: (BuildContext context, ChatState state) {
+        return Scaffold(
+          backgroundColor: Colors.lightBlue,
+          appBar: AppBar(
+            titleSpacing: 0.0,
+            title: chatHeaderInfoFactory.create(
+              context: context,
+              info: state.headerState.info,
+            ),
+          ),
+          body: Builder(builder: (BuildContext context) {
+            switch (state.bodyState.runtimeType) {
+              case DataBodyState:
+                {
+                  return _wrapToChatContext(
                     child: _buildMessagesState(
-                        context, state.bodyState as DataBodyState));
-              }
-          }
+                      context,
+                      state.bodyState as DataBodyState,
+                    ),
+                  );
+                }
+            }
 
-          return const Center(child: CircularProgressIndicator());
-        }),
-      );
-    });
+            return const Center(child: CircularProgressIndicator());
+          }),
+        );
+      },
+    );
   }
 
   Widget _wrapToChatContext({required Widget child}) => LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return ChatContext(
-              data: ChatContextData.desktop(maxWidth: constraints.maxWidth),
-              child: child);
+            data: ChatContextData.desktop(maxWidth: constraints.maxWidth),
+            child: child,
+          );
         },
       );
 

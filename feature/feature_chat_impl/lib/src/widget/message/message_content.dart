@@ -68,9 +68,10 @@ class _ContentRenderBox extends RenderBox
     return defaultHitTestChildren(result, position: position);
   }
 
-  double _computeWidth(
-      {required BoxConstraints constraints,
-      required ChildLayouter layoutChild}) {
+  double _computeWidth({
+    required BoxConstraints constraints,
+    required ChildLayouter layoutChild,
+  }) {
     double width = constraints.minWidth;
 
     RenderBox? child = firstChild;

@@ -18,15 +18,21 @@ class StickersPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Provider.of<tg.ConnectionStateWidgetFactory>(context).create(
-            context,
-            (BuildContext context) =>
-                Text(localizationManager.getString('StickersAndMasks'))),
+          context,
+          (BuildContext context) => Text(
+            localizationManager.getString('StickersAndMasks'),
+          ),
+        ),
       ),
       body: BlocBuilder<StickersBloc, StickersState>(
         builder: (BuildContext context, StickersState state) {
           if (state is DefaultState) {
             return SingleChildScrollView(
-                child: _buildDefaultWidget(context, state));
+              child: _buildDefaultWidget(
+                context,
+                state,
+              ),
+            );
           }
 
           return const SizedBox.shrink();
@@ -89,7 +95,7 @@ class StickersPage extends StatelessWidget {
           separatorBuilder: (BuildContext context, int index) => const Divider(
             height: 1,
           ),
-        )
+        ),
       ],
     );
   }

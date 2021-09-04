@@ -5,9 +5,11 @@ import 'data_loading_widget_delegate.dart';
 
 class DataLoadingWidget<D, VM extends DataLoadingHandlerMixin<D>>
     extends StatelessWidget {
-  const DataLoadingWidget(
-      {Key? key, required this.delegate, required this.viewModel})
-      : super(key: key);
+  const DataLoadingWidget({
+    Key? key,
+    required this.delegate,
+    required this.viewModel,
+  }) : super(key: key);
 
   final IDataLoadingWidgetDelegate<D> delegate;
 

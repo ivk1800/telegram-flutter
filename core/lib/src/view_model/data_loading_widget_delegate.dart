@@ -4,7 +4,10 @@ import 'data_loading_handler_mixin.dart';
 
 abstract class IDataLoadingWidgetDelegate<D> {
   Widget buildErrorWidget(
-      BuildContext context, DataLoadingHandlerMixin<D> loading, dynamic error);
+    BuildContext context,
+    DataLoadingHandlerMixin<D> loading,
+    dynamic error,
+  );
 
   Widget buildLoadingWidget(BuildContext context);
 

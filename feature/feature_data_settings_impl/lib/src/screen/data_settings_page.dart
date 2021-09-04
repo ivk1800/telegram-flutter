@@ -12,8 +12,9 @@ class DataSettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Provider.of<tg.ConnectionStateWidgetFactory>(context).create(
-            context,
-            (_) => Text(localizationManager.getString('DataSettings'))),
+          context,
+          (_) => Text(localizationManager.getString('DataSettings')),
+        ),
       ),
       body: Center(
         child: Text(localizationManager.getString('DataSettings')),

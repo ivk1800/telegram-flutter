@@ -40,55 +40,64 @@ abstract class FoldersSetupModule {
   @j.provide
   @j.singleton
   static IChatRepository provideChatRepository(
-          ChatsListFeatureDependencies dependencies) =>
+    ChatsListFeatureDependencies dependencies,
+  ) =>
       dependencies.chatRepository;
 
   @j.provide
   @j.singleton
   static IFileRepository provideFileRepository(
-          ChatsListFeatureDependencies dependencies) =>
+    ChatsListFeatureDependencies dependencies,
+  ) =>
       dependencies.fileRepository;
 
   @j.provide
   @j.singleton
   static IUserRepository provideUserRepository(
-          ChatsListFeatureDependencies dependencies) =>
+    ChatsListFeatureDependencies dependencies,
+  ) =>
       dependencies.userRepository;
 
   @j.provide
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
-          ChatsListFeatureDependencies dependencies) =>
+    ChatsListFeatureDependencies dependencies,
+  ) =>
       dependencies.localizationManager;
 
   @j.provide
   @j.singleton
   static IChatsListScreenRouter provideChatsListScreenRouter(
-          ChatsListFeatureDependencies dependencies) =>
+    ChatsListFeatureDependencies dependencies,
+  ) =>
       dependencies.router;
 
   @j.provide
   @j.singleton
   static DateFormatter provideDateFormatter(
-          ChatsListFeatureDependencies dependencies) =>
+    ChatsListFeatureDependencies dependencies,
+  ) =>
       dependencies.dateFormatter;
 
   @j.provide
   @j.singleton
   static DateParser provideDateParser(
-          ChatsListFeatureDependencies dependencies) =>
+    ChatsListFeatureDependencies dependencies,
+  ) =>
       dependencies.dateParser;
 
   @j.provide
   @j.singleton
   static IChatUpdatesProvider provideChatUpdatesProvider(
-          ChatsListFeatureDependencies dependencies) =>
+    ChatsListFeatureDependencies dependencies,
+  ) =>
       dependencies.chatUpdatesProvider;
 
   @j.provide
   @j.singleton
   static IMessagePreviewResolver provideMessagePreviewResolver(
-          ChatsListFeatureDependencies dependencies) =>
+    ChatsListFeatureDependencies dependencies,
+  ) =>
       dependencies.messagePreviewResolver;
 }
 
@@ -97,7 +106,8 @@ abstract class FoldersSetupComponentBuilder {
   FoldersSetupComponentBuilder screenState(ChatsListPageState screen);
 
   FoldersSetupComponentBuilder dependencies(
-      ChatsListFeatureDependencies dependencies);
+    ChatsListFeatureDependencies dependencies,
+  );
 
   ChatsListScreenComponent build();
 }

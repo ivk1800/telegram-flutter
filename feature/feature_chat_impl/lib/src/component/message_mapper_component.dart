@@ -48,15 +48,16 @@ class MessageMapperComponent {
     );
 
     return MessageTileMapper(
-        senderInfoMapper: SenderInfoMapper(
-          chatRepository: _dependencies.chatRepository,
-          userRepository: _dependencies.userRepository,
-        ),
-        messageReplyInfoMapper: messageReplyInfoMapper,
-        additionalInfoMapper: additionalInfoMapper,
+      senderInfoMapper: SenderInfoMapper(
+        chatRepository: _dependencies.chatRepository,
         userRepository: _dependencies.userRepository,
-        dateParser: DateParser(),
-        localizationManager: _dependencies.localizationManager,
-        formattedTextResolver: FormattedTextResolver());
+      ),
+      messageReplyInfoMapper: messageReplyInfoMapper,
+      additionalInfoMapper: additionalInfoMapper,
+      userRepository: _dependencies.userRepository,
+      dateParser: DateParser(),
+      localizationManager: _dependencies.localizationManager,
+      formattedTextResolver: FormattedTextResolver(),
+    );
   }
 }

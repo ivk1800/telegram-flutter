@@ -15,12 +15,12 @@ import 'ordered_chat.dart';
 
 class ChatListUpdateHandler {
   @j.inject
-  ChatListUpdateHandler(
-      {required IChatRepository chatRepository,
-      required ChatListConfig chatListConfig,
-      required IChatsHolder chatsHolder,
-      required ChatTileModelMapper chatTileModelMapper})
-      : _chatTileModelMapper = chatTileModelMapper,
+  ChatListUpdateHandler({
+    required IChatRepository chatRepository,
+    required ChatListConfig chatListConfig,
+    required IChatsHolder chatsHolder,
+    required ChatTileModelMapper chatTileModelMapper,
+  })  : _chatTileModelMapper = chatTileModelMapper,
         _chatListConfig = chatListConfig,
         _chatsHolder = chatsHolder,
         _chatRepository = chatRepository;
@@ -40,7 +40,9 @@ class ChatListUpdateHandler {
       _enqueue(() => _handleNewChat(chat: chat));
 
   Future<bool> handleNewPositions(
-          int chatId, List<td.ChatPosition> positions) =>
+    int chatId,
+    List<td.ChatPosition> positions,
+  ) =>
       _enqueue(() => _handleNewPositions(chatId, positions));
 
   Future<bool> handleNewPosition(int chatId, td.ChatPosition position) =>
@@ -53,15 +55,18 @@ class ChatListUpdateHandler {
       _enqueue(() => _handleUpdateChatReadInbox(update));
 
   Future<bool> handleUpdateChatUnreadMentionCount(
-          td.UpdateChatUnreadMentionCount update) =>
+    td.UpdateChatUnreadMentionCount update,
+  ) =>
       _enqueue(() => _handleUpdateChatUnreadMentionCount(update));
 
   Future<bool> handleUpdateMessageMentionRead(
-          td.UpdateMessageMentionRead update) =>
+    td.UpdateMessageMentionRead update,
+  ) =>
       _enqueue(() => _handleUpdateMessageMentionRead(update));
 
   Future<bool> handleUpdateChatNotificationSettings(
-          td.UpdateChatNotificationSettings update) =>
+    td.UpdateChatNotificationSettings update,
+  ) =>
       _enqueue(() => _handleUpdateChatNotificationSettings(update));
 
   void dispose() {
@@ -93,11 +98,14 @@ class ChatListUpdateHandler {
   }
 
   Future<bool> _handleNewPositions(
-      int chatId, List<td.ChatPosition> positions) async {
+    int chatId,
+    List<td.ChatPosition> positions,
+  ) async {
     final td.ChatPosition? position = positions.firstWhereOrNull(
-        (td.ChatPosition position) =>
-            position.list.getConstructor() ==
-            _chatListConfig.chatList.getConstructor());
+      (td.ChatPosition position) =>
+          position.list.getConstructor() ==
+          _chatListConfig.chatList.getConstructor(),
+    );
 
     if (position != null) {
       return _handleNewPosition(chatId, position);
@@ -119,7 +127,9 @@ class ChatListUpdateHandler {
     final ChatData chatData = _chats[chatId]!;
     assert(chatData.chat.positions.length == 1);
     final bool removedPrevChat = _orderedChats.remove(OrderedChat(
-        chatId: chatData.chat.id, order: chatData.chat.getPosition().order));
+      chatId: chatData.chat.id,
+      order: chatData.chat.getPosition().order,
+    ));
     assert(removedPrevChat);
 
     if (position.order == 0) {
@@ -130,7 +140,9 @@ class ChatListUpdateHandler {
           OrderedChat(chatId: chatData.chat.id, order: position.order);
       chatData.chat =
           chatData.chat.copy(positions: <td.ChatPosition>[position]);
-      chatData.model = chatData.model.copy(isPinned: position.isPinned);
+      chatData.model = chatData.model.copy(
+        isPinned: position.isPinned,
+      );
       final bool add = _orderedChats.add(newOrderedChat);
       assert(add);
     }
@@ -158,19 +170,21 @@ class ChatListUpdateHandler {
     }
 
     chatData.chat = chatData.chat.copy(
-        unreadCount: update.unreadCount,
-        // all messages was read, set 0 to MentionCount
-        // because Update for it not incoming
-        unreadMentionCount:
-            update.unreadCount == 0 ? 0 : chatData.chat.unreadMentionCount,
-        lastReadInboxMessageId: update.lastReadInboxMessageId);
+      unreadCount: update.unreadCount,
+      // all messages was read, set 0 to MentionCount
+      // because Update for it not incoming
+      unreadMentionCount:
+          update.unreadCount == 0 ? 0 : chatData.chat.unreadMentionCount,
+      lastReadInboxMessageId: update.lastReadInboxMessageId,
+    );
 
     chatData.model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }
 
   Future<bool> _handleUpdateChatUnreadMentionCount(
-      td.UpdateChatUnreadMentionCount update) async {
+    td.UpdateChatUnreadMentionCount update,
+  ) async {
     final ChatData? chatData = _getChatData(update.chatId);
 
     if (chatData == null) {
@@ -185,7 +199,8 @@ class ChatListUpdateHandler {
   }
 
   Future<bool> _handleUpdateMessageMentionRead(
-      td.UpdateMessageMentionRead update) async {
+    td.UpdateMessageMentionRead update,
+  ) async {
     final ChatData? chatData = _getChatData(update.chatId);
 
     if (chatData == null) {
@@ -200,7 +215,8 @@ class ChatListUpdateHandler {
   }
 
   Future<bool> _handleUpdateChatNotificationSettings(
-      td.UpdateChatNotificationSettings update) async {
+    td.UpdateChatNotificationSettings update,
+  ) async {
     final ChatData? chatData = _getChatData(update.chatId);
 
     if (chatData == null) {

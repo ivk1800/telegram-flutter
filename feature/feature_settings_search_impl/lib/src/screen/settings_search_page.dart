@@ -16,22 +16,23 @@ class SettingsSearchPage extends StatelessWidget {
     final ILocalizationManager localizationManager = Provider.of(context);
     final TileFactory tileFactory = Provider.of(context);
     return BlocBuilder<SearchSettingsBloc, SearchSettingsState>(
-        builder: (BuildContext context, SearchSettingsState state) {
-      switch (state.runtimeType) {
-        case DefaultState:
-          {
-            final List<ITileModel> items = (state as DefaultState).tileModels;
-            return ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (BuildContext context, int index) {
-                final ITileModel tileModel = items[index];
-                return tileFactory.create(context, tileModel);
-              },
-            );
-          }
-      }
-      return const Center(child: CircularProgressIndicator());
-    });
+      builder: (BuildContext context, SearchSettingsState state) {
+        switch (state.runtimeType) {
+          case DefaultState:
+            {
+              final List<ITileModel> items = (state as DefaultState).tileModels;
+              return ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final ITileModel tileModel = items[index];
+                  return tileFactory.create(context, tileModel);
+                },
+              );
+            }
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
   }
 }
 //

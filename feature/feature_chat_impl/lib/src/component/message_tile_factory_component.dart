@@ -33,9 +33,9 @@ abstract class IMessageActionListener {
 }
 
 class MessageTileFactoryComponent {
-  MessageTileFactoryComponent(
-      {required MessageTileFactoryDependencies dependencies})
-      : _dependencies = dependencies;
+  MessageTileFactoryComponent({
+    required MessageTileFactoryDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final MessageTileFactoryDependencies _dependencies;
 

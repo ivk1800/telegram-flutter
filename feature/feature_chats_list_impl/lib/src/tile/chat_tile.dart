@@ -13,10 +13,10 @@ abstract class ChatTileListener {
 
 class ChatTileFactory {
   @j.inject
-  ChatTileFactory(
-      {required AvatarWidgetFactory avatarWidgetFactory,
-      required ChatTileListener listener})
-      : _avatarWidgetFactory = avatarWidgetFactory,
+  ChatTileFactory({
+    required AvatarWidgetFactory avatarWidgetFactory,
+    required ChatTileListener listener,
+  })  : _avatarWidgetFactory = avatarWidgetFactory,
         _listener = listener;
 
   final AvatarWidgetFactory _avatarWidgetFactory;
@@ -46,13 +46,19 @@ class ChatTileFactory {
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
-                    child: _avatarWidgetFactory.create(context,
-                        chatId: model.id, imageId: model.photoId, radius: 27),
+                    child: _avatarWidgetFactory.create(
+                      context,
+                      chatId: model.id,
+                      imageId: model.photoId,
+                      radius: 27,
+                    ),
                   ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0, vertical: 8.0),
+                        horizontal: 12.0,
+                        vertical: 8.0,
+                      ),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
@@ -82,8 +88,12 @@ class ChatTileFactory {
         child: _buildTitle(context, model),
       ),
     );
-    widgets.add(Text(model.lastMessageDate ?? '',
-        style: theme.textTheme.caption!.copyWith(fontSize: 14)));
+    widgets.add(Text(
+      model.lastMessageDate ?? '',
+      style: theme.textTheme.caption!.copyWith(
+        fontSize: 14,
+      ),
+    ));
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.max,
@@ -94,14 +104,17 @@ class ChatTileFactory {
   Widget _buildTitle(BuildContext context, ChatTileModel model) {
     final List<Widget> widgets = <Widget>[
       Flexible(
-        child: Text(model.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            // todo font height, need refactor
-            style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                height: kFontHeight)),
+        child: Text(
+          model.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          // todo font height, need refactor
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            height: kFontHeight,
+          ),
+        ),
       ),
     ];
 
@@ -146,16 +159,18 @@ class ChatTileFactory {
         model.unreadMessagesCount == 0 &&
         !model.isMentioned) {
       widgets.add(const Align(
-          alignment: Alignment.bottomCenter,
-          child: Icon(Icons.push_pin_rounded, size: 18, color: Colors.grey)));
+        alignment: Alignment.bottomCenter,
+        child: Icon(Icons.push_pin_rounded, size: 18, color: Colors.grey),
+      ));
     }
 
     // todo extract colors to theme
     if (model.isMentioned) {
       widgets.add(Align(
-          alignment: Alignment.bottomCenter,
-          child: _buildCircle(
-              context: context, text: '@', color: Colors.lightGreen)));
+        alignment: Alignment.bottomCenter,
+        child:
+            _buildCircle(context: context, text: '@', color: Colors.lightGreen),
+      ));
     }
 
     if ((model.unreadMessagesCount > 1 && model.isMentioned) ||
@@ -166,11 +181,13 @@ class ChatTileFactory {
         ));
       }
       widgets.add(Align(
-          alignment: Alignment.bottomCenter,
-          child: _buildCircle(
-              context: context,
-              text: '${model.unreadMessagesCount}',
-              color: model.isMuted ? Colors.blueGrey : Colors.lightGreen)));
+        alignment: Alignment.bottomCenter,
+        child: _buildCircle(
+          context: context,
+          text: '${model.unreadMessagesCount}',
+          color: model.isMuted ? Colors.blueGrey : Colors.lightGreen,
+        ),
+      ));
     }
 
     return Row(
@@ -181,27 +198,29 @@ class ChatTileFactory {
   }
 
   // todo need improvements, fix horizontal padding, text align
-  Widget _buildCircle(
-      {required BuildContext context,
-      required String text,
-      required Color color}) {
+  Widget _buildCircle({
+    required BuildContext context,
+    required String text,
+    required Color color,
+  }) {
     return Container(
       constraints: const BoxConstraints(minWidth: 20, maxHeight: 20),
       child: Align(
-          alignment: Alignment.center,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 3, right: 4),
-            child: Text(
-              text,
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .caption!
-                  // todo magic number height, need refactor
-                  .copyWith(height: 1.05, color: Colors.white),
-              // style: TextStyle(height: 1.025, color: Colors.white),
-            ),
-          )),
+        alignment: Alignment.center,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 3, right: 4),
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .caption!
+                // todo magic number height, need refactor
+                .copyWith(height: 1.05, color: Colors.white),
+            // style: TextStyle(height: 1.025, color: Colors.white),
+          ),
+        ),
+      ),
       decoration: BoxDecoration(
         color: color,
         shape: BoxShape.rectangle,
@@ -218,14 +237,15 @@ class ChatTileFactory {
     }
 
     return Expanded(
-        child: Text(
-      model.firstSubtitle!,
-      maxLines: model.secondSubtitle != null ? 1 : 2,
-      textAlign: TextAlign.start,
-      overflow: TextOverflow.ellipsis,
-      style: theme.textTheme.subtitle1!
-          .copyWith(height: kFontHeight, color: theme.primaryColor),
-    ));
+      child: Text(
+        model.firstSubtitle!,
+        maxLines: model.secondSubtitle != null ? 1 : 2,
+        textAlign: TextAlign.start,
+        overflow: TextOverflow.ellipsis,
+        style: theme.textTheme.subtitle1!
+            .copyWith(height: kFontHeight, color: theme.primaryColor),
+      ),
+    );
   }
 
   Widget? _createSecondSubtitle(BuildContext context, ChatTileModel model) {
@@ -236,18 +256,21 @@ class ChatTileFactory {
     }
 
     return Expanded(
-        child: Text(
-      model.secondSubtitle!,
-      maxLines: model.firstSubtitle != null ? 1 : 2,
-      textAlign: TextAlign.start,
-      overflow: TextOverflow.ellipsis,
-      style: theme.textTheme.subtitle1!
-          .copyWith(height: kFontHeight, color: Colors.grey[600]),
-    ));
+      child: Text(
+        model.secondSubtitle!,
+        maxLines: model.firstSubtitle != null ? 1 : 2,
+        textAlign: TextAlign.start,
+        overflow: TextOverflow.ellipsis,
+        style: theme.textTheme.subtitle1!
+            .copyWith(height: kFontHeight, color: Colors.grey[600]),
+      ),
+    );
   }
 
-  void _showContextAlertDialog(
-      {required BuildContext context, required ChatTileModel chat}) {
+  void _showContextAlertDialog({
+    required BuildContext context,
+    required ChatTileModel chat,
+  }) {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) =>
@@ -255,18 +278,21 @@ class ChatTileFactory {
     );
   }
 
-  Widget _buildContextAlertDialog(
-      {required BuildContext context, required ChatTileModel chat}) {
+  Widget _buildContextAlertDialog({
+    required BuildContext context,
+    required ChatTileModel chat,
+  }) {
     return AlertDialog(
-        content: SingleChildScrollView(
-      child: ListTile(
-        title: Text(chat.isPinned ? 'unpin' : 'pin'),
-        onTap: () {
-          Navigator.of(context).pop();
-          _listener.onTogglePinTap(chat.id);
-        },
+      content: SingleChildScrollView(
+        child: ListTile(
+          title: Text(chat.isPinned ? 'unpin' : 'pin'),
+          onTap: () {
+            Navigator.of(context).pop();
+            _listener.onTogglePinTap(chat.id);
+          },
+        ),
       ),
-    ));
+    );
   }
 
   static const double kFontHeight = 1.2;

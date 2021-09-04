@@ -93,7 +93,7 @@ class LogoutPage extends StatelessWidget {
         ),
         tg.Annotation(
           text: localizationManager.getString('LogOutInfo'),
-        )
+        ),
       ],
     );
   }

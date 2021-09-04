@@ -14,20 +14,23 @@ class SearchSettingsBloc
         super(const DefaultState(tileModels: <ITileModel>[
           // TODO: implement all https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java#L7701
           SearchResultTileModel(
-              type: SearchResultType.NotificationsAndSounds,
-              title: 'Notifications and Sounds',
-              subtitle: null),
+            type: SearchResultType.NotificationsAndSounds,
+            title: 'Notifications and Sounds',
+            subtitle: null,
+          ),
           // TODO: parse faq https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java#L7342
           FaqResultTileModel(
-              title: 'FAQ > General',
-              subtitle: 'What is Telegram?',
-              url: 'https://telegram.org/faq')
+            title: 'FAQ > General',
+            subtitle: 'What is Telegram?',
+            url: 'https://telegram.org/faq',
+          ),
         ]));
   final ISettingsSearchScreenRouter _router;
 
   @override
   Stream<SearchSettingsState> mapEventToState(
-      SearchSettingsEvent event) async* {
+    SearchSettingsEvent event,
+  ) async* {
     if (event is ActionEvent) {
       _handleActionEvent(event);
       return;

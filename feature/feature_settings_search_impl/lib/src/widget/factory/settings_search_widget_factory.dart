@@ -23,30 +23,36 @@ class SearchSettingsWidgetFactory implements ISettingsSearchWidgetFactory {
   Widget create() => MultiProvider(
         providers: <Provider<dynamic>>[
           Provider<ILocalizationManager>.value(
-              value: dependencies.localizationManager),
+            value: dependencies.localizationManager,
+          ),
           Provider<TileFactory>.value(
-              value: TileFactory(
-                  delegates: <Type, ITileFactoryDelegate<ITileModel>>{
-                FaqResultTileModel: FaqResultTileFactoryDelegate(
-                    tap: (BuildContext context, String url) {
+            value:
+                TileFactory(delegates: <Type, ITileFactoryDelegate<ITileModel>>{
+              FaqResultTileModel: FaqResultTileFactoryDelegate(
+                tap: (BuildContext context, String url) {
                   BlocProvider.of<SearchSettingsBloc>(context)
                       .add(FaqResultTap(url: url));
-                }),
-                SearchResultTileModel: SearchResultTileFactoryDelegate(
-                    tap: (BuildContext context, SearchResultType type) {
+                },
+              ),
+              SearchResultTileModel: SearchResultTileFactoryDelegate(
+                tap: (BuildContext context, SearchResultType type) {
                   BlocProvider.of<SearchSettingsBloc>(context)
                       .add(SearchResultTap(type: type));
-                }),
-              })),
+                },
+              ),
+            }),
+          ),
           Provider<ConnectionStateWidgetFactory>.value(
-              value: ConnectionStateWidgetFactory(
-                  connectionStateProvider:
-                      dependencies.connectionStateProvider))
+            value: ConnectionStateWidgetFactory(
+              connectionStateProvider: dependencies.connectionStateProvider,
+            ),
+          ),
         ],
         child: BlocProvider<SearchSettingsBloc>(
-            create: (BuildContext context) => SearchSettingsBloc(
-                  router: dependencies.router,
-                ),
-            child: const SettingsSearchPage()),
+          create: (BuildContext context) => SearchSettingsBloc(
+            router: dependencies.router,
+          ),
+          child: const SettingsSearchPage(),
+        ),
       );
 }

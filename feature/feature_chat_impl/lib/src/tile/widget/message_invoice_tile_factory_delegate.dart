@@ -7,18 +7,19 @@ import 'not_implemented.dart';
 
 class MessageInvoiceTileFactoryDelegate
     implements ITileFactoryDelegate<MessageInvoiceTileModel> {
-  MessageInvoiceTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageInvoiceTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(BuildContext context, MessageInvoiceTileModel model) {
     return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      body: NotImplementedWidget(type: model.type),
+    );
   }
 }

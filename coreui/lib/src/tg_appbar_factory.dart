@@ -13,9 +13,10 @@ class TgAppBarFactory {
     IConnectionStateProvider connectionStateProvider,
   ) {
     return TgAppBarFactory(
-        connectionStateWidgetFactory: ConnectionStateWidgetFactory(
-      connectionStateProvider: connectionStateProvider,
-    ));
+      connectionStateWidgetFactory: ConnectionStateWidgetFactory(
+        connectionStateProvider: connectionStateProvider,
+      ),
+    );
   }
 
   final ConnectionStateWidgetFactory _connectionStateWidgetFactory;

@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextCell extends StatelessWidget {
-  const TextCell(
-      {Key? key,
-      required this.title,
-      this.titleColor,
-      this.subtitle,
-      this.valueWidget,
-      this.leading,
-      this.onTap})
-      : super(key: key);
+  const TextCell({
+    Key? key,
+    required this.title,
+    this.titleColor,
+    this.subtitle,
+    this.valueWidget,
+    this.leading,
+    this.onTap,
+  }) : super(key: key);
 
   factory TextCell.textValue({
     required String value,
@@ -61,7 +61,7 @@ class TextCell extends StatelessWidget {
                 Switch(
                   value: value,
                   onChanged: onChanged,
-                )
+                ),
               ],
             )
           : Switch(
@@ -88,13 +88,15 @@ class TextCell extends StatelessWidget {
         onTap: onTap,
         leading: leading,
         trailing: valueWidget,
-        title: Text(title,
-            style: titleColor != null
-                ? Theme.of(context)
-                    .textTheme
-                    .subtitle1
-                    ?.copyWith(color: titleColor)
-                : null),
+        title: Text(
+          title,
+          style: titleColor != null
+              ? Theme.of(context)
+                  .textTheme
+                  .subtitle1
+                  ?.copyWith(color: titleColor)
+              : null,
+        ),
         subtitle: subtitle != null ? Text(subtitle!) : null,
       );
 }

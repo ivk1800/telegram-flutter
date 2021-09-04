@@ -37,15 +37,16 @@ class ChatContextData {
 
   factory ChatContextData.desktop({required double maxWidth}) =>
       ChatContextData.raw(
-          width: maxWidth,
-          horizontalPadding: 8.0,
-          verticalPadding: 4.0,
-          maxWidth: 500,
-          mediaConstraints: <MediaType, Size>{
-            MediaType.Video: const Size(double.infinity, 450),
-            MediaType.Photo: const Size(double.infinity, 450),
-            MediaType.Animation: const Size(300, 300),
-          });
+        width: maxWidth,
+        horizontalPadding: 8.0,
+        verticalPadding: 4.0,
+        maxWidth: 500,
+        mediaConstraints: <MediaType, Size>{
+          MediaType.Video: const Size(double.infinity, 450),
+          MediaType.Photo: const Size(double.infinity, 450),
+          MediaType.Animation: const Size(300, 300),
+        },
+      );
 
   final double maxWidth;
   final double width;

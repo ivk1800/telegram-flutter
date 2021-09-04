@@ -3,9 +3,9 @@ import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
 import 'package:flutter/widgets.dart';
 
 class NewChatScreenFactory implements INewChatScreenFactory {
-  NewChatScreenFactory(
-      {required ICreateNewChatFeatureDependencies dependencies})
-      : _dependencies = dependencies;
+  NewChatScreenFactory({
+    required ICreateNewChatFeatureDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final ICreateNewChatFeatureDependencies _dependencies;
 

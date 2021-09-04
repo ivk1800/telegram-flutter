@@ -3,10 +3,10 @@ import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_
 import 'package:tdlib/td_api.dart' as td;
 
 class SenderInfoMapper {
-  SenderInfoMapper(
-      {required IUserRepository userRepository,
-      required IChatRepository chatRepository})
-      : _userRepository = userRepository,
+  SenderInfoMapper({
+    required IUserRepository userRepository,
+    required IChatRepository chatRepository,
+  })  : _userRepository = userRepository,
         _chatRepository = chatRepository;
   final IUserRepository _userRepository;
 

@@ -29,29 +29,32 @@ class ShortInfoFactory {
           if (additionalInfo.viewCount != null)
             TextSpan(children: <InlineSpan>[
               WidgetSpan(
-                  alignment: ui.PlaceholderAlignment.middle,
-                  baseline: TextBaseline.ideographic,
-                  child: Icon(
-                    Icons.remove_red_eye,
-                    color: caption.color,
-                    size: iconSize,
-                  )),
+                alignment: ui.PlaceholderAlignment.middle,
+                baseline: TextBaseline.ideographic,
+                child: Icon(
+                  Icons.remove_red_eye,
+                  color: caption.color,
+                  size: iconSize,
+                ),
+              ),
               // todo double tab?
-              TextSpan(text: ' ${additionalInfo.viewCount}\u0009\u0009')
+              TextSpan(text: ' ${additionalInfo.viewCount}\u0009\u0009'),
             ]),
           if (additionalInfo.authorSignature != null)
             TextSpan(text: '${additionalInfo.authorSignature}, '),
           if (additionalInfo.isEdited)
             TextSpan(
-                text: '${_localizationManager.getString('EditedMessage')} '),
+              text: '${_localizationManager.getString('EditedMessage')} ',
+            ),
           TextSpan(text: additionalInfo.sentDate),
           if (additionalInfo.hasBeenRead != null)
             WidgetSpan(
-                child: Icon(
-              additionalInfo.hasBeenRead! ? Icons.done_all : Icons.done,
-              color: caption.color,
-              size: iconSize,
-            ))
+              child: Icon(
+                additionalInfo.hasBeenRead! ? Icons.done_all : Icons.done,
+                color: caption.color,
+                size: iconSize,
+              ),
+            ),
         ],
       ),
     );

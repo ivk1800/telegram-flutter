@@ -46,12 +46,13 @@ class ChatScreenFactory implements IChatScreenFactory {
           ),
         ],
         child: BlocProvider<ChatBloc>(
-            create: (BuildContext context) =>
-                context.getComponent().getChatBloc(),
-            child: ChatTheme(
-              data: ChatThemeData.light(context: context),
-              child: const ChatPage(),
-            )),
+          create: (BuildContext context) =>
+              context.getComponent().getChatBloc(),
+          child: ChatTheme(
+            data: ChatThemeData.light(context: context),
+            child: const ChatPage(),
+          ),
+        ),
       ),
     );
   }

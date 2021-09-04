@@ -7,18 +7,19 @@ import 'not_implemented.dart';
 
 class MessageGameScoreTileFactoryDelegate
     implements ITileFactoryDelegate<MessageGameScoreTileModel> {
-  MessageGameScoreTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageGameScoreTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(BuildContext context, MessageGameScoreTileModel model) {
     return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      body: NotImplementedWidget(type: model.type),
+    );
   }
 }

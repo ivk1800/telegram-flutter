@@ -5,16 +5,21 @@ import 'package:tile/tile.dart';
 
 class MessageCustomServiceActionTileFactoryDelegate
     implements ITileFactoryDelegate<MessageCustomServiceActionTileModel> {
-  MessageCustomServiceActionTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageCustomServiceActionTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(
-      BuildContext context, MessageCustomServiceActionTileModel model) {
+    BuildContext context,
+    MessageCustomServiceActionTileModel model,
+  ) {
     return _chatMessageFactory.createChatNotificationFromText(
-        id: model.id, context: context, text: TextSpan(text: model.title));
+      id: model.id,
+      context: context,
+      text: TextSpan(text: model.title),
+    );
   }
 }

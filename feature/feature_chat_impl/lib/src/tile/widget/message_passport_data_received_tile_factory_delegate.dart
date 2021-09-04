@@ -7,19 +7,22 @@ import 'not_implemented.dart';
 
 class MessagePassportDataReceivedTileFactoryDelegate
     implements ITileFactoryDelegate<MessagePassportDataReceivedTileModel> {
-  MessagePassportDataReceivedTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessagePassportDataReceivedTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(
-      BuildContext context, MessagePassportDataReceivedTileModel model) {
+    BuildContext context,
+    MessagePassportDataReceivedTileModel model,
+  ) {
     return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      body: NotImplementedWidget(type: model.type),
+    );
   }
 }

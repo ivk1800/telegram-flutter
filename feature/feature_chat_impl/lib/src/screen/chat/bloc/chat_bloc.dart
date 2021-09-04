@@ -10,20 +10,21 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tile/tile.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
-  ChatBloc(
-      {required ChatArgs args,
-      required IChatScreenRouter router,
-      required IChatHeaderInfoInteractor headerInfoInteractor,
-      required ChatMessagesInteractor messagesInteractor})
-      : _args = args,
+  ChatBloc({
+    required ChatArgs args,
+    required IChatScreenRouter router,
+    required IChatHeaderInfoInteractor headerInfoInteractor,
+    required ChatMessagesInteractor messagesInteractor,
+  })  : _args = args,
         _headerInfoInteractor = headerInfoInteractor,
         _router = router,
         _messagesInteractor = messagesInteractor,
         super(ChatState(
-            headerState: HeaderState(
-              info: headerInfoInteractor.current,
-            ),
-            bodyState: const LoadingBodyState())) {
+          headerState: HeaderState(
+            info: headerInfoInteractor.current,
+          ),
+          bodyState: const LoadingBodyState(),
+        )) {
     _initCompositeStateSubscription();
     _messagesInteractor.init(_args.chatId);
   }
@@ -60,18 +61,19 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   void _initCompositeStateSubscription() {
     _compositeStateSubscription =
         Rx.combineLatest2<BodyState, HeaderState, ChatState>(
-                _messagesInteractor.messagesStream
-                    .map<BodyState>(
-                        (List<ITileModel> event) => DataBodyState(tiles: event))
-                    .startWith(const LoadingBodyState()),
-                _headerInfoInteractor.infoStream
-                    .startWith(_headerInfoInteractor.current)
-                    .map((ChatHeaderInfo event) => HeaderState(
-                          info: event,
-                        )),
-                (BodyState body, HeaderState header) =>
-                    ChatState(headerState: header, bodyState: body))
-            .listen((ChatState newState) {
+      _messagesInteractor.messagesStream
+          .map<BodyState>(
+            (List<ITileModel> event) => DataBodyState(tiles: event),
+          )
+          .startWith(const LoadingBodyState()),
+      _headerInfoInteractor.infoStream
+          .startWith(_headerInfoInteractor.current)
+          .map((ChatHeaderInfo event) => HeaderState(
+                info: event,
+              )),
+      (BodyState body, HeaderState header) =>
+          ChatState(headerState: header, bodyState: body),
+    ).listen((ChatState newState) {
       emit(newState);
     });
   }

@@ -7,18 +7,19 @@ import 'not_implemented.dart';
 
 class MessageVideoNoteTileFactoryDelegate
     implements ITileFactoryDelegate<MessageVideoNoteTileModel> {
-  MessageVideoNoteTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageVideoNoteTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(BuildContext context, MessageVideoNoteTileModel model) {
     return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      body: NotImplementedWidget(type: model.type),
+    );
   }
 }

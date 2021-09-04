@@ -21,8 +21,9 @@ class ChatSettingsPageState extends State<ChatSettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Provider.of<tg.ConnectionStateWidgetFactory>(context).create(
-            context,
-            (_) => Text(localizationManager.getString('ChatSettings'))),
+          context,
+          (_) => Text(localizationManager.getString('ChatSettings')),
+        ),
       ),
       body: SingleChildScrollView(child: _buildBody(context)),
     );
@@ -52,61 +53,71 @@ class ChatSettingsPageState extends State<ChatSettingsPage> {
           text: 'Settings',
         ),
         tg.TextCell.toggle(
-            onTap: () {
-              print('tap');
-            },
-            value: true,
-            title: localizationManager.getString('AutoNightTheme'),
-            subtitle: 'todo',
-            onChanged: (bool v) {
-              print('tap toggle');
-            }),
+          onTap: () {
+            print('tap');
+          },
+          value: true,
+          title: localizationManager.getString('AutoNightTheme'),
+          subtitle: 'todo',
+          onChanged: (bool v) {
+            print('tap toggle');
+          },
+        ),
         const tg.Divider(),
         tg.TextCell.toggle(
-            value: true,
-            subtitle: localizationManager.getString('ChromeCustomTabs'),
-            title: localizationManager.getString('ChromeCustomTabsInfo'),
-            onChanged: (bool v) {}),
+          value: true,
+          subtitle: localizationManager.getString('ChromeCustomTabs'),
+          title: localizationManager.getString('ChromeCustomTabsInfo'),
+          onChanged: (bool v) {},
+        ),
         const tg.Divider(),
         tg.TextCell.toggle(
-            value: true,
-            subtitle: localizationManager.getString('DirectShare'),
-            title: localizationManager.getString('DirectShareInfo'),
-            onChanged: (bool v) {}),
+          value: true,
+          subtitle: localizationManager.getString('DirectShare'),
+          title: localizationManager.getString('DirectShareInfo'),
+          onChanged: (bool v) {},
+        ),
         const tg.Divider(),
         tg.TextCell.toggle(
-            value: true,
-            title: localizationManager.getString('EnableAnimations'),
-            onChanged: (bool v) {}),
+          value: true,
+          title: localizationManager.getString('EnableAnimations'),
+          onChanged: (bool v) {},
+        ),
         const tg.Divider(),
         tg.TextCell.toggle(
-            value: true,
-            title: localizationManager.getString('LargeEmoji'),
-            onChanged: (bool v) {}),
+          value: true,
+          title: localizationManager.getString('LargeEmoji'),
+          onChanged: (bool v) {},
+        ),
         const tg.Divider(),
         tg.TextCell.toggle(
-            value: true,
-            title: localizationManager.getString('RaiseToSpeak'),
-            onChanged: (bool v) {}),
+          value: true,
+          title: localizationManager.getString('RaiseToSpeak'),
+          onChanged: (bool v) {},
+        ),
         const tg.Divider(),
         tg.TextCell.toggle(
-            value: true,
-            title: localizationManager.getString('SendByEnter'),
-            onChanged: (bool v) {}),
+          value: true,
+          title: localizationManager.getString('SendByEnter'),
+          onChanged: (bool v) {},
+        ),
         const tg.Divider(),
         tg.TextCell.toggle(
-            value: true,
-            title: localizationManager.getString('SaveToGallerySettings'),
-            onChanged: (bool v) {}),
+          value: true,
+          title: localizationManager.getString('SaveToGallerySettings'),
+          onChanged: (bool v) {},
+        ),
         const tg.Divider(),
         tg.TextCell.toggle(
-            value: true,
-            title: localizationManager.getString('DistanceUnits'),
-            onChanged: (bool v) {}),
+          value: true,
+          title: localizationManager.getString('DistanceUnits'),
+          onChanged: (bool v) {},
+        ),
         const tg.Divider(),
         tg.TextCell.textValue(
-            value: localizationManager.getString('DistanceUnitsAutomatic'),
-            title: localizationManager.getString('DistanceUnits')),
+          value: localizationManager.getString('DistanceUnitsAutomatic'),
+          title: localizationManager.getString('DistanceUnits'),
+        ),
         const tg.SectionDivider(),
         tg.TextCell(
           onTap: () => bloc.add(const StickersAndMasksTap()),

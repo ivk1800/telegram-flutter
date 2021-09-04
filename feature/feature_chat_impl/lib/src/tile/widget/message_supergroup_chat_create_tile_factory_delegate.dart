@@ -7,19 +7,22 @@ import 'not_implemented.dart';
 
 class MessageSupergroupChatCreateTileFactoryDelegate
     implements ITileFactoryDelegate<MessageSupergroupChatCreateTileModel> {
-  MessageSupergroupChatCreateTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageSupergroupChatCreateTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(
-      BuildContext context, MessageSupergroupChatCreateTileModel model) {
+    BuildContext context,
+    MessageSupergroupChatCreateTileModel model,
+  ) {
     return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      body: NotImplementedWidget(type: model.type),
+    );
   }
 }

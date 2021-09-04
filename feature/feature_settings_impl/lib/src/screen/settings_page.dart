@@ -61,7 +61,9 @@ class SettingsPageState extends State<SettingsPage>
     });
 
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 200));
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
 
     // TODO refactor Size
     _navigationIconColorTween =
@@ -269,8 +271,9 @@ class SettingsPageState extends State<SettingsPage>
                   focusNode: myFocusNode,
                   controller: _searchQueryController,
                   decoration: const InputDecoration.collapsed(
-                      hintText: 'Search',
-                      hintStyle: TextStyle(color: Colors.white)),
+                    hintText: 'Search',
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
                 );
               }
             default:

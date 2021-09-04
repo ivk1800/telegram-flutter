@@ -93,11 +93,13 @@ class SplitViewState extends State<SplitView> {
       switch (container) {
         case ContainerType.Left:
           _leftPages.removeWhere(
-              (_PageNode element) => element.order != LeftRootPageIndex);
+            (_PageNode element) => element.order != LeftRootPageIndex,
+          );
           break;
         case ContainerType.Right:
           _rightPages.removeWhere(
-              (_PageNode element) => element.order != RightRootPageIndex);
+            (_PageNode element) => element.order != RightRootPageIndex,
+          );
           break;
         case ContainerType.Top:
           _topPages.clear();
@@ -127,10 +129,11 @@ class SplitViewState extends State<SplitView> {
     }
   }
 
-  void pushAllReplacement(
-      {required LocalKey key,
-      required WidgetBuilder builder,
-      required ContainerType container}) {
+  void pushAllReplacement({
+    required LocalKey key,
+    required WidgetBuilder builder,
+    required ContainerType container,
+  }) {
     setState(() {
       popUntilRoot(container);
       push(key: key, builder: builder, container: container);
@@ -146,24 +149,28 @@ class SplitViewState extends State<SplitView> {
       } else {
         _leftRootPage = _createLeftRootPage(widget);
         final int indexOfRootPage = _leftPages.indexOf(_leftPages.firstWhere(
-            (_PageNode element) => element.order == LeftRootPageIndex));
+          (_PageNode element) => element.order == LeftRootPageIndex,
+        ));
         _leftPages[indexOfRootPage] = _leftRootPage!;
       }
       _invalidatePages();
     });
   }
 
-  void push(
-      {required LocalKey key,
-      required WidgetBuilder builder,
-      required ContainerType container}) {
+  void push({
+    required LocalKey key,
+    required WidgetBuilder builder,
+    required ContainerType container,
+  }) {
     _push(
-        _SimplePage(
-            key: key,
-            animateRouterProvider: () => _shouldAnimate(key, container),
-            builder: builder,
-            containerType: container),
-        container);
+      _SimplePage(
+        key: key,
+        animateRouterProvider: () => _shouldAnimate(key, container),
+        builder: builder,
+        containerType: container,
+      ),
+      container,
+    );
   }
 
   void setRightContainerPlaceholder(Widget widget) {
@@ -192,14 +199,15 @@ class SplitViewState extends State<SplitView> {
   _PageNode _createLeftRootPage(Widget widget) {
     final UniqueKey key = UniqueKey();
     return _PageNode(
-        order: LeftRootPageIndex,
-        container: ContainerType.Left,
-        page: _SimplePage(
-            builder: (_) => widget,
-            animateRouterProvider: () =>
-                _shouldAnimate(key, ContainerType.Left),
-            containerType: ContainerType.Left,
-            key: key));
+      order: LeftRootPageIndex,
+      container: ContainerType.Left,
+      page: _SimplePage(
+        builder: (_) => widget,
+        animateRouterProvider: () => _shouldAnimate(key, ContainerType.Left),
+        containerType: ContainerType.Left,
+        key: key,
+      ),
+    );
   }
 
   void _onWidthChanged(double width) {
@@ -295,51 +303,51 @@ class SplitViewState extends State<SplitView> {
     final bool isNotSinglePage =
         _leftPages.isNotEmpty || _rightPages.isNotEmpty;
     return Align(
-        key: key,
-        alignment: Alignment.center,
-        child: Stack(
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                if (isNotSinglePage) {
-                  popUntilRoot(ContainerType.Top);
-                }
-              },
-              child: Container(
-                height: double.infinity,
-                width: double.infinity,
-                color: Colors.black.withOpacity(0.5),
-              ),
+      key: key,
+      alignment: Alignment.center,
+      child: Stack(
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              if (isNotSinglePage) {
+                popUntilRoot(ContainerType.Top);
+              }
+            },
+            child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: Colors.black.withOpacity(0.5),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                constraints:
-                    const BoxConstraints(maxHeight: 600, maxWidth: 500),
-                padding: const EdgeInsets.only(top: 48, bottom: 48),
-                child: Card(
-                  clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  elevation: 40,
-                  child: ClipRect(
-                    child: _buildNavigator(<Page<dynamic>>[
-                          // add stub page for trigger navigation button
-                          if (isNotSinglePage)
-                            _SimplePage(
-                                key: UniqueKey(),
-                                animateRouterProvider: () => false,
-                                builder: (_) => Container(),
-                                containerType: ContainerType.Top)
-                        ] +
-                        _topPages.map((_PageNode e) => e.page).toList()),
-                  ),
+          ),
+          Align(
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 600, maxWidth: 500),
+              padding: const EdgeInsets.only(top: 48, bottom: 48),
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                elevation: 40,
+                child: ClipRect(
+                  child: _buildNavigator(<Page<dynamic>>[
+                        // add stub page for trigger navigation button
+                        if (isNotSinglePage)
+                          _SimplePage(
+                            key: UniqueKey(),
+                            animateRouterProvider: () => false,
+                            builder: (_) => Container(),
+                            containerType: ContainerType.Top,
+                          ),
+                      ] +
+                      _topPages.map((_PageNode e) => e.page).toList()),
                 ),
               ),
-            )
-          ],
-        ));
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildAllContainersTogether(BuildContext context) {
@@ -360,8 +368,9 @@ class SplitViewState extends State<SplitView> {
                   key: ValueKey<dynamic>('hide'),
                 )
               : wrapWithoutTopPadding(
-                  _buildTopContainer(const ValueKey<dynamic>('show'), context)),
-        )
+                  _buildTopContainer(const ValueKey<dynamic>('show'), context),
+                ),
+        ),
       ],
     );
   }
@@ -370,7 +379,8 @@ class SplitViewState extends State<SplitView> {
     final MediaQueryData baseMediaQuery = MediaQuery.of(context);
     return MediaQuery(
       data: baseMediaQuery.copyWith(
-          padding: baseMediaQuery.padding.copyWith(top: 0)),
+        padding: baseMediaQuery.padding.copyWith(top: 0),
+      ),
       child: child,
     );
   }
@@ -409,8 +419,9 @@ class SplitViewState extends State<SplitView> {
           onPointerMove: (PointerMoveEvent event) {
             setState(() {
               _leftContainerWidth = event.position.dx.clamp(
-                  widget.config.minLeftContainerWidth,
-                  widget.config.maxLeftContainerWidth);
+                widget.config.minLeftContainerWidth,
+                widget.config.maxLeftContainerWidth,
+              );
             });
           },
           child: divider,
@@ -445,18 +456,22 @@ class SplitViewState extends State<SplitView> {
         _rightPages.map((_PageNode e) => e.page).toList();
     final UniqueKey key = UniqueKey();
     return Expanded(
-        child: ClipRect(
-      child: _buildNavigator(<Page<dynamic>>[
-            // add stub page for trigger navigation button
-            _SimplePage(
-                key: key,
-                animateRouterProvider: () =>
-                    _shouldAnimate(key, ContainerType.Top),
-                builder: (_) => Container(),
-                containerType: ContainerType.Top)
-          ] +
-          pages),
-    ));
+      child: ClipRect(
+        child: _buildNavigator(
+          <Page<dynamic>>[
+                // add stub page for trigger navigation button
+                _SimplePage(
+                  key: key,
+                  animateRouterProvider: () =>
+                      _shouldAnimate(key, ContainerType.Top),
+                  builder: (_) => Container(),
+                  containerType: ContainerType.Top,
+                ),
+              ] +
+              pages,
+        ),
+      ),
+    );
   }
 
   bool _shouldAnimate(LocalKey key, ContainerType container) {
@@ -507,17 +522,20 @@ class SplitViewState extends State<SplitView> {
     switch (container) {
       case ContainerType.Left:
         final _PageNode lastWhere = _leftPages.lastWhere(
-            (_PageNode element) => element.container == ContainerType.Left);
+          (_PageNode element) => element.container == ContainerType.Left,
+        );
         _leftPages.remove(lastWhere);
         break;
       case ContainerType.Right:
         final _PageNode lastWhere = _rightPages.lastWhere(
-            (_PageNode element) => element.container == ContainerType.Right);
+          (_PageNode element) => element.container == ContainerType.Right,
+        );
         _rightPages.remove(lastWhere);
         break;
       case ContainerType.Top:
         final _PageNode lastWhere = _topPages.lastWhere(
-            (_PageNode element) => element.container == ContainerType.Top);
+          (_PageNode element) => element.container == ContainerType.Top,
+        );
         _topPages.remove(lastWhere);
         break;
     }
@@ -552,14 +570,15 @@ class _SimplePage extends MyPage<dynamic> {
   @override
   Route<dynamic> createRoute(BuildContext context) {
     return _DefaultRoute<dynamic>(
-        settings: this,
-        routerDurationProvider: () {
-          if (!animateRouterProvider()) {
-            return Duration.zero;
-          }
-          return null;
-        },
-        builder: (BuildContext context) => builder.call(context));
+      settings: this,
+      routerDurationProvider: () {
+        if (!animateRouterProvider()) {
+          return Duration.zero;
+        }
+        return null;
+      },
+      builder: builder.call,
+    );
   }
 }
 

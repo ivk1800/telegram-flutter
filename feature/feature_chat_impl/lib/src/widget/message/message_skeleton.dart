@@ -72,7 +72,8 @@ class _BodyRenderBox extends RenderBox
         Offset(first.size.width - second.size.width, first.size.height);
 
     size = constraints.constrain(
-        Size(first.size.width, first.size.height + second.size.height));
+      Size(first.size.width, first.size.height + second.size.height),
+    );
   }
 
   void _handleRenderParagraph(RenderParagraph first) {
@@ -88,8 +89,11 @@ class _BodyRenderBox extends RenderBox
     final _ParentData secondParentData = second.parentData! as _ParentData;
 
     final List<TextBox> boxesForSelection = first.getBoxesForSelection(
-        TextSelection(
-            baseOffset: 0, extentOffset: first.text.toPlainText().length));
+      TextSelection(
+        baseOffset: 0,
+        extentOffset: first.text.toPlainText().length,
+      ),
+    );
     final TextBox lastBox = boxesForSelection.last;
     final double newWidth = first.size.width + second.size.width;
     final double secondXOffset = newWidth - second.size.width;
@@ -103,10 +107,13 @@ class _BodyRenderBox extends RenderBox
           Offset(constraints.maxWidth - second.size.width, offsetY);
     } else {
       secondParentData.offset = Offset(
-          secondXOffset, max(lastBox.bottom - second.size.height, lastBox.top));
+        secondXOffset,
+        max(lastBox.bottom - second.size.height, lastBox.top),
+      );
     }
     size = constraints.constrain(
-        Size(newWidth, secondParentData.offset.dy + second.size.height));
+      Size(newWidth, secondParentData.offset.dy + second.size.height),
+    );
   }
 
   @override

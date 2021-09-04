@@ -14,11 +14,12 @@ class FakeChatRepository implements IChatRepository {
   }
 
   @override
-  Future<List<td.Chat>> getChats(
-      {required int offsetChatId,
-      required int offsetOrder,
-      required int limit,
-      required td.ChatList chatList}) {
+  Future<List<td.Chat>> getChats({
+    required int offsetChatId,
+    required int offsetOrder,
+    required int limit,
+    required td.ChatList chatList,
+  }) {
     return Completer<List<td.Chat>>().future;
   }
 

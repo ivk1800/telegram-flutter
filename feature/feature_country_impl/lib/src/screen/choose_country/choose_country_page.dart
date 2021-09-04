@@ -21,34 +21,36 @@ class ChooseCountyPage extends StatelessWidget {
         title: Text(localizationManager.getString('ChooseCountry')),
       ),
       body: BlocConsumer<ChooseCountryBloc, ChooseCountryState>(
-          listener: (BuildContext context, ChooseCountryState state) {
-        if (state is DoneState) {
-          Navigator.of(context).pop();
-        }
-      }, builder: (BuildContext context, ChooseCountryState state) {
-        if (state is DataState) {
-          return ListView.builder(
-            itemCount: state.countries.length,
-            itemBuilder: (BuildContext context, int index) {
-              final Country country = state.countries[index];
-              return ListTile(
-                onTap: () {
-                  context.read<ChooseCountryBloc>().add(ChooseEvent(
-                        country: country,
-                      ));
-                },
-                title: Text(country.name),
-                trailing: Text(
-                  '+${country.code}',
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
-              );
-            },
-          );
-        }
+        listener: (BuildContext context, ChooseCountryState state) {
+          if (state is DoneState) {
+            Navigator.of(context).pop();
+          }
+        },
+        builder: (BuildContext context, ChooseCountryState state) {
+          if (state is DataState) {
+            return ListView.builder(
+              itemCount: state.countries.length,
+              itemBuilder: (BuildContext context, int index) {
+                final Country country = state.countries[index];
+                return ListTile(
+                  onTap: () {
+                    context.read<ChooseCountryBloc>().add(ChooseEvent(
+                          country: country,
+                        ));
+                  },
+                  title: Text(country.name),
+                  trailing: Text(
+                    '+${country.code}',
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                );
+              },
+            );
+          }
 
-        return const CircularProgressIndicator();
-      }),
+          return const CircularProgressIndicator();
+        },
+      ),
     );
   }
 }

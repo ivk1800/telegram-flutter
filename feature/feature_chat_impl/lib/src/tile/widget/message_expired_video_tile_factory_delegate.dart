@@ -7,18 +7,19 @@ import 'not_implemented.dart';
 
 class MessageExpiredVideoTileFactoryDelegate
     implements ITileFactoryDelegate<MessageExpiredVideoTileModel> {
-  MessageExpiredVideoTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageExpiredVideoTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(BuildContext context, MessageExpiredVideoTileModel model) {
     return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      body: NotImplementedWidget(type: model.type),
+    );
   }
 }

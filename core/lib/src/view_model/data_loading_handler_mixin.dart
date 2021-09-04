@@ -24,11 +24,14 @@ mixin DataLoadingHandlerMixin<D> on BaseViewModel {
     _subscription?.cancel();
     _subscription = onCreateDataStream().doOnListen(() {
       _loadingStateStream.add(LoadingState<D>());
-    }).listen((D data) {
-      _emitData(data);
-    }, onError: (dynamic error) {
-      _loadingStateStream.add(ErrorState<D>(error: error));
-    });
+    }).listen(
+      (D data) {
+        _emitData(data);
+      },
+      onError: (dynamic error) {
+        _loadingStateStream.add(ErrorState<D>(error: error));
+      },
+    );
   }
 
   void _emitData(D data) {

@@ -49,38 +49,41 @@ class ProfilePage extends StatelessWidget {
             ),
           const tg.Divider(),
           tg.TextCell.toggle(
-              onTap: () {
-                bloc.add(const NotificationTap());
-              },
-              value: !state.content.isMuted,
-              title: localizationManager.getString('Notifications'),
-              subtitle: state.content.isMuted
-                  ? localizationManager.getString('NotificationsOff')
-                  : localizationManager.getString('NotificationsOn'),
-              onChanged: (bool v) {
-                bloc.add(const NotificationToggleTap());
-              }),
+            onTap: () {
+              bloc.add(const NotificationTap());
+            },
+            value: !state.content.isMuted,
+            title: localizationManager.getString('Notifications'),
+            subtitle: state.content.isMuted
+                ? localizationManager.getString('NotificationsOff')
+                : localizationManager.getString('NotificationsOn'),
+            onChanged: (bool v) {
+              bloc.add(const NotificationToggleTap());
+            },
+          ),
           if (state.content.sharedContent.isNotEmpty) const tg.SectionDivider(),
           if (state.content.sharedContent.isNotEmpty)
             Expanded(
               child: ListView.separated(
-                  itemBuilder: (BuildContext context, int index) {
-                    final SharedContentInfo info =
-                        state.content.sharedContent[index];
-                    return tg.TextCell.textValue(
-                        onTap: () {
-                          bloc.add(MessagesTap(type: info.type));
-                        },
-                        title: info.title,
-                        value: '${info.count}',
-                        leading: const Icon(
-                          Icons.circle,
-                        ));
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const tg.Divider();
-                  },
-                  itemCount: state.content.sharedContent.length),
+                itemBuilder: (BuildContext context, int index) {
+                  final SharedContentInfo info =
+                      state.content.sharedContent[index];
+                  return tg.TextCell.textValue(
+                    onTap: () {
+                      bloc.add(MessagesTap(type: info.type));
+                    },
+                    title: info.title,
+                    value: '${info.count}',
+                    leading: const Icon(
+                      Icons.circle,
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return const tg.Divider();
+                },
+                itemCount: state.content.sharedContent.length,
+              ),
             ),
           const tg.SectionDivider(),
         ],

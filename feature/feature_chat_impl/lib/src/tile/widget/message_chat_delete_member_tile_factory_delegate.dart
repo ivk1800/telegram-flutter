@@ -6,9 +6,9 @@ import 'package:tile/tile.dart';
 
 class MessageChatDeleteMemberTileFactoryDelegate
     implements ITileFactoryDelegate<MessageChatDeleteMemberTileModel> {
-  MessageChatDeleteMemberTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageChatDeleteMemberTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 

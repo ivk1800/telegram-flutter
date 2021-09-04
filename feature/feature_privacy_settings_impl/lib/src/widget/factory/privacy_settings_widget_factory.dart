@@ -15,11 +15,13 @@ class PrivacySettingsWidgetFactory implements IPrivacySettingsWidgetFactory {
   Widget create() => MultiProvider(
         providers: <Provider<dynamic>>[
           Provider<ILocalizationManager>.value(
-              value: dependencies.localizationManager),
+            value: dependencies.localizationManager,
+          ),
           Provider<tg.ConnectionStateWidgetFactory>.value(
-              value: tg.ConnectionStateWidgetFactory(
-                  connectionStateProvider:
-                      dependencies.connectionStateProvider))
+            value: tg.ConnectionStateWidgetFactory(
+              connectionStateProvider: dependencies.connectionStateProvider,
+            ),
+          ),
         ],
         child: const PrivacySettingsPage(),
       );

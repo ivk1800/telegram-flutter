@@ -4,9 +4,9 @@ import 'package:flutter/widgets.dart';
 
 class CreateNewSecretChatScreenFactory
     implements ICreateNewSecretChatScreenFactory {
-  CreateNewSecretChatScreenFactory(
-      {required ICreateNewChatFeatureDependencies dependencies})
-      : _dependencies = dependencies;
+  CreateNewSecretChatScreenFactory({
+    required ICreateNewChatFeatureDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final ICreateNewChatFeatureDependencies _dependencies;
 

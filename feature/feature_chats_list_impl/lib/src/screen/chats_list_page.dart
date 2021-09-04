@@ -47,8 +47,10 @@ class ChatsListPageState extends State<ChatsListPage>
       body: StreamBuilder<List<ChatTileModel>>(
         stream: viewModel.chats,
         initialData: const <ChatTileModel>[],
-        builder: (BuildContext context,
-            AsyncSnapshot<List<ChatTileModel>?> snapshot) {
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<List<ChatTileModel>?> snapshot,
+        ) {
           final List<ChatTileModel> chats =
               snapshot.data ?? const <ChatTileModel>[];
 

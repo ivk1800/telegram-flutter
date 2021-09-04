@@ -12,9 +12,9 @@ export 'src/notifications_settings_screen_router.dart';
 
 class NotificationsSettingsFeatureApi
     implements INotificationsSettingsFeatureApi {
-  NotificationsSettingsFeatureApi(
-      {required NotificationsSettingsFeatureDependencies dependencies})
-      : _settingsWidgetFactory =
+  NotificationsSettingsFeatureApi({
+    required NotificationsSettingsFeatureDependencies dependencies,
+  })  : _settingsWidgetFactory =
             NotificationsSettingsWidgetFactory(dependencies: dependencies),
         _dependencies = dependencies;
 

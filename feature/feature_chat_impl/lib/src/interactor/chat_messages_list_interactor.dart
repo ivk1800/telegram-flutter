@@ -11,12 +11,12 @@ import 'package:tile/tile.dart';
 
 class ChatMessagesInteractor {
   @j.inject
-  ChatMessagesInteractor(
-      {required IChatRepository chatRepository,
-      required IChatMessageRepository messageRepository,
-      required MessageTileMapper messageTileMapper,
-      required ChatArgs chatArgs})
-      : _chatRepository = chatRepository,
+  ChatMessagesInteractor({
+    required IChatRepository chatRepository,
+    required IChatMessageRepository messageRepository,
+    required MessageTileMapper messageTileMapper,
+    required ChatArgs chatArgs,
+  })  : _chatRepository = chatRepository,
         _messageTileMapper = messageTileMapper,
         _messageRepository = messageRepository,
         _chatArgs = chatArgs;
@@ -61,10 +61,15 @@ class ChatMessagesInteractor {
 
     _subscription = _messageRepository
         .getMessages(
-            chatId: _chatArgs.chatId, fromMessageId: fromMessageId, limit: 30)
+      chatId: _chatArgs.chatId,
+      fromMessageId: fromMessageId,
+      limit: 30,
+    )
         .asyncMap((List<td.Message> messages) async {
       return _Result(
-          messages: messages, tileModels: await _mapToTileModels(messages));
+        messages: messages,
+        tileModels: await _mapToTileModels(messages),
+      );
     }).listen((_Result _result) {
       final List<ITileModel> list = (_messagesSubject.value ?? <ITileModel>[])
           .toList()
@@ -78,7 +83,8 @@ class ChatMessagesInteractor {
   Future<List<ITileModel>> _mapToTileModels(List<td.Message> messages) async {
     final Stream<ITileModel> tileModels =
         Stream<td.Message>.fromIterable(messages).asyncMap(
-            (td.Message message) => _messageTileMapper.mapToTileModel(message));
+      (td.Message message) => _messageTileMapper.mapToTileModel(message),
+    );
     return tileModels.toList();
   }
 

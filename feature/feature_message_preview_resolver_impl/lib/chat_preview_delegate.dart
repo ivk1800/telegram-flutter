@@ -17,7 +17,9 @@ class ChatPreviewDelegate implements IPreviewDelegate {
 
   @override
   Future<MessagePreviewData> resolveForAnimation(
-          td.Message message, td.MessageAnimation animation) =>
+    td.Message message,
+    td.MessageAnimation animation,
+  ) =>
       _resolve(message.sender, animation);
 
   @override
@@ -44,7 +46,9 @@ class ChatPreviewDelegate implements IPreviewDelegate {
   }
 
   Future<MessagePreviewData> _resolve(
-      td.MessageSender sender, td.MessageAnimation animation) async {
+    td.MessageSender sender,
+    td.MessageAnimation animation,
+  ) async {
     final String? senderName = await _getSenderNameToDisplay(sender);
     final String messageText = await _messageTextResolver.resolve(animation);
     return MessagePreviewData(

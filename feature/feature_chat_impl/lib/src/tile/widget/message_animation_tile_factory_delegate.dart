@@ -34,29 +34,29 @@ class MessageAnimationTileFactoryDelegate
     }
 
     return _chatMessageFactory.createConversationMessage(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        senderTitle:
-            _messageComponentResolver.resolveSenderName(context, model),
-        reply: _replyInfoFactory.createFromMessageModel(context, model),
-        avatar: _messageComponentResolver.resolveAvatar(context, model),
-        blocks: <Widget>[
-          MediaWrapper(
-              type: MediaType.Animation,
-              child: Container(
-                color: Colors.black,
-                child: const NotImplementedPlaceholder(
-                  additional: 'MessageAnimation',
-                ),
-              ),
-              aspectRatio: model.minithumbnail!.aspectRatio()),
-          if (model.caption != null)
-            MessageCaption(
-              text: model.caption!.toInlineSpan(),
-              shortInfo:
-                  _shortInfoFactory.create(context, model.additionalInfo),
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      senderTitle: _messageComponentResolver.resolveSenderName(context, model),
+      reply: _replyInfoFactory.createFromMessageModel(context, model),
+      avatar: _messageComponentResolver.resolveAvatar(context, model),
+      blocks: <Widget>[
+        MediaWrapper(
+          type: MediaType.Animation,
+          child: Container(
+            color: Colors.black,
+            child: const NotImplementedPlaceholder(
+              additional: 'MessageAnimation',
             ),
-        ]);
+          ),
+          aspectRatio: model.minithumbnail!.aspectRatio(),
+        ),
+        if (model.caption != null)
+          MessageCaption(
+            text: model.caption!.toInlineSpan(),
+            shortInfo: _shortInfoFactory.create(context, model.additionalInfo),
+          ),
+      ],
+    );
   }
 }

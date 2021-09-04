@@ -21,16 +21,18 @@ class AuthScreenFactory implements IAuthScreenFactory {
           .dependencies(_dependencies)
           .build(),
       child: MultiProvider(
-          providers: <Provider<dynamic>>[
-            Provider<ILocalizationManager>(
-              create: (BuildContext context) =>
-                  context.getComponent().getLocalizationManager(),
-            ),
-          ],
-          child: BlocProvider<AuthBloc>(
-              create: (BuildContext context) =>
-                  context.getComponent().getProfileBloc(),
-              child: const AuthPage())),
+        providers: <Provider<dynamic>>[
+          Provider<ILocalizationManager>(
+            create: (BuildContext context) =>
+                context.getComponent().getLocalizationManager(),
+          ),
+        ],
+        child: BlocProvider<AuthBloc>(
+          create: (BuildContext context) =>
+              context.getComponent().getProfileBloc(),
+          child: const AuthPage(),
+        ),
+      ),
     );
   }
 }

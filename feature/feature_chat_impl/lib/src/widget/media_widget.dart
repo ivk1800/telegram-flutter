@@ -28,8 +28,9 @@ class MediaWrapper extends StatelessWidget {
     return Media(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-            maxWidth: mediaConstraint!.width,
-            maxHeight: mediaConstraint.height),
+          maxWidth: mediaConstraint!.width,
+          maxHeight: mediaConstraint.height,
+        ),
         child: AspectRatio(
           aspectRatio: aspectRatio,
           child: child,

@@ -14,10 +14,11 @@ import 'package:tdlib/td_api.dart' as td;
 
 class DevFeature {
   @j.provide
-  DevFeature(
-      {required this.router,
-      required this.client,
-      required this.connectionStateProvider}) {
+  DevFeature({
+    required this.router,
+    required this.client,
+    required this.connectionStateProvider,
+  }) {
     _eventsSubscription = client.events.listen((td.TdObject event) {
       final List<td.TdObject> events = _events.value!;
       events.add(event);

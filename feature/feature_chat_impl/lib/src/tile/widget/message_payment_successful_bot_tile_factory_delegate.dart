@@ -7,19 +7,22 @@ import 'not_implemented.dart';
 
 class MessagePaymentSuccessfulBotTileFactoryDelegate
     implements ITileFactoryDelegate<MessagePaymentSuccessfulBotTileModel> {
-  MessagePaymentSuccessfulBotTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessagePaymentSuccessfulBotTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(
-      BuildContext context, MessagePaymentSuccessfulBotTileModel model) {
+    BuildContext context,
+    MessagePaymentSuccessfulBotTileModel model,
+  ) {
     return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      body: NotImplementedWidget(type: model.type),
+    );
   }
 }

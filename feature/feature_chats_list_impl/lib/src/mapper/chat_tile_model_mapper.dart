@@ -7,12 +7,12 @@ import 'package:tdlib/td_api.dart' as td;
 
 class ChatTileModelMapper {
   @j.inject
-  ChatTileModelMapper(
-      {required DateFormatter dateFormatter,
-      required DateParser dateParser,
-      required IMessagePreviewResolver previewDataResolver,
-      required IChatRepository chatRepository})
-      : _dateFormatter = dateFormatter,
+  ChatTileModelMapper({
+    required DateFormatter dateFormatter,
+    required DateParser dateParser,
+    required IMessagePreviewResolver previewDataResolver,
+    required IChatRepository chatRepository,
+  })  : _dateFormatter = dateFormatter,
         _messagePreviewResolver = previewDataResolver,
         _chatRepository = chatRepository,
         _dateParser = dateParser;
@@ -34,7 +34,8 @@ class ChatTileModelMapper {
       isPinned: chat.positions[0].isPinned,
       isMentioned: chat.unreadMentionCount > 0,
       lastMessageDate: _dateFormatter.formatChatLastMessageDateOrNull(
-          _dateParser.parseUnixTimeStampToDateOrNull(chat.lastMessage?.date)),
+        _dateParser.parseUnixTimeStampToDateOrNull(chat.lastMessage?.date),
+      ),
       id: chat.id,
       photoId: chat.photo?.small.id,
       title: chat.title,

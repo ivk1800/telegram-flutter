@@ -32,12 +32,13 @@ class _DemoPageState extends State<DemoPage> {
           ),
           const Divider(),
           ListTile(
-              onTap: () {
-                Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => const DemoSplitViewPage(),
-                ));
-              },
-              title: const Text('split view')),
+            onTap: () {
+              Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
+                builder: (BuildContext context) => const DemoSplitViewPage(),
+              ));
+            },
+            title: const Text('split view'),
+          ),
         ],
       ),
     );

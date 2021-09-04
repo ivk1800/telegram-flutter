@@ -12,16 +12,21 @@ class Annotation extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.only(
-            left: 16.0, top: 16.0, bottom: 16.0, right: 8.0),
-        color: theme.hoverColor,
-        child: Text(
-          text,
-          textAlign: align,
-          style: theme.textTheme.bodyText2!.copyWith(
-            color: theme.textTheme.caption!.color,
-          ),
-        ));
+      width: double.infinity,
+      padding: const EdgeInsets.only(
+        left: 16.0,
+        top: 16.0,
+        bottom: 16.0,
+        right: 8.0,
+      ),
+      color: theme.hoverColor,
+      child: Text(
+        text,
+        textAlign: align,
+        style: theme.textTheme.bodyText2!.copyWith(
+          color: theme.textTheme.caption!.color,
+        ),
+      ),
+    );
   }
 }

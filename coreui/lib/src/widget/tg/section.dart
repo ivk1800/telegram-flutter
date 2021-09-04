@@ -12,8 +12,9 @@ class Section extends StatelessWidget {
         child: Text(
           text,
           style: Theme.of(context).textTheme.button?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).accentColor),
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).accentColor,
+              ),
         ),
       );
 }

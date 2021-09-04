@@ -11,8 +11,11 @@ class FakeChatMessageRepository implements IChatMessageRepository {
   final List<td.Message> fakeMessages;
 
   @override
-  Stream<List<td.Message>> getMessages(
-      {required int chatId, required int fromMessageId, required int limit}) {
+  Stream<List<td.Message>> getMessages({
+    required int chatId,
+    required int fromMessageId,
+    required int limit,
+  }) {
     List<td.Message> messages = fakeMessages.take(limit).toList();
 
     messages += fakeMessages.take(limit - messages.length).toList();
@@ -21,8 +24,10 @@ class FakeChatMessageRepository implements IChatMessageRepository {
   }
 
   @override
-  Future<td.Message> getMessage(
-      {required int chatId, required int messageId}) async {
+  Future<td.Message> getMessage({
+    required int chatId,
+    required int messageId,
+  }) async {
     return fakeMessages.first;
   }
 
@@ -37,8 +42,10 @@ class FakeChatMessageRepository implements IChatMessageRepository {
   }
 
   @override
-  Future<int> getMessagesCount(
-      {required int chatId, required td.SearchMessagesFilter filter}) async {
+  Future<int> getMessagesCount({
+    required int chatId,
+    required td.SearchMessagesFilter filter,
+  }) async {
     return 1;
   }
 }

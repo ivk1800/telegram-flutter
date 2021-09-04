@@ -59,7 +59,9 @@ class MainPageState extends State<MainPage>
     });
 
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 200));
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
 
     _navigationIconColorTween =
         SizeTween(begin: Size.zero, end: const Size(1, 1))
@@ -91,165 +93,167 @@ class MainPageState extends State<MainPage>
         return true;
       },
       child: Scaffold(
-          key: scaffoldKey,
-          appBar: tg.TgSwitchedAppBar(
-            key: appbarKey,
-            iconColorProvider: (bool isActive) {
-              if (isActive) {
-                switch (_screenState) {
-                  case _ScreenState.Search:
-                    {
-                      return Colors.white;
-                    }
-                  case _ScreenState.MultiSelect:
-                    {
-                      return Colors.grey;
-                    }
-                  default:
-                    {
-                      return Colors.white;
-                    }
-                }
+        key: scaffoldKey,
+        appBar: tg.TgSwitchedAppBar(
+          key: appbarKey,
+          iconColorProvider: (bool isActive) {
+            if (isActive) {
+              switch (_screenState) {
+                case _ScreenState.Search:
+                  {
+                    return Colors.white;
+                  }
+                case _ScreenState.MultiSelect:
+                  {
+                    return Colors.grey;
+                  }
+                default:
+                  {
+                    return Colors.white;
+                  }
               }
-              return Colors.white;
-            },
-            backgroundColorProvider: (bool isActive) {
-              if (isActive) {
-                switch (_screenState) {
-                  case _ScreenState.Search:
-                    {
-                      return Theme.of(context).primaryColor;
-                    }
-                  case _ScreenState.MultiSelect:
-                    {
-                      return Colors.white;
-                    }
-                  default:
-                    {
-                      return Theme.of(context).primaryColor;
-                    }
-                }
+            }
+            return Colors.white;
+          },
+          backgroundColorProvider: (bool isActive) {
+            if (isActive) {
+              switch (_screenState) {
+                case _ScreenState.Search:
+                  {
+                    return Theme.of(context).primaryColor;
+                  }
+                case _ScreenState.MultiSelect:
+                  {
+                    return Colors.white;
+                  }
+                default:
+                  {
+                    return Theme.of(context).primaryColor;
+                  }
               }
-              return Theme.of(context).primaryColor;
-            },
-            navigationIconTap: () {
-              setState(() {
-                if (_screenState == _ScreenState.Default) {
-                  scaffoldKey.currentState!.openDrawer();
-                } else {
-                  _screenState = _ScreenState.Default;
-                  _searchActive = false;
-                  _searchQueryController.text = '';
-                  appbarKey.currentState?.setActive(false);
-                }
-              });
-            },
-            actionWidgetsBuilder: (BuildContext context, bool isActive) {
-              if (isActive) {
-                switch (_screenState) {
-                  case _ScreenState.Search:
-                    {
-                      return <Widget>[
-                        AnimatedBuilder(
-                          animation: _navigationIconColorTween,
-                          builder: (BuildContext context, Widget? child) {
-                            return Transform.scale(
-                              scale: _navigationIconColorTween.value!.height,
-                              child: child,
-                            );
+            }
+            return Theme.of(context).primaryColor;
+          },
+          navigationIconTap: () {
+            setState(() {
+              if (_screenState == _ScreenState.Default) {
+                scaffoldKey.currentState!.openDrawer();
+              } else {
+                _screenState = _ScreenState.Default;
+                _searchActive = false;
+                _searchQueryController.text = '';
+                appbarKey.currentState?.setActive(false);
+              }
+            });
+          },
+          actionWidgetsBuilder: (BuildContext context, bool isActive) {
+            if (isActive) {
+              switch (_screenState) {
+                case _ScreenState.Search:
+                  {
+                    return <Widget>[
+                      AnimatedBuilder(
+                        animation: _navigationIconColorTween,
+                        builder: (BuildContext context, Widget? child) {
+                          return Transform.scale(
+                            scale: _navigationIconColorTween.value!.height,
+                            child: child,
+                          );
+                        },
+                        child: IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () {
+                            _searchQueryController.text = '';
                           },
-                          child: IconButton(
-                            icon: const Icon(Icons.close),
-                            onPressed: () {
-                              _searchQueryController.text = '';
-                            },
-                          ),
                         ),
-                      ];
-                    }
-                  case _ScreenState.MultiSelect:
-                    {
-                      return <Widget>[
-                        IconButton(
-                          icon: const Icon(Icons.push_pin_outlined),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.volume_off),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.restore_from_trash_outlined),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.more_vert_outlined),
-                          onPressed: () {},
-                        ),
-                      ];
-                    }
-                  default:
-                    {
-                      return <Widget>[];
-                    }
-                }
-              } else {
-                return <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      setState(() {
-                        _screenState = _ScreenState.Search;
-                        _searchActive = !_searchActive;
-                        myFocusNode.requestFocus();
-                        myFocusNode.unfocus();
-                        appbarKey.currentState?.setActive(true);
-                      });
-                    },
-                  ),
-                ];
+                      ),
+                    ];
+                  }
+                case _ScreenState.MultiSelect:
+                  {
+                    return <Widget>[
+                      IconButton(
+                        icon: const Icon(Icons.push_pin_outlined),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.volume_off),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.restore_from_trash_outlined),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.more_vert_outlined),
+                        onPressed: () {},
+                      ),
+                    ];
+                  }
+                default:
+                  {
+                    return <Widget>[];
+                  }
               }
-            },
-            titleBuilder: (BuildContext context, bool isActive) {
-              if (isActive) {
-                switch (_screenState) {
-                  case _ScreenState.Search:
-                    {
-                      return TextField(
-                        style: const TextStyle(color: Colors.white),
-                        cursorColor: Colors.white,
-                        focusNode: myFocusNode,
-                        controller: _searchQueryController,
-                        decoration: const InputDecoration.collapsed(
-                            hintText: 'Search',
-                            hintStyle: TextStyle(color: Colors.white)),
-                      );
-                    }
-                  case _ScreenState.MultiSelect:
-                    {
-                      return const Text(
-                        '1',
-                        style: TextStyle(color: Colors.grey),
-                      );
-                    }
-                  default:
-                    {
-                      return Container();
-                    }
-                }
-              } else {
-                return _buildTitleWidget(context);
+            } else {
+              return <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      _screenState = _ScreenState.Search;
+                      _searchActive = !_searchActive;
+                      myFocusNode.requestFocus();
+                      myFocusNode.unfocus();
+                      appbarKey.currentState?.setActive(true);
+                    });
+                  },
+                ),
+              ];
+            }
+          },
+          titleBuilder: (BuildContext context, bool isActive) {
+            if (isActive) {
+              switch (_screenState) {
+                case _ScreenState.Search:
+                  {
+                    return TextField(
+                      style: const TextStyle(color: Colors.white),
+                      cursorColor: Colors.white,
+                      focusNode: myFocusNode,
+                      controller: _searchQueryController,
+                      decoration: const InputDecoration.collapsed(
+                        hintText: 'Search',
+                        hintStyle: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  }
+                case _ScreenState.MultiSelect:
+                  {
+                    return const Text(
+                      '1',
+                      style: TextStyle(color: Colors.grey),
+                    );
+                  }
+                default:
+                  {
+                    return Container();
+                  }
               }
-            },
-            leadingAnimatedIconProvider: (bool isActive) {
-              if (_screenState == _ScreenState.MultiSelect) {
-                return AnimatedIcons.menu_close;
-              }
-              return AnimatedIcons.menu_arrow;
-            },
-          ),
-          drawer: _buildDrawer(),
-          body: _buildBody(context)),
+            } else {
+              return _buildTitleWidget(context);
+            }
+          },
+          leadingAnimatedIconProvider: (bool isActive) {
+            if (_screenState == _ScreenState.MultiSelect) {
+              return AnimatedIcons.menu_close;
+            }
+            return AnimatedIcons.menu_arrow;
+          },
+        ),
+        drawer: _buildDrawer(),
+        body: _buildBody(context),
+      ),
     );
   }
 
@@ -259,7 +263,7 @@ class MainPageState extends State<MainPage>
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             child: _searchActive ? buildSearchView() : null,
-          )
+          ),
         ],
       );
 

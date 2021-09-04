@@ -21,31 +21,36 @@ abstract class SettingsModule {
   @j.provide
   @j.singleton
   static ISettingsSearchWidgetFactory provideSettingsSearchWidgetFactory(
-          ISettingsSearchFeatureApi api) =>
+    ISettingsSearchFeatureApi api,
+  ) =>
       api.screenWidgetFactory;
 
   @j.provide
   @j.singleton
   static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
-          SettingsFeatureDependencies dependencies) =>
+    SettingsFeatureDependencies dependencies,
+  ) =>
       dependencies.settingsSearchFeatureApi;
 
   @j.provide
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
-          SettingsFeatureDependencies dependencies) =>
+    SettingsFeatureDependencies dependencies,
+  ) =>
       dependencies.localizationManager;
 
   @j.provide
   @j.singleton
   static IConnectionStateProvider provideconnectionStateProvider(
-          SettingsFeatureDependencies dependencies) =>
+    SettingsFeatureDependencies dependencies,
+  ) =>
       dependencies.connectionStateProvider;
 
   @j.provide
   @j.singleton
   static ISettingsScreenRouter provideRouter(
-          SettingsFeatureDependencies dependencies) =>
+    SettingsFeatureDependencies dependencies,
+  ) =>
       dependencies.router;
 }
 
@@ -54,7 +59,8 @@ abstract class SettingsComponentBuilder {
   SettingsComponentBuilder screenState(SettingsPageState screen);
 
   SettingsComponentBuilder dependencies(
-      SettingsFeatureDependencies dependencies);
+    SettingsFeatureDependencies dependencies,
+  );
 
   SettingsScreenComponent build();
 }

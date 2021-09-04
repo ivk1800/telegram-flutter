@@ -58,26 +58,27 @@ class WallpaperListPage extends StatelessWidget {
     final TileFactory tileFactory = context.read();
 
     return StaggeredGridView.countBuilder(
-        crossAxisCount: CrossAxisCount,
-        shrinkWrap: false,
-        itemCount: tileModels.length,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        // todo fix padding for bottom and top tiles
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        itemBuilder: (BuildContext context, int index) {
-          return tileFactory.create(context, tileModels[index]);
-        },
-        staggeredTileBuilder: (int index) {
-          final ITileModel tileModel = tileModels[index];
+      crossAxisCount: CrossAxisCount,
+      shrinkWrap: false,
+      itemCount: tileModels.length,
+      crossAxisSpacing: 8,
+      mainAxisSpacing: 8,
+      // todo fix padding for bottom and top tiles
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      itemBuilder: (BuildContext context, int index) {
+        return tileFactory.create(context, tileModels[index]);
+      },
+      staggeredTileBuilder: (int index) {
+        final ITileModel tileModel = tileModels[index];
 
-          if (tileModel is TopGroupTileModel ||
-              tileModel is BottomGroupTileModel) {
-            return const StaggeredTile.fit(CrossAxisCount);
-          }
+        if (tileModel is TopGroupTileModel ||
+            tileModel is BottomGroupTileModel) {
+          return const StaggeredTile.fit(CrossAxisCount);
+        }
 
-          return StaggeredTile.extent(2, width / (CrossAxisCount / 2) * 1.5);
-        });
+        return StaggeredTile.extent(2, width / (CrossAxisCount / 2) * 1.5);
+      },
+    );
   }
 
   static const int CrossAxisCount = 6;

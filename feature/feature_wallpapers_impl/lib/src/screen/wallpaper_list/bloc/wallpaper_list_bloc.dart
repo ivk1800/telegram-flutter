@@ -62,7 +62,8 @@ class WallpaperListBloc extends Bloc<WallpaperListEvent, WallpaperListState> {
                 }
             }
             throw StateError(
-                'unexpected background type ${background.runtimeType}');
+              'unexpected background type ${background.runtimeType}',
+            );
           })
           .cast<ITileModel>()
           .toList()

@@ -27,18 +27,19 @@ class ChatTileModel {
 }
 
 extension ChatTileModelExtension on ChatTileModel {
-  ChatTileModel copy(
-          {bool? isPinned,
-          int? id,
-          int? unreadMessagesCount,
-          String? lastMessageDate,
-          int? photoId,
-          bool? isVerified,
-          bool? isMentioned,
-          bool? isMuted,
-          String? title,
-          String? firstSubtitle,
-          String? secondSubtitle}) =>
+  ChatTileModel copy({
+    bool? isPinned,
+    int? id,
+    int? unreadMessagesCount,
+    String? lastMessageDate,
+    int? photoId,
+    bool? isVerified,
+    bool? isMentioned,
+    bool? isMuted,
+    String? title,
+    String? firstSubtitle,
+    String? secondSubtitle,
+  }) =>
       ChatTileModel(
         isPinned: isPinned ?? this.isPinned,
         id: id ?? this.id,

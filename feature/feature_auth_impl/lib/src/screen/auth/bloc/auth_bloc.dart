@@ -103,22 +103,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       blockInteraction: true,
     );
     await _authenticationManager.checkAuthenticationCode(event.code).then(
-        (td.Ok value) {
-      // nothing
-      return value;
-    }, onError: (dynamic e) {
-      emit(_getCodeState().copy(
-        blockInteraction: false,
-      ));
-      _actionSubject.add(const ResetCode());
-      _router.toDialog(
-        title: _getString('AppName'),
-        body: TextBody(text: _tryConvertToHumanError(e)),
-        actions: <Action>[
-          Action(text: _getString('OK')),
-        ],
-      );
-    });
+      (td.Ok value) {
+        // nothing
+        return value;
+      },
+      onError: (dynamic e) {
+        emit(_getCodeState().copy(
+          blockInteraction: false,
+        ));
+        _actionSubject.add(const ResetCode());
+        _router.toDialog(
+          title: _getString('AppName'),
+          body: TextBody(text: _tryConvertToHumanError(e)),
+          actions: <Action>[
+            Action(text: _getString('OK')),
+          ],
+        );
+      },
+    );
   }
 
   Stream<AuthState> _handleSubmitPhoneTap(SubmitPhoneTap event) async* {
@@ -127,26 +129,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     await _authenticationManager
         .setAuthenticationPhoneNumber(event.number)
-        .then((td.Ok value) {
-      _phoneNumber = event.number;
-      emit(CodeState(
-        blockInteraction: false,
-        // todo format number
-        title: _phoneNumber!,
-      ));
-      return value;
-    }, onError: (dynamic e) {
-      emit(_getPhoneState().copy(
-        blockInteraction: false,
-      ));
-      _router.toDialog(
-        title: _getString('AppName'),
-        body: TextBody(text: _tryConvertToHumanError(e)),
-        actions: <Action>[
-          Action(text: _getString('OK')),
-        ],
-      );
-    });
+        .then(
+      (td.Ok value) {
+        _phoneNumber = event.number;
+        emit(CodeState(
+          blockInteraction: false,
+          // todo format number
+          title: _phoneNumber!,
+        ));
+        return value;
+      },
+      onError: (dynamic e) {
+        emit(_getPhoneState().copy(
+          blockInteraction: false,
+        ));
+        _router.toDialog(
+          title: _getString('AppName'),
+          body: TextBody(text: _tryConvertToHumanError(e)),
+          actions: <Action>[
+            Action(text: _getString('OK')),
+          ],
+        );
+      },
+    );
   }
 
   // todo implement human texts
@@ -209,29 +214,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     StopVerificationTap event,
   ) async* {
     _router.toDialog(
-        title: _getString('AppName'),
-        body: TextBody(text: _getString('StopVerification')),
-        actions: <Action>[
-          Action(
-            text: _getString('Stop'),
-            callback: () {
-              _phoneNumber = null;
-              emit(
-                PhoneNumberState(
-                  title: _getString('YourPhone'),
-                  countryTitle: _getCountryTitle(),
-                  blockInteraction: false,
-                ),
-              );
-              return true;
-            },
-          ),
-          Action(
-            text: _getString('Continue'),
-            callback: () {
-              return true;
-            },
-          ),
-        ]);
+      title: _getString('AppName'),
+      body: TextBody(text: _getString('StopVerification')),
+      actions: <Action>[
+        Action(
+          text: _getString('Stop'),
+          callback: () {
+            _phoneNumber = null;
+            emit(
+              PhoneNumberState(
+                title: _getString('YourPhone'),
+                countryTitle: _getCountryTitle(),
+                blockInteraction: false,
+              ),
+            );
+            return true;
+          },
+        ),
+        Action(
+          text: _getString('Continue'),
+          callback: () {
+            return true;
+          },
+        ),
+      ],
+    );
   }
 }

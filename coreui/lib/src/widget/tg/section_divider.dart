@@ -7,11 +7,13 @@ class SectionDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(color: Theme.of(context).dividerColor),
-            ),
-            color: Theme.of(context).hoverColor),
-        height: 12);
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Theme.of(context).dividerColor),
+        ),
+        color: Theme.of(context).hoverColor,
+      ),
+      height: 12,
+    );
   }
 }

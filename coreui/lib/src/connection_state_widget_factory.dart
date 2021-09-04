@@ -7,14 +7,16 @@ typedef ConnectionReadyWidgetFactory = Widget Function(BuildContext context);
 
 class ConnectionStateWidgetFactory {
   @j.inject
-  ConnectionStateWidgetFactory(
-      {required IConnectionStateProvider connectionStateProvider})
-      : _connectionStateProvider = connectionStateProvider;
+  ConnectionStateWidgetFactory({
+    required IConnectionStateProvider connectionStateProvider,
+  }) : _connectionStateProvider = connectionStateProvider;
 
   final IConnectionStateProvider _connectionStateProvider;
 
   Widget create(
-      BuildContext context, ConnectionReadyWidgetFactory readyWidgetFactory) {
+    BuildContext context,
+    ConnectionReadyWidgetFactory readyWidgetFactory,
+  ) {
     return StreamBuilder<td.ConnectionState>(
       stream: _connectionStateProvider.connectionStateAsStream,
       builder:

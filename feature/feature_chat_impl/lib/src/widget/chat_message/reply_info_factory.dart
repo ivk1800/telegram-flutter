@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 class ReplyInfoFactory {
   Widget? createFromMessageModel(
-      BuildContext context, BaseConversationMessageTileModel messageModel) {
+    BuildContext context,
+    BaseConversationMessageTileModel messageModel,
+  ) {
     final ReplyInfo? replyInfo = messageModel.replyInfo;
     if (replyInfo == null) {
       return null;
@@ -60,10 +62,10 @@ class ReplyInfoFactory {
                 replyInfo.subtitle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-              )
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -80,7 +82,10 @@ class _Painter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawLine(
-        const Offset(horOffsetX, 0), Offset(horOffsetX, size.height), _paint);
+      const Offset(horOffsetX, 0),
+      Offset(horOffsetX, size.height),
+      _paint,
+    );
   }
 
   @override

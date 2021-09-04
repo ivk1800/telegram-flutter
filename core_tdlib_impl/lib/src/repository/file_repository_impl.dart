@@ -23,26 +23,29 @@ class FileRepositoryImpl implements IFileRepository {
   @override
   Future<td.LocalFile> getLocalFile(int id) {
     return _cache.putIfAbsent(
-        id,
-        () =>
-            _client.send<td.File>(td.GetFile(fileId: id)).then((td.File value) {
-              if (value.local.isDownloadingCompleted) {
-                _pathCache[id] = value.local.path;
-                return Future<td.LocalFile>.value(value.local);
-              }
+      id,
+      () => _client.send<td.File>(td.GetFile(fileId: id)).then((td.File value) {
+        if (value.local.isDownloadingCompleted) {
+          _pathCache[id] = value.local.path;
+          return Future<td.LocalFile>.value(value.local);
+        }
 
-              return _client
-                  .send<td.File>(td.DownloadFile(
-                      fileId: id,
-                      priority: 1,
-                      limit: 0,
-                      offset: 0,
-                      synchronous: true))
-                  .then((td.File value) {
-                _pathCache[id] = value.local.path;
-                return value.local;
-              });
-            }));
+        return _client
+            .send<td.File>(
+          td.DownloadFile(
+            fileId: id,
+            priority: 1,
+            limit: 0,
+            offset: 0,
+            synchronous: true,
+          ),
+        )
+            .then((td.File value) {
+          _pathCache[id] = value.local.path;
+          return value.local;
+        });
+      }),
+    );
   }
 
   @override

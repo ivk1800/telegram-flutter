@@ -4,7 +4,9 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:tile/tile.dart';
 
 typedef SearchResultTapCallback = void Function(
-    BuildContext context, SearchResultType type);
+  BuildContext context,
+  SearchResultType type,
+);
 
 class SearchResultTileFactoryDelegate
     implements ITileFactoryDelegate<SearchResultTileModel> {

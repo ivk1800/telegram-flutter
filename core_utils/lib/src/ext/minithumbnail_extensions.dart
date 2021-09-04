@@ -19,9 +19,10 @@ extension TdMinithumbnailExtensions on td.Minithumbnail {
   Minithumbnail? toMinithumbnail() {
     if (this != null) {
       return Minithumbnail(
-          data: const Base64Decoder().convert(data),
-          width: width.toDouble(),
-          height: height.toDouble());
+        data: const Base64Decoder().convert(data),
+        width: width.toDouble(),
+        height: height.toDouble(),
+      );
     }
   }
 }

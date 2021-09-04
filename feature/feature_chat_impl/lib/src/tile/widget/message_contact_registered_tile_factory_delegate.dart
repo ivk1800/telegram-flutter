@@ -6,9 +6,9 @@ import 'package:tile/tile.dart';
 
 class MessageContactRegisteredTileFactoryDelegate
     implements ITileFactoryDelegate<MessageContactRegisteredTileModel> {
-  MessageContactRegisteredTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageContactRegisteredTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 

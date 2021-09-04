@@ -58,7 +58,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
         fake.FakeMessagesProvider();
     final fake.FakeChatMessageRepository fakeChatMessageRepository =
         fake.FakeChatMessageRepository(fakeMessages: <td.Message>[
-      await fakeMessagesProvider.getMessageVideo1()
+      await fakeMessagesProvider.getMessageVideo1(),
     ]);
 
     final fake.FakeUserProvider fakeUserProvider = fake.FakeUserProvider();
@@ -68,30 +68,32 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
         fake.FakeUserRepository(fakeUserProvider: fakeUserProvider);
 
     _tileFactory = chat_impl.MessageTileFactoryComponent(
-        dependencies: chat_impl.MessageTileFactoryDependencies(
-      fileDownloader: FakeFileDownloader(),
-      messageWallContext: FakeMessageWallContext(),
-      messageActionListener: MessageActionListenerStub(),
-      fileRepository: fakeFileRepository,
-      localizationManager: localizationManager,
-    )).create();
+      dependencies: chat_impl.MessageTileFactoryDependencies(
+        fileDownloader: FakeFileDownloader(),
+        messageWallContext: FakeMessageWallContext(),
+        messageActionListener: MessageActionListenerStub(),
+        fileRepository: fakeFileRepository,
+        localizationManager: localizationManager,
+      ),
+    ).create();
 
     _messageTileMapper = chat_impl.MessageMapperComponent(
-        dependencies: chat_impl.MessageMapperDependencies(
-      dateParser: DateParser(),
-      chatMessageRepository: fakeChatMessageRepository,
-      chatRepository: fakeChatRepository,
-      userRepository: fakeUserRepository,
-      messagePreviewResolver: MessagePreviewResolver(
-        userRepository: fakeUserRepository,
+      dependencies: chat_impl.MessageMapperDependencies(
+        dateParser: DateParser(),
+        chatMessageRepository: fakeChatMessageRepository,
         chatRepository: fakeChatRepository,
+        userRepository: fakeUserRepository,
+        messagePreviewResolver: MessagePreviewResolver(
+          userRepository: fakeUserRepository,
+          chatRepository: fakeChatRepository,
+          localizationManager: localizationManager,
+          mode: Mode.ReplyPreview,
+          messageRepository: fakeChatMessageRepository,
+        ),
+        fileRepository: fakeFileRepository,
         localizationManager: localizationManager,
-        mode: Mode.ReplyPreview,
-        messageRepository: fakeChatMessageRepository,
       ),
-      fileRepository: fakeFileRepository,
-      localizationManager: localizationManager,
-    )).create();
+    ).create();
   }
 
   @override
@@ -107,12 +109,13 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
               children: <Widget>[
                 const Text('show all'),
                 Switch(
-                    value: _isShowAll,
-                    onChanged: (bool newValue) {
-                      setState(() {
-                        _isShowAll = newValue;
-                      });
-                    }),
+                  value: _isShowAll,
+                  onChanged: (bool newValue) {
+                    setState(() {
+                      _isShowAll = newValue;
+                    });
+                  },
+                ),
               ],
             ),
             Row(
@@ -120,49 +123,54 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
               children: <Widget>[
                 const Text('with reply'),
                 Switch(
-                    value: _withReply,
-                    onChanged: (bool newValue) {
-                      setState(() {
-                        _withReply = !_withReply;
-                      });
-                    }),
+                  value: _withReply,
+                  onChanged: (bool newValue) {
+                    setState(() {
+                      _withReply = !_withReply;
+                    });
+                  },
+                ),
               ],
             ),
             if (!_isShowAll) _buildMessageDropdownButton(),
             if (_isShowAll)
               _buildAllMessages()
             else
-              _buildSingleMessage(_currentMessage.messageFactory())
+              _buildSingleMessage(
+                _currentMessage.messageFactory(),
+              ),
           ],
         ),
       );
 
   Widget _buildAllMessages() => Expanded(
         child: ListView.separated(
-            itemBuilder: (BuildContext context, int index) {
-              final MessageData messageData = widget.bundle.messages[index];
-              final Future<td.Message> messageFuture =
-                  messageData.messageFactory();
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(messageData.name),
-                  _buildSingleMessage(
-                      _withReply ? messageFuture.withReply() : messageFuture)
-                ],
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(
-                  height: 8,
+          itemBuilder: (BuildContext context, int index) {
+            final MessageData messageData = widget.bundle.messages[index];
+            final Future<td.Message> messageFuture =
+                messageData.messageFactory();
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(messageData.name),
+                _buildSingleMessage(
+                  _withReply ? messageFuture.withReply() : messageFuture,
                 ),
-            itemCount: widget.bundle.messages.length),
+              ],
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) => const SizedBox(
+            height: 8,
+          ),
+          itemCount: widget.bundle.messages.length,
+        ),
       );
 
   Widget _buildSingleMessage(Future<td.Message> future) =>
       FutureBuilder<ITileModel>(
         future: future.then(
-            (td.Message message) => _messageTileMapper.mapToTileModel(message)),
+          (td.Message message) => _messageTileMapper.mapToTileModel(message),
+        ),
         builder: (BuildContext context, AsyncSnapshot<ITileModel> snapshot) {
           if (snapshot.hasError) {
             print(snapshot.error);
@@ -188,7 +196,8 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
           builder: (BuildContext context, BoxConstraints constraints) =>
               chat_impl.ChatContext(
             data: chat_impl.ChatContextData.desktop(
-                maxWidth: constraints.maxWidth),
+              maxWidth: constraints.maxWidth,
+            ),
             child: child,
           ),
         ),
@@ -216,7 +225,8 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
 
 extension MessageFutureExt on Future<td.Message> {
   Future<td.Message> withReply() => then(
-      (td.Message value) => value.copy(replyToMessageId: 1, replyInChatId: 1));
+        (td.Message value) => value.copy(replyToMessageId: 1, replyInChatId: 1),
+      );
 }
 
 class FakeMessageWallContext implements chat_impl.IMessageWallContext {

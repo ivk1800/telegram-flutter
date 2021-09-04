@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 
 class QuickNotificationSettingsScreenFactory
     implements IQuickNotificationSettingsScreenFactory {
-  QuickNotificationSettingsScreenFactory(
-      {required NotificationsSettingsFeatureDependencies dependencies})
-      : _dependencies = dependencies;
+  QuickNotificationSettingsScreenFactory({
+    required NotificationsSettingsFeatureDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final NotificationsSettingsFeatureDependencies _dependencies;
 
@@ -19,7 +19,8 @@ class QuickNotificationSettingsScreenFactory
     return MultiProvider(
       providers: <Provider<dynamic>>[
         Provider<ILocalizationManager>.value(
-            value: _dependencies.localizationManager),
+          value: _dependencies.localizationManager,
+        ),
       ],
       child: const QuickNotificationSettingsPage(),
     );

@@ -70,11 +70,12 @@ class ChatRepositoryImpl extends IChatRepository {
       _functionExecutor.send<td.Chat>(td.GetChat(chatId: id));
 
   @override
-  Future<List<td.Chat>> getChats(
-      {required int offsetChatId,
-      required int offsetOrder,
-      required int limit,
-      required td.ChatList chatList}) async {
+  Future<List<td.Chat>> getChats({
+    required int offsetChatId,
+    required int offsetOrder,
+    required int limit,
+    required td.ChatList chatList,
+  }) async {
     final List<td.Chat> chats = <td.Chat>[];
 
     final td.Chats result = await _functionExecutor.send<td.Chats>(td.GetChats(
@@ -85,16 +86,17 @@ class ChatRepositoryImpl extends IChatRepository {
     ));
 
     chats.addAll(await Stream<td.Chat>.fromFutures(result.chatIds.map(
-            (int e) => _functionExecutor.send<td.Chat>(td.GetChat(chatId: e))))
-        .toList());
+      (int e) => _functionExecutor.send<td.Chat>(td.GetChat(chatId: e)),
+    )).toList());
 
     if (chats.length < limit && chats.isNotEmpty) {
       final td.Chat lastChat = chats.last;
       chats.addAll(await getChats(
-          chatList: chatList,
-          limit: limit - chats.length,
-          offsetChatId: lastChat.id,
-          offsetOrder: lastChat.positions[0].order));
+        chatList: chatList,
+        limit: limit - chats.length,
+        offsetChatId: lastChat.id,
+        offsetOrder: lastChat.positions[0].order,
+      ));
     }
 
     return chats.take(limit).toList();

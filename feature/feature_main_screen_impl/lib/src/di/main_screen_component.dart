@@ -22,43 +22,50 @@ abstract class FoldersSetupModule {
   @j.provide
   @j.singleton
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
-          MainScreenFeatureDependencies dependencies) =>
+    MainScreenFeatureDependencies dependencies,
+  ) =>
       dependencies.globalSearchFeatureApi;
 
   @j.provide
   @j.singleton
   static IGlobalSearchWidgetFactory provideGlobalSearchWidgetFactory(
-          IGlobalSearchFeatureApi api) =>
+    IGlobalSearchFeatureApi api,
+  ) =>
       api.screenWidgetFactory;
 
   @j.provide
   @j.singleton
   static IChatsListFeatureApi provideChatsListFeatureApi(
-          MainScreenFeatureDependencies dependencies) =>
+    MainScreenFeatureDependencies dependencies,
+  ) =>
       dependencies.chatsListFeatureApi;
 
   @j.provide
   @j.singleton
   static IChatsListWidgetFactory provideChatsListWidgetFactory(
-          IChatsListFeatureApi api) =>
+    IChatsListFeatureApi api,
+  ) =>
       api.screenWidgetFactory;
 
   @j.provide
   @j.singleton
   static IConnectionStateProvider provideconnectionStateProvider(
-          MainScreenFeatureDependencies dependencies) =>
+    MainScreenFeatureDependencies dependencies,
+  ) =>
       dependencies.connectionStateProvider;
 
   @j.provide
   @j.singleton
   static IMainScreenRouter provideMainRouter(
-          MainScreenFeatureDependencies dependencies) =>
+    MainScreenFeatureDependencies dependencies,
+  ) =>
       dependencies.router;
 
   @j.provide
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
-          MainScreenFeatureDependencies dependencies) =>
+    MainScreenFeatureDependencies dependencies,
+  ) =>
       dependencies.localizationManager;
 }
 
@@ -67,7 +74,8 @@ abstract class FoldersSetupComponentBuilder {
   FoldersSetupComponentBuilder screenState(MainPageState screen);
 
   FoldersSetupComponentBuilder dependencies(
-      MainScreenFeatureDependencies dependencies);
+    MainScreenFeatureDependencies dependencies,
+  );
 
   MainScreenComponent build();
 }

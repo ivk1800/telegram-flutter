@@ -15,7 +15,10 @@ class TileFactory {
   }
 
   Widget createIndexed(
-      BuildContext context, List<ITileModel> models, int index) {
+    BuildContext context,
+    List<ITileModel> models,
+    int index,
+  ) {
     return create(context, models[index]);
   }
 }

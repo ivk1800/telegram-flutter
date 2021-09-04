@@ -21,26 +21,32 @@ class StickersWidgetFactory implements IStickersWidgetFactory {
   Widget create() => MultiProvider(
         providers: <Provider<dynamic>>[
           Provider<ILocalizationManager>.value(
-              value: dependencies.localizationManager),
+            value: dependencies.localizationManager,
+          ),
           Provider<TileFactory>.value(
-              value: TileFactory(
-                  delegates: <Type, ITileFactoryDelegate<ITileModel>>{
+            value: TileFactory(
+              delegates: <Type, ITileFactoryDelegate<ITileModel>>{
                 StickerSetTileModel: StickerSetTileFactoryDelegate(
                   tap: (BuildContext context, int setId) {
                     BlocProvider.of<StickersBloc>(context)
                         .add(StickerSetTap(setId: setId));
                   },
                 ),
-              })),
+              },
+            ),
+          ),
           Provider<tg.ConnectionStateWidgetFactory>.value(
-              value: tg.ConnectionStateWidgetFactory(
-                  connectionStateProvider:
-                      dependencies.connectionStateProvider))
+            value: tg.ConnectionStateWidgetFactory(
+              connectionStateProvider: dependencies.connectionStateProvider,
+            ),
+          ),
         ],
         child: BlocProvider<StickersBloc>(
-            create: (BuildContext context) => StickersBloc(
-                router: dependencies.stickersFeatureRouter,
-                stickerRepository: dependencies.stickerRepository),
-            child: const StickersPage()),
+          create: (BuildContext context) => StickersBloc(
+            router: dependencies.stickersFeatureRouter,
+            stickerRepository: dependencies.stickerRepository,
+          ),
+          child: const StickersPage(),
+        ),
       );
 }

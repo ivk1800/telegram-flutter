@@ -10,16 +10,23 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
   final ITdFunctionExecutor _functionExecutor;
 
   @override
-  Stream<List<td.Message>> getMessages(
-      {required int chatId, required int fromMessageId, required int limit}) {
+  Stream<List<td.Message>> getMessages({
+    required int chatId,
+    required int fromMessageId,
+    required int limit,
+  }) {
     return _getMessages(
-            chatId: chatId, fromMessageId: fromMessageId, limit: limit)
-        .flatMap((List<td.Message> messages) {
+      chatId: chatId,
+      fromMessageId: fromMessageId,
+      limit: limit,
+    ).flatMap((List<td.Message> messages) {
       if (messages.isNotEmpty && messages.length != limit) {
         return getMessages(
-                chatId: chatId, fromMessageId: messages.last.id, limit: limit)
-            .map((List<td.Message> additionalMessages) =>
-                messages..addAll(additionalMessages));
+          chatId: chatId,
+          fromMessageId: messages.last.id,
+          limit: limit,
+        ).map((List<td.Message> additionalMessages) =>
+            messages..addAll(additionalMessages));
       }
 
       return Stream<List<td.Message>>.value(messages);
@@ -34,18 +41,20 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
     ));
   }
 
-  Stream<List<td.Message>> _getMessages(
-          {required int chatId,
-          required int fromMessageId,
-          required int limit}) =>
+  Stream<List<td.Message>> _getMessages({
+    required int chatId,
+    required int fromMessageId,
+    required int limit,
+  }) =>
       Stream<td.Messages>.fromFuture(_functionExecutor.send<td.Messages>(
-              td.GetChatHistory(
-                  chatId: chatId,
-                  fromMessageId: fromMessageId,
-                  offset: 0,
-                  limit: limit,
-                  onlyLocal: false)))
-          .map((td.Messages event) => event.messages ?? <td.Message>[]);
+        td.GetChatHistory(
+          chatId: chatId,
+          fromMessageId: fromMessageId,
+          offset: 0,
+          limit: limit,
+          onlyLocal: false,
+        ),
+      )).map((td.Messages event) => event.messages ?? <td.Message>[]);
 
   @override
   Future<List<td.Message>> findMessages({
@@ -54,23 +63,31 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
     required int limit,
     required td.SearchMessagesFilter filter,
   }) {
-    return _get<td.Message>((td.Message? last) async {
-      return _functionExecutor
-          .send<td.Messages>(td.SearchChatMessages(
-              chatId: chatId,
-              filter: filter,
-              fromMessageId: last?.id ?? fromMessageId,
-              limit: limit,
-              messageThreadId: 0,
-              offset: 0,
-              query: '',
-              sender: null))
-          .then((td.Messages value) => value.messages ?? <td.Message>[]);
-    }, limit);
+    return _get<td.Message>(
+      (td.Message? last) async {
+        return _functionExecutor
+            .send<td.Messages>(
+              td.SearchChatMessages(
+                chatId: chatId,
+                filter: filter,
+                fromMessageId: last?.id ?? fromMessageId,
+                limit: limit,
+                messageThreadId: 0,
+                offset: 0,
+                query: '',
+                sender: null,
+              ),
+            )
+            .then((td.Messages value) => value.messages ?? <td.Message>[]);
+      },
+      limit,
+    );
   }
 
   Future<List<T>> _get<T>(
-      Future<List<T>> Function(T? last) fetcher, int limit) async {
+    Future<List<T>> Function(T? last) fetcher,
+    int limit,
+  ) async {
     final List<T> messages = await fetcher.call(null);
 
     if (messages.isNotEmpty && messages.length != limit) {

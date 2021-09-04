@@ -39,13 +39,14 @@ class MessagePhotoTileFactoryDelegate
       avatar: _messageComponentResolver.resolveAvatar(context, model),
       blocks: <Widget>[
         MediaWrapper(
-            type: MediaType.Animation,
-            child: _imageWidgetFactory.create(
-              context,
-              minithumbnail: model.minithumbnail,
-              imageId: model.photoId,
-            ),
-            aspectRatio: model.minithumbnail!.aspectRatio()),
+          type: MediaType.Animation,
+          child: _imageWidgetFactory.create(
+            context,
+            minithumbnail: model.minithumbnail,
+            imageId: model.photoId,
+          ),
+          aspectRatio: model.minithumbnail!.aspectRatio(),
+        ),
         if (model.caption != null)
           MessageCaption(
             text: model.caption!.toInlineSpan(),

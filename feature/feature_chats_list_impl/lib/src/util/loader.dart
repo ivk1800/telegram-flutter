@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 
 class Loader<T> {
-  Loader(
-      {required void Function(List<T> result) onResult,
-      required Stream<List<T>> Function() builder,
-      required void Function(dynamic error) onError})
-      : _onResult = onResult,
+  Loader({
+    required void Function(List<T> result) onResult,
+    required Stream<List<T>> Function() builder,
+    required void Function(dynamic error) onError,
+  })  : _onResult = onResult,
         _builder = builder,
         _onError = onError;
 
@@ -44,11 +44,14 @@ class Loader<T> {
           _running = false;
         })
         .take(1)
-        .listen((List<T> result) {
-          _onResult.call(result);
-          _running = false;
-        }, onError: (dynamic error) {
-          _onError.call(error);
-        });
+        .listen(
+          (List<T> result) {
+            _onResult.call(result);
+            _running = false;
+          },
+          onError: (dynamic error) {
+            _onError.call(error);
+          },
+        );
   }
 }

@@ -13,13 +13,13 @@ import 'ordered_chat.dart';
 
 class ChatListInteractor {
   @j.inject
-  ChatListInteractor(
-      {required IChatRepository chatRepository,
-      required IChatUpdatesProvider chatUpdatesProvider,
-      required IChatsHolder chatsHolder,
-      required ChatListConfig chatListConfig,
-      required ChatListUpdateHandler chatListUpdateHandler})
-      : _chatRepository = chatRepository,
+  ChatListInteractor({
+    required IChatRepository chatRepository,
+    required IChatUpdatesProvider chatUpdatesProvider,
+    required IChatsHolder chatsHolder,
+    required ChatListConfig chatListConfig,
+    required ChatListUpdateHandler chatListUpdateHandler,
+  })  : _chatRepository = chatRepository,
         _chatsHolder = chatsHolder,
         _chatListConfig = chatListConfig,
         _chatListUpdateHandler = chatListUpdateHandler,
@@ -28,10 +28,11 @@ class ChatListInteractor {
       builder: () {
         final OrderedChat? lastChat = _chatsHolder.orderedChats.lastOrNull;
         return Stream<List<td.Chat>>.fromFuture(_chatRepository.getChats(
-            offsetChatId: lastChat?.chatId ?? 0,
-            offsetOrder: lastChat?.order ?? 9223372036854775807,
-            chatList: _chatListConfig.chatList,
-            limit: 30));
+          offsetChatId: lastChat?.chatId ?? 0,
+          offsetOrder: lastChat?.order ?? 9223372036854775807,
+          chatList: _chatListConfig.chatList,
+          limit: 30,
+        ));
       },
       onResult: (List<td.Chat> newChats) async {
         _done = true;
@@ -92,7 +93,9 @@ class ChatListInteractor {
   Future<void> _handleChatUpdate(td.Update event) async {
     if (event is td.UpdateChatPosition) {
       if (await _chatListUpdateHandler.handleNewPosition(
-          event.chatId, event.position)) {
+        event.chatId,
+        event.position,
+      )) {
         _dispatchChats();
       }
     } else if (event is td.UpdateChatLastMessage) {
@@ -116,7 +119,8 @@ class ChatListInteractor {
       /// chat without positions(is empty)
       /// fetch actual chat from repo
       if (await _chatListUpdateHandler.handleNewChat(
-          chat: await _chatRepository.getChat(event.chat.id))) {
+        chat: await _chatRepository.getChat(event.chat.id),
+      )) {
         _dispatchChats();
       }
     } else if (event is td.UpdateChatUnreadMentionCount) {

@@ -34,16 +34,17 @@ class BlockInteraction extends StatelessWidget {
                     color: Colors.black45,
                     child: Center(
                       child: Container(
-                          padding: const EdgeInsets.all(20.0),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16.0))),
-                          child: const CircularProgressIndicator()),
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                        ),
+                        child: const CircularProgressIndicator(),
+                      ),
                     ),
                   )
                 : const SizedBox(),
-          )
+          ),
         ],
       ),
     );

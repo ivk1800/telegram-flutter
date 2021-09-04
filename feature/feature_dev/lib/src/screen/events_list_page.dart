@@ -57,24 +57,28 @@ class EventsListPageState extends State<EventsListPage> {
     return Scaffold(
       appBar: AppBar(
         title: connectionStateWidgetFactory.create(
-            context, (BuildContext context) => const Text('Events')),
+          context,
+          (BuildContext context) => const Text('Events'),
+        ),
         actions: <Widget>[
           IconButton(
-              onPressed: () {
-                setState(() {
-                  _scrollController
-                      .jumpTo(_scrollController.position.maxScrollExtent);
-                });
-              },
-              icon: const Icon(Icons.vertical_align_top)),
+            onPressed: () {
+              setState(() {
+                _scrollController
+                    .jumpTo(_scrollController.position.maxScrollExtent);
+              });
+            },
+            icon: const Icon(Icons.vertical_align_top),
+          ),
           IconButton(
-              onPressed: () {
-                setState(() {
-                  _scrollToLast = !_scrollToLast;
-                });
-              },
-              icon: Icon(
-                  _scrollToLast ? Icons.push_pin : Icons.push_pin_outlined)),
+            onPressed: () {
+              setState(() {
+                _scrollToLast = !_scrollToLast;
+              });
+            },
+            icon:
+                Icon(_scrollToLast ? Icons.push_pin : Icons.push_pin_outlined),
+          ),
         ],
       ),
       body: Padding(

@@ -16,18 +16,19 @@ class ChooseCountryScreenFactory implements IChooseCountryScreenFactory {
   @override
   Widget create(BuildContext context, void Function(Country country) callback) {
     return MultiProvider(
-        providers: <Provider<dynamic>>[
-          Provider<ILocalizationManager>(
-            create: (BuildContext context) => _dependencies.localizationManager,
-          ),
-        ],
-        child: BlocProvider<ChooseCountryBloc>(
-          create: (BuildContext context) => ChooseCountryBloc(
-            args: ChooseCountryArgs(callback: callback),
-            //todo get from feature component
-            countryRepository: const CountryRepository(),
-          )..add(const InitEvent()),
-          child: const ChooseCountyPage(),
-        ));
+      providers: <Provider<dynamic>>[
+        Provider<ILocalizationManager>(
+          create: (BuildContext context) => _dependencies.localizationManager,
+        ),
+      ],
+      child: BlocProvider<ChooseCountryBloc>(
+        create: (BuildContext context) => ChooseCountryBloc(
+          args: ChooseCountryArgs(callback: callback),
+          //todo get from feature component
+          countryRepository: const CountryRepository(),
+        )..add(const InitEvent()),
+        child: const ChooseCountyPage(),
+      ),
+    );
   }
 }

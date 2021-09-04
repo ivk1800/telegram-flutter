@@ -31,28 +31,28 @@ class MessageVideoTileFactoryDelegate
   @override
   Widget create(BuildContext context, MessageVideoTileModel model) {
     return _chatMessageFactory.createConversationMessage(
-        id: model.id,
-        isOutgoing: model.isOutgoing,
-        context: context,
-        senderTitle:
-            _messageComponentResolver.resolveSenderName(context, model),
-        reply: _replyInfoFactory.createFromMessageModel(context, model),
-        avatar: _messageComponentResolver.resolveAvatar(context, model),
-        blocks: <Widget>[
-          MediaWrapper(
-              type: MediaType.Video,
-              child: _imageWidgetFactory.create(
-                context,
-                minithumbnail: model.minithumbnail,
-                imageId: model.thumbnailImageId,
-              ),
-              aspectRatio: model.minithumbnail!.aspectRatio()),
-          if (model.caption != null)
-            MessageCaption(
-              text: model.caption!.toInlineSpan(),
-              shortInfo:
-                  _shortInfoFactory.create(context, model.additionalInfo),
-            ),
-        ]);
+      id: model.id,
+      isOutgoing: model.isOutgoing,
+      context: context,
+      senderTitle: _messageComponentResolver.resolveSenderName(context, model),
+      reply: _replyInfoFactory.createFromMessageModel(context, model),
+      avatar: _messageComponentResolver.resolveAvatar(context, model),
+      blocks: <Widget>[
+        MediaWrapper(
+          type: MediaType.Video,
+          child: _imageWidgetFactory.create(
+            context,
+            minithumbnail: model.minithumbnail,
+            imageId: model.thumbnailImageId,
+          ),
+          aspectRatio: model.minithumbnail!.aspectRatio(),
+        ),
+        if (model.caption != null)
+          MessageCaption(
+            text: model.caption!.toInlineSpan(),
+            shortInfo: _shortInfoFactory.create(context, model.additionalInfo),
+          ),
+      ],
+    );
   }
 }

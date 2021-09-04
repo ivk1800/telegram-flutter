@@ -7,19 +7,22 @@ import 'not_implemented.dart';
 
 class MessageProximityAlertTriggeredTileFactoryDelegate
     implements ITileFactoryDelegate<MessageProximityAlertTriggeredTileModel> {
-  MessageProximityAlertTriggeredTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageProximityAlertTriggeredTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(
-      BuildContext context, MessageProximityAlertTriggeredTileModel model) {
+    BuildContext context,
+    MessageProximityAlertTriggeredTileModel model,
+  ) {
     return _chatMessageFactory.create(
-        id: model.id,
-        context: context,
-        isOutgoing: model.isOutgoing,
-        body: NotImplementedWidget(type: model.type));
+      id: model.id,
+      context: context,
+      isOutgoing: model.isOutgoing,
+      body: NotImplementedWidget(type: model.type),
+    );
   }
 }

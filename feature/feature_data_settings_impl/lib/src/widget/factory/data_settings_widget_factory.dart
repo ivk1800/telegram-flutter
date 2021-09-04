@@ -15,11 +15,13 @@ class DataSettingsWidgetFactory implements IDataSettingsWidgetFactory {
   Widget create() => MultiProvider(
         providers: <Provider<dynamic>>[
           Provider<ILocalizationManager>.value(
-              value: dependencies.localizationManager),
+            value: dependencies.localizationManager,
+          ),
           Provider<ConnectionStateWidgetFactory>.value(
-              value: ConnectionStateWidgetFactory(
-                  connectionStateProvider:
-                      dependencies.connectionStateProvider))
+            value: ConnectionStateWidgetFactory(
+              connectionStateProvider: dependencies.connectionStateProvider,
+            ),
+          ),
         ],
         child: const DataSettingsPage(),
       );

@@ -3,7 +3,8 @@ class DateParser {
 
   DateTime parseUnixTimeStampToDate(int timestamp) =>
       DateTime.fromMillisecondsSinceEpoch(
-          Duration(seconds: timestamp).inMilliseconds);
+        Duration(seconds: timestamp).inMilliseconds,
+      );
 }
 
 extension DateParserExtensions on DateParser {

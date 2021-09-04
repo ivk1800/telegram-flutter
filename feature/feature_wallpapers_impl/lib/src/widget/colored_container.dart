@@ -21,16 +21,18 @@ class ColoredContainer extends StatelessWidget {
       );
     } else if (fill is BackgroundFillGradient) {
       return Container(
-          child: child,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
+        child: child,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
               fill.topColor,
               fill.bottomColor,
             ],
-          )));
+          ),
+        ),
+      );
     }
     throw StateError('unexpected fill type ${fill.runtimeType}');
   }

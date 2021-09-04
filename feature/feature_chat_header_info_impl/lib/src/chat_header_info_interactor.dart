@@ -70,7 +70,8 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
     return Stream<td.BasicGroup>.fromFuture(_basicGroupRepository.getGroup(id))
         .flatMap((td.BasicGroup group) {
       return Stream<ChatHeaderInfo>.value(
-          _createInfoForGroup(chat, group.memberCount, false));
+        _createInfoForGroup(chat, group.memberCount, false),
+      );
     });
   }
 
@@ -78,7 +79,8 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
     return Stream<td.Supergroup>.fromFuture(_superGroupRepository.getGroup(id))
         .flatMap((td.Supergroup group) {
       return Stream<ChatHeaderInfo>.value(
-          _createInfoForGroup(chat, group.memberCount, group.isChannel));
+        _createInfoForGroup(chat, group.memberCount, group.isChannel),
+      );
     });
   }
 
@@ -167,9 +169,9 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
       title: chat.title,
       // todo implement plural
       subtitle: '${_localizationManager.getStringFormatted('Members', <dynamic>[
-            memberCount
+            memberCount,
           ])} ${isChannel ? '' : ', ${_localizationManager.getStringFormatted('OnlineCount', <dynamic>[
-              'todo'
+              'todo',
             ])}'} ',
     );
   }

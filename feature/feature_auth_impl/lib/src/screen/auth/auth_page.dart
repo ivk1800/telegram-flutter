@@ -144,8 +144,9 @@ class _AuthPageState extends State<AuthPage> {
         onPressed: () {
           context.read<AuthBloc>().add(
                 SubmitPhoneTap(
-                    number:
-                        '${_countryCodeController.text}${_phoneMaskFormatter.getUnmaskedText()}'),
+                  number:
+                      '${_countryCodeController.text}${_phoneMaskFormatter.getUnmaskedText()}',
+                ),
               );
         },
       ),
@@ -283,10 +284,10 @@ class _AuthPageState extends State<AuthPage> {
   Widget _buildPhoneNumberState(PhoneNumberState state) {
     final ILocalizationManager localizationManager = context.read();
     final Size calculatedCodeWidth = (TextPainter(
-            text: const TextSpan(text: '+00000'),
-            maxLines: 1,
-            textDirection: TextDirection.ltr)
-          ..layout())
+      text: const TextSpan(text: '+00000'),
+      maxLines: 1,
+      textDirection: TextDirection.ltr,
+    )..layout())
         .size;
 
     return Column(

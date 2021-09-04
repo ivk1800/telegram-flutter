@@ -6,9 +6,9 @@ import 'package:tile/tile.dart';
 
 class MessageChatUpgradeFromTileFactoryDelegate
     implements ITileFactoryDelegate<MessageChatUpgradeFromTileModel> {
-  MessageChatUpgradeFromTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageChatUpgradeFromTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 

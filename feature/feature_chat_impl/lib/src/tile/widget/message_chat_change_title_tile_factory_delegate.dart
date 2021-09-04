@@ -6,9 +6,9 @@ import 'package:rich_text_format_flutter/rich_text_format_flutter.dart';
 
 class MessageChatChangeTitleTileFactoryDelegate
     implements ITileFactoryDelegate<MessageChatChangeTitleTileModel> {
-  MessageChatChangeTitleTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageChatChangeTitleTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 

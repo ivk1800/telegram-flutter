@@ -7,32 +7,33 @@ import 'package:rich_text_format_flutter/rich_text_format_flutter.dart';
 
 class MessageChatChangePhotoTileFactoryDelegate
     implements ITileFactoryDelegate<MessageChatChangePhotoTileModel> {
-  MessageChatChangePhotoTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory})
-      : _chatMessageFactory = chatMessageFactory;
+  MessageChatChangePhotoTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+  }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
   Widget create(BuildContext context, MessageChatChangePhotoTileModel model) {
     return _chatMessageFactory.createCustom(
-        id: model.id,
-        context: context,
-        alignment: Alignment.center,
-        body: Column(
-          children: <Widget>[
-            _chatMessageFactory.createChatNotificationBubbleFromText(
-              text: model.title.toInlineSpan(),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            // todo implement avatar loading
-            CircleAvatar(
-              radius: 90,
-              backgroundImage: model.minithumbnail?.toMemoryImage(),
-            )
-          ],
-        ));
+      id: model.id,
+      context: context,
+      alignment: Alignment.center,
+      body: Column(
+        children: <Widget>[
+          _chatMessageFactory.createChatNotificationBubbleFromText(
+            text: model.title.toInlineSpan(),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          // todo implement avatar loading
+          CircleAvatar(
+            radius: 90,
+            backgroundImage: model.minithumbnail?.toMemoryImage(),
+          ),
+        ],
+      ),
+    );
   }
 }

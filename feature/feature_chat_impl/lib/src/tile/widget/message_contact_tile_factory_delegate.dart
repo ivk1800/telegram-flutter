@@ -8,13 +8,13 @@ import 'package:tile/tile.dart';
 
 class MessageContactTileFactoryDelegate
     implements ITileFactoryDelegate<MessageContactTileModel> {
-  MessageContactTileFactoryDelegate(
-      {required ChatMessageFactory chatMessageFactory,
-      required ILocalizationManager localizationManager,
-      required MessageComponentResolver messageComponentResolver,
-      required ReplyInfoFactory replyInfoFactory,
-      required ShortInfoFactory shortInfoFactory})
-      : _chatMessageFactory = chatMessageFactory,
+  MessageContactTileFactoryDelegate({
+    required ChatMessageFactory chatMessageFactory,
+    required ILocalizationManager localizationManager,
+    required MessageComponentResolver messageComponentResolver,
+    required ReplyInfoFactory replyInfoFactory,
+    required ShortInfoFactory shortInfoFactory,
+  })  : _chatMessageFactory = chatMessageFactory,
         _replyInfoFactory = replyInfoFactory,
         _messageComponentResolver = messageComponentResolver,
         _localizationManager = localizationManager,
@@ -33,64 +33,66 @@ class MessageContactTileFactoryDelegate
     // todo move to config
     const double maxWidth = 220;
     return _chatMessageFactory.createConversationMessage(
-        id: model.id,
-        isOutgoing: model.isOutgoing,
-        context: context,
-        senderTitle:
-            _messageComponentResolver.resolveSenderName(context, model),
-        reply: _replyInfoFactory.createFromMessageModel(context, model),
-        avatar: _messageComponentResolver.resolveAvatar(context, model),
-        blocks: <Widget>[
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: maxWidth),
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: chatContext.verticalPadding,
-                left: chatContext.horizontalPadding,
-                right: chatContext.horizontalPadding,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  // todo replace ListTile by own layout
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    minVerticalPadding: 0,
-                    // todo display avatar
-                    leading: const CircleAvatar(),
-                    title: Text(
-                      model.title,
-                      maxLines: 1,
-                    ),
-                    subtitle: Text(
-                      model.subtitle,
-                      maxLines: 1,
-                    ),
-                    // todo handle tap
-                    trailing: const Icon(Icons.more_vert),
-                  ),
-                  OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        minimumSize: const Size(maxWidth, 40),
-                      ),
-                      onPressed: () {
-                        // todo handle tap
-                      },
-                      child:
-                          Text(_localizationManager.getString('ViewContact'))),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 4, top: 4),
-                      child: _shortInfoFactory.create(
-                          context, model.additionalInfo),
-                    ),
-                  )
-                ],
-              ),
+      id: model.id,
+      isOutgoing: model.isOutgoing,
+      context: context,
+      senderTitle: _messageComponentResolver.resolveSenderName(context, model),
+      reply: _replyInfoFactory.createFromMessageModel(context, model),
+      avatar: _messageComponentResolver.resolveAvatar(context, model),
+      blocks: <Widget>[
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: maxWidth),
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: chatContext.verticalPadding,
+              left: chatContext.horizontalPadding,
+              right: chatContext.horizontalPadding,
             ),
-          )
-        ]);
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                // todo replace ListTile by own layout
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  minVerticalPadding: 0,
+                  // todo display avatar
+                  leading: const CircleAvatar(),
+                  title: Text(
+                    model.title,
+                    maxLines: 1,
+                  ),
+                  subtitle: Text(
+                    model.subtitle,
+                    maxLines: 1,
+                  ),
+                  // todo handle tap
+                  trailing: const Icon(Icons.more_vert),
+                ),
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size(maxWidth, 40),
+                  ),
+                  onPressed: () {
+                    // todo handle tap
+                  },
+                  child: Text(
+                    _localizationManager.getString('ViewContact'),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 4, top: 4),
+                    child:
+                        _shortInfoFactory.create(context, model.additionalInfo),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

@@ -9,10 +9,10 @@ import 'stickers_event.dart';
 import 'stickers_state.dart';
 
 class StickersBloc extends Bloc<StickersEvent, StickersState> {
-  StickersBloc(
-      {required IStickerRepository stickerRepository,
-      required IStickersFeatureRouter router})
-      : _stickerRepository = stickerRepository,
+  StickersBloc({
+    required IStickerRepository stickerRepository,
+    required IStickersFeatureRouter router,
+  })  : _stickerRepository = stickerRepository,
         _router = router,
         super(const DefaultState(tiles: <ITileModel>[])) {
     add(const LoadingEvent());
