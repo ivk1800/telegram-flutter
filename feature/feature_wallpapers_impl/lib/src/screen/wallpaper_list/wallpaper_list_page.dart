@@ -59,7 +59,6 @@ class WallpaperListPage extends StatelessWidget {
 
     return StaggeredGridView.countBuilder(
       crossAxisCount: CrossAxisCount,
-      shrinkWrap: false,
       itemCount: tileModels.length,
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,

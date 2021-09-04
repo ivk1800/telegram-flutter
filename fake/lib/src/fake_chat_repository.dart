@@ -5,10 +5,6 @@ import 'package:tdlib/td_api.dart' as td;
 
 class FakeChatRepository implements IChatRepository {
   @override
-  // TODO: implement chats
-  Stream<List<td.Chat>> get chats => throw UnimplementedError();
-
-  @override
   Future<td.Chat> getChat(int id) {
     return Completer<td.Chat>().future;
   }

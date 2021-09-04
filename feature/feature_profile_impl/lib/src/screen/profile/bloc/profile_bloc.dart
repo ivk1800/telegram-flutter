@@ -102,8 +102,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       header,
       (BodyState body, HeaderState header) =>
           ProfileState(headerState: header, bodyState: body),
-    ).listen((ProfileState newState) {
-      emit(newState);
-    });
+    ).listen(emit);
   }
 }

@@ -304,7 +304,6 @@ class SplitViewState extends State<SplitView> {
         _leftPages.isNotEmpty || _rightPages.isNotEmpty;
     return Align(
       key: key,
-      alignment: Alignment.center,
       child: Stack(
         children: <Widget>[
           GestureDetector(

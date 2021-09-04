@@ -18,7 +18,6 @@ class PatternWallpaperTileFactoryDelegate
       onTap: () {},
       child: _imageWidgetFactory.create(
         context,
-        minithumbnail: null,
         imageId: model.thumbnailImageId,
         layoutBuilder: (Widget imageWidget) {
           return ColoredContainer(

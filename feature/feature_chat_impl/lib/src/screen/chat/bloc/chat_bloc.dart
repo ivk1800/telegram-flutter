@@ -73,8 +73,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               )),
       (BodyState body, HeaderState header) =>
           ChatState(headerState: header, bodyState: body),
-    ).listen((ChatState newState) {
-      emit(newState);
-    });
+    ).listen(emit);
   }
 }

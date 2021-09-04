@@ -92,9 +92,7 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
         _featureFactory.createLogoutFeatureApi().logoutScreenFactory;
     _navigationRouter.push(
       key: UniqueKey(),
-      builder: (BuildContext context) {
-        return factory.create(context);
-      },
+      builder: factory.create,
       container: ContainerType.Top,
     );
   }

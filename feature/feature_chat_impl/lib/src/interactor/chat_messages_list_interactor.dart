@@ -83,7 +83,7 @@ class ChatMessagesInteractor {
   Future<List<ITileModel>> _mapToTileModels(List<td.Message> messages) async {
     final Stream<ITileModel> tileModels =
         Stream<td.Message>.fromIterable(messages).asyncMap(
-      (td.Message message) => _messageTileMapper.mapToTileModel(message),
+      _messageTileMapper.mapToTileModel,
     );
     return tileModels.toList();
   }

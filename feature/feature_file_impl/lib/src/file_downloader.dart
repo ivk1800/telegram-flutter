@@ -31,9 +31,7 @@ class FileDownloader implements IFileDownloader {
 
   @override
   Future<IFileDownloadState> getFileDownloadState(int fileId) {
-    return _fileRepository.getFile(fileId).then((td.File file) {
-      return _toDownloadState(file);
-    });
+    return _fileRepository.getFile(fileId).then(_toDownloadState);
   }
 
   @override

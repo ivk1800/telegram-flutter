@@ -75,7 +75,6 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
                 messageThreadId: 0,
                 offset: 0,
                 query: '',
-                sender: null,
               ),
             )
             .then((td.Messages value) => value.messages ?? <td.Message>[]);

@@ -1,5 +1,4 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatRepositoryImpl extends IChatRepository {
@@ -56,14 +55,6 @@ class ChatRepositoryImpl extends IChatRepository {
   }
 
   final ITdFunctionExecutor _functionExecutor;
-
-  // final Map<int, td.Chat> _chats = <int, td.Chat>{};
-
-  final BehaviorSubject<List<td.Chat>> _chatsSubject =
-      BehaviorSubject<List<td.Chat>>();
-
-  @override
-  Stream<List<td.Chat>> get chats => _chatsSubject;
 
   @override
   Future<td.Chat> getChat(int id) =>

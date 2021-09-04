@@ -175,7 +175,6 @@ class _AuthPageState extends State<AuthPage> {
     final ILocalizationManager localizationManager = context.read();
     final ThemeData theme = Theme.of(context);
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       key: const ValueKey<dynamic>('code'),
       children: <Widget>[
         const SizedBox(

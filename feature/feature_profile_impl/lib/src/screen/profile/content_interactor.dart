@@ -2,7 +2,6 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tuple/tuple.dart';
 
@@ -23,9 +22,6 @@ class ContentInteractor {
         _basicGroupRepository = basicGroupRepository,
         _messageRepository = messageRepository;
 
-  final BehaviorSubject<ContentData> _contentDataSubject =
-      BehaviorSubject<ContentData>();
-
   final ProfileArgs _args;
   final IChatMessageRepository _messageRepository;
   final ISuperGroupRepository _superGroupRepository;
@@ -33,8 +29,6 @@ class ContentInteractor {
   final IUserRepository _userRepository;
   final IChatRepository _chatRepository;
   final ILocalizationManager _localizationManager;
-
-  Stream<ContentData> get content => _contentDataSubject;
 
   // todo handle Update*FullInfo events
   Future<ContentData> getContent() async {

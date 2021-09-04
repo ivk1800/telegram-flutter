@@ -34,9 +34,7 @@ class SplitNavigationRouter implements INavigationRouter {
         _featureFactory.createAuthFeatureApi().authScreenFactory;
     _push(
       Builder(
-        builder: (BuildContext context) {
-          return factory.create(context);
-        },
+        builder: factory.create,
       ),
       ContainerType.Top,
     );

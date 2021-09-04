@@ -35,13 +35,10 @@ class ChatTileFactory {
       child: Ink(
         color: model.isPinned ? Colors.grey[200] : null,
         child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
               height: 75,
               child: Row(
-                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Padding(
                     padding:
@@ -60,7 +57,6 @@ class ChatTileFactory {
                         vertical: 8.0,
                       ),
                       child: Column(
-                        mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           _buildFirstRow(context, model),
                           Flexible(
@@ -96,7 +92,6 @@ class ChatTileFactory {
     ));
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.max,
       children: widgets,
     );
   }
@@ -128,10 +123,7 @@ class ChatTileFactory {
       widgets.add(const Icon(Icons.volume_off, color: Colors.grey, size: 15));
     }
 
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      children: widgets,
-    );
+    return Row(children: widgets);
   }
 
   Widget _buildSecondRow(BuildContext context, ChatTileModel model) {
@@ -192,7 +184,6 @@ class ChatTileFactory {
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
       children: widgets,
     );
   }
@@ -206,7 +197,6 @@ class ChatTileFactory {
     return Container(
       constraints: const BoxConstraints(minWidth: 20, maxHeight: 20),
       child: Align(
-        alignment: Alignment.center,
         child: Padding(
           padding: const EdgeInsets.only(left: 3, right: 4),
           child: Text(
@@ -223,7 +213,6 @@ class ChatTileFactory {
       ),
       decoration: BoxDecoration(
         color: color,
-        shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(10),
       ),
     );
