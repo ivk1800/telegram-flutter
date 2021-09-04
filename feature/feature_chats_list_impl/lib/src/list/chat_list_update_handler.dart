@@ -1,21 +1,17 @@
 import 'dart:async';
+
+import 'package:collection/collection.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chats_list_impl/src/mapper/chat_tile_model_mapper.dart';
-import 'package:tdlib/td_api.dart' as td;
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:collection/collection.dart';
+import 'package:queue/queue.dart' as q;
+import 'package:tdlib/td_api.dart' as td;
+
 import 'chat_data.dart';
 import 'chat_list.dart';
 import 'chat_list_config.dart';
 import 'ordered_chat.dart';
-
-class _Action {
-  _Action({required this.action, required this.completer});
-
-  final Future<bool> Function() action;
-  final Completer<bool> completer;
-}
 
 class ChatListUpdateHandler {
   @j.inject
@@ -27,22 +23,14 @@ class ChatListUpdateHandler {
       : _chatTileModelMapper = chatTileModelMapper,
         _chatListConfig = chatListConfig,
         _chatsHolder = chatsHolder,
-        _chatRepository = chatRepository {
-    _streamController.stream.asyncMap((_Action event) async {
-      final bool result = await event.action.call().then((bool value) {
-        return value;
-      });
-      return event.completer.complete(result);
-    }).listen(null);
-  }
+        _chatRepository = chatRepository;
 
   final ChatTileModelMapper _chatTileModelMapper;
   final IChatsHolder _chatsHolder;
   final IChatRepository _chatRepository;
   final ChatListConfig _chatListConfig;
 
-  final StreamController<_Action> _streamController =
-      StreamController<_Action>();
+  final q.Queue<bool> _eventsQueue = q.Queue();
 
   Set<OrderedChat> get _orderedChats => _chatsHolder.orderedChats;
 
@@ -77,15 +65,11 @@ class ChatListUpdateHandler {
       _enqueue(() => _handleUpdateChatNotificationSettings(update));
 
   void dispose() {
-    _streamController.close();
+    _eventsQueue.dispose();
   }
 
-  Future<bool> _enqueue(Future<bool> Function() action) {
-    final Completer<bool> completer = Completer<bool>();
-    _streamController
-        .add(_Action(action: () async => action.call(), completer: completer));
-    return completer.future;
-  }
+  Future<bool> _enqueue(Future<bool> Function() action) =>
+      _eventsQueue.enqueue(action);
 
   Future<ChatData> _toChatData(td.Chat chat) async =>
       ChatData(chat: chat, model: await _chatTileModelMapper.mapToModel(chat));

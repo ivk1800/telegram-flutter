@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  queue:
+    path: ../../queue
   feature_message_preview_resolver:
     path: ../feature_message_preview_resolver
   localization_api:
