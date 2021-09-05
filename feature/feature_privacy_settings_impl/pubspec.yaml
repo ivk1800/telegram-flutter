@@ -17,7 +17,9 @@ dependencies:
   coreui:
     path: ../../coreui
 
+dev_dependencies:
+  tg_lint_rules:
+    path: ../../tg_lint_rules
+
   flutter:
     sdk: flutter
-
-flutter:

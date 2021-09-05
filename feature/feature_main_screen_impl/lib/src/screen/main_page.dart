@@ -306,7 +306,6 @@ class MainPageState extends State<MainPage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
               children: const <Widget>[
                 SizedBox(height: 70, width: 70, child: CircleAvatar()),
               ],

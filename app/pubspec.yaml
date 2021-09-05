@@ -125,7 +125,8 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  mockito: ^5.0.4
+  tg_lint_rules:
+    path: ../tg_lint_rules
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
@@ -133,8 +134,6 @@ dev_dependencies:
       ref: 2351119ad514db2c2ffbe286677e91936c39ee61
   analyzer: ^1.1.0
   build_runner: 2.1.1
-  flutter_test:
-    sdk: flutter
 
 flutter:
   assets:

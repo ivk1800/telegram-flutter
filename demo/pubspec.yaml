@@ -33,7 +33,5 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-flutter:
+  tg_lint_rules:
+    path: ../tg_lint_rules

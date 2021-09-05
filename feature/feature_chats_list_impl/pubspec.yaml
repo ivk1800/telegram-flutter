@@ -39,6 +39,9 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  tg_lint_rules:
+    path: ../../tg_lint_rules
+
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git

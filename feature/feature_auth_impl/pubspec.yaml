@@ -31,6 +31,9 @@ dependencies:
       ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
 
 dev_dependencies:
+  tg_lint_rules:
+    path: ../../tg_lint_rules
+
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git

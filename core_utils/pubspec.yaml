@@ -12,4 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-flutter:
+dev_dependencies:
+  tg_lint_rules:
+    path: ../tg_lint_rules

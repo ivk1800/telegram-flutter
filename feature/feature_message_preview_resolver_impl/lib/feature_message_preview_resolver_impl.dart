@@ -80,7 +80,6 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
               'EventLogGroupJoined',
               <dynamic>[joinedUsernames],
             ),
-            secondText: null,
           );
         }
       case td.MessageDocument.CONSTRUCTOR:
@@ -88,7 +87,6 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
           final td.MessageDocument m = content as td.MessageDocument;
           return MessagePreviewData(
             firstText: '📎 ${m.caption.text}',
-            secondText: null,
           );
         }
       case td.MessageAnimation.CONSTRUCTOR:
@@ -101,7 +99,6 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
     }
 
     return MessagePreviewData(
-      firstText: null,
       secondText: content.runtimeType.toString(),
     );
   }

@@ -27,6 +27,8 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  tg_lint_rules:
+    path: ../../tg_lint_rules
   build_runner: 2.1.1
   freezed: 0.14.2
 

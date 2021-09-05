@@ -9,3 +9,7 @@ dependencies:
   rxdart: ^0.26.0
   td_client:
     path: ../td_client
+
+dev_dependencies:
+  tg_lint_rules:
+    path: ../tg_lint_rules
