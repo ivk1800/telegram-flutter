@@ -1,1 +1,1 @@
-enum MenuItem { Settings, Dev }
+enum MenuItem { settings, dev }

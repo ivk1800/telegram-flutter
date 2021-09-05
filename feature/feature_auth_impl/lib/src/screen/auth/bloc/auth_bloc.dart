@@ -205,8 +205,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         countryTitle: _getCountryTitle(),
         phoneNumberMask: _getMask(),
       ));
-      _actionSubject.add(SetCountryCode(code: country.code));
-      _actionSubject.add(SetPhoneNumberMask(mask: _getMask()));
+      _actionSubject
+        ..add(SetCountryCode(code: country.code))
+        ..add(SetPhoneNumberMask(mask: _getMask()));
     });
   }
 

@@ -33,51 +33,51 @@ class LogoutPage extends StatelessWidget {
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.AddAnotherAccount));
+            bloc.add(const TapEvent(TapType.addAnotherAccount));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('AddAnotherAccount'),
           subtitle: localizationManager.getString('AddAnotherAccountInfo'),
         ),
         const tg.Divider(
-          indent: tg.DividerIndent.Large,
+          indent: tg.DividerIndent.large,
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.SetPasscode));
+            bloc.add(const TapEvent(TapType.setPasscode));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('SetPasscode'),
           subtitle: localizationManager.getString('SetPasscodeInfo'),
         ),
         const tg.Divider(
-          indent: tg.DividerIndent.Large,
+          indent: tg.DividerIndent.large,
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.ClearCache));
+            bloc.add(const TapEvent(TapType.clearCache));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('ClearCache'),
           subtitle: localizationManager.getString('ClearCacheInfo'),
         ),
         const tg.Divider(
-          indent: tg.DividerIndent.Large,
+          indent: tg.DividerIndent.large,
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.ChangePhoneNumber));
+            bloc.add(const TapEvent(TapType.changePhoneNumber));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('ChangePhoneNumber'),
           subtitle: localizationManager.getString('ChangePhoneNumberInfo'),
         ),
         const tg.Divider(
-          indent: tg.DividerIndent.Large,
+          indent: tg.DividerIndent.large,
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.ContactSupport));
+            bloc.add(const TapEvent(TapType.contactSupport));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('ContactSupport'),
@@ -88,7 +88,7 @@ class LogoutPage extends StatelessWidget {
           titleColor: Theme.of(context).errorColor,
           title: localizationManager.getString('LogOutTitle'),
           onTap: () {
-            bloc.add(const TapEvent(TapType.LogOut));
+            bloc.add(const TapEvent(TapType.logOut));
           },
         ),
         tg.Annotation(

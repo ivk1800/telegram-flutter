@@ -20,7 +20,7 @@ class Action {
   Action({
     required this.text,
     this.callback,
-    this.type = ActionType.Default,
+    this.type = ActionType.simple,
   });
 
   final String text;
@@ -29,4 +29,4 @@ class Action {
   final bool Function()? callback;
 }
 
-enum ActionType { Default, Attention }
+enum ActionType { simple, attention }

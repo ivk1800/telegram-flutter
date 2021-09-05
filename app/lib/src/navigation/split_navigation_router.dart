@@ -25,7 +25,7 @@ class SplitNavigationRouter implements INavigationRouter {
 
   @override
   void toSessionsScreen() {
-    _push(const SessionsPage(), ContainerType.Top);
+    _push(const SessionsPage(), ContainerType.top);
   }
 
   @override
@@ -36,13 +36,13 @@ class SplitNavigationRouter implements INavigationRouter {
       Builder(
         builder: factory.create,
       ),
-      ContainerType.Top,
+      ContainerType.top,
     );
   }
 
   @override
   void toFolders() {
-    _push(const FoldersSetupPage().wrap(), ContainerType.Top);
+    _push(const FoldersSetupPage().wrap(), ContainerType.top);
   }
 
   @override
@@ -52,18 +52,19 @@ class SplitNavigationRouter implements INavigationRouter {
       return;
     }
 
-    currentState.popUntilRoot(ContainerType.Left);
-    currentState.popUntilRoot(ContainerType.Top);
-    currentState.popUntilRoot(ContainerType.Right);
-    currentState.setRightContainerPlaceholder(const Material(
-      child: Center(
-        // TODO extract to strings
-        child: Text('Select a chat to start messaging'),
-      ),
-    ));
-    currentState.setLeftRootPage(
-      _featureFactory.createMainScreenFeature().screenWidgetFactory.create(),
-    );
+    currentState
+      ..popUntilRoot(ContainerType.left)
+      ..popUntilRoot(ContainerType.top)
+      ..popUntilRoot(ContainerType.right)
+      ..setRightContainerPlaceholder(const Material(
+        child: Center(
+          // TODO extract to strings
+          child: Text('Select a chat to start messaging'),
+        ),
+      ))
+      ..setLeftRootPage(
+        _featureFactory.createMainScreenFeature().screenWidgetFactory.create(),
+      );
   }
 
   void pushAllReplacement({

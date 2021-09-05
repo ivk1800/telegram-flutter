@@ -1,9 +1,9 @@
 enum SharedContentType {
-  Media,
-  Files,
-  Links,
-  Music,
-  Voice,
-  Gif,
-  Groups,
+  media,
+  files,
+  links,
+  music,
+  voice,
+  gif,
+  groups,
 }

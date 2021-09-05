@@ -13,4 +13,4 @@ class SearchResultTileModel implements ITileModel {
   final SearchResultType type;
 }
 
-enum SearchResultType { NotificationsAndSounds }
+enum SearchResultType { notificationsAndSounds }

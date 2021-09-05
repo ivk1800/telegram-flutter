@@ -64,11 +64,9 @@ class _BodyRenderBox extends RenderBox
     second.layout(constraints, parentUsesSize: true);
 
     // final _ParentData firstParentData = second.parentData! as _ParentData;
-    final _ParentData secondParentData = second.parentData! as _ParentData;
-
-    // TODO width of second may be great then first
-
-    secondParentData.offset =
+    (second.parentData! as _ParentData)
+            // TODO width of second may be great then first
+            .offset =
         Offset(first.size.width - second.size.width, first.size.height);
 
     size = constraints.constrain(

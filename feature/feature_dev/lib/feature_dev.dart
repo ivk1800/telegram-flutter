@@ -20,8 +20,7 @@ class DevFeature {
     required this.connectionStateProvider,
   }) {
     _eventsSubscription = client.events.listen((td.TdObject event) {
-      final List<td.TdObject> events = _events.value!;
-      events.add(event);
+      final List<td.TdObject> events = _events.value!..add(event);
       _events.add(events);
     });
   }

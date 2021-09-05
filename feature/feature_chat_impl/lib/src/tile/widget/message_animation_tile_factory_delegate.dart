@@ -42,7 +42,7 @@ class MessageAnimationTileFactoryDelegate
       avatar: _messageComponentResolver.resolveAvatar(context, model),
       blocks: <Widget>[
         MediaWrapper(
-          type: MediaType.Animation,
+          type: MediaType.animation,
           child: Container(
             color: Colors.black,
             child: const NotImplementedPlaceholder(

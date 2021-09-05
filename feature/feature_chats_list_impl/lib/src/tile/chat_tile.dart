@@ -78,18 +78,17 @@ class ChatTileFactory {
   Widget _buildFirstRow(BuildContext context, ChatTileModel model) {
     final ThemeData theme = Theme.of(context);
 
-    final List<Widget> widgets = <Widget>[];
-    widgets.add(
+    final List<Widget> widgets = <Widget>[
       Flexible(
         child: _buildTitle(context, model),
       ),
-    );
-    widgets.add(Text(
-      model.lastMessageDate ?? '',
-      style: theme.textTheme.caption!.copyWith(
-        fontSize: 14,
+      Text(
+        model.lastMessageDate ?? '',
+        style: theme.textTheme.caption!.copyWith(
+          fontSize: 14,
+        ),
       ),
-    ));
+    ];
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: widgets,

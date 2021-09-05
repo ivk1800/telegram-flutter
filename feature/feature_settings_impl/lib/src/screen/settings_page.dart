@@ -33,7 +33,7 @@ class SettingsPageState extends State<SettingsPage>
   @j.inject
   late ISettingsSearchWidgetFactory settingsSearchWidgetFactory;
 
-  _ScreenState _screenState = _ScreenState.Default;
+  _ScreenState _screenState = _ScreenState.settings;
 
   bool _searchActive = false;
   bool _showClearButtonQuery = false;
@@ -76,9 +76,9 @@ class SettingsPageState extends State<SettingsPage>
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (_screenState != _ScreenState.Default) {
+        if (_screenState != _ScreenState.settings) {
           setState(() {
-            _screenState = _ScreenState.Default;
+            _screenState = _ScreenState.settings;
             _searchActive = false;
             _searchQueryController.text = '';
             appbarKey.currentState?.setActive(false);
@@ -204,12 +204,12 @@ class SettingsPageState extends State<SettingsPage>
       },
       navigationIconTap: () {
         setState(() {
-          if (_screenState == _ScreenState.Search) {
-            _screenState = _ScreenState.Default;
+          if (_screenState == _ScreenState.search) {
+            _screenState = _ScreenState.settings;
             _searchActive = false;
             _searchQueryController.text = '';
             appbarKey.currentState?.setActive(false);
-          } else if (_screenState == _ScreenState.Default) {
+          } else if (_screenState == _ScreenState.settings) {
             Navigator.of(context).pop();
           }
         });
@@ -217,7 +217,7 @@ class SettingsPageState extends State<SettingsPage>
       actionWidgetsBuilder: (BuildContext context, bool isActive) {
         if (isActive) {
           switch (_screenState) {
-            case _ScreenState.Search:
+            case _ScreenState.search:
               {
                 return <Widget>[
                   AnimatedBuilder(
@@ -248,10 +248,11 @@ class SettingsPageState extends State<SettingsPage>
               icon: const Icon(Icons.search),
               onPressed: () {
                 setState(() {
-                  _screenState = _ScreenState.Search;
+                  _screenState = _ScreenState.search;
                   _searchActive = !_searchActive;
-                  myFocusNode.requestFocus();
-                  myFocusNode.unfocus();
+                  myFocusNode
+                    ..requestFocus()
+                    ..unfocus();
                   appbarKey.currentState?.setActive(true);
                 });
               },
@@ -263,7 +264,7 @@ class SettingsPageState extends State<SettingsPage>
       titleBuilder: (BuildContext context, bool isActive) {
         if (isActive) {
           switch (_screenState) {
-            case _ScreenState.Search:
+            case _ScreenState.search:
               {
                 return TextField(
                   style: const TextStyle(color: Colors.white),
@@ -293,14 +294,14 @@ class SettingsPageState extends State<SettingsPage>
     return PopupMenuButton<_AppBarMenu>(
       onSelected: (_AppBarMenu value) {
         switch (value) {
-          case _AppBarMenu.LogOut:
+          case _AppBarMenu.logOut:
             router.toLogOut();
             break;
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<_AppBarMenu>>[
         PopupMenuItem<_AppBarMenu>(
-          value: _AppBarMenu.LogOut,
+          value: _AppBarMenu.logOut,
           child: _buildAppBarPopupMenuItem('Log out'),
         ),
       ],
@@ -329,6 +330,6 @@ class SettingsPageState extends State<SettingsPage>
   String _getString(String key) => localizationManager.getString(key);
 }
 
-enum _AppBarMenu { LogOut }
+enum _AppBarMenu { logOut }
 
-enum _ScreenState { Default, Search }
+enum _ScreenState { settings, search }

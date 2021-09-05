@@ -124,6 +124,7 @@ linter:
     valid_regexps: true
 
     # Style rules.
+    always_specify_types: true
     always_declare_return_types: true
     always_put_required_named_parameters_first: false
     always_require_non_null_named_parameters: true

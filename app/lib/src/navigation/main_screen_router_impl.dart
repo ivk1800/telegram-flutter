@@ -31,7 +31,7 @@ class MainScreenRouterImpl implements IMainScreenRouter {
           .createSettingsFeatureApi()
           .screenWidgetFactory
           .create(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -41,7 +41,7 @@ class MainScreenRouterImpl implements IMainScreenRouter {
       key: UniqueKey(),
       builder: (BuildContext context) =>
           _featureFactory.createDevFeature().createRootWidget(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 }

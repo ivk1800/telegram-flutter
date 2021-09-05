@@ -25,7 +25,7 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
     _navigationRouter.push(
       key: UniqueKey(),
       builder: (BuildContext context) => const FoldersSetupPage().wrap(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -34,7 +34,7 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
     _navigationRouter.push(
       key: UniqueKey(),
       builder: (BuildContext context) => const SessionsPage(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -46,7 +46,7 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
           .createPrivacySettingsFeatureApi()
           .screenWidgetFactory
           .create(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -58,7 +58,7 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
           .createNotificationsSettingsFeatureApi()
           .screenWidgetFactory
           .create(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -70,7 +70,7 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
           .createDataSettingsFeatureApi()
           .screenWidgetFactory
           .create(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -82,7 +82,7 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
           .createChatSettingsFeatureApi()
           .screenWidgetFactory
           .create(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -93,7 +93,7 @@ class SettingsScreenRouterImpl implements ISettingsScreenRouter {
     _navigationRouter.push(
       key: UniqueKey(),
       builder: factory.create,
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 }

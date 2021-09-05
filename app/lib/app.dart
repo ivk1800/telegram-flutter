@@ -30,7 +30,7 @@ Future<void> launch() async {
   ));
 
   final TdClient client = appComponent.getTdClient();
-  client.init();
+  await client.init();
 
   await client
       .execute<td.TdObject>(td.SetLogVerbosityLevel(newVerbosityLevel: 0));

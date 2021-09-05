@@ -138,11 +138,11 @@ class ChatListUpdateHandler {
     } else {
       final OrderedChat newOrderedChat =
           OrderedChat(chatId: chatData.chat.id, order: position.order);
-      chatData.chat =
-          chatData.chat.copy(positions: <td.ChatPosition>[position]);
-      chatData.model = chatData.model.copy(
-        isPinned: position.isPinned,
-      );
+      chatData
+        ..chat = chatData.chat.copy(positions: <td.ChatPosition>[position])
+        ..model = chatData.model.copy(
+          isPinned: position.isPinned,
+        );
       final bool add = _orderedChats.add(newOrderedChat);
       assert(add);
     }
@@ -169,16 +169,16 @@ class ChatListUpdateHandler {
       return false;
     }
 
-    chatData.chat = chatData.chat.copy(
-      unreadCount: update.unreadCount,
-      // all messages was read, set 0 to MentionCount
-      // because Update for it not incoming
-      unreadMentionCount:
-          update.unreadCount == 0 ? 0 : chatData.chat.unreadMentionCount,
-      lastReadInboxMessageId: update.lastReadInboxMessageId,
-    );
-
-    chatData.model = await _chatTileModelMapper.mapToModel(chatData.chat);
+    chatData
+      ..chat = chatData.chat.copy(
+        unreadCount: update.unreadCount,
+        // all messages was read, set 0 to MentionCount
+        // because Update for it not incoming
+        unreadMentionCount:
+            update.unreadCount == 0 ? 0 : chatData.chat.unreadMentionCount,
+        lastReadInboxMessageId: update.lastReadInboxMessageId,
+      )
+      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }
 
@@ -191,10 +191,9 @@ class ChatListUpdateHandler {
       return false;
     }
 
-    chatData.chat =
-        chatData.chat.copy(unreadMentionCount: update.unreadMentionCount);
-
-    chatData.model = await _chatTileModelMapper.mapToModel(chatData.chat);
+    chatData
+      ..chat = chatData.chat.copy(unreadMentionCount: update.unreadMentionCount)
+      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }
 
@@ -207,10 +206,9 @@ class ChatListUpdateHandler {
       return false;
     }
 
-    chatData.chat =
-        chatData.chat.copy(unreadMentionCount: update.unreadMentionCount);
-
-    chatData.model = await _chatTileModelMapper.mapToModel(chatData.chat);
+    chatData
+      ..chat = chatData.chat.copy(unreadMentionCount: update.unreadMentionCount)
+      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }
 
@@ -223,10 +221,10 @@ class ChatListUpdateHandler {
       return false;
     }
 
-    chatData.chat =
-        chatData.chat.copy(notificationSettings: update.notificationSettings);
-
-    chatData.model = await _chatTileModelMapper.mapToModel(chatData.chat);
+    chatData
+      ..chat =
+          chatData.chat.copy(notificationSettings: update.notificationSettings)
+      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }
 }

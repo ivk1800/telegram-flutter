@@ -50,7 +50,7 @@ class SplitView extends StatefulWidget {
   }
 }
 
-enum ContainerType { Left, Right, Top }
+enum ContainerType { left, right, top }
 
 class _PageNode {
   _PageNode({required this.container, required this.page, int? order})
@@ -91,17 +91,17 @@ class SplitViewState extends State<SplitView> {
   void popUntilRoot(ContainerType container) {
     setState(() {
       switch (container) {
-        case ContainerType.Left:
+        case ContainerType.left:
           _leftPages.removeWhere(
-            (_PageNode element) => element.order != LeftRootPageIndex,
+            (_PageNode element) => element.order != kLeftRootPageIndex,
           );
           break;
-        case ContainerType.Right:
+        case ContainerType.right:
           _rightPages.removeWhere(
-            (_PageNode element) => element.order != RightRootPageIndex,
+            (_PageNode element) => element.order != kRightRootPageIndex,
           );
           break;
-        case ContainerType.Top:
+        case ContainerType.top:
           _topPages.clear();
           break;
       }
@@ -120,11 +120,11 @@ class SplitViewState extends State<SplitView> {
     }
 
     switch (container) {
-      case ContainerType.Left:
+      case ContainerType.left:
         return _tryRemoveTop(_leftPages);
-      case ContainerType.Right:
+      case ContainerType.right:
         return _tryRemoveTop(_rightPages);
-      case ContainerType.Top:
+      case ContainerType.top:
         return _tryRemoveTop(_topPages);
     }
   }
@@ -149,7 +149,7 @@ class SplitViewState extends State<SplitView> {
       } else {
         _leftRootPage = _createLeftRootPage(widget);
         final int indexOfRootPage = _leftPages.indexOf(_leftPages.firstWhere(
-          (_PageNode element) => element.order == LeftRootPageIndex,
+          (_PageNode element) => element.order == kLeftRootPageIndex,
         ));
         _leftPages[indexOfRootPage] = _leftRootPage!;
       }
@@ -182,13 +182,13 @@ class SplitViewState extends State<SplitView> {
   void _push(MyPage<dynamic> page, ContainerType containerType) {
     setState(() {
       switch (containerType) {
-        case ContainerType.Left:
+        case ContainerType.left:
           _leftPages.add(_PageNode(container: containerType, page: page));
           break;
-        case ContainerType.Right:
+        case ContainerType.right:
           _rightPages.add(_PageNode(container: containerType, page: page));
           break;
-        case ContainerType.Top:
+        case ContainerType.top:
           _topPages.add(_PageNode(container: containerType, page: page));
           break;
       }
@@ -199,12 +199,12 @@ class SplitViewState extends State<SplitView> {
   _PageNode _createLeftRootPage(Widget widget) {
     final UniqueKey key = UniqueKey();
     return _PageNode(
-      order: LeftRootPageIndex,
-      container: ContainerType.Left,
+      order: kLeftRootPageIndex,
+      container: ContainerType.left,
       page: _SimplePage(
         builder: (_) => widget,
-        animateRouterProvider: () => _shouldAnimate(key, ContainerType.Left),
-        containerType: ContainerType.Left,
+        animateRouterProvider: () => _shouldAnimate(key, ContainerType.left),
+        containerType: ContainerType.left,
         key: key,
       ),
     );
@@ -236,11 +236,11 @@ class SplitViewState extends State<SplitView> {
 
   bool hasKey(LocalKey key, ContainerType container) {
     switch (container) {
-      case ContainerType.Left:
+      case ContainerType.left:
         return _leftPages.hasKey(key);
-      case ContainerType.Right:
+      case ContainerType.right:
         return _rightPages.hasKey(key);
-      case ContainerType.Top:
+      case ContainerType.top:
         return _topPages.hasKey(key);
     }
   }
@@ -309,7 +309,7 @@ class SplitViewState extends State<SplitView> {
           GestureDetector(
             onTap: () {
               if (isNotSinglePage) {
-                popUntilRoot(ContainerType.Top);
+                popUntilRoot(ContainerType.top);
               }
             },
             child: Container(
@@ -336,7 +336,7 @@ class SplitViewState extends State<SplitView> {
                             key: UniqueKey(),
                             animateRouterProvider: () => false,
                             builder: (_) => Container(),
-                            containerType: ContainerType.Top,
+                            containerType: ContainerType.top,
                           ),
                       ] +
                       _topPages.map((_PageNode e) => e.page).toList()),
@@ -462,9 +462,9 @@ class SplitViewState extends State<SplitView> {
                 _SimplePage(
                   key: key,
                   animateRouterProvider: () =>
-                      _shouldAnimate(key, ContainerType.Top),
+                      _shouldAnimate(key, ContainerType.top),
                   builder: (_) => Container(),
-                  containerType: ContainerType.Top,
+                  containerType: ContainerType.top,
                 ),
               ] +
               pages,
@@ -484,11 +484,11 @@ class SplitViewState extends State<SplitView> {
       return shouldAnimate(_compactPages);
     }
     switch (container) {
-      case ContainerType.Left:
+      case ContainerType.left:
         return shouldAnimate(_leftPages);
-      case ContainerType.Right:
+      case ContainerType.right:
         return shouldAnimate(_rightPages);
-      case ContainerType.Top:
+      case ContainerType.top:
         return shouldAnimate(_topPages);
     }
   }
@@ -519,29 +519,29 @@ class SplitViewState extends State<SplitView> {
 
   void _removeTopFromContainer(ContainerType container) {
     switch (container) {
-      case ContainerType.Left:
+      case ContainerType.left:
         final _PageNode lastWhere = _leftPages.lastWhere(
-          (_PageNode element) => element.container == ContainerType.Left,
+          (_PageNode element) => element.container == ContainerType.left,
         );
         _leftPages.remove(lastWhere);
         break;
-      case ContainerType.Right:
+      case ContainerType.right:
         final _PageNode lastWhere = _rightPages.lastWhere(
-          (_PageNode element) => element.container == ContainerType.Right,
+          (_PageNode element) => element.container == ContainerType.right,
         );
         _rightPages.remove(lastWhere);
         break;
-      case ContainerType.Top:
+      case ContainerType.top:
         final _PageNode lastWhere = _topPages.lastWhere(
-          (_PageNode element) => element.container == ContainerType.Top,
+          (_PageNode element) => element.container == ContainerType.top,
         );
         _topPages.remove(lastWhere);
         break;
     }
   }
 
-  static const int LeftRootPageIndex = 0;
-  static const int RightRootPageIndex = -1;
+  static const int kLeftRootPageIndex = 0;
+  static const int kRightRootPageIndex = -1;
 }
 
 abstract class MyPage<T> extends Page<T> {

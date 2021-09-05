@@ -25,19 +25,19 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
   Stream<LogoutState> mapEventToState(LogoutEvent event) async* {
     if (event is TapEvent) {
       switch (event.tap) {
-        case TapType.AddAnotherAccount:
+        case TapType.addAnotherAccount:
           _router.toAddAccount();
           break;
-        case TapType.SetPasscode:
+        case TapType.setPasscode:
           _router.toPasscodeSettings();
           break;
-        case TapType.ClearCache:
+        case TapType.clearCache:
           _router.toStorageUsageSettings();
           break;
-        case TapType.ChangePhoneNumber:
+        case TapType.changePhoneNumber:
           _router.toChangeNumber();
           break;
-        case TapType.ContactSupport:
+        case TapType.contactSupport:
           _router.toDialog(
             title: _getString('AskAQuestion'),
             body: TextBody(text: 'AskAQuestionInfo'),
@@ -58,7 +58,7 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
             ],
           );
           break;
-        case TapType.LogOut:
+        case TapType.logOut:
           _router.toDialog(
             title: _getString('LogOutTitle'),
             body: TextBody(text: _getString('AreYouSureLogout')),
@@ -70,7 +70,7 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
                 },
               ),
               Action(
-                type: ActionType.Attention,
+                type: ActionType.attention,
                 text: _getString('LogOutTitle'),
                 callback: () {
                   return true;

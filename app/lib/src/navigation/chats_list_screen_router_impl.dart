@@ -28,7 +28,7 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
   void toChat(int id) {
     final ValueKey<dynamic> key = _keyGenerator.generateForChat(id);
 
-    if (_splitNavigationInfoProvider.hasKey(key, ContainerType.Right)) {
+    if (_splitNavigationInfoProvider.hasKey(key, ContainerType.right)) {
       // TODO
     } else {
       _navigationRouter.pushAllReplacement(
@@ -37,7 +37,7 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
             .createChatFeatureApi()
             .chatScreenFactory
             .create(context, id),
-        container: ContainerType.Right,
+        container: ContainerType.right,
       );
     }
   }

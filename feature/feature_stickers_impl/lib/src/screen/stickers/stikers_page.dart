@@ -61,7 +61,7 @@ class StickersPage extends StatelessWidget {
           onChanged: (bool value) {},
         ),
         const tg.Divider(
-          indent: tg.DividerIndent.None,
+          indent: tg.DividerIndent.none,
         ),
         tg.Annotation(
           text: localizationManager.getString('LoopAnimatedStickersInfo'),

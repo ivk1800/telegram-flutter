@@ -39,7 +39,7 @@ class MessagePhotoTileFactoryDelegate
       avatar: _messageComponentResolver.resolveAvatar(context, model),
       blocks: <Widget>[
         MediaWrapper(
-          type: MediaType.Animation,
+          type: MediaType.animation,
           child: _imageWidgetFactory.create(
             context,
             minithumbnail: model.minithumbnail,

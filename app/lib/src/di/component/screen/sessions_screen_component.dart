@@ -20,11 +20,10 @@ abstract class SessionsScreenComponentBuilder {
 
 extension SessionsScreenInject on SessionsPageState {
   void inject() {
-    final SessionsScreenComponent component =
-        JuggerSessionsScreenComponentBuilder()
-            .screen(this)
-            .appComponent(appComponent)
-            .build();
-    component.inject(this);
+    JuggerSessionsScreenComponentBuilder()
+        .screen(this)
+        .appComponent(appComponent)
+        .build()
+        .inject(this);
   }
 }

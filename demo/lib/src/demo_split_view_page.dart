@@ -63,7 +63,7 @@ class _DemoSplitViewPageState extends State<DemoSplitViewPage> {
               builder: (_) {
                 return _buildPage(title: 'left $c', color: color);
               },
-              container: ContainerType.Left,
+              container: ContainerType.left,
             );
           },
           child: const Text('push left'),
@@ -78,7 +78,7 @@ class _DemoSplitViewPageState extends State<DemoSplitViewPage> {
               builder: (_) {
                 return _buildPage(title: 'top $c', color: color);
               },
-              container: ContainerType.Top,
+              container: ContainerType.top,
             );
           },
           child: const Text('push top'),
@@ -93,7 +93,7 @@ class _DemoSplitViewPageState extends State<DemoSplitViewPage> {
               builder: (_) {
                 return _buildPage(title: 'right $c', color: color);
               },
-              container: ContainerType.Right,
+              container: ContainerType.right,
             );
           },
           child: const Text('push right'),
@@ -117,19 +117,20 @@ class _DemoSplitViewPageState extends State<DemoSplitViewPage> {
               return;
             }
             _count++;
-            currentState.popUntilRoot(ContainerType.Left);
-            currentState.popUntilRoot(ContainerType.Top);
-            currentState.popUntilRoot(ContainerType.Right);
-            currentState.setLeftRootPage(_buildPage(
-              title: 'root left $_count',
-              color: _generateColor(),
-            ));
-            currentState.setRightContainerPlaceholder(Container(
-              color: Colors.redAccent,
-              child: const Material(
-                child: Center(child: Text('placeholder')),
-              ),
-            ));
+            currentState
+              ..popUntilRoot(ContainerType.left)
+              ..popUntilRoot(ContainerType.top)
+              ..popUntilRoot(ContainerType.right)
+              ..setLeftRootPage(_buildPage(
+                title: 'root left $_count',
+                color: _generateColor(),
+              ))
+              ..setRightContainerPlaceholder(Container(
+                color: Colors.redAccent,
+                child: const Material(
+                  child: Center(child: Text('placeholder')),
+                ),
+              ));
           },
           child: const Text('set initial state'),
         ),

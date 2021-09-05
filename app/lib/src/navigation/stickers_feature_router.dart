@@ -24,7 +24,7 @@ class StickersFeatureRouterImpl implements IStickersFeatureRouter {
           .createStickersFeatureApi()
           .archivedStickersWidgetFactory
           .create(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -36,7 +36,7 @@ class StickersFeatureRouterImpl implements IStickersFeatureRouter {
           .createStickersFeatureApi()
           .masksWidgetFactory
           .create(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -48,7 +48,7 @@ class StickersFeatureRouterImpl implements IStickersFeatureRouter {
           .createStickersFeatureApi()
           .stickerSetWidgetFactory
           .create(setId),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -60,7 +60,7 @@ class StickersFeatureRouterImpl implements IStickersFeatureRouter {
           .createStickersFeatureApi()
           .trendingStickersWidgetFactory
           .create(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 }

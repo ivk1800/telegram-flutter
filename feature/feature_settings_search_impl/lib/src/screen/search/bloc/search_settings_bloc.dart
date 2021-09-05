@@ -14,7 +14,7 @@ class SearchSettingsBloc
         super(const DefaultState(tileModels: <ITileModel>[
           // TODO: implement all https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java#L7701
           SearchResultTileModel(
-            type: SearchResultType.NotificationsAndSounds,
+            type: SearchResultType.notificationsAndSounds,
             title: 'Notifications and Sounds',
             subtitle: null,
           ),

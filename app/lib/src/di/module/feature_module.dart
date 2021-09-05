@@ -97,7 +97,7 @@ abstract class FeatureModule {
         messagePreviewResolver: MessagePreviewResolver(
           messageRepository: chatMessageRepository,
           chatRepository: chatRepository,
-          mode: Mode.ChatPreview,
+          mode: Mode.chatPreview,
           userRepository: userRepository,
           localizationManager: localizationManager,
         ),
@@ -130,7 +130,7 @@ abstract class FeatureModule {
         chatRepository: chatRepository,
         messagePreviewResolver: MessagePreviewResolver(
           messageRepository: chatMessageRepository,
-          mode: Mode.ReplyPreview,
+          mode: Mode.replyPreview,
           chatRepository: chatRepository,
           userRepository: userRepository,
           localizationManager: localizationManager,

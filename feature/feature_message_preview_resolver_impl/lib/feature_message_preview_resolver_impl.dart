@@ -11,8 +11,8 @@ import 'preview_delegate.dart';
 import 'reply_preview_delegate.dart';
 
 enum Mode {
-  ChatPreview,
-  ReplyPreview,
+  chatPreview,
+  replyPreview,
 }
 
 class MessagePreviewResolver implements IMessagePreviewResolver {
@@ -24,7 +24,7 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
     required ILocalizationManager localizationManager,
   })  : _localizationManager = localizationManager,
         _userRepository = userRepository,
-        _delegate = mode == Mode.ChatPreview
+        _delegate = mode == Mode.chatPreview
             ? ChatPreviewDelegate(
                 messageTextResolver: MessageTextResolver(),
                 userRepository: userRepository,

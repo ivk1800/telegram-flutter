@@ -48,7 +48,7 @@ class CommonScreenRouterImpl
     _navigationRouter.push(
       key: UniqueKey(),
       builder: (BuildContext context) => factory.create(context, chatId),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -59,7 +59,7 @@ class CommonScreenRouterImpl
     _navigationRouter.push(
       key: UniqueKey(),
       builder: (BuildContext context) => factory.create(context, type),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -80,7 +80,7 @@ class CommonScreenRouterImpl
     _navigationRouter.push(
       key: UniqueKey(),
       builder: (BuildContext context) => factory.create(context, callback),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -105,9 +105,9 @@ class CommonScreenRouterImpl
       builder: (BuildContext context) {
         Color? getActionColor(dialog_api.ActionType type) {
           switch (type) {
-            case dialog_api.ActionType.Default:
+            case dialog_api.ActionType.simple:
               return null;
-            case dialog_api.ActionType.Attention:
+            case dialog_api.ActionType.attention:
               return Theme.of(context).errorColor;
           }
         }

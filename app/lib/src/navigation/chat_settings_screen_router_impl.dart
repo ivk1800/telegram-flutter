@@ -25,7 +25,7 @@ class ChatSettingsScreenRouterImpl implements IChatSettingsScreenRouter {
           .createStickersFeatureApi()
           .stickersWidgetFactory
           .create(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 
@@ -37,7 +37,7 @@ class ChatSettingsScreenRouterImpl implements IChatSettingsScreenRouter {
           .createWallpapersFeatureApi()
           .wallpapersListScreenFactory
           .create(context),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 }

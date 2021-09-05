@@ -27,10 +27,10 @@ abstract class AppDelegateComponentBuilder {
 
 extension ProfileScreenInject on TgAppState {
   void inject() {
-    final AppDelegateComponent component = JuggerAppDelegateComponentBuilder()
+    JuggerAppDelegateComponentBuilder()
         .appComponent(appComponent)
         .state(this)
-        .build();
-    component.inject(this);
+        .build()
+        .inject(this);
   }
 }

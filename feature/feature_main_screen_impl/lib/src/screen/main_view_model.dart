@@ -10,10 +10,10 @@ class MainViewModel implements j.IDisposable {
 
   void onMenuItemTap(MenuItem item) {
     switch (item) {
-      case MenuItem.Settings:
+      case MenuItem.settings:
         _router.toSettings();
         break;
-      case MenuItem.Dev:
+      case MenuItem.dev:
         _router.toDev();
         break;
     }

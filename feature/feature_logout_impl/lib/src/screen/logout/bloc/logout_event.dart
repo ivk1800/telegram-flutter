@@ -14,10 +14,10 @@ class TapEvent extends LogoutEvent {
 }
 
 enum TapType {
-  AddAnotherAccount,
-  SetPasscode,
-  ClearCache,
-  ChangePhoneNumber,
-  ContactSupport,
-  LogOut,
+  addAnotherAccount,
+  setPasscode,
+  clearCache,
+  changePhoneNumber,
+  contactSupport,
+  logOut,
 }

@@ -23,7 +23,7 @@ class DevScreenRouterImpl implements IDevFeatureRouter {
       key: UniqueKey(),
       builder: (BuildContext context) =>
           _featureFactory.createDevFeature().createEventsListWidget(),
-      container: ContainerType.Top,
+      container: ContainerType.top,
     );
   }
 }

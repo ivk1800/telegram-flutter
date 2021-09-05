@@ -87,7 +87,7 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
           userRepository: fakeUserRepository,
           chatRepository: fakeChatRepository,
           localizationManager: localizationManager,
-          mode: Mode.ReplyPreview,
+          mode: Mode.replyPreview,
           messageRepository: fakeChatMessageRepository,
         ),
         fileRepository: fakeFileRepository,

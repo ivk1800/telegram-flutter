@@ -97,42 +97,42 @@ class ContentInteractor {
             filter: const td.SearchMessagesFilterPhotoAndVideo(),
           )
           .then((int value) =>
-              Tuple2<SharedContentType, int>(SharedContentType.Media, value)),
+              Tuple2<SharedContentType, int>(SharedContentType.media, value)),
       _messageRepository
           .getMessagesCount(
             chatId: _args.id,
             filter: const td.SearchMessagesFilterDocument(),
           )
           .then((int value) =>
-              Tuple2<SharedContentType, int>(SharedContentType.Files, value)),
+              Tuple2<SharedContentType, int>(SharedContentType.files, value)),
       _messageRepository
           .getMessagesCount(
             chatId: _args.id,
             filter: const td.SearchMessagesFilterUrl(),
           )
           .then((int value) =>
-              Tuple2<SharedContentType, int>(SharedContentType.Links, value)),
+              Tuple2<SharedContentType, int>(SharedContentType.links, value)),
       _messageRepository
           .getMessagesCount(
             chatId: _args.id,
             filter: const td.SearchMessagesFilterAudio(),
           )
           .then((int value) =>
-              Tuple2<SharedContentType, int>(SharedContentType.Music, value)),
+              Tuple2<SharedContentType, int>(SharedContentType.music, value)),
       _messageRepository
           .getMessagesCount(
             chatId: _args.id,
             filter: const td.SearchMessagesFilterVoiceNote(),
           )
           .then((int value) =>
-              Tuple2<SharedContentType, int>(SharedContentType.Voice, value)),
+              Tuple2<SharedContentType, int>(SharedContentType.voice, value)),
       _messageRepository
           .getMessagesCount(
             chatId: _args.id,
             filter: const td.SearchMessagesFilterAnimation(),
           )
           .then((int value) =>
-              Tuple2<SharedContentType, int>(SharedContentType.Gif, value)),
+              Tuple2<SharedContentType, int>(SharedContentType.gif, value)),
     ];
 
     return Future.wait(countsFuture);
@@ -177,19 +177,19 @@ class ContentInteractor {
 
   String _toHumanString(SharedContentType type) {
     switch (type) {
-      case SharedContentType.Media:
+      case SharedContentType.media:
         break;
-      case SharedContentType.Files:
+      case SharedContentType.files:
         break;
-      case SharedContentType.Links:
+      case SharedContentType.links:
         return _localizationManager.getString('SharedLinks');
-      case SharedContentType.Music:
+      case SharedContentType.music:
         break;
-      case SharedContentType.Voice:
+      case SharedContentType.voice:
         break;
-      case SharedContentType.Gif:
+      case SharedContentType.gif:
         break;
-      case SharedContentType.Groups:
+      case SharedContentType.groups:
         break;
     }
 

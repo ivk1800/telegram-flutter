@@ -34,7 +34,7 @@ class MainPageState extends State<MainPage>
   @j.inject
   late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
 
-  _ScreenState _screenState = _ScreenState.Default;
+  _ScreenState _screenState = _ScreenState.chats;
 
   final GlobalObjectKey<tg.TgSwitchedAppBarState> appbarKey =
       const GlobalObjectKey<tg.TgSwitchedAppBarState>('MainAppbar');
@@ -81,9 +81,9 @@ class MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (_screenState != _ScreenState.Default) {
+        if (_screenState != _ScreenState.chats) {
           setState(() {
-            _screenState = _ScreenState.Default;
+            _screenState = _ScreenState.chats;
             _searchActive = false;
             _searchQueryController.text = '';
             appbarKey.currentState?.setActive(false);
@@ -99,11 +99,11 @@ class MainPageState extends State<MainPage>
           iconColorProvider: (bool isActive) {
             if (isActive) {
               switch (_screenState) {
-                case _ScreenState.Search:
+                case _ScreenState.search:
                   {
                     return Colors.white;
                   }
-                case _ScreenState.MultiSelect:
+                case _ScreenState.multiSelect:
                   {
                     return Colors.grey;
                   }
@@ -118,11 +118,11 @@ class MainPageState extends State<MainPage>
           backgroundColorProvider: (bool isActive) {
             if (isActive) {
               switch (_screenState) {
-                case _ScreenState.Search:
+                case _ScreenState.search:
                   {
                     return Theme.of(context).primaryColor;
                   }
-                case _ScreenState.MultiSelect:
+                case _ScreenState.multiSelect:
                   {
                     return Colors.white;
                   }
@@ -136,10 +136,10 @@ class MainPageState extends State<MainPage>
           },
           navigationIconTap: () {
             setState(() {
-              if (_screenState == _ScreenState.Default) {
+              if (_screenState == _ScreenState.chats) {
                 scaffoldKey.currentState!.openDrawer();
               } else {
-                _screenState = _ScreenState.Default;
+                _screenState = _ScreenState.chats;
                 _searchActive = false;
                 _searchQueryController.text = '';
                 appbarKey.currentState?.setActive(false);
@@ -149,7 +149,7 @@ class MainPageState extends State<MainPage>
           actionWidgetsBuilder: (BuildContext context, bool isActive) {
             if (isActive) {
               switch (_screenState) {
-                case _ScreenState.Search:
+                case _ScreenState.search:
                   {
                     return <Widget>[
                       AnimatedBuilder(
@@ -169,7 +169,7 @@ class MainPageState extends State<MainPage>
                       ),
                     ];
                   }
-                case _ScreenState.MultiSelect:
+                case _ScreenState.multiSelect:
                   {
                     return <Widget>[
                       IconButton(
@@ -201,10 +201,11 @@ class MainPageState extends State<MainPage>
                   icon: const Icon(Icons.search),
                   onPressed: () {
                     setState(() {
-                      _screenState = _ScreenState.Search;
+                      _screenState = _ScreenState.search;
                       _searchActive = !_searchActive;
-                      myFocusNode.requestFocus();
-                      myFocusNode.unfocus();
+                      myFocusNode
+                        ..requestFocus()
+                        ..unfocus();
                       appbarKey.currentState?.setActive(true);
                     });
                   },
@@ -215,7 +216,7 @@ class MainPageState extends State<MainPage>
           titleBuilder: (BuildContext context, bool isActive) {
             if (isActive) {
               switch (_screenState) {
-                case _ScreenState.Search:
+                case _ScreenState.search:
                   {
                     return TextField(
                       style: const TextStyle(color: Colors.white),
@@ -228,7 +229,7 @@ class MainPageState extends State<MainPage>
                       ),
                     );
                   }
-                case _ScreenState.MultiSelect:
+                case _ScreenState.multiSelect:
                   {
                     return const Text(
                       '1',
@@ -245,7 +246,7 @@ class MainPageState extends State<MainPage>
             }
           },
           leadingAnimatedIconProvider: (bool isActive) {
-            if (_screenState == _ScreenState.MultiSelect) {
+            if (_screenState == _ScreenState.multiSelect) {
               return AnimatedIcons.menu_close;
             }
             return AnimatedIcons.menu_arrow;
@@ -317,7 +318,7 @@ class MainPageState extends State<MainPage>
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
-              viewModel.onMenuItemTap(MenuItem.Dev);
+              viewModel.onMenuItemTap(MenuItem.dev);
             },
             leading: const Icon(Icons.developer_board),
             title: const Text('Dev'),
@@ -360,7 +361,7 @@ class MainPageState extends State<MainPage>
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
-              viewModel.onMenuItemTap(MenuItem.Settings);
+              viewModel.onMenuItemTap(MenuItem.settings);
             },
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
@@ -386,4 +387,4 @@ class MainPageState extends State<MainPage>
   }
 }
 
-enum _ScreenState { Default, MultiSelect, Search }
+enum _ScreenState { chats, multiSelect, search }

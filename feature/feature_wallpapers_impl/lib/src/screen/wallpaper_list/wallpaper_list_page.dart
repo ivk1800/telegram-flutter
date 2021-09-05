@@ -58,7 +58,7 @@ class WallpaperListPage extends StatelessWidget {
     final TileFactory tileFactory = context.read();
 
     return StaggeredGridView.countBuilder(
-      crossAxisCount: CrossAxisCount,
+      crossAxisCount: kCrossAxisCount,
       itemCount: tileModels.length,
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,
@@ -72,13 +72,13 @@ class WallpaperListPage extends StatelessWidget {
 
         if (tileModel is TopGroupTileModel ||
             tileModel is BottomGroupTileModel) {
-          return const StaggeredTile.fit(CrossAxisCount);
+          return const StaggeredTile.fit(kCrossAxisCount);
         }
 
-        return StaggeredTile.extent(2, width / (CrossAxisCount / 2) * 1.5);
+        return StaggeredTile.extent(2, width / (kCrossAxisCount / 2) * 1.5);
       },
     );
   }
 
-  static const int CrossAxisCount = 6;
+  static const int kCrossAxisCount = 6;
 }

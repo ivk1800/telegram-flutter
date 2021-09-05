@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as m;
 
 class Divider extends StatelessWidget {
-  const Divider({Key? key, this.indent = DividerIndent.Small})
+  const Divider({Key? key, this.indent = DividerIndent.small})
       : super(key: key);
 
   final DividerIndent indent;
@@ -17,14 +17,14 @@ class Divider extends StatelessWidget {
 
   double _getIndent() {
     switch (indent) {
-      case DividerIndent.Small:
+      case DividerIndent.small:
         return 16;
-      case DividerIndent.Large:
+      case DividerIndent.large:
         return 68;
-      case DividerIndent.None:
+      case DividerIndent.none:
         return 0;
     }
   }
 }
 
-enum DividerIndent { None, Small, Large }
+enum DividerIndent { none, small, large }

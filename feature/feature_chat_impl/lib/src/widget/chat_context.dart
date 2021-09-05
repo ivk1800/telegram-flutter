@@ -24,7 +24,7 @@ class ChatContext extends StatelessWidget {
   }
 }
 
-enum MediaType { Video, Photo, Animation }
+enum MediaType { video, photo, animation }
 
 class ChatContextData {
   const ChatContextData.raw({
@@ -42,9 +42,9 @@ class ChatContextData {
         verticalPadding: 4.0,
         maxWidth: 500,
         mediaConstraints: <MediaType, Size>{
-          MediaType.Video: const Size(double.infinity, 450),
-          MediaType.Photo: const Size(double.infinity, 450),
-          MediaType.Animation: const Size(300, 300),
+          MediaType.video: const Size(double.infinity, 450),
+          MediaType.photo: const Size(double.infinity, 450),
+          MediaType.animation: const Size(300, 300),
         },
       );
 
