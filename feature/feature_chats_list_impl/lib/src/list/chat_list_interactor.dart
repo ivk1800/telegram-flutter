@@ -43,7 +43,7 @@ class ChatListInteractor {
         _chatUpdatesSubscription ??=
             _chatUpdatesProvider.chatUpdates.listen(_handleChatUpdate);
       },
-      onError: (dynamic error) {},
+      onError: (Object? error) {},
     );
   }
 

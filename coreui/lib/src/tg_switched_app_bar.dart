@@ -47,14 +47,14 @@ class TgSwitchedAppBarState extends State<TgSwitchedAppBar>
 
   bool _isActive = false;
 
-  void setActive(bool value) {
+  void setActive({required bool active}) {
     if (_isActive) {
       _animationController.reverse();
     } else {
       _animationController.forward();
     }
     setState(() {
-      _isActive = value;
+      _isActive = active;
     });
   }
 

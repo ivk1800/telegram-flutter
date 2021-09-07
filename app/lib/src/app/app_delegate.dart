@@ -35,11 +35,11 @@ class AppDelegate {
   final TdConfigProvider _tdConfigProvider;
 
   void onResume() {
-    _optionsManager.setOnline(true);
+    _optionsManager.setOnline(online: true);
   }
 
   void onPause() {
-    _optionsManager.setOnline(false);
+    _optionsManager.setOnline(online: false);
   }
 
   void _init() {

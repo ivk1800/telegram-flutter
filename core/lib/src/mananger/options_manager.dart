@@ -8,10 +8,10 @@ class OptionsManager {
 
   final TdClient _client;
 
-  Future<void> setOnline(bool value) {
+  Future<void> setOnline({required bool online}) {
     return _client.send<td.Ok>(td.SetOption(
       name: 'online',
-      value: td.OptionValueBoolean(value: value),
+      value: td.OptionValueBoolean(value: online),
     ));
   }
 }

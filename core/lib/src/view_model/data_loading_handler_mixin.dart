@@ -26,7 +26,7 @@ mixin DataLoadingHandlerMixin<D> on BaseViewModel {
       _loadingStateStream.add(LoadingState<D>());
     }).listen(
       _emitData,
-      onError: (dynamic error) {
+      onError: (Object error) {
         _loadingStateStream.add(ErrorState<D>(error: error));
       },
     );
@@ -61,7 +61,7 @@ class SuccessState<T> implements DataLoadingState<T> {
 class ErrorState<T> implements DataLoadingState<T> {
   ErrorState({required this.error});
 
-  final dynamic error;
+  final Object error;
 }
 
 class LoadingState<T> implements DataLoadingState<T> {

@@ -6,7 +6,7 @@ abstract class IDataLoadingWidgetDelegate<D> {
   Widget buildErrorWidget(
     BuildContext context,
     DataLoadingHandlerMixin<D> loading,
-    dynamic error,
+    Object error,
   );
 
   Widget buildLoadingWidget(BuildContext context);

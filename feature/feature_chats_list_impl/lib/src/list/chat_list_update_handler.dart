@@ -30,7 +30,7 @@ class ChatListUpdateHandler {
   final IChatRepository _chatRepository;
   final ChatListConfig _chatListConfig;
 
-  final q.Queue<bool> _eventsQueue = q.Queue();
+  final q.Queue<bool> _eventsQueue = q.Queue<bool>();
 
   Set<OrderedChat> get _orderedChats => _chatsHolder.orderedChats;
 
@@ -155,10 +155,11 @@ class ChatListUpdateHandler {
       return false;
     }
     final ChatData chatData = _chats[chatId]!;
-    chatData.chat = chatData.chat.copy(lastMessage: message);
-    // ignore: flutter_style_todos
-    //TODO(Ivan): map only changed part
-    chatData.model = await _chatTileModelMapper.mapToModel(chatData.chat);
+    chatData
+      ..chat = chatData.chat.copy(lastMessage: message)
+      // ignore: flutter_style_todos
+      //TODO(Ivan): map only changed part
+      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }
 

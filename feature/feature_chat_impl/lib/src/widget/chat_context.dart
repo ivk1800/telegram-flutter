@@ -60,8 +60,7 @@ class _InheritedContext extends InheritedTheme {
     Key? key,
     required this.theme,
     required Widget child,
-  })  : assert(theme != null),
-        super(key: key, child: child);
+  }) : super(key: key, child: child);
 
   final ChatContext theme;
 

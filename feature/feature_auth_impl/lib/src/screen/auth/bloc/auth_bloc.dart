@@ -107,7 +107,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         // nothing
         return value;
       },
-      onError: (dynamic e) {
+      onError: (Object e) {
         emit(_getCodeState().copy(
           blockInteraction: false,
         ));
@@ -139,7 +139,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ));
         return value;
       },
-      onError: (dynamic e) {
+      onError: (Object e) {
         emit(_getPhoneState().copy(
           blockInteraction: false,
         ));
@@ -155,7 +155,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   // todo implement human texts
-  String _tryConvertToHumanError(dynamic error) {
+  String _tryConvertToHumanError(Object error) {
     if (error is TdError) {
       return error.error.message;
     }

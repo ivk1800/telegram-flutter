@@ -8,7 +8,7 @@ mixin DefaultDataLoadingWidgetDelegateMixin<D>
   Widget buildErrorWidget(
     BuildContext context,
     DataLoadingHandlerMixin<D> loading,
-    dynamic error,
+    Object error,
   ) {
     return Center(
       child: Column(

@@ -46,19 +46,7 @@ class SettingsPageState extends State<SettingsPage>
   @override
   void initState() {
     super.initState();
-    _searchQueryController.addListener(() {
-      setState(() {
-        final bool _prevValue = _showClearButtonQuery;
-        _showClearButtonQuery = _searchQueryController.text.isNotEmpty;
-        if (_showClearButtonQuery != _prevValue) {
-          if (_showClearButtonQuery) {
-            _animationController.forward();
-          } else {
-            _animationController.reverse();
-          }
-        }
-      });
-    });
+    _searchQueryController.addListener(_onSearchEvent);
 
     _animationController = AnimationController(
       vsync: this,
@@ -73,6 +61,12 @@ class SettingsPageState extends State<SettingsPage>
   }
 
   @override
+  void dispose() {
+    _searchQueryController.removeListener(_onSearchEvent);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
@@ -81,7 +75,7 @@ class SettingsPageState extends State<SettingsPage>
             _screenState = _ScreenState.settings;
             _searchActive = false;
             _searchQueryController.text = '';
-            appbarKey.currentState?.setActive(false);
+            appbarKey.currentState?.setActive(active: false);
           });
           return false;
         }
@@ -92,6 +86,20 @@ class SettingsPageState extends State<SettingsPage>
         body: _buildBody(context),
       ),
     );
+  }
+
+  void _onSearchEvent() {
+    setState(() {
+      final bool _prevValue = _showClearButtonQuery;
+      _showClearButtonQuery = _searchQueryController.text.isNotEmpty;
+      if (_showClearButtonQuery != _prevValue) {
+        if (_showClearButtonQuery) {
+          _animationController.forward();
+        } else {
+          _animationController.reverse();
+        }
+      }
+    });
   }
 
   Widget _buildBody(BuildContext context) => Stack(
@@ -208,7 +216,7 @@ class SettingsPageState extends State<SettingsPage>
             _screenState = _ScreenState.settings;
             _searchActive = false;
             _searchQueryController.text = '';
-            appbarKey.currentState?.setActive(false);
+            appbarKey.currentState?.setActive(active: false);
           } else if (_screenState == _ScreenState.settings) {
             Navigator.of(context).pop();
           }
@@ -253,7 +261,7 @@ class SettingsPageState extends State<SettingsPage>
                   myFocusNode
                     ..requestFocus()
                     ..unfocus();
-                  appbarKey.currentState?.setActive(true);
+                  appbarKey.currentState?.setActive(active: true);
                 });
               },
             ),

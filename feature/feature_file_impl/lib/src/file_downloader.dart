@@ -50,7 +50,7 @@ class FileDownloader implements IFileDownloader {
     if (local.isDownloadingCompleted) {
       return Completed(path: local.path);
     } else if (local.isDownloadingActive) {
-      final double percent = 100 * local.downloadedSize / file.expectedSize;
+      final double percent = local.downloadedSize / file.expectedSize * 100;
       return Downloading(progress: percent.toInt());
     }
     return const None();

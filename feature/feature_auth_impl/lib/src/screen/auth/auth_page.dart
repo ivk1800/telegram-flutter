@@ -85,7 +85,7 @@ class _AuthPageState extends State<AuthPage> {
         appBar: _buildAppBar(state),
         floatingActionButton: _buildFloatingActionButton(state, context),
         body: _buildBody(state, context),
-      ).withBlockInteraction(state.blockInteraction),
+      ).withBlockInteraction(block: state.blockInteraction),
     );
   }
 

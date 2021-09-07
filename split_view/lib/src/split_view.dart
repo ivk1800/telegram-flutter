@@ -397,7 +397,7 @@ class SplitViewState extends State<SplitView> {
             ),
             if (_leftPages.isNotEmpty || _rightPages.isNotEmpty)
               _buildDraggableDivider(constraints.maxWidth),
-            _buildRightContainer(context)
+            _buildRightContainer(context),
           ],
         );
       },
@@ -500,7 +500,7 @@ class SplitViewState extends State<SplitView> {
     return Navigator(
       key: key,
       pages: pages,
-      onPopPage: (Route<dynamic> route, dynamic result) {
+      onPopPage: (Route<dynamic> route, Object? result) {
         if (!route.didPop(result)) {
           return false;
         }

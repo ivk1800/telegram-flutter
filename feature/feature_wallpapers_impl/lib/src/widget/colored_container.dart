@@ -26,7 +26,7 @@ class ColoredContainer extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [
+            colors: <Color>[
               fill.topColor,
               fill.bottomColor,
             ],

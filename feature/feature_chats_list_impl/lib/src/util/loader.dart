@@ -5,14 +5,14 @@ class Loader<T> {
   Loader({
     required void Function(List<T> result) onResult,
     required Stream<List<T>> Function() builder,
-    required void Function(dynamic error) onError,
+    required void Function(Object error) onError,
   })  : _onResult = onResult,
         _builder = builder,
         _onError = onError;
 
   StreamSubscription<List<T>>? _subscription;
   final void Function(List<T> result) _onResult;
-  final void Function(dynamic error) _onError;
+  final void Function(Object error) _onError;
   final Stream<List<T>> Function() _builder;
 
   bool _running = false;
@@ -28,16 +28,12 @@ class Loader<T> {
   }
 
   void _load() {
-    if (_builder == null) {
-      return;
-    }
-
     _subscription = _builder
         .call()
         .doOnListen(() {
           _running = true;
         })
-        .doOnError((dynamic e, StackTrace? stackTrace) {
+        .doOnError((Object e, StackTrace? stackTrace) {
           _running = false;
         })
         .doOnDone(() {
@@ -49,7 +45,7 @@ class Loader<T> {
             _onResult.call(result);
             _running = false;
           },
-          onError: (dynamic error) {
+          onError: (Object error) {
             _onError.call(error);
           },
         );

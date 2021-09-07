@@ -44,19 +44,7 @@ class MainPageState extends State<MainPage>
   @override
   void initState() {
     super.initState();
-    _searchQueryController.addListener(() {
-      setState(() {
-        final bool _prevValue = _showClearButtonQuery;
-        _showClearButtonQuery = _searchQueryController.text.isNotEmpty;
-        if (_showClearButtonQuery != _prevValue) {
-          if (_showClearButtonQuery) {
-            _animationController.forward();
-          } else {
-            _animationController.reverse();
-          }
-        }
-      });
-    });
+    _searchQueryController.addListener(_onSearchEvent);
 
     _animationController = AnimationController(
       vsync: this,
@@ -78,6 +66,12 @@ class MainPageState extends State<MainPage>
   final TextEditingController _searchQueryController = TextEditingController();
 
   @override
+  void dispose() {
+    _searchQueryController.removeListener(_onSearchEvent);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
@@ -86,7 +80,7 @@ class MainPageState extends State<MainPage>
             _screenState = _ScreenState.chats;
             _searchActive = false;
             _searchQueryController.text = '';
-            appbarKey.currentState?.setActive(false);
+            appbarKey.currentState?.setActive(active: false);
           });
           return false;
         }
@@ -142,7 +136,7 @@ class MainPageState extends State<MainPage>
                 _screenState = _ScreenState.chats;
                 _searchActive = false;
                 _searchQueryController.text = '';
-                appbarKey.currentState?.setActive(false);
+                appbarKey.currentState?.setActive(active: false);
               }
             });
           },
@@ -206,7 +200,7 @@ class MainPageState extends State<MainPage>
                       myFocusNode
                         ..requestFocus()
                         ..unfocus();
-                      appbarKey.currentState?.setActive(true);
+                      appbarKey.currentState?.setActive(active: true);
                     });
                   },
                 ),
@@ -256,6 +250,20 @@ class MainPageState extends State<MainPage>
         body: _buildBody(context),
       ),
     );
+  }
+
+  void _onSearchEvent() {
+    setState(() {
+      final bool _prevValue = _showClearButtonQuery;
+      _showClearButtonQuery = _searchQueryController.text.isNotEmpty;
+      if (_showClearButtonQuery != _prevValue) {
+        if (_showClearButtonQuery) {
+          _animationController.forward();
+        } else {
+          _animationController.reverse();
+        }
+      }
+    });
   }
 
   Widget _buildBody(BuildContext context) => Stack(
