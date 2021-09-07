@@ -6,17 +6,17 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  coreui:
-    path: ../../coreui
-  rxdart: ^0.26.0
   core_tdlib_api:
     path: ../../core_tdlib_api
-  localization_api:
-    path: ../../localization_api
+  coreui:
+    path: ../../coreui
   feature_chat_header_info_api:
     path: ../feature_chat_header_info_api
   flutter:
     sdk: flutter
+  localization_api:
+    path: ../../localization_api
+  rxdart: ^0.26.0
 
 dev_dependencies:
   tg_lint_rules:

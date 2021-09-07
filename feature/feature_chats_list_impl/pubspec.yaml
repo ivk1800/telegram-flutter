@@ -6,47 +6,44 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  queue:
-    path: ../../queue
-  feature_message_preview_resolver:
-    path: ../feature_message_preview_resolver
-  localization_api:
-    path: ../../localization_api
-  coreui:
-    path: ../../coreui
-  tuple: ^2.0.0
-  core_utils:
-    path: ../../core_utils
-  core_tdlib_api:
-    path: ../../core_tdlib_api
   core_arch:
     path: ../../core_arch
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  core_utils:
+    path: ../../core_utils
+  coreui:
+    path: ../../coreui
   feature_chats_list_api:
     path: ../feature_chats_list_api
-  jext:
-     git:
-       url: git@github.com:ivk1800/jugger.dart.git
-       path: jext
-       ref: fc73e9fae90539ba0c4b03a531802ceb4547bcb6
-  jugger:
-     git:
-       url: git@github.com:ivk1800/jugger.dart.git
-       path: jugger
-       ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
-  td_client:
-    path: ../../td_client
+  feature_message_preview_resolver:
+    path: ../feature_message_preview_resolver
   flutter:
     sdk: flutter
+  jext:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jext
+      ref: fc73e9fae90539ba0c4b03a531802ceb4547bcb6
+  jugger:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jugger
+      ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
+  localization_api:
+    path: ../../localization_api
+  queue:
+    path: ../../queue
+  td_client:
+    path: ../../td_client
+  tuple: ^2.0.0
 
 dev_dependencies:
-  tg_lint_rules:
-    path: ../../tg_lint_rules
-
+  build_runner: 2.1.1
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger_generator
       ref: 2351119ad514db2c2ffbe286677e91936c39ee61
-  build_runner: 2.1.1
-
-flutter:
+  tg_lint_rules:
+    path: ../../tg_lint_rules

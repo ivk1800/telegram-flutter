@@ -6,16 +6,16 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  core_utils:
-    path: ../../core_utils
-  localization_api:
-    path: ../../localization_api
   core_tdlib_api:
     path: ../../core_tdlib_api
+  core_utils:
+    path: ../../core_utils
   feature_message_preview_resolver:
     path: ../feature_message_preview_resolver
   flutter:
     sdk: flutter
+  localization_api:
+    path: ../../localization_api
 
 dev_dependencies:
   tg_lint_rules:

@@ -6,31 +6,31 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  tile:
-    path: ../tile
-  feature_file_api:
-    path: ../feature/feature_file_api
-  feature_chat_header_info_impl:
-    path: ../feature/feature_chat_header_info_impl
-  feature_message_preview_resolver_impl:
-    path: ../feature/feature_message_preview_resolver_impl
-  intl: ^0.17.0
   core_utils:
     path: ../core_utils
-  localization_impl:
-    path: ../localization_impl
-  feature_chat_impl:
-    path: ../feature/feature_chat_impl
-  feature_profile_impl:
-    path: ../feature/feature_profile_impl
-  fake:
-    path: ../fake
   coreui:
     path: ../coreui
-  split_view:
-    path: ../split_view
+  fake:
+    path: ../fake
+  feature_chat_header_info_impl:
+    path: ../feature/feature_chat_header_info_impl
+  feature_chat_impl:
+    path: ../feature/feature_chat_impl
+  feature_file_api:
+    path: ../feature/feature_file_api
+  feature_message_preview_resolver_impl:
+    path: ../feature/feature_message_preview_resolver_impl
+  feature_profile_impl:
+    path: ../feature/feature_profile_impl
   flutter:
     sdk: flutter
+  intl: ^0.17.0
+  localization_impl:
+    path: ../localization_impl
+  split_view:
+    path: ../split_view
+  tile:
+    path: ../tile
 
 dev_dependencies:
   tg_lint_rules:

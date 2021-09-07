@@ -6,20 +6,19 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  equatable: ^2.0.0
-  flutter_bloc: 7.2.0
   core_tdlib_api:
     path: ../../core_tdlib_api
-  localization_api:
-    path: ../../localization_api
-  feature_notifications_settings_api:
-    path: ../feature_notifications_settings_api
   coreui:
     path: ../../coreui
+  equatable: ^2.0.0
+  feature_notifications_settings_api:
+    path: ../feature_notifications_settings_api
+  flutter_bloc: 7.2.0
+  localization_api:
+    path: ../../localization_api
 
 dev_dependencies:
-  tg_lint_rules:
-    path: ../../tg_lint_rules
-
   flutter:
     sdk: flutter
+  tg_lint_rules:
+    path: ../../tg_lint_rules

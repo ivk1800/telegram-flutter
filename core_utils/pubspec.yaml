@@ -8,9 +8,9 @@ environment:
 dependencies:
   core_tdlib_api:
     path: ../core_tdlib_api
-  intl: ^0.17.0
   flutter:
     sdk: flutter
+  intl: ^0.17.0
 
 dev_dependencies:
   tg_lint_rules:

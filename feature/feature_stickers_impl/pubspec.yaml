@@ -6,22 +6,22 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  tile:
-    path: ../../tile
-  equatable: ^2.0.0
-  flutter_bloc: 7.2.0
   core_arch:
     path: ../../core_arch
   core_tdlib_api:
     path: ../../core_tdlib_api
-  localization_api:
-    path: ../../localization_api
-  feature_stickers_api:
-    path: ../feature_stickers_api
   coreui:
     path: ../../coreui
+  equatable: ^2.0.0
+  feature_stickers_api:
+    path: ../feature_stickers_api
   flutter:
     sdk: flutter
+  flutter_bloc: 7.2.0
+  localization_api:
+    path: ../../localization_api
+  tile:
+    path: ../../tile
 
 dev_dependencies:
   tg_lint_rules:

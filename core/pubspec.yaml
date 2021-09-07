@@ -7,11 +7,13 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  connectivity: ^3.0.3
   core_arch:
     path: ../core_arch
   core_tdlib_api:
     path: ../core_tdlib_api
-  connectivity: ^3.0.3
+  flutter:
+    sdk: flutter
   intl: ^0.17.0
   jugger:
     git:
@@ -21,8 +23,6 @@ dependencies:
   rxdart: ^0.26.0
   td_client:
     path: ../td_client
-  flutter:
-    sdk: flutter
 
 dev_dependencies:
   tg_lint_rules:

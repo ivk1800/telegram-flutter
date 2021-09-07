@@ -7,13 +7,13 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  flutter:
+    sdk: flutter
   rxdart: ^0.26.0
   tdlib:
     git:
       url: git@github.com:ivk1800/tdlib-dart.git
       ref: d5f1be7c7bbfd7cdd1a21c1268714c4dffa500aa
-  flutter:
-    sdk: flutter
 
 dev_dependencies:
   tg_lint_rules:

@@ -6,12 +6,12 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  sprintf: "^6.0.0"
-  xml: ^5.1.1
-  localization_api:
-    path: ../localization_api
   flutter:
     sdk: flutter
+  localization_api:
+    path: ../localization_api
+  sprintf: "^6.0.0"
+  xml: 5.1.1
 
 dev_dependencies:
   tg_lint_rules:

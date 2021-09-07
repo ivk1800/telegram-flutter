@@ -6,15 +6,14 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  demo:
-    path: ../../demo
-  rxdart: ^0.26.0
   core_tdlib_api:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
-  td_client:
-    path: ../../td_client
+  demo:
+    path: ../../demo
+  flutter:
+    sdk: flutter
   jext:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
@@ -25,18 +24,16 @@ dependencies:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger
       ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
-  flutter:
-    sdk: flutter
+  rxdart: ^0.26.0
+  td_client:
+    path: ../../td_client
 
 dev_dependencies:
-  tg_lint_rules:
-    path: ../../tg_lint_rules
-
+  build_runner: 2.1.1
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger_generator
       ref: 2351119ad514db2c2ffbe286677e91936c39ee61
-  build_runner: 2.1.1
-
-flutter:
+  tg_lint_rules:
+    path: ../../tg_lint_rules

@@ -6,51 +6,45 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  rich_text_format_flutter:
-    path: ../../rich_text/rich_text_format_flutter
-  rich_text_format:
-    path: ../../rich_text/rich_text_format
-  tile:
-    path: ../../tile
-  feature_file_api:
-    path: ../feature_file_api
-  intl: ^0.17.0
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  core_utils:
+    path: ../../core_utils
+  coreui:
+    path: ../../coreui
+  equatable: ^2.0.0
+  feature_chat_api:
+    path: ../feature_chat_api
   feature_chat_header_info_api:
     path: ../feature_chat_header_info_api
   feature_message_preview_resolver:
     path: ../feature_message_preview_resolver
-  localization_api:
-    path: ../../localization_api
-  equatable: ^2.0.0
+  flutter:
+    sdk: flutter
   flutter_bloc: 7.2.0
-  path_provider: ^2.0.1
   flutter_svg: ^0.22.0
-  coreui:
-    path: ../../coreui
-  core_utils:
-    path: ../../core_utils
-  core_tdlib_api:
-    path: ../../core_tdlib_api
-  feature_chat_api:
-    path: ../feature_chat_api
+  intl: ^0.17.0
   jugger:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger
       ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
-
-  flutter:
-    sdk: flutter
+  localization_api:
+    path: ../../localization_api
+  path_provider: ^2.0.1
+  rich_text_format:
+    path: ../../rich_text/rich_text_format
+  rich_text_format_flutter:
+    path: ../../rich_text/rich_text_format_flutter
+  tile:
+    path: ../../tile
 
 dev_dependencies:
-  tg_lint_rules:
-    path: ../../tg_lint_rules
-
+  build_runner: 2.1.1
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger_generator
       ref: 2351119ad514db2c2ffbe286677e91936c39ee61
-  build_runner: 2.1.1
-
-flutter:
+  tg_lint_rules:
+    path: ../../tg_lint_rules

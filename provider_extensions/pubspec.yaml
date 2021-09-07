@@ -6,9 +6,9 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  flutter_bloc: 7.2.0
   flutter:
     sdk: flutter
+  flutter_bloc: 7.2.0
 
 dev_dependencies:
   tg_lint_rules:

@@ -6,38 +6,35 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  feature_shared_media_api:
-    path: ../feature_shared_media_api
-  coreui:
-    path: ../../coreui
-  tuple: ^2.0.0
-  equatable: ^2.0.0
-  flutter_bloc: 7.2.0
-  feature_chat_header_info_api:
-    path: ../feature_chat_header_info_api
   core_tdlib_api:
     path: ../../core_tdlib_api
-  localization_api:
-    path: ../../localization_api
+  coreui:
+    path: ../../coreui
+  equatable: ^2.0.0
+  feature_chat_header_info_api:
+    path: ../feature_chat_header_info_api
   feature_profile_api:
     path: ../feature_profile_api
+  feature_shared_media_api:
+    path: ../feature_shared_media_api
   flutter:
     sdk: flutter
+  flutter_bloc: 7.2.0
   jugger:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger
       ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
+  localization_api:
+    path: ../../localization_api
+  tuple: ^2.0.0
 
 dev_dependencies:
-  tg_lint_rules:
-    path: ../../tg_lint_rules
-
+  build_runner: 2.1.1
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger_generator
       ref: 2351119ad514db2c2ffbe286677e91936c39ee61
-  build_runner: 2.1.1
-
-flutter:
+  tg_lint_rules:
+    path: ../../tg_lint_rules

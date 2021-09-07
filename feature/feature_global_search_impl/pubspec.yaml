@@ -7,13 +7,13 @@ environment:
 
 dependencies:
   equatable: ^2.0.0
-  flutter_bloc: 7.2.0
   feature_global_search_api:
     path: ../feature_global_search_api
-  td_client:
-    path: ../../td_client
   flutter:
     sdk: flutter
+  flutter_bloc: 7.2.0
+  td_client:
+    path: ../../td_client
 
 dev_dependencies:
   tg_lint_rules:
