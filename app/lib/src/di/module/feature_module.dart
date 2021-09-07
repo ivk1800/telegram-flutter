@@ -1,10 +1,7 @@
 import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/feature/feature.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
-import 'package:app/src/navigation/dev_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
-import 'package:app/src/navigation/notifications_settings_screen_router_impl.dart';
-import 'package:app/src/navigation/stickers_feature_router.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
@@ -519,12 +516,10 @@ abstract class FeatureModule {
       );
 
   @j.bind
-  IChatsListScreenRouter bindChatsListScreenRouter(
-    ChatsListScreenRouterImpl impl,
-  );
+  IChatsListScreenRouter bindChatsListScreenRouter(CommonScreenRouterImpl impl);
 
   @j.bind
-  IMainScreenRouter bindMainScreenRouter(MainScreenRouterImpl impl);
+  IMainScreenRouter bindMainScreenRouter(CommonScreenRouterImpl impl);
 
   @j.bind
   IChatScreenRouter bindChatScreenRouter(CommonScreenRouterImpl impl);
@@ -533,35 +528,35 @@ abstract class FeatureModule {
   IProfileFeatureRouter bindProfileFeatureRouter(CommonScreenRouterImpl impl);
 
   @j.bind
-  ISettingsScreenRouter bindSettingsScreenRouter(SettingsScreenRouterImpl impl);
+  ISettingsScreenRouter bindSettingsScreenRouter(CommonScreenRouterImpl impl);
 
   @j.bind
   ISettingsSearchScreenRouter bindSettingsSearchScreenRouter(
-    SettingsSearchScreenRouterImpl impl,
+    CommonScreenRouterImpl impl,
   );
 
   @j.bind
   IPrivacySettingsScreenRouter bindPrivacySettingsScreenRouter(
-    PrivacySettingsScreenRouterImpl impl,
+    CommonScreenRouterImpl impl,
   );
 
   @j.bind
   INotificationsSettingsScreenRouter bindNotificationsSettingsScreenRouter(
-    NotificationsSettingsScreenRouterImpl impl,
+    CommonScreenRouterImpl impl,
   );
 
   @j.bind
   IDataSettingsScreenRouter bindDataSettingsScreenRouter(
-    DataSettingsScreenRouterImpl impl,
+    CommonScreenRouterImpl impl,
   );
 
   @j.bind
   IChatSettingsScreenRouter bindChatSettingsScreenRouter(
-    ChatSettingsScreenRouterImpl impl,
+    CommonScreenRouterImpl impl,
   );
 
   @j.bind
-  IDevFeatureRouter bindDevFeatureRouter(DevScreenRouterImpl impl);
+  IDevFeatureRouter bindDevFeatureRouter(CommonScreenRouterImpl impl);
 
   @j.bind
   IWallpapersFeatureRouter bindwallpapersFeatureRouter(
@@ -570,7 +565,7 @@ abstract class FeatureModule {
 
   @j.bind
   IStickersFeatureRouter bindStickersFeatureRouter(
-    StickersFeatureRouterImpl impl,
+    CommonScreenRouterImpl impl,
   );
 
   @j.bind

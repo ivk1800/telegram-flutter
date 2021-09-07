@@ -135,13 +135,6 @@ abstract class AppModule {
 
   @j.singleton
   @j.provide
-  static RootNavigationRouter provideNavigationRouter(
-    FeatureFactory featureFactory,
-  ) =>
-      RootNavigationRouter(TgApp.navigatorKey, featureFactory);
-
-  @j.singleton
-  @j.provide
   static SplitNavigationInfoProvider provideSplitNavigationInfoProvider() =>
       SplitNavigationInfoProvider(TgApp.splitViewNavigatorKey);
 

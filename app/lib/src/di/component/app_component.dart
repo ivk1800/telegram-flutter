@@ -44,8 +44,6 @@ abstract class AppComponent {
 
   INavigationRouter getNavigationRouter();
 
-  RootNavigationRouter getRootNavigationRouter();
-
   SplitNavigationRouter getSplitNavigationRouter();
 
   SplitNavigationInfoProvider getSplitNavigationInfoProvider();
