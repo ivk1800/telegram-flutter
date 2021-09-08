@@ -1,16 +1,16 @@
+import 'package:app/app.dart';
+import 'package:app/src/app/tg_app.dart';
+import 'package:app/src/di/component/feature_component.jugger.dart';
+import 'package:app/src/feature/feature.dart';
+import 'package:app/src/navigation/navigation.dart';
+import 'package:app/src/navigation/split_navigation_router.dart';
 import 'package:app/src/tdlib/config_provider.dart';
+import 'package:app/src/util/util.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:app/src/app/tg_app.dart';
-import 'package:app/app.dart';
-import 'package:app/src/di/component/feature_component.jugger.dart';
-import 'package:app/src/feature/feature.dart';
-import 'package:app/src/navigation/navigation.dart';
-import 'package:app/src/navigation/split_navigation_router.dart';
-import 'package:app/src/util/util.dart';
 import 'package:td_client/td_client.dart';
 
 @j.module

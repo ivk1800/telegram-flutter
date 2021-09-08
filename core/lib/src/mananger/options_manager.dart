@@ -1,6 +1,6 @@
+import 'package:jugger/jugger.dart' as j;
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
-import 'package:jugger/jugger.dart' as j;
 
 class OptionsManager {
   @j.inject

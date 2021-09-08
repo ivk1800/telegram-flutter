@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:app/src/app/app_delegate.dart';
+import 'package:app/src/di/component/app_delegate_component.dart';
 import 'package:app/src/widget/widget.dart';
+import 'package:flutter/material.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:split_view/split_view.dart';
 import 'package:td_client/td_client.dart';
-import 'package:jugger/jugger.dart' as j;
-import 'package:app/src/di/component/app_delegate_component.dart';
 
 class TgApp extends StatefulWidget {
   const TgApp({Key? key, required this.client}) : super(key: key);
@@ -62,6 +62,9 @@ class TgAppState extends State<TgApp> with WidgetsBindingObserver {
           platform: TargetPlatform.android,
           primaryColor: const Color(0xff5682a3),
           accentColor: const Color(0xff598fba),
+          appBarTheme: const AppBarTheme(
+            color: Color(0xff5682a3),
+          ),
         ),
         home: Container(
           // TODO maybe add color property to SplitView?

@@ -1,7 +1,7 @@
 import 'package:app/app.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/di/component/app_component.dart';
+import 'package:jugger/jugger.dart' as j;
 
 import 'app_delegate_component.jugger.dart';
 

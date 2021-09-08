@@ -8,9 +8,9 @@ import 'package:feature_chats_list_impl/src/tile/chat_tile.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jext/jext.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
-import 'package:jugger/jugger.dart' as j;
 
 import 'chats_list_screen_component.jugger.dart';
 

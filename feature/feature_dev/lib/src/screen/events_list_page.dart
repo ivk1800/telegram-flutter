@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_dev/src/dev/dev_widget.dart';
-import 'package:tdlib/td_api.dart' as td;
 import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:tdlib/td_api.dart' as td;
 
 class EventsListPage extends StatefulWidget {
   const EventsListPage({

@@ -1,9 +1,10 @@
 library feature_chat_header_info_impl;
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:coreui/coreui.dart' as tg;
+
 import 'src/chat_header_info_factory.dart';
 import 'src/chat_header_info_interactor.dart';
 

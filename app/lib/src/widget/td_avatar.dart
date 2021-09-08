@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:app/src/widget/widget.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tdlib/td_api.dart' as td;
 
 class TdAvatar extends StatelessWidget {
   const TdAvatar({Key? key, this.image}) : super(key: key);

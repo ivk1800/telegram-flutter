@@ -1,10 +1,10 @@
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/src/screen/profile/bloc/profile_bloc.dart';
 import 'package:feature_profile_impl/src/screen/profile/bloc/profile_event.dart';
 import 'package:feature_profile_impl/src/screen/profile/bloc/profile_state.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
 import 'package:flutter/material.dart';
-import 'package:coreui/coreui.dart' as tg;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';

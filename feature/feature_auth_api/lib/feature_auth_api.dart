@@ -1,8 +1,7 @@
 library feature_auth_api;
 
-import 'package:tdlib/td_api.dart' as td;
-
 import 'package:flutter/widgets.dart';
+import 'package:tdlib/td_api.dart' as td;
 
 abstract class IAuthFeatureApi {
   IAuthScreenFactory get authScreenFactory;

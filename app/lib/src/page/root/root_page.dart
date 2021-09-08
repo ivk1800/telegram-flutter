@@ -1,8 +1,8 @@
+import 'package:app/app.dart';
+import 'package:app/src/feature/feature.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:flutter/material.dart';
-import 'package:app/app.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:app/src/feature/feature.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);

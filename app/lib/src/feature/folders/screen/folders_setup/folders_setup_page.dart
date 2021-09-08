@@ -1,9 +1,9 @@
+import 'package:app/src/util/string_provider.dart';
 import 'package:coreui/coreui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:app/src/util/string_provider.dart';
 
 import 'folders_setup_view_model.dart';
 

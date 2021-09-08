@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_auth_impl/src/screen/auth/bloc/auth_action.dart';
 import 'package:feature_auth_impl/src/screen/auth/bloc/auth_bloc.dart';
 import 'package:feature_auth_impl/src/screen/auth/bloc/auth_event.dart';
 import 'package:feature_auth_impl/src/screen/auth/bloc/auth_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:coreui/coreui.dart' as tg;
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';

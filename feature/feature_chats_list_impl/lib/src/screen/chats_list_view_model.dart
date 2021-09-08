@@ -1,9 +1,8 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_chats_list_impl/src/chats_list_screen_router.dart';
 import 'package:feature_chats_list_impl/src/list/chat_list.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:jugger/jugger.dart' as j;
-
-import 'package:core_arch/core_arch.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatsListViewModel extends BaseViewModel {

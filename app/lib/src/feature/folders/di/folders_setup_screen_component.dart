@@ -1,9 +1,9 @@
-import 'package:flutter/widgets.dart';
-import 'package:jext/jext.dart';
 import 'package:app/app.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:app/src/di/component/app_component.dart';
 import 'package:app/src/feature/folders/screen/folders_setup/folders_setup_page.dart';
+import 'package:flutter/widgets.dart';
+import 'package:jext/jext.dart';
+import 'package:jugger/jugger.dart' as j;
 
 import 'folders_setup_screen_component.jugger.dart';
 

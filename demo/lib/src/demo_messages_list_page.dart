@@ -1,8 +1,9 @@
 import 'package:demo/src/message_bundle.dart';
+import 'package:fake/fake.dart' as fake;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tdlib/td_api.dart' as td;
-import 'package:fake/fake.dart' as fake;
+
 import 'demo_message_page.dart';
 import 'message_data.dart';
 

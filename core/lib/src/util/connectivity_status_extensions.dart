@@ -1,5 +1,5 @@
-import 'package:tdlib/td_api.dart' as td;
 import 'package:core/core.dart';
+import 'package:tdlib/td_api.dart' as td;
 
 extension ConnectivityStatusExtensions on ConnectivityStatus {
   td.NetworkType toNetworkType() {

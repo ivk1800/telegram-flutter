@@ -1,8 +1,8 @@
 import 'package:app/app.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:app/src/di/component/app_component.dart';
 import 'package:app/src/di/component/screen/sessions_screen_component.jugger.dart';
 import 'package:app/src/page/page.dart';
+import 'package:jugger/jugger.dart' as j;
 
 @j.Component(dependencies: <Type>[AppComponent])
 abstract class SessionsScreenComponent {

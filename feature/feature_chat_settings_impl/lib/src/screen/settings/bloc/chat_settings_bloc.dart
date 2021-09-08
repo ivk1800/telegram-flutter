@@ -1,5 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:feature_chat_settings_impl/src/chat_settings_screen_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'chat_settings_event.dart';
 import 'chat_settings_state.dart';

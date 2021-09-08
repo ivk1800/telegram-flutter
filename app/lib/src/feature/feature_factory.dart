@@ -1,3 +1,4 @@
+import 'package:app/src/di/component/feature_component.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
@@ -12,12 +13,11 @@ import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
-import 'package:feature_shared_media_api/feature_shared_media_api.dart';
-import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
-import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
-import 'package:app/src/di/component/feature_component.dart';
+import 'package:feature_shared_media_api/feature_shared_media_api.dart';
+import 'package:feature_stickers_api/feature_stickers_api.dart';
+import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 
 class FeatureFactory {
   FeatureFactory({required FeatureComponent featureComponent})

@@ -2,11 +2,10 @@ library localization_impl;
 
 import 'dart:async' show Future;
 
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:localization_api/localization_api.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:xml/xml.dart';
-import 'package:flutter/services.dart' show rootBundle;
-
-import 'package:localization_api/localization_api.dart';
 
 class LocalizationManager implements ILocalizationManager {
   late Map<String, String> _defaultStrings;
