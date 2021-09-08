@@ -125,7 +125,6 @@ dependencies:
     path: ../td_client
 
 dev_dependencies:
-  analyzer: ^1.1.0
   build_runner: 2.1.1
   jugger_generator:
     git:

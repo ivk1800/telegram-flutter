@@ -67,6 +67,6 @@ class WallpaperListBloc extends Bloc<WallpaperListEvent, WallpaperListState> {
           })
           .cast<ITileModel>()
           .toList()
-            ..insert(0, const TopGroupTileModel())
-            ..add(const BottomGroupTileModel());
+        ..insert(0, const TopGroupTileModel())
+        ..add(const BottomGroupTileModel());
 }

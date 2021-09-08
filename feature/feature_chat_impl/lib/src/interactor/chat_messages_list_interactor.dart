@@ -73,7 +73,7 @@ class ChatMessagesInteractor {
     }).listen((_Result _result) {
       final List<ITileModel> list = (_messagesSubject.value ?? <ITileModel>[])
           .toList()
-            ..addAll(_result.tileModels);
+        ..addAll(_result.tileModels);
       _messagesSubject.add(list);
       _last = _result.messages.lastOrNull;
       _isIdle = _result.messages.isNotEmpty;
