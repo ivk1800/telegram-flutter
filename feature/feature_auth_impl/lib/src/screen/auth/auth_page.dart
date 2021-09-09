@@ -156,22 +156,161 @@ class _AuthPageState extends State<AuthPage> {
   Widget _buildBody(AuthState state, BuildContext context) {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 200),
-      transitionBuilder: (Widget child, Animation<double> animation) {
-        return FadeTransition(
-          child: child,
-          opacity: animation,
-        );
-      },
       child: state is PhoneNumberState
-          ? _buildPhoneNumberState(state)
-          : _buildCodeState(context, state as CodeState),
+          ? _PhoneNumberStateWidget(
+              countryCodeController: _countryCodeController,
+              phoneMaskFormatter: _phoneMaskFormatter,
+              phoneNumberController: _phoneNumberController,
+              phoneNumberFocusNode: _phoneNumberFocusNode,
+              state: state,
+            )
+          : CodeStateWidget(
+              state: state as CodeState,
+              code1FocusNode: _code1FocusNode,
+              codeCell1Controller: _codeCell1Controller,
+              codeCell2Controller: _codeCell2Controller,
+              codeCell3Controller: _codeCell3Controller,
+              codeCell4Controller: _codeCell4Controller,
+              codeCell5Controller: _codeCell5Controller,
+            ),
     );
   }
+}
 
-  Widget _buildCodeState(
-    BuildContext context,
-    CodeState state,
-  ) {
+class _CodeCell extends StatelessWidget {
+  const _CodeCell({
+    Key? key,
+    required this.controller,
+    this.focusNode,
+    this.focusNext = true,
+  }) : super(key: key);
+
+  final FocusNode? focusNode;
+  final TextEditingController controller;
+  final bool focusNext;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 30,
+      child: TextField(
+        focusNode: focusNode,
+        controller: controller,
+        onChanged: (String value) {
+          if (focusNext && value.isNotEmpty) {
+            FocusScope.of(context).nextFocus();
+          }
+        },
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.number,
+        inputFormatters: <TextInputFormatter>[
+          LengthLimitingTextInputFormatter(1),
+        ],
+      ),
+    );
+  }
+}
+
+class _PhoneNumberStateWidget extends StatelessWidget {
+  const _PhoneNumberStateWidget({
+    Key? key,
+    required this.state,
+    required this.countryCodeController,
+    required this.phoneNumberFocusNode,
+    required this.phoneMaskFormatter,
+    required this.phoneNumberController,
+  }) : super(key: key);
+
+  final PhoneNumberState state;
+  final TextEditingController countryCodeController;
+  final FocusNode phoneNumberFocusNode;
+  final MaskTextInputFormatter phoneMaskFormatter;
+  final TextEditingController phoneNumberController;
+
+  @override
+  Widget build(BuildContext context) {
+    final ILocalizationManager localizationManager = context.read();
+    final Size calculatedCodeWidth = (TextPainter(
+      text: const TextSpan(text: '+00000'),
+      maxLines: 1,
+      textDirection: TextDirection.ltr,
+    )..layout())
+        .size;
+
+    return Column(
+      key: const ValueKey<dynamic>('phone'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        MaterialButton(
+          child: Text(state.countryTitle),
+          onPressed: () {
+            context.read<AuthBloc>().add(const ChangeCountryTap());
+          },
+        ),
+        const Divider(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: <Widget>[
+              SizedBox(
+                width: calculatedCodeWidth.width,
+                child: TextField(
+                  controller: countryCodeController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    LengthLimitingTextInputFormatter(4),
+                  ],
+                  decoration: const InputDecoration(prefix: Text('+')),
+                ),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: TextField(
+                  focusNode: phoneNumberFocusNode,
+                  inputFormatters: <TextInputFormatter>[phoneMaskFormatter],
+                  controller: phoneNumberController,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    hintText: phoneMaskFormatter.getMask(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
+          child: Text(localizationManager.getString('StartText')),
+        ),
+      ],
+    );
+  }
+}
+
+class CodeStateWidget extends StatelessWidget {
+  const CodeStateWidget({
+    Key? key,
+    required this.state,
+    required this.code1FocusNode,
+    required this.codeCell1Controller,
+    required this.codeCell2Controller,
+    required this.codeCell3Controller,
+    required this.codeCell4Controller,
+    required this.codeCell5Controller,
+  }) : super(key: key);
+
+  final CodeState state;
+  final FocusNode code1FocusNode;
+  final TextEditingController codeCell1Controller;
+  final TextEditingController codeCell2Controller;
+  final TextEditingController codeCell3Controller;
+  final TextEditingController codeCell4Controller;
+  final TextEditingController codeCell5Controller;
+
+  @override
+  Widget build(BuildContext context) {
     final ILocalizationManager localizationManager = context.read();
     final ThemeData theme = Theme.of(context);
     return Column(
@@ -205,33 +344,33 @@ class _AuthPageState extends State<AuthPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _buildCodeCell(
-              focusNode: _code1FocusNode,
-              controller: _codeCell1Controller,
+            _CodeCell(
+              focusNode: code1FocusNode,
+              controller: codeCell1Controller,
             ),
             const SizedBox(
               width: 8,
             ),
-            _buildCodeCell(
-              controller: _codeCell2Controller,
+            _CodeCell(
+              controller: codeCell2Controller,
             ),
             const SizedBox(
               width: 8,
             ),
-            _buildCodeCell(
-              controller: _codeCell3Controller,
+            _CodeCell(
+              controller: codeCell3Controller,
             ),
             const SizedBox(
               width: 8,
             ),
-            _buildCodeCell(
-              controller: _codeCell4Controller,
+            _CodeCell(
+              controller: codeCell4Controller,
             ),
             const SizedBox(
               width: 8,
             ),
-            _buildCodeCell(
-              controller: _codeCell5Controller,
+            _CodeCell(
+              controller: codeCell5Controller,
               focusNext: false,
             ),
           ],
@@ -251,90 +390,6 @@ class _AuthPageState extends State<AuthPage> {
             localizationManager.getString('DidNotGetTheCodeSms'),
             style: TextStyle(color: theme.colorScheme.secondary),
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCodeCell({
-    FocusNode? focusNode,
-    required TextEditingController controller,
-    bool focusNext = true,
-  }) {
-    return SizedBox(
-      width: 30,
-      child: TextField(
-        focusNode: focusNode,
-        controller: controller,
-        onChanged: (String value) {
-          if (focusNext && value.isNotEmpty) {
-            FocusScope.of(context).nextFocus();
-          }
-        },
-        textAlign: TextAlign.center,
-        keyboardType: TextInputType.number,
-        inputFormatters: <TextInputFormatter>[
-          LengthLimitingTextInputFormatter(1),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPhoneNumberState(PhoneNumberState state) {
-    final ILocalizationManager localizationManager = context.read();
-    final Size calculatedCodeWidth = (TextPainter(
-      text: const TextSpan(text: '+00000'),
-      maxLines: 1,
-      textDirection: TextDirection.ltr,
-    )..layout())
-        .size;
-
-    return Column(
-      key: const ValueKey<dynamic>('phone'),
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        MaterialButton(
-          child: Text(state.countryTitle),
-          onPressed: () {
-            context.read<AuthBloc>().add(const ChangeCountryTap());
-          },
-        ),
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: <Widget>[
-              SizedBox(
-                width: calculatedCodeWidth.width,
-                child: TextField(
-                  controller: _countryCodeController,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    LengthLimitingTextInputFormatter(4),
-                  ],
-                  decoration: const InputDecoration(prefix: Text('+')),
-                ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: TextField(
-                  focusNode: _phoneNumberFocusNode,
-                  inputFormatters: <TextInputFormatter>[_phoneMaskFormatter],
-                  controller: _phoneNumberController,
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    hintText: _phoneMaskFormatter.getMask(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
-          child: Text(localizationManager.getString('StartText')),
         ),
       ],
     );

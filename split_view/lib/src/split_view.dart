@@ -109,26 +109,6 @@ class SplitViewState extends State<SplitView> {
     });
   }
 
-  bool _removeTop(ContainerType container) {
-    bool _tryRemoveTop(List<_PageNode> pages) {
-      if (pages.isNotEmpty) {
-        pages.removeLast();
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    switch (container) {
-      case ContainerType.left:
-        return _tryRemoveTop(_leftPages);
-      case ContainerType.right:
-        return _tryRemoveTop(_rightPages);
-      case ContainerType.top:
-        return _tryRemoveTop(_topPages);
-    }
-  }
-
   void pushAllReplacement({
     required LocalKey key,
     required WidgetBuilder builder,
@@ -248,7 +228,74 @@ class SplitViewState extends State<SplitView> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      child: _buildAdaptiveWidget(),
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          _onWidthChanged(constraints.maxWidth);
+          Widget finalWidget;
+          if (constraints.maxWidth > widget.config.maxCompactWidth) {
+            finalWidget = Stack(
+              children: <Widget>[
+                LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return Row(
+                      children: <Widget>[
+                        ClipRect(
+                          child: Container(
+                            child: _NavigatorContainer(
+                              onPopPage: _onPopPage,
+                              pages: _leftPages
+                                  .map((_PageNode e) => e.page)
+                                  .toList(),
+                            ),
+                            constraints: BoxConstraints.expand(
+                              width: _leftContainerWidth,
+                            ),
+                          ),
+                        ),
+                        if (_leftPages.isNotEmpty || _rightPages.isNotEmpty)
+                          _DraggableDivider(
+                            isDraggableDivider:
+                                widget.config.isDraggableDivider,
+                            onPointerMove: (PointerMoveEvent event) {
+                              setState(() {
+                                _leftContainerWidth = event.position.dx.clamp(
+                                  widget.config.minLeftContainerWidth,
+                                  widget.config.maxLeftContainerWidth,
+                                );
+                              });
+                            },
+                          ),
+                        _RightNavigatorContainer(
+                          onPopPage: _onPopPage,
+                          pages:
+                              _rightPages.map((_PageNode e) => e.page).toList(),
+                          placeholder: _rightContainerPlaceholder,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                AnimatedTopNavigationContainer(
+                  onPopPage: _onPopPage,
+                  isNotSinglePage:
+                      _leftPages.isNotEmpty || _rightPages.isNotEmpty,
+                  onBarrierTap: () {
+                    popUntilRoot(ContainerType.top);
+                  },
+                  pages: _topPages.map((_PageNode e) => e.page).toList(),
+                ),
+              ],
+            );
+          } else {
+            finalWidget = _NavigatorContainer(
+              onPopPage: _onPopPage,
+              pages: _compactPages.map((_PageNode e) => e.page).toList(),
+              navigatorKey: _topNavigatorKey,
+            );
+          }
+          return finalWidget;
+        },
+      ),
       onWillPop: () async {
         if (_isCompact) {
           return !(await _topNavigatorKey.currentState!.maybePop());
@@ -284,96 +331,6 @@ class SplitViewState extends State<SplitView> {
     );
   }
 
-  Widget _buildAdaptiveWidget() {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        _onWidthChanged(constraints.maxWidth);
-        Widget finalWidget;
-        if (constraints.maxWidth > widget.config.maxCompactWidth) {
-          finalWidget = _buildAllContainersTogether(context);
-        } else {
-          finalWidget = _buildCompactContainer(context);
-        }
-        return finalWidget;
-      },
-    );
-  }
-
-  Widget _buildTopContainer(Key key, BuildContext context) {
-    final bool isNotSinglePage =
-        _leftPages.isNotEmpty || _rightPages.isNotEmpty;
-    return Align(
-      key: key,
-      child: Stack(
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              if (isNotSinglePage) {
-                popUntilRoot(ContainerType.top);
-              }
-            },
-            child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              color: Colors.black.withOpacity(0.5),
-            ),
-          ),
-          Align(
-            child: Container(
-              constraints: const BoxConstraints(maxHeight: 600, maxWidth: 500),
-              padding: const EdgeInsets.only(top: 48, bottom: 48),
-              child: Card(
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                elevation: 40,
-                child: ClipRect(
-                  child: _buildNavigator(<Page<dynamic>>[
-                        // add stub page for trigger navigation button
-                        if (isNotSinglePage)
-                          _SimplePage(
-                            key: UniqueKey(),
-                            animateRouterProvider: () => false,
-                            builder: (_) => Container(),
-                            containerType: ContainerType.top,
-                          ),
-                      ] +
-                      _topPages.map((_PageNode e) => e.page).toList()),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAllContainersTogether(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        _buildLeftAndRightContainersTogether(context),
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return FadeTransition(
-              child: child,
-              opacity: animation,
-            );
-          },
-          // TODO rename keys
-          child: _topPages.isEmpty
-              ? const SizedBox(
-                  key: ValueKey<dynamic>('hide'),
-                )
-              : wrapWithoutTopPadding(
-                  _buildTopContainer(const ValueKey<dynamic>('show'), context),
-                ),
-        ),
-      ],
-    );
-  }
-
   Widget wrapWithoutTopPadding(Widget child) {
     final MediaQueryData baseMediaQuery = MediaQuery.of(context);
     return MediaQuery(
@@ -381,95 +338,6 @@ class SplitViewState extends State<SplitView> {
         padding: baseMediaQuery.padding.copyWith(top: 0),
       ),
       child: child,
-    );
-  }
-
-  Widget _buildLeftAndRightContainersTogether(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return Row(
-          children: <Widget>[
-            ClipRect(
-              child: Container(
-                child: _buildLeftContainer(context),
-                constraints: BoxConstraints.expand(width: _leftContainerWidth),
-              ),
-            ),
-            if (_leftPages.isNotEmpty || _rightPages.isNotEmpty)
-              _buildDraggableDivider(constraints.maxWidth),
-            _buildRightContainer(context),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildDraggableDivider(double maxWidth) {
-    final Container divider = Container(
-      color: Colors.transparent,
-      constraints:
-          const BoxConstraints.expand(width: 3, height: double.infinity),
-      child: const ContainerDivider(),
-    );
-    if (widget.config.isDraggableDivider) {
-      return MouseRegion(
-        cursor: SystemMouseCursors.resizeColumn,
-        child: Listener(
-          onPointerMove: (PointerMoveEvent event) {
-            setState(() {
-              _leftContainerWidth = event.position.dx.clamp(
-                widget.config.minLeftContainerWidth,
-                widget.config.maxLeftContainerWidth,
-              );
-            });
-          },
-          child: divider,
-        ),
-      );
-    }
-    return divider;
-  }
-
-  Widget _buildLeftContainer(BuildContext context) {
-    if (_leftPages.isEmpty) {
-      return const SizedBox();
-    }
-    return _buildNavigator(_leftPages.map((_PageNode e) => e.page).toList());
-  }
-
-  Widget _buildCompactContainer(BuildContext context) {
-    if (_compactPages.isEmpty) {
-      return const SizedBox();
-    }
-    return _buildNavigator(
-      _compactPages.map((_PageNode e) => e.page).toList(),
-      key: _topNavigatorKey,
-    );
-  }
-
-  Widget _buildRightContainer(BuildContext context) {
-    if (_rightPages.isEmpty) {
-      return Expanded(child: _rightContainerPlaceholder);
-    }
-    final List<Page<dynamic>> pages =
-        _rightPages.map((_PageNode e) => e.page).toList();
-    final UniqueKey key = UniqueKey();
-    return Expanded(
-      child: ClipRect(
-        child: _buildNavigator(
-          <Page<dynamic>>[
-                // add stub page for trigger navigation button
-                _SimplePage(
-                  key: key,
-                  animateRouterProvider: () =>
-                      _shouldAnimate(key, ContainerType.top),
-                  builder: (_) => Container(),
-                  containerType: ContainerType.top,
-                ),
-              ] +
-              pages,
-        ),
-      ),
     );
   }
 
@@ -493,28 +361,19 @@ class SplitViewState extends State<SplitView> {
     }
   }
 
-  Widget _buildNavigator(
-    List<Page<dynamic>> pages, {
-    Key? key,
-  }) {
-    return Navigator(
-      key: key,
-      pages: pages,
-      onPopPage: (Route<dynamic> route, Object? result) {
-        if (!route.didPop(result)) {
-          return false;
-        }
-        if (route.settings is MyPage) {
-          setState(() {
-            final MyPage<dynamic> myPage = route.settings as MyPage<dynamic>;
-            _removeTopFromContainer(myPage.container);
-            _invalidatePages();
-          });
-        }
+  bool _onPopPage(Route<dynamic> route, Object? result) {
+    if (!route.didPop(result)) {
+      return false;
+    }
+    if (route.settings is MyPage) {
+      setState(() {
+        final MyPage<dynamic> myPage = route.settings as MyPage<dynamic>;
+        _removeTopFromContainer(myPage.container);
+        _invalidatePages();
+      });
+    }
 
-        return true;
-      },
-    );
+    return true;
   }
 
   void _removeTopFromContainer(ContainerType container) {
@@ -553,8 +412,6 @@ abstract class MyPage<T> extends Page<T> {
   final ContainerType container;
 }
 
-typedef _AnimateRouterProvider = bool Function();
-
 class _SimplePage extends MyPage<dynamic> {
   const _SimplePage({
     required this.builder,
@@ -564,7 +421,7 @@ class _SimplePage extends MyPage<dynamic> {
   }) : super(key: key, container: containerType);
 
   final WidgetBuilder builder;
-  final _AnimateRouterProvider animateRouterProvider;
+  final bool Function() animateRouterProvider;
 
   @override
   Route<dynamic> createRoute(BuildContext context) {
@@ -581,8 +438,6 @@ class _SimplePage extends MyPage<dynamic> {
   }
 }
 
-typedef _RouterDurationProvider = Duration? Function();
-
 class _DefaultRoute<T> extends MaterialPageRoute<T> {
   _DefaultRoute({
     required RouteSettings? settings,
@@ -590,7 +445,7 @@ class _DefaultRoute<T> extends MaterialPageRoute<T> {
     required this.routerDurationProvider,
   }) : super(builder: builder, settings: settings);
 
-  final _RouterDurationProvider routerDurationProvider;
+  final Duration? Function() routerDurationProvider;
 
   @override
   Duration get transitionDuration {
@@ -606,4 +461,219 @@ class _DefaultRoute<T> extends MaterialPageRoute<T> {
 extension _Extensions on List<_PageNode> {
   bool hasKey(LocalKey key) =>
       any((_PageNode element) => element.page.key == key);
+}
+
+class _NavigatorContainer extends StatelessWidget {
+  const _NavigatorContainer({
+    Key? key,
+    this.navigatorKey,
+    required this.pages,
+    required this.onPopPage,
+  }) : super(key: key);
+
+  final List<Page<dynamic>> pages;
+  final PopPageCallback onPopPage;
+  final GlobalKey<NavigatorState>? navigatorKey;
+
+  @override
+  Widget build(BuildContext context) {
+    if (pages.isEmpty) {
+      return const SizedBox();
+    }
+
+    return Navigator(
+      key: navigatorKey,
+      pages: pages,
+      onPopPage: onPopPage,
+    );
+  }
+}
+
+class _RightNavigatorContainer extends StatelessWidget {
+  const _RightNavigatorContainer({
+    Key? key,
+    required this.pages,
+    required this.onPopPage,
+    required this.placeholder,
+  }) : super(key: key);
+
+  //.map((_PageNode e) => e.page).toList()
+  final List<Page<dynamic>> pages;
+  final PopPageCallback onPopPage;
+  final Widget placeholder;
+
+  @override
+  Widget build(BuildContext context) {
+    if (pages.isEmpty) {
+      return Expanded(child: placeholder);
+    }
+    final UniqueKey key = UniqueKey();
+    return Expanded(
+      child: ClipRect(
+        child: _NavigatorContainer(
+          onPopPage: onPopPage,
+          pages: <Page<dynamic>>[
+            // add stub page for trigger navigation button
+            _SimplePage(
+              key: key,
+              animateRouterProvider: () => true,
+              builder: (_) => Container(),
+              containerType: ContainerType.top,
+            ),
+            ...pages,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DraggableDivider extends StatelessWidget {
+  const _DraggableDivider({
+    Key? key,
+    required this.isDraggableDivider,
+    required this.onPointerMove,
+  }) : super(key: key);
+
+  final bool isDraggableDivider;
+  final PointerMoveEventListener onPointerMove;
+
+  @override
+  Widget build(BuildContext context) {
+    final Container divider = Container(
+      color: Colors.transparent,
+      constraints:
+          const BoxConstraints.expand(width: 3, height: double.infinity),
+      child: const ContainerDivider(),
+    );
+    if (isDraggableDivider) {
+      return MouseRegion(
+        cursor: SystemMouseCursors.resizeColumn,
+        child: Listener(
+          onPointerMove: onPointerMove,
+          child: divider,
+        ),
+      );
+    }
+    return divider;
+  }
+}
+
+class TopNavigationContainer extends StatelessWidget {
+  const TopNavigationContainer({
+    Key? key,
+    required this.isNotSinglePage,
+    required this.onPopPage,
+    required this.pages,
+    required this.onBarrierTap,
+  }) : super(key: key);
+
+  final bool isNotSinglePage;
+  final PopPageCallback onPopPage;
+  final List<Page<dynamic>> pages;
+  final GestureTapCallback onBarrierTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      key: key,
+      child: Stack(
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              if (isNotSinglePage) {
+                onBarrierTap.call();
+              }
+            },
+            child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          Align(
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 600, maxWidth: 500),
+              padding: const EdgeInsets.only(top: 48, bottom: 48),
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                elevation: 40,
+                child: ClipRect(
+                  child: _NavigatorContainer(
+                    onPopPage: onPopPage,
+                    pages: <Page<dynamic>>[
+                      // add stub page for trigger navigation button
+                      if (isNotSinglePage)
+                        _SimplePage(
+                          key: UniqueKey(),
+                          animateRouterProvider: () => false,
+                          builder: (_) => Container(),
+                          containerType: ContainerType.top,
+                        ),
+                      ...pages,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class AnimatedTopNavigationContainer extends StatelessWidget {
+  const AnimatedTopNavigationContainer({
+    Key? key,
+    required this.isNotSinglePage,
+    required this.onPopPage,
+    required this.pages,
+    required this.onBarrierTap,
+  }) : super(key: key);
+
+  final bool isNotSinglePage;
+  final PopPageCallback onPopPage;
+  final List<Page<dynamic>> pages;
+  final GestureTapCallback onBarrierTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      child: pages.isEmpty
+          ? const SizedBox()
+          : RemoveToPadding(
+              child: TopNavigationContainer(
+                isNotSinglePage: isNotSinglePage,
+                onPopPage: onPopPage,
+                pages: pages,
+                onBarrierTap: onBarrierTap,
+              ),
+            ),
+    );
+  }
+}
+
+class RemoveToPadding extends StatelessWidget {
+  const RemoveToPadding({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final MediaQueryData baseMediaQuery = MediaQuery.of(context);
+    return MediaQuery(
+      data: baseMediaQuery.copyWith(
+        padding: baseMediaQuery.padding.copyWith(top: 0),
+      ),
+      child: child,
+    );
+  }
 }

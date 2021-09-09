@@ -18,11 +18,16 @@ class LogoutPage extends StatelessWidget {
         context,
         localizationManager.getString('LogOutTitle'),
       ),
-      body: _buildBody(context),
+      body: const _Body(),
     );
   }
+}
 
-  Widget _buildBody(BuildContext context) {
+class _Body extends StatelessWidget {
+  const _Body({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     final ILocalizationManager localizationManager = context.read();
     final LogoutBloc bloc = context.read();
     return Column(
