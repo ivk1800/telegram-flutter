@@ -14,7 +14,7 @@ class SessionTileFactory {
       trailing: session.isCurrent
           ? Text(
               'online',
-              style: TextStyle(color: Theme.of(context).accentColor),
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             )
           : null,
       title: Text('${session.applicationName} ${session.applicationVersion}'),

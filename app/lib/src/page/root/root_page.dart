@@ -56,7 +56,7 @@ class RootPageState extends State<RootPage> {
                 ],
               ),
               decoration: BoxDecoration(
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
             ListTile(

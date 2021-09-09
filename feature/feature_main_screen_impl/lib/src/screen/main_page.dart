@@ -126,7 +126,7 @@ class MainPageState extends State<MainPage>
                   }
               }
             }
-            return Theme.of(context).primaryColor;
+            return AppBarTheme.of(context).backgroundColor!;
           },
           navigationIconTap: () {
             setState(() {
@@ -320,7 +320,7 @@ class MainPageState extends State<MainPage>
               ],
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
           ListTile(

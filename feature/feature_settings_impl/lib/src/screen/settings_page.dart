@@ -118,7 +118,7 @@ class SettingsPageState extends State<SettingsPage>
       );
 
   Widget _buildDefaultWidget(BuildContext context) {
-    final Color accentColor = Theme.of(context).accentColor;
+    final Color accentColor = Theme.of(context).colorScheme.secondary;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -208,7 +208,7 @@ class SettingsPageState extends State<SettingsPage>
         return Colors.white;
       },
       backgroundColorProvider: (bool isActive) {
-        return Theme.of(context).primaryColor;
+        return AppBarTheme.of(context).backgroundColor!;
       },
       navigationIconTap: () {
         setState(() {

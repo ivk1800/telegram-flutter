@@ -31,7 +31,7 @@ class TextCell extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .button
-                ?.copyWith(color: Theme.of(context).accentColor),
+                ?.copyWith(color: Theme.of(context).colorScheme.secondary),
           );
         },
       ),

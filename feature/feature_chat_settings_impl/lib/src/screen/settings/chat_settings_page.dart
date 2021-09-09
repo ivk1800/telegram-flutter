@@ -34,7 +34,7 @@ class ChatSettingsPageState extends State<ChatSettingsPage> {
         Provider.of(context, listen: false);
     final ChatSettingsBloc bloc = BlocProvider.of(context, listen: false);
     final ThemeData theme = Theme.of(context);
-    final Color accentColor = theme.accentColor;
+    final Color accentColor = theme.colorScheme.secondary;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

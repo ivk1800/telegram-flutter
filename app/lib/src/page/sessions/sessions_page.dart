@@ -41,7 +41,8 @@ class SessionsPageState extends State<SessionsPage>
   Widget buildSuccessWidget(BuildContext context, StateData data) {
     // TODO extract text to stings
     final ThemeData theme = Theme.of(context);
-    final TextStyle accentTextStyle = TextStyle(color: theme.accentColor);
+    final TextStyle accentTextStyle =
+        TextStyle(color: theme.colorScheme.secondary);
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[

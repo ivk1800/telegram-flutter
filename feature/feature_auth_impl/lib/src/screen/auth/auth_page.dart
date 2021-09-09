@@ -249,7 +249,7 @@ class _AuthPageState extends State<AuthPage> {
           },
           child: Text(
             localizationManager.getString('DidNotGetTheCodeSms'),
-            style: TextStyle(color: theme.accentColor),
+            style: TextStyle(color: theme.colorScheme.secondary),
           ),
         ),
       ],

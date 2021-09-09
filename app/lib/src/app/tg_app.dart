@@ -61,7 +61,9 @@ class TgAppState extends State<TgApp> with WidgetsBindingObserver {
           ),
           platform: TargetPlatform.android,
           primaryColor: const Color(0xff5682a3),
-          accentColor: const Color(0xff598fba),
+          colorScheme: ThemeData.light().colorScheme.copyWith(
+                secondary: const Color(0xff598fba),
+              ),
           appBarTheme: const AppBarTheme(
             color: Color(0xff5682a3),
           ),
