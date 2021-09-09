@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:demo/src/message_bundle.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:flutter/cupertino.dart';
@@ -40,13 +42,15 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
           return ListTile(
             title: Text(bundle.name),
             onTap: () async {
-              Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
+              final Future<dynamic> push = Navigator.of(context)
+                  .push<dynamic>(MaterialPageRoute<dynamic>(
                 builder: (BuildContext context) {
                   return DemoMessagePage(
                     bundle: bundle,
                   );
                 },
               ));
+              unawaited(push);
             },
           );
         },

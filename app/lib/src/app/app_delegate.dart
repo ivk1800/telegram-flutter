@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:app/src/navigation/navigation.dart';
@@ -59,7 +60,7 @@ class AppDelegate {
       if (newEvent is td.UpdateAuthorizationState) {
         if (newEvent.authorizationState
             is td.AuthorizationStateWaitTdlibParameters) {
-          _client.send<td.Ok>(
+          final Future<td.Ok> setTdlibParameters = _client.send<td.Ok>(
             td.SetTdlibParameters(
               parameters: td.TdlibParameters(
                 systemVersion: '1',
@@ -81,13 +82,15 @@ class AppDelegate {
               ),
             ),
           );
+          unawaited(setTdlibParameters);
         } else if (newEvent.authorizationState
             is td.AuthorizationStateWaitEncryptionKey) {
-          _client.send<td.Ok>(
+          final Future<td.Ok> checkDatabaseEncryptionKey = _client.send<td.Ok>(
             td.CheckDatabaseEncryptionKey(
               encryptionKey: await _tdConfigProvider.getEncryptionKey(),
             ),
           );
+          unawaited(checkDatabaseEncryptionKey);
         } else if (newEvent.authorizationState is td.AuthorizationStateReady) {
           _router.toRoot();
         } else if (newEvent.authorizationState
