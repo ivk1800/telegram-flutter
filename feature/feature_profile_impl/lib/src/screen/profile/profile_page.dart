@@ -20,21 +20,29 @@ class ProfilePage extends StatelessWidget {
         title: BlocConsumer<ProfileBloc, ProfileState>(
           listener: (BuildContext context, ProfileState state) {},
           builder: (BuildContext context, ProfileState state) =>
-              _buildHeader(context, state.headerState.info),
+              _Header(info: state.headerState.info),
         ),
       ),
       body: BlocConsumer<ProfileBloc, ProfileState>(
         listener: (BuildContext context, ProfileState state) {},
         builder: (BuildContext context, ProfileState state) =>
-            _buildBody(context, state.bodyState),
+            _Body(state: state.bodyState),
       ),
     );
   }
+}
 
-  Widget _buildBody(BuildContext context, BodyState state) {
+class _Body extends StatelessWidget {
+  const _Body({Key? key, required this.state}) : super(key: key);
+
+  final BodyState state;
+
+  @override
+  Widget build(BuildContext context) {
     final ILocalizationManager localizationManager =
         Provider.of(context, listen: false);
     final ProfileBloc bloc = BlocProvider.of(context, listen: false);
+    final BodyState state = this.state;
     if (state is DataBodyState) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,8 +100,15 @@ class ProfilePage extends StatelessWidget {
 
     return const Center(child: CircularProgressIndicator());
   }
+}
 
-  Widget _buildHeader(BuildContext context, ChatHeaderInfo info) {
+class _Header extends StatelessWidget {
+  const _Header({Key? key, required this.info}) : super(key: key);
+
+  final ChatHeaderInfo info;
+
+  @override
+  Widget build(BuildContext context) {
     final IChatHeaderInfoFactory chatHeaderInfoFactory = Provider.of(context);
     return chatHeaderInfoFactory.create(
       context: context,

@@ -28,9 +28,8 @@ class StickersPage extends StatelessWidget {
         builder: (BuildContext context, StickersState state) {
           if (state is DefaultState) {
             return SingleChildScrollView(
-              child: _buildDefaultWidget(
-                context,
-                state,
+              child: _DefaultWidget(
+                state: state,
               ),
             );
           }
@@ -40,8 +39,15 @@ class StickersPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDefaultWidget(BuildContext context, DefaultState state) {
+class _DefaultWidget extends StatelessWidget {
+  const _DefaultWidget({Key? key, required this.state}) : super(key: key);
+
+  final DefaultState state;
+
+  @override
+  Widget build(BuildContext context) {
     final ILocalizationManager localizationManager = Provider.of(context);
     final TileFactory tileFactory = Provider.of<TileFactory>(context);
     final StickersBloc bloc = BlocProvider.of(context);

@@ -25,11 +25,16 @@ class ChatSettingsPageState extends State<ChatSettingsPage> {
           (_) => Text(localizationManager.getString('ChatSettings')),
         ),
       ),
-      body: SingleChildScrollView(child: _buildBody(context)),
+      body: const SingleChildScrollView(child: _Body()),
     );
   }
+}
 
-  Widget _buildBody(BuildContext context) {
+class _Body extends StatelessWidget {
+  const _Body({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     final ILocalizationManager localizationManager =
         Provider.of(context, listen: false);
     final ChatSettingsBloc bloc = BlocProvider.of(context, listen: false);

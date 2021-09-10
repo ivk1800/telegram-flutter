@@ -265,7 +265,15 @@ class SettingsPageState extends State<SettingsPage>
                 });
               },
             ),
-            _buildAppBarPopupMenu(),
+            _AppBarPopupMenu(
+              onSelected: (_AppBarMenu value) {
+                switch (value) {
+                  case _AppBarMenu.logOut:
+                    router.toLogOut();
+                    break;
+                }
+              },
+            ),
           ];
         }
       },
@@ -298,32 +306,6 @@ class SettingsPageState extends State<SettingsPage>
     );
   }
 
-  Widget _buildAppBarPopupMenu() {
-    return PopupMenuButton<_AppBarMenu>(
-      onSelected: (_AppBarMenu value) {
-        switch (value) {
-          case _AppBarMenu.logOut:
-            router.toLogOut();
-            break;
-        }
-      },
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<_AppBarMenu>>[
-        PopupMenuItem<_AppBarMenu>(
-          value: _AppBarMenu.logOut,
-          child: _buildAppBarPopupMenuItem('Log out'),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAppBarPopupMenuItem(String title) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: const Icon(Icons.circle),
-      title: Text(title),
-    );
-  }
-
   Widget _buildTitleWidget(BuildContext context) {
     return Align(
       child:
@@ -341,3 +323,41 @@ class SettingsPageState extends State<SettingsPage>
 enum _AppBarMenu { logOut }
 
 enum _ScreenState { settings, search }
+
+class AppBarPopupMenuItem extends StatelessWidget {
+  const AppBarPopupMenuItem({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const Icon(Icons.circle),
+      title: Text(title),
+    );
+  }
+}
+
+class _AppBarPopupMenu extends StatelessWidget {
+  const _AppBarPopupMenu({Key? key, required this.onSelected})
+      : super(key: key);
+
+  final PopupMenuItemSelected<_AppBarMenu> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<_AppBarMenu>(
+      onSelected: onSelected,
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<_AppBarMenu>>[
+        const PopupMenuItem<_AppBarMenu>(
+          value: _AppBarMenu.logOut,
+          child: AppBarPopupMenuItem(
+            // todo extract string
+            title: 'Log out',
+          ),
+        ),
+      ],
+    );
+  }
+}
