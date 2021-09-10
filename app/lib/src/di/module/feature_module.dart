@@ -516,7 +516,8 @@ abstract class FeatureModule {
       );
 
   @j.bind
-  IChatsListScreenRouter bindChatsListScreenRouter(CommonScreenRouterImpl impl);
+  IChatsListScreenRouter bindChatsListScreenRouter(
+      ChatsListScreenRouterImpl impl);
 
   @j.bind
   IMainScreenRouter bindMainScreenRouter(CommonScreenRouterImpl impl);

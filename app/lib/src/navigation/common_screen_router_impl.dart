@@ -43,7 +43,6 @@ class CommonScreenRouterImpl
         IStickersFeatureRouter,
         ISettingsScreenRouter,
         IPrivacySettingsScreenRouter,
-        IChatsListScreenRouter,
         INotificationsSettingsScreenRouter,
         IDataSettingsScreenRouter,
         IChatSettingsScreenRouter,
@@ -75,7 +74,7 @@ class CommonScreenRouterImpl
     _navigationRouter.push(
       key: UniqueKey(),
       builder: (BuildContext context) => factory.create(context, id),
-      container: ContainerType.top,
+      container: ContainerType.right,
     );
   }
 
