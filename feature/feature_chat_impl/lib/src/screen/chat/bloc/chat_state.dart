@@ -1,23 +1,21 @@
 import 'package:equatable/equatable.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tile/tile.dart';
 
-class ChatState extends Equatable {
-  const ChatState({
-    required this.headerState,
-    required this.bodyState,
-  });
+part 'chat_state.freezed.dart';
 
-  final HeaderState headerState;
-  final BodyState bodyState;
+@freezed
+@immutable
+class BodyState with _$BodyState {
+  const factory BodyState.loading() = _Loading;
 
-  @override
-  List<Object> get props => <Object>[
-        headerState,
-        bodyState,
-      ];
+  const factory BodyState.data({
+    required List<ITileModel> models,
+  }) = _Data;
 }
 
+//
 class HeaderState extends Equatable {
   const HeaderState({required this.info});
 
@@ -25,24 +23,4 @@ class HeaderState extends Equatable {
 
   @override
   List<Object> get props => <Object>[info];
-}
-
-abstract class BodyState extends Equatable {
-  const BodyState();
-}
-
-class LoadingBodyState extends BodyState {
-  const LoadingBodyState();
-
-  @override
-  List<Object?> get props => <dynamic>[];
-}
-
-class DataBodyState extends BodyState {
-  const DataBodyState({required this.tiles});
-
-  final List<ITileModel> tiles;
-
-  @override
-  List<Object> get props => <Object>[tiles];
 }
