@@ -1,2 +1,2 @@
-export 'bloc/chat_state.dart';
+export 'chat_state.dart';
 export 'bloc/chat_view_model.dart';

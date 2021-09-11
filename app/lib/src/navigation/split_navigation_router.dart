@@ -20,7 +20,7 @@ class SplitNavigationRouter implements INavigationRouter {
 
   @override
   void back() {
-    // _navigationKey.currentState?.pop();
+    _navigationKey.currentState?.pop();
   }
 
   @override

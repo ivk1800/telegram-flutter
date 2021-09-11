@@ -8,7 +8,6 @@ import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
-import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
@@ -386,5 +385,10 @@ class CommonScreenRouterImpl
 
   void _showNotImplementedDialog() {
     toDialog(body: TextBody(text: 'not implemented'));
+  }
+
+  @override
+  void back() {
+    _navigationRouter.back();
   }
 }

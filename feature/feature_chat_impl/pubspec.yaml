@@ -14,6 +14,9 @@ dependencies:
     path: ../../core_utils
   coreui:
     path: ../../coreui
+  dialog_api:
+    path: ../../dialog_api
+  equatable: ^2.0.0
   feature_chat_api:
     path: ../feature_chat_api
   feature_chat_header_info_api:
@@ -33,6 +36,7 @@ dependencies:
   localization_api:
     path: ../../localization_api
   path_provider: ^2.0.1
+  provider: 6.0.0
   rich_text_format:
     path: ../../rich_text/rich_text_format
   rich_text_format_flutter:

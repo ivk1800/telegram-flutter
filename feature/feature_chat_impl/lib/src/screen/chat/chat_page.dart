@@ -2,11 +2,10 @@ import 'package:core_arch/core_arch.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:tile/tile.dart';
 
-import 'bloc/chat_state.dart';
+import 'chat_state.dart';
 import 'bloc/chat_view_model.dart';
 
 class ChatPage extends StatefulWidget {
@@ -38,19 +37,7 @@ class ChatPageState extends State<ChatPage> {
     final ChatViewModel viewModel = context.read();
     return Scaffold(
       backgroundColor: Colors.lightBlue,
-      appBar: AppBar(
-        titleSpacing: 0.0,
-        title: StreamListener<HeaderState>(
-          stream: viewModel.headerStateStream,
-          builder: (BuildContext context, HeaderState data) {
-            final IChatHeaderInfoFactory chatHeaderInfoFactory = context.read();
-            return chatHeaderInfoFactory.create(
-              context: context,
-              info: data.info,
-            );
-          },
-        ),
-      ),
+      appBar: const _AppBar(),
       body: StreamListener<BodyState>(
         stream: viewModel.bodyStateStream,
         builder: (BuildContext context, BodyState data) {
@@ -122,6 +109,79 @@ class _Messages extends StatelessWidget {
           return tileFactory.create(context, tileModel);
         },
       ),
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _AppBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ChatViewModel viewModel = context.read();
+    return StreamListener<HeaderState>(
+      stream: viewModel.headerStateStream,
+      builder: (BuildContext context, HeaderState data) {
+        final IChatHeaderInfoFactory chatHeaderInfoFactory = context.read();
+        return AppBar(
+          titleSpacing: 0.0,
+          title: chatHeaderInfoFactory.create(
+            context: context,
+            info: data.info,
+          ),
+          actions: <Widget>[
+            _AppBarPopupMenu(
+              actions: data.actions,
+              onSelected: viewModel.onHeaderActionTap,
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size(double.infinity, kToolbarHeight);
+}
+
+class _AppBarPopupMenu extends StatelessWidget {
+  const _AppBarPopupMenu({
+    Key? key,
+    required this.onSelected,
+    required this.actions,
+  }) : super(key: key);
+
+  final List<HeaderActionData> actions;
+  final PopupMenuItemSelected<HeaderAction> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<HeaderAction>(
+      onSelected: onSelected,
+      itemBuilder: (BuildContext context) => actions
+          .map((e) => PopupMenuItem<HeaderAction>(
+                value: e.action,
+                child: AppBarPopupMenuItem(
+                  title: e.label,
+                ),
+              ))
+          .toList(),
+    );
+  }
+}
+
+// todo same in settings page, extract common widget
+class AppBarPopupMenuItem extends StatelessWidget {
+  const AppBarPopupMenuItem({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const Icon(Icons.circle),
+      title: Text(title),
     );
   }
 }

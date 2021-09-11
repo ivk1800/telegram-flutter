@@ -1,7 +1,10 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
+import 'package:feature_chat_impl/src/manager/chat_manager_impl.dart';
+import 'package:feature_chat_impl/src/resolver/chat_info_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_action_listener.dart';
@@ -102,9 +105,15 @@ abstract class ChatScreenModule {
     ChatArgs args,
     ChatMessagesInteractor chatMessagesInteractor,
     IChatHeaderInfoInteractor headerInfoInteractor,
+    ChatHeaderActionsInteractor headerActionsInteractor,
     ChatFeatureDependencies dependencies,
   ) =>
       ChatViewModel(
+        localizationManager: dependencies.localizationManager,
+        headerActionsInteractor: headerActionsInteractor,
+        // todo move to chat feature component
+        chatManager:
+            ChatManagerImpl(functionExecutor: dependencies.functionExecutor),
         headerInfoInteractor: headerInfoInteractor,
         router: dependencies.router,
         messagesInteractor: chatMessagesInteractor,
@@ -142,6 +151,30 @@ abstract class ChatScreenModule {
   ) =>
       dependencies.chatHeaderInfoFeatureApi
           .getChatHeaderInfoInteractor(args.chatId);
+
+  @j.provide
+  @j.singleton
+  static ChatHeaderActionsInteractor provideChatHeaderActionsInteractor(
+    ChatArgs args,
+    ChatInfoResolver chatInfoResolver,
+    ChatFeatureDependencies dependencies,
+  ) =>
+      ChatHeaderActionsInteractor(
+        localizationManager: dependencies.localizationManager,
+        chatInfoResolver: chatInfoResolver,
+        chatId: args.chatId,
+      );
+
+  @j.provide
+  @j.singleton
+  static ChatInfoResolver provideChatInfoResolver(
+    ChatFeatureDependencies dependencies,
+  ) =>
+      ChatInfoResolver(
+        chatRepository: dependencies.chatRepository,
+        superGroupRepository: dependencies.superGroupRepository,
+        basicGroupRepository: dependencies.basicGroupRepository,
+      );
 }
 
 @j.componentBuilder

@@ -4,6 +4,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
+import 'package:feature_chat_impl/src/manager/chat_manager_impl.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:localization_api/localization_api.dart';
@@ -25,12 +26,19 @@ export 'src/widget/theme/chat_theme.dart';
 class ChatFeatureApi implements IChatFeatureApi {
   ChatFeatureApi({
     required ChatFeatureDependencies dependencies,
-  }) : _chatScreenFactory = ChatScreenFactory(dependencies: dependencies);
+  }) : _dependencies = dependencies;
 
-  final IChatScreenFactory _chatScreenFactory;
+  final ChatFeatureDependencies _dependencies;
+  IChatScreenFactory? _chatScreenFactory;
+  IChatManager? _chatManager;
 
   @override
-  IChatScreenFactory get chatScreenFactory => _chatScreenFactory;
+  IChatScreenFactory get chatScreenFactory =>
+      _chatScreenFactory ??= ChatScreenFactory(dependencies: _dependencies);
+
+  @override
+  IChatManager get chatManager => _chatManager ??=
+      ChatManagerImpl(functionExecutor: _dependencies.functionExecutor);
 }
 
 class ChatFeatureDependencies {
@@ -47,6 +55,9 @@ class ChatFeatureDependencies {
     required this.messagePreviewResolver,
     required this.chatHeaderInfoFeatureApi,
     required this.fileDownloader,
+    required this.functionExecutor,
+    required this.superGroupRepository,
+    required this.basicGroupRepository,
   });
 
   final IChatRepository chatRepository;
@@ -72,4 +83,10 @@ class ChatFeatureDependencies {
   final IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi;
 
   final IFileDownloader fileDownloader;
+
+  final ITdFunctionExecutor functionExecutor;
+
+  final ISuperGroupRepository superGroupRepository;
+
+  final IBasicGroupRepository basicGroupRepository;
 }

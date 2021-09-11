@@ -118,8 +118,14 @@ abstract class FeatureModule {
     FeatureFactory featureFactory,
     DateFormatter dateFormatter,
     IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
+    ITdFunctionExecutor functionExecutor,
+    ISuperGroupRepository superGroupRepository,
+    IBasicGroupRepository basicGroupRepository,
   ) =>
       ChatFeatureDependencies(
+        basicGroupRepository: basicGroupRepository,
+        superGroupRepository: superGroupRepository,
+        functionExecutor: functionExecutor,
         dateFormatter: dateFormatter,
         // todo move to app component global scope
         fileDownloader: featureFactory.createFileFeatureApi().fileDownloader,

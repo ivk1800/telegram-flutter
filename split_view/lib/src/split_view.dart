@@ -376,6 +376,24 @@ class SplitViewState extends State<SplitView> {
     return true;
   }
 
+  void pop() {
+    setState(() {
+      if (_isCompact) {
+        final _PageNode removed = _compactPages.removeLast();
+        _removeTopFromContainer(removed.container);
+        _invalidatePages();
+      } else {
+        if (_topPages.isNotEmpty) {
+          _removeTopFromContainer(ContainerType.top);
+        } else if (_rightPages.isNotEmpty) {
+          _removeTopFromContainer(ContainerType.right);
+        } else if (_leftPages.isNotEmpty) {
+          _removeTopFromContainer(ContainerType.left);
+        }
+      }
+    });
+  }
+
   void _removeTopFromContainer(ContainerType container) {
     switch (container) {
       case ContainerType.left:

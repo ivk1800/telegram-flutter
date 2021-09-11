@@ -226,4 +226,12 @@
     <string lang="ResetChatBackgrounds">Reset Chat Backgrounds</string>
     <!-- https://translations.telegram.org/en/android/settings/ResetChatBackgroundsInfo -->
     <string lang="ResetChatBackgroundsInfo">Remove all uploaded chat backgrounds and restore the pre-installed ones.</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/LeaveMegaMenu -->
+    <string lang="LeaveMegaMenu">Leave group</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/LeaveChannelMenu -->
+    <string lang="LeaveChannelMenu">Leave channel</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/MegaLeaveAlertWithName -->
+    <string lang="MegaLeaveAlertWithName">Are you sure you want to leave %s?</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/ChannelLeaveAlertWithName -->
+    <string lang="ChannelLeaveAlertWithName">Are you sure you want to leave %s?</string>
 </resources>

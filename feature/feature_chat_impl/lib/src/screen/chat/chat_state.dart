@@ -17,10 +17,25 @@ class BodyState with _$BodyState {
 
 //
 class HeaderState extends Equatable {
-  const HeaderState({required this.info});
+  const HeaderState({
+    required this.info,
+    required this.actions,
+  });
 
   final ChatHeaderInfo info;
 
+  final List<HeaderActionData> actions;
+
   @override
-  List<Object> get props => <Object>[info];
+  List<Object> get props => <Object>[info, actions];
 }
+
+class HeaderActionData {
+  HeaderActionData({required this.action, required this.label});
+
+  final HeaderAction action;
+
+  final String label;
+}
+
+enum HeaderAction { leave }
