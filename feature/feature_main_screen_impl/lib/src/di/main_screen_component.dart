@@ -28,10 +28,9 @@ abstract class FoldersSetupModule {
 
   @j.provide
   @j.singleton
-  static IGlobalSearchWidgetFactory provideGlobalSearchWidgetFactory(
-    IGlobalSearchFeatureApi api,
-  ) =>
-      api.screenWidgetFactory;
+  static IGlobalSearchScreenFactory provideGlobalSearchScreenFactory(
+          IGlobalSearchFeatureApi api) =>
+      api.globalSearchScreenFactory;
 
   @j.provide
   @j.singleton

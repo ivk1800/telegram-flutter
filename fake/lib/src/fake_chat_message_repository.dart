@@ -33,8 +33,9 @@ class FakeChatMessageRepository implements IChatMessageRepository {
 
   @override
   Future<List<td.Message>> findMessages({
-    required int chatId,
+    required String query,
     required int fromMessageId,
+    required int fromChatId,
     required int limit,
     required td.SearchMessagesFilter filter,
   }) {

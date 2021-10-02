@@ -27,9 +27,9 @@ class AvatarWidgetFactory {
   // todo rename chatId to some another name
   Widget create(
     BuildContext context, {
-    required double radius,
-    required int chatId,
+    double radius = 20,
     int? imageId,
+    required int chatId,
   }) {
     if (imageId == null) {
       return _createDefaultAvatar(radius: radius, chatId: chatId);

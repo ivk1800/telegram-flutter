@@ -6,15 +6,36 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  equatable: ^2.0.0
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+  coreui:
+    path: ../../coreui
   feature_global_search_api:
     path: ../feature_global_search_api
   flutter:
     sdk: flutter
   flutter_bloc: 7.2.0
+  freezed_annotation: 0.14.2
+  localization_api:
+    path: ../../localization_api
+  provider: ^6.0.0
+  provider_extensions:
+    path: ../../provider_extensions
+  rxdart: ^0.26.0
+  search_component:
+    path: ../../search_component
   td_client:
     path: ../../td_client
+  tile:
+    path: ../../tile
 
 dev_dependencies:
+  build_runner: 2.1.1
+  freezed: 0.14.3
+  jugger_generator:
+    git:
+      url: git@github.com:ivk1800/jugger.dart.git
+      path: jugger_generator
+      ref: 2351119ad514db2c2ffbe286677e91936c39ee61
   tg_lint_rules:
     path: ../../tg_lint_rules

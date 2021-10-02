@@ -101,9 +101,20 @@ abstract class FeatureModule {
       );
 
   @j.provide
-  static GlobalSearchFeatureDependencies
-      provideGlobalSearchFeatureDependencies() =>
-          const GlobalSearchFeatureDependencies();
+  static GlobalSearchFeatureDependencies provideGlobalSearchFeatureDependencies(
+    ILocalizationManager localizationManager,
+    IChatRepository chatRepository,
+    IFileRepository fileRepository,
+    IChatMessageRepository chatMessageRepository,
+    IGlobalSearchFeatureRouter router,
+  ) =>
+      GlobalSearchFeatureDependencies(
+        router: router,
+        localizationManager: localizationManager,
+        chatRepository: chatRepository,
+        fileRepository: fileRepository,
+        chatMessageRepository: chatMessageRepository,
+      );
 
   @j.provide
   static ChatFeatureDependencies provideChatFeatureDependencies(
@@ -580,5 +591,10 @@ abstract class FeatureModule {
 
   @j.bind
   ILogoutFeatureRouter bindLogoutFeatureRouter(CommonScreenRouterImpl impl);
+
+  @j.bind
+  IGlobalSearchFeatureRouter bindGlobalSearchFeatureRouter(
+    CommonScreenRouterImpl impl,
+  );
 // endregion
 }

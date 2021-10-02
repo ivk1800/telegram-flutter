@@ -23,7 +23,6 @@ class SenderAvatarFactory {
           onTap: onTap,
           child: _avatarWidgetFactory.create(
             context,
-            radius: 20,
             chatId: senderInfo.id,
             imageId: senderInfo.senderPhotoId,
           ),

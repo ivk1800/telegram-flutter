@@ -58,29 +58,26 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
 
   @override
   Future<List<td.Message>> findMessages({
-    required int chatId,
+    required String query,
     required int fromMessageId,
+    required int fromChatId,
     required int limit,
     required td.SearchMessagesFilter filter,
   }) {
-    return _get<td.Message>(
-      (td.Message? last) async {
-        return _functionExecutor
-            .send<td.Messages>(
-              td.SearchChatMessages(
-                chatId: chatId,
-                filter: filter,
-                fromMessageId: last?.id ?? fromMessageId,
-                limit: limit,
-                messageThreadId: 0,
-                offset: 0,
-                query: '',
-              ),
-            )
-            .then((td.Messages value) => value.messages ?? <td.Message>[]);
-      },
-      limit,
-    );
+    return _get<td.Message>((td.Message? last) async {
+      return _functionExecutor
+          .send<td.Messages>(td.SearchMessages(
+            minDate: 0,
+            maxDate: 0,
+            offsetChatId: last?.chatId ?? fromChatId,
+            offsetDate: 0,
+            offsetMessageId: last?.id ?? fromMessageId,
+            filter: filter,
+            limit: limit,
+            query: query,
+          ))
+          .then((td.Messages value) => value.messages ?? <td.Message>[]);
+    }, limit);
   }
 
   Future<List<T>> _get<T>(

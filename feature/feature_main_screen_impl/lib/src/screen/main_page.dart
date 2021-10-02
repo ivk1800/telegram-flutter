@@ -26,7 +26,7 @@ class MainPageState extends State<MainPage>
   late ILocalizationManager localizationManager;
 
   @j.inject
-  late IGlobalSearchWidgetFactory globalSearchWidgetFactory;
+  late IGlobalSearchScreenFactory globalSearchWidgetFactory;
 
   @j.inject
   late IChatsListWidgetFactory chatsListWidgetFactory;
@@ -35,6 +35,10 @@ class MainPageState extends State<MainPage>
   late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
 
   _ScreenState _screenState = _ScreenState.chats;
+  final GlobalSearchScreenController _globalSearchScreenController =
+      GlobalSearchScreenController();
+
+  late Widget _chatsListWidget;
 
   final GlobalObjectKey<tg.TgSwitchedAppBarState> appbarKey =
       const GlobalObjectKey<tg.TgSwitchedAppBarState>('MainAppbar');
@@ -44,8 +48,8 @@ class MainPageState extends State<MainPage>
   @override
   void initState() {
     super.initState();
+    _chatsListWidget = chatsListWidgetFactory.create();
     _searchQueryController.addListener(_onSearchEvent);
-
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 200),
@@ -236,7 +240,16 @@ class MainPageState extends State<MainPage>
                   }
               }
             } else {
-              return _buildTitleWidget(context);
+              return Align(
+                child: connectionStateWidgetFactory.create(
+                  context,
+                  (BuildContext context) {
+                    // TODO extract text to stings
+                    return const Text('Telegram');
+                  },
+                ),
+                alignment: Alignment.centerLeft,
+              );
             }
           },
           leadingAnimatedIconProvider: (bool isActive) {
@@ -247,7 +260,23 @@ class MainPageState extends State<MainPage>
           },
         ),
         drawer: _buildDrawer(),
-        body: _buildBody(context),
+        body: Stack(
+          children: <Widget>[
+            _chatsListWidget,
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: _searchActive
+                  ? Container(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      child: globalSearchWidgetFactory.create(
+                        context,
+                        _globalSearchScreenController,
+                      ),
+                    )
+                  : null,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -256,6 +285,7 @@ class MainPageState extends State<MainPage>
     setState(() {
       final bool _prevValue = _showClearButtonQuery;
       _showClearButtonQuery = _searchQueryController.text.isNotEmpty;
+      _globalSearchScreenController.onQuery(_searchQueryController.text);
       if (_showClearButtonQuery != _prevValue) {
         if (_showClearButtonQuery) {
           _animationController.forward();
@@ -264,45 +294,6 @@ class MainPageState extends State<MainPage>
         }
       }
     });
-  }
-
-  Widget _buildBody(BuildContext context) => Stack(
-        children: <Widget>[
-          buildListView(),
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 200),
-            child: _searchActive ? buildSearchView() : null,
-          ),
-        ],
-      );
-
-  Widget _buildTitleWidget(BuildContext context) {
-    return Align(
-      child:
-          connectionStateWidgetFactory.create(context, (BuildContext context) {
-        // TODO extract text to stings
-        return const Text('Telegram');
-      }),
-      alignment: Alignment.centerLeft,
-    );
-  }
-
-  Widget buildSearchView() => Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: globalSearchWidgetFactory.create(),
-      );
-
-  Widget buildListView() {
-    return chatsListWidgetFactory.create();
-
-    // return ListView.builder(
-    //   key: ValueKey<int>(1),
-    //   itemCount: _models.length,
-    //   itemBuilder: (BuildContext context, int index) {
-    //     final ChatTileModel chatTileModel = _models[index];
-    //     return _chatTileFactory.create(context, chatTileModel);
-    //   },
-    // );
   }
 
   Widget _buildDrawer() {

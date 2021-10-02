@@ -11,4 +11,8 @@ abstract class IChatRepository {
     required int limit,
     required td.ChatList chatList,
   });
+
+  Future<List<td.Chat>> findChats({
+    required String query,
+  });
 }

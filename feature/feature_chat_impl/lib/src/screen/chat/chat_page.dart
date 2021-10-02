@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tile/tile.dart';
 
-import 'chat_state.dart';
 import 'bloc/chat_view_model.dart';
+import 'chat_state.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -159,7 +159,7 @@ class _AppBarPopupMenu extends StatelessWidget {
     return PopupMenuButton<HeaderAction>(
       onSelected: onSelected,
       itemBuilder: (BuildContext context) => actions
-          .map((e) => PopupMenuItem<HeaderAction>(
+          .map((HeaderActionData e) => PopupMenuItem<HeaderAction>(
                 value: e.action,
                 child: AppBarPopupMenuItem(
                   title: e.label,

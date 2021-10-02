@@ -12,6 +12,7 @@ import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
+import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_logout_api/feature_logout_api.dart';
 import 'package:feature_logout_impl/feature_logout_impl.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
@@ -50,6 +51,7 @@ class CommonScreenRouterImpl
         IMainScreenRouter,
         IWallpapersFeatureRouter,
         IProfileFeatureRouter,
+        IGlobalSearchFeatureRouter,
         IDialogRouter,
         ILogoutFeatureRouter,
         IAuthFeatureRouter {
@@ -66,6 +68,7 @@ class CommonScreenRouterImpl
   final FeatureFactory _featureFactory;
   final GlobalKey<NavigatorState> _dialogNavigatorKey;
 
+  // TODO extract chat router delegate
   @override
   void toChat(int id) {
     final IChatScreenFactory factory =

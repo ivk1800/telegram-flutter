@@ -96,4 +96,20 @@ class ChatRepositoryImpl extends IChatRepository {
   @override
   Future<td.Supergroup> getSupergroup(int id) =>
       _functionExecutor.send<td.Supergroup>(td.GetSupergroup(supergroupId: id));
+
+  @override
+  Future<List<td.Chat>> findChats({
+    required String query,
+  }) =>
+      _functionExecutor
+          .send<td.Chats>(td.SearchPublicChats(query: query))
+          .then((td.Chats chats) {
+        return Stream<td.Chat>.fromFutures(
+          chats.chatIds.map(
+            (int e) => _functionExecutor.send<td.Chat>(
+              td.GetChat(chatId: e),
+            ),
+          ),
+        ).toList();
+      });
 }
