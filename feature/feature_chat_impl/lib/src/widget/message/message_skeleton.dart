@@ -92,6 +92,7 @@ class _BodyRenderBox extends RenderBox
         extentOffset: first.text.toPlainText().length,
       ),
     );
+    // todo text can be empty
     final TextBox lastBox = boxesForSelection.last;
     final double newWidth = first.size.width + second.size.width;
     final double secondXOffset = newWidth - second.size.width;

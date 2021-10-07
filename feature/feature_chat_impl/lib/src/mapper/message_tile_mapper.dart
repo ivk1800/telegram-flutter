@@ -495,7 +495,8 @@ class MessageTileMapper {
             replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
             additionalInfo: await _additionalInfoMapper.map(message),
             isOutgoing: message.isOutgoing,
-            text: _formattedTextResolver.resolve(m.text),
+            // todo text can be null
+            text: _formattedTextResolver.resolve(m.text)!,
           );
         }
       case td.MessageUnsupported.CONSTRUCTOR:
