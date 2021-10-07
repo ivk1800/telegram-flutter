@@ -122,12 +122,8 @@ abstract class ChatScreenModule {
 
   @j.provide
   @j.singleton
-  static ChatMessageFactory provideChatMessageFactory(
-    tg.AvatarWidgetFactory avatarWidgetFactory,
-  ) =>
-      ChatMessageFactory(
-        avatarWidgetFactory: avatarWidgetFactory,
-      );
+  static ChatMessageFactory provideChatMessageFactory() =>
+      const ChatMessageFactory();
 
   @j.provide
   @j.singleton

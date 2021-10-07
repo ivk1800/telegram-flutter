@@ -51,9 +51,7 @@ class MessageTileFactoryComponent {
 
     final tg.AvatarWidgetFactory avatarWidgetFactory =
         tg.AvatarWidgetFactory(fileRepository: _dependencies.fileRepository);
-    final ChatMessageFactory chatMessageFactory = ChatMessageFactory(
-      avatarWidgetFactory: avatarWidgetFactory,
-    );
+    const ChatMessageFactory chatMessageFactory = ChatMessageFactory();
 
     final SenderAvatarFactory senderAvatarFactory =
         SenderAvatarFactory(avatarWidgetFactory: avatarWidgetFactory);

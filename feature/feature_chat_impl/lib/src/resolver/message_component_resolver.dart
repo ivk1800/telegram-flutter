@@ -34,6 +34,10 @@ class MessageComponentResolver {
     BuildContext context,
     BaseConversationMessageTileModel model,
   ) {
+    if (model.isOutgoing) {
+      return null;
+    }
+
     return _messageWallContext.isDisplayAvatarFor(model.id)
         ? _senderAvatarFactory.create(
             context: context,

@@ -21,8 +21,8 @@ class MessageChatChangePhotoTileFactoryDelegate
       alignment: Alignment.center,
       body: Column(
         children: <Widget>[
-          _chatMessageFactory.createChatNotificationBubbleFromText(
-            text: model.title.toInlineSpan(),
+          _chatMessageFactory.createChatNotificationBubble(
+            span: model.title.toInlineSpan(),
           ),
           const SizedBox(
             height: 8,

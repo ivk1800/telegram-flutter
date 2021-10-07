@@ -11,9 +11,12 @@ class NotImplementedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChatThemeData theme = TgTheme.of(context).themeOf();
-    return Text(
-      type,
-      style: theme.bubbleTextStyle.copyWith(color: Colors.redAccent),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        type,
+        style: theme.bubbleTextStyle.copyWith(color: Colors.redAccent),
+      ),
     );
   }
 }

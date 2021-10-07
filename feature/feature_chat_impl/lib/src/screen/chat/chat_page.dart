@@ -101,15 +101,18 @@ class _Messages extends StatelessWidget {
   Widget build(BuildContext context) {
     final TileFactory tileFactory = context.read();
     return Scrollbar(
-      child: ListView.builder(
+      child: ListView.separated(
         // todo extract to config
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         controller: scrollController,
         reverse: true,
         itemCount: models.length,
         itemBuilder: (BuildContext context, int index) {
           final ITileModel tileModel = models[index];
           return tileFactory.create(context, tileModel);
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(height: 8.0);
         },
       ),
     );

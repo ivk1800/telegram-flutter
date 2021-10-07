@@ -14,6 +14,8 @@ class MessageWallContextImpl implements IMessageWallContext {
 
   @override
   bool isDisplayAvatarFor(int messageId) {
+    return true;
+
     final int index = _chatMessagesInteractor.messages.indexWhere(
       (ITileModel element) =>
           element is BaseConversationMessageTileModel &&
