@@ -5,13 +5,19 @@ function sync() {
     cd $d
     pubspec="pubspec.yaml"
     if [ -f "$pubspec" ]; then
-      flutter packages get
+      if grep -q flutter: "$pubspec"; then
+        flutter packages get
+      else
+        dart pub get
+      fi
+    elif [ $1 == true ]; then
+      sync false
     fi
     cd ..
   done
 }
 
 cd ..
-sync
+sync false
 cd feature/
-sync
+sync true

@@ -1,3 +1,4 @@
+import 'package:chat_theme/chat_theme.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:demo/src/message_data.dart';
 import 'package:fake/fake.dart' as fake;
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:localization_impl/localization_impl.dart';
 import 'package:tdlib/td_api.dart' as td;
+import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
 import 'message_bundle.dart';
@@ -189,9 +191,10 @@ class _DemoMessagePageState extends State<DemoMessagePage> {
             _tileFactory.create(context, tileModel),
       );
 
-  chat_impl.ChatTheme _wrapToRequiredWidgets({required Widget child}) =>
-      chat_impl.ChatTheme(
-        data: chat_impl.ChatThemeData.light(context: context),
+  Widget _wrapToRequiredWidgets({required Widget child}) => TgTheme(
+        data: TgThemeData(themes: <Type, ITgThemeData>{
+          ChatThemeData: ChatThemeData.def(context: context),
+        }),
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) =>
               chat_impl.ChatContext(

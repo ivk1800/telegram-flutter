@@ -1,8 +1,10 @@
+import 'package:chat_theme/chat_theme.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
 import 'bloc/chat_view_model.dart';
@@ -36,7 +38,8 @@ class ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     final ChatViewModel viewModel = context.read();
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
+      backgroundColor:
+          TgTheme.of(context).themeOf<ChatThemeData>().backgroundColor,
       appBar: const _AppBar(),
       body: StreamListener<BodyState>(
         stream: viewModel.bodyStateStream,

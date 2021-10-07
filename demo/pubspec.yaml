@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  chat_theme:
+    path: ../feature/chat/chat_theme
   core_utils:
     path: ../core_utils
   coreui:
@@ -29,6 +31,8 @@ dependencies:
     path: ../localization_impl
   split_view:
     path: ../split_view
+  tg_theme:
+    path: ../tg_theme
   tile:
     path: ../tile
 

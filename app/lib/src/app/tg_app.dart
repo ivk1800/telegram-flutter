@@ -6,6 +6,8 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:split_view/split_view.dart';
 import 'package:td_client/td_client.dart';
 
+import 'tg_theme.dart';
+
 class TgApp extends StatefulWidget {
   const TgApp({Key? key, required this.client}) : super(key: key);
 
@@ -51,6 +53,9 @@ class TgAppState extends State<TgApp> with WidgetsBindingObserver {
     return TdImageLoader(
       client: widget.client,
       child: MaterialApp(
+        builder: (BuildContext context, Widget? child) {
+          return TgAppTheme(child: child!);
+        },
         debugShowCheckedModeBanner: false,
         navigatorKey: TgApp.navigatorKey,
         theme: ThemeData(

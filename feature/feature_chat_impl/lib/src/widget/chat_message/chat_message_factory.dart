@@ -1,13 +1,14 @@
+import 'package:chat_theme/chat_theme.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/widget/bubble/bubble.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:feature_chat_impl/src/widget/message/message_content.dart';
 import 'package:feature_chat_impl/src/widget/message/message_skeleton.dart';
-import 'package:feature_chat_impl/src/widget/theme/chat_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:tg_theme/tg_theme.dart';
 
 class ChatMessageFactory {
   @j.inject
@@ -206,7 +207,7 @@ class ChatMessageFactory {
     required bool isOutgoing,
     required Widget child,
   }) {
-    final ChatThemeData theme = ChatTheme.of(context);
+    final ChatThemeData theme = TgTheme.of(context).themeOf();
     return Bubble(
       radius: 10,
       child: Container(

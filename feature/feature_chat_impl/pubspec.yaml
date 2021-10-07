@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  chat_theme:
+    path: ../chat/chat_theme
   core_arch:
     path: ../../core_arch
   core_tdlib_api:
@@ -41,6 +43,8 @@ dependencies:
     path: ../../rich_text/rich_text_format
   rich_text_format_flutter:
     path: ../../rich_text/rich_text_format_flutter
+  tg_theme:
+    path: ../../tg_theme
   tile:
     path: ../../tile
 

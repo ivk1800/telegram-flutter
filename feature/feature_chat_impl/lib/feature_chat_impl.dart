@@ -21,7 +21,6 @@ export 'src/tile/model/tile_model.dart';
 export 'src/tile/widget/tile_widget.dart';
 export 'src/wall/message_wall_context.dart';
 export 'src/widget/chat_context.dart';
-export 'src/widget/theme/chat_theme.dart';
 
 class ChatFeatureApi implements IChatFeatureApi {
   ChatFeatureApi({
