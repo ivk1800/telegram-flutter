@@ -4,6 +4,8 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class FakeFileRepository implements IFileRepository {
+  const FakeFileRepository();
+
   @override
   Future<td.LocalFile> getLocalFile(int id) {
     final Completer<td.LocalFile> completer = Completer<td.LocalFile>();

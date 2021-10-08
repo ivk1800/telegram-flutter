@@ -7,6 +7,8 @@ class ChatTileModel {
     required this.isVerified,
     required this.isMuted,
     required this.isMentioned,
+    required this.isSecret,
+    required this.isRead,
     required this.lastMessageDate,
     required this.title,
     required this.firstSubtitle,
@@ -21,6 +23,8 @@ class ChatTileModel {
   final bool isVerified;
   final bool isMuted;
   final bool isMentioned;
+  final bool isSecret;
+  final bool? isRead;
   final String title;
   final String? firstSubtitle;
   final String? secondSubtitle;
@@ -36,6 +40,8 @@ extension ChatTileModelExtension on ChatTileModel {
     bool? isVerified,
     bool? isMentioned,
     bool? isMuted,
+    bool? isSecret,
+    bool? isRead,
     String? title,
     String? firstSubtitle,
     String? secondSubtitle,
@@ -44,6 +50,8 @@ extension ChatTileModelExtension on ChatTileModel {
         isPinned: isPinned ?? this.isPinned,
         id: id ?? this.id,
         isMuted: isMuted ?? this.isMuted,
+        isSecret: isSecret ?? this.isSecret,
+        isRead: isRead ?? this.isRead,
         isMentioned: isMentioned ?? this.isMentioned,
         isVerified: isVerified ?? this.isVerified,
         unreadMessagesCount: unreadMessagesCount ?? this.unreadMessagesCount,

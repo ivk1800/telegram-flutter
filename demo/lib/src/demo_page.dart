@@ -1,3 +1,4 @@
+import 'package:demo/src/chat_cell_showcase.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,17 @@ class _DemoPageState extends State<DemoPage> {
               ));
             },
             title: const Text('split view'),
+          ),
+          const Divider(),
+          ListTile(
+            onTap: () {
+              Navigator.of(context).push<dynamic>(
+                MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) => const ChatCellShowCase(),
+                ),
+              );
+            },
+            title: const Text('chat cell showCase'),
           ),
         ],
       ),

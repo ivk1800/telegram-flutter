@@ -27,11 +27,15 @@ class ChatTileModelMapper {
         await _messagePreviewResolver.resolveFromChatOrEmpty(chat);
 
     assert(chat.positions.length == 1);
+    final bool isSecret =
+        chat.type.getConstructor() == td.ChatTypeSecret.CONSTRUCTOR;
     return ChatTileModel(
       isMuted: chat.notificationSettings.muteFor > 0,
       isVerified: await getVerified(chat),
       unreadMessagesCount: chat.unreadCount,
       isPinned: chat.positions[0].isPinned,
+      isRead: null,
+      isSecret: isSecret,
       isMentioned: chat.unreadMentionCount > 0,
       lastMessageDate: _dateFormatter.formatChatLastMessageDateOrNull(
         _dateParser.parseUnixTimeStampToDateOrNull(chat.lastMessage?.date),

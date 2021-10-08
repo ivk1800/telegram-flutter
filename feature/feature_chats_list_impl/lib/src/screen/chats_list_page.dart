@@ -58,6 +58,7 @@ class ChatsListPageState extends State<ChatsListPage>
             child: ListView.separated(
               controller: scrollController,
               separatorBuilder: (BuildContext context, int index) {
+                // todo support dark theme
                 return Divider(indent: 72, height: 0, color: Colors.grey[400]);
               },
               itemCount: chats.length,
