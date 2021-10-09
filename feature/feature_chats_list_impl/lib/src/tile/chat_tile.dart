@@ -2,8 +2,8 @@ import 'package:coreui/coreui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:provider/provider.dart';
+import 'package:tile/tile.dart';
 
 import 'chat/unread_messages_count.dart';
 import 'chat_tile_model.dart';
@@ -14,8 +14,7 @@ abstract class ChatTileListener {
   void onTogglePinTap(int id);
 }
 
-class ChatTileFactory {
-  @j.inject
+class ChatTileFactory implements ITileFactoryDelegate<ChatTileModel> {
   ChatTileFactory({
     required AvatarWidgetFactory avatarWidgetFactory,
     required ChatTileListener listener,
@@ -28,6 +27,7 @@ class ChatTileFactory {
   // TODO: fix overflow for subtitle with emoji
   // TODO: support dark theme
   // TODO: extract text styles to theme
+  @override
   Widget create(BuildContext context, ChatTileModel chat) {
     return Provider<AvatarWidgetFactory>.value(
       value: _avatarWidgetFactory,

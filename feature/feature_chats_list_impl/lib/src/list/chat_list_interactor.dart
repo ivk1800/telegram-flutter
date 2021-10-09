@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_state.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:feature_chats_list_impl/src/util/loader.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -64,10 +65,10 @@ class ChatListInteractor {
 
   StreamSubscription<td.Update>? _chatUpdatesSubscription;
 
-  final BehaviorSubject<List<ChatTileModel>> _chatsSubject =
-      BehaviorSubject<List<ChatTileModel>>();
+  final BehaviorSubject<ChatsListState> _chatsSubject =
+      BehaviorSubject<ChatsListState>.seeded(const ChatsListState.loading());
 
-  Stream<List<ChatTileModel>> get chats => _chatsSubject;
+  Stream<ChatsListState> get chats => _chatsSubject;
 
   td.Chat getChat(int id) => _chatsHolder.chatsData[id]!.chat;
 
@@ -85,10 +86,12 @@ class ChatListInteractor {
   }
 
   void _dispatchChats() {
-    _chatsSubject.add(_chatsHolder.orderedChats
+    //todo need optimizing, new list created on each dispatch
+    final List<ChatTileModel> list = _chatsHolder.orderedChats
         .map((OrderedChat element) =>
             _chatsHolder.chatsData[element.chatId]!.model)
-        .toList());
+        .toList();
+    _chatsSubject.add(ChatsListState.data(list));
   }
 
   Future<void> _handleChatUpdate(td.Update event) async {

@@ -1,33 +1,27 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:coreui/coreui.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:feature_chats_list_impl/src/chats_list_screen_router.dart';
 import 'package:feature_chats_list_impl/src/list/chat_list.dart';
-import 'package:feature_chats_list_impl/src/screen/chats_list_page.dart';
+import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_tile_listener.dart';
+import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_view_model.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
-import 'package:flutter/widgets.dart';
-import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
-
-import 'chats_list_screen_component.jugger.dart';
+import 'package:tile/tile.dart';
 
 @j.Component(modules: <Type>[FoldersSetupModule])
-abstract class ChatsListScreenComponent
-    implements IWidgetStateComponent<ChatsListPage, ChatsListPageState> {
-  @override
-  void inject(ChatsListPageState screenState);
+abstract class ChatsListScreenComponent {
+  TileFactory getTileFactory();
+
+  ChatsListViewModel getChatsListViewModel();
 }
 
 @j.module
 abstract class FoldersSetupModule {
-  @j.provide
-  @j.singleton
-  static ChatTileListener provideChatTileListener(ChatsListPageState screen) =>
-      screen;
-
   @j.provide
   @j.singleton
   static ChatListConfig provideChatListConfig() =>
@@ -99,27 +93,43 @@ abstract class FoldersSetupModule {
     ChatsListFeatureDependencies dependencies,
   ) =>
       dependencies.messagePreviewResolver;
+
+  @j.provide
+  @j.singleton
+  static TileFactory provideTileFactory(
+          AvatarWidgetFactory avatarWidgetFactory, ChatTileListener listener) =>
+      TileFactory(
+        delegates: <Type, ITileFactoryDelegate<ITileModel>>{
+          ChatTileModel: ChatTileFactory(
+            listener: listener,
+            avatarWidgetFactory: avatarWidgetFactory,
+          ),
+        },
+      );
+
+  @j.provide
+  @j.singleton
+  static ChatTileListener provideChatTileListener(
+          ChatsListViewModel viewModel) =>
+      ChatsListTileListener(viewModel: viewModel);
+
+  @j.provide
+  @j.singleton
+  static ChatsListViewModel provideChatsListViewModel(
+    IChatsListScreenRouter router,
+    ChatListInteractor interactor,
+  ) =>
+      ChatsListViewModel(
+        router: router,
+        interactor: interactor,
+      );
 }
 
 @j.componentBuilder
 abstract class FoldersSetupComponentBuilder {
-  FoldersSetupComponentBuilder screenState(ChatsListPageState screen);
-
   FoldersSetupComponentBuilder dependencies(
     ChatsListFeatureDependencies dependencies,
   );
 
   ChatsListScreenComponent build();
-}
-
-extension FoldersSetupComponentExt on ChatsListPage {
-  Widget wrap(ChatsListFeatureDependencies dependencies) =>
-      ComponentHolder<ChatsListPage, ChatsListPageState>(
-        componentFactory: (ChatsListPageState state) =>
-            JuggerChatsListScreenComponentBuilder()
-                .dependencies(dependencies)
-                .screenState(state)
-                .build(),
-        child: this,
-      );
 }

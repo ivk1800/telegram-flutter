@@ -29,7 +29,7 @@ class MainPageState extends State<MainPage>
   late IGlobalSearchScreenFactory globalSearchWidgetFactory;
 
   @j.inject
-  late IChatsListWidgetFactory chatsListWidgetFactory;
+  late IChatsListScreenFactory chatsListWidgetFactory;
 
   @j.inject
   late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;

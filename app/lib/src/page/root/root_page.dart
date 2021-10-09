@@ -17,13 +17,16 @@ class RootPageState extends State<RootPage> {
 
   @j.inject
   late FeatureFactory featureFactory;
-  late Widget _list;
+
+  late Widget _body;
 
   @override
   void initState() {
     appComponent.injectRootPageState(this);
-    _list =
-        featureFactory.createChatsListFeatureApi().screenWidgetFactory.create();
+    _body = featureFactory
+        .createChatsListFeatureApi()
+        .chatsListScreenFactory
+        .create();
     super.initState();
   }
 
@@ -106,7 +109,7 @@ class RootPageState extends State<RootPage> {
           ],
         ),
       ),
-      body: _list,
+      body: _body,
     );
   }
 }

@@ -41,10 +41,9 @@ abstract class FoldersSetupModule {
 
   @j.provide
   @j.singleton
-  static IChatsListWidgetFactory provideChatsListWidgetFactory(
-    IChatsListFeatureApi api,
-  ) =>
-      api.screenWidgetFactory;
+  static IChatsListScreenFactory provideChatsListWidgetFactory(
+          IChatsListFeatureApi api) =>
+      api.chatsListScreenFactory;
 
   @j.provide
   @j.singleton

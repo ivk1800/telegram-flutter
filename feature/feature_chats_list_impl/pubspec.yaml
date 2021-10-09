@@ -33,15 +33,20 @@ dependencies:
       ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
   localization_api:
     path: ../../localization_api
-  provider: 6.0.0
+  provider_extensions:
+    path: ../../provider_extensions
   queue:
     path: ../../queue
+  shimmer: 2.0.0
   td_client:
     path: ../../td_client
+  tile:
+    path: ../../tile
   tuple: ^2.0.0
 
 dev_dependencies:
   build_runner: 2.1.1
+  freezed: 0.14.2
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git

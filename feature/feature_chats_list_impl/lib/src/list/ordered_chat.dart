@@ -1,5 +1,11 @@
+import 'package:flutter/foundation.dart';
+
+@immutable
 class OrderedChat implements Comparable<OrderedChat> {
-  OrderedChat({required this.chatId, required this.order});
+  const OrderedChat({
+    required this.chatId,
+    required this.order,
+  });
 
   final int order;
   final int chatId;

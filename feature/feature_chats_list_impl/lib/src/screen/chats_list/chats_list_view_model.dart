@@ -1,13 +1,16 @@
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_chats_list_impl/src/chats_list_screen_router.dart';
 import 'package:feature_chats_list_impl/src/list/chat_list.dart';
-import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:tdlib/td_api.dart' as td;
 
+import 'chats_list_state.dart';
+
 class ChatsListViewModel extends BaseViewModel {
-  @j.inject
-  ChatsListViewModel(this._router, this._interactor) {
+  ChatsListViewModel({
+    required IChatsListScreenRouter router,
+    required ChatListInteractor interactor,
+  })  : _router = router,
+        _interactor = interactor {
     _interactor.load();
   }
 
@@ -15,7 +18,7 @@ class ChatsListViewModel extends BaseViewModel {
 
   final ChatListInteractor _interactor;
 
-  Stream<List<ChatTileModel>> get chats => _interactor.chats;
+  Stream<ChatsListState> get chatsListState => _interactor.chats;
 
   void onChatTap(int id) {
     _router.toChat(id);

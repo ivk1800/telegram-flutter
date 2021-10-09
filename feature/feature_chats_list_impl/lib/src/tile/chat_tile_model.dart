@@ -1,4 +1,6 @@
-class ChatTileModel {
+import 'package:tile/tile.dart';
+
+class ChatTileModel implements ITileModel {
   ChatTileModel({
     this.photoId,
     required this.id,
