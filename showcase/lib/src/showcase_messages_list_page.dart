@@ -1,24 +1,25 @@
 import 'dart:async';
 
-import 'package:demo/src/message_bundle.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:showcase/src/message_bundle.dart';
 import 'package:tdlib/td_api.dart' as td;
 
-import 'demo_message_page.dart';
 import 'message_data.dart';
+import 'showcase_message_page.dart';
 
-class DemoMessageListPage extends StatefulWidget {
-  const DemoMessageListPage({
+class ShowcaseMessageListPage extends StatefulWidget {
+  const ShowcaseMessageListPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  _DemoMessageListPageState createState() => _DemoMessageListPageState();
+  _ShowcaseMessageListPageState createState() =>
+      _ShowcaseMessageListPageState();
 }
 
-class _DemoMessageListPageState extends State<DemoMessageListPage> {
+class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
   late fake.FakeMessagesProvider _fakeMessagesProvider;
   late List<MessageBundle> _messages;
 
@@ -45,7 +46,7 @@ class _DemoMessageListPageState extends State<DemoMessageListPage> {
               final Future<dynamic> push = Navigator.of(context)
                   .push<dynamic>(MaterialPageRoute<dynamic>(
                 builder: (BuildContext context) {
-                  return DemoMessagePage(
+                  return ShowcaseMessagePage(
                     bundle: bundle,
                   );
                 },

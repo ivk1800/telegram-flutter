@@ -12,10 +12,10 @@ dependencies:
   app:
     path: ../app
   cupertino_icons: ^1.0.2
-  demo:
-    path: ../demo
   flutter:
     sdk: flutter
+  showcase:
+    path: ../showcase
 
 dev_dependencies:
   tg_lint_rules:

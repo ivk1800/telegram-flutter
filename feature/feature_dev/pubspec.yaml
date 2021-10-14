@@ -10,8 +10,8 @@ dependencies:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
-  demo:
-    path: ../../demo
+  showcase:
+    path: ../../showcase
   flutter:
     sdk: flutter
   jext:

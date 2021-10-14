@@ -1,20 +1,20 @@
-import 'package:demo/src/chat_cell_showcase.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:showcase/src/chat_cell_showcase.dart';
 
-import 'demo_messages_list_page.dart';
-import 'demo_split_view_page.dart';
+import 'showcase_messages_list_page.dart';
+import 'showcase_split_view_page.dart';
 
-class DemoPage extends StatefulWidget {
-  const DemoPage({
+class ShowcasePage extends StatefulWidget {
+  const ShowcasePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  _DemoPageState createState() => _DemoPageState();
+  _ShowcasePageState createState() => _ShowcasePageState();
 }
 
-class _DemoPageState extends State<DemoPage> {
+class _ShowcasePageState extends State<ShowcasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,8 @@ class _DemoPageState extends State<DemoPage> {
           ListTile(
             onTap: () {
               Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) => const DemoMessageListPage(),
+                builder: (BuildContext context) =>
+                    const ShowcaseMessageListPage(),
               ));
             },
             title: const Text('messages'),
@@ -35,7 +36,8 @@ class _DemoPageState extends State<DemoPage> {
           ListTile(
             onTap: () {
               Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) => const DemoSplitViewPage(),
+                builder: (BuildContext context) =>
+                    const ShowcaseSplitViewPage(),
               ));
             },
             title: const Text('split view'),

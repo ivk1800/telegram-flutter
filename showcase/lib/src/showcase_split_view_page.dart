@@ -4,14 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:split_view/split_view.dart';
 
-class DemoSplitViewPage extends StatefulWidget {
-  const DemoSplitViewPage({Key? key}) : super(key: key);
+class ShowcaseSplitViewPage extends StatefulWidget {
+  const ShowcaseSplitViewPage({Key? key}) : super(key: key);
 
   @override
-  _DemoSplitViewPageState createState() => _DemoSplitViewPageState();
+  _ShowcaseSplitViewPageState createState() => _ShowcaseSplitViewPageState();
 }
 
-class _DemoSplitViewPageState extends State<DemoSplitViewPage> {
+class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
   static final GlobalKey<SplitViewState> _navigationKey =
       GlobalKey<SplitViewState>();
 

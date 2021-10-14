@@ -1,5 +1,5 @@
 import 'package:coreui/coreui.dart' as tg;
-import 'package:demo/demo.dart' as demo;
+import 'package:showcase/showcase.dart' as showcase;
 import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -79,7 +79,8 @@ class RootPageState extends State<RootPage> {
             onPressed: () {
               Navigator.of(context, rootNavigator: true)
                   .push<dynamic>(MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) => demo.createDemoRootPage(),
+                builder: (BuildContext context) =>
+                    const showcase.ShowcasePage(),
               ));
             },
             child: const Text('Demo'),

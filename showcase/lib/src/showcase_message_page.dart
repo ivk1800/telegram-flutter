@@ -1,6 +1,5 @@
 import 'package:chat_theme/chat_theme.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:demo/src/message_data.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:feature_chat_impl/feature_chat_impl.dart' as chat_impl;
 import 'package:feature_chat_impl/feature_chat_impl.dart';
@@ -10,14 +9,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:localization_impl/localization_impl.dart';
+import 'package:showcase/src/message_data.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
 import 'message_bundle.dart';
 
-class DemoMessagePage extends StatefulWidget {
-  const DemoMessagePage({
+class ShowcaseMessagePage extends StatefulWidget {
+  const ShowcaseMessagePage({
     Key? key,
     required this.bundle,
   }) : super(key: key);
@@ -25,10 +25,10 @@ class DemoMessagePage extends StatefulWidget {
   final MessageBundle bundle;
 
   @override
-  _DemoMessagePageState createState() => _DemoMessagePageState();
+  _ShowcaseMessagePageState createState() => _ShowcaseMessagePageState();
 }
 
-class _DemoMessagePageState extends State<DemoMessagePage> {
+class _ShowcaseMessagePageState extends State<ShowcaseMessagePage> {
   late TileFactory _tileFactory;
 
   late chat_impl.MessageTileMapper _messageTileMapper;
