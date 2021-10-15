@@ -1,12 +1,12 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
-import 'package:feature_main_screen_impl/src/screen/menu_item.dart';
 import 'package:flutter/material.dart';
-import 'package:jext/jext.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:provider/provider.dart';
+
 import 'main_view_model.dart';
+import 'menu_item.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({
@@ -17,28 +17,13 @@ class MainPage extends StatefulWidget {
   MainPageState createState() => MainPageState();
 }
 
-class MainPageState extends State<MainPage>
-    with TickerProviderStateMixin, StateInjectorMixin<MainPage, MainPageState> {
-  @j.inject
-  late MainViewModel viewModel;
-
-  @j.inject
-  late ILocalizationManager localizationManager;
-
-  @j.inject
-  late IGlobalSearchScreenFactory globalSearchWidgetFactory;
-
-  @j.inject
-  late IChatsListScreenFactory chatsListWidgetFactory;
-
-  @j.inject
-  late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
-
+class MainPageState extends State<MainPage> with TickerProviderStateMixin {
   _ScreenState _screenState = _ScreenState.chats;
   final GlobalSearchScreenController _globalSearchScreenController =
       GlobalSearchScreenController();
 
   late Widget _chatsListWidget;
+  late Widget _globalSearchWidget;
 
   final GlobalObjectKey<tg.TgSwitchedAppBarState> appbarKey =
       const GlobalObjectKey<tg.TgSwitchedAppBarState>('MainAppbar');
@@ -48,7 +33,11 @@ class MainPageState extends State<MainPage>
   @override
   void initState() {
     super.initState();
-    _chatsListWidget = chatsListWidgetFactory.create();
+    _chatsListWidget = context.read<IChatsListScreenFactory>().create();
+    _globalSearchWidget = context.read<IGlobalSearchScreenFactory>().create(
+          context,
+          _globalSearchScreenController,
+        );
     _searchQueryController.addListener(_onSearchEvent);
     _animationController = AnimationController(
       vsync: this,
@@ -190,7 +179,7 @@ class MainPageState extends State<MainPage>
                   }
                 default:
                   {
-                    return <Widget>[];
+                    return const <Widget>[];
                   }
               }
             } else {
@@ -236,20 +225,11 @@ class MainPageState extends State<MainPage>
                   }
                 default:
                   {
-                    return Container();
+                    return const SizedBox.shrink();
                   }
               }
             } else {
-              return Align(
-                child: connectionStateWidgetFactory.create(
-                  context,
-                  (BuildContext context) {
-                    // TODO extract text to stings
-                    return const Text('Telegram');
-                  },
-                ),
-                alignment: Alignment.centerLeft,
-              );
+              return const _DefaultTitle();
             }
           },
           leadingAnimatedIconProvider: (bool isActive) {
@@ -259,19 +239,16 @@ class MainPageState extends State<MainPage>
             return AnimatedIcons.menu_arrow;
           },
         ),
-        drawer: _buildDrawer(),
+        drawer: const _MainDrawer(),
         body: Stack(
           children: <Widget>[
             _chatsListWidget,
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               child: _searchActive
-                  ? Container(
+                  ? ColoredBox(
                       color: Theme.of(context).scaffoldBackgroundColor,
-                      child: globalSearchWidgetFactory.create(
-                        context,
-                        _globalSearchScreenController,
-                      ),
+                      child: _globalSearchWidget,
                     )
                   : null,
             ),
@@ -295,11 +272,40 @@ class MainPageState extends State<MainPage>
       }
     });
   }
+}
 
-  Widget _buildDrawer() {
+class _DefaultTitle extends StatelessWidget {
+  const _DefaultTitle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      child: context.read<tg.ConnectionStateWidgetFactory>().create(
+        context,
+        (BuildContext context) {
+          // TODO extract text to stings
+          return const Text('Telegram');
+        },
+      ),
+      alignment: Alignment.centerLeft,
+    );
+  }
+}
+
+class _MainDrawer extends StatelessWidget {
+  const _MainDrawer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ILocalizationManager localizationManager = context.read();
+    final MainViewModel viewModel = context.read();
+
     return Drawer(
       child: ListView(
-        // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
@@ -371,7 +377,7 @@ class MainPageState extends State<MainPage>
               Navigator.of(context).pop();
             },
             leading: const Icon(Icons.person_add_outlined),
-            title: const Text('Invite Firends'),
+            title: const Text('Invite Friends'),
           ),
           ListTile(
             onTap: () {

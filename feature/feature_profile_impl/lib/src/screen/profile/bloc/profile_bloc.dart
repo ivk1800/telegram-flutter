@@ -7,6 +7,7 @@ import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart'
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
+
 import 'profile_event.dart';
 import 'profile_state.dart';
 import 'profile_state_ext.dart';

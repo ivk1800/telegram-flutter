@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  core_arch:
+    path: ../../core_arch
   core_tdlib_api:
     path: ../../core_tdlib_api
   coreui:
@@ -18,11 +20,6 @@ dependencies:
     path: ../feature_main_screen_api
   flutter:
     sdk: flutter
-  jext:
-     git:
-       url: git@github.com:ivk1800/jugger.dart.git
-       path: jext
-       ref: fc73e9fae90539ba0c4b03a531802ceb4547bcb6
   jugger:
      git:
        url: git@github.com:ivk1800/jugger.dart.git
@@ -30,6 +27,9 @@ dependencies:
        ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
   localization_api:
     path: ../../localization_api
+  provider: ^6.0.0
+  provider_extensions:
+    path: ../../provider_extensions
   td_client:
     path: ../../td_client
 

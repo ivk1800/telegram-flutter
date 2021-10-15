@@ -63,7 +63,7 @@ class SplitNavigationRouter implements INavigationRouter {
         ),
       ))
       ..setLeftRootPage(
-        _featureFactory.createMainScreenFeature().screenWidgetFactory.create(),
+        _featureFactory.createMainScreenFeature().mainScreenFactory.create(),
       );
   }
 

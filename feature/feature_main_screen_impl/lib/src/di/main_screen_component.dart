@@ -1,24 +1,45 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
-import 'package:feature_main_screen_impl/src/screen/main_page.dart';
-import 'package:flutter/widgets.dart';
-import 'package:jext/jext.dart';
+import 'package:feature_main_screen_impl/src/screen/main/main_view_model.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
-import 'main_screen_component.jugger.dart';
+@j.Component(modules: <Type>[MainScreenModule])
+abstract class MainScreenComponent {
+  MainViewModel getMainViewModel();
 
-@j.Component(modules: <Type>[FoldersSetupModule])
-abstract class MainScreenComponent
-    implements IWidgetStateComponent<MainPage, MainPageState> {
-  @override
-  void inject(MainPageState screenState);
+  ILocalizationManager getLocalizationManager();
+
+  IGlobalSearchScreenFactory getGlobalSearchScreenFactory();
+
+  IChatsListScreenFactory getChatsListScreenFactory();
+
+  tg.ConnectionStateWidgetFactory getConnectionStateWidgetFactory();
 }
 
 @j.module
-abstract class FoldersSetupModule {
+abstract class MainScreenModule {
+  @j.provide
+  @j.singleton
+  static MainViewModel provideMainViewModel(
+    MainScreenFeatureDependencies dependencies,
+  ) =>
+      MainViewModel(
+        router: dependencies.router,
+      );
+
+  @j.provide
+  @j.singleton
+  static tg.ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
+    MainScreenFeatureDependencies dependencies,
+  ) =>
+      tg.ConnectionStateWidgetFactory(
+        connectionStateProvider: dependencies.connectionStateProvider,
+      );
+
   @j.provide
   @j.singleton
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
@@ -47,7 +68,7 @@ abstract class FoldersSetupModule {
 
   @j.provide
   @j.singleton
-  static IConnectionStateProvider provideconnectionStateProvider(
+  static IConnectionStateProvider provideConnectionStateProvider(
     MainScreenFeatureDependencies dependencies,
   ) =>
       dependencies.connectionStateProvider;
@@ -69,23 +90,9 @@ abstract class FoldersSetupModule {
 
 @j.componentBuilder
 abstract class FoldersSetupComponentBuilder {
-  FoldersSetupComponentBuilder screenState(MainPageState screen);
-
   FoldersSetupComponentBuilder dependencies(
     MainScreenFeatureDependencies dependencies,
   );
 
   MainScreenComponent build();
-}
-
-extension FoldersSetupComponentExt on MainPage {
-  Widget wrap(MainScreenFeatureDependencies dependencies) =>
-      ComponentHolder<MainPage, MainPageState>(
-        componentFactory: (MainPageState state) =>
-            JuggerMainScreenComponentBuilder()
-                .dependencies(dependencies)
-                .screenState(state)
-                .build(),
-        child: this,
-      );
 }

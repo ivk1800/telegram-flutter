@@ -1,10 +1,12 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
-import 'package:feature_main_screen_impl/src/screen/menu_item.dart';
-import 'package:jugger/jugger.dart' as j;
 
-class MainViewModel implements j.IDisposable {
-  @j.inject
-  MainViewModel(IMainScreenRouter router) : _router = router;
+import 'menu_item.dart';
+
+class MainViewModel extends BaseViewModel {
+  MainViewModel({
+    required IMainScreenRouter router,
+  }) : _router = router;
 
   final IMainScreenRouter _router;
 
@@ -18,7 +20,4 @@ class MainViewModel implements j.IDisposable {
         break;
     }
   }
-
-  @override
-  void dispose() {}
 }
