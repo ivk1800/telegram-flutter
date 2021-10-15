@@ -13,13 +13,45 @@ class ReplyInfoFactory {
       return null;
     }
 
-    return _buildDecoration(context, _buildBody(context, replyInfo));
+    return _Decoration(child: _Body(replyInfo: replyInfo));
+  }
+}
+
+class _Painter extends CustomPainter {
+  _Painter({required ThemeData theme})
+      : _paint = Paint()
+          ..color = theme.primaryColor
+          ..strokeWidth = 2;
+
+  final Paint _paint;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawLine(
+      const Offset(horOffsetX, 0),
+      Offset(horOffsetX, size.height),
+      _paint,
+    );
   }
 
-  Widget _buildDecoration(
-    BuildContext context,
-    Widget child,
-  ) {
+  @override
+  bool shouldRepaint(_Painter oldDelegate) {
+    return _paint != oldDelegate._paint;
+  }
+
+  static const double horOffsetX = 8;
+}
+
+class _Decoration extends StatelessWidget {
+  const _Decoration({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
     final ChatContextData chatContextData = ChatContext.of(context);
     return Padding(
       padding: EdgeInsets.only(
@@ -40,8 +72,18 @@ class ReplyInfoFactory {
       ),
     );
   }
+}
 
-  Widget _buildBody(BuildContext context, ReplyInfo replyInfo) {
+class _Body extends StatelessWidget {
+  const _Body({
+    Key? key,
+    required this.replyInfo,
+  }) : super(key: key);
+
+  final ReplyInfo replyInfo;
+
+  @override
+  Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -69,29 +111,4 @@ class ReplyInfoFactory {
       ],
     );
   }
-}
-
-class _Painter extends CustomPainter {
-  _Painter({required ThemeData theme})
-      : _paint = Paint()
-          ..color = theme.primaryColor
-          ..strokeWidth = 2;
-
-  final Paint _paint;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawLine(
-      const Offset(horOffsetX, 0),
-      Offset(horOffsetX, size.height),
-      _paint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(_Painter oldDelegate) {
-    return _paint != oldDelegate._paint;
-  }
-
-  static const double horOffsetX = 8;
 }

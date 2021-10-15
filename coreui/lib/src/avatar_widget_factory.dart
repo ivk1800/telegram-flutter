@@ -13,15 +13,16 @@ class AvatarWidgetFactory {
 
   final IFileRepository _fileRepository;
 
+  // todo move to core ui module
   /// https://github.com/DrKLO/Telegram/blob/ca13bc972dda0498b8ffb40276423a49325cd26d/TMessagesProj/src/main/java/org/telegram/ui/ActionBar/Theme.java#L119
-  List<Color> colors = <Color>[
-    const Color(0xffe56555),
-    const Color(0xfff28c48),
-    const Color(0xff8e85ee),
-    const Color(0xff76c84d),
-    const Color(0xff5fbed5),
-    const Color(0xff549cdd),
-    const Color(0xfff2749a),
+  static const List<Color> colors = <Color>[
+    Color(0xffe56555),
+    Color(0xfff28c48),
+    Color(0xff8e85ee),
+    Color(0xff76c84d),
+    Color(0xff5fbed5),
+    Color(0xff549cdd),
+    Color(0xfff2749a),
   ];
 
   // todo rename chatId to some another name
@@ -32,7 +33,7 @@ class AvatarWidgetFactory {
     required int chatId,
   }) {
     if (imageId == null) {
-      return _createDefaultAvatar(radius: radius, chatId: chatId);
+      return _DefaultAvatar(radius: radius, chatId: chatId);
     }
 
     return FutureBuilder<td.LocalFile>(
@@ -41,7 +42,7 @@ class AvatarWidgetFactory {
         final String? path = _fileRepository.getPathOrNull(imageId);
 
         if (path == null) {
-          return _createDefaultAvatar(radius: radius, chatId: chatId);
+          return _DefaultAvatar(radius: radius, chatId: chatId);
         }
 
         return CircleAvatar(
@@ -51,10 +52,23 @@ class AvatarWidgetFactory {
       },
     );
   }
+}
 
-  Widget _createDefaultAvatar({required double radius, required int chatId}) {
+class _DefaultAvatar extends StatelessWidget {
+  const _DefaultAvatar({
+    Key? key,
+    required this.radius,
+    required this.chatId,
+  }) : super(key: key);
+
+  final double radius;
+  final int chatId;
+
+  @override
+  Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundColor: colors[(chatId % colors.length).abs()],
+      backgroundColor: AvatarWidgetFactory
+          .colors[(chatId % AvatarWidgetFactory.colors.length).abs()],
       maxRadius: radius,
     );
   }

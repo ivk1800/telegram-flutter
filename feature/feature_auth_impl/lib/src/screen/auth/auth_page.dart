@@ -82,9 +82,33 @@ class _AuthPageState extends State<AuthPage> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (BuildContext context, AuthState state) {},
       builder: (BuildContext context, AuthState state) => Scaffold(
-        appBar: _buildAppBar(state),
-        floatingActionButton: _buildFloatingActionButton(state, context),
-        body: _buildBody(state, context),
+        appBar: _AppBar(state: state),
+        floatingActionButton: state is PhoneNumberState
+            ? _SubmitPhone(
+                countryCodeController: _countryCodeController,
+                phoneMaskFormatter: _phoneMaskFormatter,
+              )
+            : null,
+        body: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: state is PhoneNumberState
+              ? _PhoneNumberStateWidget(
+                  countryCodeController: _countryCodeController,
+                  phoneMaskFormatter: _phoneMaskFormatter,
+                  phoneNumberController: _phoneNumberController,
+                  phoneNumberFocusNode: _phoneNumberFocusNode,
+                  state: state,
+                )
+              : CodeStateWidget(
+                  state: state as CodeState,
+                  code1FocusNode: _code1FocusNode,
+                  codeCell1Controller: _codeCell1Controller,
+                  codeCell2Controller: _codeCell2Controller,
+                  codeCell3Controller: _codeCell3Controller,
+                  codeCell4Controller: _codeCell4Controller,
+                  codeCell5Controller: _codeCell5Controller,
+                ),
+        ),
       ).withBlockInteraction(block: state.blockInteraction),
     );
   }
@@ -117,63 +141,6 @@ class _AuthPageState extends State<AuthPage> {
           break;
         }
     }
-  }
-
-  PreferredSizeWidget _buildAppBar(AuthState state) {
-    return AppBar(
-      leading: state is PhoneNumberState
-          ? null
-          : IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-              ),
-              onPressed: () {
-                context.read<AuthBloc>().add(const StopVerificationTap());
-              },
-            ),
-      automaticallyImplyLeading: false,
-      title: Text(state.title),
-    );
-  }
-
-  Widget _buildFloatingActionButton(AuthState state, BuildContext context) {
-    return Visibility(
-      visible: state is PhoneNumberState,
-      child: FloatingActionButton(
-        child: const Icon(Icons.arrow_forward_outlined),
-        onPressed: () {
-          context.read<AuthBloc>().add(
-                SubmitPhoneTap(
-                  number:
-                      '${_countryCodeController.text}${_phoneMaskFormatter.getUnmaskedText()}',
-                ),
-              );
-        },
-      ),
-    );
-  }
-
-  Widget _buildBody(AuthState state, BuildContext context) {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 200),
-      child: state is PhoneNumberState
-          ? _PhoneNumberStateWidget(
-              countryCodeController: _countryCodeController,
-              phoneMaskFormatter: _phoneMaskFormatter,
-              phoneNumberController: _phoneNumberController,
-              phoneNumberFocusNode: _phoneNumberFocusNode,
-              state: state,
-            )
-          : CodeStateWidget(
-              state: state as CodeState,
-              code1FocusNode: _code1FocusNode,
-              codeCell1Controller: _codeCell1Controller,
-              codeCell2Controller: _codeCell2Controller,
-              codeCell3Controller: _codeCell3Controller,
-              codeCell4Controller: _codeCell4Controller,
-              codeCell5Controller: _codeCell5Controller,
-            ),
-    );
   }
 }
 
@@ -394,4 +361,60 @@ class CodeStateWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+class _SubmitPhone extends StatelessWidget {
+  const _SubmitPhone({
+    Key? key,
+    required this.countryCodeController,
+    required this.phoneMaskFormatter,
+  }) : super(key: key);
+
+  final TextEditingController countryCodeController;
+  final MaskTextInputFormatter phoneMaskFormatter;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      child: const Icon(Icons.arrow_forward_outlined),
+      onPressed: () {
+        context.read<AuthBloc>().add(
+              SubmitPhoneTap(
+                number:
+                    '${countryCodeController.text}${phoneMaskFormatter.getUnmaskedText()}',
+              ),
+            );
+      },
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _AppBar({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final AuthState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: state is PhoneNumberState
+          ? null
+          : IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+              ),
+              onPressed: () {
+                context.read<AuthBloc>().add(const StopVerificationTap());
+              },
+            ),
+      automaticallyImplyLeading: false,
+      title: Text(state.title),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

@@ -67,8 +67,14 @@ class _ImageWidgetState extends State<_ImageWidget> {
         return Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            if (minithumbnail != null) _buildMinithumbnail(minithumbnail),
-            _buildImage(path),
+            if (minithumbnail != null)
+              _Minithumbnail(
+                minithumbnail: minithumbnail,
+              ),
+            _Image(
+              path: path,
+              layoutBuilder: widget.layoutBuilder,
+            ),
           ],
         );
       },
@@ -97,8 +103,43 @@ class _ImageWidgetState extends State<_ImageWidget> {
       _stream = null;
     }
   }
+}
 
-  Widget _buildMinithumbnail(Minithumbnail minithumbnail) {
+class _FinalImage extends StatelessWidget {
+  const _FinalImage({
+    Key? key,
+    required this.path,
+    required this.layoutBuilder,
+  }) : super(key: key);
+
+  final String path;
+  final ImageLayoutBuilder? layoutBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final Image image = Image.file(
+      File(path),
+      fit: BoxFit.fill,
+    );
+
+    final ImageLayoutBuilder? lb = layoutBuilder;
+    if (lb != null) {
+      return lb.call(image);
+    }
+    return image;
+  }
+}
+
+class _Minithumbnail extends StatelessWidget {
+  const _Minithumbnail({
+    Key? key,
+    required this.minithumbnail,
+  }) : super(key: key);
+
+  final Minithumbnail minithumbnail;
+
+  @override
+  Widget build(BuildContext context) {
     return ClipRect(
       child: ImageFiltered(
         imageFilter: ImageFilter.blur(
@@ -112,8 +153,21 @@ class _ImageWidgetState extends State<_ImageWidget> {
       ),
     );
   }
+}
 
-  Widget _buildImage(String? path) {
+class _Image extends StatelessWidget {
+  const _Image({
+    Key? key,
+    required this.path,
+    required this.layoutBuilder,
+  }) : super(key: key);
+
+  final String? path;
+  final ImageLayoutBuilder? layoutBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final String? p = path;
     return AnimatedSwitcher(
       layoutBuilder: (Widget? currentChild, List<Widget> previousChildren) {
         return Stack(
@@ -125,19 +179,12 @@ class _ImageWidgetState extends State<_ImageWidget> {
         );
       },
       duration: const Duration(milliseconds: 300),
-      child: path == null ? null : _build(path),
+      child: p == null
+          ? null
+          : _FinalImage(
+              path: p,
+              layoutBuilder: layoutBuilder,
+            ),
     );
-  }
-
-  Widget _build(String path) {
-    final Image image = Image.file(
-      File(path),
-      fit: BoxFit.fill,
-    );
-
-    if (widget.layoutBuilder != null) {
-      return widget.layoutBuilder!.call(image);
-    }
-    return image;
   }
 }
