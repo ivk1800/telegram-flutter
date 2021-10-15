@@ -10,8 +10,6 @@ dependencies:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
-  showcase:
-    path: ../../showcase
   flutter:
     sdk: flutter
   jext:
@@ -25,6 +23,8 @@ dependencies:
       path: jugger
       ref: 02cb9197b758cd89457d71c2b4c1daab4d92477c
   rxdart: ^0.26.0
+  showcase:
+    path: ../../showcase
   td_client:
     path: ../../td_client
 

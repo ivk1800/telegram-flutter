@@ -40,7 +40,7 @@ class ChatMessagesInteractor {
   StreamSubscription<_Result>? _subscription;
 
   Future<void> init(int chatId) async {
-    final td.Chat chat = await _chatRepository.getChat(chatId);
+    // final td.Chat chat = await _chatRepository.getChat(chatId);
 
     // if (chat.lastMessage != null) {
     load(0);

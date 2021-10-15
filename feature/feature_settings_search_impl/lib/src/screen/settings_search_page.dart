@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 import 'package:tile/tile.dart';
 
@@ -12,7 +11,6 @@ class SettingsSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager = Provider.of(context);
     final TileFactory tileFactory = Provider.of(context);
     return BlocBuilder<SearchSettingsBloc, SearchSettingsState>(
       builder: (BuildContext context, SearchSettingsState state) {

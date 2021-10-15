@@ -45,29 +45,30 @@ class GlobalSearchInteractor {
     );
 
     Rx.combineLatest6<PageState, PageState, PageState, PageState, PageState,
-            PageState, GlobalSearchState>(
-        _cache[GlobalSearchResultCategory.chats]!.result.map(_mapToPageState),
-        _cache[GlobalSearchResultCategory.media]!.result.map(_mapToPageState),
-        _cache[GlobalSearchResultCategory.links]!.result.map(_mapToPageState),
-        _cache[GlobalSearchResultCategory.files]!.result.map(_mapToPageState),
-        _cache[GlobalSearchResultCategory.music]!.result.map(_mapToPageState),
-        _cache[GlobalSearchResultCategory.voice]!.result.map(_mapToPageState),
-        (
-          PageState chats,
-          PageState media,
-          PageState links,
-          PageState files,
-          PageState music,
-          PageState voice,
-        ) =>
-            GlobalSearchState(
-              chatsPageState: chats,
-              filesPageState: files,
-              linksPageState: links,
-              mediaPageState: media,
-              musicPageState: music,
-              voicePageState: voice,
-            )).listen(_stateSubject.add);
+        PageState, GlobalSearchState>(
+      _cache[GlobalSearchResultCategory.chats]!.result.map(_mapToPageState),
+      _cache[GlobalSearchResultCategory.media]!.result.map(_mapToPageState),
+      _cache[GlobalSearchResultCategory.links]!.result.map(_mapToPageState),
+      _cache[GlobalSearchResultCategory.files]!.result.map(_mapToPageState),
+      _cache[GlobalSearchResultCategory.music]!.result.map(_mapToPageState),
+      _cache[GlobalSearchResultCategory.voice]!.result.map(_mapToPageState),
+      (
+        PageState chats,
+        PageState media,
+        PageState links,
+        PageState files,
+        PageState music,
+        PageState voice,
+      ) =>
+          GlobalSearchState(
+        chatsPageState: chats,
+        filesPageState: files,
+        linksPageState: links,
+        mediaPageState: media,
+        musicPageState: music,
+        voicePageState: voice,
+      ),
+    ).listen(_stateSubject.add);
   }
 
   final SearchInteractorFactory _searchInteractorFactory;
@@ -138,7 +139,8 @@ class GlobalSearchInteractor {
   ISearchInteractor<List<ITileModel>> _createChatsSearchInteractor() =>
       _searchInteractorFactory.create<List<td.Chat>>(
         resultMapper: (List<td.Chat> result) => Future.wait(
-            result.map(_resultTileMapper.mapToChatTileModel).toList()),
+          result.map(_resultTileMapper.mapToChatTileModel).toList(),
+        ),
         resultFetcher: (String query) {
           return _chatRepository.findChats(query: query);
         },

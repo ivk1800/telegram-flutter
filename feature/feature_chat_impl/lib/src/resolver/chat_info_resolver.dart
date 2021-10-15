@@ -41,12 +41,13 @@ class ChatInfoResolver {
     }
 
     return ChatInfo(
-        isGroup: supergroup != null || basicGroup != null,
-        isMember: (supergroup?.status.isMember ?? false) ||
-            (basicGroup?.status.isMember ?? false),
-        isChannel: supergroup?.isChannel ?? true,
-        isCreator: (supergroup?.status.isCreator ?? false) ||
-            (basicGroup?.status.isCreator ?? false));
+      isGroup: supergroup != null || basicGroup != null,
+      isMember: (supergroup?.status.isMember ?? false) ||
+          (basicGroup?.status.isMember ?? false),
+      isChannel: supergroup?.isChannel ?? true,
+      isCreator: (supergroup?.status.isCreator ?? false) ||
+          (basicGroup?.status.isCreator ?? false),
+    );
   }
 }
 

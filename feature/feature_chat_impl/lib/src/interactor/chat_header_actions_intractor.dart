@@ -28,7 +28,7 @@ class ChatHeaderActionsInteractor {
             HeaderActionData(
               action: HeaderAction.leave,
               label: _localizationManager.getString('LeaveMegaMenu'),
-            )
+            ),
       ];
     });
   }

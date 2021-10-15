@@ -33,8 +33,11 @@ class _GlobalSearchPageState extends State<GlobalSearchPage>
     super.initState();
     tabController = TabController(vsync: this, length: 6);
     tabController.addListener(() {
-      _bloc.add(CurrentPageChanged(
-          category: GlobalSearchResultCategory.values[tabController.index]));
+      _bloc.add(
+        CurrentPageChanged(
+          category: GlobalSearchResultCategory.values[tabController.index],
+        ),
+      );
     });
   }
 
@@ -93,7 +96,7 @@ class _GlobalSearchPageState extends State<GlobalSearchPage>
                     _SearchPage(pageState: state.voicePageState),
                   ],
                 ),
-              )
+              ),
             ],
           );
         },

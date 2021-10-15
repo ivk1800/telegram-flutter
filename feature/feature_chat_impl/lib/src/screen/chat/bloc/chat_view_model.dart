@@ -42,13 +42,14 @@ class ChatViewModel extends BaseViewModel {
 
   Stream<HeaderState> get headerStateStream =>
       Rx.combineLatest2<ChatHeaderInfo, List<HeaderActionData>, HeaderState>(
-          _headerInfoInteractor.infoStream,
-          _headerActionsInteractor.actionsStream,
-          (ChatHeaderInfo headerInfo, List<HeaderActionData> headerActions) =>
-              HeaderState(
-                info: headerInfo,
-                actions: headerActions,
-              ));
+        _headerInfoInteractor.infoStream,
+        _headerActionsInteractor.actionsStream,
+        (ChatHeaderInfo headerInfo, List<HeaderActionData> headerActions) =>
+            HeaderState(
+          info: headerInfo,
+          actions: headerActions,
+        ),
+      );
 
   Stream<BodyState> get bodyStateStream => _messagesInteractor.messagesStream
       .map<BodyState>(
@@ -70,7 +71,9 @@ class ChatViewModel extends BaseViewModel {
         _router.toDialog(
           body: TextBody(
             text: _localizationManager.getStringFormatted(
-                'MegaLeaveAlertWithName', <dynamic>['name']),
+              'MegaLeaveAlertWithName',
+              <dynamic>['name'],
+            ),
           ),
           title: _getString('LeaveMegaMenu'),
           actions: <Action>[

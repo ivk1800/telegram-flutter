@@ -26,7 +26,7 @@ class FakeProvider {
   }
 
   IFileRepository getFileRepository() {
-    return fake.FakeFileRepository();
+    return const fake.FakeFileRepository();
   }
 
   IConnectionStateProvider getConnectionStateProvider() {

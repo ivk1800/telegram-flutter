@@ -1,8 +1,8 @@
 import 'package:coreui/coreui.dart' as tg;
-import 'package:showcase/showcase.dart' as showcase;
 import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:showcase/showcase.dart' as showcase;
 import 'package:tdlib/td_api.dart' as td;
 
 class RootPage extends StatefulWidget {

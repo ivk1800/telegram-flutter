@@ -1,6 +1,4 @@
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
-import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
-import 'package:tile/tile.dart';
 
 import 'message_wall_context.dart';
 
@@ -15,7 +13,7 @@ class MessageWallContextImpl implements IMessageWallContext {
   @override
   bool isDisplayAvatarFor(int messageId) {
     return true;
-
+    /*
     final int index = _chatMessagesInteractor.messages.indexWhere(
       (ITileModel element) =>
           element is BaseConversationMessageTileModel &&
@@ -41,6 +39,7 @@ class MessageWallContextImpl implements IMessageWallContext {
     }
 
     return false;
+ */
   }
 
   @override

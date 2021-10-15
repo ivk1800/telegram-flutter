@@ -1,7 +1,6 @@
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_chats_list_impl/src/chats_list_screen_router.dart';
 import 'package:feature_chats_list_impl/src/list/chat_list.dart';
-import 'package:tdlib/td_api.dart' as td;
 
 import 'chats_list_state.dart';
 
@@ -25,7 +24,7 @@ class ChatsListViewModel extends BaseViewModel {
   }
 
   void onChatPinToggleTap(int id) {
-    final td.Chat chat = _interactor.getChat(id);
+    // final td.Chat chat = _interactor.getChat(id);
 
     // appComponent.getTdClient().send<td.Ok>(td.ToggleChatIsPinned(
     //     chatList: const td.ChatListMain(),

@@ -69,7 +69,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             ),
           ),
         );
-        print('NotificationToggleTap');
         return;
       case MessagesTap:
         _router.toSharedMedia((event as MessagesTap).type);

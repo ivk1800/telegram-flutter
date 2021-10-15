@@ -18,7 +18,8 @@ abstract class GlobalSearchScreenModule {
   @j.singleton
   @j.provide
   static GlobalSearchBloc provideGlobalSearchBloc(
-          GlobalSearchFeatureDependencies dependencies) =>
+    GlobalSearchFeatureDependencies dependencies,
+  ) =>
       GlobalSearchBloc(
         router: dependencies.router,
         searchInteractor: GlobalSearchInteractor(
@@ -34,13 +35,15 @@ abstract class GlobalSearchScreenModule {
   @j.singleton
   @j.provide
   static ILocalizationManager provideLocalizationManager(
-          GlobalSearchFeatureDependencies dependencies) =>
+    GlobalSearchFeatureDependencies dependencies,
+  ) =>
       dependencies.localizationManager;
 
   @j.singleton
   @j.provide
   static AvatarWidgetFactory provideAvatarWidgetFactory(
-          GlobalSearchFeatureDependencies dependencies) =>
+    GlobalSearchFeatureDependencies dependencies,
+  ) =>
       AvatarWidgetFactory(
         fileRepository: dependencies.fileRepository,
       );

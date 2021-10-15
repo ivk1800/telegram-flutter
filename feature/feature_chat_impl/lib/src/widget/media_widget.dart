@@ -19,11 +19,6 @@ class MediaWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final ChatContextData chatContext = ChatContext.of(context);
 
-    double extraWidth = 0;
-
-    if (chatContext.width < chatContext.maxWidth) {
-      extraWidth = chatContext.maxWidth - chatContext.width;
-    }
     final Size? mediaConstraint = chatContext.mediaConstraints[type];
     return Media(
       child: ConstrainedBox(

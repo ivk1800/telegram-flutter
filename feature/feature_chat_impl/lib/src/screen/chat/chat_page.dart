@@ -90,9 +90,11 @@ class _ChatContextWrapper extends StatelessWidget {
 }
 
 class _Messages extends StatelessWidget {
-  const _Messages(
-      {Key? key, required this.scrollController, required this.models})
-      : super(key: key);
+  const _Messages({
+    Key? key,
+    required this.scrollController,
+    required this.models,
+  }) : super(key: key);
 
   final ScrollController scrollController;
   final List<ITileModel> models;
@@ -139,7 +141,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
             _AppBarPopupMenu(
               actions: data.actions,
               onSelected: viewModel.onHeaderActionTap,
-            )
+            ),
           ],
         );
       },

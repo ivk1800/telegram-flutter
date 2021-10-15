@@ -54,7 +54,7 @@ class _ShowcaseMessagePageState extends State<ShowcaseMessagePage> {
     final LocalizationManager localizationManager = LocalizationManager();
     await localizationManager.init('en', 'en');
 
-    final fake.FakeFileRepository fakeFileRepository =
+    const fake.FakeFileRepository fakeFileRepository =
         fake.FakeFileRepository();
     final fake.FakeMessagesProvider fakeMessagesProvider =
         fake.FakeMessagesProvider();
@@ -175,7 +175,6 @@ class _ShowcaseMessagePageState extends State<ShowcaseMessagePage> {
         ),
         builder: (BuildContext context, AsyncSnapshot<ITileModel> snapshot) {
           if (snapshot.hasError) {
-            print(snapshot.error);
             return Text(snapshot.error.toString());
           }
 

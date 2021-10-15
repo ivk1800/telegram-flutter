@@ -37,7 +37,7 @@ class GlobalSearchScreenFactory implements IGlobalSearchScreenFactory {
           Provider<GlobalSearchBloc>(
             create: (BuildContext context) =>
                 component.getGlobalSearchBloc()..add(const InitEvent()),
-          )
+          ),
         ];
       },
       child: GlobalSearchPage(

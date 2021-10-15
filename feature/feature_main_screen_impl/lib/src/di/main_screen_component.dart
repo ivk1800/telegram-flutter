@@ -50,7 +50,8 @@ abstract class MainScreenModule {
   @j.provide
   @j.singleton
   static IGlobalSearchScreenFactory provideGlobalSearchScreenFactory(
-          IGlobalSearchFeatureApi api) =>
+    IGlobalSearchFeatureApi api,
+  ) =>
       api.globalSearchScreenFactory;
 
   @j.provide
@@ -63,7 +64,8 @@ abstract class MainScreenModule {
   @j.provide
   @j.singleton
   static IChatsListScreenFactory provideChatsListWidgetFactory(
-          IChatsListFeatureApi api) =>
+    IChatsListFeatureApi api,
+  ) =>
       api.chatsListScreenFactory;
 
   @j.provide

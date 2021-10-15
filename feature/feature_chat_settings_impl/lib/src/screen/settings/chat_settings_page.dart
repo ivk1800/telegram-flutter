@@ -58,15 +58,11 @@ class _Body extends StatelessWidget {
           text: 'Settings',
         ),
         tg.TextCell.toggle(
-          onTap: () {
-            print('tap');
-          },
+          onTap: () {},
           value: true,
           title: localizationManager.getString('AutoNightTheme'),
           subtitle: 'todo',
-          onChanged: (bool v) {
-            print('tap toggle');
-          },
+          onChanged: (bool v) {},
         ),
         const tg.Divider(),
         tg.TextCell.toggle(
