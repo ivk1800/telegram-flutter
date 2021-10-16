@@ -25,42 +25,27 @@ class MainPageState extends State<MainPage> with TickerProviderStateMixin {
   late Widget _chatsListWidget;
   late Widget _globalSearchWidget;
 
-  final GlobalObjectKey<tg.TgSwitchedAppBarState> appbarKey =
-      const GlobalObjectKey<tg.TgSwitchedAppBarState>('MainAppbar');
-  final GlobalObjectKey<ScaffoldState> scaffoldKey =
-      const GlobalObjectKey<ScaffoldState>('MainScaffold');
+  late GlobalObjectKey<tg.TgSwitchedAppBarState> _appbarKey;
 
   @override
   void initState() {
     super.initState();
+    _appbarKey = _AppBarKey(hashCode);
     _chatsListWidget = context.read<IChatsListScreenFactory>().create();
     _globalSearchWidget = context.read<IGlobalSearchScreenFactory>().create(
           context,
           _globalSearchScreenController,
         );
     _searchQueryController.addListener(_onSearchEvent);
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 200),
-    );
-
-    _navigationIconColorTween =
-        SizeTween(begin: Size.zero, end: const Size(1, 1))
-            .animate(_animationController);
-    myFocusNode = FocusNode();
   }
 
-  bool _searchActive = false;
-  bool _showClearButtonQuery = false;
-
-  late FocusNode myFocusNode;
-  late Animation<Size?> _navigationIconColorTween;
-  late AnimationController _animationController;
+  final FocusNode _searchQueryFocusNode = FocusNode();
   final TextEditingController _searchQueryController = TextEditingController();
 
   @override
   void dispose() {
     _searchQueryController.removeListener(_onSearchEvent);
+    _searchQueryFocusNode.dispose();
     super.dispose();
   }
 
@@ -69,175 +54,52 @@ class MainPageState extends State<MainPage> with TickerProviderStateMixin {
     return WillPopScope(
       onWillPop: () async {
         if (_screenState != _ScreenState.chats) {
-          setState(() {
-            _screenState = _ScreenState.chats;
-            _searchActive = false;
-            _searchQueryController.text = '';
-            appbarKey.currentState?.setActive(active: false);
-          });
+          _switchToChatState();
           return false;
         }
         return true;
       },
       child: Scaffold(
-        key: scaffoldKey,
         appBar: tg.TgSwitchedAppBar(
-          key: appbarKey,
-          iconColorProvider: (bool isActive) {
+          backgroundColor: AppBarTheme.of(context).backgroundColor!,
+          appBarBuilder: (AnimationController animationController,
+              BuildContext context, bool isActive) {
             if (isActive) {
-              switch (_screenState) {
-                case _ScreenState.search:
-                  {
-                    return Colors.white;
-                  }
-                case _ScreenState.multiSelect:
-                  {
-                    return Colors.grey;
-                  }
-                default:
-                  {
-                    return Colors.white;
-                  }
-              }
-            }
-            return Colors.white;
-          },
-          backgroundColorProvider: (bool isActive) {
-            if (isActive) {
-              switch (_screenState) {
-                case _ScreenState.search:
-                  {
-                    return Theme.of(context).primaryColor;
-                  }
-                case _ScreenState.multiSelect:
-                  {
-                    return Colors.white;
-                  }
-                default:
-                  {
-                    return Theme.of(context).primaryColor;
-                  }
-              }
-            }
-            return AppBarTheme.of(context).backgroundColor!;
-          },
-          navigationIconTap: () {
-            setState(() {
-              if (_screenState == _ScreenState.chats) {
-                scaffoldKey.currentState!.openDrawer();
-              } else {
-                _screenState = _ScreenState.chats;
-                _searchActive = false;
-                _searchQueryController.text = '';
-                appbarKey.currentState?.setActive(active: false);
-              }
-            });
-          },
-          actionWidgetsBuilder: (BuildContext context, bool isActive) {
-            if (isActive) {
-              switch (_screenState) {
-                case _ScreenState.search:
-                  {
-                    return <Widget>[
-                      AnimatedBuilder(
-                        animation: _navigationIconColorTween,
-                        builder: (BuildContext context, Widget? child) {
-                          return Transform.scale(
-                            scale: _navigationIconColorTween.value!.height,
-                            child: child,
-                          );
-                        },
-                        child: IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () {
-                            _searchQueryController.text = '';
-                          },
-                        ),
-                      ),
-                    ];
-                  }
-                case _ScreenState.multiSelect:
-                  {
-                    return <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.push_pin_outlined),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.volume_off),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.restore_from_trash_outlined),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.more_vert_outlined),
-                        onPressed: () {},
-                      ),
-                    ];
-                  }
-                default:
-                  {
-                    return const <Widget>[];
-                  }
-              }
+              return tg.SearchAppBar(
+                animationController: animationController,
+                focusNode: _searchQueryFocusNode,
+                searchQueryController: _searchQueryController,
+                onLeadingTap: _switchToChatState,
+              );
             } else {
-              return <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.search),
+              return AppBar(
+                title: const _DefaultTitle(),
+                leading: IconButton(
+                  // color: _navigationIconColorTween.value,
+                  icon: AnimatedIcon(
+                    progress: animationController,
+                    icon: AnimatedIcons.menu_arrow,
+                  ),
                   onPressed: () {
-                    setState(() {
-                      _screenState = _ScreenState.search;
-                      _searchActive = !_searchActive;
-                      myFocusNode
-                        ..requestFocus()
-                        ..unfocus();
-                      appbarKey.currentState?.setActive(active: true);
-                    });
+                    Scaffold.of(context).openDrawer();
                   },
                 ),
-              ];
+                actions: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      setState(() {
+                        _screenState = _ScreenState.search;
+                        _searchQueryFocusNode.requestFocus();
+                        _appbarKey.currentState?.setActive(active: true);
+                      });
+                    },
+                  ),
+                ],
+              );
             }
           },
-          titleBuilder: (BuildContext context, bool isActive) {
-            if (isActive) {
-              switch (_screenState) {
-                case _ScreenState.search:
-                  {
-                    return TextField(
-                      style: const TextStyle(color: Colors.white),
-                      cursorColor: Colors.white,
-                      focusNode: myFocusNode,
-                      controller: _searchQueryController,
-                      decoration: const InputDecoration.collapsed(
-                        hintText: 'Search',
-                        hintStyle: TextStyle(color: Colors.white),
-                      ),
-                    );
-                  }
-                case _ScreenState.multiSelect:
-                  {
-                    return const Text(
-                      '1',
-                      style: TextStyle(color: Colors.grey),
-                    );
-                  }
-                default:
-                  {
-                    return const SizedBox.shrink();
-                  }
-              }
-            } else {
-              return const _DefaultTitle();
-            }
-          },
-          leadingAnimatedIconProvider: (bool isActive) {
-            if (_screenState == _ScreenState.multiSelect) {
-              return AnimatedIcons.menu_close;
-            }
-            return AnimatedIcons.menu_arrow;
-          },
+          key: _appbarKey,
         ),
         drawer: const _MainDrawer(),
         body: Stack(
@@ -245,7 +107,7 @@ class MainPageState extends State<MainPage> with TickerProviderStateMixin {
             _chatsListWidget,
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
-              child: _searchActive
+              child: _screenState == _ScreenState.search
                   ? ColoredBox(
                       color: Theme.of(context).scaffoldBackgroundColor,
                       child: _globalSearchWidget,
@@ -259,17 +121,14 @@ class MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 
   void _onSearchEvent() {
+    _globalSearchScreenController.onQuery(_searchQueryController.text);
+  }
+
+  void _switchToChatState() {
     setState(() {
-      final bool _prevValue = _showClearButtonQuery;
-      _showClearButtonQuery = _searchQueryController.text.isNotEmpty;
-      _globalSearchScreenController.onQuery(_searchQueryController.text);
-      if (_showClearButtonQuery != _prevValue) {
-        if (_showClearButtonQuery) {
-          _animationController.forward();
-        } else {
-          _animationController.reverse();
-        }
-      }
+      _screenState = _ScreenState.chats;
+      _searchQueryController.text = '';
+      _appbarKey.currentState?.setActive(active: false);
     });
   }
 }
@@ -392,4 +251,8 @@ class _MainDrawer extends StatelessWidget {
   }
 }
 
-enum _ScreenState { chats, multiSelect, search }
+enum _ScreenState { chats, search }
+
+class _AppBarKey extends GlobalObjectKey<tg.TgSwitchedAppBarState> {
+  const _AppBarKey(Object value) : super(value);
+}
