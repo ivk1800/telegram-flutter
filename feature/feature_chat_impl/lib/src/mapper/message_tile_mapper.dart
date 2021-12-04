@@ -353,16 +353,6 @@ class MessageTileMapper {
             type: notImplementedText,
           );
         }
-      case td.MessageInviteVoiceChatParticipants.CONSTRUCTOR:
-        {
-          final td.MessageInviteVoiceChatParticipants m =
-              message.content.cast();
-          return MessageInviteVoiceChatParticipantsTileModel(
-            id: message.id,
-            isOutgoing: message.isOutgoing,
-            type: notImplementedText,
-          );
-        }
       case td.MessageInvoice.CONSTRUCTOR:
         {
           final td.MessageInvoice m = message.content.cast();
@@ -538,24 +528,6 @@ class MessageTileMapper {
             caption: _formattedTextResolver.resolve(m.caption),
             minithumbnail: m.video.minithumbnail?.toMinithumbnail(),
             thumbnailImageId: m.video.thumbnail?.file.id,
-          );
-        }
-      case td.MessageVoiceChatEnded.CONSTRUCTOR:
-        {
-          final td.MessageVoiceChatEnded m = message.content.cast();
-          return MessageVoiceChatEndedTileModel(
-            id: message.id,
-            isOutgoing: message.isOutgoing,
-            type: notImplementedText,
-          );
-        }
-      case td.MessageVoiceChatStarted.CONSTRUCTOR:
-        {
-          final td.MessageVoiceChatStarted m = message.content.cast();
-          return MessageVoiceChatStartedTileModel(
-            id: message.id,
-            isOutgoing: message.isOutgoing,
-            type: notImplementedText,
           );
         }
       case td.MessageVoiceNote.CONSTRUCTOR:

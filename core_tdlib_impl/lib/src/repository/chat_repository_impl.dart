@@ -69,12 +69,13 @@ class ChatRepositoryImpl extends IChatRepository {
   }) async {
     final List<td.Chat> chats = <td.Chat>[];
 
-    final td.Chats result = await _functionExecutor.send<td.Chats>(td.GetChats(
-      offsetChatId: offsetChatId,
-      offsetOrder: offsetOrder,
-      chatList: chatList,
-      limit: limit,
-    ));
+    // todo: replace by LoadChats
+    final td.Chats result = await _functionExecutor.send<td.Chats>(
+      td.GetChats(
+        chatList: chatList,
+        limit: limit,
+      ),
+    );
 
     chats.addAll(await Stream<td.Chat>.fromFutures(result.chatIds.map(
       (int e) => _functionExecutor.send<td.Chat>(td.GetChat(chatId: e)),

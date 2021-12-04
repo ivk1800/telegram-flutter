@@ -27,8 +27,9 @@ class AdditionalInfoMapper {
 
   String? getAuthorSignature(td.Message message) {
     // todo get signature from forward_info if forwarded
-    if (message.authorSignature != null && message.authorSignature.isNotEmpty) {
-      return message.authorSignature;
+    final String? authorSignature = message.authorSignature;
+    if (authorSignature != null && authorSignature.isNotEmpty) {
+      return authorSignature;
     }
     return null;
   }

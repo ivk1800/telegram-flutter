@@ -59,7 +59,6 @@ extension _UpdatesExtensions on Stream<td.TdObject> {
       event is td.UpdateChatIsMarkedAsUnread ||
       event is td.UpdateChatIsBlocked ||
       event is td.UpdateChatHasScheduledMessages ||
-      event is td.UpdateChatVoiceChat ||
       event is td.UpdateChatDefaultDisableNotification ||
       event is td.UpdateChatReadInbox ||
       event is td.UpdateChatReadOutbox ||

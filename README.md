@@ -3,7 +3,7 @@
 
 preffered flutter version: `stable, 2.5.0`
 
-td lib version: `1.7.3`
+td lib version: `1.7.9` 8d7bda00
 
 #### Supported platform
 |Platform| Status|
