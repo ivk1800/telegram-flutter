@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 function generate() {
   for d in */; do
@@ -20,7 +21,11 @@ function generate() {
   done
 }
 
-cd ..
+parent_path=$(
+  cd "$(dirname "${BASH_SOURCE[0]}")"
+  pwd -P
+)
+cd "$parent_path/.."
 generate false
 cd feature/
 generate true

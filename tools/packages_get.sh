@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 function sync() {
   for d in */; do
@@ -17,7 +18,11 @@ function sync() {
   done
 }
 
-cd ..
+parent_path=$(
+  cd "$(dirname "${BASH_SOURCE[0]}")"
+  pwd -P
+)
+cd "$parent_path/.."
 sync false
 cd feature/
 sync true
