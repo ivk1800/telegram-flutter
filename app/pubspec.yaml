@@ -55,6 +55,10 @@ dependencies:
     path: ../feature/feature_file_api
   feature_file_impl:
     path: ../feature/feature_file_impl
+  feature_folders_api:
+    path: ../feature/folders/feature_folders_api
+  feature_folders_impl:
+    path: ../feature/folders/feature_folders_impl
   feature_global_search_api:
     path: ../feature/feature_global_search_api
   feature_global_search_impl:

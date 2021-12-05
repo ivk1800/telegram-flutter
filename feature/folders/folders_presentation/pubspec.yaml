@@ -1,0 +1,13 @@
+name: folders_presentation
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+
+dependencies:
+  core_arch:
+    path: ../../../core_arch
+
+dev_dependencies:
+  tg_lint_rules:
+    path: ../../../tg_lint_rules

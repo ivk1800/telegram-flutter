@@ -1,5 +1,4 @@
 import 'package:app/src/feature/feature.dart';
-import 'package:app/src/feature/folders/feature_folders.dart';
 import 'package:app/src/page/page.dart';
 import 'package:dialog_api/dialog_api.dart';
 import 'package:dialog_api/dialog_api.dart' as dialog_api;
@@ -12,6 +11,7 @@ import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
+import 'package:feature_folders_impl/feature_folders_impl.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_logout_api/feature_logout_api.dart';
 import 'package:feature_logout_impl/feature_logout_impl.dart';
@@ -39,6 +39,7 @@ import 'navigation.dart';
 
 class CommonScreenRouterImpl
     implements
+        IFoldersRouter,
         IChatScreenRouter,
         IStickersFeatureRouter,
         ISettingsScreenRouter,
@@ -246,9 +247,24 @@ class CommonScreenRouterImpl
 
   @override
   void toFolders() {
+    final Widget foldersScreen =
+        _featureFactory.createFoldersFeatureApi().foldersScreenFactory.create();
     _navigationRouter.push(
       key: UniqueKey(),
-      builder: (BuildContext context) => const FoldersSetupPage().wrap(),
+      builder: (BuildContext context) => foldersScreen,
+      container: ContainerType.top,
+    );
+  }
+
+  @override
+  void toCreateNewFolder() {
+    final Widget setupFolderScreen = _featureFactory
+        .createFoldersFeatureApi()
+        .setupFolderScreenFactory
+        .create();
+    _navigationRouter.push(
+      key: UniqueKey(),
+      builder: (BuildContext context) => setupFolderScreen,
       container: ContainerType.top,
     );
   }

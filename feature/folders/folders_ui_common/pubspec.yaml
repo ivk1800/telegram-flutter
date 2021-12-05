@@ -1,0 +1,21 @@
+name: folders_ui_common
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  coreui:
+    path: ../../../coreui
+  flutter:
+    sdk: flutter
+  folders_presentation:
+    path: ../folders_presentation
+  localization_api:
+    path: ../../../localization_api
+  provider: ^6.0.0
+
+dev_dependencies:
+  tg_lint_rules:
+    path: ../../../tg_lint_rules

@@ -234,4 +234,10 @@
     <string lang="MegaLeaveAlertWithName">Are you sure you want to leave %s?</string>
     <!-- https://translations.telegram.org/en/android/chat_list/ChannelLeaveAlertWithName -->
     <string lang="ChannelLeaveAlertWithName">Are you sure you want to leave %s?</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/Filters -->
+    <string lang="Filters">Folders</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/CreateNewFilter -->
+    <string lang="CreateNewFilter">Create New Folder</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/FilterNew -->
+    <string lang="FilterNew">New Folder</string>
 </resources>

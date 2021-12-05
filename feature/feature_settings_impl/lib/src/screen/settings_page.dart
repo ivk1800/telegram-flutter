@@ -200,6 +200,12 @@ class SettingsPageState extends State<SettingsPage>
           leading: const Icon(Icons.chat_bubble_outline),
           title: _getString('ChatSettings'),
         ),
+        const tg.Divider(),
+        tg.TextCell(
+          onTap: router.toFolders,
+          leading: const Icon(Icons.folder),
+          title: _getString('Filters'),
+        ),
         const tg.SectionDivider(),
         tg.Section(
           text: _getString('SettingsHelp'),

@@ -21,6 +21,8 @@ import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_file_impl/feature_file_impl.dart';
+import 'package:feature_folders_api/feature_folders_api.dart';
+import 'package:feature_folders_impl/feature_folders_impl.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_logout_api/feature_logout_api.dart';
@@ -378,7 +380,19 @@ abstract class FeatureModule {
         functionExecutor: functionExecutor,
       );
 
-  // endregion
+  @j.provide
+  static FoldersFeatureDependencies provideFoldersFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    IFoldersRouter router,
+    ILocalizationManager localizationManager,
+  ) =>
+      FoldersFeatureDependencies(
+        localizationManager: localizationManager,
+        connectionStateProvider: connectionStateProvider,
+        router: router,
+      );
+
+  // endregion dependencies
 
   // region api
 
@@ -504,7 +518,13 @@ abstract class FeatureModule {
   ) =>
       FileFeatureApi(dependencies: dependencies);
 
-  // endregion
+  @j.provide
+  static IFoldersFeatureApi provideFoldersFeatureApi(
+    FoldersFeatureDependencies dependencies,
+  ) =>
+      FoldersFeatureImpl(dependencies: dependencies);
+
+  // endregion api
 
   @j.provide
   static DevFeature provideDevFeature(
@@ -597,5 +617,10 @@ abstract class FeatureModule {
   IGlobalSearchFeatureRouter bindGlobalSearchFeatureRouter(
     CommonScreenRouterImpl impl,
   );
-// endregion
+
+  @j.bind
+  IFoldersRouter bindFoldersRouter(CommonScreenRouterImpl impl);
+
+  // endregion router
+
 }
