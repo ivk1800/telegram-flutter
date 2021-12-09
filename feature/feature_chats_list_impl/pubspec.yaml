@@ -20,7 +20,7 @@ dependencies:
     path: ../feature_message_preview_resolver
   flutter:
     sdk: flutter
-  flutter_svg: 0.22.0
+  flutter_svg: 1.0.0
   jext:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
