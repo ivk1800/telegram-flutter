@@ -1,6 +1,5 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'connection_state_widget_factory.dart';
 

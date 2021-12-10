@@ -3,8 +3,6 @@ import 'package:feature_chat_impl/src/widget/bubble/bubble.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:feature_chat_impl/src/widget/message/message_content.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tg_theme/tg_theme.dart';
 
 class ChatMessageFactory {

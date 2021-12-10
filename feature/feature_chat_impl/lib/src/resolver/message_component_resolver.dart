@@ -1,6 +1,5 @@
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
-import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/cupertino.dart';

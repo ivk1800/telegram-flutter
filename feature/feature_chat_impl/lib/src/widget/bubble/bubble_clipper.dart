@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/rendering.dart';
 
 class BubbleClipper extends CustomClipper<Path> {

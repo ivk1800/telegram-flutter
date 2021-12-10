@@ -31,7 +31,6 @@ import 'package:feature_stickers_impl/feature_stickers_impl.dart';
 import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:split_view/split_view.dart';
 

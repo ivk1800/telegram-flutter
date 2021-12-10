@@ -10,7 +10,6 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 import 'chat_list.dart';
-import 'chat_list_update_handler.dart';
 import 'ordered_chat.dart';
 
 class ChatListInteractor {

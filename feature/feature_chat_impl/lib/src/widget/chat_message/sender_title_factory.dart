@@ -1,6 +1,5 @@
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SenderTitleFactory {

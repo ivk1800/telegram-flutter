@@ -6,7 +6,6 @@ import 'package:fake/fake.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 class ChatCellShowCase extends StatefulWidget {
   const ChatCellShowCase({Key? key}) : super(key: key);

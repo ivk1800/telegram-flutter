@@ -1,7 +1,6 @@
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:feature_shared_media_impl/feature_shared_media_impl.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class SharedMediaScreenFactory implements ISharedMediaScreenFactory {
   SharedMediaScreenFactory({

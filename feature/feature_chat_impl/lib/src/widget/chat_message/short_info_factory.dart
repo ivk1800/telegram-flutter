@@ -1,7 +1,6 @@
 import 'dart:ui' as ui show PlaceholderAlignment;
 
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 

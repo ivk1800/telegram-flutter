@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:fake/fake.dart' as fake;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:showcase/src/message_bundle.dart';
 import 'package:tdlib/td_api.dart' as td;

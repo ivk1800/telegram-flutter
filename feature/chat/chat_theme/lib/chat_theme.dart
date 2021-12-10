@@ -1,8 +1,6 @@
 library chat_theme;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:tg_theme/tg_theme.dart';
 
 @immutable

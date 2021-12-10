@@ -1,6 +1,5 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:feature_wallpapers_impl/src/tile/model/fill_wallpaper_tile_model.dart';
 import 'package:feature_wallpapers_impl/src/tile/model/model.dart';
 import 'package:feature_wallpapers_impl/src/util/background_fill_ext.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

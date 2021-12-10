@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class ContainerDivider extends StatelessWidget {
   const ContainerDivider({Key? key}) : super(key: key);

@@ -1,6 +1,5 @@
 library showcase;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:showcase/src/showcase_page.dart';
 

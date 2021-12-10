@@ -7,7 +7,6 @@ import 'package:feature_chat_impl/src/manager/chat_manager_impl.dart';
 import 'package:feature_chat_impl/src/resolver/chat_info_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
-import 'package:feature_chat_impl/src/screen/chat/message_action_listener.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:jugger/jugger.dart' as j;

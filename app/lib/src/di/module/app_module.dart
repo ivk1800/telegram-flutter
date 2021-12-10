@@ -3,7 +3,6 @@ import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/di/component/feature_component.jugger.dart';
 import 'package:app/src/feature/feature.dart';
 import 'package:app/src/navigation/navigation.dart';
-import 'package:app/src/navigation/split_navigation_router.dart';
 import 'package:app/src/tdlib/config_provider.dart';
 import 'package:app/src/util/util.dart';
 import 'package:core/core.dart';

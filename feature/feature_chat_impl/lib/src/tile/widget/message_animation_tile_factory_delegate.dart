@@ -1,7 +1,6 @@
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
-import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:rich_text_format_flutter/rich_text_format_flutter.dart';
