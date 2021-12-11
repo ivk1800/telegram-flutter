@@ -240,4 +240,8 @@
     <string lang="CreateNewFilter">Create New Folder</string>
     <!-- https://translations.telegram.org/en/android/chat_list/FilterNew -->
     <string lang="FilterNew">New Folder</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/ChannelUnmute -->
+    <string lang="ChannelUnmute">UNMUTE</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/ChannelMute -->
+    <string lang="ChannelMute">MUTE</string>
 </resources>

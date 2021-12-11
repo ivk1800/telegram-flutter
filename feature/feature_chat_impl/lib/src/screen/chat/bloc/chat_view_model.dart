@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:dialog_api/dialog_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
@@ -22,12 +23,14 @@ class ChatViewModel extends BaseViewModel {
     required ChatMessagesInteractor messagesInteractor,
     required IChatManager chatManager,
     required ChatHeaderActionsInteractor headerActionsInteractor,
+    required IChatActionPanelInteractor chatActionPanelInteractor,
   })  : _args = args,
         _headerInfoInteractor = headerInfoInteractor,
         _router = router,
         _chatManager = chatManager,
         _localizationManager = localizationManager,
         _headerActionsInteractor = headerActionsInteractor,
+        _actionPanelInteractor = chatActionPanelInteractor,
         _messagesInteractor = messagesInteractor {
     _messagesInteractor.init(_args.chatId);
   }
@@ -39,6 +42,10 @@ class ChatViewModel extends BaseViewModel {
   final ILocalizationManager _localizationManager;
   final IChatManager _chatManager;
   final IChatScreenRouter _router;
+  final IChatActionPanelInteractor _actionPanelInteractor;
+
+  Stream<PanelState> get actionsPanelState =>
+      _actionPanelInteractor.panelStateStream;
 
   Stream<HeaderState> get headerStateStream =>
       Rx.combineLatest2<ChatHeaderInfo, List<HeaderActionData>, HeaderState>(
@@ -107,6 +114,7 @@ class ChatViewModel extends BaseViewModel {
   @override
   void dispose() {
     _messagesInteractor.dispose();
+    _actionPanelInteractor.dispose();
   }
 
   String _getString(String key) => _localizationManager.getString(key);

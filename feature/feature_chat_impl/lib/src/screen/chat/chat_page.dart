@@ -1,3 +1,4 @@
+import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_theme/chat_theme.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
@@ -59,6 +60,15 @@ class ChatPageState extends State<ChatPage> {
             ),
           );
         },
+      ),
+      bottomNavigationBar: SafeArea(
+        child: StreamListener<PanelState>(
+          stream: viewModel.actionsPanelState,
+          builder: (BuildContext context, PanelState state) {
+            final IChatActionPanelFactory factory = context.read();
+            return factory.create(state);
+          },
+        ),
       ),
     );
   }

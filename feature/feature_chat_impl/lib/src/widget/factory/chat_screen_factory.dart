@@ -1,3 +1,4 @@
+import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
@@ -26,6 +27,10 @@ class ChatScreenFactory implements IChatScreenFactory {
           .build(),
       child: MultiProvider(
         providers: <Provider<dynamic>>[
+          Provider<IChatActionPanelFactory>(
+            create: (BuildContext context) =>
+                context.getComponent().getChatActionPanelFactory(),
+          ),
           Provider<TileFactory>(
             create: (BuildContext context) =>
                 context.getComponent().getTileFactory(),

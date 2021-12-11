@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  chat_actions_panel:
+    path: ../chat/chat_actions_panel
   chat_theme:
     path: ../chat/chat_theme
   core_arch:

@@ -1,3 +1,4 @@
+import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
@@ -26,6 +27,10 @@ abstract class ChatScreenComponent {
   IChatHeaderInfoFactory getChatHeaderInfoFactory();
 
   ChatViewModel getChatBloc();
+
+  IChatActionPanelFactory getChatActionPanelFactory();
+
+  IChatActionPanelInteractor getChatActionPanelInteractor();
 }
 
 @j.module
@@ -106,8 +111,10 @@ abstract class ChatScreenModule {
     IChatHeaderInfoInteractor headerInfoInteractor,
     ChatHeaderActionsInteractor headerActionsInteractor,
     ChatFeatureDependencies dependencies,
+    IChatActionPanelInteractor chatActionPanelInteractor,
   ) =>
       ChatViewModel(
+        chatActionPanelInteractor: chatActionPanelInteractor,
         localizationManager: dependencies.localizationManager,
         headerActionsInteractor: headerActionsInteractor,
         // todo move to chat feature component
@@ -169,6 +176,26 @@ abstract class ChatScreenModule {
         chatRepository: dependencies.chatRepository,
         superGroupRepository: dependencies.superGroupRepository,
         basicGroupRepository: dependencies.basicGroupRepository,
+      );
+
+  @j.provide
+  @j.singleton
+  static IChatActionPanelFactory provideChatActionPanelFactory(
+    ChatFeatureDependencies dependencies,
+  ) =>
+      ChatActionPanelFactory();
+
+  @j.provide
+  @j.singleton
+  static IChatActionPanelInteractor provideChatActionPanelInteractor(
+    ChatFeatureDependencies dependencies,
+    ChatArgs args,
+  ) =>
+      ChatActionPanelInteractor(
+        superGroupRepository: dependencies.superGroupRepository,
+        basicGroupRepository: dependencies.basicGroupRepository,
+        chatRepository: dependencies.chatRepository,
+        chatId: args.chatId,
       );
 }
 
