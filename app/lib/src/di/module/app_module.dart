@@ -97,6 +97,7 @@ abstract class AppModule {
 
   @j.singleton
   @j.provide
+  @j.nonLazy
   static IChatFilterRepository provideChatFilterRepository(
     IChatFiltersUpdatesProvider chatFiltersUpdatesProvider,
   ) =>
@@ -145,11 +146,8 @@ abstract class AppModule {
       SplitNavigationRouter(TgApp.splitViewNavigatorKey, featureFactory);
 
   @j.singleton
-  @j.provide
-  static INavigationRouter provideRootNavigationRouter(
-    SplitNavigationRouter splitViewNavigationRouter,
-  ) =>
-      splitViewNavigationRouter;
+  @j.bind
+  INavigationRouter bindRootNavigationRouter(SplitNavigationRouter impl);
 
   @j.singleton
   @j.provide

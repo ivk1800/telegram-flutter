@@ -22,12 +22,8 @@ abstract class SetupFolderScreenModule {
       SetupFolderViewModel(router: router);
 
   @j.singleton
-  @j.provide
-  // todo bind not work from FoldersComponent
-  static ISetupFolderScreenRouter provideSetupFolderScreenRouter(
-    IFoldersRouter router,
-  ) =>
-      router;
+  @j.bind
+  ISetupFolderScreenRouter bindSetupFolderScreenRouter(IFoldersRouter router);
 }
 
 @j.componentBuilder

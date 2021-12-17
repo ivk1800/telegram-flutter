@@ -7,8 +7,7 @@ import 'package:feature_settings_impl/src/settings_screen_router.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-
-import 'src/di/settings_screen_component.dart';
+import 'package:provider/provider.dart';
 
 export 'src/settings_screen_router.dart';
 
@@ -47,5 +46,8 @@ class _ScreenWidgetFactory implements ISettingsWidgetFactory {
   final SettingsFeatureDependencies dependencies;
 
   @override
-  Widget create() => const SettingsPage().wrap(dependencies);
+  Widget create() => Provider<SettingsFeatureDependencies>(
+        create: (BuildContext context) => dependencies,
+        child: const SettingsPage(),
+      );
 }

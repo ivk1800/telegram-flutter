@@ -3,14 +3,13 @@ import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
 import 'package:feature_settings_search_impl/src/settings_search_screen_router.dart';
 import 'package:feature_settings_search_impl/src/tile/model/faq_result_tile_model.dart';
 import 'package:feature_settings_search_impl/src/tile/model/search_result_tile_model.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:tile/tile.dart';
 
 class SettingsSearchViewModel extends BaseViewModel {
-  @j.inject
-  SettingsSearchViewModel({required ISettingsSearchScreenRouter router})
-      : _router = router {
+  SettingsSearchViewModel({
+    required ISettingsSearchScreenRouter router,
+  }) : _router = router {
     _suggests.add(<ITileModel>[
       // TODO: implement all https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java#L7701
       const SearchResultTileModel(

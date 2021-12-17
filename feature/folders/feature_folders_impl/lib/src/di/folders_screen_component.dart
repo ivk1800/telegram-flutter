@@ -22,12 +22,8 @@ abstract class FoldersScreenModule {
       FoldersViewModel(router: router);
 
   @j.singleton
-  @j.provide
-  // todo bind not work from FoldersComponent
-  static IFoldersScreenRouter provideFoldersScreenRouter(
-    IFoldersRouter router,
-  ) =>
-      router;
+  @j.bind
+  IFoldersScreenRouter bindFoldersScreenRouter(IFoldersRouter router);
 }
 
 @j.componentBuilder

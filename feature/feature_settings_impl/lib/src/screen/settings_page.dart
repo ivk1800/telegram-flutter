@@ -1,10 +1,11 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_settings_impl/feature_settings_impl.dart';
+import 'package:feature_settings_impl/src/di/settings_screen_component.jugger.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:flutter/material.dart';
-import 'package:jext/jext.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -14,9 +15,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class SettingsPageState extends State<SettingsPage>
-    with
-        TickerProviderStateMixin,
-        StateInjectorMixin<SettingsPage, SettingsPageState> {
+    with TickerProviderStateMixin {
   late GlobalObjectKey<tg.TgSwitchedAppBarState> _appbarKey;
 
   @j.inject
@@ -38,6 +37,11 @@ class SettingsPageState extends State<SettingsPage>
 
   @override
   void initState() {
+    JuggerSettingsScreenComponentBuilder()
+        .dependencies(context.read())
+        .screenState(this)
+        .build()
+        .inject(this);
     super.initState();
     _appbarKey = _AppBarKey(hashCode);
     _searchQueryController.addListener(_onSearchEvent);

@@ -1,4 +1,5 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:coreui/coreui.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_dev/src/screen/events_list_page.dart';
 import 'package:feature_dev/src/screen/root_page.dart';
@@ -21,10 +22,19 @@ abstract class DevModule {
 
   @j.provide
   @j.singleton
-  static IConnectionStateProvider provideconnectionStateProvider(
+  static IConnectionStateProvider provideConnectionStateProvider(
     DevFeature devFeature,
   ) =>
       devFeature.connectionStateProvider;
+
+  @j.singleton
+  @j.provide
+  static ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
+    IConnectionStateProvider connectionStateProvider,
+  ) =>
+      ConnectionStateWidgetFactory(
+        connectionStateProvider: connectionStateProvider,
+      );
 }
 
 @j.componentBuilder

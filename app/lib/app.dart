@@ -22,8 +22,6 @@ Future<void> launch() async {
   appComponent = JuggerAppComponentBuilder()
       .localizationManager(localizationManager)
       .build();
-  //init repo
-  appComponent.getChatFilterRepository();
 
   runApp(TgApp(
     client: appComponent.getTdClient(),
