@@ -5,16 +5,20 @@ import 'package:tile/tile.dart';
 
 import 'not_implemented.dart';
 
-class MessageVoiceChatEndedTileFactoryDelegate
-    implements ITileFactoryDelegate<MessageVoiceChatEndedTileModel> {
-  MessageVoiceChatEndedTileFactoryDelegate({
+class MessageInviteVideoChatParticipantsTileFactoryDelegate
+    implements
+        ITileFactoryDelegate<MessageInviteVideoChatParticipantsTileModel> {
+  MessageInviteVideoChatParticipantsTileFactoryDelegate({
     required ChatMessageFactory chatMessageFactory,
   }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
-  Widget create(BuildContext context, MessageVoiceChatEndedTileModel model) {
+  Widget create(
+    BuildContext context,
+    MessageInviteVideoChatParticipantsTileModel model,
+  ) {
     return _chatMessageFactory.create(
       id: model.id,
       context: context,

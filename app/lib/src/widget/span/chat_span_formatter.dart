@@ -20,22 +20,14 @@ class ChatSpanFormatter {
     }
 
     final td.MessageContent content = message.content;
-    switch (content.getConstructor()) {
-      case td.MessageText.CONSTRUCTOR:
-        {
-          return _createForMessageText(content as td.MessageText);
-        }
-      case td.MessageSticker.CONSTRUCTOR:
-        {
-          return _createForMessageSticker(content as td.MessageSticker);
-        }
-      case td.MessagePhoto.CONSTRUCTOR:
-        {
-          return _createForMessagePhoto(content as td.MessagePhoto);
-        }
-    }
-
-    return TextSpan(text: '${content.runtimeType}');
+    return content.maybeMap(
+      messageText: _createForMessageText,
+      messageSticker: _createForMessageSticker,
+      messagePhoto: _createForMessagePhoto,
+      orElse: () {
+        return TextSpan(text: '${content.runtimeType}');
+      },
+    );
   }
 
   InlineSpan _createForMessageText(td.MessageText message) {

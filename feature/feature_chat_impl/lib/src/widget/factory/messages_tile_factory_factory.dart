@@ -1,6 +1,7 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
+import 'package:feature_chat_impl/src/tile/widget/message_invite_video_chat_participants_tile_factory_delegate.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:localization_api/localization_api.dart';
@@ -106,8 +107,8 @@ class MessagesTileFactoryFactory {
       MessageGameTileModel: MessageGameTileFactoryDelegate(
         chatMessageFactory: chatMessageFactory,
       ),
-      MessageInviteVoiceChatParticipantsTileModel:
-          MessageInviteVoiceChatParticipantsTileFactoryDelegate(
+      MessageVideoChatStartedTileModel:
+          MessageVideoChatStartedTileFactoryDelegate(
         chatMessageFactory: chatMessageFactory,
       ),
       MessageInvoiceTileModel: MessageInvoiceTileFactoryDelegate(
@@ -182,7 +183,7 @@ class MessagesTileFactoryFactory {
         replyInfoFactory: replyInfoFactory,
         chatMessageFactory: chatMessageFactory,
       ),
-      MessageVoiceChatEndedTileModel: MessageVoiceChatEndedTileFactoryDelegate(
+      MessageChatSetThemeTileModel: MessageChatSetThemeTileFactoryDelegate(
         chatMessageFactory: chatMessageFactory,
       ),
       MessageVoiceChatStartedTileModel:
@@ -197,6 +198,24 @@ class MessagesTileFactoryFactory {
         chatMessageFactory: chatMessageFactory,
       ),
       UnknownMessageTileModel: UnknownMessageTileFactoryDelegate(
+        chatMessageFactory: chatMessageFactory,
+      ),
+      MessageAnimatedEmojiTileModel: MessageAnimatedEmojiTileFactoryDelegate(
+        chatMessageFactory: chatMessageFactory,
+      ),
+      MessageInviteVideoChatParticipantsTileModel:
+          MessageInviteVideoChatParticipantsTileFactoryDelegate(
+        chatMessageFactory: chatMessageFactory,
+      ),
+      MessageVideoChatScheduledTileModel:
+          MessageVideoChatScheduledTileFactoryDelegate(
+        chatMessageFactory: chatMessageFactory,
+      ),
+      MessageVideoChatEndedTileModel: MessageVideoChatEndedTileFactoryDelegate(
+        chatMessageFactory: chatMessageFactory,
+      ),
+      MessageChatJoinByRequestTileModel:
+          MessageChatJoinByRequestTileFactoryDelegate(
         chatMessageFactory: chatMessageFactory,
       ),
     });

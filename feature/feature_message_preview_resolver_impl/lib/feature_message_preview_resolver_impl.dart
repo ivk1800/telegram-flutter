@@ -43,63 +43,53 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
   @override
   Future<MessagePreviewData> resolve(td.Message message) async {
     final td.MessageContent content = message.content;
-    switch (content.getConstructor()) {
-      case td.MessageText.CONSTRUCTOR:
-        {
-          return _delegate.resolveForText(message, content as td.MessageText);
-        }
-      case td.MessageSticker.CONSTRUCTOR:
-        {
-          final td.MessageSticker m = content as td.MessageSticker;
-          return MessagePreviewData(
-            firstText: 'Sticker',
-            secondText: m.sticker.emoji,
-          );
-        }
-      case td.MessagePhoto.CONSTRUCTOR:
-        {
-          final td.MessagePhoto m = content as td.MessagePhoto;
-          return MessagePreviewData(
-            firstText: 'Photo',
-            secondText: m.caption.text,
-          );
-        }
-      case td.MessageChatAddMembers.CONSTRUCTOR:
-        {
-          final td.MessageChatAddMembers m =
-              content as td.MessageChatAddMembers;
-          final Iterable<Future<String>> userNamesFutures =
-              m.memberUserIds.map((int userId) async {
-            final td.User user = await _userRepository.getUser(userId);
-            return <String>[user.firstName, user.lastName].join(', ');
-          });
-          final String joinedUsernames = await Future.wait(userNamesFutures)
-              .then((List<String> users) => users.join(', '));
-          return MessagePreviewData(
-            firstText: _localizationManager.getStringFormatted(
-              'EventLogGroupJoined',
-              <dynamic>[joinedUsernames],
-            ),
-          );
-        }
-      case td.MessageDocument.CONSTRUCTOR:
-        {
-          final td.MessageDocument m = content as td.MessageDocument;
-          return MessagePreviewData(
-            firstText: '📎 ${m.caption.text}',
-          );
-        }
-      case td.MessageAnimation.CONSTRUCTOR:
-        {
-          return _delegate.resolveForAnimation(
-            message,
-            content as td.MessageAnimation,
-          );
-        }
-    }
-
-    return MessagePreviewData(
-      secondText: content.runtimeType.toString(),
+    return content.maybeMap(
+      messageText: (td.MessageText value) {
+        return _delegate.resolveForText(message, value);
+      },
+      messageSticker: (td.MessageSticker value) {
+        return MessagePreviewData(
+          firstText: 'Sticker',
+          secondText: value.sticker.emoji,
+        );
+      },
+      messagePhoto: (td.MessagePhoto value) {
+        return MessagePreviewData(
+          firstText: 'Photo',
+          secondText: value.caption.text,
+        );
+      },
+      messageChatAddMembers: (td.MessageChatAddMembers value) async {
+        final Iterable<Future<String>> userNamesFutures =
+            value.memberUserIds.map((int userId) async {
+          final td.User user = await _userRepository.getUser(userId);
+          return <String>[user.firstName, user.lastName].join(', ');
+        });
+        final String joinedUsernames = await Future.wait(userNamesFutures)
+            .then((List<String> users) => users.join(', '));
+        return MessagePreviewData(
+          firstText: _localizationManager.getStringFormatted(
+            'EventLogGroupJoined',
+            <dynamic>[joinedUsernames],
+          ),
+        );
+      },
+      messageDocument: (td.MessageDocument value) {
+        return MessagePreviewData(
+          firstText: '📎 ${value.caption.text}',
+        );
+      },
+      messageAnimation: (td.MessageAnimation value) {
+        return _delegate.resolveForAnimation(
+          message,
+          value,
+        );
+      },
+      orElse: () {
+        return MessagePreviewData(
+          secondText: content.runtimeType.toString(),
+        );
+      },
     );
   }
 }

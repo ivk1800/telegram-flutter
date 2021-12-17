@@ -1,7 +1,7 @@
 import 'base_message_tile_model.dart';
 
-class MessageChatSetThemeTileModel extends BaseMessageTileModel {
-  const MessageChatSetThemeTileModel({
+class MessageVideoChatStartedTileModel extends BaseMessageTileModel {
+  const MessageVideoChatStartedTileModel({
     required int id,
     required bool isOutgoing,
     required this.type,

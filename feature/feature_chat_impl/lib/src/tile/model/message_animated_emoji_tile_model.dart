@@ -1,7 +1,7 @@
 import 'base_message_tile_model.dart';
 
-class MessageInviteVoiceChatParticipantsTileModel extends BaseMessageTileModel {
-  const MessageInviteVoiceChatParticipantsTileModel({
+class MessageAnimatedEmojiTileModel extends BaseMessageTileModel {
+  const MessageAnimatedEmojiTileModel({
     required int id,
     required bool isOutgoing,
     required this.type,
