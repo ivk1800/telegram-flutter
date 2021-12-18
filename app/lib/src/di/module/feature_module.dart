@@ -130,13 +130,17 @@ abstract class FeatureModule {
     IChatRepository chatRepository,
     FeatureFactory featureFactory,
     DateFormatter dateFormatter,
+    ISuperGroupUpdatesProvider superGroupUpdatesProvider,
+    IChatUpdatesProvider chatUpdatesProvider,
     IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
     ITdFunctionExecutor functionExecutor,
     ISuperGroupRepository superGroupRepository,
     IBasicGroupRepository basicGroupRepository,
   ) =>
       ChatFeatureDependencies(
+        chatUpdatesProvider: chatUpdatesProvider,
         basicGroupRepository: basicGroupRepository,
+        superGroupUpdatesProvider: superGroupUpdatesProvider,
         superGroupRepository: superGroupRepository,
         functionExecutor: functionExecutor,
         dateFormatter: dateFormatter,
@@ -621,6 +625,6 @@ abstract class FeatureModule {
   @j.bind
   IFoldersRouter bindFoldersRouter(CommonScreenRouterImpl impl);
 
-  // endregion router
+// endregion router
 
 }

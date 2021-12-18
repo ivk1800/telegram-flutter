@@ -183,7 +183,9 @@ abstract class ChatScreenModule {
   static IChatActionPanelFactory provideChatActionPanelFactory(
     ChatFeatureDependencies dependencies,
   ) =>
-      ChatActionPanelFactory();
+      ChatActionPanelFactory(
+        localizationManager: dependencies.localizationManager,
+      );
 
   @j.provide
   @j.singleton
@@ -192,6 +194,8 @@ abstract class ChatScreenModule {
     ChatArgs args,
   ) =>
       ChatActionPanelInteractor(
+        chatUpdatesProvider: dependencies.chatUpdatesProvider,
+        superGroupUpdatesProvider: dependencies.superGroupUpdatesProvider,
         superGroupRepository: dependencies.superGroupRepository,
         basicGroupRepository: dependencies.basicGroupRepository,
         chatRepository: dependencies.chatRepository,

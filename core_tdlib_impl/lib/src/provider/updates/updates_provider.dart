@@ -6,6 +6,7 @@ class UpdatesProvider
     implements
         IChatUpdatesProvider,
         IChatFiltersUpdatesProvider,
+        ISuperGroupUpdatesProvider,
         IFileUpdatesProvider,
         IAuthenticationStateUpdatesProvider {
   UpdatesProvider({
@@ -30,6 +31,10 @@ class UpdatesProvider
 
   @override
   Stream<td.UpdateFile> get fileUpdates => _client.events.fileUpdatesFilter();
+
+  @override
+  Stream<td.UpdateSupergroup> get superGroupUpdates =>
+      _client.events.superGroupUpdatesFilter();
 }
 
 extension _UpdatesExtensions on Stream<td.TdObject> {
@@ -48,6 +53,10 @@ extension _UpdatesExtensions on Stream<td.TdObject> {
   Stream<td.UpdateFile> fileUpdatesFilter() =>
       where((td.TdObject event) => event is td.UpdateFile)
           .cast<td.UpdateFile>();
+
+  Stream<td.UpdateSupergroup> superGroupUpdatesFilter() =>
+      where((td.TdObject event) => event is td.UpdateSupergroup)
+          .cast<td.UpdateSupergroup>();
 
   Stream<td.Update> chatUpdatesFilter() => where((td.TdObject event) =>
       event is td.UpdateNewChat ||

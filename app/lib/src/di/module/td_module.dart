@@ -39,6 +39,13 @@ abstract class TdModule {
 
   @j.singleton
   @j.provide
+  static ISuperGroupUpdatesProvider provideSuperGroupUpdatesProvider(
+    UpdatesProvider impl,
+  ) =>
+      impl;
+
+  @j.singleton
+  @j.provide
   static ITdFunctionExecutor provideTdFunctionExecutor(TdClient client) =>
       TdFunctionExecutor(
         client: client,

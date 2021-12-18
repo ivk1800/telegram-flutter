@@ -59,6 +59,8 @@ abstract class AppComponent {
 
   IFileUpdatesProvider getFileUpdatesProvider();
 
+  ISuperGroupUpdatesProvider getSuperGroupUpdatesProvider();
+
   IAuthenticationStateUpdatesProvider getAuthenticationStateUpdatesProvider();
 
   IConnectionStateProvider getConnectionStateProvider();

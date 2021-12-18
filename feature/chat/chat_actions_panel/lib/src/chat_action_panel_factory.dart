@@ -1,10 +1,39 @@
 import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:localization_api/localization_api.dart';
+import 'package:provider/provider.dart';
 
 class ChatActionPanelFactory implements IChatActionPanelFactory {
+  ChatActionPanelFactory({
+    required ILocalizationManager localizationManager,
+  }) : _localizationManager = localizationManager;
+
+  final ILocalizationManager _localizationManager;
+
   @override
   Widget create(PanelState state) {
+    return MultiProvider(
+      providers: <Provider<dynamic>>[
+        Provider<ILocalizationManager>.value(
+          value: _localizationManager,
+        ),
+      ],
+      child: _PanelContainer(state: state),
+    );
+  }
+}
+
+class _PanelContainer extends StatelessWidget {
+  const _PanelContainer({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final PanelState state;
+
+  @override
+  Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: _panelHeight + 1),
       child: Column(
@@ -12,6 +41,9 @@ class ChatActionPanelFactory implements IChatActionPanelFactory {
         children: <Widget>[
           const Divider(height: 1),
           state.map(
+            join: (Join value) {
+              return _Join(state: value);
+            },
             empty: (Empty state) {
               return const SizedBox.shrink();
             },
@@ -40,12 +72,40 @@ class _ChannelSubscriber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ILocalizationManager localizationManager = context.read();
+
     return TextButton(
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, _panelHeight),
       ),
       onPressed: () {},
-      child: const Text('BUTTON'),
+      child: Text(
+        state.isMuted
+            ? localizationManager.getString('ChannelUnmute')
+            : localizationManager.getString('ChannelMute'),
+      ),
+    );
+  }
+}
+
+class _Join extends StatelessWidget {
+  const _Join({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final Join state;
+
+  @override
+  Widget build(BuildContext context) {
+    final ILocalizationManager localizationManager = context.read();
+
+    return TextButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(double.infinity, _panelHeight),
+      ),
+      onPressed: () {},
+      child: Text(localizationManager.getString('ChannelJoin')),
     );
   }
 }
