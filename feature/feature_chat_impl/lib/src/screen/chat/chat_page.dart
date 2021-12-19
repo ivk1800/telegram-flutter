@@ -10,6 +10,7 @@ import 'package:tile/tile.dart';
 
 import 'bloc/chat_view_model.dart';
 import 'chat_state.dart';
+import 'view_model/chat_actions_panel_view_model.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -38,6 +39,7 @@ class ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     final ChatViewModel viewModel = context.read();
+    final ChatActionsPanelViewModel chatActionsViewModel = context.read();
     return Scaffold(
       backgroundColor:
           TgTheme.of(context).themeOf<ChatThemeData>().backgroundColor,
@@ -63,7 +65,7 @@ class ChatPageState extends State<ChatPage> {
       ),
       bottomNavigationBar: SafeArea(
         child: StreamListener<PanelState>(
-          stream: viewModel.actionsPanelState,
+          stream: chatActionsViewModel.actionsPanelState,
           builder: (BuildContext context, PanelState state) {
             final IChatActionPanelFactory factory = context.read();
             return factory.create(state);

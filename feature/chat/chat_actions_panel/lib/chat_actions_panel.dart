@@ -12,6 +12,10 @@ abstract class IChatActionPanelFactory {
   Widget create(PanelState state);
 }
 
+abstract class IActionsListener {
+  void onToggleMuteState({required bool newState});
+}
+
 abstract class IChatActionPanelInteractor {
   Stream<PanelState> get panelStateStream;
 

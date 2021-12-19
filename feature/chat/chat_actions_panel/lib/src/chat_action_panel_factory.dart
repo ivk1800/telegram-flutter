@@ -7,14 +7,20 @@ import 'package:provider/provider.dart';
 class ChatActionPanelFactory implements IChatActionPanelFactory {
   ChatActionPanelFactory({
     required ILocalizationManager localizationManager,
-  }) : _localizationManager = localizationManager;
+    required IActionsListener actionsListener,
+  })  : _localizationManager = localizationManager,
+        _actionsListener = actionsListener;
 
   final ILocalizationManager _localizationManager;
+  final IActionsListener _actionsListener;
 
   @override
   Widget create(PanelState state) {
     return MultiProvider(
       providers: <Provider<dynamic>>[
+        Provider<IActionsListener>.value(
+          value: _actionsListener,
+        ),
         Provider<ILocalizationManager>.value(
           value: _localizationManager,
         ),
@@ -78,7 +84,11 @@ class _ChannelSubscriber extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, _panelHeight),
       ),
-      onPressed: () {},
+      onPressed: () {
+        context.read<IActionsListener>().onToggleMuteState(
+              newState: !state.isMuted,
+            );
+      },
       child: Text(
         state.isMuted
             ? localizationManager.getString('ChannelUnmute')

@@ -36,8 +36,10 @@ class ChatFeatureApi implements IChatFeatureApi {
       _chatScreenFactory ??= ChatScreenFactory(dependencies: _dependencies);
 
   @override
-  IChatManager get chatManager => _chatManager ??=
-      ChatManagerImpl(functionExecutor: _dependencies.functionExecutor);
+  IChatManager get chatManager => _chatManager ??= ChatManagerImpl(
+        chatRepository: _dependencies.chatRepository,
+        functionExecutor: _dependencies.functionExecutor,
+      );
 }
 
 class ChatFeatureDependencies {

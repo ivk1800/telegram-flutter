@@ -14,4 +14,8 @@ abstract class IChatScreenFactory {
 
 abstract class IChatManager {
   Future<void> leave(int chatId);
+
+  Future<void> join(int chatId);
+
+  Future<void> muteFor(int chatId, int seconds);
 }
