@@ -114,7 +114,7 @@ class _Join extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, _panelHeight),
       ),
-      onPressed: () {},
+      onPressed: () => context.read<IActionsListener>().onJoin(),
       child: Text(localizationManager.getString('ChannelJoin')),
     );
   }

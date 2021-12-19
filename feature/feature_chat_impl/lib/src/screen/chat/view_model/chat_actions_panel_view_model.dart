@@ -33,6 +33,11 @@ class ChatActionsPanelViewModel extends BaseViewModel
     _chatManager.muteFor(_chatId, seconds);
   }
 
+  @override
+  void onJoin() {
+    _chatManager.join(_chatId);
+  }
+
 // endregion IActionsListener
 
 }

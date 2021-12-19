@@ -14,6 +14,7 @@ abstract class IChatActionPanelFactory {
 
 abstract class IActionsListener {
   void onToggleMuteState({required bool newState});
+  void onJoin();
 }
 
 abstract class IChatActionPanelInteractor {
