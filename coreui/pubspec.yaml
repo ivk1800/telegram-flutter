@@ -15,11 +15,6 @@ dependencies:
     path: ../feature/feature_file_api
   flutter:
     sdk: flutter
-  jugger:
-    git:
-      url: git@github.com:ivk1800/jugger.dart.git
-      path: jugger
-      ref: 85d05caacbe81d3a683c1d31a9b27735e512bb93
 
 dev_dependencies:
   tg_lint_rules:

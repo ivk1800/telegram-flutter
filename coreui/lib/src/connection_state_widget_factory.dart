@@ -1,12 +1,10 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:tdlib/td_api.dart' as td;
 
 typedef ConnectionReadyWidgetFactory = Widget Function(BuildContext context);
 
 class ConnectionStateWidgetFactory {
-  @j.inject
   ConnectionStateWidgetFactory({
     required IConnectionStateProvider connectionStateProvider,
   }) : _connectionStateProvider = connectionStateProvider;

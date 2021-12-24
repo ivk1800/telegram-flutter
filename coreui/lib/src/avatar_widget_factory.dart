@@ -2,13 +2,12 @@ import 'dart:io';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:flutter/material.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:tdlib/td_api.dart' as td;
 
 class AvatarWidgetFactory {
-  @j.inject
-  AvatarWidgetFactory({required IFileRepository fileRepository})
-      : _fileRepository = fileRepository;
+  AvatarWidgetFactory({
+    required IFileRepository fileRepository,
+  }) : _fileRepository = fileRepository;
 
   final IFileRepository _fileRepository;
 

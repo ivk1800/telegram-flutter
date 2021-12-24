@@ -38,10 +38,12 @@ abstract class FoldersSetupModule {
 
   @j.provide
   @j.singleton
-  static IFileRepository provideFileRepository(
+  static AvatarWidgetFactory provideAvatarWidgetFactory(
     ChatsListFeatureDependencies dependencies,
   ) =>
-      dependencies.fileRepository;
+      AvatarWidgetFactory(
+        fileRepository: dependencies.fileRepository,
+      );
 
   @j.provide
   @j.singleton
