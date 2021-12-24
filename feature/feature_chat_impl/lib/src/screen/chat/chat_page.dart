@@ -145,6 +145,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
         final IChatHeaderInfoFactory chatHeaderInfoFactory = context.read();
         return AppBar(
           titleSpacing: 0.0,
+          // todo wrap to builder?
           title: chatHeaderInfoFactory.create(
             context: context,
             info: data.info,

@@ -23,6 +23,7 @@ class ChatHeaderInfoFactory implements IChatHeaderInfoFactory {
       ),
       title: Text(
         info.title,
+        maxLines: 1,
         style: const TextStyle(color: Colors.white),
       ),
       subtitle: DefaultTextStyle(
