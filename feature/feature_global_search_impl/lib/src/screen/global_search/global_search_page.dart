@@ -136,8 +136,9 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: const BoxConstraints(minWidth: double.infinity),
       color: Theme.of(context).colorScheme.secondary,
-      child: child,
+      child: Center(child: child),
     );
   }
 
