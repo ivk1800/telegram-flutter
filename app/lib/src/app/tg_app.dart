@@ -22,30 +22,14 @@ class TgApp extends StatefulWidget {
   TgAppState createState() => TgAppState();
 }
 
-class TgAppState extends State<TgApp> with WidgetsBindingObserver {
+class TgAppState extends State<TgApp> {
   @j.inject
   late AppDelegate appDelegate;
 
   @override
   void initState() {
     inject();
-    WidgetsBinding.instance!.addObserver(this);
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused) {
-      appDelegate.onPause();
-    } else if (state == AppLifecycleState.resumed) {
-      appDelegate.onResume();
-    }
   }
 
   @override

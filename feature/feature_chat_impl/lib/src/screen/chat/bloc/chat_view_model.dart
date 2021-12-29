@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:dialog_api/dialog_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';

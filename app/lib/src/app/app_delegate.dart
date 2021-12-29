@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/tdlib/config_provider.dart';
@@ -35,14 +34,6 @@ class AppDelegate {
   final OptionsManager _optionsManager;
   final TdConfigProvider _tdConfigProvider;
 
-  void onResume() {
-    _optionsManager.setOnline(online: true);
-  }
-
-  void onPause() {
-    _optionsManager.setOnline(online: false);
-  }
-
   void _init() {
     _connectivityProvider.onStatusChange
         .startWith(_connectivityProvider.status)
@@ -50,11 +41,8 @@ class AppDelegate {
       _client.send(td.SetNetworkType(type: status.toNetworkType()));
     });
 
-    _appLifecycleStateProvider.onStateChange
-        .where((AppLifecycleState state) => state == AppLifecycleState.resumed)
-        .map((AppLifecycleState event) => _connectivityProvider.status)
-        .listen((ConnectivityStatus event) {
-      _client.send(td.SetNetworkType(type: event.toNetworkType()));
+    _appLifecycleStateProvider.onStateChange.listen((LifecycleState state) {
+      _optionsManager.setOnline(online: state == LifecycleState.active);
     });
     _client.events.listen((td.TdObject newEvent) async {
       if (newEvent is td.UpdateAuthorizationState) {

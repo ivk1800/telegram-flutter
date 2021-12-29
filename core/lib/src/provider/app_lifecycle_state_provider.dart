@@ -1,7 +1,10 @@
-import 'dart:ui';
-
 abstract class IAppLifecycleStateProvider {
-  AppLifecycleState get currentState;
+  LifecycleState get currentState;
 
-  Stream<AppLifecycleState> get onStateChange;
+  Stream<LifecycleState> get onStateChange;
+}
+
+enum LifecycleState {
+  active,
+  inactive,
 }

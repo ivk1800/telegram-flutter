@@ -4,28 +4,33 @@ import 'package:rxdart/rxdart.dart';
 
 import 'app_lifecycle_state_provider.dart';
 
-class AppLifecycleStateProviderImpl
-    with WidgetsBindingObserver
+class AppLifecycleStateProviderImpl extends WidgetsBindingObserver
     implements IAppLifecycleStateProvider {
   @j.inject
   AppLifecycleStateProviderImpl() {
     WidgetsBinding.instance!.addObserver(this);
   }
 
-  final PublishSubject<AppLifecycleState> _onStateChangeSubject =
-      PublishSubject<AppLifecycleState>();
+  // ignore: close_sinks
+  final PublishSubject<LifecycleState> _onStateChangeSubject =
+      PublishSubject<LifecycleState>();
 
-  AppLifecycleState _currentState = AppLifecycleState.inactive;
-
-  @override
-  AppLifecycleState get currentState => _currentState;
+  LifecycleState _currentState = LifecycleState.inactive;
 
   @override
-  Stream<AppLifecycleState> get onStateChange => _onStateChangeSubject;
+  LifecycleState get currentState => _currentState;
+
+  @override
+  Stream<LifecycleState> get onStateChange => _onStateChangeSubject;
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    _currentState = state;
-    _onStateChangeSubject.add(state);
+    if (state == AppLifecycleState.paused) {
+      _currentState = LifecycleState.inactive;
+      _onStateChangeSubject.add(_currentState);
+    } else if (state == AppLifecycleState.resumed) {
+      _currentState = LifecycleState.active;
+      _onStateChangeSubject.add(_currentState);
+    }
   }
 }

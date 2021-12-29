@@ -9,11 +9,22 @@ import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:coreui/coreui.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:td_client/td_client.dart';
 
 @j.module
 abstract class AppModule {
+  // todo temporary
+  @j.singleton
+  @j.provide
+  static ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
+    IConnectionStateProvider connectionStateProvider,
+  ) =>
+      ConnectionStateWidgetFactory(
+        connectionStateProvider: connectionStateProvider,
+      );
+
   @j.singleton
   @j.provide
   static FeatureFactory provideFeatureFactory() {
