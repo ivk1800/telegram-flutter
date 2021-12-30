@@ -1,10 +1,10 @@
 import 'package:app/src/di/component/screen/sessions_screen_component.dart';
 import 'package:app/src/page/page.dart';
 import 'package:app/src/tile/session_tile.dart';
-import 'package:app/src/util/string_provider.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class SessionsPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class SessionsPage extends StatefulWidget {
 class SessionsPageState extends State<SessionsPage>
     with DefaultDataLoadingWidgetDelegateMixin<StateData> {
   @j.inject
-  late IStringsProvider stringsProvider;
+  late ILocalizationManager localizationManager;
 
   @j.inject
   late SessionTileFactory sessionTileFactory;
@@ -93,7 +93,7 @@ class SessionsPageState extends State<SessionsPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(stringsProvider.devices),
+        title: Text(localizationManager.getString('Devices')),
       ),
       body: DataLoadingWidget<StateData, SessionsViewModel>(
         delegate: this,

@@ -246,4 +246,6 @@
     <string lang="ChannelMute">MUTE</string>
     <!-- https://translations.telegram.org/en/android/groups_and_channels/ChannelJoin -->
     <string lang="ChannelJoin">JOIN</string>
+    <!-- https://translations.telegram.org/en/android/settings/Devices -->
+    <string lang="Devices">Devices</string>
 </resources>

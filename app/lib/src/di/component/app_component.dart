@@ -3,7 +3,6 @@ import 'package:app/src/di/module/td_module.dart';
 import 'package:app/src/feature/feature.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/tdlib/config_provider.dart';
-import 'package:app/src/util/util.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
@@ -45,8 +44,6 @@ abstract class AppComponent {
   SplitNavigationRouter getSplitNavigationRouter();
 
   SplitNavigationInfoProvider getSplitNavigationInfoProvider();
-
-  IStringsProvider getStringsProvider();
 
   DateFormatter getDateFormatter();
 
