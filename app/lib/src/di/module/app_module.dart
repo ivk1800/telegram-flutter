@@ -15,16 +15,6 @@ import 'package:td_client/td_client.dart';
 
 @j.module
 abstract class AppModule {
-  // todo temporary
-  @j.singleton
-  @j.provide
-  static ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
-    IConnectionStateProvider connectionStateProvider,
-  ) =>
-      ConnectionStateWidgetFactory(
-        connectionStateProvider: connectionStateProvider,
-      );
-
   @j.singleton
   @j.provide
   static FeatureFactory provideFeatureFactory() {
