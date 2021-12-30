@@ -11,5 +11,6 @@ dependencies:
     path: ../td_client
 
 dev_dependencies:
+  dependency_validator: ^3.1.2
   tg_lint_rules:
     path: ../tg_lint_rules

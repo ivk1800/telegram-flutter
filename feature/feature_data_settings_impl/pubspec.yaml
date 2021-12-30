@@ -18,6 +18,7 @@ dependencies:
     path: ../../localization_api
 
 dev_dependencies:
+  dependency_validator: ^3.1.2
   flutter:
     sdk: flutter
   tg_lint_rules:

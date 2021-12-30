@@ -129,6 +129,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.1.7
+  dependency_validator: ^3.1.2
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git

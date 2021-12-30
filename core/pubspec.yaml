@@ -12,6 +12,7 @@ dependencies:
     path: ../core_arch
   core_tdlib_api:
     path: ../core_tdlib_api
+  dependency_validator: ^3.1.2
   flutter:
     sdk: flutter
   intl: ^0.17.0

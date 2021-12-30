@@ -16,5 +16,6 @@ dependencies:
       ref: 2dec79fb15fddd61d8d3b068e0ac7336f0cacca1
 
 dev_dependencies:
+  dependency_validator: ^3.1.2
   tg_lint_rules:
     path: ../tg_lint_rules
