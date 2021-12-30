@@ -13,7 +13,7 @@ import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class DevFeature {
-  @j.provide
+  @j.provides
   DevFeature({
     required this.router,
     required this.client,

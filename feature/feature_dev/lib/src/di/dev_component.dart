@@ -17,10 +17,10 @@ abstract class DevComponent {
 
 @j.module
 abstract class DevModule {
-  @j.provide
+  @j.provides
   static TdClient provideTdClient(DevFeature devFeature) => devFeature.client;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IConnectionStateProvider provideConnectionStateProvider(
     DevFeature devFeature,
@@ -28,7 +28,7 @@ abstract class DevModule {
       devFeature.connectionStateProvider;
 
   @j.singleton
-  @j.provide
+  @j.provides
   static ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
     IConnectionStateProvider connectionStateProvider,
   ) =>

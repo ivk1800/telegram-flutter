@@ -54,7 +54,7 @@ import 'package:td_client/td_client.dart';
 abstract class FeatureModule {
   // region dependencies
 
-  @j.provide
+  @j.provides
   static MainScreenFeatureDependencies provideMainScreenFeatureDependencies(
     ILocalizationManager localizationManager,
     IMainScreenRouter router,
@@ -72,7 +72,7 @@ abstract class FeatureModule {
         globalSearchFeatureApi: globalSearchFeatureApi,
       );
 
-  @j.provide
+  @j.provides
   static ChatsListFeatureDependencies provideChatsListFeatureDependencies(
     IChatRepository chatRepository,
     IFileRepository fileRepository,
@@ -102,7 +102,7 @@ abstract class FeatureModule {
         ),
       );
 
-  @j.provide
+  @j.provides
   static GlobalSearchFeatureDependencies provideGlobalSearchFeatureDependencies(
     ILocalizationManager localizationManager,
     IChatRepository chatRepository,
@@ -118,7 +118,7 @@ abstract class FeatureModule {
         chatMessageRepository: chatMessageRepository,
       );
 
-  @j.provide
+  @j.provides
   static ChatFeatureDependencies provideChatFeatureDependencies(
     ILocalizationManager localizationManager,
     DateParser dateParser,
@@ -164,7 +164,7 @@ abstract class FeatureModule {
         userRepository: userRepository,
       );
 
-  @j.provide
+  @j.provides
   static SettingsFeatureDependencies provideSettingsFeatureDependencies(
     ILocalizationManager localizationManager,
     ISettingsScreenRouter router,
@@ -179,7 +179,7 @@ abstract class FeatureModule {
         settingsSearchFeatureApi: settingsSearchFeatureApi,
       );
 
-  @j.provide
+  @j.provides
   static SettingsSearchFeatureDependencies
       provideSettingsSearchFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
@@ -192,7 +192,7 @@ abstract class FeatureModule {
             localizationManager: localizationManager,
           );
 
-  @j.provide
+  @j.provides
   static PrivacySettingsFeatureDependencies
       providePrivacySettingsFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
@@ -205,7 +205,7 @@ abstract class FeatureModule {
             localizationManager: localizationManager,
           );
 
-  @j.provide
+  @j.provides
   static NotificationsSettingsFeatureDependencies
       provideNotificationsSettingsFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
@@ -218,7 +218,7 @@ abstract class FeatureModule {
             router: router,
           );
 
-  @j.provide
+  @j.provides
   static DataSettingsFeatureDependencies provideDataSettingsFeatureDependencies(
     ILocalizationManager localizationManager,
     IDataSettingsScreenRouter router,
@@ -230,7 +230,7 @@ abstract class FeatureModule {
         connectionStateProvider: connectionStateProvider,
       );
 
-  @j.provide
+  @j.provides
   static ChatSettingsFeatureDependencies provideChatSettingsFeatureDependencies(
     ILocalizationManager localizationManager,
     IChatSettingsScreenRouter router,
@@ -242,7 +242,7 @@ abstract class FeatureModule {
         connectionStateProvider: connectionStateProvider,
       );
 
-  @j.provide
+  @j.provides
   static WallpapersFeatureDependencies provideWallpapersFeatureDependencies(
     IBackgroundRepository backgroundRepository,
     FeatureFactory featureFactory,
@@ -259,7 +259,7 @@ abstract class FeatureModule {
         fileDownloader: featureFactory.createFileFeatureApi().fileDownloader,
       );
 
-  @j.provide
+  @j.provides
   static StickersFeatureDependencies provideStickersFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
     ILocalizationManager localizationManager,
@@ -273,7 +273,7 @@ abstract class FeatureModule {
         stickersFeatureRouter: router,
       );
 
-  @j.provide
+  @j.provides
   static ChatHeaderInfoFeatureDependencies
       provideChatHeaderInfoFeatureDependencies(
     IChatRepository chatRepository,
@@ -295,7 +295,7 @@ abstract class FeatureModule {
     );
   }
 
-  @j.provide
+  @j.provides
   static ProfileFeatureDependencies provideProfileFeatureDependencies(
     IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
     IUserRepository userRepository,
@@ -317,7 +317,7 @@ abstract class FeatureModule {
         chatHeaderInfoFeatureApi: chatHeaderInfoFeatureApi,
       );
 
-  @j.provide
+  @j.provides
   static SharedMediaFeatureDependencies provideSharedMediaFeatureDependencies(
     IChatMessageRepository messageRepository,
   ) =>
@@ -325,7 +325,7 @@ abstract class FeatureModule {
         messageRepository: messageRepository,
       );
 
-  @j.provide
+  @j.provides
   static CountryFeatureDependencies provideCountryFeatureDependencies(
     ILocalizationManager localizationManager,
   ) =>
@@ -333,7 +333,7 @@ abstract class FeatureModule {
         localizationManager: localizationManager,
       );
 
-  @j.provide
+  @j.provides
   static AuthFeatureDependencies provideAuthFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
     ILocalizationManager localizationManager,
@@ -354,7 +354,7 @@ abstract class FeatureModule {
             featureFactory.createCountryFeatureApi().countryRepository,
       );
 
-  @j.provide
+  @j.provides
   static LogoutFeatureDependencies provideLogoutFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
     ILocalizationManager localizationManager,
@@ -372,7 +372,7 @@ abstract class FeatureModule {
             featureFactory.createAuthFeatureApi().authenticationManager,
       );
 
-  @j.provide
+  @j.provides
   static FileFeatureDependencies provideFileFeatureDependencies(
     IFileRepository fileRepository,
     IFileUpdatesProvider fileUpdatesProvider,
@@ -384,7 +384,7 @@ abstract class FeatureModule {
         functionExecutor: functionExecutor,
       );
 
-  @j.provide
+  @j.provides
   static FoldersFeatureDependencies provideFoldersFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
     IFoldersRouter router,
@@ -400,129 +400,129 @@ abstract class FeatureModule {
 
   // region api
 
-  @j.provide
+  @j.provides
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
     GlobalSearchFeatureDependencies dependencies,
   ) {
     return GlobalSearchFeatureApi(dependencies: dependencies);
   }
 
-  @j.provide
+  @j.provides
   static IMainScreenFeatureApi provideMainScreenFeatureApi(
     MainScreenFeatureDependencies dependencies,
   ) {
     return MainScreenFeatureApi(dependencies: dependencies);
   }
 
-  @j.provide
+  @j.provides
   static IChatHeaderInfoFeatureApi provideChatHeaderInfoFeatureApi(
     ChatHeaderInfoFeatureDependencies dependencies,
   ) {
     return ChatHeaderInfoFeatureApi(dependencies: dependencies);
   }
 
-  @j.provide
+  @j.provides
   static IChatFeatureApi provideChatFeatureApi(
     ChatFeatureDependencies dependencies,
   ) {
     return ChatFeatureApi(dependencies: dependencies);
   }
 
-  @j.provide
+  @j.provides
   static IChatsListFeatureApi provideChatsListFeatureApi(
     ChatsListFeatureDependencies dependencies,
   ) {
     return ChatsListFeatureApi(dependencies: dependencies);
   }
 
-  @j.provide
+  @j.provides
   static ISettingsFeatureApi provideSettingsFeatureApi(
     SettingsFeatureDependencies dependencies,
   ) {
     return SettingsFeatureApi(dependencies: dependencies);
   }
 
-  @j.provide
+  @j.provides
   static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
     SettingsSearchFeatureDependencies dependencies,
   ) =>
       SettingsSearchFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static IPrivacySettingsFeatureApi providePrivacySettingsFeatureApi(
     PrivacySettingsFeatureDependencies dependencies,
   ) =>
       PrivacySettingsFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static INotificationsSettingsFeatureApi
       provideNotificationsSettingsFeatureApi(
     NotificationsSettingsFeatureDependencies dependencies,
   ) =>
           NotificationsSettingsFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static IDataSettingsFeatureApi provideDataSettingsFeatureApi(
     DataSettingsFeatureDependencies dependencies,
   ) =>
       DataSettingsFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static IChatSettingsFeatureApi provideChatSettingsFeatureApi(
     ChatSettingsFeatureDependencies dependencies,
   ) =>
       ChatSettingsFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static IWallpapersFeatureApi providewallpapersFeatureApi(
     WallpapersFeatureDependencies dependencies,
   ) =>
       WallpapersFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static IStickersFeatureApi provideStickersFeatureApi(
     StickersFeatureDependencies dependencies,
   ) =>
       StickersFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static IProfileFeatureApi provideProfileFeatureApi(
     ProfileFeatureDependencies dependencies,
   ) {
     return ProfileFeatureApi(dependencies: dependencies);
   }
 
-  @j.provide
+  @j.provides
   static ISharedMediaFeatureApi provideSharedMediaFeatureApi(
     SharedMediaFeatureDependencies dependencies,
   ) =>
       SharedMediaFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static ICountryFeatureApi provideCountryFeatureApi(
     CountryFeatureDependencies dependencies,
   ) =>
       CountryFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static IAuthFeatureApi provideAuthFeatureApi(
     AuthFeatureDependencies dependencies,
   ) =>
       AuthFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static ILogoutFeatureApi provideLogoutFeatureApi(
     LogoutFeatureDependencies dependencies,
   ) =>
       LogoutFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static IFileFeatureApi provideFileFeatureApi(
     FileFeatureDependencies dependencies,
   ) =>
       FileFeatureApi(dependencies: dependencies);
 
-  @j.provide
+  @j.provides
   static IFoldersFeatureApi provideFoldersFeatureApi(
     FoldersFeatureDependencies dependencies,
   ) =>
@@ -530,7 +530,7 @@ abstract class FeatureModule {
 
   // endregion api
 
-  @j.provide
+  @j.provides
   static DevFeature provideDevFeature(
     IDevFeatureRouter router,
     TdClient client,
@@ -544,7 +544,7 @@ abstract class FeatureModule {
 
   // region router
 
-  @j.provide
+  @j.provides
   @j.singleton
   static CommonScreenRouterImpl provideCommonScreenRouter(
     FeatureFactory featureFactory,
@@ -556,73 +556,73 @@ abstract class FeatureModule {
         navigationRouter: splitNavigationRouter,
       );
 
-  @j.bind
+  @j.binds
   IChatsListScreenRouter bindChatsListScreenRouter(
     ChatsListScreenRouterImpl impl,
   );
 
-  @j.bind
+  @j.binds
   IMainScreenRouter bindMainScreenRouter(CommonScreenRouterImpl impl);
 
-  @j.bind
+  @j.binds
   IChatScreenRouter bindChatScreenRouter(CommonScreenRouterImpl impl);
 
-  @j.bind
+  @j.binds
   IProfileFeatureRouter bindProfileFeatureRouter(CommonScreenRouterImpl impl);
 
-  @j.bind
+  @j.binds
   ISettingsScreenRouter bindSettingsScreenRouter(CommonScreenRouterImpl impl);
 
-  @j.bind
+  @j.binds
   ISettingsSearchScreenRouter bindSettingsSearchScreenRouter(
     CommonScreenRouterImpl impl,
   );
 
-  @j.bind
+  @j.binds
   IPrivacySettingsScreenRouter bindPrivacySettingsScreenRouter(
     CommonScreenRouterImpl impl,
   );
 
-  @j.bind
+  @j.binds
   INotificationsSettingsScreenRouter bindNotificationsSettingsScreenRouter(
     CommonScreenRouterImpl impl,
   );
 
-  @j.bind
+  @j.binds
   IDataSettingsScreenRouter bindDataSettingsScreenRouter(
     CommonScreenRouterImpl impl,
   );
 
-  @j.bind
+  @j.binds
   IChatSettingsScreenRouter bindChatSettingsScreenRouter(
     CommonScreenRouterImpl impl,
   );
 
-  @j.bind
+  @j.binds
   IDevFeatureRouter bindDevFeatureRouter(CommonScreenRouterImpl impl);
 
-  @j.bind
+  @j.binds
   IWallpapersFeatureRouter bindwallpapersFeatureRouter(
     CommonScreenRouterImpl impl,
   );
 
-  @j.bind
+  @j.binds
   IStickersFeatureRouter bindStickersFeatureRouter(
     CommonScreenRouterImpl impl,
   );
 
-  @j.bind
+  @j.binds
   IAuthFeatureRouter bindAuthFeatureRouter(CommonScreenRouterImpl impl);
 
-  @j.bind
+  @j.binds
   ILogoutFeatureRouter bindLogoutFeatureRouter(CommonScreenRouterImpl impl);
 
-  @j.bind
+  @j.binds
   IGlobalSearchFeatureRouter bindGlobalSearchFeatureRouter(
     CommonScreenRouterImpl impl,
   );
 
-  @j.bind
+  @j.binds
   IFoldersRouter bindFoldersRouter(CommonScreenRouterImpl impl);
 
 // endregion router

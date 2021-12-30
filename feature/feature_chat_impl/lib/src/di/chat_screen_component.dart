@@ -39,7 +39,7 @@ abstract class ChatScreenComponent {
 
 @j.module
 abstract class ChatScreenModule {
-  @j.provide
+  @j.provides
   @j.singleton
   static MessageTileMapper provideMessageTileMapper(
     ChatFeatureDependencies dependencies,
@@ -56,7 +56,7 @@ abstract class ChatScreenModule {
         ),
       ).create();
 
-  @j.provide
+  @j.provides
   @j.singleton
   static TileFactory provideTileFactory(
     ChatMessagesInteractor chatMessagesInteractor,
@@ -75,7 +75,7 @@ abstract class ChatScreenModule {
         ),
       ).create();
 
-  @j.provide
+  @j.provides
   @j.singleton
   static tg.AvatarWidgetFactory provideAvatarWidgetFactory(
     ChatFeatureDependencies dependencies,
@@ -84,7 +84,7 @@ abstract class ChatScreenModule {
         fileRepository: dependencies.fileRepository,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IMessageActionListener provideMessageActionListener(
     ChatViewModel bloc,
@@ -93,21 +93,21 @@ abstract class ChatScreenModule {
         bloc: bloc,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatHeaderInfoFactory provideChatHeaderInfoFactory(
     ChatFeatureDependencies dependencies,
   ) =>
       dependencies.chatHeaderInfoFeatureApi.getChatHeaderInfoFactory();
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
     ChatFeatureDependencies dependencies,
   ) =>
       dependencies.localizationManager;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ChatViewModel provideChatBloc(
     ChatArgs args,
@@ -127,12 +127,12 @@ abstract class ChatScreenModule {
         args: args,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ChatMessageFactory provideChatMessageFactory() =>
       const ChatMessageFactory();
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ChatMessagesInteractor provideChatMessagesInteractor(
     MessageTileMapper messageTileMapper,
@@ -146,7 +146,7 @@ abstract class ChatScreenModule {
         messageRepository: dependencies.chatMessageRepository,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatHeaderInfoInteractor provideChatHeaderInfoInteractor(
     ChatArgs args,
@@ -155,7 +155,7 @@ abstract class ChatScreenModule {
       dependencies.chatHeaderInfoFeatureApi
           .getChatHeaderInfoInteractor(args.chatId);
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ChatHeaderActionsInteractor provideChatHeaderActionsInteractor(
     ChatArgs args,
@@ -168,7 +168,7 @@ abstract class ChatScreenModule {
         chatId: args.chatId,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ChatInfoResolver provideChatInfoResolver(
     ChatFeatureDependencies dependencies,
@@ -179,7 +179,7 @@ abstract class ChatScreenModule {
         basicGroupRepository: dependencies.basicGroupRepository,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatActionPanelFactory provideChatActionPanelFactory(
     ChatFeatureDependencies dependencies,
@@ -190,7 +190,7 @@ abstract class ChatScreenModule {
         localizationManager: dependencies.localizationManager,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatActionPanelInteractor provideChatActionPanelInteractor(
     ChatFeatureDependencies dependencies,
@@ -205,7 +205,7 @@ abstract class ChatScreenModule {
         chatId: args.chatId,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ChatActionsPanelViewModel provideChatActionsViewModel(
     ChatFeatureDependencies dependencies,
@@ -220,7 +220,7 @@ abstract class ChatScreenModule {
       );
 
   // todo move to chat feature component
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatManager provideChatManager(
     ChatFeatureDependencies dependencies,

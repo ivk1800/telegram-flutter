@@ -12,7 +12,7 @@ abstract class AuthScreenComponent {
 
 @j.module
 abstract class ProfileScreenModule {
-  @j.provide
+  @j.provides
   @j.singleton
   static AuthBloc provideProfileBloc(
     AuthFeatureDependencies dependencies,
@@ -29,7 +29,7 @@ abstract class ProfileScreenModule {
         countryRepository: dependencies.countryRepository,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
     AuthFeatureDependencies dependencies,

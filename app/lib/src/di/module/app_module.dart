@@ -16,7 +16,7 @@ import 'package:td_client/td_client.dart';
 @j.module
 abstract class AppModule {
   @j.singleton
-  @j.provide
+  @j.provides
   static FeatureFactory provideFeatureFactory() {
     return FeatureFactory(
       featureComponent:
@@ -25,18 +25,18 @@ abstract class AppModule {
   }
 
   @j.singleton
-  @j.provide
+  @j.provides
   static TdClient provideTdClient() {
     return TdClient();
   }
 
   @j.singleton
-  @j.provide
+  @j.provides
   static OptionsManager provideOptionsManager(TdClient client) =>
       OptionsManager(client);
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IChatMessageRepository provideChatMessageRepository(
     ITdFunctionExecutor functionExecutor,
   ) =>
@@ -45,7 +45,7 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IChatRepository provideChatRepository(
     ITdFunctionExecutor functionExecutor,
   ) =>
@@ -54,7 +54,7 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IFileRepository provideFileRepository(
     TdClient client,
   ) =>
@@ -63,14 +63,14 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IUserRepository provideUserRepository(
     ITdFunctionExecutor functionExecutor,
   ) =>
       UserRepositoryImpl(functionExecutor: functionExecutor);
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IStickerRepository provideStickerRepository(
     ITdFunctionExecutor functionExecutor,
   ) =>
@@ -79,7 +79,7 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IBackgroundRepository provideBackgroundRepository(
     ITdFunctionExecutor functionExecutor,
   ) =>
@@ -88,7 +88,7 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static ISessionRepository provideSessionRepository(
     ITdFunctionExecutor functionExecutor,
   ) =>
@@ -97,7 +97,7 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   @j.nonLazy
   static IChatFilterRepository provideChatFilterRepository(
     IChatFiltersUpdatesProvider chatFiltersUpdatesProvider,
@@ -107,7 +107,7 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IBasicGroupRepository provideBasicGroupRepository(
     ITdFunctionExecutor functionExecutor,
   ) =>
@@ -116,7 +116,7 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static ISuperGroupRepository provideSuperGroupRepository(
     ITdFunctionExecutor functionExecutor,
   ) =>
@@ -125,44 +125,44 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.bind
+  @j.binds
   IConnectivityProvider bindConnectivityProvider(ConnectivityProviderImpl impl);
 
   @j.singleton
-  @j.bind
+  @j.binds
   IAppLifecycleStateProvider bindAppLifecycleStateProvider(
     AppLifecycleStateProviderImpl impl,
   );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static SplitNavigationInfoProvider provideSplitNavigationInfoProvider() =>
       SplitNavigationInfoProvider(TgApp.splitViewNavigatorKey);
 
   @j.singleton
-  @j.provide
+  @j.provides
   static SplitNavigationRouter provideSplitViewNavigationRouter(
     FeatureFactory featureFactory,
   ) =>
       SplitNavigationRouter(TgApp.splitViewNavigatorKey, featureFactory);
 
   @j.singleton
-  @j.bind
+  @j.binds
   INavigationRouter bindRootNavigationRouter(SplitNavigationRouter impl);
 
   @j.singleton
-  @j.provide
+  @j.provides
   static DateFormatter provideDateFormatter() => DateFormatter();
 
   @j.singleton
-  @j.provide
+  @j.provides
   static DateParser provideDateParser() => DateParser();
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IStringsProvider provideStringsProvider() => DefaultStringProvider();
 
   @j.singleton
-  @j.provide
+  @j.provides
   static TdConfigProvider provideTdConfigProvider() => TdConfigProvider();
 }

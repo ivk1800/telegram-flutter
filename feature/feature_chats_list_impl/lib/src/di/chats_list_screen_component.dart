@@ -20,23 +20,23 @@ abstract class ChatsListScreenComponent {
 
 @j.module
 abstract class FoldersSetupModule {
-  @j.provide
+  @j.provides
   @j.singleton
   static ChatListConfig provideChatListConfig() =>
       ChatListConfig(chatList: const td.ChatListMain());
 
-  @j.bind
+  @j.binds
   @j.singleton
   IChatsHolder bindChatsHolder(SimpleChatsHolder impl);
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatRepository provideChatRepository(
     ChatsListFeatureDependencies dependencies,
   ) =>
       dependencies.chatRepository;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static AvatarWidgetFactory provideAvatarWidgetFactory(
     ChatsListFeatureDependencies dependencies,
@@ -45,56 +45,56 @@ abstract class FoldersSetupModule {
         fileRepository: dependencies.fileRepository,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IUserRepository provideUserRepository(
     ChatsListFeatureDependencies dependencies,
   ) =>
       dependencies.userRepository;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
     ChatsListFeatureDependencies dependencies,
   ) =>
       dependencies.localizationManager;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatsListScreenRouter provideChatsListScreenRouter(
     ChatsListFeatureDependencies dependencies,
   ) =>
       dependencies.router;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static DateFormatter provideDateFormatter(
     ChatsListFeatureDependencies dependencies,
   ) =>
       dependencies.dateFormatter;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static DateParser provideDateParser(
     ChatsListFeatureDependencies dependencies,
   ) =>
       dependencies.dateParser;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatUpdatesProvider provideChatUpdatesProvider(
     ChatsListFeatureDependencies dependencies,
   ) =>
       dependencies.chatUpdatesProvider;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IMessagePreviewResolver provideMessagePreviewResolver(
     ChatsListFeatureDependencies dependencies,
   ) =>
       dependencies.messagePreviewResolver;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static TileFactory provideTileFactory(
           AvatarWidgetFactory avatarWidgetFactory, ChatTileListener listener) =>
@@ -107,13 +107,13 @@ abstract class FoldersSetupModule {
         },
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ChatTileListener provideChatTileListener(
           ChatsListViewModel viewModel) =>
       ChatsListTileListener(viewModel: viewModel);
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ChatsListViewModel provideChatsListViewModel(
     IChatsListScreenRouter router,

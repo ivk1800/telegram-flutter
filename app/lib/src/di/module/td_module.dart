@@ -3,24 +3,25 @@ import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:td_client/td_client.dart';
 
+@j.module
 abstract class TdModule {
   @j.singleton
-  @j.provide
+  @j.provides
   static UpdatesProvider provideUpdatesProvider(TdClient client) =>
       UpdatesProvider(client: client);
 
   @j.singleton
-  @j.bind
+  @j.binds
   IChatUpdatesProvider bindChatUpdatesProvider(UpdatesProvider impl);
 
   @j.singleton
-  @j.bind
+  @j.binds
   IChatFiltersUpdatesProvider bindChatFiltersUpdatesProvider(
     UpdatesProvider impl,
   );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IConnectionStateProvider bindConnectionStateProvider(
     UpdatesProvider updatesProvider,
   ) =>
@@ -29,23 +30,23 @@ abstract class TdModule {
       );
 
   @j.singleton
-  @j.bind
+  @j.binds
   IAuthenticationStateUpdatesProvider bindAuthenticationStateUpdatesProvider(
       UpdatesProvider impl);
 
   @j.singleton
-  @j.bind
+  @j.binds
   IFileUpdatesProvider bindFileUpdatesProvider(UpdatesProvider impl);
 
   @j.singleton
-  @j.provide
+  @j.provides
   static ISuperGroupUpdatesProvider provideSuperGroupUpdatesProvider(
     UpdatesProvider impl,
   ) =>
       impl;
 
   @j.singleton
-  @j.provide
+  @j.provides
   static ITdFunctionExecutor provideTdFunctionExecutor(TdClient client) =>
       TdFunctionExecutor(
         client: client,

@@ -17,7 +17,7 @@ abstract class ProfileScreenComponent {
 
 @j.module
 abstract class ProfileScreenModule {
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatHeaderInfoInteractor provideChatHeaderInfoInteractor(
     ProfileArgs args,
@@ -26,7 +26,7 @@ abstract class ProfileScreenModule {
       dependencies.chatHeaderInfoFeatureApi
           .getChatHeaderInfoInteractor(args.id);
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatHeaderInfoFactory provideChatHeaderInfoFactory(
     ProfileArgs args,
@@ -34,7 +34,7 @@ abstract class ProfileScreenModule {
   ) =>
       dependencies.chatHeaderInfoFeatureApi.getChatHeaderInfoFactory();
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ProfileBloc provideProfileBloc(
     ProfileArgs args,
@@ -50,7 +50,7 @@ abstract class ProfileScreenModule {
         messageRepository: dependencies.messageRepository,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ContentInteractor provideContentInteractor(
     ProfileArgs args,
@@ -66,7 +66,7 @@ abstract class ProfileScreenModule {
         messageRepository: dependencies.messageRepository,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
     ProfileFeatureDependencies dependencies,

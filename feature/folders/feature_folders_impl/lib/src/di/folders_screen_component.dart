@@ -15,14 +15,14 @@ abstract class FoldersScreenComponent {
 @j.module
 abstract class FoldersScreenModule {
   @j.singleton
-  @j.provide
+  @j.provides
   static FoldersViewModel provideFoldersViewModel(
     IFoldersScreenRouter router,
   ) =>
       FoldersViewModel(router: router);
 
   @j.singleton
-  @j.bind
+  @j.binds
   IFoldersScreenRouter bindFoldersScreenRouter(IFoldersRouter router);
 }
 

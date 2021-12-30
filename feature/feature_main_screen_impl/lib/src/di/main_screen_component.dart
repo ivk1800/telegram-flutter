@@ -22,7 +22,7 @@ abstract class MainScreenComponent {
 
 @j.module
 abstract class MainScreenModule {
-  @j.provide
+  @j.provides
   @j.singleton
   static MainViewModel provideMainViewModel(
     MainScreenFeatureDependencies dependencies,
@@ -31,7 +31,7 @@ abstract class MainScreenModule {
         router: dependencies.router,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static tg.ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
     MainScreenFeatureDependencies dependencies,
@@ -40,49 +40,49 @@ abstract class MainScreenModule {
         connectionStateProvider: dependencies.connectionStateProvider,
       );
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
     MainScreenFeatureDependencies dependencies,
   ) =>
       dependencies.globalSearchFeatureApi;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IGlobalSearchScreenFactory provideGlobalSearchScreenFactory(
     IGlobalSearchFeatureApi api,
   ) =>
       api.globalSearchScreenFactory;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatsListFeatureApi provideChatsListFeatureApi(
     MainScreenFeatureDependencies dependencies,
   ) =>
       dependencies.chatsListFeatureApi;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IChatsListScreenFactory provideChatsListWidgetFactory(
     IChatsListFeatureApi api,
   ) =>
       api.chatsListScreenFactory;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IConnectionStateProvider provideConnectionStateProvider(
     MainScreenFeatureDependencies dependencies,
   ) =>
       dependencies.connectionStateProvider;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static IMainScreenRouter provideMainRouter(
     MainScreenFeatureDependencies dependencies,
   ) =>
       dependencies.router;
 
-  @j.provide
+  @j.provides
   @j.singleton
   static ILocalizationManager provideLocalizationManager(
     MainScreenFeatureDependencies dependencies,

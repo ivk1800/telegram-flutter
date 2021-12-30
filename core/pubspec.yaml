@@ -19,7 +19,7 @@ dependencies:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger
-      ref: 85d05caacbe81d3a683c1d31a9b27735e512bb93
+      ref: 9e9f4e9beb08951b37ec8592147ba52979c33d30
   rxdart: ^0.26.0
   td_client:
     path: ../td_client

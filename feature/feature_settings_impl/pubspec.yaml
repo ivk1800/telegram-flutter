@@ -20,17 +20,17 @@ dependencies:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger
-      ref: 85d05caacbe81d3a683c1d31a9b27735e512bb93
+      ref: 9e9f4e9beb08951b37ec8592147ba52979c33d30
   localization_api:
     path: ../../localization_api
   provider: 6.0.0
 
 dev_dependencies:
-  build_runner: 2.1.1
+  build_runner: ^2.1.7
   jugger_generator:
     git:
       url: git@github.com:ivk1800/jugger.dart.git
       path: jugger_generator
-      ref: c1db629af1108851234014cb98eeb135f3673315
+      ref: c44f7871e6be360937b83b0e89be29c957dcdbd9
   tg_lint_rules:
     path: ../../tg_lint_rules

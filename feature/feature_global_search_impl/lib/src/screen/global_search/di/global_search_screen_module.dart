@@ -16,7 +16,7 @@ import 'package:tile/tile.dart';
 @j.module
 abstract class GlobalSearchScreenModule {
   @j.singleton
-  @j.provide
+  @j.provides
   static GlobalSearchBloc provideGlobalSearchBloc(
     GlobalSearchFeatureDependencies dependencies,
   ) =>
@@ -33,14 +33,14 @@ abstract class GlobalSearchScreenModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static ILocalizationManager provideLocalizationManager(
     GlobalSearchFeatureDependencies dependencies,
   ) =>
       dependencies.localizationManager;
 
   @j.singleton
-  @j.provide
+  @j.provides
   static AvatarWidgetFactory provideAvatarWidgetFactory(
     GlobalSearchFeatureDependencies dependencies,
   ) =>
@@ -49,7 +49,7 @@ abstract class GlobalSearchScreenModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static TileFactory provideTileFactory(
     AvatarWidgetFactory avatarWidgetFactory,
   ) =>

@@ -15,7 +15,7 @@ abstract class FoldersComponent {
 @j.module
 abstract class FoldersModule {
   @j.singleton
-  @j.provide
+  @j.provides
   static tg.TgAppBarFactory provideTgAppBarFactory(
     FoldersFeatureDependencies dependencies,
   ) =>
@@ -26,14 +26,14 @@ abstract class FoldersModule {
       );
 
   @j.singleton
-  @j.provide
+  @j.provides
   static ILocalizationManager provideLocalizationManager(
     FoldersFeatureDependencies dependencies,
   ) =>
       dependencies.localizationManager;
 
   @j.singleton
-  @j.provide
+  @j.provides
   static IFoldersRouter provideFoldersRouter(
     FoldersFeatureDependencies dependencies,
   ) =>
