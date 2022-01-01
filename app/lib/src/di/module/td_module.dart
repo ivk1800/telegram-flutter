@@ -32,18 +32,18 @@ abstract class TdModule {
   @j.singleton
   @j.binds
   IAuthenticationStateUpdatesProvider bindAuthenticationStateUpdatesProvider(
-      UpdatesProvider impl);
+    UpdatesProvider impl,
+  );
 
   @j.singleton
   @j.binds
   IFileUpdatesProvider bindFileUpdatesProvider(UpdatesProvider impl);
 
   @j.singleton
-  @j.provides
-  static ISuperGroupUpdatesProvider provideSuperGroupUpdatesProvider(
+  @j.binds
+  ISuperGroupUpdatesProvider bindSuperGroupUpdatesProvider(
     UpdatesProvider impl,
-  ) =>
-      impl;
+  );
 
   @j.singleton
   @j.provides
