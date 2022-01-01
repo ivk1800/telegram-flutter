@@ -27,7 +27,7 @@ class ReplyPreviewDelegate implements IPreviewDelegate {
     td.MessageAnimation animation,
   ) async {
     return MessagePreviewData(
-      firstText: await _getSenderNameToDisplay(message.sender),
+      firstText: await _getSenderNameToDisplay(message.senderId),
       secondText: 'GIF',
     );
   }
@@ -38,7 +38,7 @@ class ReplyPreviewDelegate implements IPreviewDelegate {
     td.MessageText text,
   ) async {
     return MessagePreviewData(
-      firstText: await _getSenderNameToDisplay(message.sender),
+      firstText: await _getSenderNameToDisplay(message.senderId),
       secondText: await _messageTextResolver.resolve(message.content),
     );
   }

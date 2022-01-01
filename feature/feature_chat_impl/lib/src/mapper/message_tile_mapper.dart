@@ -53,7 +53,7 @@ class MessageTileMapper {
       messageAnimation: (td.MessageAnimation value) async {
         return MessageAnimationTileModel(
           id: message.id,
-          senderInfo: await _senderInfoMapper.map(message.sender),
+          senderInfo: await _senderInfoMapper.map(message.senderId),
           replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
           additionalInfo: await _additionalInfoMapper.map(message),
           isOutgoing: message.isOutgoing,
@@ -65,7 +65,7 @@ class MessageTileMapper {
         final Duration duration = Duration(seconds: value.audio.duration);
         return MessageAudioTileModel(
           id: message.id,
-          senderInfo: await _senderInfoMapper.map(message.sender),
+          senderInfo: await _senderInfoMapper.map(message.senderId),
           replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
           additionalInfo: await _additionalInfoMapper.map(message),
           isOutgoing: message.isOutgoing,
@@ -248,7 +248,7 @@ class MessageTileMapper {
         // todo extact data from vcard
         return MessageContactTileModel(
           id: message.id,
-          senderInfo: await _senderInfoMapper.map(message.sender),
+          senderInfo: await _senderInfoMapper.map(message.senderId),
           replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
           additionalInfo: await _additionalInfoMapper.map(message),
           isOutgoing: message.isOutgoing,
@@ -356,7 +356,7 @@ class MessageTileMapper {
       messagePhoto: (td.MessagePhoto value) async {
         return MessagePhotoTileModel(
           id: message.id,
-          senderInfo: await _senderInfoMapper.map(message.sender),
+          senderInfo: await _senderInfoMapper.map(message.senderId),
           replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
           additionalInfo: await _additionalInfoMapper.map(message),
           minithumbnail: value.photo.minithumbnail?.toMinithumbnail(),
@@ -412,7 +412,7 @@ class MessageTileMapper {
       messageText: (td.MessageText value) async {
         return MessageTextTileModel(
           id: message.id,
-          senderInfo: await _senderInfoMapper.map(message.sender),
+          senderInfo: await _senderInfoMapper.map(message.senderId),
           replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
           additionalInfo: await _additionalInfoMapper.map(message),
           isOutgoing: message.isOutgoing,
@@ -444,7 +444,7 @@ class MessageTileMapper {
       messageVideo: (td.MessageVideo value) async {
         return MessageVideoTileModel(
           id: message.id,
-          senderInfo: await _senderInfoMapper.map(message.sender),
+          senderInfo: await _senderInfoMapper.map(message.senderId),
           replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
           additionalInfo: await _additionalInfoMapper.map(message),
           isOutgoing: message.isOutgoing,

@@ -20,7 +20,7 @@ class ChatPreviewDelegate implements IPreviewDelegate {
     td.Message message,
     td.MessageAnimation animation,
   ) =>
-      _resolve(message.sender, animation);
+      _resolve(message.senderId, animation);
 
   @override
   Future<MessagePreviewData> resolveForText(
@@ -28,7 +28,7 @@ class ChatPreviewDelegate implements IPreviewDelegate {
     td.MessageText text,
   ) async {
     return MessagePreviewData(
-      firstText: await _getSenderNameToDisplay(message.sender),
+      firstText: await _getSenderNameToDisplay(message.senderId),
       secondText: await _messageTextResolver.resolve(text),
     );
   }

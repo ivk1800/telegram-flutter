@@ -58,6 +58,7 @@ extension _UpdatesExtensions on Stream<td.TdObject> {
       where((td.TdObject event) => event is td.UpdateSupergroup)
           .cast<td.UpdateSupergroup>();
 
+  // todo add more updates after update lib version
   Stream<td.Update> chatUpdatesFilter() => where((td.TdObject event) =>
       event is td.UpdateNewChat ||
       event is td.UpdateChatTitle ||
@@ -74,7 +75,6 @@ extension _UpdatesExtensions on Stream<td.TdObject> {
       event is td.UpdateChatUnreadMentionCount ||
       event is td.UpdateChatNotificationSettings ||
       event is td.UpdateScopeNotificationSettings ||
-      event is td.UpdateChatMessageTtlSetting ||
       event is td.UpdateChatActionBar ||
       event is td.UpdateChatReplyMarkup ||
       event is td.UpdateChatDraftMessage ||

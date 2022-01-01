@@ -39,7 +39,7 @@ class MessageCallTileModelMapper {
     // todo handle video calls
     return MessageCallTileModel(
       id: message.id,
-      senderInfo: await _senderInfoResolver.map(message.sender),
+      senderInfo: await _senderInfoResolver.map(message.senderId),
       replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
       additionalInfo: await _additionalInfoMapper.map(message),
       isOutgoing: message.isOutgoing,
