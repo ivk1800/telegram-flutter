@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  core_arch:
+    path: ../../core_arch
   core_tdlib_api:
     path: ../../core_tdlib_api
   coreui:
@@ -24,6 +26,8 @@ dependencies:
   localization_api:
     path: ../../localization_api
   provider: 6.0.0
+  provider_extensions:
+    path: ../../provider_extensions
 
 dev_dependencies:
   build_runner: ^2.1.7

@@ -1,9 +1,7 @@
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_settings_impl/feature_settings_impl.dart';
-import 'package:feature_settings_impl/src/di/settings_screen_component.jugger.dart';
+import 'package:feature_settings_impl/src/screen/setting_view_model.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:flutter/material.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
@@ -18,33 +16,19 @@ class SettingsPageState extends State<SettingsPage>
     with TickerProviderStateMixin {
   late GlobalObjectKey<tg.TgSwitchedAppBarState> _appbarKey;
 
-  @j.inject
-  late ILocalizationManager localizationManager;
-
-  @j.inject
-  late ISettingsScreenRouter router;
-
-  @j.inject
-  late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
-
-  @j.inject
-  late ISettingsSearchWidgetFactory settingsSearchWidgetFactory;
-
   _ScreenState _screenState = _ScreenState.settings;
 
   final FocusNode _searchQueryFocusNode = FocusNode();
   final TextEditingController _searchQueryController = TextEditingController();
 
+  late Widget _searchWidget;
+
   @override
   void initState() {
-    JuggerSettingsScreenComponentBuilder()
-        .dependencies(context.read())
-        .screenState(this)
-        .build()
-        .inject(this);
-    super.initState();
+    _searchWidget = context.read<ISettingsSearchWidgetFactory>().create();
     _appbarKey = _AppBarKey(hashCode);
     _searchQueryController.addListener(_onSearchEvent);
+    super.initState();
   }
 
   @override
@@ -95,8 +79,18 @@ class SettingsPageState extends State<SettingsPage>
                 },
               );
             } else {
+              final tg.ConnectionStateWidgetFactory
+                  connectionStateWidgetFactory = context.read();
               return AppBar(
-                title: _buildTitleWidget(context),
+                title: Align(
+                  child: connectionStateWidgetFactory.create(context,
+                      (BuildContext context) {
+                    return Text(
+                      context.read<ILocalizationManager>().getString('AppName'),
+                    );
+                  }),
+                  alignment: Alignment.centerLeft,
+                ),
                 actions: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.search),
@@ -112,7 +106,7 @@ class SettingsPageState extends State<SettingsPage>
                     onSelected: (_AppBarMenu value) {
                       switch (value) {
                         case _AppBarMenu.logOut:
-                          router.toLogOut();
+                          context.read<SettingViewModel>().onLogOutTap();
                           break;
                       }
                     },
@@ -122,132 +116,25 @@ class SettingsPageState extends State<SettingsPage>
             }
           },
         ),
-        body: _buildBody(context),
+        body: Stack(
+          children: <Widget>[
+            const SingleChildScrollView(child: _Body()),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: _screenState == _ScreenState.search
+                  ? ColoredBox(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      child: _searchWidget,
+                    )
+                  : null,
+            ),
+          ],
+        ),
       ),
     );
   }
 
   void _onSearchEvent() {}
-
-  Widget _buildBody(BuildContext context) => Stack(
-        children: <Widget>[
-          SingleChildScrollView(child: _buildDefaultWidget(context)),
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 200),
-            child: _screenState == _ScreenState.search
-                ? _buildSearchWidget(context)
-                : null,
-          ),
-        ],
-      );
-
-  Widget _buildSearchWidget(BuildContext context) => Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: settingsSearchWidgetFactory.create(),
-      );
-
-  Widget _buildDefaultWidget(BuildContext context) {
-    final Color accentColor = Theme.of(context).colorScheme.secondary;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        tg.TextCell(
-          titleColor: accentColor,
-          leading: Icon(
-            Icons.add_a_photo_outlined,
-            color: accentColor,
-          ),
-          title: _getString('SetProfilePhoto'),
-        ),
-        const tg.SectionDivider(),
-        tg.Section(
-          text: _getString('Account'),
-        ),
-        tg.TextCell(
-          title: '123',
-          subtitle: _getString('TapToChangePhone'),
-        ),
-        const tg.Divider(),
-        tg.TextCell(
-          title: 'None',
-          subtitle: _getString('Username'),
-        ),
-        const tg.Divider(),
-        tg.TextCell(
-          title: _getString('UserBio'),
-          subtitle: _getString('UserBioDetail'),
-        ),
-        const tg.SectionDivider(),
-        tg.Section(
-          text: _getString('Settings'),
-        ),
-        tg.TextCell(
-          onTap: router.toNotificationsSettings,
-          leading: const Icon(Icons.notifications_none),
-          title: _getString('NotificationsAndSounds'),
-        ),
-        const tg.Divider(),
-        tg.TextCell(
-          onTap: router.toPrivacySettings,
-          leading: const Icon(Icons.lock_open),
-          title: _getString('PrivacySettings'),
-        ),
-        const tg.Divider(),
-        tg.TextCell(
-          onTap: router.toDataSettings,
-          leading: const Icon(Icons.data_usage),
-          title: _getString('DataSettings'),
-        ),
-        const tg.Divider(),
-        tg.TextCell(
-          onTap: router.toChatSettings,
-          leading: const Icon(Icons.chat_bubble_outline),
-          title: _getString('ChatSettings'),
-        ),
-        const tg.Divider(),
-        tg.TextCell(
-          onTap: router.toFolders,
-          leading: const Icon(Icons.folder),
-          title: _getString('Filters'),
-        ),
-        const tg.SectionDivider(),
-        tg.Section(
-          text: _getString('SettingsHelp'),
-        ),
-        tg.TextCell(
-          leading: const Icon(Icons.chat),
-          title: _getString('AskAQuestion'),
-        ),
-        const tg.Divider(),
-        tg.TextCell(
-          leading: const Icon(Icons.help_outline),
-          title: _getString('TelegramFAQ'),
-        ),
-        const tg.Divider(),
-        tg.TextCell(
-          leading: const Icon(Icons.shield),
-          title: _getString('PrivacyPolicy'),
-        ),
-        const tg.Annotation(
-          align: TextAlign.center,
-          text: 'Todo: add app version information',
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTitleWidget(BuildContext context) {
-    return Align(
-      child:
-          connectionStateWidgetFactory.create(context, (BuildContext context) {
-        // TODO extract text to stings
-        return const Text('Telegram');
-      }),
-      alignment: Alignment.centerLeft,
-    );
-  }
-
-  String _getString(String key) => localizationManager.getString(key);
 }
 
 enum _AppBarMenu { logOut }
@@ -255,7 +142,10 @@ enum _AppBarMenu { logOut }
 enum _ScreenState { settings, search }
 
 class AppBarPopupMenuItem extends StatelessWidget {
-  const AppBarPopupMenuItem({Key? key, required this.title}) : super(key: key);
+  const AppBarPopupMenuItem({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   final String title;
 
@@ -294,4 +184,105 @@ class _AppBarPopupMenu extends StatelessWidget {
 
 class _AppBarKey extends GlobalObjectKey<tg.TgSwitchedAppBarState> {
   const _AppBarKey(Object value) : super(value);
+}
+
+class _Body extends StatelessWidget {
+  const _Body({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final Color accentColor = Theme.of(context).colorScheme.secondary;
+
+    final SettingViewModel viewModel = context.read();
+
+    final ILocalizationManager localizationManager = context.read();
+    String _getString(String key) => localizationManager.getString(key);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        tg.TextCell(
+          titleColor: accentColor,
+          leading: Icon(
+            Icons.add_a_photo_outlined,
+            color: accentColor,
+          ),
+          title: _getString('SetProfilePhoto'),
+        ),
+        const tg.SectionDivider(),
+        tg.Section(
+          text: _getString('Account'),
+        ),
+        tg.TextCell(
+          title: '123',
+          subtitle: _getString('TapToChangePhone'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          title: 'None',
+          subtitle: _getString('Username'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          title: _getString('UserBio'),
+          subtitle: _getString('UserBioDetail'),
+        ),
+        const tg.SectionDivider(),
+        tg.Section(
+          text: _getString('Settings'),
+        ),
+        tg.TextCell(
+          onTap: viewModel.onNotificationsSettingsTap,
+          leading: const Icon(Icons.notifications_none),
+          title: _getString('NotificationsAndSounds'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          onTap: viewModel.onPrivacySettingsTap,
+          leading: const Icon(Icons.lock_open),
+          title: _getString('PrivacySettings'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          onTap: viewModel.onDataSettingsTap,
+          leading: const Icon(Icons.data_usage),
+          title: _getString('DataSettings'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          onTap: viewModel.onChatSettingsTap,
+          leading: const Icon(Icons.chat_bubble_outline),
+          title: _getString('ChatSettings'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          onTap: viewModel.onFoldersTap,
+          leading: const Icon(Icons.folder),
+          title: _getString('Filters'),
+        ),
+        const tg.SectionDivider(),
+        tg.Section(
+          text: _getString('SettingsHelp'),
+        ),
+        tg.TextCell(
+          leading: const Icon(Icons.chat),
+          title: _getString('AskAQuestion'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          leading: const Icon(Icons.help_outline),
+          title: _getString('TelegramFAQ'),
+        ),
+        const tg.Divider(),
+        tg.TextCell(
+          leading: const Icon(Icons.shield),
+          title: _getString('PrivacyPolicy'),
+        ),
+        const tg.Annotation(
+          align: TextAlign.center,
+          text: 'Todo: add app version information',
+        ),
+      ],
+    );
+  }
 }

@@ -369,8 +369,8 @@ class CommonScreenRouterImpl
 
   @override
   void toSettings() {
-    final ISettingsWidgetFactory factory =
-        _featureFactory.createSettingsFeatureApi().screenWidgetFactory;
+    final ISettingScreenFactory factory =
+        _featureFactory.createSettingsFeatureApi().settingsScreenFactory;
     _navigationRouter.push(
       key: UniqueKey(),
       builder: (BuildContext context) => factory.create(),

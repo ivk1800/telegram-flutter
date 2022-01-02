@@ -3,9 +3,9 @@ library feature_settings_api;
 import 'package:flutter/widgets.dart';
 
 abstract class ISettingsFeatureApi {
-  ISettingsWidgetFactory get screenWidgetFactory;
+  ISettingScreenFactory get settingsScreenFactory;
 }
 
-abstract class ISettingsWidgetFactory {
+abstract class ISettingScreenFactory {
   Widget create();
 }

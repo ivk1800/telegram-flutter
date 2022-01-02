@@ -1,14 +1,23 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_settings_impl/feature_settings_impl.dart';
-import 'package:feature_settings_impl/src/screen/settings_page.dart';
+import 'package:feature_settings_impl/src/screen/setting_view_model.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 @j.Component(modules: <Type>[SettingsModule])
 abstract class SettingsScreenComponent {
-  void inject(SettingsPageState screenState);
+  ILocalizationManager getLocalizationManager();
+
+  tg.ConnectionStateWidgetFactory getConnectionStateWidgetFactory();
+
+  tg.TgAppBarFactory getTgAppBarFactory();
+
+  ISettingsSearchWidgetFactory getSettingsSearchWidgetFactory();
+
+  SettingViewModel getSettingViewModel();
 }
 
 @j.module
@@ -56,12 +65,28 @@ abstract class SettingsModule {
       ConnectionStateWidgetFactory(
         connectionStateProvider: connectionStateProvider,
       );
+
+  @j.singleton
+  @j.provides
+  static SettingViewModel provideSettingViewModel(
+    SettingsFeatureDependencies dependencies,
+  ) =>
+      SettingViewModel(
+        router: dependencies.router,
+      );
+
+  @j.singleton
+  @j.provides
+  static tg.TgAppBarFactory provideTgAppBarFactory(
+    ConnectionStateWidgetFactory connectionStateWidgetFactory,
+  ) =>
+      TgAppBarFactory(
+        connectionStateWidgetFactory: connectionStateWidgetFactory,
+      );
 }
 
 @j.componentBuilder
 abstract class SettingsComponentBuilder {
-  SettingsComponentBuilder screenState(SettingsPageState screen);
-
   SettingsComponentBuilder dependencies(
     SettingsFeatureDependencies dependencies,
   );

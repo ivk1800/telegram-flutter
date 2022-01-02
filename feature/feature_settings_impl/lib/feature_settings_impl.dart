@@ -2,12 +2,11 @@ library feature_settings_impl;
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
-import 'package:feature_settings_impl/src/screen/settings_page.dart';
 import 'package:feature_settings_impl/src/settings_screen_router.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
-import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
+
+import 'src/screen/settings_screen_factory.dart';
 
 export 'src/settings_screen_router.dart';
 
@@ -15,12 +14,12 @@ class SettingsFeatureApi implements ISettingsFeatureApi {
   SettingsFeatureApi({
     required SettingsFeatureDependencies dependencies,
   }) : _settingsWidgetFactory =
-            _ScreenWidgetFactory(dependencies: dependencies);
+            SettingsScreenFactory(dependencies: dependencies);
 
-  final ISettingsWidgetFactory _settingsWidgetFactory;
+  final ISettingScreenFactory _settingsWidgetFactory;
 
   @override
-  ISettingsWidgetFactory get screenWidgetFactory => _settingsWidgetFactory;
+  ISettingScreenFactory get settingsScreenFactory => _settingsWidgetFactory;
 }
 
 class SettingsFeatureDependencies {
@@ -38,16 +37,4 @@ class SettingsFeatureDependencies {
   final IConnectionStateProvider connectionStateProvider;
 
   final ISettingsSearchFeatureApi settingsSearchFeatureApi;
-}
-
-class _ScreenWidgetFactory implements ISettingsWidgetFactory {
-  _ScreenWidgetFactory({required this.dependencies});
-
-  final SettingsFeatureDependencies dependencies;
-
-  @override
-  Widget create() => Provider<SettingsFeatureDependencies>(
-        create: (BuildContext context) => dependencies,
-        child: const SettingsPage(),
-      );
 }
