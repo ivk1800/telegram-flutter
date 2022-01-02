@@ -19,4 +19,6 @@ class SettingViewModel extends BaseViewModel {
   void onChatSettingsTap() => _router.toChatSettings();
 
   void onFoldersTap() => _router.toFolders();
+
+  void onSessionsTap() => _router.toSessions();
 }

@@ -1,5 +1,4 @@
 import 'package:app/src/feature/feature.dart';
-import 'package:app/src/page/page.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:flutter/material.dart';
 import 'package:split_view/split_view.dart';
@@ -23,7 +22,7 @@ class SplitNavigationRouter implements INavigationRouter {
 
   @override
   void toSessionsScreen() {
-    _push(const SessionsPage(), ContainerType.top);
+    // _push(const SessionsPage(), ContainerType.top);
   }
 
   @override

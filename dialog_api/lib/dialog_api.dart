@@ -30,3 +30,11 @@ class Action {
 }
 
 enum ActionType { simple, attention }
+
+extension DialogRouterExt on IDialogRouter {
+  void toNotImplemented() {
+    toDialog(body: TextBody(text: 'not implemented :('), actions: <Action>[
+      Action(text: 'OK'),
+    ]);
+  }
+}

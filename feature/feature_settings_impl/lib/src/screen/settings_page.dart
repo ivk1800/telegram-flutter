@@ -260,6 +260,12 @@ class _Body extends StatelessWidget {
           leading: const Icon(Icons.folder),
           title: _getString('Filters'),
         ),
+        const tg.Divider(),
+        tg.TextCell(
+          onTap: viewModel.onSessionsTap,
+          leading: const Icon(Icons.devices_sharp),
+          title: _getString('Devices'),
+        ),
         const tg.SectionDivider(),
         tg.Section(
           text: _getString('SettingsHelp'),

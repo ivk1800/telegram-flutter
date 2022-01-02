@@ -248,4 +248,16 @@
     <string lang="ChannelJoin">JOIN</string>
     <!-- https://translations.telegram.org/en/android/settings/Devices -->
     <string lang="Devices">Devices</string>
+    <!-- https://translations.telegram.org/en/android/settings/CurrentSession -->
+    <string lang="CurrentSession">This device</string>
+    <!-- https://translations.telegram.org/en/android/settings/TerminateAllSessions -->
+    <string lang="TerminateAllSessions">Terminate All Other Sessions</string>
+    <!-- https://translations.telegram.org/en/android/settings/ClearOtherSessionsHelp -->
+    <string lang="ClearOtherSessionsHelp">Logs out all devices except for this one.</string>
+    <!-- https://translations.telegram.org/en/android/login/AuthAnotherClient -->
+    <string lang="AuthAnotherClient">Scan QR Code</string>
+    <!-- https://translations.telegram.org/en/android/settings/OtherSessions -->
+    <string lang="OtherSessions">Active sessions</string>
+    <!-- https://translations.telegram.org/en/android/settings/TerminateSessionInfo -->
+    <string lang="TerminateSessionInfo">Tap on a session to terminate.</string>
 </resources>

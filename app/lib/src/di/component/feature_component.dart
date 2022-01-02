@@ -15,6 +15,7 @@ import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
+import 'package:feature_sessions_api/feature_chat_api.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
@@ -63,6 +64,8 @@ abstract class FeatureComponent {
   ILogoutFeatureApi getLogoutFeatureApi();
 
   IFileFeatureApi getFileFeatureApi();
+
+  ISessionsFeatureApi getSessionsFeatureApi();
 }
 
 @j.componentBuilder

@@ -87,6 +87,10 @@ dependencies:
     path: ../feature/feature_profile_api
   feature_profile_impl:
     path: ../feature/feature_profile_impl
+  feature_sessions_api:
+    path: ../feature/feature_sessions_api
+  feature_sessions_impl:
+    path: ../feature/feature_sessions_impl
   feature_settings_api:
     path: ../feature/feature_settings_api
   feature_settings_impl:

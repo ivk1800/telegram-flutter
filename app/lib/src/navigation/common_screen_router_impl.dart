@@ -1,5 +1,4 @@
 import 'package:app/src/feature/feature.dart';
-import 'package:app/src/page/page.dart';
 import 'package:dialog_api/dialog_api.dart';
 import 'package:dialog_api/dialog_api.dart' as dialog_api;
 import 'package:feature_auth_impl/feature_auth_impl.dart';
@@ -22,6 +21,7 @@ import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
+import 'package:feature_sessions_impl/feature_sessions_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
@@ -42,6 +42,7 @@ class CommonScreenRouterImpl
         IChatScreenRouter,
         IStickersFeatureRouter,
         ISettingsScreenRouter,
+        ISessionsScreenRouter,
         IPrivacySettingsScreenRouter,
         INotificationsSettingsScreenRouter,
         IDataSettingsScreenRouter,
@@ -270,9 +271,13 @@ class CommonScreenRouterImpl
 
   @override
   void toSessions() {
+    final Widget screen = _featureFactory
+        .createSessionsFeatureApi()
+        .sessionsScreenFactory
+        .create();
     _navigationRouter.push(
       key: UniqueKey(),
-      builder: (BuildContext context) => const SessionsPage(),
+      builder: (BuildContext context) => screen,
       container: ContainerType.top,
     );
   }

@@ -36,6 +36,8 @@ import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
+import 'package:feature_sessions_api/feature_chat_api.dart';
+import 'package:feature_sessions_impl/feature_sessions_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
@@ -396,6 +398,20 @@ abstract class FeatureModule {
         router: router,
       );
 
+  @j.provides
+  static SessionsFeatureDependencies provideSessionsFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ISessionsScreenRouter router,
+    ISessionRepository sessionRepository,
+    ILocalizationManager localizationManager,
+  ) =>
+      SessionsFeatureDependencies(
+        connectionStateProvider: connectionStateProvider,
+        localizationManager: localizationManager,
+        router: router,
+        sessionRepository: sessionRepository,
+      );
+
   // endregion dependencies
 
   // region api
@@ -528,6 +544,12 @@ abstract class FeatureModule {
   ) =>
       FoldersFeatureImpl(dependencies: dependencies);
 
+  @j.provides
+  static ISessionsFeatureApi provideSessionsFeatureApi(
+    SessionsFeatureDependencies dependencies,
+  ) =>
+      SessionsFeatureImpl(dependencies: dependencies);
+
   // endregion api
 
   @j.provides
@@ -624,6 +646,9 @@ abstract class FeatureModule {
 
   @j.binds
   IFoldersRouter bindFoldersRouter(CommonScreenRouterImpl impl);
+
+  @j.binds
+  ISessionsScreenRouter bindSessionsScreenRouter(CommonScreenRouterImpl impl);
 
 // endregion router
 
