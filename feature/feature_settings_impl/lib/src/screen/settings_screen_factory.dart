@@ -38,7 +38,7 @@ class SettingsScreenFactory implements ISettingScreenFactory {
           Provider<tg.ConnectionStateWidgetFactory>(
             create: (_) => component.getConnectionStateWidgetFactory(),
           ),
-          Provider<ISettingsSearchWidgetFactory>(
+          Provider<ISettingsSearchScreenFactory>(
             create: (_) => component.getSettingsSearchWidgetFactory(),
           ),
           Provider<SettingViewModel>(

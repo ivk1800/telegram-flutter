@@ -1,39 +1,37 @@
 import 'package:core_arch/core_arch.dart';
+import 'package:dialog_api/dialog_api.dart';
 import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
+import 'package:feature_settings_search_impl/src/domain/search_item.dart';
 import 'package:feature_settings_search_impl/src/settings_search_screen_router.dart';
-import 'package:feature_settings_search_impl/src/tile/model/faq_result_tile_model.dart';
-import 'package:feature_settings_search_impl/src/tile/model/search_result_tile_model.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:tile/tile.dart';
+
+import 'search_state.dart';
+import 'settings_search_interactor.dart';
 
 class SettingsSearchViewModel extends BaseViewModel {
   SettingsSearchViewModel({
     required ISettingsSearchScreenRouter router,
-  }) : _router = router {
-    _suggests.add(<ITileModel>[
-      // TODO: implement all https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java#L7701
-      const SearchResultTileModel(
-        type: SearchResultType.notificationsAndSounds,
-        title: 'Notifications and Sounds',
-        subtitle: null,
-      ),
-      // TODO: parse faq https://github.com/DrKLO/Telegram/blob/master/TMessagesProj/src/main/java/org/telegram/ui/ProfileActivity.java#L7342
-      const FaqResultTileModel(
-        title: 'FAQ > General',
-        subtitle: 'What is Telegram?',
-        url: 'https://telegram.org/faq',
-      ),
-    ]);
-  }
+    required SettingsSearchInteractor searchInteractor,
+  })  : _router = router,
+        _searchInteractor = searchInteractor;
 
+  final SettingsSearchInteractor _searchInteractor;
   final ISettingsSearchScreenRouter _router;
 
-  final BehaviorSubject<List<ITileModel>> _suggests =
-      BehaviorSubject<List<ITileModel>>();
+  Stream<SearchState> get state => _searchInteractor.state;
 
-  Stream<List<ITileModel>> get suggests => _suggests;
+  void onQueryChanged(String value) => _searchInteractor.onQuery(value);
 
-  void onFaqResultTap(String url) {}
+  void onFaqResultTap(String url) {
+    _router.toNotImplemented();
+  }
 
-  void onSearchResultTap(SearchResultType type) {}
+  void onSearchResultTap(SearchItem item) {
+    _router.toNotImplemented();
+  }
+
+  @override
+  void dispose() {
+    _searchInteractor.dispose();
+    super.dispose();
+  }
 }

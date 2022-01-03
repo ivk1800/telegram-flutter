@@ -21,11 +21,16 @@ class SettingsPageState extends State<SettingsPage>
   final FocusNode _searchQueryFocusNode = FocusNode();
   final TextEditingController _searchQueryController = TextEditingController();
 
+  final SettingsSearchScreenController _settingsSearchScreenController =
+      SettingsSearchScreenController();
+
   late Widget _searchWidget;
 
   @override
   void initState() {
-    _searchWidget = context.read<ISettingsSearchWidgetFactory>().create();
+    _searchWidget = context
+        .read<ISettingsSearchScreenFactory>()
+        .create(_settingsSearchScreenController);
     _appbarKey = _AppBarKey(hashCode);
     _searchQueryController.addListener(_onSearchEvent);
     super.initState();
@@ -34,6 +39,7 @@ class SettingsPageState extends State<SettingsPage>
   @override
   void dispose() {
     _searchQueryController.removeListener(_onSearchEvent);
+    _settingsSearchScreenController.dispose();
     super.dispose();
   }
 
@@ -122,7 +128,7 @@ class SettingsPageState extends State<SettingsPage>
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               child: _screenState == _ScreenState.search
-                  ? ColoredBox(
+                  ? Material(
                       color: Theme.of(context).scaffoldBackgroundColor,
                       child: _searchWidget,
                     )
@@ -134,7 +140,8 @@ class SettingsPageState extends State<SettingsPage>
     );
   }
 
-  void _onSearchEvent() {}
+  void _onSearchEvent() =>
+      _settingsSearchScreenController.onQuery(_searchQueryController.text);
 }
 
 enum _AppBarMenu { logOut }

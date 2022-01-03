@@ -272,4 +272,58 @@
     <string lang="FilterDelete">Remove Folder</string>
     <!-- https://translations.telegram.org/en/android/chat_list/Delete -->
     <string lang="Delete">Delete</string>
+    <!-- https://translations.telegram.org/en/android/profile/EditName -->
+    <string lang="EditName">Edit name</string>
+    <!-- https://translations.telegram.org/en/android/settings/NotificationsPrivateChats -->
+    <string lang="NotificationsPrivateChats">Private Chats</string>
+    <!-- https://translations.telegram.org/en/android/settings/NotificationsGroups -->
+    <string lang="NotificationsGroups">Groups</string>
+    <!-- https://translations.telegram.org/en/android/settings/NotificationsChannels -->
+    <string lang="NotificationsChannels">Channels</string>
+    <!-- https://translations.telegram.org/en/search?lang_pack=android&query=VoipNotificationSettings -->
+    <string lang="VoipNotificationSettings">Calls</string>
+    <!-- https://translations.telegram.org/en/android/settings/BadgeNumber -->
+    <string lang="BadgeNumber">Badge Counter</string>
+    <!-- https://translations.telegram.org/en/android/settings/InAppNotifications -->
+    <string lang="InAppNotifications">In-app notifications</string>
+    <!-- https://translations.telegram.org/en/android/settings/PinnedMessages -->
+    <string lang="PinnedMessages">Pinned Messages</string>
+    <!-- https://translations.telegram.org/en/android/settings/ResetAllNotifications -->
+    <string lang="ResetAllNotifications">Reset All Notifications</string>
+    <!-- https://translations.telegram.org/en/android/settings/BlockedUsers -->
+    <string lang="BlockedUsers">Blocked Users</string>
+    <!-- https://translations.telegram.org/en/android/settings/PrivacyPhone -->
+    <string lang="PrivacyPhone">Phone Number</string>
+    <!-- https://translations.telegram.org/en/android/settings/PrivacyLastSeen -->
+    <string lang="PrivacyLastSeen">Last Seen &amp; Online</string>
+    <!-- https://translations.telegram.org/en/android/settings/PrivacyProfilePhoto -->
+    <string lang="PrivacyProfilePhoto">Profile Photos</string>
+    <!-- https://translations.telegram.org/en/android/settings/PrivacyForwards -->
+    <string lang="PrivacyForwards">Forwarded Messages</string>
+    <!-- https://translations.telegram.org/en/android/settings/PrivacyP2P -->
+    <string lang="PrivacyP2P">Peer-to-Peer in Calls</string>
+    <!-- https://translations.telegram.org/en/android/settings/GroupsAndChannels -->
+    <string lang="GroupsAndChannels">Groups</string>
+    <!-- https://translations.telegram.org/en/android/settings/Passcode -->
+    <string lang="Passcode">Passcode Lock</string>
+    <!-- https://translations.telegram.org/en/android/login/TwoStepVerification -->
+    <string lang="TwoStepVerification">Two-Step Verification</string>
+    <!-- https://translations.telegram.org/en/android/settings/SessionsTitle -->
+    <string lang="SessionsTitle">Active Sessions</string>
+    <!-- https://translations.telegram.org/en/android/settings/DeleteAccountIfAwayFor2 -->
+    <string lang="DeleteAccountIfAwayFor2">Delete my account if away for</string>
+    <!-- https://translations.telegram.org/en/android/settings/PrivacyPaymentsClear -->
+    <string lang="PrivacyPaymentsClear">Clear Payment and Shipping Info</string>
+    <!-- https://translations.telegram.org/en/android/settings/WebSessionsTitle -->
+    <string lang="WebSessionsTitle">Logged In with Telegram</string>
+    <!-- https://translations.telegram.org/en/android/settings/SyncContactsDelete -->
+    <string lang="SyncContactsDelete">Delete Synced Contacts</string>
+    <!-- https://translations.telegram.org/en/android/login/SyncContacts -->
+    <string lang="SyncContacts">Sync Contacts</string>
+    <!-- https://translations.telegram.org/en/android/settings/SuggestContacts -->
+    <string lang="SuggestContacts">Suggest Frequent Contacts</string>
+    <!-- https://translations.telegram.org/en/android/settings/MapPreviewProvider -->
+    <string lang="MapPreviewProvider">Map Preview Provider</string>
+    <!-- https://translations.telegram.org/en/android/settings/SecretWebPage -->
+    <string lang="SecretWebPage">Link Previews</string>
 </resources>

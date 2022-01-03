@@ -2,20 +2,22 @@ import 'package:feature_settings_search_impl/src/tile/model/faq_result_tile_mode
 import 'package:flutter/material.dart';
 import 'package:tile/tile.dart';
 
-typedef FaqResultTapCallback = void Function(BuildContext context, String url);
+abstract class IFaqResultTapListener {
+  void onFaqResultTap(String url);
+}
 
 class FaqResultTileFactoryDelegate
     implements ITileFactoryDelegate<FaqResultTileModel> {
   FaqResultTileFactoryDelegate({
-    required FaqResultTapCallback tap,
-  }) : _tap = tap;
+    required IFaqResultTapListener listener,
+  }) : _listener = listener;
 
-  final FaqResultTapCallback _tap;
+  final IFaqResultTapListener _listener;
 
   @override
   Widget create(BuildContext context, FaqResultTileModel model) {
     return ListTile(
-      onTap: () => _tap(context, model.url),
+      onTap: () => _listener.onFaqResultTap(model.url),
       title: Text(model.title),
       subtitle: Text(model.subtitle),
     );

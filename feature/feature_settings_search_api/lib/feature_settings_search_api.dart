@@ -3,9 +3,22 @@ library feature_settings_search_api;
 import 'package:flutter/widgets.dart';
 
 abstract class ISettingsSearchFeatureApi {
-  ISettingsSearchWidgetFactory get screenWidgetFactory;
+  ISettingsSearchScreenFactory get settingsSearchScreenFactory;
 }
 
-abstract class ISettingsSearchWidgetFactory {
-  Widget create();
+abstract class ISettingsSearchScreenFactory {
+  Widget create(SettingsSearchScreenController controller);
+}
+
+class SettingsSearchScreenController {
+  ValueNotifier<String> queryValue = ValueNotifier<String>('');
+
+  // ignore: use_setters_to_change_properties
+  void onQuery(String query) {
+    queryValue.value = query;
+  }
+
+  void dispose() {
+    queryValue.dispose();
+  }
 }

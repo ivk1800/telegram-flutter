@@ -1,26 +1,27 @@
+import 'package:feature_settings_search_impl/src/domain/search_item.dart';
 import 'package:feature_settings_search_impl/src/tile/model/search_result_tile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:tile/tile.dart';
 
-typedef SearchResultTapCallback = void Function(
-  BuildContext context,
-  SearchResultType type,
-);
+abstract class ISearchResultTapListener {
+  void onSearchResultTap(SearchItem item);
+}
 
 class SearchResultTileFactoryDelegate
     implements ITileFactoryDelegate<SearchResultTileModel> {
   SearchResultTileFactoryDelegate({
-    required SearchResultTapCallback tap,
-  }) : _tap = tap;
+    required ISearchResultTapListener listener,
+  }) : _listener = listener;
 
-  final SearchResultTapCallback _tap;
+  final ISearchResultTapListener _listener;
 
   @override
   Widget create(BuildContext context, SearchResultTileModel model) {
+    final String? subtitle = model.subtitle;
     return ListTile(
-      onTap: () => _tap(context, model.type),
+      onTap: () => _listener.onSearchResultTap(model.item),
       title: Text(model.title),
-      subtitle: model.subtitle != null ? Text(model.subtitle!) : null,
+      subtitle: subtitle != null ? Text(subtitle) : null,
     );
   }
 }

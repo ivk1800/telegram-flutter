@@ -15,7 +15,7 @@ abstract class SettingsScreenComponent {
 
   tg.TgAppBarFactory getTgAppBarFactory();
 
-  ISettingsSearchWidgetFactory getSettingsSearchWidgetFactory();
+  ISettingsSearchScreenFactory getSettingsSearchWidgetFactory();
 
   SettingViewModel getSettingViewModel();
 }
@@ -24,10 +24,10 @@ abstract class SettingsScreenComponent {
 abstract class SettingsModule {
   @j.provides
   @j.singleton
-  static ISettingsSearchWidgetFactory provideSettingsSearchWidgetFactory(
+  static ISettingsSearchScreenFactory provideSettingsSearchScreenFactory(
     ISettingsSearchFeatureApi api,
   ) =>
-      api.screenWidgetFactory;
+      api.settingsSearchScreenFactory;
 
   @j.provides
   @j.singleton
