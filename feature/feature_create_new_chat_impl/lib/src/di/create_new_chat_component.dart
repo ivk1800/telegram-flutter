@@ -1,0 +1,37 @@
+import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
+import 'package:feature_create_new_chat_impl/src/create_new_chat_router.dart';
+import 'package:jugger/jugger.dart' as j;
+import 'package:localization_api/localization_api.dart';
+
+@j.Component(
+  modules: <Type>[CreateNewChatModule],
+)
+abstract class CreateNewChatComponent {
+  ILocalizationManager getLocalizationManager();
+
+  ICreateNewChatRouter getCreateNewChatRouter();
+}
+
+@j.module
+abstract class CreateNewChatModule {
+  @j.provides
+  static ILocalizationManager provideLocalizationManager(
+    CreateNewChatFeatureDependencies dependencies,
+  ) =>
+      dependencies.localizationManager;
+
+  @j.provides
+  static ICreateNewChatRouter provideCreateNewChatRouter(
+    CreateNewChatFeatureDependencies dependencies,
+  ) =>
+      dependencies.router;
+}
+
+@j.componentBuilder
+abstract class CreateNewChatComponentBuilder {
+  CreateNewChatComponentBuilder dependencies(
+    CreateNewChatFeatureDependencies dependencies,
+  );
+
+  CreateNewChatComponent build();
+}

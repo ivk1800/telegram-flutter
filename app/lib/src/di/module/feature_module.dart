@@ -16,6 +16,8 @@ import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_country_impl/feature_country_impl.dart';
+import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
+import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
@@ -412,6 +414,19 @@ abstract class FeatureModule {
         sessionRepository: sessionRepository,
       );
 
+  @j.provides
+  static CreateNewChatFeatureDependencies
+      provideCreateNewChatFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ILocalizationManager localizationManager,
+    ICreateNewChatRouter router,
+  ) =>
+          CreateNewChatFeatureDependencies(
+            router: router,
+            connectionStateProvider: connectionStateProvider,
+            localizationManager: localizationManager,
+          );
+
   // endregion dependencies
 
   // region api
@@ -550,6 +565,12 @@ abstract class FeatureModule {
   ) =>
       SessionsFeatureImpl(dependencies: dependencies);
 
+  @j.provides
+  static ICreateNewChatFeatureApi provideCreateNewChatFeatureApi(
+    CreateNewChatFeatureDependencies dependencies,
+  ) =>
+      CreateNewChatFeatureApi(dependencies: dependencies);
+
   // endregion api
 
   @j.provides
@@ -649,6 +670,9 @@ abstract class FeatureModule {
 
   @j.binds
   ISessionsScreenRouter bindSessionsScreenRouter(CommonScreenRouterImpl impl);
+
+  @j.binds
+  ICreateNewChatRouter bindCreateNewChatRouter(CommonScreenRouterImpl impl);
 
 // endregion router
 

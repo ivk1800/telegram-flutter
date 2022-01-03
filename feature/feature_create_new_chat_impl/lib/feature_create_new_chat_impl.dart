@@ -1,18 +1,29 @@
 library feature_create_new_chat_impl;
 
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
+import 'package:feature_create_new_chat_impl/src/di/di.dart';
+import 'package:localization_api/localization_api.dart';
 
+import 'src/create_new_chat_router.dart';
 import 'src/screen/factory/create_new_channel_screen_factory.dart';
 import 'src/screen/factory/create_new_group_screen_factory.dart';
 import 'src/screen/factory/create_new_secret_chat_screen_factory.dart';
 import 'src/screen/factory/new_chat_screen_factory.dart';
 
+export 'src/create_new_chat_router.dart';
+
 class CreateNewChatFeatureApi implements ICreateNewChatFeatureApi {
   CreateNewChatFeatureApi({
-    required ICreateNewChatFeatureDependencies dependencies,
+    required CreateNewChatFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 
-  final ICreateNewChatFeatureDependencies _dependencies;
+  final CreateNewChatFeatureDependencies _dependencies;
+
+  CreateNewChatComponent? _componentValue;
+
+  CreateNewChatComponent get _component => _componentValue ??=
+      JuggerCreateNewChatComponentBuilder().dependencies(_dependencies).build();
 
   CreateNewChannelScreenFactory? _createNewChannelScreenFactory;
   CreateNewGroupScreenFactory? _createNewGroupScreenFactory;
@@ -22,26 +33,44 @@ class CreateNewChatFeatureApi implements ICreateNewChatFeatureApi {
   @override
   ICreateNewChannelScreenFactory get createNewChannelScreenFactory =>
       _createNewChannelScreenFactory ??= CreateNewChannelScreenFactory(
-        dependencies: _dependencies,
+        component: JuggerCreateNewChannelScreenComponentBuilder()
+            .createNewChatComponent(_component)
+            .build(),
       );
 
   @override
   ICreateNewGroupScreenFactory get createNewGroupScreenFactory =>
       _createNewGroupScreenFactory ??= CreateNewGroupScreenFactory(
-        dependencies: _dependencies,
+        component: JuggerCreateNewGroupScreenComponentBuilder()
+            .createNewChatComponent(_component)
+            .build(),
       );
 
   @override
   ICreateNewSecretChatScreenFactory get createNewSecretChatScreenFactory =>
       _createNewSecretChatScreenFactory ??= CreateNewSecretChatScreenFactory(
-        dependencies: _dependencies,
+        component: JuggerCreateNewSecretChatScreenComponentBuilder()
+            .createNewChatComponent(_component)
+            .build(),
       );
 
   @override
   INewChatScreenFactory get newChatScreenFactory =>
       _chatScreenFactory ??= NewChatScreenFactory(
-        dependencies: _dependencies,
+        component: JuggerCreateNewChatScreenComponentBuilder()
+            .createNewChatComponent(_component)
+            .build(),
       );
 }
 
-abstract class ICreateNewChatFeatureDependencies {}
+class CreateNewChatFeatureDependencies {
+  CreateNewChatFeatureDependencies({
+    required this.localizationManager,
+    required this.connectionStateProvider,
+    required this.router,
+  });
+
+  final ILocalizationManager localizationManager;
+  final IConnectionStateProvider connectionStateProvider;
+  final ICreateNewChatRouter router;
+}

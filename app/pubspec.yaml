@@ -45,6 +45,10 @@ dependencies:
     path: ../feature/feature_country_api
   feature_country_impl:
     path: ../feature/feature_country_impl
+  feature_create_new_chat_api:
+    path: ../feature/feature_create_new_chat_api
+  feature_create_new_chat_impl:
+    path: ../feature/feature_create_new_chat_impl
   feature_data_settings_api:
     path: ../feature/feature_data_settings_api
   feature_data_settings_impl:

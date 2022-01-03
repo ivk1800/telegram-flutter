@@ -7,6 +7,8 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
+import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
+import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
@@ -43,6 +45,7 @@ class CommonScreenRouterImpl
         IStickersFeatureRouter,
         ISettingsScreenRouter,
         ISessionsScreenRouter,
+        ICreateNewChatRouter,
         IPrivacySettingsScreenRouter,
         INotificationsSettingsScreenRouter,
         IDataSettingsScreenRouter,
@@ -389,6 +392,57 @@ class CommonScreenRouterImpl
     _navigationRouter.push(
       key: UniqueKey(),
       builder: (BuildContext context) => feature.createRootWidget(),
+      container: ContainerType.top,
+    );
+  }
+
+  @override
+  void toCreateNewChat() {
+    final INewChatScreenFactory factory =
+        _featureFactory.createCreateNewChatFeatureApi().newChatScreenFactory;
+    final Widget widget = factory.create();
+    _navigationRouter.push(
+      key: UniqueKey(),
+      builder: (BuildContext context) => widget,
+      container: ContainerType.top,
+    );
+  }
+
+  @override
+  void toCreateNewChannel() {
+    final ICreateNewChannelScreenFactory factory = _featureFactory
+        .createCreateNewChatFeatureApi()
+        .createNewChannelScreenFactory;
+    final Widget widget = factory.create();
+    _navigationRouter.push(
+      key: UniqueKey(),
+      builder: (BuildContext context) => widget,
+      container: ContainerType.top,
+    );
+  }
+
+  @override
+  void toCreateNewGroup() {
+    final ICreateNewGroupScreenFactory factory = _featureFactory
+        .createCreateNewChatFeatureApi()
+        .createNewGroupScreenFactory;
+    final Widget widget = factory.create();
+    _navigationRouter.push(
+      key: UniqueKey(),
+      builder: (BuildContext context) => widget,
+      container: ContainerType.top,
+    );
+  }
+
+  @override
+  void toCreateNewSecretChat() {
+    final ICreateNewSecretChatScreenFactory factory = _featureFactory
+        .createCreateNewChatFeatureApi()
+        .createNewSecretChatScreenFactory;
+    final Widget widget = factory.create();
+    _navigationRouter.push(
+      key: UniqueKey(),
+      builder: (BuildContext context) => widget,
       container: ContainerType.top,
     );
   }

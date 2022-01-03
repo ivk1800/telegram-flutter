@@ -1,19 +1,35 @@
-import 'package:create_new_chat_impl/feature_create_new_chat_impl.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
+import 'package:feature_create_new_chat_impl/src/di/di.dart';
+import 'package:feature_create_new_chat_impl/src/screen/new_secret_chat/new_secret_chat_model.dart';
+import 'package:feature_create_new_chat_impl/src/screen/new_secret_chat/new_secret_chat_page.dart';
 import 'package:flutter/widgets.dart';
+import 'package:localization_api/localization_api.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_extensions/provider_extensions.dart';
 
 class CreateNewSecretChatScreenFactory
     implements ICreateNewSecretChatScreenFactory {
   CreateNewSecretChatScreenFactory({
-    required ICreateNewChatFeatureDependencies dependencies,
-  }) : _dependencies = dependencies;
+    required CreateNewSecretChatScreenComponent component,
+  }) : _component = component;
 
-  final ICreateNewChatFeatureDependencies _dependencies;
+  final CreateNewSecretChatScreenComponent _component;
 
   @override
-  Widget create(BuildContext context) {
-    return const Center(
-      child: Text('CreateNewSecretChat'),
+  Widget create() {
+    return Scope<CreateNewSecretChatScreenComponent>(
+      create: () => _component,
+      providers: (CreateNewSecretChatScreenComponent component) {
+        return <Provider<dynamic>>[
+          Provider<NewSecretChatViewModel>(
+            create: (_) => component.getNewSecretChatViewModel(),
+          ),
+          Provider<ILocalizationManager>(
+            create: (_) => component.getLocalizationManager(),
+          )
+        ];
+      },
+      child: const NewSecretChatPage(),
     );
   }
 }

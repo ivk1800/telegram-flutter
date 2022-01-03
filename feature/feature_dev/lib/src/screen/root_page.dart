@@ -85,6 +85,14 @@ class RootPageState extends State<RootPage> {
             },
             child: const Text('Demo'),
           ),
+          const Divider(),
+          ListTile(
+            onTap: () {
+              DevWidget.of(context).devFeature.router.toCreateNewChat();
+            },
+            title: const Text('to New chat screen'),
+          ),
+          const Divider(),
         ],
       ),
     );

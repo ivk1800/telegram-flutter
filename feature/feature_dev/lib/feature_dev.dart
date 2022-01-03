@@ -7,13 +7,11 @@ import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:feature_dev/src/screen/events_list_page.dart';
 import 'package:feature_dev/src/screen/root_page.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class DevFeature {
-  @j.provides
   DevFeature({
     required this.router,
     required this.client,
@@ -49,4 +47,5 @@ class DevFeature {
 
 abstract class IDevFeatureRouter {
   void toEventsList();
+  void toCreateNewChat();
 }

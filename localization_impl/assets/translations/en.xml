@@ -260,4 +260,10 @@
     <string lang="OtherSessions">Active sessions</string>
     <!-- https://translations.telegram.org/en/android/settings/TerminateSessionInfo -->
     <string lang="TerminateSessionInfo">Tap on a session to terminate.</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/NewGroup -->
+    <string lang="NewGroup">New Group</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/NewSecretChat -->
+    <string lang="NewSecretChat">New Secret Chat</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/NewChannel -->
+    <string lang="NewChannel">New Channel</string>
 </resources>

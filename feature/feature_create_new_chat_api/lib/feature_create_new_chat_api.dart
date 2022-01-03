@@ -13,17 +13,17 @@ abstract class ICreateNewChatFeatureApi {
 }
 
 abstract class INewChatScreenFactory {
-  Widget create(BuildContext context);
+  Widget create();
 }
 
 abstract class ICreateNewGroupScreenFactory {
-  Widget create(BuildContext context);
+  Widget create();
 }
 
 abstract class ICreateNewChannelScreenFactory {
-  Widget create(BuildContext context);
+  Widget create();
 }
 
 abstract class ICreateNewSecretChatScreenFactory {
-  Widget create(BuildContext context);
+  Widget create();
 }
