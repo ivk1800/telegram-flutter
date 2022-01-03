@@ -32,7 +32,6 @@ class LogoutScreenFactory implements ILogoutScreenFactory {
       child: BlocProvider<LogoutBloc>(
         create: (BuildContext context) => LogoutBloc(
           localizationManager: _dependencies.localizationManager,
-          authenticationManager: _dependencies.authenticationManager,
           router: _dependencies.router,
         ),
         child: const LogoutPage(),

@@ -1,5 +1,4 @@
 import 'package:dialog_api/dialog_api.dart';
-import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_logout_impl/src/logout_feature_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
@@ -10,15 +9,12 @@ import 'logout_state.dart';
 class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
   LogoutBloc({
     required ILogoutFeatureRouter router,
-    required IAuthenticationManager authenticationManager,
     required ILocalizationManager localizationManager,
-  })  : _authenticationManager = authenticationManager,
-        _router = router,
+  })  : _router = router,
         _localizationManager = localizationManager,
         super(const LogoutState());
 
   final ILogoutFeatureRouter _router;
-  final IAuthenticationManager _authenticationManager;
   final ILocalizationManager _localizationManager;
 
   @override

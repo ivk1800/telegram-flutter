@@ -4,24 +4,19 @@ import 'package:collection/collection.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 class ChatMessagesInteractor {
-  @j.inject
   ChatMessagesInteractor({
-    required IChatRepository chatRepository,
     required IChatMessageRepository messageRepository,
     required MessageTileMapper messageTileMapper,
     required ChatArgs chatArgs,
-  })  : _chatRepository = chatRepository,
-        _messageTileMapper = messageTileMapper,
+  })  : _messageTileMapper = messageTileMapper,
         _messageRepository = messageRepository,
         _chatArgs = chatArgs;
 
-  final IChatRepository _chatRepository;
   final IChatMessageRepository _messageRepository;
   final MessageTileMapper _messageTileMapper;
 

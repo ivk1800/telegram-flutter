@@ -91,8 +91,8 @@ class _ImageWidgetState extends State<_ImageWidget> {
 
   void _initPhoto(int? photoId) {
     if (photoId != null) {
-      final IFileDownloader fileDownloader = widget.fileDownloader;
-      fileDownloader.downloadFile(photoId).catchError(print);
+      final IFileDownloader fileDownloader = widget.fileDownloader
+        ..downloadFile(photoId);
       _stream = fileDownloader
           .getFileDownloadStateStream(photoId)
           .where((IFileDownloadState event) => event is Completed)

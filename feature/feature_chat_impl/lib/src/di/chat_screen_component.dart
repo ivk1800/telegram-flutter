@@ -140,7 +140,6 @@ abstract class ChatScreenModule {
     ChatFeatureDependencies dependencies,
   ) =>
       ChatMessagesInteractor(
-        chatRepository: dependencies.chatRepository,
         chatArgs: args,
         messageTileMapper: messageTileMapper,
         messageRepository: dependencies.chatMessageRepository,

@@ -1,6 +1,7 @@
 import 'package:feature_folders_impl/src/folders_router.dart';
 import 'package:folders_presentation/folders_presentation.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:localization_api/localization_api.dart';
 
 import 'folders_component.dart';
 
@@ -17,9 +18,13 @@ abstract class SetupFolderScreenModule {
   @j.singleton
   @j.provides
   static SetupFolderViewModel provideSetupFolderViewModel(
+    ILocalizationManager localizationManager,
     ISetupFolderScreenRouter router,
   ) =>
-      SetupFolderViewModel(router: router);
+      SetupFolderViewModel(
+        router: router,
+        localizationManager: localizationManager,
+      );
 
   @j.singleton
   @j.binds

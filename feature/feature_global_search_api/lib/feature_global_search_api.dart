@@ -1,3 +1,4 @@
+// ignore_for_file: use_setters_to_change_properties
 library feature_global_search_api;
 
 import 'package:flutter/widgets.dart';

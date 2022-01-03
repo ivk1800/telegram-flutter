@@ -266,4 +266,10 @@
     <string lang="NewSecretChat">New Secret Chat</string>
     <!-- https://translations.telegram.org/en/android/chat_list/NewChannel -->
     <string lang="NewChannel">New Channel</string>
+    <!-- https://translations.telegram.org/en/android/unsorted/FilterDeleteAlert -->
+    <string lang="FilterDeleteAlert">Are you sure you want to remove this folder? Your chats will not be deleted.</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/FilterDelete -->
+    <string lang="FilterDelete">Remove Folder</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/Delete -->
+    <string lang="Delete">Delete</string>
 </resources>

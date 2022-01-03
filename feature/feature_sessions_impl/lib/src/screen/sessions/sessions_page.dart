@@ -77,8 +77,6 @@ class _Body extends StatelessWidget {
 
     // TODO extract text to stings
     final ThemeData theme = Theme.of(context);
-    final TextStyle accentTextStyle =
-        TextStyle(color: theme.colorScheme.secondary);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

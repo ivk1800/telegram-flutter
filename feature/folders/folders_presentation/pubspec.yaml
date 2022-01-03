@@ -7,6 +7,10 @@ environment:
 dependencies:
   core_arch:
     path: ../../../core_arch
+  dialog_api:
+    path: ../../../dialog_api
+  localization_api:
+    path: ../../../localization_api
 
 dev_dependencies:
   dependency_validator: ^3.1.2

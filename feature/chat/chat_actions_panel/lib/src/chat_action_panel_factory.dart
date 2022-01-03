@@ -1,6 +1,5 @@
 import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 

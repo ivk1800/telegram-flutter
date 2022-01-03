@@ -47,7 +47,6 @@ abstract class ProfileScreenModule {
         headerInfoInteractor: dependencies.chatHeaderInfoFeatureApi
             .getChatHeaderInfoInteractor(args.id),
         contentInteractor: contentInteractor,
-        messageRepository: dependencies.messageRepository,
       );
 
   @j.provides

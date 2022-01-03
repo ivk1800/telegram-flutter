@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/src/profile_feature_router.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
@@ -18,12 +17,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     required IProfileFeatureRouter router,
     required IChatHeaderInfoInteractor headerInfoInteractor,
     required ContentInteractor contentInteractor,
-    required IChatMessageRepository messageRepository,
-  })  : _args = args,
-        _contentInteractor = contentInteractor,
+  })  : _contentInteractor = contentInteractor,
         _router = router,
         _headerInfoInteractor = headerInfoInteractor,
-        _messageRepository = messageRepository,
         super(ProfileState(
           headerState: HeaderState(
             info: ChatHeaderInfo(
@@ -38,8 +34,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     _initCompositeStateSubscription();
   }
 
-  final ProfileArgs _args;
-  final IChatMessageRepository _messageRepository;
   final ContentInteractor _contentInteractor;
   final IProfileFeatureRouter _router;
   final IChatHeaderInfoInteractor _headerInfoInteractor;

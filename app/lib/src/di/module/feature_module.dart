@@ -324,8 +324,10 @@ abstract class FeatureModule {
   @j.provides
   static SharedMediaFeatureDependencies provideSharedMediaFeatureDependencies(
     IChatMessageRepository messageRepository,
+    ILocalizationManager localizationManager,
   ) =>
       SharedMediaFeatureDependencies(
+        localizationManager: localizationManager,
         messageRepository: messageRepository,
       );
 
