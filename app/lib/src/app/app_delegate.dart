@@ -3,15 +3,13 @@ import 'dart:async';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/tdlib/config_provider.dart';
 import 'package:core/core.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:path_provider/path_provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class AppDelegate {
-  @j.inject
-  AppDelegate({
+  const AppDelegate({
     required TdClient client,
     required INavigationRouter router,
     required TdConfigProvider tdConfigProvider,
@@ -23,9 +21,7 @@ class AppDelegate {
         _tdConfigProvider = tdConfigProvider,
         _appLifecycleStateProvider = appLifecycleStateProvider,
         _connectivityProvider = connectivityProvider,
-        _optionsManager = optionsManager {
-    _init();
-  }
+        _optionsManager = optionsManager;
 
   final INavigationRouter _router;
   final IConnectivityProvider _connectivityProvider;
@@ -34,7 +30,7 @@ class AppDelegate {
   final OptionsManager _optionsManager;
   final TdConfigProvider _tdConfigProvider;
 
-  void _init() {
+  void init() {
     _connectivityProvider.onStatusChange
         .startWith(_connectivityProvider.status)
         .listen((ConnectivityStatus status) {

@@ -1,36 +1,29 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:showcase/showcase.dart' as showcase;
 import 'package:tdlib/td_api.dart' as td;
 
-class RootPage extends StatefulWidget {
-  const RootPage({
+class DevRootPage extends StatelessWidget {
+  const DevRootPage({
     Key? key,
   }) : super(key: key);
-
-  @override
-  RootPageState createState() => RootPageState();
-}
-
-class RootPageState extends State<RootPage> {
-  @j.inject
-  late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
-
-  @override
-  void initState() {
-    DevWidget.of(context).devComponent.injectRootState(this);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: connectionStateWidgetFactory.create(
-          context,
-          (BuildContext context) => const Text('Dev'),
+        title: Builder(
+          builder: (BuildContext context) {
+            final tg.ConnectionStateWidgetFactory connectionStateProvider =
+                DevWidget.of(context)
+                    .devComponent
+                    .getConnectionStateWidgetFactory();
+            return connectionStateProvider.create(
+              context,
+              (BuildContext context) => const Text('Events'),
+            );
+          },
         ),
       ),
       body: Column(

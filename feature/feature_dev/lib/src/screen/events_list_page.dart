@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:tdlib/td_api.dart' as td;
 
 class EventsListPage extends StatefulWidget {
@@ -16,9 +15,6 @@ class EventsListPage extends StatefulWidget {
 }
 
 class EventsListPageState extends State<EventsListPage> {
-  @j.inject
-  late tg.ConnectionStateWidgetFactory connectionStateWidgetFactory;
-
   late ScrollController _scrollController;
 
   List<td.TdObject> _events = <td.TdObject>[];
@@ -29,7 +25,6 @@ class EventsListPageState extends State<EventsListPage> {
 
   @override
   void initState() {
-    DevWidget.of(context).devComponent.injectEventsListState(this);
     _scrollController = ScrollController();
     _eventsSubscription = DevWidget.of(context)
         .devFeature
@@ -56,9 +51,17 @@ class EventsListPageState extends State<EventsListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: connectionStateWidgetFactory.create(
-          context,
-          (BuildContext context) => const Text('Events'),
+        title: Builder(
+          builder: (BuildContext context) {
+            final tg.ConnectionStateWidgetFactory connectionStateProvider =
+                DevWidget.of(context)
+                    .devComponent
+                    .getConnectionStateWidgetFactory();
+            return connectionStateProvider.create(
+              context,
+              (BuildContext context) => const Text('Events'),
+            );
+          },
         ),
         actions: <Widget>[
           IconButton(

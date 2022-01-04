@@ -1,3 +1,4 @@
+import 'package:app/src/app/app_delegate.dart';
 import 'package:app/src/di/module/app_module.dart';
 import 'package:app/src/di/module/td_module.dart';
 import 'package:app/src/feature/feature.dart';
@@ -15,6 +16,8 @@ import 'package:td_client/td_client.dart';
   TdModule,
 ])
 abstract class AppComponent {
+  AppDelegate getAppDelegate();
+
   TdConfigProvider getTdConfigProvider();
 
   TdClient getTdClient();

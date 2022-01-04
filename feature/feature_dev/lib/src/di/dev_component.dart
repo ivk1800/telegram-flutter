@@ -1,18 +1,14 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:coreui/coreui.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_dev/feature_dev.dart';
-import 'package:feature_dev/src/screen/events_list_page.dart';
-import 'package:feature_dev/src/screen/root_page.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:td_client/td_client.dart';
 
 @j.Component(modules: <Type>[DevModule])
 abstract class DevComponent {
-  void injectRootState(RootPageState state);
-
-  void injectEventsListState(EventsListPageState state);
-
   TdClient getTdClient();
+
+  tg.ConnectionStateWidgetFactory getConnectionStateWidgetFactory();
 }
 
 @j.module
@@ -29,10 +25,10 @@ abstract class DevModule {
 
   @j.singleton
   @j.provides
-  static ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
+  static tg.ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
     IConnectionStateProvider connectionStateProvider,
   ) =>
-      ConnectionStateWidgetFactory(
+      tg.ConnectionStateWidgetFactory(
         connectionStateProvider: connectionStateProvider,
       );
 }

@@ -4,8 +4,8 @@ import 'dart:async';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_dev/src/dev/dev_widget.dart';
+import 'package:feature_dev/src/screen/dev_root_page.dart';
 import 'package:feature_dev/src/screen/events_list_page.dart';
-import 'package:feature_dev/src/screen/root_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:td_client/td_client.dart';
@@ -35,7 +35,7 @@ class DevFeature {
   Stream<List<td.TdObject>> get events => _events;
 
   Widget createRootWidget() =>
-      DevWidget(child: const RootPage(), devFeature: this);
+      DevWidget(child: const DevRootPage(), devFeature: this);
 
   Widget createEventsListWidget() =>
       DevWidget(child: const EventsListPage(), devFeature: this);

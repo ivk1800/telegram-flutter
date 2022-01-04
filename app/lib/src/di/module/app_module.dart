@@ -1,4 +1,5 @@
 import 'package:app/app.dart';
+import 'package:app/src/app/app_delegate.dart';
 import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/di/component/feature_component.jugger.dart';
 import 'package:app/src/feature/feature.dart';
@@ -159,4 +160,22 @@ abstract class AppModule {
   @j.singleton
   @j.provides
   static TdConfigProvider provideTdConfigProvider() => TdConfigProvider();
+
+  @j.singleton
+  @j.provides
+  static AppDelegate provideAppDelegate(
+    TdClient client,
+    INavigationRouter router,
+    TdConfigProvider tdConfigProvider,
+    IAppLifecycleStateProvider appLifecycleStateProvider,
+    IConnectivityProvider connectivityProvider,
+    OptionsManager optionsManager,
+  ) =>
+      AppDelegate(
+          router: router,
+          client: client,
+          appLifecycleStateProvider: appLifecycleStateProvider,
+          connectivityProvider: connectivityProvider,
+          optionsManager: optionsManager,
+          tdConfigProvider: tdConfigProvider);
 }

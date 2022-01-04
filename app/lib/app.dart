@@ -23,9 +23,9 @@ Future<void> launch() async {
       .localizationManager(localizationManager)
       .build();
 
-  runApp(TgApp(
-    client: appComponent.getTdClient(),
-  ));
+  appComponent.getAppDelegate().init();
+
+  runApp(const TgApp());
 
   final TdClient client = appComponent.getTdClient();
   await client.init();
