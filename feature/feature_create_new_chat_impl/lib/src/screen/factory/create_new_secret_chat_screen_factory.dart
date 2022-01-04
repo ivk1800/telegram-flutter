@@ -11,15 +11,17 @@ import 'package:provider_extensions/provider_extensions.dart';
 class CreateNewSecretChatScreenFactory
     implements ICreateNewSecretChatScreenFactory {
   CreateNewSecretChatScreenFactory({
-    required CreateNewSecretChatScreenComponent component,
+    required CreateNewChatComponent component,
   }) : _component = component;
 
-  final CreateNewSecretChatScreenComponent _component;
+  final CreateNewChatComponent _component;
 
   @override
   Widget create() {
     return Scope<CreateNewSecretChatScreenComponent>(
-      create: () => _component,
+      create: () => JuggerCreateNewSecretChatScreenComponentBuilder()
+          .createNewChatComponent(_component)
+          .build(),
       providers: (CreateNewSecretChatScreenComponent component) {
         return <Provider<dynamic>>[
           ViewModelProvider<NewSecretChatViewModel>(

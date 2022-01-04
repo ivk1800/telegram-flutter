@@ -33,33 +33,25 @@ class CreateNewChatFeatureApi implements ICreateNewChatFeatureApi {
   @override
   ICreateNewChannelScreenFactory get createNewChannelScreenFactory =>
       _createNewChannelScreenFactory ??= CreateNewChannelScreenFactory(
-        component: JuggerCreateNewChannelScreenComponentBuilder()
-            .createNewChatComponent(_component)
-            .build(),
+        component: _component,
       );
 
   @override
   ICreateNewGroupScreenFactory get createNewGroupScreenFactory =>
       _createNewGroupScreenFactory ??= CreateNewGroupScreenFactory(
-        component: JuggerCreateNewGroupScreenComponentBuilder()
-            .createNewChatComponent(_component)
-            .build(),
+        component: _component,
       );
 
   @override
   ICreateNewSecretChatScreenFactory get createNewSecretChatScreenFactory =>
       _createNewSecretChatScreenFactory ??= CreateNewSecretChatScreenFactory(
-        component: JuggerCreateNewSecretChatScreenComponentBuilder()
-            .createNewChatComponent(_component)
-            .build(),
+        component: _component,
       );
 
   @override
   INewChatScreenFactory get newChatScreenFactory =>
       _chatScreenFactory ??= NewChatScreenFactory(
-        component: JuggerCreateNewChatScreenComponentBuilder()
-            .createNewChatComponent(_component)
-            .build(),
+        component: _component,
       );
 }
 

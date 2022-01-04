@@ -10,15 +10,17 @@ import 'package:provider_extensions/provider_extensions.dart';
 
 class CreateNewChannelScreenFactory implements ICreateNewChannelScreenFactory {
   CreateNewChannelScreenFactory({
-    required CreateNewChannelScreenComponent component,
+    required CreateNewChatComponent component,
   }) : _component = component;
 
-  final CreateNewChannelScreenComponent _component;
+  final CreateNewChatComponent _component;
 
   @override
   Widget create() {
     return Scope<CreateNewChannelScreenComponent>(
-      create: () => _component,
+      create: () => JuggerCreateNewChannelScreenComponentBuilder()
+          .createNewChatComponent(_component)
+          .build(),
       providers: (CreateNewChannelScreenComponent component) {
         return <Provider<dynamic>>[
           ViewModelProvider<NewChannelViewModel>(

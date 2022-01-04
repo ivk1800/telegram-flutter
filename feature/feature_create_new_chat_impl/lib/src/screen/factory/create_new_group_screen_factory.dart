@@ -10,15 +10,17 @@ import 'package:provider_extensions/provider_extensions.dart';
 
 class CreateNewGroupScreenFactory implements ICreateNewGroupScreenFactory {
   CreateNewGroupScreenFactory({
-    required CreateNewGroupScreenComponent component,
+    required CreateNewChatComponent component,
   }) : _component = component;
 
-  final CreateNewGroupScreenComponent _component;
+  final CreateNewChatComponent _component;
 
   @override
   Widget create() {
     return Scope<CreateNewGroupScreenComponent>(
-      create: () => _component,
+      create: () => JuggerCreateNewGroupScreenComponentBuilder()
+          .createNewChatComponent(_component)
+          .build(),
       providers: (CreateNewGroupScreenComponent component) {
         return <Provider<dynamic>>[
           ViewModelProvider<NewGroupViewModel>(

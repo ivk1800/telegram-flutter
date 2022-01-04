@@ -10,15 +10,17 @@ import 'package:provider_extensions/provider_extensions.dart';
 
 class NewChatScreenFactory implements INewChatScreenFactory {
   NewChatScreenFactory({
-    required CreateNewChatScreenComponent component,
+    required CreateNewChatComponent component,
   }) : _component = component;
 
-  final CreateNewChatScreenComponent _component;
+  final CreateNewChatComponent _component;
 
   @override
   Widget create() {
     return Scope<CreateNewChatScreenComponent>(
-      create: () => _component,
+      create: () => JuggerCreateNewChatScreenComponentBuilder()
+          .createNewChatComponent(_component)
+          .build(),
       providers: (CreateNewChatScreenComponent component) {
         return <Provider<dynamic>>[
           ViewModelProvider<NewChatViewModel>(
