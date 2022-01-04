@@ -1,19 +1,15 @@
 library dialog_api;
 
+import 'src/body.dart';
+
+export 'src/body.dart';
+
 abstract class IDialogRouter {
   void toDialog({
     String? title,
     required Body body,
     List<Action> actions = const <Action>[],
   });
-}
-
-abstract class Body {}
-
-class TextBody implements Body {
-  TextBody({required this.text});
-
-  final String text;
 }
 
 class Action {
@@ -26,15 +22,21 @@ class Action {
   final String text;
   final ActionType type;
 
-  final bool Function()? callback;
+  final void Function(IDismissible dismissible)? callback;
 }
 
 enum ActionType { simple, attention }
 
+abstract class IDismissible {
+  void dismiss();
+}
+
 extension DialogRouterExt on IDialogRouter {
   void toNotImplemented() {
-    toDialog(body: TextBody(text: 'not implemented :('), actions: <Action>[
-      Action(text: 'OK'),
-    ]);
+    toDialog(
+        body: const Body.text(text: 'not implemented :('),
+        actions: <Action>[
+          Action(text: 'OK'),
+        ]);
   }
 }

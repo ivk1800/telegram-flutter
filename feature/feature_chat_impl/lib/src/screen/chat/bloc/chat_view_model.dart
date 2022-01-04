@@ -69,7 +69,7 @@ class ChatViewModel extends BaseViewModel {
     switch (action) {
       case HeaderAction.leave:
         _router.toDialog(
-          body: TextBody(
+          body: Body.text(
             text: _localizationManager.getStringFormatted(
               'MegaLeaveAlertWithName',
               <dynamic>['name'],
@@ -79,14 +79,14 @@ class ChatViewModel extends BaseViewModel {
           actions: <Action>[
             Action(
               text: _getString('Cancel'),
-              callback: () {
-                return true;
+              callback: (IDismissible dismissible) {
+                dismissible.dismiss();
               },
             ),
             Action(
               type: ActionType.attention,
               text: _getString('LeaveMegaMenu'),
-              callback: () {
+              callback: (IDismissible dismissible) {
                 // todo block ui until do request, it is not offine request
                 _chatManager.leave(_args.chatId).then((_) {
                   // todo check is dispose viewmodel,
@@ -95,7 +95,7 @@ class ChatViewModel extends BaseViewModel {
                   return _;
                 });
 
-                return true;
+                dismissible.dismiss();
               },
             ),
           ],

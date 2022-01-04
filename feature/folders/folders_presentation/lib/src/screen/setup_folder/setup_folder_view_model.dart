@@ -16,7 +16,7 @@ class SetupFolderViewModel extends BaseViewModel {
 
   void onRemoveFolderTap() {
     _router.toDialog(
-      body: TextBody(
+      body: Body.text(
         text: _localizationManager.getString('FilterDeleteAlert'),
       ),
       title: _localizationManager.getString('FilterDelete'),
@@ -25,9 +25,9 @@ class SetupFolderViewModel extends BaseViewModel {
         Action(
           text: _localizationManager.getString('Delete'),
           type: ActionType.attention,
-          callback: () {
+          callback: (IDismissible dismissible) {
             _router.toNotImplemented();
-            return true;
+            dismissible.dismiss();
           },
         ),
       ],

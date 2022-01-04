@@ -36,19 +36,19 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
         case TapType.contactSupport:
           _router.toDialog(
             title: _getString('AskAQuestion'),
-            body: TextBody(text: 'AskAQuestionInfo'),
+            body: const Body.text(text: 'AskAQuestionInfo'),
             actions: <Action>[
               Action(
                 text: _getString('Cancel'),
-                callback: () {
-                  return true;
+                callback: (IDismissible dismissible) {
+                  dismissible.dismiss();
                 },
               ),
               Action(
                 text: _getString('AskButton'),
-                callback: () {
+                callback: (IDismissible dismissible) {
                   _router.toChat(0);
-                  return true;
+                  dismissible.dismiss();
                 },
               ),
             ],
@@ -57,19 +57,19 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
         case TapType.logOut:
           _router.toDialog(
             title: _getString('LogOutTitle'),
-            body: TextBody(text: _getString('AreYouSureLogout')),
+            body: Body.text(text: _getString('AreYouSureLogout')),
             actions: <Action>[
               Action(
                 text: _getString('Cancel'),
-                callback: () {
-                  return true;
+                callback: (IDismissible dismissible) {
+                  dismissible.dismiss();
                 },
               ),
               Action(
                 type: ActionType.attention,
                 text: _getString('LogOutTitle'),
-                callback: () {
-                  return true;
+                callback: (IDismissible dismissible) {
+                  dismissible.dismiss();
                 },
               ),
             ],

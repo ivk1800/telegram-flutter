@@ -114,7 +114,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _actionSubject.add(const ResetCode());
         _router.toDialog(
           title: _getString('AppName'),
-          body: TextBody(text: _tryConvertToHumanError(e)),
+          body: Body.text(text: _tryConvertToHumanError(e)),
           actions: <Action>[
             Action(text: _getString('OK')),
           ],
@@ -145,7 +145,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ));
         _router.toDialog(
           title: _getString('AppName'),
-          body: TextBody(text: _tryConvertToHumanError(e)),
+          body: Body.text(text: _tryConvertToHumanError(e)),
           actions: <Action>[
             Action(text: _getString('OK')),
           ],
@@ -216,11 +216,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async* {
     _router.toDialog(
       title: _getString('AppName'),
-      body: TextBody(text: _getString('StopVerification')),
+      body: Body.text(text: _getString('StopVerification')),
       actions: <Action>[
         Action(
           text: _getString('Stop'),
-          callback: () {
+          callback: (IDismissible dismissible) {
             _phoneNumber = null;
             emit(
               PhoneNumberState(
@@ -229,13 +229,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 blockInteraction: false,
               ),
             );
-            return true;
+            dismissible.dismiss();
           },
         ),
         Action(
           text: _getString('Continue'),
-          callback: () {
-            return true;
+          callback: (IDismissible dismissible) {
+            dismissible.dismiss();
           },
         ),
       ],

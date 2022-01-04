@@ -1,4 +1,5 @@
 import 'package:app/src/feature/feature.dart';
+import 'package:app/src/navigation/dialog_router_impl.dart';
 import 'package:dialog_api/dialog_api.dart';
 import 'package:dialog_api/dialog_api.dart' as dialog_api;
 import 'package:feature_auth_impl/feature_auth_impl.dart';
@@ -66,11 +67,14 @@ class CommonScreenRouterImpl
     required FeatureFactory featureFactory,
   })  : _navigationRouter = navigationRouter,
         _dialogNavigatorKey = dialogNavigatorKey,
+        _dialogRouter =
+            DialogRouterImpl(dialogNavigatorKey: dialogNavigatorKey),
         _featureFactory = featureFactory;
 
   final SplitNavigationRouter _navigationRouter;
   final FeatureFactory _featureFactory;
   final GlobalKey<NavigatorState> _dialogNavigatorKey;
+  final DialogRouterImpl _dialogRouter;
 
   // TODO extract chat router delegate
   @override
@@ -132,53 +136,12 @@ class CommonScreenRouterImpl
     String? title,
     required Body body,
     List<dialog_api.Action> actions = const <dialog_api.Action>[],
-  }) {
-    Widget? createContent() {
-      switch (body.runtimeType) {
-        case TextBody:
-          {
-            return Text((body as TextBody).text);
-          }
-      }
-
-      return null;
-    }
-
-    _showDialog(
-      builder: (BuildContext context) {
-        Color? getActionColor(dialog_api.ActionType type) {
-          switch (type) {
-            case dialog_api.ActionType.simple:
-              return null;
-            case dialog_api.ActionType.attention:
-              return Theme.of(context).errorColor;
-          }
-        }
-
-        return AlertDialog(
-          title: title != null ? Text(title) : null,
-          content: createContent(),
-          actions: actions
-              .map((dialog_api.Action action) => TextButton(
-                    child: Text(
-                      action.text,
-                      style: TextStyle(color: getActionColor(action.type)),
-                    ),
-                    onPressed: () {
-                      if (action.callback == null) {
-                        Navigator.of(context).pop();
-                      } else {
-                        if (action.callback!.call()) {
-                          Navigator.of(context).pop();
-                        }
-                      }
-                    },
-                  ))
-              .toList(),
-        );
-      },
-    );
-  }
+  }) =>
+      _dialogRouter.toDialog(
+        title: title,
+        body: body,
+        actions: actions,
+      );
 
   @override
   void toAddAccount() {
@@ -461,7 +424,9 @@ class CommonScreenRouterImpl
   }
 
   void _showNotImplementedDialog() {
-    toDialog(body: TextBody(text: 'not implemented'));
+    toDialog(
+      body: const Body.text(text: 'not implemented'),
+    );
   }
 
   @override
