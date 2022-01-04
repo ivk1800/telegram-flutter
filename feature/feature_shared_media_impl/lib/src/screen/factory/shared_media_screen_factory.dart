@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:feature_shared_media_impl/feature_shared_media_impl.dart';
 import 'package:feature_shared_media_impl/src/di/shared_media_component.dart';
@@ -27,7 +28,7 @@ class SharedMediaScreenFactory implements ISharedMediaScreenFactory {
       },
       providers: (SharedMediaComponent component) {
         return <Provider<dynamic>>[
-          Provider<SharedMediaViewModel>(
+          ViewModelProvider<SharedMediaViewModel>(
             create: (_) => component.getSharedMediaViewModel(),
           ),
         ];

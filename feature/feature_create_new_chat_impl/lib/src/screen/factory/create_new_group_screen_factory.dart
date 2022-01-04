@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:feature_create_new_chat_impl/src/screen/new_group/new_group_model.dart';
@@ -20,7 +21,7 @@ class CreateNewGroupScreenFactory implements ICreateNewGroupScreenFactory {
       create: () => _component,
       providers: (CreateNewGroupScreenComponent component) {
         return <Provider<dynamic>>[
-          Provider<NewGroupViewModel>(
+          ViewModelProvider<NewGroupViewModel>(
             create: (_) => component.getNewGroupViewModel(),
           ),
           Provider<ILocalizationManager>(

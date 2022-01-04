@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
@@ -28,7 +29,7 @@ class MainScreenFactory implements IMainScreenFactory {
           .build(),
       providers: (MainScreenComponent component) {
         return <Provider<dynamic>>[
-          Provider<MainViewModel>(
+          ViewModelProvider<MainViewModel>(
             create: (BuildContext _) => component.getMainViewModel(),
           ),
           Provider<ILocalizationManager>(

@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:feature_create_new_chat_impl/src/screen/new_secret_chat/new_secret_chat_model.dart';
@@ -21,7 +22,7 @@ class CreateNewSecretChatScreenFactory
       create: () => _component,
       providers: (CreateNewSecretChatScreenComponent component) {
         return <Provider<dynamic>>[
-          Provider<NewSecretChatViewModel>(
+          ViewModelProvider<NewSecretChatViewModel>(
             create: (_) => component.getNewSecretChatViewModel(),
           ),
           Provider<ILocalizationManager>(

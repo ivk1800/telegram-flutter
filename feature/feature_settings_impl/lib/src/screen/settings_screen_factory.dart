@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
@@ -41,7 +42,7 @@ class SettingsScreenFactory implements ISettingScreenFactory {
           Provider<ISettingsSearchScreenFactory>(
             create: (_) => component.getSettingsSearchWidgetFactory(),
           ),
-          Provider<SettingViewModel>(
+          ViewModelProvider<SettingViewModel>(
             create: (_) => component.getSettingViewModel(),
           ),
         ];

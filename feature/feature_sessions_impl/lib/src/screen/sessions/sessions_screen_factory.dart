@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_sessions_api/feature_chat_api.dart';
 import 'package:feature_sessions_impl/feature_sessions_impl.dart';
@@ -26,7 +27,7 @@ class SessionsScreenFactory implements ISessionsScreenFactory {
           .build(),
       providers: (SessionsScreenComponent component) {
         return <Provider<dynamic>>[
-          Provider<SessionsViewModel>(
+          ViewModelProvider<SessionsViewModel>(
             create: (BuildContext _) => component.getSessionsViewModel(),
           ),
           Provider<TileFactory>(

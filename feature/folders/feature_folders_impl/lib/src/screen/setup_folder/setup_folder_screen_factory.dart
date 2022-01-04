@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_folders_api/feature_folders_api.dart';
 import 'package:feature_folders_impl/src/di/di.dart';
@@ -23,7 +24,7 @@ class SetupFolderScreenFactory implements ISetupFolderScreenFactory {
           .build(),
       providers: (SetupFolderScreenComponent component) {
         return <Provider<dynamic>>[
-          Provider<SetupFolderViewModel>(
+          ViewModelProvider<SetupFolderViewModel>(
             create: (_) => component.getSetupFolderViewModel(),
           ),
           Provider<tg.TgAppBarFactory>(

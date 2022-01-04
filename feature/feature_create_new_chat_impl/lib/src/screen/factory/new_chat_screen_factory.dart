@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:feature_create_new_chat_impl/src/screen/new_chat/new_chat_page.dart';
@@ -20,7 +21,7 @@ class NewChatScreenFactory implements INewChatScreenFactory {
       create: () => _component,
       providers: (CreateNewChatScreenComponent component) {
         return <Provider<dynamic>>[
-          Provider<NewChatViewModel>(
+          ViewModelProvider<NewChatViewModel>(
             create: (_) => component.getNewChatViewModel(),
           ),
           Provider<ILocalizationManager>(

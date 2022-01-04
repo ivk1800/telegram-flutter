@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:feature_chats_list_impl/src/di/chats_list_screen_component.dart';
@@ -28,10 +29,7 @@ class ChatsListScreenFactory implements IChatsListScreenFactory {
           Provider<TileFactory>(
             create: (_) => value.getTileFactory(),
           ),
-          Provider<ChatsListViewModel>(
-            dispose: (_, ChatsListViewModel value) {
-              value.dispose();
-            },
+          ViewModelProvider<ChatsListViewModel>(
             create: (_) => value.getChatsListViewModel(),
           ),
         ];

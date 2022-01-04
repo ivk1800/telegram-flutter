@@ -1,3 +1,4 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:feature_create_new_chat_impl/src/screen/new_channel/new_channel_model.dart';
@@ -20,7 +21,7 @@ class CreateNewChannelScreenFactory implements ICreateNewChannelScreenFactory {
       create: () => _component,
       providers: (CreateNewChannelScreenComponent component) {
         return <Provider<dynamic>>[
-          Provider<NewChannelViewModel>(
+          ViewModelProvider<NewChannelViewModel>(
             create: (_) => component.getNewChannelViewModel(),
           ),
           Provider<ILocalizationManager>(
