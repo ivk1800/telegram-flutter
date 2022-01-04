@@ -26,8 +26,8 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
 
   // TODO extract chat router delegate
   @override
-  void toChat(int id) {
-    final ValueKey<dynamic> key = _keyGenerator.generateForChat(id);
+  void toChat(int chatId) {
+    final ValueKey<dynamic> key = _keyGenerator.generateForChat(chatId);
 
     if (_splitNavigationInfoProvider.hasKey(key, ContainerType.right)) {
       // TODO scroll to last message
@@ -36,7 +36,7 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
           _featureFactory.createChatFeatureApi().chatScreenFactory;
       _navigationRouter.pushAllReplacement(
         key: key,
-        builder: (BuildContext context) => factory.create(context, id),
+        builder: (BuildContext context) => factory.create(context, chatId),
         container: ContainerType.right,
       );
     }

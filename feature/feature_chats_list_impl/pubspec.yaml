@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  chat_router_api:
+    path: ../chat/chat_router_api
   core_arch:
     path: ../../core_arch
   core_tdlib_api:

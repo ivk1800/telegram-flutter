@@ -8,6 +8,8 @@ environment:
 dependencies:
   chat_actions_panel:
     path: ../chat/chat_actions_panel
+  chat_router_api:
+    path: ../chat/chat_router_api
   chat_theme:
     path: ../chat/chat_theme
   core_arch:

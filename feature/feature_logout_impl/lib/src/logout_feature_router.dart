@@ -1,6 +1,7 @@
+import 'package:chat_router_api/chat_router_api.dart';
 import 'package:dialog_api/dialog_api.dart';
 
-abstract class ILogoutFeatureRouter implements IDialogRouter {
+abstract class ILogoutFeatureRouter implements IDialogRouter, IChatRouter {
   void toAddAccount();
 
   void toPasscodeSettings();
@@ -9,5 +10,6 @@ abstract class ILogoutFeatureRouter implements IDialogRouter {
 
   void toChangeNumber();
 
+  @override
   void toChat(int chatId);
 }
