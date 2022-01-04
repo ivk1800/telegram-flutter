@@ -25,20 +25,28 @@ class WallpaperListPage extends StatelessWidget {
         listener: (BuildContext context, WallpaperListState state) {},
         builder: (BuildContext context, WallpaperListState state) {
           return AnimatedSwitcher(
-            child: _stateToWidget(state),
+            child: _Body(state: state),
             duration: const Duration(milliseconds: 200),
           );
         },
       ),
     );
   }
+}
 
-  Widget _stateToWidget(WallpaperListState state) {
+class _Body extends StatelessWidget {
+  const _Body({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final WallpaperListState state;
+
+  @override
+  Widget build(BuildContext context) {
     return state.when(
       (List<ITileModel> backgrounds) => LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) =>
-            _buildGridView(
-          context: context,
+        builder: (BuildContext context, BoxConstraints constraints) => _Grid(
           tileModels: backgrounds,
           width: constraints.maxWidth,
         ),
@@ -48,12 +56,20 @@ class WallpaperListPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildGridView({
-    required BuildContext context,
-    required List<ITileModel> tileModels,
-    required double width,
-  }) {
+class _Grid extends StatelessWidget {
+  const _Grid({
+    Key? key,
+    required this.tileModels,
+    required this.width,
+  }) : super(key: key);
+
+  final List<ITileModel> tileModels;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
     final TileFactory tileFactory = context.read();
 
     return StaggeredGridView.countBuilder(

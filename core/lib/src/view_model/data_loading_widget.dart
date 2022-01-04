@@ -22,13 +22,29 @@ class DataLoadingWidget<D, VM extends DataLoadingHandlerMixin<D>>
         return SizedBox(
           width: constraints.maxWidth,
           height: constraints.maxHeight,
-          child: _buildRootWidget(context),
+          child: _Body<D, VM>(
+            delegate: delegate,
+            viewModel: viewModel,
+          ),
         );
       },
     );
   }
+}
 
-  StreamBuilder<DataLoadingState<D>> _buildRootWidget(BuildContext context) {
+class _Body<D, VM extends DataLoadingHandlerMixin<D>> extends StatelessWidget {
+  const _Body({
+    Key? key,
+    required this.delegate,
+    required this.viewModel,
+  }) : super(key: key);
+
+  final IDataLoadingWidgetDelegate<D> delegate;
+
+  final VM viewModel;
+
+  @override
+  Widget build(BuildContext context) {
     return StreamBuilder<DataLoadingState<D>>(
       stream: viewModel.loadingState(),
       builder:

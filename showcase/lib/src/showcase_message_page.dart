@@ -132,95 +132,145 @@ class _ShowcaseMessagePageState extends State<ShowcaseMessagePage> {
                 ),
               ],
             ),
-            if (!_isShowAll) _buildMessageDropdownButton(),
+            if (!_isShowAll)
+              DropdownButton<MessageData>(
+                value: _currentMessage,
+                items: widget.bundle.messages
+                    .map<DropdownMenuItem<MessageData>>((MessageData value) {
+                  return DropdownMenuItem<MessageData>(
+                    value: value,
+                    child: Text(
+                      value.name,
+                    ),
+                  );
+                }).toList(),
+                onChanged: (MessageData? message) {
+                  setState(() {
+                    _currentMessage = message!;
+                  });
+                },
+              ),
             if (_isShowAll)
-              _buildAllMessages()
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (BuildContext context, int index) {
+                    final MessageData messageData =
+                        widget.bundle.messages[index];
+                    final Future<td.Message> messageFuture =
+                        messageData.messageFactory();
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text(messageData.name),
+                        _SingleMessage(
+                          tileFactory: _tileFactory,
+                          isReady: _isReady,
+                          messageTileMapper: _messageTileMapper,
+                          future: _withReply
+                              ? messageFuture.withReply()
+                              : messageFuture,
+                        ),
+                      ],
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(
+                    height: 8,
+                  ),
+                  itemCount: widget.bundle.messages.length,
+                ),
+              )
             else
-              _buildSingleMessage(
-                _currentMessage.messageFactory(),
+              _SingleMessage(
+                tileFactory: _tileFactory,
+                isReady: _isReady,
+                messageTileMapper: _messageTileMapper,
+                future: _currentMessage.messageFactory(),
               ),
           ],
         ),
       );
 
-  Widget _buildAllMessages() => Expanded(
-        child: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            final MessageData messageData = widget.bundle.messages[index];
-            final Future<td.Message> messageFuture =
-                messageData.messageFactory();
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(messageData.name),
-                _buildSingleMessage(
-                  _withReply ? messageFuture.withReply() : messageFuture,
-                ),
-              ],
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) => const SizedBox(
-            height: 8,
-          ),
-          itemCount: widget.bundle.messages.length,
-        ),
-      );
+// Widget _buildAllMessages() => Expanded(
+//       child: ListView.separated(
+//         itemBuilder: (BuildContext context, int index) {
+//           final MessageData messageData = widget.bundle.messages[index];
+//           final Future<td.Message> messageFuture =
+//               messageData.messageFactory();
+//           return Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: <Widget>[
+//               Text(messageData.name),
+//               _buildSingleMessage(
+//                 _withReply ? messageFuture.withReply() : messageFuture,
+//               ),
+//             ],
+//           );
+//         },
+//         separatorBuilder: (BuildContext context, int index) => const SizedBox(
+//           height: 8,
+//         ),
+//         itemCount: widget.bundle.messages.length,
+//       ),
+//     );
 
-  Widget _buildSingleMessage(Future<td.Message> future) =>
-      FutureBuilder<ITileModel>(
-        future: future.then(
-          (td.Message message) => _messageTileMapper.mapToTileModel(message),
-        ),
-        builder: (BuildContext context, AsyncSnapshot<ITileModel> snapshot) {
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          }
+// Widget _buildSingleMessage(Future<td.Message> future) =>
+//     FutureBuilder<ITileModel>(
+//       future: future.then(
+//         (td.Message message) => _messageTileMapper.mapToTileModel(message),
+//       ),
+//       builder: (BuildContext context, AsyncSnapshot<ITileModel> snapshot) {
+//         if (snapshot.hasError) {
+//           return Text(snapshot.error.toString());
+//         }
+//
+//         if (_isReady && snapshot.hasData) {
+//           return _Required(
+//             child: Builder(
+//               builder: (BuildContext context) => _tileFactory.create(
+//                 context,
+//                 snapshot.data!,
+//               ),
+//             ),
+//           );
+//         }
+//         return const SizedBox();
+//       },
+//     );
 
-          if (_isReady && snapshot.hasData) {
-            return _wrapToRequiredWidgets(child: _buildMessage(snapshot.data!));
-          }
-          return const SizedBox();
-        },
-      );
+// Widget _wrapToRequiredWidgets({required Widget child}) => TgTheme(
+//       data: TgThemeData(themes: <Type, ITgThemeData>{
+//         ChatThemeData: ChatThemeData.def(context: context),
+//       }),
+//       child: LayoutBuilder(
+//         builder: (BuildContext context, BoxConstraints constraints) =>
+//             chat_impl.ChatContext(
+//           data: chat_impl.ChatContextData.desktop(
+//             maxWidth: constraints.maxWidth,
+//           ),
+//           child: child,
+//         ),
+//       ),
+//     );
 
-  Widget _buildMessage(ITileModel tileModel) => Builder(
-        builder: (BuildContext context) =>
-            _tileFactory.create(context, tileModel),
-      );
-
-  Widget _wrapToRequiredWidgets({required Widget child}) => TgTheme(
-        data: TgThemeData(themes: <Type, ITgThemeData>{
-          ChatThemeData: ChatThemeData.def(context: context),
-        }),
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) =>
-              chat_impl.ChatContext(
-            data: chat_impl.ChatContextData.desktop(
-              maxWidth: constraints.maxWidth,
-            ),
-            child: child,
-          ),
-        ),
-      );
-
-  DropdownButton<MessageData> _buildMessageDropdownButton() =>
-      DropdownButton<MessageData>(
-        value: _currentMessage,
-        items: widget.bundle.messages
-            .map<DropdownMenuItem<MessageData>>((MessageData value) {
-          return DropdownMenuItem<MessageData>(
-            value: value,
-            child: Text(
-              value.name,
-            ),
-          );
-        }).toList(),
-        onChanged: (MessageData? message) {
-          setState(() {
-            _currentMessage = message!;
-          });
-        },
-      );
+// DropdownButton<MessageData> _buildMessageDropdownButton() =>
+// DropdownButton<MessageData>(
+//   value: _currentMessage,
+//   items: widget.bundle.messages
+//       .map<DropdownMenuItem<MessageData>>((MessageData value) {
+//     return DropdownMenuItem<MessageData>(
+//       value: value,
+//       child: Text(
+//         value.name,
+//       ),
+//     );
+//   }).toList(),
+//   onChanged: (MessageData? message) {
+//     setState(() {
+//       _currentMessage = message!;
+//     });
+//   },
+// );
 }
 
 extension MessageFutureExt on Future<td.Message> {
@@ -259,5 +309,71 @@ class FakeFileDownloader implements IFileDownloader {
   Stream<IFileDownloadState> getFileDownloadStateStream(int fileId) {
     // TODO: implement getFileDownloadStateStream
     throw UnimplementedError();
+  }
+}
+
+class _Required extends StatelessWidget {
+  const _Required({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return TgTheme(
+      data: TgThemeData(themes: <Type, ITgThemeData>{
+        ChatThemeData: ChatThemeData.def(context: context),
+      }),
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) =>
+            chat_impl.ChatContext(
+          data: chat_impl.ChatContextData.desktop(
+            maxWidth: constraints.maxWidth,
+          ),
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+class _SingleMessage extends StatelessWidget {
+  const _SingleMessage({
+    Key? key,
+    required this.tileFactory,
+    required this.isReady,
+    required this.future,
+    required this.messageTileMapper,
+  }) : super(key: key);
+
+  final Future<td.Message> future;
+  final chat_impl.MessageTileMapper messageTileMapper;
+  final bool isReady;
+  final TileFactory tileFactory;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<ITileModel>(
+      future: future.then(messageTileMapper.mapToTileModel),
+      builder: (BuildContext context, AsyncSnapshot<ITileModel> snapshot) {
+        if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+
+        if (isReady && snapshot.hasData) {
+          return _Required(
+            child: Builder(
+              builder: (BuildContext context) => tileFactory.create(
+                context,
+                snapshot.data!,
+              ),
+            ),
+          );
+        }
+        return const SizedBox();
+      },
+    );
   }
 }
