@@ -7,5 +7,5 @@ abstract class ILogoutFeatureApi {
 }
 
 abstract class ILogoutScreenFactory {
-  Widget create(BuildContext context);
+  Widget create();
 }

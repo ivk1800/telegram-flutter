@@ -15,7 +15,7 @@ abstract class ICountryRepository {
 }
 
 abstract class IChooseCountryScreenFactory {
-  Widget create(BuildContext context, void Function(Country country) callback);
+  Widget create(void Function(Country country) callback);
 }
 
 class Country {

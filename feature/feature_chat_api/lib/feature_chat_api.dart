@@ -9,7 +9,7 @@ abstract class IChatFeatureApi {
 }
 
 abstract class IChatScreenFactory {
-  Widget create(BuildContext context, int chatId);
+  Widget create(int chatId);
 }
 
 abstract class IChatManager {

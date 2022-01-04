@@ -10,7 +10,7 @@ abstract class IAuthFeatureApi {
 }
 
 abstract class IAuthScreenFactory {
-  Widget create(BuildContext context);
+  Widget create();
 }
 
 abstract class IAuthenticationManager {

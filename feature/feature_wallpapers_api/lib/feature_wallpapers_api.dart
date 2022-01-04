@@ -7,5 +7,5 @@ abstract class IWallpapersFeatureApi {
 }
 
 abstract class IWallpapersListScreenFactory {
-  Widget create(BuildContext context);
+  Widget create();
 }

@@ -7,5 +7,5 @@ abstract class IProfileFeatureApi {
 }
 
 abstract class IProfileScreenFactory {
-  Widget create(BuildContext context, int id);
+  Widget create(int id);
 }

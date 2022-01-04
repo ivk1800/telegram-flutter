@@ -18,7 +18,7 @@ class SharedMediaScreenFactory implements ISharedMediaScreenFactory {
   final SharedMediaFeatureDependencies _dependencies;
 
   @override
-  Widget create(BuildContext context, SharedContentType type) {
+  Widget create(SharedContentType type) {
     return Scope<SharedMediaComponent>(
       create: () {
         return JuggerSharedMediaComponentBuilder()

@@ -24,7 +24,7 @@ class WallpapersListScreenFactory implements IWallpapersListScreenFactory {
   final WallpapersFeatureDependencies _dependencies;
 
   @override
-  Widget create(BuildContext context) {
+  Widget create() {
     return MultiProvider(
       providers: <Provider<dynamic>>[
         Provider<ILocalizationManager>(

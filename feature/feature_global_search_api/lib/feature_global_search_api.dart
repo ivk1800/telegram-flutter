@@ -8,7 +8,7 @@ abstract class IGlobalSearchFeatureApi {
 }
 
 abstract class IGlobalSearchScreenFactory {
-  Widget create(BuildContext context, GlobalSearchScreenController controller);
+  Widget create(GlobalSearchScreenController controller);
 }
 
 class GlobalSearchScreenController {

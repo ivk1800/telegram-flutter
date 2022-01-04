@@ -20,7 +20,7 @@ class GlobalSearchScreenFactory implements IGlobalSearchScreenFactory {
   final GlobalSearchFeatureDependencies _dependencies;
 
   @override
-  Widget create(BuildContext context, GlobalSearchScreenController controller) {
+  Widget create(GlobalSearchScreenController controller) {
     return Scope<GlobalSearchScreenComponent>(
       create: () => JuggerGlobalSearchScreenComponentBuilder()
           .dependencies(_dependencies)

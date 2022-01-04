@@ -79,7 +79,7 @@ class CommonScreenRouterImpl
         _featureFactory.createChatFeatureApi().chatScreenFactory;
     _navigationRouter.push(
       key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(context, id),
+      builder: (BuildContext context) => factory.create(id),
       container: ContainerType.right,
     );
   }
@@ -90,7 +90,7 @@ class CommonScreenRouterImpl
         _featureFactory.createProfileFeatureApi().profileScreenFactory;
     _navigationRouter.push(
       key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(context, chatId),
+      builder: (BuildContext context) => factory.create(chatId),
       container: ContainerType.top,
     );
   }
@@ -101,7 +101,7 @@ class CommonScreenRouterImpl
         _featureFactory.createSharedMediaFeatureApi().sharedMediaScreenFactory;
     _navigationRouter.push(
       key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(context, type),
+      builder: (_) => factory.create(type),
       container: ContainerType.top,
     );
   }
@@ -122,7 +122,7 @@ class CommonScreenRouterImpl
         _featureFactory.createCountryFeatureApi().chooseCountryScreenFactory;
     _navigationRouter.push(
       key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(context, callback),
+      builder: (_) => factory.create(callback),
       container: ContainerType.top,
     );
   }
@@ -337,7 +337,7 @@ class CommonScreenRouterImpl
         _featureFactory.createLogoutFeatureApi().logoutScreenFactory;
     _navigationRouter.push(
       key: UniqueKey(),
-      builder: factory.create,
+      builder: (_) => factory.create(),
       container: ContainerType.top,
     );
   }
@@ -360,7 +360,7 @@ class CommonScreenRouterImpl
         .wallpapersListScreenFactory;
     _navigationRouter.push(
       key: UniqueKey(),
-      builder: factory.create,
+      builder: (_) => factory.create(),
       container: ContainerType.top,
     );
   }

@@ -11,5 +11,5 @@ abstract class ISharedMediaFeatureApi {
 }
 
 abstract class ISharedMediaScreenFactory {
-  Widget create(BuildContext context, SharedContentType type);
+  Widget create(SharedContentType type);
 }

@@ -14,7 +14,7 @@ class ChooseCountryScreenFactory implements IChooseCountryScreenFactory {
   final CountryFeatureDependencies _dependencies;
 
   @override
-  Widget create(BuildContext context, void Function(Country country) callback) {
+  Widget create(void Function(Country country) callback) {
     return MultiProvider(
       providers: <Provider<dynamic>>[
         Provider<ILocalizationManager>(

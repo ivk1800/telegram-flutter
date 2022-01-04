@@ -18,8 +18,7 @@ class ProfileScreenFactory implements IProfileScreenFactory {
   final ProfileFeatureDependencies _dependencies;
 
   @override
-  Widget create(BuildContext context, int id) =>
-      Provider<ProfileScreenComponent>(
+  Widget create(int id) => Provider<ProfileScreenComponent>(
         create: (_) => JuggerProfileScreenComponentBuilder()
             .dependencies(_dependencies)
             .chatArgs(ProfileArgs(id))

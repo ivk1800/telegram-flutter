@@ -36,7 +36,7 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
           _featureFactory.createChatFeatureApi().chatScreenFactory;
       _navigationRouter.pushAllReplacement(
         key: key,
-        builder: (BuildContext context) => factory.create(context, chatId),
+        builder: (BuildContext context) => factory.create(chatId),
         container: ContainerType.right,
       );
     }

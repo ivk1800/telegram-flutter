@@ -20,7 +20,7 @@ class ChatScreenFactory implements IChatScreenFactory {
   final ChatFeatureDependencies dependencies;
 
   @override
-  Widget create(BuildContext context, int chatId) {
+  Widget create(int chatId) {
     return Provider<ChatScreenComponent>(
       create: (_) => JuggerChatScreenComponentBuilder()
           .dependencies(dependencies)

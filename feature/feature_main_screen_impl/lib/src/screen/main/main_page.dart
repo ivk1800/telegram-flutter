@@ -33,7 +33,6 @@ class MainPageState extends State<MainPage> with TickerProviderStateMixin {
     _appbarKey = _AppBarKey(hashCode);
     _chatsListWidget = context.read<IChatsListScreenFactory>().create();
     _globalSearchWidget = context.read<IGlobalSearchScreenFactory>().create(
-          context,
           _globalSearchScreenController,
         );
     _searchQueryController.addListener(_onSearchEvent);

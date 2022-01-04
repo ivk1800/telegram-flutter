@@ -15,7 +15,7 @@ class AuthScreenFactory implements IAuthScreenFactory {
   final AuthFeatureDependencies _dependencies;
 
   @override
-  Widget create(BuildContext context) {
+  Widget create() {
     return Provider<AuthScreenComponent>(
       create: (_) => JuggerAuthScreenComponentBuilder()
           .dependencies(_dependencies)
