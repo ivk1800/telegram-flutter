@@ -40,14 +40,15 @@ class SearchSettingsScreenFactory implements ISettingsSearchScreenFactory {
             ),
             Provider<TileFactory>.value(
               value: TileFactory(
-                  delegates: <Type, ITileFactoryDelegate<ITileModel>>{
-                    FaqResultTileModel: FaqResultTileFactoryDelegate(
-                      listener: component.getSearchItemListener(),
-                    ),
-                    SearchResultTileModel: SearchResultTileFactoryDelegate(
-                      listener: component.getSearchItemListener(),
-                    ),
-                  }),
+                delegates: <Type, ITileFactoryDelegate<ITileModel>>{
+                  FaqResultTileModel: FaqResultTileFactoryDelegate(
+                    listener: component.getSearchItemListener(),
+                  ),
+                  SearchResultTileModel: SearchResultTileFactoryDelegate(
+                    listener: component.getSearchItemListener(),
+                  ),
+                },
+              ),
             ),
             Provider<ConnectionStateWidgetFactory>.value(
               value: ConnectionStateWidgetFactory(

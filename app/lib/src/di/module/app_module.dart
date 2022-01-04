@@ -172,10 +172,11 @@ abstract class AppModule {
     OptionsManager optionsManager,
   ) =>
       AppDelegate(
-          router: router,
-          client: client,
-          appLifecycleStateProvider: appLifecycleStateProvider,
-          connectivityProvider: connectivityProvider,
-          optionsManager: optionsManager,
-          tdConfigProvider: tdConfigProvider);
+        router: router,
+        client: client,
+        appLifecycleStateProvider: appLifecycleStateProvider,
+        connectivityProvider: connectivityProvider,
+        optionsManager: optionsManager,
+        tdConfigProvider: tdConfigProvider,
+      );
 }

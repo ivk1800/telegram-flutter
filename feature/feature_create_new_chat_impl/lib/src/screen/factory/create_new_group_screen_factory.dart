@@ -25,7 +25,7 @@ class CreateNewGroupScreenFactory implements ICreateNewGroupScreenFactory {
           ),
           Provider<ILocalizationManager>(
             create: (_) => component.getLocalizationManager(),
-          )
+          ),
         ];
       },
       child: const NewGroupPage(),

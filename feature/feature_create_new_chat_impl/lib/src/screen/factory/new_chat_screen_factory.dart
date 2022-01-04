@@ -25,7 +25,7 @@ class NewChatScreenFactory implements INewChatScreenFactory {
           ),
           Provider<ILocalizationManager>(
             create: (_) => component.getLocalizationManager(),
-          )
+          ),
         ];
       },
       child: const NewChatPage(),

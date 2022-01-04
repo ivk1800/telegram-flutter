@@ -89,12 +89,16 @@ class SettingsPageState extends State<SettingsPage>
                   connectionStateWidgetFactory = context.read();
               return AppBar(
                 title: Align(
-                  child: connectionStateWidgetFactory.create(context,
-                      (BuildContext context) {
-                    return Text(
-                      context.read<ILocalizationManager>().getString('AppName'),
-                    );
-                  }),
+                  child: connectionStateWidgetFactory.create(
+                    context,
+                    (BuildContext context) {
+                      return Text(
+                        context
+                            .read<ILocalizationManager>()
+                            .getString('AppName'),
+                      );
+                    },
+                  ),
                   alignment: Alignment.centerLeft,
                 ),
                 actions: <Widget>[

@@ -87,5 +87,5 @@ enum SearchItem {
 
   askAQuestion,
   telegramFAQ,
-  privacyPolicy
+  privacyPolicy,
 }

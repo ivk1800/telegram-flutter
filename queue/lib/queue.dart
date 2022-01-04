@@ -19,7 +19,8 @@ class Queue<R> {
   Future<R> enqueue(Future<R> Function() action) {
     final Completer<R> completer = Completer<R>();
     _queueStreamController.add(
-        _Action<R>(action: () async => action.call(), completer: completer));
+      _Action<R>(action: () async => action.call(), completer: completer),
+    );
     return completer.future;
   }
 

@@ -56,8 +56,8 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
         },
         supergroup: (td.ChatTypeSupergroup value) {
           return Stream<td.Supergroup>.fromFuture(
-                  _superGroupRepository.getGroup(value.supergroupId))
-              .flatMap((td.Supergroup group) => _supergroupState(chat, group));
+            _superGroupRepository.getGroup(value.supergroupId),
+          ).flatMap((td.Supergroup group) => _supergroupState(chat, group));
         },
         secret: (td.ChatTypeSecret value) {
           return Stream<PanelState>.value(const PanelState.empty());
@@ -78,14 +78,21 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
 
     final Stream<Tuple2<td.Supergroup, td.ChatNotificationSettings>>
         groupInfoUpdates = Rx.combineLatest2<
-                td.Supergroup,
-                td.ChatNotificationSettings,
-                Tuple2<td.Supergroup, td.ChatNotificationSettings>>(
-            groupUpdates, notificationSettingsUpdates, (td.Supergroup group,
-                td.ChatNotificationSettings notificationSettings) {
-      return Tuple2<td.Supergroup, td.ChatNotificationSettings>(
-          group, notificationSettings);
-    });
+            td.Supergroup,
+            td.ChatNotificationSettings,
+            Tuple2<td.Supergroup, td.ChatNotificationSettings>>(
+      groupUpdates,
+      notificationSettingsUpdates,
+      (
+        td.Supergroup group,
+        td.ChatNotificationSettings notificationSettings,
+      ) {
+        return Tuple2<td.Supergroup, td.ChatNotificationSettings>(
+          group,
+          notificationSettings,
+        );
+      },
+    );
 
     return groupInfoUpdates.map(
       (Tuple2<td.Supergroup, td.ChatNotificationSettings> data) {
@@ -119,7 +126,8 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
   }
 
   Stream<td.ChatNotificationSettings> _getNotificationSettingsUpdatesStream(
-          int chatId) =>
+    int chatId,
+  ) =>
       _chatUpdatesProvider.chatUpdates
           .whereType<td.UpdateChatNotificationSettings>()
           .where((td.UpdateChatNotificationSettings update) =>

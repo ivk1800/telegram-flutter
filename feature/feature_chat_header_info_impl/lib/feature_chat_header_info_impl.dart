@@ -35,9 +35,9 @@ class ChatHeaderInfoFeatureDependencies {
 }
 
 class ChatHeaderInfoFeatureApi implements IChatHeaderInfoFeatureApi {
-  const ChatHeaderInfoFeatureApi(
-      {required ChatHeaderInfoFeatureDependencies dependencies})
-      : _dependencies = dependencies;
+  const ChatHeaderInfoFeatureApi({
+    required ChatHeaderInfoFeatureDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final ChatHeaderInfoFeatureDependencies _dependencies;
 

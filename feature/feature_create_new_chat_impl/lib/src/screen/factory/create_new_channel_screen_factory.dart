@@ -25,7 +25,7 @@ class CreateNewChannelScreenFactory implements ICreateNewChannelScreenFactory {
           ),
           Provider<ILocalizationManager>(
             create: (_) => component.getLocalizationManager(),
-          )
+          ),
         ];
       },
       child: const NewChannelPage(),

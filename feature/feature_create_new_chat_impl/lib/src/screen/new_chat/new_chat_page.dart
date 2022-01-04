@@ -45,7 +45,7 @@ class _Body extends StatelessWidget {
           onTap: viewModel.onNewChannelTap,
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('NewChannel'),
-        )
+        ),
       ],
     );
   }

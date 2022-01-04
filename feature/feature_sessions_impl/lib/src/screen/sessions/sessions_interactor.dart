@@ -37,7 +37,8 @@ class SessionsInteractor {
       _sessionRepository.activeSessions.map((List<td.Session> sessions) {
         return SessionsState(
           activeSession: _sessionTileMapper.mapToTileModel(
-              sessions.firstWhere((td.Session session) => session.isCurrent)),
+            sessions.firstWhere((td.Session session) => session.isCurrent),
+          ),
           sessions: sessions
               .where((td.Session session) => !session.isCurrent)
               .map(_sessionTileMapper.mapToTileModel)

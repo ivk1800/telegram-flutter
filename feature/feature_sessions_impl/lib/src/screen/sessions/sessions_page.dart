@@ -108,7 +108,8 @@ class _Body extends StatelessWidget {
             children: ListTile.divideTiles(
               context: context,
               tiles: sessions.map(
-                  (ITileModel model) => tileFactory.create(context, model)),
+                (ITileModel model) => tileFactory.create(context, model),
+              ),
             ).toList(),
           ),
           ListTile(

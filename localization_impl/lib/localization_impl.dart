@@ -26,8 +26,11 @@ class LocalizationManager implements ILocalizationManager {
       _currentStrings[key] ?? _defaultStrings[key] ?? defaultValue;
 
   @override
-  String getStringFormatted(String key, List<dynamic> formatArgs,
-      [String defaultValue = '']) {
+  String getStringFormatted(
+    String key,
+    List<dynamic> formatArgs, [
+    String defaultValue = '',
+  ]) {
     final String s =
         _currentStrings[key] ?? _defaultStrings[key] ?? defaultValue;
     return sprintf(s, formatArgs);
@@ -40,7 +43,8 @@ class LocalizationManager implements ILocalizationManager {
 
   Future<Map<String, String>> _readStrings(String language) async {
     final String rawXml = await rootBundle.loadString(
-        'packages/localization_impl/assets/translations/$language.xml');
+      'packages/localization_impl/assets/translations/$language.xml',
+    );
 
     final XmlDocument document = XmlDocument.parse(rawXml);
 

@@ -62,8 +62,11 @@ class MainPageState extends State<MainPage> with TickerProviderStateMixin {
       child: Scaffold(
         appBar: tg.TgSwitchedAppBar(
           backgroundColor: AppBarTheme.of(context).backgroundColor!,
-          appBarBuilder: (AnimationController animationController,
-              BuildContext context, bool isActive) {
+          appBarBuilder: (
+            AnimationController animationController,
+            BuildContext context,
+            bool isActive,
+          ) {
             if (isActive) {
               return tg.SearchAppBar(
                 animationController: animationController,

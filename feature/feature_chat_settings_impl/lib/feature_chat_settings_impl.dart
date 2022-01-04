@@ -49,15 +49,18 @@ class _ScreenWidgetFactory implements IChatSettingsWidgetFactory {
   Widget create() => MultiProvider(
         providers: <Provider<dynamic>>[
           Provider<ILocalizationManager>.value(
-              value: dependencies.localizationManager),
+            value: dependencies.localizationManager,
+          ),
           Provider<ConnectionStateWidgetFactory>.value(
-              value: ConnectionStateWidgetFactory(
-                  connectionStateProvider:
-                      dependencies.connectionStateProvider))
+            value: ConnectionStateWidgetFactory(
+              connectionStateProvider: dependencies.connectionStateProvider,
+            ),
+          ),
         ],
         child: BlocProvider<ChatSettingsBloc>(
-            create: (BuildContext context) =>
-                ChatSettingsBloc(router: dependencies.router),
-            child: const ChatSettingsPage()),
+          create: (BuildContext context) =>
+              ChatSettingsBloc(router: dependencies.router),
+          child: const ChatSettingsPage(),
+        ),
       );
 }

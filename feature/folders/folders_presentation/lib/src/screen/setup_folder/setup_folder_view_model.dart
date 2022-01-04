@@ -16,20 +16,21 @@ class SetupFolderViewModel extends BaseViewModel {
 
   void onRemoveFolderTap() {
     _router.toDialog(
-        body: TextBody(
-          text: _localizationManager.getString('FilterDeleteAlert'),
+      body: TextBody(
+        text: _localizationManager.getString('FilterDeleteAlert'),
+      ),
+      title: _localizationManager.getString('FilterDelete'),
+      actions: <Action>[
+        Action(text: _localizationManager.getString('Cancel')),
+        Action(
+          text: _localizationManager.getString('Delete'),
+          type: ActionType.attention,
+          callback: () {
+            _router.toNotImplemented();
+            return true;
+          },
         ),
-        title: _localizationManager.getString('FilterDelete'),
-        actions: <Action>[
-          Action(text: _localizationManager.getString('Cancel')),
-          Action(
-            text: _localizationManager.getString('Delete'),
-            type: ActionType.attention,
-            callback: () {
-              _router.toNotImplemented();
-              return true;
-            },
-          ),
-        ]);
+      ],
+    );
   }
 }

@@ -26,7 +26,7 @@ class CreateNewSecretChatScreenFactory
           ),
           Provider<ILocalizationManager>(
             create: (_) => component.getLocalizationManager(),
-          )
+          ),
         ];
       },
       child: const NewSecretChatPage(),
