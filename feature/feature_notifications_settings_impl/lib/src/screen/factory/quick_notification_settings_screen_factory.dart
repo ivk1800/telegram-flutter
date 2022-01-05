@@ -15,7 +15,7 @@ class QuickNotificationSettingsScreenFactory
   final NotificationsSettingsFeatureDependencies _dependencies;
 
   @override
-  Widget create({required BuildContext context}) {
+  Widget create() {
     return MultiProvider(
       providers: <Provider<dynamic>>[
         Provider<ILocalizationManager>.value(

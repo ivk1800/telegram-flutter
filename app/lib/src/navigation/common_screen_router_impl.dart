@@ -13,6 +13,7 @@ import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
+import 'package:feature_folders_api/feature_folders_api.dart';
 import 'package:feature_folders_impl/feature_folders_impl.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_logout_api/feature_logout_api.dart';
@@ -24,6 +25,7 @@ import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
+import 'package:feature_sessions_api/feature_chat_api.dart';
 import 'package:feature_sessions_impl/feature_sessions_impl.dart';
 import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
@@ -81,9 +83,8 @@ class CommonScreenRouterImpl
   void toChat(int id) {
     final IChatScreenFactory factory =
         _featureFactory.createChatFeatureApi().chatScreenFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(id),
+    _add(
+      widget: factory.create(id),
       container: ContainerType.right,
     );
   }
@@ -92,9 +93,8 @@ class CommonScreenRouterImpl
   void toChatProfile(int chatId) {
     final IProfileScreenFactory factory =
         _featureFactory.createProfileFeatureApi().profileScreenFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(chatId),
+    _add(
+      widget: factory.create(chatId),
       container: ContainerType.top,
     );
   }
@@ -103,9 +103,8 @@ class CommonScreenRouterImpl
   void toSharedMedia(SharedContentType type) {
     final ISharedMediaScreenFactory factory =
         _featureFactory.createSharedMediaFeatureApi().sharedMediaScreenFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (_) => factory.create(type),
+    _add(
+      widget: factory.create(type),
       container: ContainerType.top,
     );
   }
@@ -116,7 +115,8 @@ class CommonScreenRouterImpl
         .createNotificationsSettingsFeatureApi()
         .quickNotificationSettingsScreenFactory;
     _showDialog(
-      builder: (BuildContext context) => factory.create(context: context),
+      // todo pass widget instead call method
+      builder: (BuildContext context) => factory.create(),
     );
   }
 
@@ -124,9 +124,8 @@ class CommonScreenRouterImpl
   void toChooseCountry(void Function(Country country) callback) {
     final IChooseCountryScreenFactory factory =
         _featureFactory.createCountryFeatureApi().chooseCountryScreenFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (_) => factory.create(callback),
+    _add(
+      widget: factory.create(callback),
       container: ContainerType.top,
     );
   }
@@ -165,85 +164,72 @@ class CommonScreenRouterImpl
 
   @override
   void toArchivedStickers() {
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => _featureFactory
-          .createStickersFeatureApi()
-          .archivedStickersWidgetFactory
-          .create(),
+    final IArchivedStickersWidgetFactory factory = _featureFactory
+        .createStickersFeatureApi()
+        .archivedStickersWidgetFactory;
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
 
   @override
   void toMasks() {
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => _featureFactory
-          .createStickersFeatureApi()
-          .masksWidgetFactory
-          .create(),
+    final IMasksWidgetFactory factory =
+        _featureFactory.createStickersFeatureApi().masksWidgetFactory;
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
 
   @override
   void toStickerSet(int setId) {
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => _featureFactory
-          .createStickersFeatureApi()
-          .stickerSetWidgetFactory
-          .create(setId),
+    final IStickerSetWidgetFactory factory =
+        _featureFactory.createStickersFeatureApi().stickerSetWidgetFactory;
+    _add(
+      widget: factory.create(setId),
       container: ContainerType.top,
     );
   }
 
   @override
   void toTrendingStickers() {
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => _featureFactory
-          .createStickersFeatureApi()
-          .trendingStickersWidgetFactory
-          .create(),
+    final ITrendingStickersWidgetFactory factory = _featureFactory
+        .createStickersFeatureApi()
+        .trendingStickersWidgetFactory;
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
 
   @override
   void toFolders() {
-    final Widget foldersScreen =
-        _featureFactory.createFoldersFeatureApi().foldersScreenFactory.create();
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => foldersScreen,
+    final IFoldersScreenFactory factory =
+        _featureFactory.createFoldersFeatureApi().foldersScreenFactory;
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
 
   @override
   void toCreateNewFolder() {
-    final Widget setupFolderScreen = _featureFactory
-        .createFoldersFeatureApi()
-        .setupFolderScreenFactory
-        .create();
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => setupFolderScreen,
+    final ISetupFolderScreenFactory factory =
+        _featureFactory.createFoldersFeatureApi().setupFolderScreenFactory;
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
 
   @override
   void toSessions() {
-    final Widget screen = _featureFactory
-        .createSessionsFeatureApi()
-        .sessionsScreenFactory
-        .create();
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => screen,
+    final ISessionsScreenFactory factory =
+        _featureFactory.createSessionsFeatureApi().sessionsScreenFactory;
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -252,10 +238,8 @@ class CommonScreenRouterImpl
   void toPrivacySettings() {
     final IPrivacySettingsWidgetFactory factory =
         _featureFactory.createPrivacySettingsFeatureApi().screenWidgetFactory;
-
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(),
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -265,9 +249,8 @@ class CommonScreenRouterImpl
     final INotificationsSettingsWidgetFactory factory = _featureFactory
         .createNotificationsSettingsFeatureApi()
         .screenWidgetFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(),
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -276,9 +259,8 @@ class CommonScreenRouterImpl
   void toDataSettings() {
     final IDataSettingsWidgetFactory factory =
         _featureFactory.createDataSettingsFeatureApi().screenWidgetFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(),
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -287,9 +269,8 @@ class CommonScreenRouterImpl
   void toChatSettings() {
     final IChatSettingsWidgetFactory factory =
         _featureFactory.createChatSettingsFeatureApi().screenWidgetFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(),
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -298,9 +279,8 @@ class CommonScreenRouterImpl
   void toLogOut() {
     final ILogoutScreenFactory factory =
         _featureFactory.createLogoutFeatureApi().logoutScreenFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (_) => factory.create(),
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -309,9 +289,8 @@ class CommonScreenRouterImpl
   void toStickersAndMasks() {
     final IStickersWidgetFactory factory =
         _featureFactory.createStickersFeatureApi().stickersWidgetFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(),
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -321,9 +300,8 @@ class CommonScreenRouterImpl
     final IWallpapersListScreenFactory factory = _featureFactory
         .createWallpapersFeatureApi()
         .wallpapersListScreenFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (_) => factory.create(),
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -331,9 +309,8 @@ class CommonScreenRouterImpl
   @override
   void toEventsList() {
     final DevFeature feature = _featureFactory.createDevFeature();
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => feature.createEventsListWidget(),
+    _add(
+      widget: feature.createEventsListWidget(),
       container: ContainerType.top,
     );
   }
@@ -342,9 +319,8 @@ class CommonScreenRouterImpl
   void toSettings() {
     final ISettingScreenFactory factory =
         _featureFactory.createSettingsFeatureApi().settingsScreenFactory;
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => factory.create(),
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -352,9 +328,8 @@ class CommonScreenRouterImpl
   @override
   void toDev() {
     final DevFeature feature = _featureFactory.createDevFeature();
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => feature.createRootWidget(),
+    _add(
+      widget: feature.createRootWidget(),
       container: ContainerType.top,
     );
   }
@@ -363,10 +338,8 @@ class CommonScreenRouterImpl
   void toCreateNewChat() {
     final INewChatScreenFactory factory =
         _featureFactory.createCreateNewChatFeatureApi().newChatScreenFactory;
-    final Widget widget = factory.create();
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => widget,
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -376,10 +349,8 @@ class CommonScreenRouterImpl
     final ICreateNewChannelScreenFactory factory = _featureFactory
         .createCreateNewChatFeatureApi()
         .createNewChannelScreenFactory;
-    final Widget widget = factory.create();
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => widget,
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -389,10 +360,8 @@ class CommonScreenRouterImpl
     final ICreateNewGroupScreenFactory factory = _featureFactory
         .createCreateNewChatFeatureApi()
         .createNewGroupScreenFactory;
-    final Widget widget = factory.create();
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => widget,
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -402,10 +371,8 @@ class CommonScreenRouterImpl
     final ICreateNewSecretChatScreenFactory factory = _featureFactory
         .createCreateNewChatFeatureApi()
         .createNewSecretChatScreenFactory;
-    final Widget widget = factory.create();
-    _navigationRouter.push(
-      key: UniqueKey(),
-      builder: (BuildContext context) => widget,
+    _add(
+      widget: factory.create(),
       container: ContainerType.top,
     );
   }
@@ -426,6 +393,17 @@ class CommonScreenRouterImpl
   void _showNotImplementedDialog() {
     toDialog(
       body: const Body.text(text: 'not implemented'),
+    );
+  }
+
+  void _add({
+    required Widget widget,
+    required ContainerType container,
+  }) {
+    _navigationRouter.push(
+      key: UniqueKey(),
+      builder: (_) => widget,
+      container: container,
     );
   }
 

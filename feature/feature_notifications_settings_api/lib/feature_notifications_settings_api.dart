@@ -14,5 +14,5 @@ abstract class INotificationsSettingsWidgetFactory {
 }
 
 abstract class IQuickNotificationSettingsScreenFactory {
-  Widget create({required BuildContext context});
+  Widget create();
 }
