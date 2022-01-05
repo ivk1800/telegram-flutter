@@ -6,6 +6,7 @@ analyzer:
   exclude:
     - "build/**"
     - "**/*.freezed.dart"
+    - "**/*.mocks.dart"
     - "**/*.jugger.dart"
 
   strong-mode:

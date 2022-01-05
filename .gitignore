@@ -1,6 +1,7 @@
 .idea
 *.jugger.dart
 *.freezed.dart
+*.mocks.dart
 .metadata
 *.g.dart
 /tdlib

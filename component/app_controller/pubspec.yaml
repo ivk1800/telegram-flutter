@@ -14,5 +14,10 @@ dependencies:
   rxdart: ^0.26.0
 
 dev_dependencies:
+  build_runner: 2.1.1
+  mockito: ^5.0.16
+  test: ^1.16.0
+  test_utils:
+    path: ../../test_utils
   tg_lint_rules:
     path: ../../tg_lint_rules
