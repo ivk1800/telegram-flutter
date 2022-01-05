@@ -60,6 +60,7 @@ class ChatFeatureDependencies {
     required this.superGroupRepository,
     required this.basicGroupRepository,
     required this.superGroupUpdatesProvider,
+    required this.basicGroupUpdatesProvider,
     required this.chatUpdatesProvider,
   });
 
@@ -94,6 +95,8 @@ class ChatFeatureDependencies {
   final IBasicGroupRepository basicGroupRepository;
 
   final ISuperGroupUpdatesProvider superGroupUpdatesProvider;
+
+  final IBasicGroupUpdatesProvider basicGroupUpdatesProvider;
 
   final IChatUpdatesProvider chatUpdatesProvider;
 }

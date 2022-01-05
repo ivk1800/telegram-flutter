@@ -58,6 +58,8 @@ abstract class AppComponent {
 
   ISuperGroupUpdatesProvider getSuperGroupUpdatesProvider();
 
+  IBasicGroupUpdatesProvider getBasicGroupUpdatesProvider();
+
   IAuthenticationStateUpdatesProvider getAuthenticationStateUpdatesProvider();
 
   IConnectionStateProvider getConnectionStateProvider();

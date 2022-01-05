@@ -46,6 +46,12 @@ abstract class TdModule {
   );
 
   @j.singleton
+  @j.binds
+  IBasicGroupUpdatesProvider bindBasicGroupUpdatesProvider(
+    UpdatesProvider impl,
+  );
+
+  @j.singleton
   @j.provides
   static ITdFunctionExecutor provideTdFunctionExecutor(TdClient client) =>
       TdFunctionExecutor(

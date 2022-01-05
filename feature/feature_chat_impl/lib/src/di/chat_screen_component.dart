@@ -196,6 +196,7 @@ abstract class ChatScreenModule {
     ChatArgs args,
   ) =>
       ChatActionPanelInteractor(
+        basicGroupUpdatesProvider: dependencies.basicGroupUpdatesProvider,
         chatUpdatesProvider: dependencies.chatUpdatesProvider,
         superGroupUpdatesProvider: dependencies.superGroupUpdatesProvider,
         superGroupRepository: dependencies.superGroupRepository,
