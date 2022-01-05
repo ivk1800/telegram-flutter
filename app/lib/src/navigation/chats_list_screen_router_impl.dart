@@ -6,6 +6,7 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:split_view/split_view.dart';
 
 import 'navigation.dart';
+import 'navigation_router.dart';
 
 class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
   @j.inject
@@ -13,15 +14,15 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
     FeatureFactory featureFactory,
     SplitNavigationInfoProvider splitNavigationInfoProvider,
     KeyGenerator keyGenerator,
-    SplitNavigationRouter navigationRouter,
-  )   : _navigationRouter = navigationRouter,
+    ISplitNavigationDelegate navigationDelegate,
+  )   : _navigationDelegate = navigationDelegate,
         _featureFactory = featureFactory,
         _splitNavigationInfoProvider = splitNavigationInfoProvider,
         _keyGenerator = keyGenerator;
 
   final SplitNavigationInfoProvider _splitNavigationInfoProvider;
   final KeyGenerator _keyGenerator;
-  final SplitNavigationRouter _navigationRouter;
+  final ISplitNavigationDelegate _navigationDelegate;
   final FeatureFactory _featureFactory;
 
   // TODO extract chat router delegate
@@ -34,7 +35,7 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
     } else {
       final IChatScreenFactory factory =
           _featureFactory.createChatFeatureApi().chatScreenFactory;
-      _navigationRouter.pushAllReplacement(
+      _navigationDelegate.pushAllReplacement(
         key: key,
         builder: (BuildContext context) => factory.create(chatId),
         container: ContainerType.right,

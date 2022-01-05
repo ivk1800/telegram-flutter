@@ -7,6 +7,8 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  app_controller:
+    path: ../component/app_controller
   chat_theme:
     path: ../feature/chat/chat_theme
   core:

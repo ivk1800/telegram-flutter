@@ -1,10 +1,13 @@
 import 'package:app/app.dart';
-import 'package:app/src/app/app_delegate.dart';
 import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/di/component/feature_component.jugger.dart';
 import 'package:app/src/feature/feature.dart';
+import 'package:app/src/navigation/app_controller_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
+import 'package:app/src/navigation/navigation_router.dart';
+import 'package:app/src/navigation/split_navigation_router.dart';
 import 'package:app/src/tdlib/config_provider.dart';
+import 'package:app_controller/app_controller_component.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
@@ -31,8 +34,12 @@ abstract class AppModule {
 
   @j.singleton
   @j.provides
-  static OptionsManager provideOptionsManager(TdClient client) =>
-      OptionsManager(client);
+  static OptionsManager provideOptionsManager(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      OptionsManager(
+        functionExecutor: functionExecutor,
+      );
 
   @j.singleton
   @j.provides
@@ -140,17 +147,6 @@ abstract class AppModule {
 
   @j.singleton
   @j.provides
-  static SplitNavigationRouter provideSplitViewNavigationRouter(
-    FeatureFactory featureFactory,
-  ) =>
-      SplitNavigationRouter(TgApp.splitViewNavigatorKey, featureFactory);
-
-  @j.singleton
-  @j.binds
-  INavigationRouter bindRootNavigationRouter(SplitNavigationRouter impl);
-
-  @j.singleton
-  @j.provides
   static DateFormatter provideDateFormatter() => DateFormatter();
 
   @j.singleton
@@ -158,25 +154,49 @@ abstract class AppModule {
   static DateParser provideDateParser() => DateParser();
 
   @j.singleton
-  @j.provides
-  static TdConfigProvider provideTdConfigProvider() => TdConfigProvider();
+  @j.binds
+  ITdConfigProvider bindTdConfigProvider(TdConfigProvider impl);
 
   @j.singleton
   @j.provides
-  static AppDelegate provideAppDelegate(
-    TdClient client,
-    INavigationRouter router,
-    TdConfigProvider tdConfigProvider,
+  static ISplitNavigationDelegate provideSplitNavigationDelegate(
+    FeatureFactory featureFactory,
+  ) =>
+      SplitNavigationDelegateImpl(
+        TgApp.splitViewNavigatorKey,
+      );
+
+  @j.singleton
+  @j.provides
+  static IAppController provideAppController(
+    ITdConfigProvider tdConfigProvider,
     IAppLifecycleStateProvider appLifecycleStateProvider,
     IConnectivityProvider connectivityProvider,
     OptionsManager optionsManager,
+    ITdFunctionExecutor functionExecutor,
+    IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
+    IAppControllerRouter router,
   ) =>
-      AppDelegate(
-        router: router,
-        client: client,
-        appLifecycleStateProvider: appLifecycleStateProvider,
-        connectivityProvider: connectivityProvider,
-        optionsManager: optionsManager,
-        tdConfigProvider: tdConfigProvider,
+      AppControllerComponent(
+        dependencies: AppControllerComponentDependencies(
+          router: router,
+          authenticationStateUpdatesProvider:
+              authenticationStateUpdatesProvider,
+          functionExecutor: functionExecutor,
+          appLifecycleStateProvider: appLifecycleStateProvider,
+          connectivityProvider: connectivityProvider,
+          optionsManager: optionsManager,
+          tdConfigProvider: tdConfigProvider,
+        ),
+      ).appController;
+
+  @j.singleton
+  @j.provides
+  static IAppControllerRouter provideAppControllerRouter(
+    FeatureFactory featureFactory,
+  ) =>
+      AppControllerRouterImpl(
+        TgApp.splitViewNavigatorKey,
+        featureFactory,
       );
 }

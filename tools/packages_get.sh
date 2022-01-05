@@ -26,3 +26,5 @@ cd "$parent_path/.."
 sync false
 cd feature/
 sync true
+cd ../component/
+sync true

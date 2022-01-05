@@ -1,15 +1,15 @@
-import 'package:jugger/jugger.dart' as j;
-import 'package:td_client/td_client.dart';
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class OptionsManager {
-  @j.inject
-  OptionsManager(this._client);
+  OptionsManager({
+    required ITdFunctionExecutor functionExecutor,
+  }) : _functionExecutor = functionExecutor;
 
-  final TdClient _client;
+  final ITdFunctionExecutor _functionExecutor;
 
   Future<void> setOnline({required bool online}) {
-    return _client.send<td.Ok>(td.SetOption(
+    return _functionExecutor.send<td.Ok>(td.SetOption(
       name: 'online',
       value: td.OptionValueBoolean(value: online),
     ));

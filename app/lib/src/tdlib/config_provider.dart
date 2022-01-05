@@ -1,18 +1,24 @@
 import 'dart:convert';
 
+import 'package:app_controller/app_controller_component.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:jugger/jugger.dart' as j;
 
-class TdConfigProvider {
+class TdConfigProvider implements ITdConfigProvider {
+  @j.inject
   TdConfigProvider();
 
   Future<Map<String, String>>? _cache;
 
+  @override
   Future<int> getAppId() async =>
       int.parse((await (_cache ??= _readFromAssets()))['apiId']!);
 
+  @override
   Future<String> getApiHash() async =>
       (await (_cache ??= _readFromAssets()))['apiHash']!;
 
+  @override
   Future<String> getEncryptionKey() async =>
       (await (_cache ??= _readFromAssets()))['encryptionKey']!;
 

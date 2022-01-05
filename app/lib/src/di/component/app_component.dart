@@ -1,9 +1,9 @@
-import 'package:app/src/app/app_delegate.dart';
 import 'package:app/src/di/module/app_module.dart';
 import 'package:app/src/di/module/td_module.dart';
 import 'package:app/src/feature/feature.dart';
 import 'package:app/src/navigation/navigation.dart';
-import 'package:app/src/tdlib/config_provider.dart';
+import 'package:app/src/navigation/navigation_router.dart';
+import 'package:app_controller/app_controller_component.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
@@ -16,9 +16,9 @@ import 'package:td_client/td_client.dart';
   TdModule,
 ])
 abstract class AppComponent {
-  AppDelegate getAppDelegate();
+  IAppController getAppController();
 
-  TdConfigProvider getTdConfigProvider();
+  ITdConfigProvider getTdConfigProvider();
 
   TdClient getTdClient();
 
@@ -42,9 +42,7 @@ abstract class AppComponent {
 
   IBackgroundRepository getBackgroundRepository();
 
-  INavigationRouter getNavigationRouter();
-
-  SplitNavigationRouter getSplitNavigationRouter();
+  ISplitNavigationDelegate getSplitNavigationDelegate();
 
   SplitNavigationInfoProvider getSplitNavigationInfoProvider();
 

@@ -39,7 +39,7 @@ import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:split_view/split_view.dart';
 
-import 'navigation.dart';
+import 'navigation_router.dart';
 
 class CommonScreenRouterImpl
     implements
@@ -64,16 +64,16 @@ class CommonScreenRouterImpl
         IAuthFeatureRouter {
   @j.inject
   CommonScreenRouterImpl({
-    required SplitNavigationRouter navigationRouter,
+    required ISplitNavigationDelegate navigationDelegate,
     required GlobalKey<NavigatorState> dialogNavigatorKey,
     required FeatureFactory featureFactory,
-  })  : _navigationRouter = navigationRouter,
+  })  : _navigationDelegate = navigationDelegate,
         _dialogNavigatorKey = dialogNavigatorKey,
         _dialogRouter =
             DialogRouterImpl(dialogNavigatorKey: dialogNavigatorKey),
         _featureFactory = featureFactory;
 
-  final SplitNavigationRouter _navigationRouter;
+  final ISplitNavigationDelegate _navigationDelegate;
   final FeatureFactory _featureFactory;
   final GlobalKey<NavigatorState> _dialogNavigatorKey;
   final DialogRouterImpl _dialogRouter;
@@ -400,7 +400,7 @@ class CommonScreenRouterImpl
     required Widget widget,
     required ContainerType container,
   }) {
-    _navigationRouter.push(
+    _navigationDelegate.push(
       key: UniqueKey(),
       builder: (_) => widget,
       container: container,
@@ -409,6 +409,6 @@ class CommonScreenRouterImpl
 
   @override
   void back() {
-    _navigationRouter.back();
+    _navigationDelegate.back();
   }
 }

@@ -23,7 +23,7 @@ Future<void> launch() async {
       .localizationManager(localizationManager)
       .build();
 
-  appComponent.getAppDelegate().init();
+  appComponent.getAppController().onInit();
 
   runApp(const TgApp());
 

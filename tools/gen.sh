@@ -29,3 +29,5 @@ cd "$parent_path/.."
 generate false
 cd feature/
 generate true
+cd ../component/
+generate true

@@ -2,6 +2,7 @@ import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/feature/feature.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
+import 'package:app/src/navigation/navigation_router.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
@@ -593,12 +594,12 @@ abstract class FeatureModule {
   @j.singleton
   static CommonScreenRouterImpl provideCommonScreenRouter(
     FeatureFactory featureFactory,
-    SplitNavigationRouter splitNavigationRouter,
+    ISplitNavigationDelegate navigationDelegate,
   ) =>
       CommonScreenRouterImpl(
         dialogNavigatorKey: TgApp.navigatorKey,
         featureFactory: featureFactory,
-        navigationRouter: splitNavigationRouter,
+        navigationDelegate: navigationDelegate,
       );
 
   @j.binds
