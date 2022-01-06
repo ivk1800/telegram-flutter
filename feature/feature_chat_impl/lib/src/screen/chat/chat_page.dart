@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
-import 'bloc/chat_view_model.dart';
+import 'view_model/chat_view_model.dart';
 import 'chat_state.dart';
 import 'view_model/chat_actions_panel_view_model.dart';
 
