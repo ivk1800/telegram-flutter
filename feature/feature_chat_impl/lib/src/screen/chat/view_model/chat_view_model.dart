@@ -29,7 +29,7 @@ class ChatViewModel extends BaseViewModel {
         _localizationManager = localizationManager,
         _headerActionsInteractor = headerActionsInteractor,
         _messagesInteractor = messagesInteractor {
-    _messagesInteractor.init(_args.chatId);
+    _messagesInteractor.init();
   }
 
   final ChatArgs _args;

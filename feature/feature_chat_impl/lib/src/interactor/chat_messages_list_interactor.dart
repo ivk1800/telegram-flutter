@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:async/async.dart';
+import 'package:async_utils/async_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
-import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
+import 'package:feature_chat_impl/src/tile/model/loading_tile_model.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tile/tile.dart';
@@ -12,16 +14,15 @@ class ChatMessagesInteractor {
   ChatMessagesInteractor({
     required IChatMessageRepository messageRepository,
     required MessageTileMapper messageTileMapper,
-    required ChatArgs chatArgs,
+    required int chatId,
   })  : _messageTileMapper = messageTileMapper,
         _messageRepository = messageRepository,
-        _chatArgs = chatArgs;
+        _chatId = chatId;
 
   final IChatMessageRepository _messageRepository;
   final MessageTileMapper _messageTileMapper;
 
-  // TODO refactor
-  final ChatArgs _chatArgs;
+  final int _chatId;
 
   final BehaviorSubject<List<ITileModel>> _messagesSubject =
       BehaviorSubject<List<ITileModel>>();
@@ -31,19 +32,17 @@ class ChatMessagesInteractor {
   Stream<List<ITileModel>> get messagesStream => _messagesSubject;
 
   td.Message? _last;
-  bool _isIdle = true;
-  StreamSubscription<_Result>? _subscription;
+  bool _isCnBeLodOldest = true;
+  CancelableOperation<_Result>? _oldestMessagesOperation;
 
-  Future<void> init(int chatId) async {
-    // final td.Chat chat = await _chatRepository.getChat(chatId);
+  List<ITileModel> get currentItems => _messagesSubject.value ?? <ITileModel>[];
 
-    // if (chat.lastMessage != null) {
+  Future<void> init() async {
     load(0);
-    // }
   }
 
   void loadOldestMessages() {
-    if (_isIdle) {
+    if (_isCnBeLodOldest) {
       if (_last != null) {
         load(_last!.id);
       }
@@ -53,28 +52,41 @@ class ChatMessagesInteractor {
   void loadNewestMessages() {}
 
   void load(int fromMessageId) {
-    _isIdle = false;
-    _subscription?.cancel();
+    _isCnBeLodOldest = false;
 
-    _subscription = _messageRepository
-        .getMessages(
-      chatId: _chatArgs.chatId,
+    if (currentItems.isNotEmpty) {
+      _messagesSubject
+          .add(currentItems.toList().addLoadingIndicatorForOldestIfNeeded());
+    }
+
+    _oldestMessagesOperation = CancelableOperation<_Result>.fromFuture(
+      _loadMessagesFuture(fromMessageId),
+    ).onValue((_Result result) {
+      final List<ITileModel> list = currentItems
+          .toList()
+          .removeLoadingIndicatorForOldestIfNeeded()
+        ..addAll(result.tileModels);
+
+      _messagesSubject.add(list);
+      _last = result.messages.lastOrNull;
+      _isCnBeLodOldest = result.messages.isNotEmpty;
+    });
+  }
+
+  Future<_Result> _loadMessagesFuture(int fromMessageId) async {
+    final List<td.Message> messages = await _messageRepository.getMessages(
+      chatId: _chatId,
       fromMessageId: fromMessageId,
       limit: 30,
-    )
+    );
+    final Stream<_Result> asyncMap = Stream<List<td.Message>>.value(messages)
         .asyncMap((List<td.Message> messages) async {
       return _Result(
         messages: messages,
         tileModels: await _mapToTileModels(messages),
       );
-    }).listen((_Result _result) {
-      final List<ITileModel> list = (_messagesSubject.value ?? <ITileModel>[])
-          .toList()
-        ..addAll(_result.tileModels);
-      _messagesSubject.add(list);
-      _last = _result.messages.lastOrNull;
-      _isIdle = _result.messages.isNotEmpty;
     });
+    return asyncMap.single;
   }
 
   Future<List<ITileModel>> _mapToTileModels(List<td.Message> messages) async {
@@ -86,7 +98,7 @@ class ChatMessagesInteractor {
   }
 
   void dispose() {
-    _subscription?.cancel();
+    _oldestMessagesOperation?.cancel();
   }
 }
 
@@ -96,4 +108,22 @@ class _Result {
   final List<td.Message> messages;
 
   final List<ITileModel> tileModels;
+}
+
+extension ListItemsExt on List<ITileModel> {
+  List<ITileModel> addLoadingIndicatorForOldestIfNeeded() {
+    if (isNotEmpty) {
+      add(const LoadingTileModel());
+    }
+
+    return this;
+  }
+
+  List<ITileModel> removeLoadingIndicatorForOldestIfNeeded() {
+    if (isNotEmpty && last is LoadingTileModel) {
+      removeLast();
+    }
+
+    return this;
+  }
 }

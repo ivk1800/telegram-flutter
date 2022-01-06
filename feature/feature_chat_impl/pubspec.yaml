@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  async_utils:
+    path: ../../async_utils
   chat_actions_panel:
     path: ../chat/chat_actions_panel
   chat_router_api:

@@ -1,5 +1,4 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatMessageRepositoryImpl implements IChatMessageRepository {
@@ -10,27 +9,26 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
   final ITdFunctionExecutor _functionExecutor;
 
   @override
-  Stream<List<td.Message>> getMessages({
+  Future<List<td.Message>> getMessages({
     required int chatId,
     required int fromMessageId,
     required int limit,
-  }) {
-    return _getMessages(
+  }) async {
+    final List<td.Message> messages = await _getMessages(
       chatId: chatId,
       fromMessageId: fromMessageId,
       limit: limit,
-    ).flatMap((List<td.Message> messages) {
-      if (messages.isNotEmpty && messages.length != limit) {
-        return getMessages(
-          chatId: chatId,
-          fromMessageId: messages.last.id,
-          limit: limit,
-        ).map((List<td.Message> additionalMessages) =>
-            messages..addAll(additionalMessages));
-      }
+    );
+    if (messages.isNotEmpty && messages.length != limit) {
+      final List<td.Message> additionalMessages = await getMessages(
+        chatId: chatId,
+        fromMessageId: messages.last.id,
+        limit: limit,
+      );
+      return messages..addAll(additionalMessages);
+    }
 
-      return Stream<List<td.Message>>.value(messages);
-    });
+    return messages;
   }
 
   @override
@@ -41,20 +39,22 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
     ));
   }
 
-  Stream<List<td.Message>> _getMessages({
+  Future<List<td.Message>> _getMessages({
     required int chatId,
     required int fromMessageId,
     required int limit,
-  }) =>
-      Stream<td.Messages>.fromFuture(_functionExecutor.send<td.Messages>(
-        td.GetChatHistory(
-          chatId: chatId,
-          fromMessageId: fromMessageId,
-          offset: 0,
-          limit: limit,
-          onlyLocal: false,
-        ),
-      )).map((td.Messages event) => event.messages ?? <td.Message>[]);
+  }) async {
+    final td.Messages messages = await _functionExecutor.send<td.Messages>(
+      td.GetChatHistory(
+        chatId: chatId,
+        fromMessageId: fromMessageId,
+        offset: 0,
+        limit: limit,
+        onlyLocal: false,
+      ),
+    );
+    return messages.messages ?? <td.Message>[];
+  }
 
   @override
   Future<List<td.Message>> findMessages({
