@@ -131,14 +131,14 @@ abstract class AppModule {
       );
 
   @j.singleton
-  @j.binds
-  IConnectivityProvider bindConnectivityProvider(ConnectivityProviderImpl impl);
+  @j.provides
+  static IConnectivityProvider provideConnectivityProvider() =>
+      ConnectivityProviderImpl();
 
   @j.singleton
-  @j.binds
-  IAppLifecycleStateProvider bindAppLifecycleStateProvider(
-    AppLifecycleStateProviderImpl impl,
-  );
+  @j.provides
+  static IAppLifecycleStateProvider provideAppLifecycleStateProvider() =>
+      AppLifecycleStateProviderImpl();
 
   @j.singleton
   @j.provides

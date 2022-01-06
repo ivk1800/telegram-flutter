@@ -1,12 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 
 import 'app_lifecycle_state_provider.dart';
 
 class AppLifecycleStateProviderImpl extends WidgetsBindingObserver
     implements IAppLifecycleStateProvider {
-  @j.inject
   AppLifecycleStateProviderImpl() {
     WidgetsBinding.instance!.addObserver(this);
   }

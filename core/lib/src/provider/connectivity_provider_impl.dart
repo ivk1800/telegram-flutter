@@ -1,12 +1,10 @@
 import 'package:connectivity/connectivity.dart' as c;
 import 'package:core/core.dart';
-import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 
 import 'connectivity_provider.dart';
 
 class ConnectivityProviderImpl implements IConnectivityProvider {
-  @j.inject
   ConnectivityProviderImpl() {
     final c.Connectivity connectivity = c.Connectivity();
     connectivity.onConnectivityChanged.listen((c.ConnectivityResult event) {
