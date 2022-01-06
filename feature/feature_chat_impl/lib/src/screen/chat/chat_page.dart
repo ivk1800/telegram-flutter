@@ -1,14 +1,19 @@
+import 'dart:async';
+
 import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_theme/chat_theme.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
 import 'chat_state.dart';
+import 'messages_scroll_controller.dart';
 import 'view_model/chat_actions_panel_view_model.dart';
 import 'view_model/chat_view_model.dart';
 
@@ -20,19 +25,32 @@ class ChatPage extends StatefulWidget {
 }
 
 class ChatPageState extends State<ChatPage> {
-  final ScrollController _messagesScrollController = ScrollController();
+  final ItemScrollController _itemScrollController = ItemScrollController();
+
+  final ItemPositionsListener _itemPositionsListener =
+      ItemPositionsListener.create();
+
+  late MessagesScrollController _messagesScrollController;
 
   @override
   void initState() {
+    final ChatViewModel viewModel = context.read();
+    final Stream<int> itemsCountStream = viewModel.bodyStateStream
+        .where((BodyState event) => event is Data)
+        .cast<Data>()
+        .map((Data data) => data.models.length);
+    _messagesScrollController = MessagesScrollController(
+      onScrollToNewest: viewModel.onLoadNewestMessages,
+      onScrollToOldest: viewModel.onLoadOldestMessages,
+      itemsCountStream: itemsCountStream,
+      itemPositions: _itemPositionsListener.itemPositions,
+    )..attach();
     super.initState();
-    _messagesScrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
-    _messagesScrollController
-      ..removeListener(_onScroll)
-      ..dispose();
+    _messagesScrollController.dispose();
     super.dispose();
   }
 
@@ -53,9 +71,18 @@ class ChatPageState extends State<ChatPage> {
               loading: () => const Center(child: CircularProgressIndicator()),
               data: (List<ITileModel> models) {
                 return _ChatContextWrapper(
-                  child: _Messages(
-                    scrollController: _messagesScrollController,
-                    models: models,
+                  child: MultiProvider(
+                    providers: <Provider<dynamic>>[
+                      Provider<ItemScrollController>(
+                        create: (_) => _itemScrollController,
+                      ),
+                      Provider<ItemPositionsListener>(
+                        create: (_) => _itemPositionsListener,
+                      ),
+                    ],
+                    child: _Messages(
+                      models: models,
+                    ),
                   ),
                 );
               },
@@ -73,13 +100,6 @@ class ChatPageState extends State<ChatPage> {
         ),
       ),
     );
-  }
-
-  void _onScroll() {
-    final double extentAfter = _messagesScrollController.position.extentAfter;
-    if (extentAfter < 200) {
-      context.read<ChatViewModel>().onLoadMore();
-    }
   }
 }
 
@@ -104,21 +124,20 @@ class _ChatContextWrapper extends StatelessWidget {
 class _Messages extends StatelessWidget {
   const _Messages({
     Key? key,
-    required this.scrollController,
     required this.models,
   }) : super(key: key);
 
-  final ScrollController scrollController;
   final List<ITileModel> models;
 
   @override
   Widget build(BuildContext context) {
     final TileFactory tileFactory = context.read();
     return Scrollbar(
-      child: ListView.separated(
+      child: ScrollablePositionedList.separated(
         // todo extract to config
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-        controller: scrollController,
+        itemPositionsListener: context.read(),
+        itemScrollController: context.read(),
         reverse: true,
         itemCount: models.length,
         itemBuilder: (BuildContext context, int index) {

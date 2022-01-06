@@ -42,13 +42,15 @@ class ChatMessagesInteractor {
     // }
   }
 
-  void loadMore() {
+  void loadOldestMessages() {
     if (_isIdle) {
       if (_last != null) {
         load(_last!.id);
       }
     }
   }
+
+  void loadNewestMessages() {}
 
   void load(int fromMessageId) {
     _isIdle = false;

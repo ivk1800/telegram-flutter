@@ -47,10 +47,12 @@ dependencies:
     path: ../../rich_text/rich_text_format
   rich_text_format_flutter:
     path: ../../rich_text/rich_text_format_flutter
+  scrollable_positioned_list: ^0.2.2
   tg_theme:
     path: ../../tg_theme
   tile:
     path: ../../tile
+  tuple: ^2.0.0
 
 dev_dependencies:
   build_runner: ^2.1.7

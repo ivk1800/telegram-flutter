@@ -5,7 +5,7 @@ abstract class RichText {
 }
 
 class PlainText implements RichText {
-  PlainText({required this.text});
+  const PlainText({required this.text});
 
   final String text;
 

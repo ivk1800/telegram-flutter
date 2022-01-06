@@ -12,7 +12,7 @@ class BodyState with _$BodyState {
 
   const factory BodyState.data({
     required List<ITileModel> models,
-  }) = _Data;
+  }) = Data;
 }
 
 //

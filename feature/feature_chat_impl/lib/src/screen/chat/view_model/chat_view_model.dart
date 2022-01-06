@@ -57,9 +57,9 @@ class ChatViewModel extends BaseViewModel {
       )
       .startWith(const BodyState.loading());
 
-  void onLoadMore() {
-    _messagesInteractor.loadMore();
-  }
+  void onLoadOldestMessages() => _messagesInteractor.loadOldestMessages();
+
+  void onLoadNewestMessages() => _messagesInteractor.loadNewestMessages();
 
   void onSenderTap(int senderId) {
     _router.toChatProfile(senderId);
