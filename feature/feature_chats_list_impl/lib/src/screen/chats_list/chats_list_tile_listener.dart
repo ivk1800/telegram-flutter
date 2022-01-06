@@ -2,7 +2,7 @@ import 'package:feature_chats_list_impl/src/tile/chat_tile.dart';
 
 import 'chats_list_view_model.dart';
 
-class ChatsListTileListener implements ChatTileListener {
+class ChatsListTileListener implements IChatTileListener {
   const ChatsListTileListener({
     required ChatsListViewModel viewModel,
   }) : _viewModel = viewModel;

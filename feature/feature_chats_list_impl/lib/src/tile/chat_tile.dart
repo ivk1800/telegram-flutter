@@ -7,7 +7,7 @@ import 'package:tile/tile.dart';
 import 'chat/unread_messages_count.dart';
 import 'chat_tile_model.dart';
 
-abstract class ChatTileListener {
+abstract class IChatTileListener {
   void onChatTap(int id);
 
   void onTogglePinTap(int id);
@@ -16,12 +16,12 @@ abstract class ChatTileListener {
 class ChatTileFactory implements ITileFactoryDelegate<ChatTileModel> {
   ChatTileFactory({
     required AvatarWidgetFactory avatarWidgetFactory,
-    required ChatTileListener listener,
+    required IChatTileListener listener,
   })  : _avatarWidgetFactory = avatarWidgetFactory,
         _listener = listener;
 
   final AvatarWidgetFactory _avatarWidgetFactory;
-  final ChatTileListener _listener;
+  final IChatTileListener _listener;
 
   // TODO: fix overflow for subtitle with emoji
   // TODO: support dark theme

@@ -15,7 +15,7 @@ class ChatCellShowCase extends StatefulWidget {
 }
 
 class _ChatCellShowCaseState extends State<ChatCellShowCase>
-    implements ChatTileListener {
+    implements IChatTileListener {
   late ChatTileFactory chatTileFactory;
   late List<ChatTileModel> models;
 

@@ -98,7 +98,7 @@ abstract class FoldersSetupModule {
   @j.singleton
   static TileFactory provideTileFactory(
     AvatarWidgetFactory avatarWidgetFactory,
-    ChatTileListener listener,
+    IChatTileListener listener,
   ) =>
       TileFactory(
         delegates: <Type, ITileFactoryDelegate<ITileModel>>{
@@ -111,7 +111,7 @@ abstract class FoldersSetupModule {
 
   @j.provides
   @j.singleton
-  static ChatTileListener provideChatTileListener(
+  static IChatTileListener provideChatTileListener(
     ChatsListViewModel viewModel,
   ) =>
       ChatsListTileListener(viewModel: viewModel);
