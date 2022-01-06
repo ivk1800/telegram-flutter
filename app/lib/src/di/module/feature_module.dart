@@ -142,8 +142,10 @@ abstract class FeatureModule {
     ITdFunctionExecutor functionExecutor,
     ISuperGroupRepository superGroupRepository,
     IBasicGroupRepository basicGroupRepository,
+    IChatMessagesUpdatesProvider chatMessagesUpdatesProvider,
   ) =>
       ChatFeatureDependencies(
+        chatMessagesUpdatesProvider: chatMessagesUpdatesProvider,
         chatUpdatesProvider: chatUpdatesProvider,
         basicGroupRepository: basicGroupRepository,
         superGroupUpdatesProvider: superGroupUpdatesProvider,

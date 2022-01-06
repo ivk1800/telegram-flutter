@@ -3,6 +3,7 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/chat_message_updates_handler.dart';
 import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/manager/chat_manager_impl.dart';
@@ -138,11 +139,25 @@ abstract class ChatScreenModule {
     MessageTileMapper messageTileMapper,
     ChatArgs args,
     ChatFeatureDependencies dependencies,
+    ChatMessageUpdatesHandler chatMessageUpdatesHandler,
   ) =>
       ChatMessagesInteractor(
+        chatMessageUpdatesHandler: chatMessageUpdatesHandler,
         chatId: args.chatId,
         messageTileMapper: messageTileMapper,
         messageRepository: dependencies.chatMessageRepository,
+      );
+
+  @j.provides
+  static ChatMessageUpdatesHandler provideChatMessageUpdatesHandler(
+    ChatArgs args,
+    ChatFeatureDependencies dependencies,
+    MessageTileMapper messageTileMapper,
+  ) =>
+      ChatMessageUpdatesHandler(
+        messageTileMapper: messageTileMapper,
+        chatId: args.chatId,
+        chatMessagesUpdatesProvider: dependencies.chatMessagesUpdatesProvider,
       );
 
   @j.provides

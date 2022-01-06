@@ -4,6 +4,7 @@ import 'package:async/async.dart';
 import 'package:async_utils/async_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:feature_chat_impl/src/chat_message_updates_handler.dart';
 import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
 import 'package:feature_chat_impl/src/tile/model/loading_tile_model.dart';
 import 'package:rxdart/rxdart.dart';
@@ -15,12 +16,15 @@ class ChatMessagesInteractor {
     required IChatMessageRepository messageRepository,
     required MessageTileMapper messageTileMapper,
     required int chatId,
+    required ChatMessageUpdatesHandler chatMessageUpdatesHandler,
   })  : _messageTileMapper = messageTileMapper,
         _messageRepository = messageRepository,
+        _chatMessageUpdatesHandler = chatMessageUpdatesHandler,
         _chatId = chatId;
 
   final IChatMessageRepository _messageRepository;
   final MessageTileMapper _messageTileMapper;
+  final ChatMessageUpdatesHandler _chatMessageUpdatesHandler;
 
   final int _chatId;
 
@@ -38,6 +42,10 @@ class ChatMessagesInteractor {
   List<ITileModel> get currentItems => _messagesSubject.value ?? <ITileModel>[];
 
   Future<void> init() async {
+    _chatMessageUpdatesHandler.attach(
+      actualMessages: () => messages,
+      onUpdated: _messagesSubject.add,
+    );
     load(0);
   }
 
@@ -98,6 +106,7 @@ class ChatMessagesInteractor {
   }
 
   void dispose() {
+    _chatMessageUpdatesHandler.dispose();
     _oldestMessagesOperation?.cancel();
   }
 }

@@ -52,6 +52,8 @@ abstract class AppComponent {
 
   IChatUpdatesProvider getChatUpdatesProvider();
 
+  IChatMessagesUpdatesProvider getChatMessagesUpdatesProvider();
+
   IChatFiltersUpdatesProvider getChatFiltersUpdatesProvider();
 
   IFileUpdatesProvider getFileUpdatesProvider();

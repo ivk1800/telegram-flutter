@@ -5,6 +5,7 @@ import 'package:tdlib/td_api.dart' as td;
 class UpdatesProvider
     implements
         IChatUpdatesProvider,
+        IChatMessagesUpdatesProvider,
         IChatFiltersUpdatesProvider,
         ISuperGroupUpdatesProvider,
         IBasicGroupUpdatesProvider,
@@ -40,6 +41,10 @@ class UpdatesProvider
   @override
   Stream<td.UpdateBasicGroup> get basicGroupUpdates =>
       _client.events.basicGroupUpdatesFilter();
+
+  @override
+  Stream<td.Update> get chatMessageUpdates =>
+      _client.events.messageUpdatesFilter();
 }
 
 extension _UpdatesExtensions on Stream<td.TdObject> {
@@ -89,4 +94,18 @@ extension _UpdatesExtensions on Stream<td.TdObject> {
       event is td.UpdateChatDraftMessage ||
       event is td.UpdateChatFilters ||
       event is td.UpdateChatOnlineMemberCount).cast<td.Update>();
+
+  Stream<td.Update> messageUpdatesFilter() => where((td.TdObject event) =>
+      event is td.UpdateMessageContent ||
+      event is td.UpdateMessageContentOpened ||
+      event is td.UpdateMessageEdited ||
+      event is td.UpdateMessageInteractionInfo ||
+      event is td.UpdateMessageIsPinned ||
+      event is td.UpdateMessageLiveLocationViewed ||
+      event is td.UpdateMessageMentionRead ||
+      event is td.UpdateMessageSendAcknowledged ||
+      event is td.UpdateMessageSendFailed ||
+      event is td.UpdateMessageSendSucceeded ||
+      event is td.UpdateNewMessage ||
+      event is td.UpdateDeleteMessages).cast<td.Update>();
 }

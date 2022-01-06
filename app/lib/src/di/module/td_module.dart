@@ -16,6 +16,12 @@ abstract class TdModule {
 
   @j.singleton
   @j.binds
+  IChatMessagesUpdatesProvider bindChatMessagesUpdatesProvider(
+    UpdatesProvider impl,
+  );
+
+  @j.singleton
+  @j.binds
   IChatFiltersUpdatesProvider bindChatFiltersUpdatesProvider(
     UpdatesProvider impl,
   );
