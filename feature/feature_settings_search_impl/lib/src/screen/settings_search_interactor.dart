@@ -1,15 +1,15 @@
 import 'package:feature_settings_search_impl/src/screen/search_state.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:search_component/search_component.dart';
+import 'package:search_component/search_component.dart' as sc;
 import 'package:tile/tile.dart';
 
 class SettingsSearchInteractor {
   @j.inject
   SettingsSearchInteractor({
-    required ISearchInteractor<List<ITileModel>> searchInteractor,
+    required sc.ISearchInteractor<List<ITileModel>> searchInteractor,
   }) : _searchInteractor = searchInteractor;
 
-  final ISearchInteractor<List<ITileModel>> _searchInteractor;
+  final sc.ISearchInteractor<List<ITileModel>> _searchInteractor;
 
   Stream<SearchState> get state =>
       _searchInteractor.result.map(_mapToPageState);
@@ -22,16 +22,20 @@ class SettingsSearchInteractor {
     _searchInteractor.dispose();
   }
 
-  SearchState _mapToPageState(ISearchState state) {
-    if (state is DefaultState) {
-      return const SearchState.data(models: <ITileModel>[]);
-    } else if (state is LoadingState) {
-      return const SearchState.loading();
-    } else if (state is ResultState<List<ITileModel>>) {
-      return SearchState.data(models: state.result);
-    } else if (state is EmptyState) {
-      return const SearchState.empty();
-    }
-    throw StateError('unexpected state $state');
+  SearchState _mapToPageState(sc.SearchState<List<ITileModel>> state) {
+    return state.map(
+      def: (_) {
+        return const SearchState.data(models: <ITileModel>[]);
+      },
+      empty: (_) {
+        return const SearchState.empty();
+      },
+      loading: (_) {
+        return const SearchState.loading();
+      },
+      result: (sc.Result<List<ITileModel>> value) {
+        return SearchState.data(models: value.result);
+      },
+    );
   }
 }

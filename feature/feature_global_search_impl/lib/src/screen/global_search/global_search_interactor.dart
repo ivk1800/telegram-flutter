@@ -123,17 +123,21 @@ class GlobalSearchInteractor {
     _stateSubject.close();
   }
 
-  PageState _mapToPageState(ISearchState state) {
-    if (state is DefaultState) {
-      return const PageState.data(models: <ITileModel>[]);
-    } else if (state is LoadingState) {
-      return const PageState.loading();
-    } else if (state is ResultState<List<ITileModel>>) {
-      return PageState.data(models: state.result);
-    } else if (state is EmptyState) {
-      return const PageState.empty();
-    }
-    throw StateError('unexpected state $state');
+  PageState _mapToPageState(SearchState<List<ITileModel>> state) {
+    return state.map(
+      def: (_) {
+        return const PageState.data(models: <ITileModel>[]);
+      },
+      empty: (_) {
+        return const PageState.empty();
+      },
+      loading: (_) {
+        return const PageState.loading();
+      },
+      result: (Result<List<ITileModel>> value) {
+        return PageState.data(models: value.result);
+      },
+    );
   }
 
   ISearchInteractor<List<ITileModel>> _createChatsSearchInteractor() =>

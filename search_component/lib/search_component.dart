@@ -1,6 +1,9 @@
 library search_component;
 
 import 'src/search_interactor.dart';
+import 'src/search_state.dart';
+
+export 'src/search_state.dart';
 
 typedef ResultMapper<R, T> = Future<R> Function(T result);
 typedef ResultFetcher<T> = Future<T> Function(String query);
@@ -8,7 +11,7 @@ typedef ResultFetcher<T> = Future<T> Function(String query);
 typedef EmptyTest<R> = bool Function(R value);
 
 abstract class ISearchInteractor<T> {
-  Stream<ISearchState> get result;
+  Stream<SearchState<T>> get result;
 
   void onQuery(String query);
 
@@ -25,29 +28,4 @@ abstract class ISearchInteractor<T> {
       emptyTest: emptyTest,
     );
   }
-}
-
-// todo: replace by freezed
-abstract class ISearchState {
-  const ISearchState();
-}
-
-class EmptyState implements ISearchState {
-  const EmptyState();
-}
-
-class ResultState<R> implements ISearchState {
-  const ResultState({
-    required this.result,
-  });
-
-  final R result;
-}
-
-class LoadingState implements ISearchState {
-  const LoadingState();
-}
-
-class DefaultState implements ISearchState {
-  const DefaultState();
 }
