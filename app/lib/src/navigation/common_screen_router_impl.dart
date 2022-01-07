@@ -1,7 +1,7 @@
 import 'package:app/src/feature/feature.dart';
-import 'package:app/src/navigation/dialog_router_impl.dart';
-import 'package:dialog_api/dialog_api.dart';
 import 'package:dialog_api/dialog_api.dart' as dialog_api;
+import 'package:dialog_api/dialog_api.dart';
+import 'package:dialog_api_flutter/dialog_api_flutter.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';

@@ -27,6 +27,8 @@ dependencies:
     path: ../coreui
   dialog_api:
     path: ../dialog_api
+  dialog_api_flutter:
+    path: ../dialog_api_flutter
   feature_auth_api:
     path: ../feature/feature_auth_api
   feature_auth_impl:

@@ -1,8 +1,7 @@
-import 'package:dialog_api/dialog_api.dart';
-import 'package:dialog_api/dialog_api.dart' as dialog_api;
+import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:flutter/material.dart';
 
-class DialogRouterImpl implements IDialogRouter {
+class DialogRouterImpl implements d.IDialogRouter {
   DialogRouterImpl({
     required GlobalKey<NavigatorState> dialogNavigatorKey,
   }) : _dialogNavigatorKey = dialogNavigatorKey;
@@ -12,8 +11,8 @@ class DialogRouterImpl implements IDialogRouter {
   @override
   void toDialog({
     String? title,
-    required Body body,
-    List<dialog_api.Action> actions = const <dialog_api.Action>[],
+    required d.Body body,
+    List<d.Action> actions = const <d.Action>[],
   }) {
     Widget? createContent() {
       return body.when(
@@ -25,11 +24,11 @@ class DialogRouterImpl implements IDialogRouter {
 
     _showDialog(
       builder: (BuildContext context) {
-        Color? getActionColor(dialog_api.ActionType type) {
+        Color? getActionColor(d.ActionType type) {
           switch (type) {
-            case dialog_api.ActionType.simple:
+            case d.ActionType.simple:
               return null;
-            case dialog_api.ActionType.attention:
+            case d.ActionType.attention:
               return Theme.of(context).errorColor;
           }
         }
@@ -38,7 +37,7 @@ class DialogRouterImpl implements IDialogRouter {
           title: title != null ? Text(title) : null,
           content: createContent(),
           actions: actions
-              .map((dialog_api.Action action) => TextButton(
+              .map((d.Action action) => TextButton(
                     child: Text(
                       action.text,
                       style: TextStyle(color: getActionColor(action.type)),
@@ -71,7 +70,7 @@ class DialogRouterImpl implements IDialogRouter {
   }
 }
 
-class _Dismissible implements IDismissible {
+class _Dismissible implements d.IDismissible {
   _Dismissible({required this.context});
 
   final BuildContext context;
