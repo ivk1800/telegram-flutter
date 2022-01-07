@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_theme/chat_theme.dart';
-import 'package:core_arch/core_arch.dart';
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,6 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-
-import 'base_view_model.dart';
 
 class ViewModelProvider<T extends BaseViewModel> extends Provider<T> {
   ViewModelProvider({

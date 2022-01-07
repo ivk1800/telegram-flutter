@@ -1,4 +1,4 @@
-import 'package:core_arch/core_arch.dart';
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

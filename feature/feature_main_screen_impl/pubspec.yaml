@@ -8,6 +8,8 @@ environment:
 dependencies:
   core_arch:
     path: ../../core_arch
+  core_arch_flutter:
+    path: ../../core_arch_flutter
   core_tdlib_api:
     path: ../../core_tdlib_api
   coreui:

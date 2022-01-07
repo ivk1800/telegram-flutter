@@ -1,4 +1,4 @@
-import 'package:core_arch/core_arch.dart';
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:feature_create_new_chat_impl/src/screen/new_group/new_group_model.dart';

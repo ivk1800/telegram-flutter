@@ -1,5 +1,5 @@
 import 'package:chat_actions_panel/chat_actions_panel.dart';
-import 'package:core_arch/core_arch.dart';
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';

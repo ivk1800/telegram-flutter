@@ -1,4 +1,4 @@
-import 'package:core_arch/core_arch.dart';
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';

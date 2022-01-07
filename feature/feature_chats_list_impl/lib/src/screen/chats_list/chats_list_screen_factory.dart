@@ -1,4 +1,4 @@
-import 'package:core_arch/core_arch.dart';
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:feature_chats_list_impl/src/di/chats_list_screen_component.dart';
