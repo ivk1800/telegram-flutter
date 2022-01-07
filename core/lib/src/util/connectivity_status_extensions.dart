@@ -10,6 +10,8 @@ extension ConnectivityStatusExtensions on ConnectivityStatus {
         return const td.NetworkTypeMobile();
       case ConnectivityStatus.none:
         return const td.NetworkTypeNone();
+      case ConnectivityStatus.other:
+        return const td.NetworkTypeOther();
     }
   }
 }

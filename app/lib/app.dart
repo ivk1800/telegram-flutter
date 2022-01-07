@@ -14,8 +14,6 @@ late AppComponent appComponent;
 
 Future<void> launch() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // runDemo();
   final LocalizationManager localizationManager = LocalizationManager();
   await localizationManager.init('en', 'en');
 

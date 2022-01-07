@@ -1,4 +1,4 @@
-import 'package:connectivity/connectivity.dart' as c;
+import 'package:connectivity_plus/connectivity_plus.dart' as c;
 import 'package:core/core.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -7,12 +7,7 @@ import 'connectivity_provider.dart';
 class ConnectivityProviderImpl implements IConnectivityProvider {
   ConnectivityProviderImpl() {
     final c.Connectivity connectivity = c.Connectivity();
-    connectivity.onConnectivityChanged.listen((c.ConnectivityResult event) {
-      final ConnectivityStatus connectivityStatus =
-          event.toConnectivityStatus();
-      _onStatusChangeSubject.add(connectivityStatus);
-      _currentStatus = connectivityStatus;
-    });
+    connectivity.onConnectivityChanged.listen(_dispatchStatus);
 
     connectivity.checkConnectivity().then((c.ConnectivityResult value) {
       _onStatusChangeSubject.add(value.toConnectivityStatus());
@@ -30,6 +25,12 @@ class ConnectivityProviderImpl implements IConnectivityProvider {
 
   @override
   ConnectivityStatus get status => _currentStatus;
+
+  void _dispatchStatus(c.ConnectivityResult connectivityResult) {
+    final ConnectivityStatus status = connectivityResult.toConnectivityStatus();
+    _onStatusChangeSubject.add(status);
+    _currentStatus = status;
+  }
 }
 
 extension _ConnectivityExtensions on c.ConnectivityResult {
@@ -41,6 +42,9 @@ extension _ConnectivityExtensions on c.ConnectivityResult {
         return ConnectivityStatus.mobile;
       case c.ConnectivityResult.none:
         return ConnectivityStatus.none;
+      case c.ConnectivityResult.ethernet:
+      case c.ConnectivityResult.bluetooth:
+        return ConnectivityStatus.other;
     }
   }
 }

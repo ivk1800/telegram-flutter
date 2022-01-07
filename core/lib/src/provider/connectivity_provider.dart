@@ -4,4 +4,9 @@ abstract class IConnectivityProvider {
   Stream<ConnectivityStatus> get onStatusChange;
 }
 
-enum ConnectivityStatus { wifi, mobile, none }
+enum ConnectivityStatus {
+  wifi,
+  mobile,
+  none,
+  other,
+}
