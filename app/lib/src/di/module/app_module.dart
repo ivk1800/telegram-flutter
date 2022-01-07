@@ -8,6 +8,8 @@ import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app/src/navigation/split_navigation_router.dart';
 import 'package:app/src/tdlib/config_provider.dart';
 import 'package:app_controller/app_controller_component.dart';
+import 'package:auth_manager_api/auth_manager_api.dart';
+import 'package:auth_manager_impl/auth_manager_impl.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
@@ -166,6 +168,8 @@ abstract class AppModule {
         TgApp.splitViewNavigatorKey,
       );
 
+  // region component
+
   @j.singleton
   @j.provides
   static IAppController provideAppController(
@@ -192,6 +196,17 @@ abstract class AppModule {
 
   @j.singleton
   @j.provides
+  static IAuthenticationManager provideAuthenticationManager(
+    ITdFunctionExecutor functionExecutor,
+    IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
+  ) =>
+      AuthenticationManager(
+        functionExecutor: functionExecutor,
+        authenticationStateUpdatesProvider: authenticationStateUpdatesProvider,
+      );
+
+  @j.singleton
+  @j.provides
   static IAppControllerRouter provideAppControllerRouter(
     FeatureFactory featureFactory,
   ) =>
@@ -199,4 +214,6 @@ abstract class AppModule {
         TgApp.splitViewNavigatorKey,
         featureFactory,
       );
+
+// endregion component
 }

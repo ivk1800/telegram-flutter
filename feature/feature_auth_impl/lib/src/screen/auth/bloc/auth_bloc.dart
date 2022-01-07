@@ -1,6 +1,6 @@
+import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:dialog_api/dialog_api.dart';
-import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_auth_impl/src/screen/auth/bloc/auth_action.dart';
 import 'package:feature_country_api/feature_country_api.dart';

@@ -1,0 +1,13 @@
+name: auth_manager_api
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+
+dependencies:
+  core_tdlib_api:
+    path: ../../../core_tdlib_api
+
+dev_dependencies:
+  tg_lint_rules:
+    path: ../../../tg_lint_rules

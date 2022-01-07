@@ -3,6 +3,7 @@ import 'package:app/src/feature/feature.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
+import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
@@ -354,6 +355,7 @@ abstract class FeatureModule {
     // todo maybe provide countryRepository from app component?
     // todo with singleton scope?
     FeatureFactory featureFactory,
+    IAuthenticationManager authenticationManager,
   ) =>
       AuthFeatureDependencies(
         connectionStateProvider: connectionStateProvider,
@@ -363,6 +365,7 @@ abstract class FeatureModule {
         authenticationStateUpdatesProvider: authenticationStateUpdatesProvider,
         countryRepository:
             featureFactory.createCountryFeatureApi().countryRepository,
+        authenticationManager: authenticationManager,
       );
 
   @j.provides
@@ -371,16 +374,13 @@ abstract class FeatureModule {
     ILocalizationManager localizationManager,
     ILogoutFeatureRouter router,
     ITdFunctionExecutor functionExecutor,
-    // todo maybe provide authenticationManager from app component?
-    // todo with singleton scope?
-    FeatureFactory featureFactory,
+    IAuthenticationManager authenticationManager,
   ) =>
       LogoutFeatureDependencies(
         connectionStateProvider: connectionStateProvider,
         localizationManager: localizationManager,
         router: router,
-        authenticationManager:
-            featureFactory.createAuthFeatureApi().authenticationManager,
+        authenticationManager: authenticationManager,
       );
 
   @j.provides

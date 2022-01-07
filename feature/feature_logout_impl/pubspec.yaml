@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  auth_manager_api:
+    path: ../../component/auth_manager/auth_manager_api
   chat_router_api:
     path: ../chat/chat_router_api
   core_tdlib_api:
@@ -15,8 +17,6 @@ dependencies:
   dialog_api:
     path: ../../dialog_api
   equatable: ^2.0.0
-  feature_auth_api:
-    path: ../feature_auth_api
   feature_logout_api:
     path: ../feature_logout_api
   flutter:

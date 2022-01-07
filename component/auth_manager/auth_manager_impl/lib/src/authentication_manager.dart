@@ -1,5 +1,5 @@
+import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class AuthenticationManager implements IAuthenticationManager {

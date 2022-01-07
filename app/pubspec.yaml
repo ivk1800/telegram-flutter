@@ -9,6 +9,10 @@ environment:
 dependencies:
   app_controller:
     path: ../component/app_controller
+  auth_manager_api:
+    path: ../component/auth_manager/auth_manager_api
+  auth_manager_impl:
+    path: ../component/auth_manager/auth_manager_impl
   chat_theme:
     path: ../feature/chat/chat_theme
   core:

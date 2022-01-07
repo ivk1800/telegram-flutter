@@ -4,6 +4,7 @@ import 'package:app/src/feature/feature.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app_controller/app_controller_component.dart';
+import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
@@ -16,7 +17,13 @@ import 'package:td_client/td_client.dart';
   TdModule,
 ])
 abstract class AppComponent {
+  // region component
+
   IAppController getAppController();
+
+  IAuthenticationManager getAuthenticationManager();
+
+  // endregion component
 
   ITdConfigProvider getTdConfigProvider();
 

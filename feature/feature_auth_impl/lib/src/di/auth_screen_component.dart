@@ -20,12 +20,7 @@ abstract class ProfileScreenModule {
       AuthBloc(
         localizationManager: dependencies.localizationManager,
         router: dependencies.router,
-        // todo move to feature component
-        authenticationManager: AuthenticationManager(
-          authenticationStateUpdatesProvider:
-              dependencies.authenticationStateUpdatesProvider,
-          functionExecutor: dependencies.functionExecutor,
-        ),
+        authenticationManager: dependencies.authenticationManager,
         countryRepository: dependencies.countryRepository,
       );
 

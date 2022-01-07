@@ -1,7 +1,7 @@
 library feature_logout_impl;
 
+import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_logout_api/feature_logout_api.dart';
 import 'package:localization_api/localization_api.dart';
 
