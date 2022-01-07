@@ -95,7 +95,7 @@ class _BodyRenderBox extends RenderBox
     // todo text can be empty
     final TextBox lastBox = boxesForSelection.last;
     final double newWidth = first.size.width + second.size.width;
-    final double secondXOffset = newWidth - second.size.width;
+    final double secondXOffset = constraints.maxWidth - second.size.width;
 
     final double width = hasSize ? size.width : constraints.maxWidth;
     if (newWidth > width) {
