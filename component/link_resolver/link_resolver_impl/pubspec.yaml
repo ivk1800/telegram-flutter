@@ -1,0 +1,15 @@
+name: link_resolver_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+
+dependencies:
+  link_resolver_api:
+    path: ../link_resolver_api
+
+dev_dependencies:
+  dependency_validator: ^3.1.2
+  test: ^1.16.0
+  tg_lint_rules:
+    path: ../../../tg_lint_rules
