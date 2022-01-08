@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
+import 'fakes.dart';
+
 class FakeChatRepository implements IChatRepository {
   @override
-  Future<td.Chat> getChat(int id) {
-    return Completer<td.Chat>().future;
+  Future<td.Chat> getChat(int id) async {
+    return createFakeChat();
   }
 
   @override
@@ -15,8 +17,8 @@ class FakeChatRepository implements IChatRepository {
     required int offsetOrder,
     required int limit,
     required td.ChatList chatList,
-  }) {
-    return Completer<List<td.Chat>>().future;
+  }) async {
+    return <td.Chat>[createFakeChat()];
   }
 
   @override

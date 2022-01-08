@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:fake/fake.dart' as fake;
 import 'package:flutter/material.dart';
-import 'package:showcase/src/message_bundle.dart';
+import 'package:showcase/src/showcase/message/message_bundle.dart';
 import 'package:tdlib/td_api.dart' as td;
 
-import 'message_data.dart';
-import 'showcase_message_page.dart';
+import '../message/mesage_showcase_factory.dart';
+import '../message/message_data.dart';
 
 class ShowcaseMessageListPage extends StatefulWidget {
   const ShowcaseMessageListPage({
@@ -40,17 +40,18 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
         itemBuilder: (BuildContext context, int index) {
           final MessageBundle bundle = _messages[index];
           return ListTile(
-            title: Text(bundle.name),
-            onTap: () async {
-              final Future<dynamic> push = Navigator.of(context)
-                  .push<dynamic>(MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) {
-                  return ShowcaseMessagePage(
-                    bundle: bundle,
-                  );
-                },
-              ));
-              unawaited(push);
+            title: Text('${index + 1}: ${bundle.name}'),
+            onTap: () {
+              final Widget widget = MessageShowcaseFactory().create(
+                context,
+                bundle,
+              );
+
+              Navigator.of(context).push<dynamic>(
+                MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) => widget,
+                ),
+              );
             },
           );
         },

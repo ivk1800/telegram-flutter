@@ -1,4 +1,4 @@
-import 'package:showcase/src/message_data.dart';
+import 'package:showcase/src/showcase/message/message_data.dart';
 
 class MessageBundle {
   MessageBundle({required this.messages, required this.name});

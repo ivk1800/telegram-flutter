@@ -10,6 +10,8 @@ dependencies:
     path: ../core_tdlib_api
   feature_chat_header_info_api:
     path: ../feature/feature_chat_header_info_api
+  feature_file_api:
+    path: ../feature/feature_file_api
   flutter:
     sdk: flutter
   localization_impl:
