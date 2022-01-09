@@ -22,7 +22,7 @@ class MessageChatChangePhotoTileFactoryDelegate
       body: Column(
         children: <Widget>[
           _chatMessageFactory.createChatNotificationBubble(
-            span: model.title.toInlineSpan(),
+            span: model.title.toInlineSpan(context),
           ),
           const SizedBox(
             height: 8,

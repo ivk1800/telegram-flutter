@@ -1,3 +1,5 @@
+import 'package:rich_text_format/rich_text_format.dart';
+
 import 'base_message_tile_model.dart';
 
 class MessageCustomServiceActionTileModel extends BaseMessageTileModel {
@@ -7,5 +9,5 @@ class MessageCustomServiceActionTileModel extends BaseMessageTileModel {
     required this.title,
   }) : super(isOutgoing: isOutgoing, id: id);
 
-  final String title;
+  final RichText title;
 }

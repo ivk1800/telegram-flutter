@@ -19,7 +19,7 @@ class MessageCustomServiceActionTileFactoryDelegate
     return _chatMessageFactory.createChatNotificationFromText(
       id: model.id,
       context: context,
-      text: TextSpan(text: model.title),
+      text: model.title,
     );
   }
 }

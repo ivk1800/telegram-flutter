@@ -1,5 +1,6 @@
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:flutter/material.dart';
+import 'package:rich_text_format/rich_text_format.dart' as rt;
 
 import 'message_text.dart';
 
@@ -10,7 +11,7 @@ class MessageCaption extends StatelessWidget {
     required this.shortInfo,
   }) : super(key: key);
 
-  final InlineSpan text;
+  final rt.RichText text;
   final Widget shortInfo;
 
   @override

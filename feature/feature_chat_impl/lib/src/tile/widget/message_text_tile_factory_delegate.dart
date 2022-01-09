@@ -2,7 +2,6 @@ import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
-import 'package:rich_text_format_flutter/rich_text_format_flutter.dart';
 import 'package:tile/tile.dart';
 
 class MessageTextTileFactoryDelegate
@@ -33,7 +32,7 @@ class MessageTextTileFactoryDelegate
       avatar: _messageComponentResolver.resolveAvatar(context, model),
       blocks: <Widget>[
         MessageCaption(
-          text: model.text.toInlineSpan(),
+          text: model.text,
           shortInfo: _shortInfoFactory.create(context, model.additionalInfo),
         ),
       ],

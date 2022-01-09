@@ -54,6 +54,8 @@ dependencies:
   rich_text_format_flutter:
     path: ../../rich_text/rich_text_format_flutter
   scrollable_positioned_list: ^0.2.2
+  td_rich_text_parser:
+    path: ../../rich_text/td_rich_text_parser
   tg_theme:
     path: ../../tg_theme
   tile:

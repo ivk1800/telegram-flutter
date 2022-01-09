@@ -98,6 +98,7 @@ class ChatMessagesInteractor {
   }
 
   Future<List<ITileModel>> _mapToTileModels(List<td.Message> messages) async {
+    // todo refactor without stream
     final Stream<ITileModel> tileModels =
         Stream<td.Message>.fromIterable(messages).asyncMap(
       _messageTileMapper.mapToTileModel,

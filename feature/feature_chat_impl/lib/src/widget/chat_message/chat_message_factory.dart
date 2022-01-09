@@ -3,6 +3,8 @@ import 'package:feature_chat_impl/src/widget/bubble/bubble.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:feature_chat_impl/src/widget/message/message_content.dart';
 import 'package:flutter/material.dart';
+import 'package:rich_text_format/rich_text_format.dart' as rt;
+import 'package:rich_text_format_flutter/rich_text_format_flutter.dart';
 import 'package:tg_theme/tg_theme.dart';
 
 class ChatMessageFactory {
@@ -11,12 +13,12 @@ class ChatMessageFactory {
   Widget createChatNotificationFromText({
     required int id,
     required BuildContext context,
-    required InlineSpan text,
+    required rt.RichText text,
   }) {
     return _Notification(
       key: ValueKey<int>(id),
       child: Text.rich(
-        text,
+        text.toInlineSpan(context),
         textAlign: TextAlign.center,
         // todo extract style
         style: const TextStyle(color: Colors.white),

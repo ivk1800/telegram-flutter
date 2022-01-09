@@ -80,8 +80,8 @@ class MessageTileMapper {
           id: message.id,
           // todo add a tap for username
           // todo add username
-          text: rt.PlainText(
-            text: _localizationManager.getStringFormatted(
+          text: rt.RichText.planeText(
+            _localizationManager.getStringFormatted(
               'ActionCreateGroup',
               <dynamic>['todo'],
             ),
@@ -111,8 +111,8 @@ class MessageTileMapper {
         return MessageChatAddMembersTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
-          title: rt.PlainText(
-            text: _localizationManager.getStringFormatted(
+          title: rt.RichText.planeText(
+            _localizationManager.getStringFormatted(
               'EventLogGroupJoined',
               <dynamic>[joinedUserNames],
             ),
@@ -123,8 +123,8 @@ class MessageTileMapper {
         return MessageChatChangePhotoTileModel(
           id: message.id,
           // todo missing user name
-          title: rt.PlainText(
-            text: _getStringFormatted(
+          title: rt.RichText.planeText(
+            _getStringFormatted(
               'ActionChangedPhoto',
               <dynamic>['todo'],
             ),
@@ -137,8 +137,8 @@ class MessageTileMapper {
           id: message.id,
           isOutgoing: message.isOutgoing,
           // todo missing user name
-          title: rt.PlainText(
-            text: _getStringFormatted(
+          title: rt.RichText.planeText(
+            _getStringFormatted(
               'ActionChangedTitle',
               <dynamic>['todo', value.title],
             ),
@@ -151,8 +151,8 @@ class MessageTileMapper {
           id: message.id,
           isOutgoing: message.isOutgoing,
           // todo missing user name
-          title: rt.PlainText(
-            text: _getStringFormatted(
+          title: rt.RichText.planeText(
+            _getStringFormatted(
               'ActionKickUser',
               <dynamic>[
                 'todo',
@@ -172,8 +172,8 @@ class MessageTileMapper {
           id: message.id,
           isOutgoing: message.isOutgoing,
           // todo missing user name
-          title: rt.PlainText(
-            text: _getStringFormatted(
+          title: rt.RichText.planeText(
+            _getStringFormatted(
               'ActionRemovedPhoto',
               <dynamic>['todo'],
             ),
@@ -185,8 +185,8 @@ class MessageTileMapper {
           id: message.id,
           isOutgoing: message.isOutgoing,
           // todo missing user name
-          title: rt.PlainText(
-            text: _getStringFormatted(
+          title: rt.RichText.planeText(
+            _getStringFormatted(
               'ActionInviteUser',
               <dynamic>['todo'],
             ),
@@ -198,8 +198,8 @@ class MessageTileMapper {
         return MessageChatSetTtlTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
-          title: rt.PlainText(
-            text: message.isOutgoing
+          title: rt.RichText.planeText(
+            message.isOutgoing
                 ? _getStringFormatted(
                     'MessageLifetimeChangedOutgoing',
                     <dynamic>['todo'],
@@ -216,8 +216,8 @@ class MessageTileMapper {
         return MessageChatUpgradeFromTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
-          title: rt.PlainText(
-            text: _getStringFormatted(
+          title: rt.RichText.planeText(
+            _getStringFormatted(
               'ActionMigrateFromGroupNotify',
               <dynamic>[value.title],
             ),
@@ -228,8 +228,8 @@ class MessageTileMapper {
         return MessageChatUpgradeFromTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
-          title: rt.PlainText(
-            text: _localizationManager.getString('ActionMigrateFromGroup'),
+          title: rt.RichText.planeText(
+            _localizationManager.getString('ActionMigrateFromGroup'),
           ),
         );
       },
@@ -237,8 +237,8 @@ class MessageTileMapper {
         return MessageContactRegisteredTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
-          title: rt.PlainText(
-            text: _localizationManager.getString('ContactJoined'),
+          title: rt.RichText.planeText(
+            _localizationManager.getString('ContactJoined'),
           ),
         );
       },
@@ -266,7 +266,7 @@ class MessageTileMapper {
         return MessageCustomServiceActionTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
-          title: value.text,
+          title: rt.RichText.planeText(value.text),
         );
       },
       messageDice: (td.MessageDice value) {

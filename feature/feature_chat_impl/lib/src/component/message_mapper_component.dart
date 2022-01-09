@@ -7,6 +7,7 @@ import 'package:feature_chat_impl/src/mapper/sender_info_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:localization_api/localization_api.dart';
+import 'package:td_rich_text_parser/td_rich_text_parser.dart';
 
 class MessageMapperDependencies {
   const MessageMapperDependencies({
@@ -57,7 +58,9 @@ class MessageMapperComponent {
       userRepository: _dependencies.userRepository,
       dateParser: DateParser(),
       localizationManager: _dependencies.localizationManager,
-      formattedTextResolver: FormattedTextResolver(),
+      formattedTextResolver: FormattedTextResolver(
+        parser: const Parser(),
+      ),
     );
   }
 }

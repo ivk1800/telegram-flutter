@@ -2,6 +2,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
+import 'package:rich_text_format/rich_text_format.dart' as rt;
 import 'package:tile/tile.dart';
 
 class MessageAudioTileFactoryDelegate
@@ -73,9 +74,14 @@ class MessageAudioTileFactoryDelegate
                       height: 4,
                     ),
                     MessageText(
-                      text: TextSpan(
-                        text: '00:00 / ${model.totalDuration}',
-                        style: theme.textTheme.caption,
+                      // todo move to model
+                      text: rt.RichText(
+                        entities: <rt.Entity>[
+                          rt.Entity(
+                            text: '00:00 / ${model.totalDuration}',
+                            types: <rt.Type>[const rt.Type.planeText()],
+                          ),
+                        ],
                       ),
                       shortInfo: _shortInfoFactory.create(
                         context,

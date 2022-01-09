@@ -1,14 +1,21 @@
 library rich_text_format;
 
-abstract class RichText {
-  String get source;
-}
+import 'src/entity.dart';
+import 'src/type.dart';
 
-class PlainText implements RichText {
-  const PlainText({required this.text});
+export 'src/entity.dart';
+export 'src/type.dart';
 
-  final String text;
+class RichText {
+  const RichText({
+    required this.entities,
+  });
 
-  @override
-  String get source => text;
+  final List<Entity> entities;
+
+  factory RichText.planeText(String text) {
+    return RichText(entities: <Entity>[
+      Entity(text: text, types: <Type>[Type.planeText()])
+    ]);
+  }
 }
