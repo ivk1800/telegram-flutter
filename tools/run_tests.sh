@@ -22,3 +22,5 @@ cd feature/
 findTests true
 cd ../component/
 findTests true
+cd ../rich_text/
+findTests true

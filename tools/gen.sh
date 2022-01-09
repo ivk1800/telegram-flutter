@@ -31,3 +31,5 @@ cd feature/
 generate true
 cd ../component/
 generate true
+cd ../rich_text/
+generate true

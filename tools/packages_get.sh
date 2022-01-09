@@ -28,3 +28,5 @@ cd feature/
 sync true
 cd ../component/
 sync true
+cd ../rich_text/
+sync true
