@@ -4,6 +4,8 @@ import 'package:showcase/src/showcase/message_list/showcase_messages_list_page.d
 import 'package:showcase/src/showcase_split_view_page.dart';
 import 'package:split_view/split_view.dart';
 
+import 'auth/auth_showcase_factory.dart';
+
 class ShowcaseListPage extends StatefulWidget {
   const ShowcaseListPage({Key? key}) : super(key: key);
 
@@ -54,6 +56,21 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
         );
       },
     ),
+    _ShowcaseData(
+      title: 'auth',
+      subtitle: 'phone: 7-111-111-11-11, code: 11111',
+      routeCallback: (BuildContext context) {
+        final Widget widget = AuthShowcaseFactory().create(context);
+
+        SplitView.of(context)
+          ..popUntilRoot(ContainerType.top)
+          ..push(
+            key: UniqueKey(),
+            builder: (_) => widget,
+            container: ContainerType.top,
+          );
+      },
+    ),
   ];
 
   @override
@@ -70,6 +87,9 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
           return ListTile(
             onTap: () => showcaseData.routeCallback.call(context),
             title: Text(showcaseData.title),
+            subtitle: showcaseData.subtitle != null
+                ? Text(showcaseData.subtitle!)
+                : null,
           );
         },
       ),
@@ -80,10 +100,12 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
 class _ShowcaseData {
   _ShowcaseData({
     required this.title,
+    this.subtitle,
     required this.routeCallback,
   });
 
   final String title;
+  final String? subtitle;
 
   final void Function(BuildContext context) routeCallback;
 }

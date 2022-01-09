@@ -28,7 +28,6 @@ class AuthFeatureDependencies {
     required this.connectionStateProvider,
     required this.localizationManager,
     required this.router,
-    required this.functionExecutor,
     required this.authenticationStateUpdatesProvider,
     required this.countryRepository,
     required this.authenticationManager,
@@ -37,7 +36,6 @@ class AuthFeatureDependencies {
   final IConnectionStateProvider connectionStateProvider;
   final ILocalizationManager localizationManager;
   final IAuthFeatureRouter router;
-  final ITdFunctionExecutor functionExecutor;
   final IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider;
   final ICountryRepository countryRepository;
   final IAuthenticationManager authenticationManager;

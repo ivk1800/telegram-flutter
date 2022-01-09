@@ -18,14 +18,24 @@ dependencies:
     path: ../core_utils
   coreui:
     path: ../coreui
+  dialog_api:
+    path: ../dialog_api
+  dialog_api_flutter:
+    path: ../dialog_api_flutter
   fake:
     path: ../fake
+  feature_auth_impl:
+    path: ../feature/feature_auth_impl
   feature_chat_header_info_impl:
     path: ../feature/feature_chat_header_info_impl
   feature_chat_impl:
     path: ../feature/feature_chat_impl
   feature_chats_list_impl:
     path: ../feature/feature_chats_list_impl
+  feature_country_api:
+    path: ../feature/feature_country_api
+  feature_country_impl:
+    path: ../feature/feature_country_impl
   feature_file_api:
     path: ../feature/feature_file_api
   feature_message_preview_resolver:

@@ -350,7 +350,6 @@ abstract class FeatureModule {
     IConnectionStateProvider connectionStateProvider,
     ILocalizationManager localizationManager,
     IAuthFeatureRouter router,
-    ITdFunctionExecutor functionExecutor,
     IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
     // todo maybe provide countryRepository from app component?
     // todo with singleton scope?
@@ -361,7 +360,6 @@ abstract class FeatureModule {
         connectionStateProvider: connectionStateProvider,
         localizationManager: localizationManager,
         router: router,
-        functionExecutor: functionExecutor,
         authenticationStateUpdatesProvider: authenticationStateUpdatesProvider,
         countryRepository:
             featureFactory.createCountryFeatureApi().countryRepository,
