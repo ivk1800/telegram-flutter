@@ -1,31 +1,17 @@
 library feature_file_api;
 
+import 'src/file_download_state.dart';
+
+export 'src/file_download_state.dart';
+
 abstract class IFileFeatureApi {
   IFileDownloader get fileDownloader;
 }
 
 abstract class IFileDownloader {
-  Future<IFileDownloadState> getFileDownloadState(int fileId);
+  Future<FileDownloadState> getFileDownloadState(int fileId);
 
-  Stream<IFileDownloadState> getFileDownloadStateStream(int fileId);
+  Stream<FileDownloadState> getFileDownloadStateStream(int fileId);
 
   Future<void> downloadFile(int fileId);
-}
-
-abstract class IFileDownloadState {}
-
-class None implements IFileDownloadState {
-  const None();
-}
-
-class Downloading implements IFileDownloadState {
-  const Downloading({required this.progress});
-
-  final int progress;
-}
-
-class Completed implements IFileDownloadState {
-  const Completed({required this.path});
-
-  final String path;
 }

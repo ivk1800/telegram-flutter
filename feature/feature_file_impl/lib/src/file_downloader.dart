@@ -30,29 +30,29 @@ class FileDownloader implements IFileDownloader {
   }
 
   @override
-  Future<IFileDownloadState> getFileDownloadState(int fileId) {
+  Future<FileDownloadState> getFileDownloadState(int fileId) {
     return _fileRepository.getFile(fileId).then(_toDownloadState);
   }
 
   @override
-  Stream<IFileDownloadState> getFileDownloadStateStream(int fileId) {
-    final Stream<IFileDownloadState> currentState =
-        Stream<IFileDownloadState>.fromFuture(getFileDownloadState(fileId));
-    final Stream<IFileDownloadState> stateUpdates = _fileUpdatesProvider
+  Stream<FileDownloadState> getFileDownloadStateStream(int fileId) {
+    final Stream<FileDownloadState> currentState =
+        Stream<FileDownloadState>.fromFuture(getFileDownloadState(fileId));
+    final Stream<FileDownloadState> stateUpdates = _fileUpdatesProvider
         .fileUpdates
         .where((td.UpdateFile update) => update.file.id == fileId)
         .map((td.UpdateFile update) => _toDownloadState(update.file));
-    return Rx.concat(<Stream<IFileDownloadState>>[currentState, stateUpdates]);
+    return Rx.concat(<Stream<FileDownloadState>>[currentState, stateUpdates]);
   }
 
-  IFileDownloadState _toDownloadState(td.File file) {
+  FileDownloadState _toDownloadState(td.File file) {
     final td.LocalFile local = file.local;
     if (local.isDownloadingCompleted) {
-      return Completed(path: local.path);
+      return FileDownloadState.completed(path: local.path);
     } else if (local.isDownloadingActive) {
       final double percent = local.downloadedSize / file.expectedSize * 100;
-      return Downloading(progress: percent.toInt());
+      return FileDownloadState.downloading(progress: percent.toInt());
     }
-    return const None();
+    return const FileDownloadState.none();
   }
 }

@@ -95,7 +95,8 @@ class _ImageWidgetState extends State<_ImageWidget> {
         ..downloadFile(photoId);
       _stream = fileDownloader
           .getFileDownloadStateStream(photoId)
-          .where((IFileDownloadState event) => event is Completed)
+          // todo refactor filter state, do not check Completed state
+          .where((FileDownloadState event) => event is Completed)
           .cast<Completed>()
           .map((Completed event) => event.path);
     } else {

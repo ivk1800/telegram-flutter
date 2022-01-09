@@ -9,12 +9,14 @@ class FakeFileDownloader implements IFileDownloader {
   }
 
   @override
-  Future<IFileDownloadState> getFileDownloadState(int fileId) async {
-    return const Downloading(progress: 0);
+  Future<FileDownloadState> getFileDownloadState(int fileId) async {
+    return const FileDownloadState.downloading(progress: 0);
   }
 
   @override
-  Stream<IFileDownloadState> getFileDownloadStateStream(int fileId) {
-    return Stream<IFileDownloadState>.value(const Downloading(progress: 0));
+  Stream<FileDownloadState> getFileDownloadStateStream(int fileId) {
+    return Stream<FileDownloadState>.value(
+      const FileDownloadState.downloading(progress: 0),
+    );
   }
 }
