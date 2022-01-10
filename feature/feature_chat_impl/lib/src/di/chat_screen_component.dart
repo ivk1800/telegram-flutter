@@ -126,7 +126,7 @@ abstract class ChatScreenModule {
         router: dependencies.router,
         messagesInteractor: chatMessagesInteractor,
         args: args,
-      );
+      )..init();
 
   @j.provides
   @j.singleton
@@ -232,7 +232,7 @@ abstract class ChatScreenModule {
         chatId: args.chatId,
         chatManager: chatManager,
         chatActionPanelInteractor: chatActionPanelInteractor,
-      );
+      )..init();
 
   // todo move to chat feature component
   @j.provides

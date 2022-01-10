@@ -125,7 +125,7 @@ abstract class FoldersSetupModule {
       ChatsListViewModel(
         router: router,
         interactor: interactor,
-      );
+      )..init();
 }
 
 @j.componentBuilder

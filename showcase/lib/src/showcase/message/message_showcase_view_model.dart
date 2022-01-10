@@ -13,7 +13,11 @@ class MessageShowcaseViewModel extends BaseViewModel {
     required MessageBundle messageBundle,
     required MessageTileMapper messageTileMapper,
   })  : _messageBundle = messageBundle,
-        _messageTileMapper = messageTileMapper {
+        _messageTileMapper = messageTileMapper;
+
+  @override
+  void init() {
+    super.init();
     final Stream<MessageShowcaseState> stateStream =
         Stream<MessageData>.fromIterable(_messageBundle.messages)
             .asyncMap((MessageData data) async {

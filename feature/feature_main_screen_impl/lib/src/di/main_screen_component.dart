@@ -29,7 +29,7 @@ abstract class MainScreenModule {
   ) =>
       MainViewModel(
         router: dependencies.router,
-      );
+      )..init();
 
   @j.provides
   @j.singleton

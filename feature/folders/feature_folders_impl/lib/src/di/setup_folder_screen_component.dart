@@ -24,7 +24,7 @@ abstract class SetupFolderScreenModule {
       SetupFolderViewModel(
         router: router,
         localizationManager: localizationManager,
-      );
+      )..init();
 
   @j.singleton
   @j.binds

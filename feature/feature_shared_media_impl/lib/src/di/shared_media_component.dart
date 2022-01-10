@@ -24,7 +24,7 @@ abstract class SharedMediaModule {
   static SharedMediaViewModel provideSharedMediaViewModel(
     SharedMediaFeatureDependencies dependencies,
   ) =>
-      SharedMediaViewModel();
+      SharedMediaViewModel()..init();
 }
 
 @j.componentBuilder

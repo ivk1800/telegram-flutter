@@ -9,15 +9,19 @@ class ChatsListViewModel extends BaseViewModel {
     required IChatsListScreenRouter router,
     required ChatListInteractor interactor,
   })  : _router = router,
-        _interactor = interactor {
-    _interactor.load();
-  }
+        _interactor = interactor;
 
   final IChatsListScreenRouter _router;
 
   final ChatListInteractor _interactor;
 
   Stream<ChatsListState> get chatsListState => _interactor.chats;
+
+  @override
+  void init() {
+    super.init();
+    _interactor.load();
+  }
 
   void onChatTap(int id) {
     _router.toChat(id);

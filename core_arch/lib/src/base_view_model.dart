@@ -4,6 +4,8 @@ class BaseViewModel {
   final List<StreamSubscription<dynamic>> _subscriptionsList =
       <StreamSubscription<dynamic>>[];
 
+  void init() {}
+
   void subscribe<T>(
     Stream<T> stream,
     void Function(T value) onValue, {

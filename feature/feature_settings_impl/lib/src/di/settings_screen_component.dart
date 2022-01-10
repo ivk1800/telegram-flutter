@@ -73,7 +73,7 @@ abstract class SettingsModule {
   ) =>
       SettingViewModel(
         router: dependencies.router,
-      );
+      )..init();
 
   @j.singleton
   @j.provides

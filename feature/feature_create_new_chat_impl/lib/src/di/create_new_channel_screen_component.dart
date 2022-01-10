@@ -19,7 +19,7 @@ abstract class CreateNewChannelScreenModule {
   @j.singleton
   @j.provides
   static NewChannelViewModel provideNewChannelViewModel() =>
-      NewChannelViewModel();
+      NewChannelViewModel()..init();
 }
 
 @j.componentBuilder
