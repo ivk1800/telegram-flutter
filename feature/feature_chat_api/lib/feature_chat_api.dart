@@ -18,4 +18,8 @@ abstract class IChatManager {
   Future<void> join(int chatId);
 
   Future<void> muteFor(int chatId, int seconds);
+
+  void markAsOpenedChat(int chatId);
+
+  void markAsClosedChat(int chatId);
 }

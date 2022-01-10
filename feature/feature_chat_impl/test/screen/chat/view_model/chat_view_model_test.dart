@@ -1,0 +1,73 @@
+// @dart=2.9
+
+import 'package:feature_chat_api/feature_chat_api.dart';
+import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
+import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';
+import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
+import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
+import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
+import 'package:localization_api/localization_api.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:test/test.dart';
+
+import 'chat_view_model_test.mocks.dart';
+
+@GenerateMocks(<Type>[
+  ChatArgs,
+  IChatScreenRouter,
+  ILocalizationManager,
+  IChatHeaderInfoInteractor,
+  ChatHeaderActionsInteractor,
+], customMocks: <MockSpec<dynamic>>[
+  MockSpec<ChatMessagesInteractor>(returnNullOnMissingStub: true),
+  MockSpec<IChatManager>(returnNullOnMissingStub: true)
+])
+void main() {
+  ChatArgs mockChatArgs;
+  IChatScreenRouter mockChatScreenRouter;
+  ILocalizationManager mockLocalizationManager;
+  IChatHeaderInfoInteractor mockChatHeaderInfoInteractor;
+  ChatMessagesInteractor mockChatMessagesInteractor;
+  IChatManager mockChatManager;
+  ChatHeaderActionsInteractor mockChatHeaderActionsInteractor;
+
+  ChatViewModel viewModel;
+
+  setUp(() {
+    mockChatArgs = MockChatArgs();
+    mockChatScreenRouter = MockIChatScreenRouter();
+    mockLocalizationManager = MockILocalizationManager();
+    mockChatHeaderInfoInteractor = MockIChatHeaderInfoInteractor();
+    mockChatMessagesInteractor = MockChatMessagesInteractor();
+    mockChatManager = MockIChatManager();
+    mockChatHeaderActionsInteractor = MockChatHeaderActionsInteractor();
+
+    when(mockChatArgs.chatId).thenReturn(0);
+
+    viewModel = ChatViewModel(
+      args: mockChatArgs,
+      localizationManager: mockLocalizationManager,
+      router: mockChatScreenRouter,
+      chatManager: mockChatManager,
+      headerActionsInteractor: mockChatHeaderActionsInteractor,
+      headerInfoInteractor: mockChatHeaderInfoInteractor,
+      messagesInteractor: mockChatMessagesInteractor,
+    );
+  });
+
+  test('should mark opened chat on init', () async {
+    verify(mockChatManager.markAsOpenedChat(any)).called(1);
+  });
+
+  test('should mark opened chat on dispose', () async {
+    viewModel.dispose();
+    verify(mockChatManager.markAsClosedChat(any)).called(1);
+  });
+
+  test('should dispose messages interactor on dispose', () async {
+    viewModel.dispose();
+    verify(mockChatMessagesInteractor.dispose()).called(1);
+  });
+}

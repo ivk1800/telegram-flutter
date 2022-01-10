@@ -30,6 +30,7 @@ class ChatViewModel extends BaseViewModel {
         _headerActionsInteractor = headerActionsInteractor,
         _messagesInteractor = messagesInteractor {
     _messagesInteractor.init();
+    chatManager.markAsOpenedChat(args.chatId);
   }
 
   final ChatArgs _args;
@@ -106,6 +107,7 @@ class ChatViewModel extends BaseViewModel {
 
   @override
   void dispose() {
+    _chatManager.markAsClosedChat(_args.chatId);
     _messagesInteractor.dispose();
   }
 

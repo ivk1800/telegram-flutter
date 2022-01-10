@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:tdlib/td_api.dart' as td;
@@ -32,5 +34,15 @@ class ChatManagerImpl implements IChatManager {
       chatId: chatId,
       notificationSettings: notificationSettings,
     ));
+  }
+
+  @override
+  void markAsClosedChat(int chatId) {
+    unawaited(_functionExecutor.send<td.Ok>(td.CloseChat(chatId: chatId)));
+  }
+
+  @override
+  void markAsOpenedChat(int chatId) {
+    unawaited(_functionExecutor.send<td.Ok>(td.OpenChat(chatId: chatId)));
   }
 }
