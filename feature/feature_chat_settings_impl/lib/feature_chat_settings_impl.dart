@@ -14,8 +14,8 @@ import 'src/screen/settings/bloc/chat_settings_bloc.dart';
 
 export 'src/chat_settings_screen_router.dart';
 
-class ChatSettingsFeatureApi implements IChatSettingsFeatureApi {
-  ChatSettingsFeatureApi({
+class ChatSettingsFeature implements IChatSettingsFeatureApi {
+  ChatSettingsFeature({
     required ChatSettingsFeatureDependencies dependencies,
   }) : _settingsWidgetFactory =
             _ScreenWidgetFactory(dependencies: dependencies);

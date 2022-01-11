@@ -6,8 +6,8 @@ import 'package:localization_api/localization_api.dart';
 
 import 'src/screen/factory/shared_media_screen_factory.dart';
 
-class SharedMediaFeatureApi implements ISharedMediaFeatureApi {
-  SharedMediaFeatureApi({required SharedMediaFeatureDependencies dependencies})
+class SharedMediaFeature implements ISharedMediaFeatureApi {
+  SharedMediaFeature({required SharedMediaFeatureDependencies dependencies})
       : _dependencies = dependencies;
 
   final SharedMediaFeatureDependencies _dependencies;

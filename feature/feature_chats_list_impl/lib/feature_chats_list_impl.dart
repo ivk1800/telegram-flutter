@@ -12,8 +12,8 @@ export 'src/chats_list_screen_router.dart';
 export 'src/tile/chat_tile.dart';
 export 'src/tile/chat_tile_model.dart';
 
-class ChatsListFeatureApi implements IChatsListFeatureApi {
-  ChatsListFeatureApi({
+class ChatsListFeature implements IChatsListFeatureApi {
+  ChatsListFeature({
     required ChatsListFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 

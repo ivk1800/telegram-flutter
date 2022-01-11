@@ -22,8 +22,8 @@ export 'src/tile/widget/tile_widget.dart';
 export 'src/wall/message_wall_context.dart';
 export 'src/widget/chat_context.dart';
 
-class ChatFeatureApi implements IChatFeatureApi {
-  ChatFeatureApi({
+class ChatFeature implements IChatFeatureApi {
+  ChatFeature({
     required ChatFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 

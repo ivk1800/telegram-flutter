@@ -4,8 +4,8 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_file_impl/src/file_downloader.dart';
 
-class FileFeatureApi implements IFileFeatureApi {
-  FileFeatureApi({
+class FileFeature implements IFileFeatureApi {
+  FileFeature({
     required FileFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 

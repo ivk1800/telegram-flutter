@@ -13,8 +13,8 @@ import 'src/screen/factory/new_chat_screen_factory.dart';
 
 export 'src/create_new_chat_router.dart';
 
-class CreateNewChatFeatureApi implements ICreateNewChatFeatureApi {
-  CreateNewChatFeatureApi({
+class CreateNewChatFeature implements ICreateNewChatFeatureApi {
+  CreateNewChatFeature({
     required CreateNewChatFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 

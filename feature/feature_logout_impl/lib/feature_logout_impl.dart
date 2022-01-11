@@ -10,8 +10,8 @@ import 'src/screen/factory/logout_screen_factory.dart';
 
 export 'src/logout_feature_router.dart';
 
-class LogoutFeatureApi implements ILogoutFeatureApi {
-  LogoutFeatureApi({
+class LogoutFeature implements ILogoutFeatureApi {
+  LogoutFeature({
     required LogoutFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 

@@ -9,8 +9,8 @@ import 'src/screen/settings_search_screen_factory.dart';
 
 export 'src/settings_search_screen_router.dart';
 
-class SettingsSearchFeatureApi implements ISettingsSearchFeatureApi {
-  SettingsSearchFeatureApi({
+class SettingsSearchFeature implements ISettingsSearchFeatureApi {
+  SettingsSearchFeature({
     required SettingsSearchFeatureDependencies dependencies,
   }) : _settingsWidgetFactory =
             SearchSettingsScreenFactory(dependencies: dependencies);

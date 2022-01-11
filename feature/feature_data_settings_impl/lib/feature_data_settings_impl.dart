@@ -9,8 +9,8 @@ import 'src/widget/factory/data_settings_widget_factory.dart';
 
 export 'src/data_settings_screen_router.dart';
 
-class DataSettingsFeatureApi implements IDataSettingsFeatureApi {
-  DataSettingsFeatureApi({
+class DataSettingsFeature implements IDataSettingsFeatureApi {
+  DataSettingsFeature({
     required DataSettingsFeatureDependencies dependencies,
   }) : _settingsWidgetFactory =
             DataSettingsWidgetFactory(dependencies: dependencies);

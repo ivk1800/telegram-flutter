@@ -14,13 +14,13 @@ class AuthShowcaseFactory {
   Widget create(BuildContext context) {
     final ILocalizationManager localizationManager =
         context.read<ILocalizationManager>();
-    final CountryFeatureApi countryFeature = CountryFeatureApi(
+    final CountryFeature countryFeature = CountryFeature(
       dependencies: CountryFeatureDependencies(
         localizationManager: localizationManager,
       ),
     );
     final SplitViewState splitView = SplitView.of(context);
-    final AuthFeatureApi authFeature = AuthFeatureApi(
+    final AuthFeature authFeature = AuthFeature(
       dependencies: AuthFeatureDependencies(
         authenticationStateUpdatesProvider:
             FakeAuthenticationStateUpdatesProvider(),

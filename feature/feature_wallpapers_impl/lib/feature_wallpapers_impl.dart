@@ -10,8 +10,8 @@ import 'src/screen/factory/wallpaper_list_screen_factory.dart';
 
 export 'src/wallpapers_screen_router.dart';
 
-class WallpapersFeatureApi implements IWallpapersFeatureApi {
-  WallpapersFeatureApi({
+class WallpapersFeature implements IWallpapersFeatureApi {
+  WallpapersFeature({
     required WallpapersFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 

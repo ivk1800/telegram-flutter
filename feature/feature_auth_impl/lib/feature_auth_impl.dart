@@ -11,8 +11,8 @@ import 'src/screen/factory/auth_screen_factory.dart';
 
 export 'src/auth_feature_router.dart';
 
-class AuthFeatureApi implements IAuthFeatureApi {
-  AuthFeatureApi({required AuthFeatureDependencies dependencies})
+class AuthFeature implements IAuthFeatureApi {
+  AuthFeature({required AuthFeatureDependencies dependencies})
       : _dependencies = dependencies;
 
   final AuthFeatureDependencies _dependencies;

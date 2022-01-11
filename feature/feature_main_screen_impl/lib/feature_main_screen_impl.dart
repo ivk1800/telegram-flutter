@@ -11,8 +11,8 @@ import 'src/screen/main/main_screen_factory.dart';
 
 export 'src/main_screen_router.dart';
 
-class MainScreenFeatureApi implements IMainScreenFeatureApi {
-  MainScreenFeatureApi({
+class MainScreenFeature implements IMainScreenFeatureApi {
+  MainScreenFeature({
     required MainScreenFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 

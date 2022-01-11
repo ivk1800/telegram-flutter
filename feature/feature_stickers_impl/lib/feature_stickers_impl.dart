@@ -13,8 +13,8 @@ import 'src/widget/trending_stickers_widget_factory.dart';
 
 export 'src/stickers_feature_router.dart';
 
-class StickersFeatureApi implements IStickersFeatureApi {
-  StickersFeatureApi({required StickersFeatureDependencies dependencies})
+class StickersFeature implements IStickersFeatureApi {
+  StickersFeature({required StickersFeatureDependencies dependencies})
       : _dependencies = dependencies;
 
   final StickersFeatureDependencies _dependencies;

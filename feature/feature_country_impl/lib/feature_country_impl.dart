@@ -6,8 +6,8 @@ import 'package:localization_api/localization_api.dart';
 
 import 'src/screen/factory/choose_country_screen_factory.dart';
 
-class CountryFeatureApi implements ICountryFeatureApi {
-  CountryFeatureApi({required CountryFeatureDependencies dependencies})
+class CountryFeature implements ICountryFeatureApi {
+  CountryFeature({required CountryFeatureDependencies dependencies})
       : _dependencies = dependencies;
 
   final CountryFeatureDependencies _dependencies;

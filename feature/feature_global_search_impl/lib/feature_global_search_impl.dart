@@ -9,8 +9,8 @@ import 'src/global_search_feature_router.dart';
 
 export 'src/global_search_feature_router.dart';
 
-class GlobalSearchFeatureApi implements IGlobalSearchFeatureApi {
-  GlobalSearchFeatureApi({
+class GlobalSearchFeature implements IGlobalSearchFeatureApi {
+  GlobalSearchFeature({
     required GlobalSearchFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 

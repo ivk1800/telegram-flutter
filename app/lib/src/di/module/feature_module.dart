@@ -440,55 +440,55 @@ abstract class FeatureModule {
   static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
     GlobalSearchFeatureDependencies dependencies,
   ) {
-    return GlobalSearchFeatureApi(dependencies: dependencies);
+    return GlobalSearchFeature(dependencies: dependencies);
   }
 
   @j.provides
   static IMainScreenFeatureApi provideMainScreenFeatureApi(
     MainScreenFeatureDependencies dependencies,
   ) {
-    return MainScreenFeatureApi(dependencies: dependencies);
+    return MainScreenFeature(dependencies: dependencies);
   }
 
   @j.provides
   static IChatHeaderInfoFeatureApi provideChatHeaderInfoFeatureApi(
     ChatHeaderInfoFeatureDependencies dependencies,
   ) {
-    return ChatHeaderInfoFeatureApi(dependencies: dependencies);
+    return ChatHeaderInfoFeature(dependencies: dependencies);
   }
 
   @j.provides
   static IChatFeatureApi provideChatFeatureApi(
     ChatFeatureDependencies dependencies,
   ) {
-    return ChatFeatureApi(dependencies: dependencies);
+    return ChatFeature(dependencies: dependencies);
   }
 
   @j.provides
   static IChatsListFeatureApi provideChatsListFeatureApi(
     ChatsListFeatureDependencies dependencies,
   ) {
-    return ChatsListFeatureApi(dependencies: dependencies);
+    return ChatsListFeature(dependencies: dependencies);
   }
 
   @j.provides
   static ISettingsFeatureApi provideSettingsFeatureApi(
     SettingsFeatureDependencies dependencies,
   ) {
-    return SettingsFeatureApi(dependencies: dependencies);
+    return SettingsFeature(dependencies: dependencies);
   }
 
   @j.provides
   static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
     SettingsSearchFeatureDependencies dependencies,
   ) =>
-      SettingsSearchFeatureApi(dependencies: dependencies);
+      SettingsSearchFeature(dependencies: dependencies);
 
   @j.provides
   static IPrivacySettingsFeatureApi providePrivacySettingsFeatureApi(
     PrivacySettingsFeatureDependencies dependencies,
   ) =>
-      PrivacySettingsFeatureApi(dependencies: dependencies);
+      PrivacySettingsFeature(dependencies: dependencies);
 
   @j.provides
   static INotificationsSettingsFeatureApi
@@ -501,62 +501,62 @@ abstract class FeatureModule {
   static IDataSettingsFeatureApi provideDataSettingsFeatureApi(
     DataSettingsFeatureDependencies dependencies,
   ) =>
-      DataSettingsFeatureApi(dependencies: dependencies);
+      DataSettingsFeature(dependencies: dependencies);
 
   @j.provides
   static IChatSettingsFeatureApi provideChatSettingsFeatureApi(
     ChatSettingsFeatureDependencies dependencies,
   ) =>
-      ChatSettingsFeatureApi(dependencies: dependencies);
+      ChatSettingsFeature(dependencies: dependencies);
 
   @j.provides
   static IWallpapersFeatureApi providewallpapersFeatureApi(
     WallpapersFeatureDependencies dependencies,
   ) =>
-      WallpapersFeatureApi(dependencies: dependencies);
+      WallpapersFeature(dependencies: dependencies);
 
   @j.provides
   static IStickersFeatureApi provideStickersFeatureApi(
     StickersFeatureDependencies dependencies,
   ) =>
-      StickersFeatureApi(dependencies: dependencies);
+      StickersFeature(dependencies: dependencies);
 
   @j.provides
   static IProfileFeatureApi provideProfileFeatureApi(
     ProfileFeatureDependencies dependencies,
   ) {
-    return ProfileFeatureApi(dependencies: dependencies);
+    return ProfileFeature(dependencies: dependencies);
   }
 
   @j.provides
   static ISharedMediaFeatureApi provideSharedMediaFeatureApi(
     SharedMediaFeatureDependencies dependencies,
   ) =>
-      SharedMediaFeatureApi(dependencies: dependencies);
+      SharedMediaFeature(dependencies: dependencies);
 
   @j.provides
   static ICountryFeatureApi provideCountryFeatureApi(
     CountryFeatureDependencies dependencies,
   ) =>
-      CountryFeatureApi(dependencies: dependencies);
+      CountryFeature(dependencies: dependencies);
 
   @j.provides
   static IAuthFeatureApi provideAuthFeatureApi(
     AuthFeatureDependencies dependencies,
   ) =>
-      AuthFeatureApi(dependencies: dependencies);
+      AuthFeature(dependencies: dependencies);
 
   @j.provides
   static ILogoutFeatureApi provideLogoutFeatureApi(
     LogoutFeatureDependencies dependencies,
   ) =>
-      LogoutFeatureApi(dependencies: dependencies);
+      LogoutFeature(dependencies: dependencies);
 
   @j.provides
   static IFileFeatureApi provideFileFeatureApi(
     FileFeatureDependencies dependencies,
   ) =>
-      FileFeatureApi(dependencies: dependencies);
+      FileFeature(dependencies: dependencies);
 
   @j.provides
   static IFoldersFeatureApi provideFoldersFeatureApi(
@@ -574,7 +574,7 @@ abstract class FeatureModule {
   static ICreateNewChatFeatureApi provideCreateNewChatFeatureApi(
     CreateNewChatFeatureDependencies dependencies,
   ) =>
-      CreateNewChatFeatureApi(dependencies: dependencies);
+      CreateNewChatFeature(dependencies: dependencies);
 
   // endregion api
 

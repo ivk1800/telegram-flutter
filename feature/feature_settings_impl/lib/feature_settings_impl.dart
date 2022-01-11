@@ -10,8 +10,8 @@ import 'src/screen/settings_screen_factory.dart';
 
 export 'src/settings_screen_router.dart';
 
-class SettingsFeatureApi implements ISettingsFeatureApi {
-  SettingsFeatureApi({
+class SettingsFeature implements ISettingsFeatureApi {
+  SettingsFeature({
     required SettingsFeatureDependencies dependencies,
   }) : _settingsWidgetFactory =
             SettingsScreenFactory(dependencies: dependencies);

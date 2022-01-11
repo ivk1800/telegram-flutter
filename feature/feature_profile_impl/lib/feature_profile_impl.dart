@@ -10,8 +10,8 @@ import 'src/screen/factory/profile_screen_factory.dart';
 
 export 'src/profile_feature_router.dart';
 
-class ProfileFeatureApi implements IProfileFeatureApi {
-  ProfileFeatureApi({required ProfileFeatureDependencies dependencies})
+class ProfileFeature implements IProfileFeatureApi {
+  ProfileFeature({required ProfileFeatureDependencies dependencies})
       : _dependencies = dependencies;
 
   final ProfileFeatureDependencies _dependencies;

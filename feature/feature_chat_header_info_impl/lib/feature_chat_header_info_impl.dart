@@ -34,8 +34,8 @@ class ChatHeaderInfoFeatureDependencies {
   final ISuperGroupRepository superGroupRepository;
 }
 
-class ChatHeaderInfoFeatureApi implements IChatHeaderInfoFeatureApi {
-  const ChatHeaderInfoFeatureApi({
+class ChatHeaderInfoFeature implements IChatHeaderInfoFeatureApi {
+  const ChatHeaderInfoFeature({
     required ChatHeaderInfoFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 
