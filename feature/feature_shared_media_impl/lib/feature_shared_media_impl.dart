@@ -11,13 +11,14 @@ class SharedMediaFeatureApi implements ISharedMediaFeatureApi {
       : _dependencies = dependencies;
 
   final SharedMediaFeatureDependencies _dependencies;
-  SharedMediaScreenFactory? _sharedMediaScreenFactory;
+  late final SharedMediaScreenFactory _sharedMediaScreenFactory =
+      SharedMediaScreenFactory(
+    dependencies: _dependencies,
+  );
 
   @override
   ISharedMediaScreenFactory get sharedMediaScreenFactory =>
-      _sharedMediaScreenFactory ??= SharedMediaScreenFactory(
-        dependencies: _dependencies,
-      );
+      _sharedMediaScreenFactory;
 }
 
 class SharedMediaFeatureDependencies {

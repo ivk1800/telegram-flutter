@@ -16,26 +16,26 @@ class AppControllerComponent {
 
   final AppControllerComponentDependencies _dependencies;
 
-  AppController? _appController;
+  late final AppController _appController = AppController(
+    appLifecycleStateDelegate: AppLifecycleStateDelegate(
+      appLifecycleStateProvider: _dependencies.appLifecycleStateProvider,
+      optionsManager: _dependencies.optionsManager,
+    ),
+    connectivityDelegate: ConnectivityDelegate(
+      connectivityProvider: _dependencies.connectivityProvider,
+      functionExecutor: _dependencies.functionExecutor,
+    ),
+    authorizationStateDelegate: AuthorizationStateDelegate(
+      deviceInfoProvider: DeviceInfoProvider(),
+      functionExecutor: _dependencies.functionExecutor,
+      authenticationStateUpdatesProvider:
+          _dependencies.authenticationStateUpdatesProvider,
+      tdConfigProvider: _dependencies.tdConfigProvider,
+      router: _dependencies.router,
+    ),
+  );
 
-  IAppController get appController => _appController ??= AppController(
-        appLifecycleStateDelegate: AppLifecycleStateDelegate(
-          appLifecycleStateProvider: _dependencies.appLifecycleStateProvider,
-          optionsManager: _dependencies.optionsManager,
-        ),
-        connectivityDelegate: ConnectivityDelegate(
-          connectivityProvider: _dependencies.connectivityProvider,
-          functionExecutor: _dependencies.functionExecutor,
-        ),
-        authorizationStateDelegate: AuthorizationStateDelegate(
-          deviceInfoProvider: DeviceInfoProvider(),
-          functionExecutor: _dependencies.functionExecutor,
-          authenticationStateUpdatesProvider:
-              _dependencies.authenticationStateUpdatesProvider,
-          tdConfigProvider: _dependencies.tdConfigProvider,
-          router: _dependencies.router,
-        ),
-      );
+  IAppController get appController => _appController;
 }
 
 abstract class IAppControllerRouter {

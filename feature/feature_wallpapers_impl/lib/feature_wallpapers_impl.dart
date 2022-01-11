@@ -17,13 +17,14 @@ class WallpapersFeatureApi implements IWallpapersFeatureApi {
 
   final WallpapersFeatureDependencies _dependencies;
 
-  IWallpapersListScreenFactory? _wallpapersListScreenFactory;
+  late final IWallpapersListScreenFactory _wallpapersListScreenFactory =
+      WallpapersListScreenFactory(
+    dependencies: _dependencies,
+  );
 
   @override
   IWallpapersListScreenFactory get wallpapersListScreenFactory =>
-      _wallpapersListScreenFactory ??= WallpapersListScreenFactory(
-        dependencies: _dependencies,
-      );
+      _wallpapersListScreenFactory;
 }
 
 class WallpapersFeatureDependencies {

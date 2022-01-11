@@ -8,19 +8,16 @@ class TdConfigProvider implements ITdConfigProvider {
   @j.inject
   TdConfigProvider();
 
-  Future<Map<String, String>>? _cache;
+  late final Future<Map<String, String>> _cache = _readFromAssets();
 
   @override
-  Future<int> getAppId() async =>
-      int.parse((await (_cache ??= _readFromAssets()))['apiId']!);
+  Future<int> getAppId() async => int.parse((await _cache)['apiId']!);
 
   @override
-  Future<String> getApiHash() async =>
-      (await (_cache ??= _readFromAssets()))['apiHash']!;
+  Future<String> getApiHash() async => (await _cache)['apiHash']!;
 
   @override
-  Future<String> getEncryptionKey() async =>
-      (await (_cache ??= _readFromAssets()))['encryptionKey']!;
+  Future<String> getEncryptionKey() async => (await _cache)['encryptionKey']!;
 
   Future<Map<String, String>> _readFromAssets() async {
     final String raw =

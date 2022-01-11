@@ -20,39 +20,39 @@ class CreateNewChatFeatureApi implements ICreateNewChatFeatureApi {
 
   final CreateNewChatFeatureDependencies _dependencies;
 
-  CreateNewChatComponent? _componentValue;
-
-  CreateNewChatComponent get _component => _componentValue ??=
+  late final CreateNewChatComponent _component =
       JuggerCreateNewChatComponentBuilder().dependencies(_dependencies).build();
 
-  CreateNewChannelScreenFactory? _createNewChannelScreenFactory;
-  CreateNewGroupScreenFactory? _createNewGroupScreenFactory;
-  CreateNewSecretChatScreenFactory? _createNewSecretChatScreenFactory;
-  NewChatScreenFactory? _chatScreenFactory;
+  late final CreateNewChannelScreenFactory _createNewChannelScreenFactory =
+      CreateNewChannelScreenFactory(
+    component: _component,
+  );
+  late final CreateNewGroupScreenFactory _createNewGroupScreenFactory =
+      CreateNewGroupScreenFactory(
+    component: _component,
+  );
+  late final CreateNewSecretChatScreenFactory
+      _createNewSecretChatScreenFactory = CreateNewSecretChatScreenFactory(
+    component: _component,
+  );
+  late final NewChatScreenFactory _chatScreenFactory = NewChatScreenFactory(
+    component: _component,
+  );
 
   @override
   ICreateNewChannelScreenFactory get createNewChannelScreenFactory =>
-      _createNewChannelScreenFactory ??= CreateNewChannelScreenFactory(
-        component: _component,
-      );
+      _createNewChannelScreenFactory;
 
   @override
   ICreateNewGroupScreenFactory get createNewGroupScreenFactory =>
-      _createNewGroupScreenFactory ??= CreateNewGroupScreenFactory(
-        component: _component,
-      );
+      _createNewGroupScreenFactory;
 
   @override
   ICreateNewSecretChatScreenFactory get createNewSecretChatScreenFactory =>
-      _createNewSecretChatScreenFactory ??= CreateNewSecretChatScreenFactory(
-        component: _component,
-      );
+      _createNewSecretChatScreenFactory;
 
   @override
-  INewChatScreenFactory get newChatScreenFactory =>
-      _chatScreenFactory ??= NewChatScreenFactory(
-        component: _component,
-      );
+  INewChatScreenFactory get newChatScreenFactory => _chatScreenFactory;
 }
 
 class CreateNewChatFeatureDependencies {

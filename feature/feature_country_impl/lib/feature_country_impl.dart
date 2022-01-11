@@ -12,18 +12,18 @@ class CountryFeatureApi implements ICountryFeatureApi {
 
   final CountryFeatureDependencies _dependencies;
 
-  ChooseCountryScreenFactory? _chooseCountryScreenFactory;
-  CountryRepository? _countryRepository;
+  late final ChooseCountryScreenFactory _chooseCountryScreenFactory =
+      ChooseCountryScreenFactory(
+    dependencies: _dependencies,
+  );
+  late final CountryRepository _countryRepository = const CountryRepository();
 
   @override
   IChooseCountryScreenFactory get chooseCountryScreenFactory =>
-      _chooseCountryScreenFactory ??= ChooseCountryScreenFactory(
-        dependencies: _dependencies,
-      );
+      _chooseCountryScreenFactory;
 
   @override
-  ICountryRepository get countryRepository =>
-      _countryRepository ??= const CountryRepository();
+  ICountryRepository get countryRepository => _countryRepository;
 }
 
 class CountryFeatureDependencies {

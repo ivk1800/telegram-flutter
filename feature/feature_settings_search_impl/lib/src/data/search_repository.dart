@@ -10,12 +10,12 @@ class SearchRepository {
 
   final ILocalizationManager _localizationManager;
 
-  Future<List<SearchItemData>>? _cache;
+  late final Future<List<SearchItemData>> _cache = _createAllItems();
 
   Future<List<SearchItemData>> find(String query) async {
     final List<String> queryParts = query.split(' ');
 
-    final List<SearchItemData> all = await (_cache ??= _createAllItems());
+    final List<SearchItemData> all = await _cache;
     return all
         .where((SearchItemData item) => queryParts
             .every((String part) => item.name.toLowerCase().contains(part)))

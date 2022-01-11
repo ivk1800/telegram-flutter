@@ -28,18 +28,18 @@ class ChatFeatureApi implements IChatFeatureApi {
   }) : _dependencies = dependencies;
 
   final ChatFeatureDependencies _dependencies;
-  IChatScreenFactory? _chatScreenFactory;
-  IChatManager? _chatManager;
+  late final IChatScreenFactory _chatScreenFactory =
+      ChatScreenFactory(dependencies: _dependencies);
+  late final IChatManager _chatManager = ChatManagerImpl(
+    chatRepository: _dependencies.chatRepository,
+    functionExecutor: _dependencies.functionExecutor,
+  );
 
   @override
-  IChatScreenFactory get chatScreenFactory =>
-      _chatScreenFactory ??= ChatScreenFactory(dependencies: _dependencies);
+  IChatScreenFactory get chatScreenFactory => _chatScreenFactory;
 
   @override
-  IChatManager get chatManager => _chatManager ??= ChatManagerImpl(
-        chatRepository: _dependencies.chatRepository,
-        functionExecutor: _dependencies.functionExecutor,
-      );
+  IChatManager get chatManager => _chatManager;
 }
 
 class ChatFeatureDependencies {

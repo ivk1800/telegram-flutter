@@ -17,14 +17,13 @@ class ChatsListFeatureApi implements IChatsListFeatureApi {
     required ChatsListFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 
-  IChatsListScreenFactory? _chatsListScreenFactory;
+  late final IChatsListScreenFactory _chatsListScreenFactory =
+      ChatsListScreenFactory(dependencies: _dependencies);
 
   final ChatsListFeatureDependencies _dependencies;
 
   @override
-  IChatsListScreenFactory get chatsListScreenFactory =>
-      _chatsListScreenFactory ??=
-          ChatsListScreenFactory(dependencies: _dependencies);
+  IChatsListScreenFactory get chatsListScreenFactory => _chatsListScreenFactory;
 }
 
 class ChatsListFeatureDependencies {

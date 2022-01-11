@@ -15,13 +15,12 @@ class ProfileFeatureApi implements IProfileFeatureApi {
       : _dependencies = dependencies;
 
   final ProfileFeatureDependencies _dependencies;
-  ProfileScreenFactory? _profileScreenFactory;
+  late final ProfileScreenFactory _profileScreenFactory = ProfileScreenFactory(
+    dependencies: _dependencies,
+  );
 
   @override
-  IProfileScreenFactory get profileScreenFactory =>
-      _profileScreenFactory ??= ProfileScreenFactory(
-        dependencies: _dependencies,
-      );
+  IProfileScreenFactory get profileScreenFactory => _profileScreenFactory;
 }
 
 class ProfileFeatureDependencies {

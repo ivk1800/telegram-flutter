@@ -16,13 +16,13 @@ class SessionsFeatureImpl implements ISessionsFeatureApi {
 
   final SessionsFeatureDependencies _dependencies;
 
-  SessionsScreenFactory? _sessionsScreenFactory;
+  late final SessionsScreenFactory _sessionsScreenFactory =
+      SessionsScreenFactory(
+    dependencies: _dependencies,
+  );
 
   @override
-  ISessionsScreenFactory get sessionsScreenFactory =>
-      _sessionsScreenFactory ??= SessionsScreenFactory(
-        dependencies: _dependencies,
-      );
+  ISessionsScreenFactory get sessionsScreenFactory => _sessionsScreenFactory;
 }
 
 class SessionsFeatureDependencies {
