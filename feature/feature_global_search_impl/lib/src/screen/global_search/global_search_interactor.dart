@@ -4,8 +4,8 @@ import 'package:search_component/search_component.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
-import 'bloc/global_search_state.dart';
-import 'bloc/search_page_state.dart';
+import 'cubit/global_search_state.dart';
+import 'cubit/search_page_state.dart';
 import 'global_search_result_category.dart';
 import 'global_search_result_tile_mapper.dart';
 import 'search_interactor_factory.dart';

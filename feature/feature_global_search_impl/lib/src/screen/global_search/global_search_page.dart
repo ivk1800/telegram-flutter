@@ -1,13 +1,12 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_global_search_api/feature_global_search_api.dart';
-import 'package:feature_global_search_impl/src/screen/global_search/bloc/global_search_bloc.dart';
-import 'package:feature_global_search_impl/src/screen/global_search/bloc/global_search_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tile/tile.dart';
 
-import 'bloc/global_search_event.dart';
-import 'bloc/search_page_state.dart';
+import 'cubit/global_search_cubit.dart';
+import 'cubit/global_search_state.dart';
+import 'cubit/search_page_state.dart';
 import 'global_search_result_category.dart';
 
 class GlobalSearchPage extends StatefulWidget {
@@ -24,19 +23,17 @@ class GlobalSearchPage extends StatefulWidget {
 
 class _GlobalSearchPageState extends State<GlobalSearchPage>
     with SingleTickerProviderStateMixin {
-  late GlobalSearchBloc _bloc;
+  late GlobalSearchCubit _searchCubit;
 
   @override
   void initState() {
-    _bloc = context.read<GlobalSearchBloc>();
+    _searchCubit = context.read<GlobalSearchCubit>();
     _listenController();
     super.initState();
     tabController = TabController(vsync: this, length: 6);
     tabController.addListener(() {
-      _bloc.add(
-        CurrentPageChanged(
-          category: GlobalSearchResultCategory.values[tabController.index],
-        ),
+      _searchCubit.onCurrentPageChanged(
+        GlobalSearchResultCategory.values[tabController.index],
       );
     });
   }
@@ -45,13 +42,13 @@ class _GlobalSearchPageState extends State<GlobalSearchPage>
 
   void onCallback() {
     final String query = widget.controller.queryValue.value;
-    _bloc.add(QueryChanged(query: query));
+    _searchCubit.onQueryChanged(query);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<GlobalSearchBloc, GlobalSearchState>(
+      body: BlocConsumer<GlobalSearchCubit, GlobalSearchState>(
         listener: (BuildContext context, GlobalSearchState state) {},
         builder: (BuildContext context, GlobalSearchState state) {
           return Column(
