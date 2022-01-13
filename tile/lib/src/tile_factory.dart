@@ -4,7 +4,7 @@ import 'tile_factory_delegate.dart';
 import 'tile_model.dart';
 
 class TileFactory {
-  TileFactory({required this.delegates});
+  const TileFactory({required this.delegates});
 
   final Map<Type, ITileFactoryDelegate<ITileModel>> delegates;
 

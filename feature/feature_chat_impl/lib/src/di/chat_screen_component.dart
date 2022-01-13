@@ -14,6 +14,8 @@ import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
 import 'package:feature_chat_impl/src/screen/chat/view_model/chat_actions_panel_view_model.dart';
+import 'package:feature_chat_impl/src/tile/model/loading_tile_model.dart';
+import 'package:feature_chat_impl/src/tile/widget/loading_tile_factory_delegate.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
@@ -67,16 +69,27 @@ abstract class ChatScreenModule {
     IMessageWallContext messageWallContext,
     ChatFeatureDependencies dependencies,
     IMessageActionListener messageActionListener,
-  ) =>
-      MessageTileFactoryComponent(
-        dependencies: MessageTileFactoryDependencies(
-          fileDownloader: dependencies.fileDownloader,
-          messageActionListener: messageActionListener,
-          messageWallContext: messageWallContext,
-          localizationManager: dependencies.localizationManager,
-          fileRepository: dependencies.fileRepository,
-        ),
-      ).create();
+  ) {
+    final TileFactory messageTileFactory = MessageTileFactoryComponent(
+      dependencies: MessageTileFactoryDependencies(
+        fileDownloader: dependencies.fileDownloader,
+        messageActionListener: messageActionListener,
+        messageWallContext: messageWallContext,
+        localizationManager: dependencies.localizationManager,
+        fileRepository: dependencies.fileRepository,
+      ),
+    ).create();
+    return CompositeTileFactory(
+      factories: <TileFactory>[
+        messageTileFactory,
+        const TileFactory(
+          delegates: <Type, ITileFactoryDelegate<ITileModel>>{
+            LoadingTileModel: LoadingTileFactoryDelegate(),
+          },
+        )
+      ],
+    );
+  }
 
   @j.provides
   @j.singleton
