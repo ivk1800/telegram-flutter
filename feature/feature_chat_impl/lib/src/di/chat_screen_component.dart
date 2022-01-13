@@ -1,4 +1,5 @@
 import 'package:chat_actions_panel/chat_actions_panel.dart';
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
@@ -8,10 +9,13 @@ import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.d
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/manager/chat_manager_impl.dart';
 import 'package:feature_chat_impl/src/resolver/chat_info_resolver.dart';
+import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
+import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
 import 'package:feature_chat_impl/src/screen/chat/view_model/chat_actions_panel_view_model.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
+import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
@@ -21,7 +25,7 @@ import 'package:tile/tile.dart';
 abstract class ChatScreenComponent {
   MessageTileMapper getMessageTileMapper();
 
-  TileFactory getTileFactory();
+  MessageFactory getMessageFactory();
 
   ChatMessageFactory getChatMessageFactory();
 
@@ -60,7 +64,7 @@ abstract class ChatScreenModule {
   @j.provides
   @j.singleton
   static TileFactory provideTileFactory(
-    ChatMessagesInteractor chatMessagesInteractor,
+    IMessageWallContext messageWallContext,
     ChatFeatureDependencies dependencies,
     IMessageActionListener messageActionListener,
   ) =>
@@ -68,13 +72,56 @@ abstract class ChatScreenModule {
         dependencies: MessageTileFactoryDependencies(
           fileDownloader: dependencies.fileDownloader,
           messageActionListener: messageActionListener,
-          messageWallContext: MessageWallContextImpl(
-            chatMessagesInteractor: chatMessagesInteractor,
-          ),
+          messageWallContext: messageWallContext,
           localizationManager: dependencies.localizationManager,
           fileRepository: dependencies.fileRepository,
         ),
       ).create();
+
+  @j.provides
+  @j.singleton
+  static IMessageWallContext provideMessageWallContext(
+    ChatMessagesInteractor chatMessagesInteractor,
+  ) =>
+      MessageWallContextImpl(
+        chatMessagesInteractor: chatMessagesInteractor,
+      );
+
+  @j.provides
+  @j.singleton
+  static MessageFactory provideMessageFactory(
+    TileFactory tileFactory,
+    MessageComponentResolver messageComponentResolver,
+  ) =>
+      MessageFactory(
+        tileFactory: tileFactory,
+        messageComponentResolver: messageComponentResolver,
+      );
+
+  @j.provides
+  @j.singleton
+  static MessageComponentResolver provideMessageComponentResolver(
+    IMessageActionListener messageActionListener,
+    IFileRepository fileRepository,
+    IMessageWallContext messageWallContext,
+  ) =>
+      MessageComponentResolver(
+        senderAvatarFactory: SenderAvatarFactory(
+          avatarWidgetFactory: tg.AvatarWidgetFactory(
+            fileRepository: fileRepository,
+          ),
+        ),
+        messageWallContext: messageWallContext,
+        senderTitleFactory: const SenderTitleFactory(),
+        messageActionListener: messageActionListener,
+      );
+
+  @j.provides
+  @j.singleton
+  static IFileRepository provideFileRepository(
+    ChatFeatureDependencies dependencies,
+  ) =>
+      dependencies.fileRepository;
 
   @j.provides
   @j.singleton

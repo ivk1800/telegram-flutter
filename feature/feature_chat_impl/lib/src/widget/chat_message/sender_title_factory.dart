@@ -3,6 +3,8 @@ import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_
 import 'package:flutter/material.dart';
 
 class SenderTitleFactory {
+  const SenderTitleFactory();
+
   Widget createFromMessageModel(
     BuildContext context,
     BaseConversationMessageTileModel messageModel,

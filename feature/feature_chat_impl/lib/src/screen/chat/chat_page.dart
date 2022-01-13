@@ -12,6 +12,7 @@ import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
 import 'chat_state.dart';
+import 'message_factory.dart';
 import 'messages_scroll_controller.dart';
 import 'view_model/chat_actions_panel_view_model.dart';
 import 'view_model/chat_view_model.dart';
@@ -130,7 +131,7 @@ class _Messages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TileFactory tileFactory = context.read();
+    final MessageFactory messageFactory = context.read();
     return Scrollbar(
       child: ScrollablePositionedList.separated(
         // todo extract to config
@@ -141,7 +142,10 @@ class _Messages extends StatelessWidget {
         itemCount: models.length,
         itemBuilder: (BuildContext context, int index) {
           final ITileModel tileModel = models[index];
-          return tileFactory.create(context, tileModel);
+          return messageFactory.create(
+            context: context,
+            model: tileModel,
+          );
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(height: 8.0);

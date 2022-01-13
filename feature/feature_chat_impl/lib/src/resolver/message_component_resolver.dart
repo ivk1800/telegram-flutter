@@ -37,21 +37,23 @@ class MessageComponentResolver {
       return null;
     }
 
-    return _messageWallContext.isDisplayAvatarFor(model.id)
-        ? _senderAvatarFactory.create(
-            context: context,
-            senderInfo: model.senderInfo,
-            onTap: () => _messageActionListener.onSenderAvatarTap(
-              senderId: model.senderInfo.id,
-            ),
-          )
-        // todo copy paste from senderAvatarFactory
-        : const Padding(
-            padding: EdgeInsets.only(right: 8),
-            child: SizedBox(
-              width: 40,
-              height: 40,
-            ),
-          );
+    if (_messageWallContext.isDisplayAvatarFor(model.id)) {
+      return _senderAvatarFactory.create(
+        context: context,
+        senderInfo: model.senderInfo,
+        onTap: () => _messageActionListener.onSenderAvatarTap(
+          senderId: model.senderInfo.id,
+        ),
+      );
+    } else {
+      // todo copy paste from senderAvatarFactory
+      return const Padding(
+        padding: EdgeInsets.only(right: 8),
+        child: SizedBox(
+          width: 40,
+          height: 40,
+        ),
+      );
+    }
   }
 }

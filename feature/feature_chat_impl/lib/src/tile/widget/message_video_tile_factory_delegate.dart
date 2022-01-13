@@ -34,7 +34,6 @@ class MessageVideoTileFactoryDelegate
       context: context,
       senderTitle: _messageComponentResolver.resolveSenderName(context, model),
       reply: _replyInfoFactory.createFromMessageModel(context, model),
-      avatar: _messageComponentResolver.resolveAvatar(context, model),
       blocks: <Widget>[
         MediaWrapper(
           type: MediaType.video,

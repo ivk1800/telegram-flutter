@@ -44,7 +44,7 @@ class MessageTileFactoryComponent {
       localizationManager: _dependencies.localizationManager,
     );
     final ReplyInfoFactory replyInfoFactory = ReplyInfoFactory();
-    final SenderTitleFactory senderTitleFactory = SenderTitleFactory();
+    const SenderTitleFactory senderTitleFactory = SenderTitleFactory();
 
     final tg.AvatarWidgetFactory avatarWidgetFactory =
         tg.AvatarWidgetFactory(fileRepository: _dependencies.fileRepository);

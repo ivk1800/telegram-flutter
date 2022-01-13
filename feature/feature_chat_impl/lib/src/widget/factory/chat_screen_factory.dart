@@ -7,13 +7,13 @@ import 'package:feature_chat_impl/src/di/di.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
+import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
 import 'package:feature_chat_impl/src/screen/chat/view_model/chat_actions_panel_view_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
-import 'package:tile/tile.dart';
 
 class ChatScreenFactory implements IChatScreenFactory {
   ChatScreenFactory({required this.dependencies});
@@ -33,9 +33,9 @@ class ChatScreenFactory implements IChatScreenFactory {
             create: (BuildContext context) =>
                 context.getComponent().getChatActionPanelFactory(),
           ),
-          Provider<TileFactory>(
+          Provider<MessageFactory>(
             create: (BuildContext context) =>
-                context.getComponent().getTileFactory(),
+                context.getComponent().getMessageFactory(),
           ),
           Provider<ChatMessageFactory>(
             create: (BuildContext context) =>

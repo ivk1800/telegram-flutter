@@ -93,13 +93,11 @@ class ChatMessageFactory {
     required Widget? senderTitle,
     required List<Widget> blocks,
     required bool isOutgoing,
-    required Widget? avatar,
   }) {
     return createFromBlocks(
       id: id,
       context: context,
       isOutgoing: isOutgoing,
-      leading: avatar,
       blocks: <Widget>[
         if (senderTitle != null) senderTitle,
         if (reply != null) reply,
@@ -113,22 +111,18 @@ class ChatMessageFactory {
     required BuildContext context,
     required bool isOutgoing,
     required List<Widget> blocks,
-    Widget? leading,
   }) {
     return _BaseMessage(
       id: id,
       alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
-      body: _Leading(
-        leading: leading,
-        body: _BaseMessage(
-          id: id,
-          alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
-          body: _Bubble(
-            child: MessageContent(
-              children: blocks,
-            ),
-            isOutgoing: isOutgoing,
+      body: _BaseMessage(
+        id: id,
+        alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
+        body: _Bubble(
+          child: MessageContent(
+            children: blocks,
           ),
+          isOutgoing: isOutgoing,
         ),
       ),
     );
@@ -180,31 +174,6 @@ class _Bubble extends StatelessWidget {
         color: isOutgoing ? theme.bubbleOutgoingColor : theme.bubbleColor,
         child: child,
       ),
-    );
-  }
-}
-
-class _Leading extends StatelessWidget {
-  const _Leading({
-    required this.leading,
-    required this.body,
-    Key? key,
-  }) : super(key: key);
-
-  final Widget? leading;
-  final Widget body;
-
-  @override
-  Widget build(BuildContext context) {
-    if (leading == null) {
-      return body;
-    }
-
-    return Row(
-      // todo need pass from args for different cases
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[leading!, Flexible(child: body)],
     );
   }
 }
