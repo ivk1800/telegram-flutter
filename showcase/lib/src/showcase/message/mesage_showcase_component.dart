@@ -17,7 +17,7 @@ import 'message_showcase_view_model.dart';
 @j.Component(
   modules: <Type>[MessageShowcaseModule],
 )
-abstract class MessageShowcaseComponent {
+abstract class IMessageShowcaseComponent {
   ILocalizationManager getLocalizationManager();
 
   MessageShowcaseViewModel getMessageShowcaseViewModel();
@@ -135,16 +135,16 @@ abstract class MessageShowcaseModule {
 }
 
 @j.componentBuilder
-abstract class MessageShowcaseComponentBuilder {
-  MessageShowcaseComponentBuilder localizationManager(
+abstract class IMessageShowcaseComponentBuilder {
+  IMessageShowcaseComponentBuilder localizationManager(
     ILocalizationManager value,
   );
 
-  MessageShowcaseComponentBuilder messageBundle(
+  IMessageShowcaseComponentBuilder messageBundle(
     MessageBundle value,
   );
 
-  MessageShowcaseComponent build();
+  IMessageShowcaseComponent build();
 }
 
 class _MessageActionListenerStub implements IMessageActionListener {

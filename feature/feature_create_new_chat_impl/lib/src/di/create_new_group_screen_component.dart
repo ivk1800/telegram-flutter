@@ -5,7 +5,7 @@ import 'package:localization_api/localization_api.dart';
 import 'create_new_chat_component.dart';
 
 @j.Component(
-  dependencies: <Type>[CreateNewChatComponent],
+  dependencies: <Type>[ICreateNewChatComponent],
   modules: <Type>[CreateNewGroupScreenModule],
 )
 abstract class CreateNewGroupScreenComponent {
@@ -25,7 +25,7 @@ abstract class CreateNewGroupScreenModule {
 @j.componentBuilder
 abstract class CreateNewGroupScreenComponentBuilder {
   CreateNewGroupScreenComponentBuilder createNewChatComponent(
-    CreateNewChatComponent component,
+    ICreateNewChatComponent component,
   );
 
   CreateNewGroupScreenComponent build();

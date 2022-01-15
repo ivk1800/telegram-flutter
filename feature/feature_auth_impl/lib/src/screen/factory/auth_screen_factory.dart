@@ -16,7 +16,7 @@ class AuthScreenFactory implements IAuthScreenFactory {
 
   @override
   Widget create() {
-    return Provider<AuthScreenComponent>(
+    return Provider<IAuthScreenComponent>(
       create: (_) => JuggerAuthScreenComponentBuilder()
           .dependencies(_dependencies)
           .build(),
@@ -38,5 +38,5 @@ class AuthScreenFactory implements IAuthScreenFactory {
 }
 
 extension _ContextExt on BuildContext {
-  AuthScreenComponent getComponent() => read<AuthScreenComponent>();
+  IAuthScreenComponent getComponent() => read<IAuthScreenComponent>();
 }

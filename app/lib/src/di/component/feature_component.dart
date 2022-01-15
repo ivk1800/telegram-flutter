@@ -24,8 +24,11 @@ import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:jugger/jugger.dart' as j;
 
-@j.Component(modules: <Type>[FeatureModule], dependencies: <Type>[AppComponent])
-abstract class FeatureComponent {
+@j.Component(
+  modules: <Type>[FeatureModule],
+  dependencies: <Type>[IAppComponent],
+)
+abstract class IFeatureComponent {
   IGlobalSearchFeatureApi getGlobalSearchFeatureApi();
 
   IMainScreenFeatureApi getMainScreenFeatureApi();
@@ -72,8 +75,8 @@ abstract class FeatureComponent {
 }
 
 @j.componentBuilder
-abstract class FeatureComponentBuilder {
-  FeatureComponentBuilder appComponent(AppComponent appComponent);
+abstract class IFeatureComponentBuilder {
+  IFeatureComponentBuilder appComponent(IAppComponent appComponent);
 
-  FeatureComponent build();
+  IFeatureComponent build();
 }

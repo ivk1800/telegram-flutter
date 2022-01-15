@@ -11,10 +11,10 @@ import 'package:provider_extensions/provider_extensions.dart';
 class CreateNewSecretChatScreenFactory
     implements ICreateNewSecretChatScreenFactory {
   CreateNewSecretChatScreenFactory({
-    required CreateNewChatComponent component,
+    required ICreateNewChatComponent component,
   }) : _component = component;
 
-  final CreateNewChatComponent _component;
+  final ICreateNewChatComponent _component;
 
   @override
   Widget create() {

@@ -20,9 +20,9 @@ class FoldersFeatureImpl implements IFoldersFeatureApi {
   IFoldersScreenFactory? _foldersScreenFactory;
   ISetupFolderScreenFactory? _setupFolderScreenFactory;
 
-  FoldersComponent? _component;
+  IFoldersComponent? _component;
 
-  FoldersComponent get _foldersComponent =>
+  IFoldersComponent get _foldersComponent =>
       _component ??
       JuggerFoldersComponentBuilder().dependencies(_dependencies).build();
 

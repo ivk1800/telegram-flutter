@@ -16,7 +16,7 @@ import 'package:td_client/td_client.dart';
   AppModule,
   TdModule,
 ])
-abstract class AppComponent {
+abstract class IAppComponent {
   // region component
 
   IAppController getAppController();
@@ -85,10 +85,10 @@ abstract class AppComponent {
 }
 
 @j.componentBuilder
-abstract class AppComponentBuilder {
-  AppComponentBuilder localizationManager(
+abstract class IAppComponentBuilder {
+  IAppComponentBuilder localizationManager(
     ILocalizationManager localizationManager,
   );
 
-  AppComponent build();
+  IAppComponent build();
 }

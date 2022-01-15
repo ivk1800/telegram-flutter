@@ -20,11 +20,11 @@ class ChatsListScreenFactory implements IChatsListScreenFactory {
 
   @override
   Widget create() {
-    return Scope<ChatsListScreenComponent>(
+    return Scope<IChatsListScreenComponent>(
       create: () => JuggerChatsListScreenComponentBuilder()
           .dependencies(_dependencies)
           .build(),
-      providers: (ChatsListScreenComponent value) {
+      providers: (IChatsListScreenComponent value) {
         return <Provider<dynamic>>[
           Provider<TileFactory>(
             create: (_) => value.getTileFactory(),

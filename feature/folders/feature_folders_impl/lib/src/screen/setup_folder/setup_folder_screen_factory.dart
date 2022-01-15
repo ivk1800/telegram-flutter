@@ -11,18 +11,18 @@ import 'package:provider_extensions/provider_extensions.dart';
 
 class SetupFolderScreenFactory implements ISetupFolderScreenFactory {
   SetupFolderScreenFactory({
-    required FoldersComponent foldersComponent,
+    required IFoldersComponent foldersComponent,
   }) : _foldersComponent = foldersComponent;
 
-  final FoldersComponent _foldersComponent;
+  final IFoldersComponent _foldersComponent;
 
   @override
   Widget create() {
-    return Scope<SetupFolderScreenComponent>(
+    return Scope<ISetupFolderScreenComponent>(
       create: () => JuggerSetupFolderScreenComponentBuilder()
           .foldersComponent(_foldersComponent)
           .build(),
-      providers: (SetupFolderScreenComponent component) {
+      providers: (ISetupFolderScreenComponent component) {
         return <Provider<dynamic>>[
           ViewModelProvider<SetupFolderViewModel>(
             create: (_) => component.getSetupFolderViewModel(),

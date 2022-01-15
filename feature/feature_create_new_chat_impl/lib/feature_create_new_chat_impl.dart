@@ -20,7 +20,7 @@ class CreateNewChatFeature implements ICreateNewChatFeatureApi {
 
   final CreateNewChatFeatureDependencies _dependencies;
 
-  late final CreateNewChatComponent _component =
+  late final ICreateNewChatComponent _component =
       JuggerCreateNewChatComponentBuilder().dependencies(_dependencies).build();
 
   late final CreateNewChannelScreenFactory _createNewChannelScreenFactory =

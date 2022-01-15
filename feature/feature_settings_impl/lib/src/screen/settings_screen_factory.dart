@@ -22,13 +22,13 @@ class SettingsScreenFactory implements ISettingScreenFactory {
 
   @override
   Widget create() {
-    return Scope<SettingsScreenComponent>(
+    return Scope<ISettingsComponent>(
       create: () {
-        return JuggerSettingsScreenComponentBuilder()
+        return JuggerSettingsComponentBuilder()
             .dependencies(_dependencies)
             .build();
       },
-      providers: (SettingsScreenComponent component) {
+      providers: (ISettingsComponent component) {
         return <Provider<dynamic>>[
           Provider<ILocalizationManager>(
             create: (_) => component.getLocalizationManager(),

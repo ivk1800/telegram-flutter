@@ -10,14 +10,12 @@ import 'package:tdlib/td_api.dart' as td;
 
 import 'src/di/component/app_component.dart';
 
-late AppComponent appComponent;
-
 Future<void> launch() async {
   WidgetsFlutterBinding.ensureInitialized();
   final LocalizationManager localizationManager = LocalizationManager();
   await localizationManager.init('en', 'en');
 
-  appComponent = JuggerAppComponentBuilder()
+  final IAppComponent appComponent = JuggerAppComponentBuilder()
       .localizationManager(localizationManager)
       .build();
 

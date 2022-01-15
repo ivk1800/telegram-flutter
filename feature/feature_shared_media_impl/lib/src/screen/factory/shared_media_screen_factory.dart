@@ -20,13 +20,13 @@ class SharedMediaScreenFactory implements ISharedMediaScreenFactory {
 
   @override
   Widget create(SharedContentType type) {
-    return Scope<SharedMediaComponent>(
+    return Scope<ISharedMediaComponent>(
       create: () {
         return JuggerSharedMediaComponentBuilder()
             .dependencies(_dependencies)
             .build();
       },
-      providers: (SharedMediaComponent component) {
+      providers: (ISharedMediaComponent component) {
         return <Provider<dynamic>>[
           ViewModelProvider<SharedMediaViewModel>(
             create: (_) => component.getSharedMediaViewModel(),

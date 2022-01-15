@@ -7,8 +7,10 @@ import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
-@j.Component(modules: <Type>[SettingsModule])
-abstract class SettingsScreenComponent {
+@j.Component(
+  modules: <Type>[SettingsScreenModule],
+)
+abstract class ISettingsComponent {
   ILocalizationManager getLocalizationManager();
 
   tg.ConnectionStateWidgetFactory getConnectionStateWidgetFactory();
@@ -21,7 +23,7 @@ abstract class SettingsScreenComponent {
 }
 
 @j.module
-abstract class SettingsModule {
+abstract class SettingsScreenModule {
   @j.provides
   @j.singleton
   static ISettingsSearchScreenFactory provideSettingsSearchScreenFactory(
@@ -86,10 +88,10 @@ abstract class SettingsModule {
 }
 
 @j.componentBuilder
-abstract class SettingsComponentBuilder {
-  SettingsComponentBuilder dependencies(
+abstract class ISettingsComponentBuilder {
+  ISettingsComponentBuilder dependencies(
     SettingsFeatureDependencies dependencies,
   );
 
-  SettingsScreenComponent build();
+  ISettingsComponent build();
 }

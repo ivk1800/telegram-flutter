@@ -25,16 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: 1.0.0
-  jext:
-    git:
-      url: git@github.com:ivk1800/jugger.dart.git
-      path: jext
-      ref: c44f7871e6be360937b83b0e89be29c957dcdbd9
-  jugger:
-    git:
-      url: git@github.com:ivk1800/jugger.dart.git
-      path: jugger
-      ref: 9e9f4e9beb08951b37ec8592147ba52979c33d30
+  jugger: ^2.0.0
   localization_api:
     path: ../../localization_api
   provider_extensions:
@@ -52,10 +43,6 @@ dev_dependencies:
   build_runner: ^2.1.7
   dependency_validator: ^3.1.2
   freezed: ^1.1.1
-  jugger_generator:
-    git:
-      url: git@github.com:ivk1800/jugger.dart.git
-      path: jugger_generator
-      ref: c44f7871e6be360937b83b0e89be29c957dcdbd9
+  jugger_generator: ^2.0.0
   tg_lint_rules:
     path: ../../tg_lint_rules

@@ -10,10 +10,10 @@ import 'package:provider_extensions/provider_extensions.dart';
 
 class CreateNewGroupScreenFactory implements ICreateNewGroupScreenFactory {
   CreateNewGroupScreenFactory({
-    required CreateNewChatComponent component,
+    required ICreateNewChatComponent component,
   }) : _component = component;
 
-  final CreateNewChatComponent _component;
+  final ICreateNewChatComponent _component;
 
   @override
   Widget create() {

@@ -1,5 +1,5 @@
-import 'package:app/app.dart';
 import 'package:app/src/app/tg_app.dart';
+import 'package:app/src/di/component/app_component.dart';
 import 'package:app/src/di/component/feature_component.jugger.dart';
 import 'package:app/src/feature/feature.dart';
 import 'package:app/src/navigation/app_controller_router_impl.dart';
@@ -21,7 +21,7 @@ import 'package:td_client/td_client.dart';
 abstract class AppModule {
   @j.singleton
   @j.provides
-  static FeatureFactory provideFeatureFactory() {
+  static FeatureFactory provideFeatureFactory(IAppComponent appComponent) {
     return FeatureFactory(
       featureComponent:
           JuggerFeatureComponentBuilder().appComponent(appComponent).build(),

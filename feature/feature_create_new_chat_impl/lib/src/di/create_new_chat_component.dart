@@ -5,7 +5,7 @@ import 'package:localization_api/localization_api.dart';
 @j.Component(
   modules: <Type>[CreateNewChatModule],
 )
-abstract class CreateNewChatComponent {
+abstract class ICreateNewChatComponent {
   ILocalizationManager getLocalizationManager();
 
   ICreateNewChatRouter getCreateNewChatRouter();
@@ -27,10 +27,10 @@ abstract class CreateNewChatModule {
 }
 
 @j.componentBuilder
-abstract class CreateNewChatComponentBuilder {
-  CreateNewChatComponentBuilder dependencies(
+abstract class ICreateNewChatComponentBuilder {
+  ICreateNewChatComponentBuilder dependencies(
     CreateNewChatFeatureDependencies dependencies,
   );
 
-  CreateNewChatComponent build();
+  ICreateNewChatComponent build();
 }

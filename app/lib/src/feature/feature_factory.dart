@@ -23,10 +23,10 @@ import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 
 class FeatureFactory {
-  FeatureFactory({required FeatureComponent featureComponent})
+  FeatureFactory({required IFeatureComponent featureComponent})
       : _featureComponent = featureComponent;
 
-  final FeatureComponent _featureComponent;
+  final IFeatureComponent _featureComponent;
 
   IMainScreenFeatureApi createMainScreenFeature() =>
       _featureComponent.getMainScreenFeatureApi();

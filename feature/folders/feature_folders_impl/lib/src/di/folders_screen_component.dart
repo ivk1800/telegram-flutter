@@ -5,10 +5,10 @@ import 'package:jugger/jugger.dart' as j;
 import 'folders_component.dart';
 
 @j.Component(
-  dependencies: <Type>[FoldersComponent],
+  dependencies: <Type>[IFoldersComponent],
   modules: <Type>[FoldersScreenModule],
 )
-abstract class FoldersScreenComponent {
+abstract class IFoldersScreenComponent {
   FoldersViewModel getFoldersViewModel();
 }
 
@@ -27,10 +27,10 @@ abstract class FoldersScreenModule {
 }
 
 @j.componentBuilder
-abstract class FoldersScreenComponentBuilder {
-  FoldersScreenComponentBuilder foldersComponent(
-    FoldersComponent foldersComponent,
+abstract class IFoldersScreenComponentBuilder {
+  IFoldersScreenComponentBuilder foldersComponent(
+    IFoldersComponent foldersComponent,
   );
 
-  FoldersScreenComponent build();
+  IFoldersScreenComponent build();
 }

@@ -18,7 +18,7 @@ class ProfileScreenFactory implements IProfileScreenFactory {
   final ProfileFeatureDependencies _dependencies;
 
   @override
-  Widget create(int id) => Provider<ProfileScreenComponent>(
+  Widget create(int id) => Provider<IProfileScreenComponent>(
         create: (_) => JuggerProfileScreenComponentBuilder()
             .dependencies(_dependencies)
             .chatArgs(ProfileArgs(id))
@@ -44,5 +44,5 @@ class ProfileScreenFactory implements IProfileScreenFactory {
 }
 
 extension _ContextExt on BuildContext {
-  ProfileScreenComponent getComponent() => read<ProfileScreenComponent>();
+  IProfileScreenComponent getComponent() => read<IProfileScreenComponent>();
 }

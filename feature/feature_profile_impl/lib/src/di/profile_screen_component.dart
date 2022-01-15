@@ -6,8 +6,10 @@ import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
-@j.Component(modules: <Type>[ProfileScreenModule])
-abstract class ProfileScreenComponent {
+@j.Component(
+  modules: <Type>[ProfileScreenModule],
+)
+abstract class IProfileScreenComponent {
   IChatHeaderInfoFactory getChatHeaderInfoFactory();
 
   ProfileBloc getProfileBloc();
@@ -74,12 +76,12 @@ abstract class ProfileScreenModule {
 }
 
 @j.componentBuilder
-abstract class ProfileScreenComponentBuilder {
-  ProfileScreenComponentBuilder dependencies(
+abstract class IProfileScreenComponentBuilder {
+  IProfileScreenComponentBuilder dependencies(
     ProfileFeatureDependencies dependencies,
   );
 
-  ProfileScreenComponentBuilder chatArgs(ProfileArgs args);
+  IProfileScreenComponentBuilder chatArgs(ProfileArgs args);
 
-  ProfileScreenComponent build();
+  IProfileScreenComponent build();
 }

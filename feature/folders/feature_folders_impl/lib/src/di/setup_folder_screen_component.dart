@@ -6,10 +6,10 @@ import 'package:localization_api/localization_api.dart';
 import 'folders_component.dart';
 
 @j.Component(
-  dependencies: <Type>[FoldersComponent],
+  dependencies: <Type>[IFoldersComponent],
   modules: <Type>[SetupFolderScreenModule],
 )
-abstract class SetupFolderScreenComponent {
+abstract class ISetupFolderScreenComponent {
   SetupFolderViewModel getSetupFolderViewModel();
 }
 
@@ -32,10 +32,10 @@ abstract class SetupFolderScreenModule {
 }
 
 @j.componentBuilder
-abstract class SetupFolderScreenComponentBuilder {
-  SetupFolderScreenComponentBuilder foldersComponent(
-    FoldersComponent foldersComponent,
+abstract class ISetupFolderScreenComponentBuilder {
+  ISetupFolderScreenComponentBuilder foldersComponent(
+    IFoldersComponent foldersComponent,
   );
 
-  SetupFolderScreenComponent build();
+  ISetupFolderScreenComponent build();
 }

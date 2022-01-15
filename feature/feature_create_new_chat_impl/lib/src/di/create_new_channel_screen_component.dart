@@ -5,10 +5,10 @@ import 'package:localization_api/localization_api.dart';
 import 'create_new_chat_component.dart';
 
 @j.Component(
-  dependencies: <Type>[CreateNewChatComponent],
+  dependencies: <Type>[ICreateNewChatComponent],
   modules: <Type>[CreateNewChannelScreenModule],
 )
-abstract class CreateNewChannelScreenComponent {
+abstract class ICreateNewChannelScreenComponent {
   NewChannelViewModel getNewChannelViewModel();
 
   ILocalizationManager getLocalizationManager();
@@ -23,10 +23,10 @@ abstract class CreateNewChannelScreenModule {
 }
 
 @j.componentBuilder
-abstract class CreateNewChannelScreenComponentBuilder {
-  CreateNewChannelScreenComponentBuilder createNewChatComponent(
-    CreateNewChatComponent component,
+abstract class ICreateNewChannelScreenComponentBuilder {
+  ICreateNewChannelScreenComponentBuilder createNewChatComponent(
+    ICreateNewChatComponent component,
   );
 
-  CreateNewChannelScreenComponent build();
+  ICreateNewChannelScreenComponent build();
 }

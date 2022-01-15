@@ -4,8 +4,10 @@ import 'package:feature_dev/feature_dev.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:td_client/td_client.dart';
 
-@j.Component(modules: <Type>[DevModule])
-abstract class DevComponent {
+@j.Component(
+  modules: <Type>[DevModule],
+)
+abstract class IDevComponent {
   TdClient getTdClient();
 
   tg.ConnectionStateWidgetFactory getConnectionStateWidgetFactory();
@@ -34,10 +36,10 @@ abstract class DevModule {
 }
 
 @j.componentBuilder
-abstract class DevComponentBuilder {
-  DevComponentBuilder devFeature(DevFeature devFeature);
+abstract class IDevComponentBuilder {
+  IDevComponentBuilder devFeature(DevFeature devFeature);
 
-  DevComponent build();
+  IDevComponent build();
 }
 
 // extension FoldersSetupComponentExt on RootPage {

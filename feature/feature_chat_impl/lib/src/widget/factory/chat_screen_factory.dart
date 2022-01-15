@@ -22,7 +22,7 @@ class ChatScreenFactory implements IChatScreenFactory {
 
   @override
   Widget create(int chatId) {
-    return Provider<ChatScreenComponent>(
+    return Provider<IChatScreenComponent>(
       create: (_) => JuggerChatScreenComponentBuilder()
           .dependencies(dependencies)
           .chatArgs(ChatArgs(chatId))
@@ -65,6 +65,6 @@ class ChatScreenFactory implements IChatScreenFactory {
 }
 
 extension _ContextExt on BuildContext {
-  ChatScreenComponent getComponent() =>
-      Provider.of<ChatScreenComponent>(this, listen: false);
+  IChatScreenComponent getComponent() =>
+      Provider.of<IChatScreenComponent>(this, listen: false);
 }

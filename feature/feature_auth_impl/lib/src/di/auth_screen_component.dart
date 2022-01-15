@@ -3,8 +3,10 @@ import 'package:feature_auth_impl/src/screen/auth/bloc/auth_bloc.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
-@j.Component(modules: <Type>[ProfileScreenModule])
-abstract class AuthScreenComponent {
+@j.Component(
+  modules: <Type>[ProfileScreenModule],
+)
+abstract class IAuthScreenComponent {
   AuthBloc getProfileBloc();
 
   ILocalizationManager getLocalizationManager();
@@ -33,10 +35,10 @@ abstract class ProfileScreenModule {
 }
 
 @j.componentBuilder
-abstract class AuthScreenComponentBuilder {
-  AuthScreenComponentBuilder dependencies(
+abstract class IAuthScreenComponentBuilder {
+  IAuthScreenComponentBuilder dependencies(
     AuthFeatureDependencies dependencies,
   );
 
-  AuthScreenComponent build();
+  IAuthScreenComponent build();
 }

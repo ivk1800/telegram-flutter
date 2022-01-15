@@ -26,11 +26,11 @@ class SearchSettingsScreenFactory implements ISettingsSearchScreenFactory {
   Widget create(
     SettingsSearchScreenController controller,
   ) =>
-      Scope<SearchSettingsScreenComponent>(
+      Scope<ISearchSettingsScreenComponent>(
         create: () => JuggerSearchSettingsScreenComponentBuilder()
             .dependencies(_dependencies)
             .build(),
-        providers: (SearchSettingsScreenComponent component) {
+        providers: (ISearchSettingsScreenComponent component) {
           return <Provider<dynamic>>[
             Provider<SettingsSearchViewModel>.value(
               value: component.getSettingsSearchViewModel(),

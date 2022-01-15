@@ -6,10 +6,10 @@ import 'package:tile/tile.dart';
 
 import 'global_search_screen_module.dart';
 
-@j.Component(modules: <Type>[
-  GlobalSearchScreenModule,
-])
-abstract class GlobalSearchScreenComponent {
+@j.Component(
+  modules: <Type>[GlobalSearchScreenModule],
+)
+abstract class IGlobalSearchScreenComponent {
   TileFactory getTileFactory();
 
   GlobalSearchCubit getGlobalSearchCubit();
@@ -18,10 +18,10 @@ abstract class GlobalSearchScreenComponent {
 }
 
 @j.componentBuilder
-abstract class GlobalSearchScreenComponentBuilder {
-  GlobalSearchScreenComponentBuilder dependencies(
+abstract class IGlobalSearchScreenComponentBuilder {
+  IGlobalSearchScreenComponentBuilder dependencies(
     GlobalSearchFeatureDependencies dependencies,
   );
 
-  GlobalSearchScreenComponent build();
+  IGlobalSearchScreenComponent build();
 }

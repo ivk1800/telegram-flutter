@@ -6,7 +6,7 @@ import 'package:localization_api/localization_api.dart';
 @j.Component(
   modules: <Type>[SharedMediaModule],
 )
-abstract class SharedMediaComponent {
+abstract class ISharedMediaComponent {
   ILocalizationManager getLocalizationManager();
 
   SharedMediaViewModel getSharedMediaViewModel();
@@ -28,10 +28,10 @@ abstract class SharedMediaModule {
 }
 
 @j.componentBuilder
-abstract class SharedMediaComponentBuilder {
-  SharedMediaComponentBuilder dependencies(
+abstract class ISharedMediaComponentBuilder {
+  ISharedMediaComponentBuilder dependencies(
     SharedMediaFeatureDependencies dependencies,
   );
 
-  SharedMediaComponent build();
+  ISharedMediaComponent build();
 }

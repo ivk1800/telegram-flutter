@@ -11,15 +11,17 @@ import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
-@j.Component(modules: <Type>[FoldersSetupModule])
-abstract class ChatsListScreenComponent {
+@j.Component(
+  modules: <Type>[ChatsListScreenModule],
+)
+abstract class IChatsListScreenComponent {
   TileFactory getTileFactory();
 
   ChatsListViewModel getChatsListViewModel();
 }
 
 @j.module
-abstract class FoldersSetupModule {
+abstract class ChatsListScreenModule {
   @j.provides
   @j.singleton
   static ChatListConfig provideChatListConfig() =>
@@ -129,10 +131,10 @@ abstract class FoldersSetupModule {
 }
 
 @j.componentBuilder
-abstract class FoldersSetupComponentBuilder {
-  FoldersSetupComponentBuilder dependencies(
+abstract class IChatsListScreenComponentBuilder {
+  IChatsListScreenComponentBuilder dependencies(
     ChatsListFeatureDependencies dependencies,
   );
 
-  ChatsListScreenComponent build();
+  IChatsListScreenComponent build();
 }

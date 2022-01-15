@@ -7,8 +7,10 @@ import 'package:feature_main_screen_impl/src/screen/main/main_view_model.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
-@j.Component(modules: <Type>[MainScreenModule])
-abstract class MainScreenComponent {
+@j.Component(
+  modules: <Type>[MainScreenModule],
+)
+abstract class IMainScreenComponent {
   MainViewModel getMainViewModel();
 
   ILocalizationManager getLocalizationManager();
@@ -91,10 +93,10 @@ abstract class MainScreenModule {
 }
 
 @j.componentBuilder
-abstract class FoldersSetupComponentBuilder {
-  FoldersSetupComponentBuilder dependencies(
+abstract class IMainScreenComponentBuilder {
+  IMainScreenComponentBuilder dependencies(
     MainScreenFeatureDependencies dependencies,
   );
 
-  MainScreenComponent build();
+  IMainScreenComponent build();
 }

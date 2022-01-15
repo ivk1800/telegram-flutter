@@ -23,11 +23,11 @@ class MainScreenFactory implements IMainScreenFactory {
 
   @override
   Widget create() {
-    return Scope<MainScreenComponent>(
+    return Scope<IMainScreenComponent>(
       create: () => JuggerMainScreenComponentBuilder()
           .dependencies(_dependencies)
           .build(),
-      providers: (MainScreenComponent component) {
+      providers: (IMainScreenComponent component) {
         return <Provider<dynamic>>[
           ViewModelProvider<MainViewModel>(
             create: (BuildContext _) => component.getMainViewModel(),

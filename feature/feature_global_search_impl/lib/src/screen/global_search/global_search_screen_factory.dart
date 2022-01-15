@@ -20,11 +20,11 @@ class GlobalSearchScreenFactory implements IGlobalSearchScreenFactory {
 
   @override
   Widget create(GlobalSearchScreenController controller) {
-    return Scope<GlobalSearchScreenComponent>(
+    return Scope<IGlobalSearchScreenComponent>(
       create: () => JuggerGlobalSearchScreenComponentBuilder()
           .dependencies(_dependencies)
           .build(),
-      providers: (GlobalSearchScreenComponent component) {
+      providers: (IGlobalSearchScreenComponent component) {
         return <Provider<dynamic>>[
           Provider<TileFactory>(
             create: (BuildContext context) => component.getTileFactory(),

@@ -23,8 +23,10 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:tile/tile.dart';
 
-@j.Component(modules: <Type>[ChatScreenModule])
-abstract class ChatScreenComponent {
+@j.Component(
+  modules: <Type>[ChatScreenModule],
+)
+abstract class IChatScreenComponent {
   MessageTileMapper getMessageTileMapper();
 
   MessageFactory getMessageFactory();
@@ -307,12 +309,12 @@ abstract class ChatScreenModule {
 }
 
 @j.componentBuilder
-abstract class ChatsListScreenComponentBuilder {
-  ChatsListScreenComponentBuilder dependencies(
+abstract class IChatsScreenComponentBuilder {
+  IChatsScreenComponentBuilder dependencies(
     ChatFeatureDependencies dependencies,
   );
 
-  ChatsListScreenComponentBuilder chatArgs(ChatArgs args);
+  IChatsScreenComponentBuilder chatArgs(ChatArgs args);
 
-  ChatScreenComponent build();
+  IChatScreenComponent build();
 }

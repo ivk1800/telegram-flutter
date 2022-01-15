@@ -13,7 +13,7 @@ import 'package:tile/tile.dart';
 @j.Component(
   modules: <Type>[SessionsScreenModule],
 )
-abstract class SessionsScreenComponent {
+abstract class ISessionsScreenComponent {
   SessionsViewModel getSessionsViewModel();
 
   TileFactory getTileFactory();
@@ -99,10 +99,10 @@ abstract class SessionsScreenModule {
 }
 
 @j.componentBuilder
-abstract class SessionsScreenComponentBuilder {
-  SessionsScreenComponentBuilder dependencies(
+abstract class ISessionsScreenComponentBuilder {
+  ISessionsScreenComponentBuilder dependencies(
     SessionsFeatureDependencies dependencies,
   );
 
-  SessionsScreenComponent build();
+  ISessionsScreenComponent build();
 }

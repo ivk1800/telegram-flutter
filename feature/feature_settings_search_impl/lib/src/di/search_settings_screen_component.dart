@@ -14,7 +14,7 @@ import 'package:tile/tile.dart';
 @j.Component(
   modules: <Type>[SearchSettingsScreenModule],
 )
-abstract class SearchSettingsScreenComponent {
+abstract class ISearchSettingsScreenComponent {
   SettingsSearchViewModel getSettingsSearchViewModel();
 
   ILocalizationManager getLocalizationManager();
@@ -93,10 +93,10 @@ abstract class SearchSettingsScreenModule {
 }
 
 @j.componentBuilder
-abstract class SearchSettingsScreenComponentBuilder {
-  SearchSettingsScreenComponentBuilder dependencies(
+abstract class ISearchSettingsScreenComponentBuilder {
+  ISearchSettingsScreenComponentBuilder dependencies(
     SettingsSearchFeatureDependencies dependencies,
   );
 
-  SearchSettingsScreenComponent build();
+  ISearchSettingsScreenComponent build();
 }

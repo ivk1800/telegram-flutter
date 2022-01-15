@@ -23,8 +23,8 @@ class DevWidget extends StatefulWidget {
 class DevWidgetState extends State<DevWidget> {
   DevFeature get devFeature => widget.devFeature;
 
-  late DevComponent _devComponent;
-  DevComponent get devComponent => _devComponent;
+  late IDevComponent _devComponent;
+  IDevComponent get devComponent => _devComponent;
 
   @override
   void initState() {

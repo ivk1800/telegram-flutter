@@ -13,12 +13,12 @@ import 'message_showcase_view_model.dart';
 
 class MessageShowcaseFactory {
   Widget create(BuildContext context, MessageBundle bundle) {
-    return Scope<MessageShowcaseComponent>(
+    return Scope<IMessageShowcaseComponent>(
       create: () => JuggerMessageShowcaseComponentBuilder()
           .localizationManager(context.read())
           .messageBundle(bundle)
           .build(),
-      providers: (MessageShowcaseComponent component) {
+      providers: (IMessageShowcaseComponent component) {
         return <Provider<dynamic>>[
           ViewModelProvider<MessageShowcaseViewModel>(
             create: (_) => component.getMessageShowcaseViewModel(),

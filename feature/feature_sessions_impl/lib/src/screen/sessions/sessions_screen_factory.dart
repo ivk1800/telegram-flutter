@@ -21,11 +21,11 @@ class SessionsScreenFactory implements ISessionsScreenFactory {
 
   @override
   Widget create() {
-    return Scope<SessionsScreenComponent>(
+    return Scope<ISessionsScreenComponent>(
       create: () => JuggerSessionsScreenComponentBuilder()
           .dependencies(_dependencies)
           .build(),
-      providers: (SessionsScreenComponent component) {
+      providers: (ISessionsScreenComponent component) {
         return <Provider<dynamic>>[
           ViewModelProvider<SessionsViewModel>(
             create: (BuildContext _) => component.getSessionsViewModel(),
