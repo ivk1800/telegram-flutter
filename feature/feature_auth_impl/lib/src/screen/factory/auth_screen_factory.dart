@@ -1,12 +1,13 @@
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_auth_impl/src/di/di.dart';
 import 'package:feature_auth_impl/src/screen/auth/auth_page.dart';
-import 'package:feature_auth_impl/src/screen/auth/bloc/auth_bloc.dart';
+import 'package:feature_auth_impl/src/screen/auth/view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_extensions/provider_extensions.dart';
 
 class AuthScreenFactory implements IAuthScreenFactory {
   AuthScreenFactory({required AuthFeatureDependencies dependencies})
@@ -16,27 +17,21 @@ class AuthScreenFactory implements IAuthScreenFactory {
 
   @override
   Widget create() {
-    return Provider<IAuthScreenComponent>(
-      create: (_) => JuggerAuthScreenComponentBuilder()
+    return Scope<IAuthScreenComponent>(
+      create: () => JuggerAuthScreenComponentBuilder()
           .dependencies(_dependencies)
           .build(),
-      child: MultiProvider(
-        providers: <Provider<dynamic>>[
-          Provider<ILocalizationManager>(
-            create: (BuildContext context) =>
-                context.getComponent().getLocalizationManager(),
+      providers: (IAuthScreenComponent component) {
+        return <Provider<dynamic>>[
+          ViewModelProvider<AuthViewModel>(
+            create: (_) => component.getAuthViewModel(),
           ),
-        ],
-        child: BlocProvider<AuthBloc>(
-          create: (BuildContext context) =>
-              context.getComponent().getProfileBloc(),
-          child: const AuthPage(),
-        ),
-      ),
+          Provider<ILocalizationManager>(
+            create: (_) => component.getLocalizationManager(),
+          ),
+        ];
+      },
+      child: const AuthPage(),
     );
   }
-}
-
-extension _ContextExt on BuildContext {
-  IAuthScreenComponent getComponent() => read<IAuthScreenComponent>();
 }

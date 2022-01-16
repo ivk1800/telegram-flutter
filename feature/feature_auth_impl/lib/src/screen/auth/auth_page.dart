@@ -1,21 +1,50 @@
 import 'dart:async';
 
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_auth_impl/src/screen/auth/bloc/auth_action.dart';
-import 'package:feature_auth_impl/src/screen/auth/bloc/auth_bloc.dart';
-import 'package:feature_auth_impl/src/screen/auth/bloc/auth_event.dart';
-import 'package:feature_auth_impl/src/screen/auth/bloc/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:provider/provider.dart';
+
+import 'view_model/auth_action.dart';
+import 'view_model/auth_state.dart';
+import 'view_model/auth_view_model.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
 
   @override
   _AuthPageState createState() => _AuthPageState();
+}
+
+class _AuthContext {
+  _AuthContext({
+    required this.countryCodeController,
+    required this.phoneNumberFocusNode,
+    required this.phoneMaskFormatter,
+    required this.phoneNumberController,
+    required this.code1FocusNode,
+    required this.codeCell1Controller,
+    required this.codeCell2Controller,
+    required this.codeCell3Controller,
+    required this.codeCell4Controller,
+    required this.codeCell5Controller,
+  });
+
+  final TextEditingController countryCodeController;
+  final FocusNode phoneNumberFocusNode;
+  final MaskTextInputFormatter phoneMaskFormatter;
+
+  final TextEditingController phoneNumberController;
+  final FocusNode code1FocusNode;
+  final TextEditingController codeCell1Controller;
+  final TextEditingController codeCell2Controller;
+  final TextEditingController codeCell3Controller;
+  final TextEditingController codeCell4Controller;
+
+  final TextEditingController codeCell5Controller;
 }
 
 class _AuthPageState extends State<AuthPage> {
@@ -34,13 +63,24 @@ class _AuthPageState extends State<AuthPage> {
   final FocusNode _phoneNumberFocusNode = FocusNode();
   final FocusNode _code1FocusNode = FocusNode();
 
+  late final _AuthContext _authContext = _AuthContext(
+    code1FocusNode: _code1FocusNode,
+    codeCell1Controller: _codeCell1Controller,
+    codeCell2Controller: _codeCell2Controller,
+    codeCell3Controller: _codeCell3Controller,
+    codeCell4Controller: _codeCell4Controller,
+    codeCell5Controller: _codeCell5Controller,
+    countryCodeController: _countryCodeController,
+    phoneMaskFormatter: _phoneMaskFormatter,
+    phoneNumberController: _phoneNumberController,
+    phoneNumberFocusNode: _phoneNumberFocusNode,
+  );
+
   @override
   void initState() {
-    final AuthBloc bloc = context.read<AuthBloc>();
+    final AuthViewModel viewModel = context.read<AuthViewModel>();
     _countryCodeController.addListener(() {
-      bloc.add(CountryCodeChanged(
-        code: _countryCodeController.text,
-      ));
+      viewModel.onCountryCodeChanged(_countryCodeController.text);
     });
     _codeCell5Controller.addListener(() {
       final String code5 = _codeCell5Controller.text;
@@ -49,15 +89,11 @@ class _AuthPageState extends State<AuthPage> {
         final String code2 = _codeCell2Controller.text;
         final String code3 = _codeCell3Controller.text;
         final String code4 = _codeCell4Controller.text;
-        bloc.add(
-          SubmitCodeTap(
-            code: '$code1$code2$code3$code4$code5',
-          ),
-        );
+        viewModel.onSubmitCodeTap('$code1$code2$code3$code4$code5');
       }
     });
 
-    _actionsSubscription = bloc.actions.listen(_handleAction);
+    _actionsSubscription = viewModel.actions.listen(_handleAction);
     super.initState();
   }
 
@@ -78,68 +114,43 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthBloc, AuthState>(
-      listener: (BuildContext context, AuthState state) {},
-      builder: (BuildContext context, AuthState state) => Scaffold(
-        appBar: _AppBar(state: state),
-        floatingActionButton: state is PhoneNumberState
-            ? _SubmitPhone(
-                countryCodeController: _countryCodeController,
-                phoneMaskFormatter: _phoneMaskFormatter,
-              )
-            : null,
-        body: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          child: state is PhoneNumberState
-              ? _PhoneNumberStateWidget(
-                  countryCodeController: _countryCodeController,
-                  phoneMaskFormatter: _phoneMaskFormatter,
-                  phoneNumberController: _phoneNumberController,
-                  phoneNumberFocusNode: _phoneNumberFocusNode,
-                  state: state,
-                )
-              : CodeStateWidget(
-                  state: state as CodeState,
-                  code1FocusNode: _code1FocusNode,
-                  codeCell1Controller: _codeCell1Controller,
-                  codeCell2Controller: _codeCell2Controller,
-                  codeCell3Controller: _codeCell3Controller,
-                  codeCell4Controller: _codeCell4Controller,
-                  codeCell5Controller: _codeCell5Controller,
-                ),
-        ),
-      ).withBlockInteraction(block: state.blockInteraction),
+    final AuthViewModel viewModel = context.read<AuthViewModel>();
+    return StreamListener<AuthState>(
+      stream: viewModel.state,
+      builder: (_, AuthState state) {
+        return tg.BlockInteraction(
+          block: state.blockInteraction,
+          child: Provider<_AuthContext>(
+            create: (_) => _authContext,
+            child: _AuthScaffold(state: state),
+          ),
+        );
+      },
     );
   }
 
   void _handleAction(AuthAction event) {
-    switch (event.runtimeType) {
-      case SetCountryCode:
-        {
-          _countryCodeController.value = _countryCodeController.value.copyWith(
-            text: (event as SetCountryCode).code.toString(),
-          );
-          _phoneNumberFocusNode.requestFocus();
-          break;
-        }
-      case SetPhoneNumberMask:
-        {
-          _phoneMaskFormatter.updateMask(
-            mask: (event as SetPhoneNumberMask).mask,
-          );
-          break;
-        }
-      case ResetCode:
-        {
-          _codeCell1Controller.value = TextEditingValue.empty;
-          _codeCell2Controller.value = TextEditingValue.empty;
-          _codeCell3Controller.value = TextEditingValue.empty;
-          _codeCell4Controller.value = TextEditingValue.empty;
-          _codeCell5Controller.value = TextEditingValue.empty;
-          _code1FocusNode.requestFocus();
-          break;
-        }
-    }
+    event.when(
+      setCountryCode: (int code) {
+        _countryCodeController.value = _countryCodeController.value.copyWith(
+          text: code.toString(),
+        );
+        _phoneNumberFocusNode.requestFocus();
+      },
+      setPhoneNumberMask: (String mask) {
+        _phoneMaskFormatter.updateMask(
+          mask: mask,
+        );
+      },
+      resetCode: () {
+        _codeCell1Controller.value = TextEditingValue.empty;
+        _codeCell2Controller.value = TextEditingValue.empty;
+        _codeCell3Controller.value = TextEditingValue.empty;
+        _codeCell4Controller.value = TextEditingValue.empty;
+        _codeCell5Controller.value = TextEditingValue.empty;
+        _code1FocusNode.requestFocus();
+      },
+    );
   }
 }
 
@@ -177,24 +188,48 @@ class _CodeCell extends StatelessWidget {
   }
 }
 
+class _AuthScaffold extends StatelessWidget {
+  const _AuthScaffold({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final AuthState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final AuthState state = this.state;
+
+    return Scaffold(
+        appBar: _AppBar(state: state),
+        body: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: state.map(
+            phoneNumber: (PhoneNumberState value) =>
+                _PhoneNumberStateWidget(state: value),
+            code: (CodeState value) => CodeStateWidget(
+              state: value,
+            ),
+          ),
+        ),
+        floatingActionButton: state.maybeMap(
+          phoneNumber: (_) => const _SubmitPhone(),
+          orElse: () => null,
+        ));
+  }
+}
+
 class _PhoneNumberStateWidget extends StatelessWidget {
   const _PhoneNumberStateWidget({
     Key? key,
     required this.state,
-    required this.countryCodeController,
-    required this.phoneNumberFocusNode,
-    required this.phoneMaskFormatter,
-    required this.phoneNumberController,
   }) : super(key: key);
 
   final PhoneNumberState state;
-  final TextEditingController countryCodeController;
-  final FocusNode phoneNumberFocusNode;
-  final MaskTextInputFormatter phoneMaskFormatter;
-  final TextEditingController phoneNumberController;
 
   @override
   Widget build(BuildContext context) {
+    final _AuthContext authContext = context.read();
     final ILocalizationManager localizationManager = context.read();
     final Size calculatedCodeWidth = (TextPainter(
       text: const TextSpan(text: '+00000'),
@@ -209,9 +244,7 @@ class _PhoneNumberStateWidget extends StatelessWidget {
       children: <Widget>[
         MaterialButton(
           child: Text(state.countryTitle),
-          onPressed: () {
-            context.read<AuthBloc>().add(const ChangeCountryTap());
-          },
+          onPressed: () => context.read<AuthViewModel>().onChangeCountryTap(),
         ),
         const Divider(),
         Padding(
@@ -221,7 +254,7 @@ class _PhoneNumberStateWidget extends StatelessWidget {
               SizedBox(
                 width: calculatedCodeWidth.width,
                 child: TextField(
-                  controller: countryCodeController,
+                  controller: authContext.countryCodeController,
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     LengthLimitingTextInputFormatter(4),
@@ -234,12 +267,14 @@ class _PhoneNumberStateWidget extends StatelessWidget {
               ),
               Expanded(
                 child: TextField(
-                  focusNode: phoneNumberFocusNode,
-                  inputFormatters: <TextInputFormatter>[phoneMaskFormatter],
-                  controller: phoneNumberController,
+                  focusNode: authContext.phoneNumberFocusNode,
+                  inputFormatters: <TextInputFormatter>[
+                    authContext.phoneMaskFormatter
+                  ],
+                  controller: authContext.phoneNumberController,
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
-                    hintText: phoneMaskFormatter.getMask(),
+                    hintText: authContext.phoneMaskFormatter.getMask(),
                   ),
                 ),
               ),
@@ -259,24 +294,13 @@ class CodeStateWidget extends StatelessWidget {
   const CodeStateWidget({
     Key? key,
     required this.state,
-    required this.code1FocusNode,
-    required this.codeCell1Controller,
-    required this.codeCell2Controller,
-    required this.codeCell3Controller,
-    required this.codeCell4Controller,
-    required this.codeCell5Controller,
   }) : super(key: key);
 
   final CodeState state;
-  final FocusNode code1FocusNode;
-  final TextEditingController codeCell1Controller;
-  final TextEditingController codeCell2Controller;
-  final TextEditingController codeCell3Controller;
-  final TextEditingController codeCell4Controller;
-  final TextEditingController codeCell5Controller;
 
   @override
   Widget build(BuildContext context) {
+    final _AuthContext authContext = context.read();
     final ILocalizationManager localizationManager = context.read();
     final ThemeData theme = Theme.of(context);
     return Column(
@@ -311,32 +335,32 @@ class CodeStateWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _CodeCell(
-              focusNode: code1FocusNode,
-              controller: codeCell1Controller,
+              focusNode: authContext.code1FocusNode,
+              controller: authContext.codeCell1Controller,
             ),
             const SizedBox(
               width: 8,
             ),
             _CodeCell(
-              controller: codeCell2Controller,
+              controller: authContext.codeCell2Controller,
             ),
             const SizedBox(
               width: 8,
             ),
             _CodeCell(
-              controller: codeCell3Controller,
+              controller: authContext.codeCell3Controller,
             ),
             const SizedBox(
               width: 8,
             ),
             _CodeCell(
-              controller: codeCell4Controller,
+              controller: authContext.codeCell4Controller,
             ),
             const SizedBox(
               width: 8,
             ),
             _CodeCell(
-              controller: codeCell5Controller,
+              controller: authContext.codeCell5Controller,
               focusNext: false,
             ),
           ],
@@ -365,23 +389,16 @@ class CodeStateWidget extends StatelessWidget {
 class _SubmitPhone extends StatelessWidget {
   const _SubmitPhone({
     Key? key,
-    required this.countryCodeController,
-    required this.phoneMaskFormatter,
   }) : super(key: key);
-
-  final TextEditingController countryCodeController;
-  final MaskTextInputFormatter phoneMaskFormatter;
 
   @override
   Widget build(BuildContext context) {
+    final _AuthContext authContext = context.read();
     return FloatingActionButton(
       child: const Icon(Icons.arrow_forward_outlined),
       onPressed: () {
-        context.read<AuthBloc>().add(
-              SubmitPhoneTap(
-                number:
-                    '${countryCodeController.text}${phoneMaskFormatter.getUnmaskedText()}',
-              ),
+        context.read<AuthViewModel>().onSubmitPhoneTap(
+              '${authContext.countryCodeController.text}${authContext.phoneMaskFormatter.getUnmaskedText()}',
             );
       },
     );
@@ -405,10 +422,10 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: const Icon(
                 Icons.arrow_back,
               ),
-              onPressed: () {
-                context.read<AuthBloc>().add(const StopVerificationTap());
-              },
+              onPressed: () =>
+                  context.read<AuthViewModel>().onStopVerificationTap(),
             ),
+      // todo: override ModelRoute in splitview
       automaticallyImplyLeading: false,
       title: Text(state.title),
     );

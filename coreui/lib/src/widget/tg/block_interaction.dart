@@ -50,12 +50,3 @@ class BlockInteraction extends StatelessWidget {
     );
   }
 }
-
-extension BlockInteractionExt on Widget {
-  Widget withBlockInteraction({required bool block}) {
-    return BlockInteraction(
-      block: block,
-      child: this,
-    );
-  }
-}

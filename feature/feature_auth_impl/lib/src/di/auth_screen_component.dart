@@ -1,25 +1,25 @@
 import 'package:feature_auth_impl/feature_auth_impl.dart';
-import 'package:feature_auth_impl/src/screen/auth/bloc/auth_bloc.dart';
+import 'package:feature_auth_impl/src/screen/auth/view_model/auth_view_model.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 @j.Component(
-  modules: <Type>[ProfileScreenModule],
+  modules: <Type>[AuthScreenModule],
 )
 abstract class IAuthScreenComponent {
-  AuthBloc getProfileBloc();
+  AuthViewModel getAuthViewModel();
 
   ILocalizationManager getLocalizationManager();
 }
 
 @j.module
-abstract class ProfileScreenModule {
+abstract class AuthScreenModule {
   @j.provides
   @j.singleton
-  static AuthBloc provideProfileBloc(
+  static AuthViewModel provideAuthViewModel(
     AuthFeatureDependencies dependencies,
   ) =>
-      AuthBloc(
+      AuthViewModel(
         localizationManager: dependencies.localizationManager,
         router: dependencies.router,
         authenticationManager: dependencies.authenticationManager,
