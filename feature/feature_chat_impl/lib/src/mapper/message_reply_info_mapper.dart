@@ -25,11 +25,14 @@ class MessageReplyInfoMapper {
       return null;
     }
 
-    // todo message may be not found
-    final td.Message replyMessage = await _messageRepository.getMessage(
+    final td.Message? replyMessage = await _messageRepository.getMessage(
       chatId: message.replyInChatId,
       messageId: message.replyToMessageId,
     );
+
+    if (replyMessage == null) {
+      return null;
+    }
 
     final MessagePreviewData preview =
         await _messagePreviewResolver.resolve(replyMessage);

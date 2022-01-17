@@ -32,11 +32,22 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
   }
 
   @override
-  Future<td.Message> getMessage({required int chatId, required int messageId}) {
-    return _functionExecutor.send<td.Message>(td.GetMessage(
-      chatId: chatId,
-      messageId: messageId,
-    ));
+  Future<td.Message?> getMessage({
+    required int chatId,
+    required int messageId,
+  }) {
+    return _functionExecutor
+        .send<td.Message>(td.GetMessage(
+          chatId: chatId,
+          messageId: messageId,
+        ))
+        .then((td.Message value) => Future<td.Message?>.value(value))
+        .catchError(
+          // todo log error
+          (Object? error) => null,
+          // todo handle only 404 error
+          test: (Object error) => error is TdError,
+        );
   }
 
   Future<List<td.Message>> _getMessages({

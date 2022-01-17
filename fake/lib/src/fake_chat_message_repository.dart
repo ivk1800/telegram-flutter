@@ -24,7 +24,7 @@ class FakeChatMessageRepository implements IChatMessageRepository {
   }
 
   @override
-  Future<td.Message> getMessage({
+  Future<td.Message?> getMessage({
     required int chatId,
     required int messageId,
   }) async {
