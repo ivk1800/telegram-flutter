@@ -2,6 +2,7 @@ import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/di/component/app_component.dart';
 import 'package:app/src/di/component/feature_component.jugger.dart';
 import 'package:app/src/feature/feature.dart';
+import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/app_controller_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
@@ -25,6 +26,16 @@ abstract class AppModule {
     return FeatureFactory(
       featureComponent:
           JuggerFeatureComponentBuilder().appComponent(appComponent).build(),
+    );
+  }
+
+  @j.singleton
+  @j.provides
+  static FeatureProvider provideFeatureProvider(
+    FeatureFactory featureFactory,
+  ) {
+    return FeatureProvider(
+      featureFactory: featureFactory,
     );
   }
 
@@ -161,9 +172,7 @@ abstract class AppModule {
 
   @j.singleton
   @j.provides
-  static ISplitNavigationDelegate provideSplitNavigationDelegate(
-    FeatureFactory featureFactory,
-  ) =>
+  static ISplitNavigationDelegate provideSplitNavigationDelegate() =>
       SplitNavigationDelegateImpl(
         TgApp.splitViewNavigatorKey,
       );
@@ -208,11 +217,13 @@ abstract class AppModule {
   @j.singleton
   @j.provides
   static IAppControllerRouter provideAppControllerRouter(
-    FeatureFactory featureFactory,
+    FeatureProvider featureProvider,
   ) =>
       AppControllerRouterImpl(
-        TgApp.splitViewNavigatorKey,
-        featureFactory,
+        navigationKey: TgApp.splitViewNavigatorKey,
+        authScreenFactory: featureProvider.authFeatureApi.authScreenFactory,
+        mainScreenFactory:
+            featureProvider.mainScreenFeatureApi.mainScreenFactory,
       );
 
 // endregion component

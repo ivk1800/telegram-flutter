@@ -1,5 +1,5 @@
 import 'package:app/src/app/tg_app.dart';
-import 'package:app/src/feature/feature.dart';
+import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
@@ -134,7 +134,7 @@ abstract class FeatureModule {
     IChatMessageRepository chatMessageRepository,
     IConnectionStateProvider connectionStateProvider,
     IChatRepository chatRepository,
-    FeatureFactory featureFactory,
+    FeatureProvider featureProvider,
     DateFormatter dateFormatter,
     ISuperGroupUpdatesProvider superGroupUpdatesProvider,
     IBasicGroupUpdatesProvider basicGroupUpdatesProvider,
@@ -154,8 +154,7 @@ abstract class FeatureModule {
         superGroupRepository: superGroupRepository,
         functionExecutor: functionExecutor,
         dateFormatter: dateFormatter,
-        // todo move to app component global scope
-        fileDownloader: featureFactory.createFileFeatureApi().fileDownloader,
+        fileDownloader: featureProvider.fileFeatureApi.fileDownloader,
         chatHeaderInfoFeatureApi: chatHeaderInfoFeatureApi,
         chatRepository: chatRepository,
         messagePreviewResolver: MessagePreviewResolver(
@@ -255,7 +254,7 @@ abstract class FeatureModule {
   @j.provides
   static WallpapersFeatureDependencies provideWallpapersFeatureDependencies(
     IBackgroundRepository backgroundRepository,
-    FeatureFactory featureFactory,
+    FeatureProvider featureProvider,
     ILocalizationManager localizationManager,
     IWallpapersFeatureRouter router,
     IConnectionStateProvider connectionStateProvider,
@@ -265,8 +264,7 @@ abstract class FeatureModule {
         router: router,
         connectionStateProvider: connectionStateProvider,
         backgroundRepository: backgroundRepository,
-        // todo move to app component global scope
-        fileDownloader: featureFactory.createFileFeatureApi().fileDownloader,
+        fileDownloader: featureProvider.fileFeatureApi.fileDownloader,
       );
 
   @j.provides
@@ -351,9 +349,7 @@ abstract class FeatureModule {
     ILocalizationManager localizationManager,
     IAuthFeatureRouter router,
     IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
-    // todo maybe provide countryRepository from app component?
-    // todo with singleton scope?
-    FeatureFactory featureFactory,
+    ICountryFeatureApi countryFeatureApi,
     IAuthenticationManager authenticationManager,
   ) =>
       AuthFeatureDependencies(
@@ -361,8 +357,7 @@ abstract class FeatureModule {
         localizationManager: localizationManager,
         router: router,
         authenticationStateUpdatesProvider: authenticationStateUpdatesProvider,
-        countryRepository:
-            featureFactory.createCountryFeatureApi().countryRepository,
+        countryRepository: countryFeatureApi.countryRepository,
         authenticationManager: authenticationManager,
       );
 
@@ -595,12 +590,12 @@ abstract class FeatureModule {
   @j.provides
   @j.singleton
   static CommonScreenRouterImpl provideCommonScreenRouter(
-    FeatureFactory featureFactory,
+    FeatureProvider featureProvider,
     ISplitNavigationDelegate navigationDelegate,
   ) =>
       CommonScreenRouterImpl(
         dialogNavigatorKey: TgApp.navigatorKey,
-        featureFactory: featureFactory,
+        featureProvider: featureProvider,
         navigationDelegate: navigationDelegate,
       );
 

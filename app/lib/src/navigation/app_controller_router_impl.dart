@@ -1,18 +1,21 @@
-import 'package:app/src/feature/feature.dart';
 import 'package:app_controller/app_controller_component.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
+import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:flutter/material.dart';
 import 'package:split_view/split_view.dart';
 
 class AppControllerRouterImpl implements IAppControllerRouter {
-  AppControllerRouterImpl(
-    GlobalKey<SplitViewState> navigationKey,
-    FeatureFactory featureFactory,
-  )   : _navigationKey = navigationKey,
-        _featureFactory = featureFactory;
+  AppControllerRouterImpl({
+    required GlobalKey<SplitViewState> navigationKey,
+    required IMainScreenFactory mainScreenFactory,
+    required IAuthScreenFactory authScreenFactory,
+  })  : _navigationKey = navigationKey,
+        _authScreenFactory = authScreenFactory,
+        _mainScreenFactory = mainScreenFactory;
 
   final GlobalKey<SplitViewState> _navigationKey;
-  final FeatureFactory _featureFactory;
+  final IMainScreenFactory _mainScreenFactory;
+  final IAuthScreenFactory _authScreenFactory;
 
   @override
   void toRoot() {
@@ -33,17 +36,13 @@ class AppControllerRouterImpl implements IAppControllerRouter {
           ),
         ),
       )
-      ..setLeftRootPage(
-        _featureFactory.createMainScreenFeature().mainScreenFactory.create(),
-      );
+      ..setLeftRootPage(_mainScreenFactory.create());
   }
 
   @override
   void toLogin() {
-    final IAuthScreenFactory factory =
-        _featureFactory.createAuthFeatureApi().authScreenFactory;
     _push(
-      factory.create(),
+      _authScreenFactory.create(),
       ContainerType.top,
     );
   }

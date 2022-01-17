@@ -1,6 +1,6 @@
 import 'package:app/src/di/module/app_module.dart';
 import 'package:app/src/di/module/td_module.dart';
-import 'package:app/src/feature/feature.dart';
+import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app_controller/app_controller_component.dart';
@@ -77,7 +77,7 @@ abstract class IAppComponent {
 
   IAppLifecycleStateProvider getIAppLifecycleStateProvider();
 
-  FeatureFactory getFeatureFactory();
+  FeatureProvider getFeatureProvider();
 
   ILocalizationManager getLocalizationManager();
 
