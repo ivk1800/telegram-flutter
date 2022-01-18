@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_extensions/provider_extensions.dart';
 
 class ChatScreenFactory implements IChatScreenFactory {
   ChatScreenFactory({required this.dependencies});
@@ -22,49 +23,37 @@ class ChatScreenFactory implements IChatScreenFactory {
 
   @override
   Widget create(int chatId) {
-    return Provider<IChatScreenComponent>(
-      create: (_) => JuggerChatScreenComponentBuilder()
+    return Scope<IChatScreenComponent>(
+      create: () => JuggerChatScreenComponentBuilder()
           .dependencies(dependencies)
           .chatArgs(ChatArgs(chatId))
           .build(),
-      child: MultiProvider(
-        providers: <Provider<dynamic>>[
+      providers: (IChatScreenComponent component) {
+        return <Provider<dynamic>>[
           Provider<IChatActionPanelFactory>(
-            create: (BuildContext context) =>
-                context.getComponent().getChatActionPanelFactory(),
+            create: (_) => component.getChatActionPanelFactory(),
           ),
           Provider<MessageFactory>(
-            create: (BuildContext context) =>
-                context.getComponent().getMessageFactory(),
+            create: (_) => component.getMessageFactory(),
           ),
           Provider<ChatMessageFactory>(
-            create: (BuildContext context) =>
-                context.getComponent().getChatMessageFactory(),
+            create: (_) => component.getChatMessageFactory(),
           ),
           Provider<ILocalizationManager>(
-            create: (BuildContext context) =>
-                context.getComponent().getLocalizationManager(),
+            create: (_) => component.getLocalizationManager(),
           ),
           Provider<IChatHeaderInfoFactory>(
-            create: (BuildContext context) =>
-                context.getComponent().getChatHeaderInfoFactory(),
+            create: (_) => component.getChatHeaderInfoFactory(),
           ),
           ViewModelProvider<ChatViewModel>(
-            create: (BuildContext context) =>
-                context.getComponent().getChatViewModel(),
+            create: (_) => component.getChatViewModel(),
           ),
           ViewModelProvider<ChatActionsPanelViewModel>(
-            create: (BuildContext context) =>
-                context.getComponent().getChatActionsPanelViewModel(),
+            create: (_) => component.getChatActionsPanelViewModel(),
           ),
-        ],
-        child: const ChatPage(),
-      ),
+        ];
+      },
+      child: const ChatPage(),
     );
   }
-}
-
-extension _ContextExt on BuildContext {
-  IChatScreenComponent getComponent() =>
-      Provider.of<IChatScreenComponent>(this, listen: false);
 }
