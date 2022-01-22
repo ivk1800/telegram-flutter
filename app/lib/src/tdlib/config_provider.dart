@@ -33,6 +33,8 @@ class TdConfigProvider implements ITdConfigProvider {
       return MapEntry<String, String>(key, value);
     }).toList();
 
+    assert(entries.isNotEmpty, 'config.txt is missing or not provided values!');
+
     return Map<String, String>.fromEntries(entries);
   }
 }

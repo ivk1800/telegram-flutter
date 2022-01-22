@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.14)
 project(app LANGUAGES CXX)
 
 set(BINARY_NAME "app")
@@ -65,6 +65,7 @@ endif()
 set(INSTALL_BUNDLE_DATA_DIR "${CMAKE_INSTALL_PREFIX}/data")
 set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}")
 
+# begin td
 set(dll_path "${CMAKE_CURRENT_SOURCE_DIR}/../../tdlib/windows")
 set(libcrypto "libcrypto-1_1.dll")
 set(libcrypto_path "${dll_path}/${libcrypto}")
@@ -85,6 +86,7 @@ set(zlib "zlib1.dll")
 set(zlib_path "${dll_path}/${zlib}")
 install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/${zlib}\")" COMPONENT Runtime)
 install(FILES "${zlib_path}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
+# end td
 
 install(TARGETS ${BINARY_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}"
   COMPONENT Runtime)
