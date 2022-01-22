@@ -1,0 +1,13 @@
+name: tools
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+
+dev_dependencies:
+  args: ^2.3.0
+  console: ^4.1.0
+  pubspec_parse: ^1.2.0
+  rxdart: ^0.27.3
+  tg_lint_rules:
+    path: ../../tg_lint_rules
