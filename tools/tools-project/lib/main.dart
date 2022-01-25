@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:args/args.dart';
 import 'package:console/console.dart';
+import 'package:tools/strings_provider_generator.dart';
 import 'command/pub_get_command.dart';
 import 'dart_project.dart';
 import 'utils.dart';
@@ -14,6 +15,7 @@ Future<void> main(List<String> arguments) async {
     ..addCommand('gen')
     ..addCommand('analyze')
     ..addCommand('validate_dependencies')
+    ..addCommand('generate_stings_provider')
     ..addCommand('test');
 
   final ArgResults results = parser.parse(arguments);
@@ -55,5 +57,7 @@ Future<void> main(List<String> arguments) async {
       withOutputs: withOutputs,
       dartProjects: await getDartProjects(workDirectory),
     );
+  } else if (command == 'generate_stings_provider') {
+    generateStringsProvider(workDirectory);
   }
 }

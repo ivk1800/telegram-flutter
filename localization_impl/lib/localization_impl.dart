@@ -4,12 +4,14 @@ import 'dart:async' show Future;
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:localization_api/localization_api.dart';
+import 'package:localization_impl/src/tg_strings_provider.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:xml/xml.dart';
 
 class LocalizationManager implements ILocalizationManager {
   late Map<String, String> _defaultStrings;
   late Map<String, String> _currentStrings;
+  late IStringsProvider _stringsProvider;
 
   Future<void> init(String defaultLanguage, String currentLanguage) async {
     _defaultStrings = await _readStrings(defaultLanguage);
@@ -19,6 +21,7 @@ class LocalizationManager implements ILocalizationManager {
     } else {
       _currentStrings = await _readStrings(defaultLanguage);
     }
+    _stringsProvider = TgStringsProvider(getString);
   }
 
   @override
@@ -65,4 +68,7 @@ class LocalizationManager implements ILocalizationManager {
 
     return strings;
   }
+
+  @override
+  IStringsProvider get stringsProvider => _stringsProvider;
 }
