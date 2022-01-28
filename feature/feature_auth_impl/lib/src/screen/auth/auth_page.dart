@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_auth_impl/src/screen/auth/auth_screen_scope.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:localization_api/localization_api.dart';
@@ -78,7 +79,7 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   void initState() {
-    final AuthViewModel viewModel = context.read<AuthViewModel>();
+    final AuthViewModel viewModel = AuthScreenScope.getAuthViewModel(context);
     _countryCodeController.addListener(() {
       viewModel.onCountryCodeChanged(_countryCodeController.text);
     });
@@ -114,7 +115,7 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthViewModel viewModel = context.read<AuthViewModel>();
+    final AuthViewModel viewModel = AuthScreenScope.getAuthViewModel(context);
     return StreamListener<AuthState>(
       stream: viewModel.state,
       builder: (_, AuthState state) {
@@ -230,7 +231,8 @@ class _PhoneNumberStateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _AuthContext authContext = context.read();
-    final ILocalizationManager localizationManager = context.read();
+    final IStringsProvider stringsProvider =
+        AuthScreenScope.getStringsProvider(context);
     final Size calculatedCodeWidth = (TextPainter(
       text: const TextSpan(text: '+00000'),
       maxLines: 1,
@@ -244,7 +246,8 @@ class _PhoneNumberStateWidget extends StatelessWidget {
       children: <Widget>[
         MaterialButton(
           child: Text(state.countryTitle),
-          onPressed: () => context.read<AuthViewModel>().onChangeCountryTap(),
+          onPressed: () =>
+              AuthScreenScope.getAuthViewModel(context).onChangeCountryTap(),
         ),
         const Divider(),
         Padding(
@@ -283,7 +286,7 @@ class _PhoneNumberStateWidget extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
-          child: Text(localizationManager.getString('StartText')),
+          child: Text(stringsProvider.startText),
         ),
       ],
     );
@@ -301,7 +304,8 @@ class CodeStateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _AuthContext authContext = context.read();
-    final ILocalizationManager localizationManager = context.read();
+    final IStringsProvider stringsProvider =
+        AuthScreenScope.getStringsProvider(context);
     final ThemeData theme = Theme.of(context);
     return Column(
       key: const ValueKey<dynamic>('code'),
@@ -316,7 +320,7 @@ class CodeStateWidget extends StatelessWidget {
           height: 8,
         ),
         Text(
-          localizationManager.getString('SentAppCodeTitle'),
+          stringsProvider.sentAppCodeTitle,
           style: theme.textTheme.bodyText1!.copyWith(
             fontSize: 17,
           ),
@@ -327,7 +331,7 @@ class CodeStateWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            localizationManager.getString('SentAppCode'),
+            stringsProvider.sentAppCode,
             textAlign: TextAlign.center,
           ),
         ),
@@ -377,7 +381,7 @@ class CodeStateWidget extends StatelessWidget {
             );
           },
           child: Text(
-            localizationManager.getString('DidNotGetTheCodeSms'),
+            stringsProvider.didNotGetTheCodeSms,
             style: TextStyle(color: theme.colorScheme.secondary),
           ),
         ),
@@ -397,9 +401,9 @@ class _SubmitPhone extends StatelessWidget {
     return FloatingActionButton(
       child: const Icon(Icons.arrow_forward_outlined),
       onPressed: () {
-        context.read<AuthViewModel>().onSubmitPhoneTap(
-              '${authContext.countryCodeController.text}${authContext.phoneMaskFormatter.getUnmaskedText()}',
-            );
+        AuthScreenScope.getAuthViewModel(context).onSubmitPhoneTap(
+          '${authContext.countryCodeController.text}${authContext.phoneMaskFormatter.getUnmaskedText()}',
+        );
       },
     );
   }
@@ -422,8 +426,8 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: const Icon(
                 Icons.arrow_back,
               ),
-              onPressed: () =>
-                  context.read<AuthViewModel>().onStopVerificationTap(),
+              onPressed: () => AuthScreenScope.getAuthViewModel(context)
+                  .onStopVerificationTap(),
             ),
       // todo: override ModelRoute in splitview
       automaticallyImplyLeading: false,

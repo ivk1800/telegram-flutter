@@ -5,6 +5,7 @@ typedef CreateComponent<T> = T Function();
 typedef CreateProviders<T> = List<Provider<dynamic>> Function(T value);
 
 class Scope<T> extends StatelessWidget {
+  @Deprecated('use own scope')
   const Scope({
     required this.create,
     required this.providers,

@@ -26,7 +26,7 @@ class AuthFeature implements IAuthFeatureApi {
 class AuthFeatureDependencies {
   AuthFeatureDependencies({
     required this.connectionStateProvider,
-    required this.localizationManager,
+    required this.stringsProvider,
     required this.router,
     required this.authenticationStateUpdatesProvider,
     required this.countryRepository,
@@ -34,7 +34,7 @@ class AuthFeatureDependencies {
   });
 
   final IConnectionStateProvider connectionStateProvider;
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
   final IAuthFeatureRouter router;
   final IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider;
   final ICountryRepository countryRepository;

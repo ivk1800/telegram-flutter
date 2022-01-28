@@ -81,6 +81,8 @@ abstract class IAppComponent {
 
   ILocalizationManager getLocalizationManager();
 
+  IStringsProvider getStringsProvider();
+
   ITdFunctionExecutor getTdFunctionExecutor();
 }
 

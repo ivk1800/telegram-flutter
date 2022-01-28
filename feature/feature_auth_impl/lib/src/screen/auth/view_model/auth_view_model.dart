@@ -13,16 +13,16 @@ import 'auth_state.dart';
 
 class AuthViewModel extends BaseViewModel {
   AuthViewModel({
-    required ILocalizationManager localizationManager,
+    required IStringsProvider stringsProvider,
     required IAuthFeatureRouter router,
     required ICountryRepository countryRepository,
     required IAuthenticationManager authenticationManager,
-  })  : _localizationManager = localizationManager,
+  })  : _stringsProvider = stringsProvider,
         _countryRepository = countryRepository,
         _router = router,
         _authenticationManager = authenticationManager;
 
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
   final IAuthFeatureRouter _router;
   final ICountryRepository _countryRepository;
   final IAuthenticationManager _authenticationManager;
@@ -30,8 +30,8 @@ class AuthViewModel extends BaseViewModel {
       PublishSubject<AuthAction>();
   late final BehaviorSubject<AuthState> _stateSubject =
       BehaviorSubject<AuthState>.seeded(AuthState.phoneNumber(
-    title: _localizationManager.getString('YourPhone'),
-    countryTitle: _localizationManager.getString('ChooseCountry'),
+    title: _stringsProvider.yourPhone,
+    countryTitle: _stringsProvider.chooseCountry,
     blockInteraction: false,
   ));
 
@@ -67,7 +67,7 @@ class AuthViewModel extends BaseViewModel {
 
   String _getCountryTitle() {
     if (_country == null) {
-      return _getString('ChooseCountry');
+      return _stringsProvider.chooseCountry;
     }
     return _country!.name;
   }
@@ -77,8 +77,6 @@ class AuthViewModel extends BaseViewModel {
   PhoneNumberState _getPhoneState() => _stateSubject.value as PhoneNumberState;
 
   CodeState _getCodeState() => _stateSubject.value as CodeState;
-
-  String _getString(String key) => _localizationManager.getString(key);
 
   void _handleSubmitCodeTap(String code) {
     _stateSubject.add(
@@ -99,10 +97,10 @@ class AuthViewModel extends BaseViewModel {
         );
         _actionSubject.add(const AuthAction.resetCode());
         _router.toDialog(
-          title: _getString('AppName'),
+          title: _stringsProvider.appName,
           body: Body.text(text: _tryConvertToHumanError(e)),
           actions: <Action>[
-            Action(text: _getString('OK')),
+            Action(text: _stringsProvider.oK),
           ],
         );
       },
@@ -134,10 +132,10 @@ class AuthViewModel extends BaseViewModel {
           ),
         );
         _router.toDialog(
-          title: _getString('AppName'),
+          title: _stringsProvider.appName,
           body: Body.text(text: _tryConvertToHumanError(e)),
           actions: <Action>[
-            Action(text: _getString('OK')),
+            Action(text: _stringsProvider.oK),
           ],
         );
       },
@@ -177,7 +175,7 @@ class AuthViewModel extends BaseViewModel {
       _country = null;
       _stateSubject.add(
         _getPhoneState().copyWith(
-          countryTitle: _getString('WrongCountry'),
+          countryTitle: _stringsProvider.wrongCountry,
         ),
       );
     } else {
@@ -207,16 +205,16 @@ class AuthViewModel extends BaseViewModel {
 
   void _handleStopVerificationTap() {
     _router.toDialog(
-      title: _getString('AppName'),
-      body: Body.text(text: _getString('StopVerification')),
+      title: _stringsProvider.appName,
+      body: Body.text(text: _stringsProvider.stopVerification),
       actions: <Action>[
         Action(
-          text: _getString('Stop'),
+          text: _stringsProvider.stop,
           callback: (IDismissible dismissible) {
             _phoneNumber = null;
             _stateSubject.add(
               AuthState.phoneNumber(
-                title: _getString('YourPhone'),
+                title: _stringsProvider.yourPhone,
                 countryTitle: _getCountryTitle(),
                 blockInteraction: false,
               ),
@@ -225,7 +223,7 @@ class AuthViewModel extends BaseViewModel {
           },
         ),
         Action(
-          text: _getString('Continue'),
+          text: _stringsProvider.continue$,
           callback: (IDismissible dismissible) {
             dismissible.dismiss();
           },

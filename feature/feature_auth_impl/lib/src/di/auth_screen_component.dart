@@ -9,7 +9,7 @@ import 'package:localization_api/localization_api.dart';
 abstract class IAuthScreenComponent {
   AuthViewModel getAuthViewModel();
 
-  ILocalizationManager getLocalizationManager();
+  IStringsProvider getStringsProvider();
 }
 
 @j.module
@@ -20,7 +20,7 @@ abstract class AuthScreenModule {
     AuthFeatureDependencies dependencies,
   ) =>
       AuthViewModel(
-        localizationManager: dependencies.localizationManager,
+        stringsProvider: dependencies.stringsProvider,
         router: dependencies.router,
         authenticationManager: dependencies.authenticationManager,
         countryRepository: dependencies.countryRepository,
@@ -28,10 +28,10 @@ abstract class AuthScreenModule {
 
   @j.provides
   @j.singleton
-  static ILocalizationManager provideLocalizationManager(
+  static IStringsProvider provideStringsProvider(
     AuthFeatureDependencies dependencies,
   ) =>
-      dependencies.localizationManager;
+      dependencies.stringsProvider;
 }
 
 @j.componentBuilder

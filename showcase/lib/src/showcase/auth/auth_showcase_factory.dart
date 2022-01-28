@@ -50,7 +50,7 @@ class AuthShowcaseFactory {
           splitView: splitView,
           dialogNavigatorKey: navigatorKey,
         ),
-        localizationManager: localizationManager,
+        stringsProvider: localizationManager.stringsProvider,
         countryRepository: countryFeature.countryRepository,
       ),
     );

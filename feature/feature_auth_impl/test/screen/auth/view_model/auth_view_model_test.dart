@@ -13,7 +13,7 @@ import 'auth_view_model_test.mocks.dart';
 @GenerateMocks(
   <Type>[],
   customMocks: <MockSpec<dynamic>>[
-    MockSpec<ILocalizationManager>(returnNullOnMissingStub: true),
+    MockSpec<IStringsProvider>(returnNullOnMissingStub: true),
     MockSpec<IAuthFeatureRouter>(returnNullOnMissingStub: true),
     MockSpec<ICountryRepository>(returnNullOnMissingStub: true),
     MockSpec<IAuthenticationManager>(returnNullOnMissingStub: true),
@@ -21,19 +21,19 @@ import 'auth_view_model_test.mocks.dart';
 )
 void main() {
   AuthViewModel viewModel;
-  MockILocalizationManager mockLocalizationManager;
+  MockIStringsProvider mockStringsProvider;
   MockIAuthFeatureRouter mockAuthFeatureRouter;
   MockICountryRepository mockCountryRepository;
   MockIAuthenticationManager mockAuthenticationManager;
 
   setUp(() {
-    mockLocalizationManager = MockILocalizationManager();
+    mockStringsProvider = MockIStringsProvider();
     mockAuthFeatureRouter = MockIAuthFeatureRouter();
     mockCountryRepository = MockICountryRepository();
     mockAuthenticationManager = MockIAuthenticationManager();
 
     viewModel = AuthViewModel(
-      localizationManager: mockLocalizationManager,
+      stringsProvider: mockStringsProvider,
       router: mockAuthFeatureRouter,
       countryRepository: mockCountryRepository,
       authenticationManager: mockAuthenticationManager,

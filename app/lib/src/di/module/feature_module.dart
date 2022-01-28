@@ -346,7 +346,7 @@ abstract class FeatureModule {
   @j.provides
   static AuthFeatureDependencies provideAuthFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     IAuthFeatureRouter router,
     IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
     ICountryFeatureApi countryFeatureApi,
@@ -354,7 +354,7 @@ abstract class FeatureModule {
   ) =>
       AuthFeatureDependencies(
         connectionStateProvider: connectionStateProvider,
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
         router: router,
         authenticationStateUpdatesProvider: authenticationStateUpdatesProvider,
         countryRepository: countryFeatureApi.countryRepository,
