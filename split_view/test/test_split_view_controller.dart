@@ -19,7 +19,10 @@ class TestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Text('page $id'));
+    return Scaffold(
+      appBar: AppBar(),
+      body: Text('page $id'),
+    );
   }
 }
 
@@ -66,19 +69,37 @@ class TestSplitViewController {
   }
 
   void expectCompactNavigator() {
-    expect(_findNavigatorByLocation(NavigatorLocation.compact), isNotNull);
+    expectDisplayedNavigators(<NavigatorLocation>[NavigatorLocation.compact]);
   }
 
   void expectOnlyLeftNavigator() {
-    expect(_findNavigatorByLocation(NavigatorLocation.left), isNotNull);
+    expectDisplayedNavigators(<NavigatorLocation>[NavigatorLocation.left]);
   }
 
   void expectOnlyRightNavigator() {
-    expect(_findNavigatorByLocation(NavigatorLocation.right), isNotNull);
+    expectDisplayedNavigators(<NavigatorLocation>[NavigatorLocation.right]);
   }
 
   void expectOnlyTopNavigator() {
-    expect(_findNavigatorByLocation(NavigatorLocation.top), isNotNull);
+    expectDisplayedNavigators(<NavigatorLocation>[NavigatorLocation.top]);
+  }
+
+  void expectDisplayedNavigators(List<NavigatorLocation> navigators) {
+    final List<NavigatorLocation> existNavigators = <NavigatorLocation>[
+      if (_findNavigatorByLocation(NavigatorLocation.left) != null)
+        NavigatorLocation.left,
+      if (_findNavigatorByLocation(NavigatorLocation.right) != null)
+        NavigatorLocation.right,
+      if (_findNavigatorByLocation(NavigatorLocation.top) != null)
+        NavigatorLocation.top,
+      if (_findNavigatorByLocation(NavigatorLocation.compact) != null)
+        NavigatorLocation.compact,
+    ];
+
+    for (final NavigatorLocation value in navigators) {
+      existNavigators.remove(value);
+    }
+    expect(existNavigators.length, 0);
   }
 
   void expectTotalNavigatorsCount(int count) {
@@ -132,6 +153,40 @@ class TestSplitViewController {
     );
   }
 
+  void expectBackButtonDisplayedAtTopPage({
+    required bool displayed,
+    required NavigatorLocation navigatorLocation,
+  }) {
+    final List<Widget> pages = tester
+        .widgetList(_pagesFinder(navigatorLocation: navigatorLocation))
+        .toList();
+    expect(pages.length, greaterThanOrEqualTo(1));
+
+    final Finder iconButtonFinder = find.descendant(
+        of: find.byWidget(pages.last), matching: find.byType(IconButton));
+    expect(
+      iconButtonFinder,
+      displayed ? findsOneWidget : findsNothing,
+    );
+  }
+
+  Future<void> tapBackButtonAtTopPage({
+    required NavigatorLocation navigatorLocation,
+  }) async {
+    final List<Widget> pages = tester
+        .widgetList(_pagesFinder(navigatorLocation: navigatorLocation))
+        .toList();
+    expect(pages.length, greaterThanOrEqualTo(1));
+
+    final Finder iconButtonFinder = find.descendant(
+        of: find.byWidget(pages.last), matching: find.byType(IconButton));
+    expect(
+      iconButtonFinder,
+      findsOneWidget,
+    );
+    await tester.tap(iconButtonFinder);
+  }
+
   Element? _findNavigatorByLocation(NavigatorLocation location) {
     // todo: magic numbers
     final List<Element> navigators = _findNavigators();
@@ -143,10 +198,11 @@ class TestSplitViewController {
       case NavigatorLocation.right:
         return navigators.firstWhereOrNull((Element element) =>
             element.size!.width != 350 &&
-            element.size!.width != binding.window.physicalSize.width);
+            element.size!.width != binding.window.physicalSize.width &&
+            element.size!.height == binding.window.physicalSize.height);
       case NavigatorLocation.top:
         return navigators.firstWhereOrNull((Element element) =>
-            element.size!.height / element.size!.width > 0.8);
+            element.size!.height == 600 && element.size!.width == 500);
       case NavigatorLocation.compact:
         return navigators.firstWhereOrNull(
             (Element element) => element.size! == binding.window.physicalSize);
