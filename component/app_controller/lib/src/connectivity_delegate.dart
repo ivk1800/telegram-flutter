@@ -20,6 +20,7 @@ class ConnectivityDelegate {
   void onInit() {
     _connectivitySubscription = _connectivityProvider.onStatusChange
         .startWith(_connectivityProvider.status)
+        .distinct()
         .listen((ConnectivityStatus status) {
       _functionExecutor.send(td.SetNetworkType(type: status.toNetworkType()));
     });

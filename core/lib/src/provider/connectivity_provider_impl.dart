@@ -21,7 +21,8 @@ class ConnectivityProviderImpl implements IConnectivityProvider {
   ConnectivityStatus _currentStatus = ConnectivityStatus.none;
 
   @override
-  Stream<ConnectivityStatus> get onStatusChange => _onStatusChangeSubject;
+  Stream<ConnectivityStatus> get onStatusChange =>
+      _onStatusChangeSubject.distinct();
 
   @override
   ConnectivityStatus get status => _currentStatus;

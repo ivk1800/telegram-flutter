@@ -58,4 +58,37 @@ void main() {
       td.NetworkTypeWiFi.CONSTRUCTOR,
     );
   });
+
+  test('should not sent twice same connection state to td', () async {
+    when(mockConnectivityProvider.status).thenReturn(ConnectivityStatus.mobile);
+    when(mockConnectivityProvider.onStatusChange).thenAnswer(
+      (_) => Stream<ConnectivityStatus>.fromIterable(
+        <ConnectivityStatus>[
+          ConnectivityStatus.mobile,
+          // ConnectivityStatus.mobile,
+        ],
+      ),
+    );
+
+    delegate.onInit();
+
+    await untilCalled(mockFunctionExecutor.send(any));
+    expect(verify(mockFunctionExecutor.send(captureAny)).callCount, 1);
+  });
+
+  test('should send in a row different connection state to td', () async {
+    when(mockConnectivityProvider.status).thenReturn(ConnectivityStatus.none);
+    when(mockConnectivityProvider.onStatusChange).thenAnswer(
+      (_) => Stream<ConnectivityStatus>.fromIterable(
+        <ConnectivityStatus>[
+          ConnectivityStatus.mobile,
+        ],
+      ),
+    );
+
+    delegate.onInit();
+
+    await untilCalled(mockFunctionExecutor.send(any));
+    expect(verify(mockFunctionExecutor.send(captureAny)).callCount, 2);
+  });
 }
