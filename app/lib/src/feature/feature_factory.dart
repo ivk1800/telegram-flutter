@@ -59,7 +59,7 @@ class FeatureFactory {
       _featureComponent.getChatSettingsFeatureApi();
 
   IWallpapersFeatureApi createWallpapersFeatureApi() =>
-      _featureComponent.getwallpapersFeatureApi();
+      _featureComponent.getWallpapersFeatureApi();
 
   IStickersFeatureApi createStickersFeatureApi() =>
       _featureComponent.getStickersFeatureApi();
