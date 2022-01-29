@@ -608,16 +608,16 @@ class TopNavigationContainer extends StatelessWidget {
             ),
           ),
           Align(
-            child: Container(
-              constraints: const BoxConstraints(maxHeight: 600, maxWidth: 500),
-              padding: const EdgeInsets.only(top: 48, bottom: 48),
-              child: Card(
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                elevation: 40,
-                child: ClipRect(
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              elevation: 40,
+              child: ClipRect(
+                child: ConstrainedBox(
+                  constraints:
+                      const BoxConstraints(maxHeight: 600, maxWidth: 500),
                   child: _NavigatorContainer(
                     onPopPage: onPopPage,
                     pages: <Page<dynamic>>[
@@ -626,7 +626,7 @@ class TopNavigationContainer extends StatelessWidget {
                         _SimplePage(
                           key: UniqueKey(),
                           animateRouterProvider: () => false,
-                          builder: (_) => Container(),
+                          builder: (_) => const SizedBox.shrink(),
                           containerType: ContainerType.top,
                         ),
                       ...pages,
