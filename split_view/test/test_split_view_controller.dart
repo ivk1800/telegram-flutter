@@ -40,7 +40,12 @@ class TestSplitViewController {
 
   Future<void> setup() async {
     binding.window.devicePixelRatioTestValue = 1.0;
-    await _wrapAndPump(tester, SplitView(key: splitViewNavigatorKey));
+    await _wrapAndPump(
+        tester,
+        SplitView(
+          delegate: const DefaultSplitViewDelegate(),
+          key: splitViewNavigatorKey,
+        ));
     expect(find.byType(SplitView), findsOneWidget);
   }
 

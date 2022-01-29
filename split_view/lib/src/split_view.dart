@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:split_view/src/split_view_scope.dart';
 import 'container_divider.dart';
+import 'split_view_delegate.dart';
 
 class Config {
   const Config({
@@ -23,6 +24,7 @@ class Config {
 
 class SplitView extends StatefulWidget {
   const SplitView({
+    required this.delegate,
     this.config = const Config(
       minLeftContainerWidth: 290,
       leftContainerWidth: 350,
@@ -35,6 +37,7 @@ class SplitView extends StatefulWidget {
   }) : super(key: key);
 
   final Config config;
+  final SplitViewDelegate delegate;
 
   @override
   SplitViewState createState() => SplitViewState();
@@ -51,28 +54,32 @@ class SplitView extends StatefulWidget {
 
 enum ContainerType { left, right, top }
 
-class _PageNode {
-  _PageNode({required this.container, required this.page, int? order})
-      : order = order ?? DateTime.now().millisecondsSinceEpoch;
+class PageNode {
+  PageNode({
+    required this.container,
+    required Page<dynamic> page,
+    int? order,
+  })  : _page = page,
+        order = order ?? DateTime.now().millisecondsSinceEpoch;
 
   final ContainerType container;
   final int order;
 
-  final Page<dynamic> page;
+  final Page<dynamic> _page;
 }
 
 class SplitViewState extends State<SplitView> {
-  late List<_PageNode> _leftPages;
-  late List<_PageNode> _rightPages;
-  late List<_PageNode> _topPages;
+  late List<PageNode> _leftPages;
+  late List<PageNode> _rightPages;
+  late List<PageNode> _topPages;
 
   final GlobalKey<NavigatorState> _topNavigatorKey =
       GlobalKey<NavigatorState>();
 
-  _PageNode? _leftRootPage;
+  PageNode? _leftRootPage;
   Widget _rightContainerPlaceholder = Container();
 
-  late List<_PageNode> _compactPages = const <_PageNode>[];
+  late List<PageNode> _compactPages = const <PageNode>[];
   bool _isCompact = false;
 
   double _leftContainerWidth = 0;
@@ -82,9 +89,9 @@ class SplitViewState extends State<SplitView> {
     super.initState();
     _leftContainerWidth = widget.config.leftContainerWidth;
 
-    _leftPages = <_PageNode>[];
-    _rightPages = <_PageNode>[];
-    _topPages = <_PageNode>[];
+    _leftPages = <PageNode>[];
+    _rightPages = <PageNode>[];
+    _topPages = <PageNode>[];
   }
 
   void popUntilRoot(ContainerType container) {
@@ -92,12 +99,12 @@ class SplitViewState extends State<SplitView> {
       switch (container) {
         case ContainerType.left:
           _leftPages.removeWhere(
-            (_PageNode element) => element.order != kLeftRootPageIndex,
+            (PageNode element) => element.order != kLeftRootPageIndex,
           );
           break;
         case ContainerType.right:
           _rightPages.removeWhere(
-            (_PageNode element) => element.order != kRightRootPageIndex,
+            (PageNode element) => element.order != kRightRootPageIndex,
           );
           break;
         case ContainerType.top:
@@ -128,7 +135,7 @@ class SplitViewState extends State<SplitView> {
       } else {
         _leftRootPage = _createLeftRootPage(widget);
         final int indexOfRootPage = _leftPages.indexOf(_leftPages.firstWhere(
-          (_PageNode element) => element.order == kLeftRootPageIndex,
+          (PageNode element) => element.order == kLeftRootPageIndex,
         ));
         _leftPages[indexOfRootPage] = _leftRootPage!;
       }
@@ -162,22 +169,22 @@ class SplitViewState extends State<SplitView> {
     setState(() {
       switch (containerType) {
         case ContainerType.left:
-          _leftPages.add(_PageNode(container: containerType, page: page));
+          _leftPages.add(PageNode(container: containerType, page: page));
           break;
         case ContainerType.right:
-          _rightPages.add(_PageNode(container: containerType, page: page));
+          _rightPages.add(PageNode(container: containerType, page: page));
           break;
         case ContainerType.top:
-          _topPages.add(_PageNode(container: containerType, page: page));
+          _topPages.add(PageNode(container: containerType, page: page));
           break;
       }
       _invalidatePages();
     });
   }
 
-  _PageNode _createLeftRootPage(Widget widget) {
+  PageNode _createLeftRootPage(Widget widget) {
     final UniqueKey key = UniqueKey();
-    return _PageNode(
+    return PageNode(
       order: kLeftRootPageIndex,
       container: ContainerType.left,
       page: _SimplePage(
@@ -205,11 +212,10 @@ class SplitViewState extends State<SplitView> {
 
   void _invalidatePages() {
     if (_isCompact) {
-      _compactPages = (_leftPages + _rightPages + _topPages)
-        // todo fix order if first pushed top
-        ..sort((_PageNode a, _PageNode b) => a.order.compareTo(b.order));
+      _compactPages = widget.delegate.compactLayoutMergeStrategy
+          .process(_leftPages, _rightPages, _topPages);
     } else {
-      _compactPages = const <_PageNode>[];
+      _compactPages = const <PageNode>[];
     }
   }
 
@@ -278,9 +284,9 @@ class SplitViewState extends State<SplitView> {
   }
 
   bool _shouldAnimate(LocalKey key, ContainerType container) {
-    bool shouldAnimate(List<_PageNode> pages) {
+    bool shouldAnimate(List<PageNode> pages) {
       final int indexWhere =
-          pages.indexWhere((_PageNode element) => element.page.key == key);
+          pages.indexWhere((PageNode element) => element._page.key == key);
       return indexWhere > 0;
     }
 
@@ -315,7 +321,7 @@ class SplitViewState extends State<SplitView> {
   void pop() {
     setState(() {
       if (_isCompact) {
-        final _PageNode removed = _compactPages.removeLast();
+        final PageNode removed = _compactPages.removeLast();
         _removeTopFromContainer(removed.container);
         _invalidatePages();
       } else {
@@ -333,20 +339,20 @@ class SplitViewState extends State<SplitView> {
   void _removeTopFromContainer(ContainerType container) {
     switch (container) {
       case ContainerType.left:
-        final _PageNode lastWhere = _leftPages.lastWhere(
-          (_PageNode element) => element.container == ContainerType.left,
+        final PageNode lastWhere = _leftPages.lastWhere(
+          (PageNode element) => element.container == ContainerType.left,
         );
         _leftPages.remove(lastWhere);
         break;
       case ContainerType.right:
-        final _PageNode lastWhere = _rightPages.lastWhere(
-          (_PageNode element) => element.container == ContainerType.right,
+        final PageNode lastWhere = _rightPages.lastWhere(
+          (PageNode element) => element.container == ContainerType.right,
         );
         _rightPages.remove(lastWhere);
         break;
       case ContainerType.top:
-        final _PageNode lastWhere = _topPages.lastWhere(
-          (_PageNode element) => element.container == ContainerType.top,
+        final PageNode lastWhere = _topPages.lastWhere(
+          (PageNode element) => element.container == ContainerType.top,
         );
         _topPages.remove(lastWhere);
         break;
@@ -412,9 +418,9 @@ class _DefaultRoute<T> extends MaterialPageRoute<T> {
   }
 }
 
-extension _Extensions on List<_PageNode> {
+extension _Extensions on List<PageNode> {
   bool hasKey(LocalKey key) =>
-      any((_PageNode element) => element.page.key == key);
+      any((PageNode element) => element._page.key == key);
 }
 
 class _NavigatorContainer extends StatelessWidget {
@@ -640,7 +646,7 @@ class _CompactLayout extends StatelessWidget {
     final SplitViewState splitViewState = SplitViewScope.of(context);
     return _NavigatorContainer(
       onPopPage: splitViewState._onPopPage,
-      pages: splitViewState._compactPages.map((_PageNode e) => e.page).toList(),
+      pages: splitViewState._compactPages.map((PageNode e) => e._page).toList(),
       navigatorKey: splitViewState._topNavigatorKey,
     );
   }
@@ -661,7 +667,7 @@ class _SplitLayout extends StatelessWidget {
                 child: _NavigatorContainer(
                   onPopPage: splitViewState._onPopPage,
                   pages: splitViewState._leftPages
-                      .map((_PageNode e) => e.page)
+                      .map((PageNode e) => e._page)
                       .toList(),
                 ),
                 constraints: BoxConstraints.expand(
@@ -687,7 +693,7 @@ class _SplitLayout extends StatelessWidget {
             _RightNavigatorContainer(
               onPopPage: splitViewState._onPopPage,
               pages: splitViewState._rightPages
-                  .map((_PageNode e) => e.page)
+                  .map((PageNode e) => e._page)
                   .toList(),
               placeholder: splitViewState._rightContainerPlaceholder,
             ),
@@ -700,7 +706,7 @@ class _SplitLayout extends StatelessWidget {
           onBarrierTap: () {
             splitViewState.popUntilRoot(ContainerType.top);
           },
-          pages: splitViewState._topPages.map((_PageNode e) => e.page).toList(),
+          pages: splitViewState._topPages.map((PageNode e) => e._page).toList(),
         ),
       ],
     );

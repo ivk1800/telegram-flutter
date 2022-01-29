@@ -58,6 +58,7 @@ class _ShowcasePageState extends State<ShowcasePage> {
             ),
           ],
           child: SplitView(
+            delegate: const DefaultSplitViewDelegate(),
             key: splitViewNavigatorKey,
           ),
         );

@@ -40,6 +40,7 @@ class TgApp extends StatelessWidget {
         // TODO maybe add color property to SplitView?
         color: Theme.of(context).scaffoldBackgroundColor,
         child: SplitView(
+          delegate: const DefaultSplitViewDelegate(),
           key: TgApp.splitViewNavigatorKey,
         ),
       ),

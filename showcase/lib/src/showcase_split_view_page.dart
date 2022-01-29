@@ -24,6 +24,7 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Stack(children: <Widget>[
         SplitView(
+          delegate: const DefaultSplitViewDelegate(),
           key: _navigationKey,
         ),
         Align(

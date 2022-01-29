@@ -63,32 +63,6 @@ void main() {
       controller.expectPagesOrder(
           navigatorLocation: NavigatorLocation.compact, pages: const <int>[1]);
     });
-
-    testWidgets(
-        'should display ordered pages if add to with order left -> right -> top',
-        (
-      WidgetTester tester,
-    ) async {
-      final TestSplitViewController controller =
-          TestSplitViewController(tester: tester);
-      await controller.setup();
-      controller.compactScreen();
-      controller.addPage(
-        container: ContainerType.left,
-        pageId: 3,
-      );
-      controller.addPage(container: ContainerType.right, pageId: 1);
-      controller.addPage(container: ContainerType.top, pageId: 2);
-      await tester.pump();
-
-      controller.expectCompactNavigator();
-      controller.expectPagesOrder(
-        navigatorLocation: NavigatorLocation.compact,
-        pages: const <int>[3, 1, 2],
-      );
-    });
-
-    // todo add more combinations
   });
   group('split mode', () {
     testWidgets('should not display empty navigator in split mode', (
@@ -154,6 +128,156 @@ void main() {
     });
 
     _topPagesGroup();
+    _defaultCompactLayoutMergeStrategyGroup();
+  });
+}
+
+void _defaultCompactLayoutMergeStrategyGroup() {
+  testWidgets(
+      'should display ordered pages if add to with order left -> right -> top',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 3);
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pump();
+
+    controller.expectCompactNavigator();
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[3, 1, 2],
+    );
+  });
+
+  testWidgets(
+      'should display ordered pages if add to with order left -> top -> right',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 3);
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    await tester.pump();
+
+    controller.expectCompactNavigator();
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[3, 2, 1],
+    );
+  });
+
+  testWidgets(
+      'should display ordered pages if add to with order left -> right -> top',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 3);
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pump();
+
+    controller.expectCompactNavigator();
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[3, 1, 2],
+    );
+  });
+
+  testWidgets(
+      'should display ordered pages if add to with order top -> left -> right',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 3);
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    await tester.pump();
+
+    controller.expectCompactNavigator();
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2, 3],
+    );
+  });
+
+  testWidgets(
+      'should display ordered pages if add to with order top -> right -> left',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 3);
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    await tester.pump();
+
+    controller.expectCompactNavigator();
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[2, 1, 3],
+    );
+  });
+
+  testWidgets(
+      'should display ordered pages if add to with order right -> top -> left',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 3);
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    await tester.pump();
+
+    controller.expectCompactNavigator();
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[2, 3, 1],
+    );
+  });
+
+  testWidgets(
+      'should display ordered pages if add to with order right -> left -> top',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 3);
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pump();
+
+    controller.expectCompactNavigator();
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 3, 2],
+    );
   });
 }
 
