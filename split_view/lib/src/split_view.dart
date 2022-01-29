@@ -111,7 +111,7 @@ class SplitViewState extends State<SplitView> {
           _topPages.clear();
           break;
       }
-      _invalidatePages();
+      _refreshCompactPages();
     });
   }
 
@@ -123,7 +123,7 @@ class SplitViewState extends State<SplitView> {
     setState(() {
       popUntilRoot(container);
       push(key: key, builder: builder, container: container);
-      _invalidatePages();
+      _refreshCompactPages();
     });
   }
 
@@ -139,7 +139,7 @@ class SplitViewState extends State<SplitView> {
         ));
         _leftPages[indexOfRootPage] = _leftRootPage!;
       }
-      _invalidatePages();
+      _refreshCompactPages();
     });
   }
 
@@ -178,7 +178,7 @@ class SplitViewState extends State<SplitView> {
           _topPages.add(PageNode(container: containerType, page: page));
           break;
       }
-      _invalidatePages();
+      _refreshCompactPages();
     });
   }
 
@@ -196,21 +196,21 @@ class SplitViewState extends State<SplitView> {
     );
   }
 
-  void _onWidthChanged(double width) {
-    if (width <= widget.config.maxCompactWidth) {
+  void _onSizeChanged(BoxConstraints constraints) {
+    if (widget.delegate.compactLayoutStrategy.process(constraints)) {
       if (!_isCompact) {
         _isCompact = true;
-        _invalidatePages();
+        _refreshCompactPages();
       }
     } else {
       if (_isCompact) {
         _isCompact = false;
-        _invalidatePages();
+        _refreshCompactPages();
       }
     }
   }
 
-  void _invalidatePages() {
+  void _refreshCompactPages() {
     if (_isCompact) {
       _compactPages = widget.delegate.compactLayoutMergeStrategy
           .process(_leftPages, _rightPages, _topPages);
@@ -237,11 +237,11 @@ class SplitViewState extends State<SplitView> {
       child: WillPopScope(
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            _onWidthChanged(constraints.maxWidth);
-            if (constraints.maxWidth > widget.config.maxCompactWidth) {
-              return const _SplitLayout();
-            } else {
+            _onSizeChanged(constraints);
+            if (_isCompact) {
               return const _CompactLayout();
+            } else {
+              return const _SplitLayout();
             }
           },
         ),
@@ -311,7 +311,7 @@ class SplitViewState extends State<SplitView> {
       setState(() {
         final MyPage<dynamic> myPage = route.settings as MyPage<dynamic>;
         _removeTopFromContainer(myPage.container);
-        _invalidatePages();
+        _refreshCompactPages();
       });
     }
 
@@ -323,7 +323,7 @@ class SplitViewState extends State<SplitView> {
       if (_isCompact) {
         final PageNode removed = _compactPages.removeLast();
         _removeTopFromContainer(removed.container);
-        _invalidatePages();
+        _refreshCompactPages();
       } else {
         if (_topPages.isNotEmpty) {
           _removeTopFromContainer(ContainerType.top);

@@ -133,6 +133,15 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
             ],
           ),
         ),
+        LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return Material(
+              child: Text(
+                '${constraints.maxWidth} : ${constraints.maxHeight}',
+              ),
+            );
+          },
+        )
       ]),
     );
   }
@@ -147,11 +156,17 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
   }
 
   Widget _buildPage({required String title, required Color color}) {
-    return Scaffold(
-      backgroundColor: color,
-      appBar: AppBar(
-        title: Text(title),
-      ),
+    return LayoutBuilder(
+      builder: (BuildContext _, BoxConstraints constraints) {
+        return Scaffold(
+          backgroundColor: color,
+          appBar: AppBar(
+            title: Text(
+              '$title, ${constraints.maxWidth} : ${constraints.maxHeight}',
+            ),
+          ),
+        );
+      },
     );
   }
 }
