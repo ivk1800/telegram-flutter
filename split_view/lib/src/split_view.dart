@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:split_view/src/split_view_scope.dart';
 import 'container_divider.dart';
 
 class Config {
@@ -225,118 +226,55 @@ class SplitViewState extends State<SplitView> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          _onWidthChanged(constraints.maxWidth);
-          Widget finalWidget;
-          if (constraints.maxWidth > widget.config.maxCompactWidth) {
-            finalWidget = Stack(
-              children: <Widget>[
-                LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    return Row(
-                      children: <Widget>[
-                        ClipRect(
-                          child: Container(
-                            child: _NavigatorContainer(
-                              onPopPage: _onPopPage,
-                              pages: _leftPages
-                                  .map((_PageNode e) => e.page)
-                                  .toList(),
-                            ),
-                            constraints: BoxConstraints.expand(
-                              width: _leftContainerWidth,
-                            ),
-                          ),
-                        ),
-                        if (_leftPages.isNotEmpty || _rightPages.isNotEmpty)
-                          _DraggableDivider(
-                            isDraggableDivider:
-                                widget.config.isDraggableDivider,
-                            onPointerMove: (PointerMoveEvent event) {
-                              setState(() {
-                                _leftContainerWidth = event.position.dx.clamp(
-                                  widget.config.minLeftContainerWidth,
-                                  widget.config.maxLeftContainerWidth,
-                                );
-                              });
-                            },
-                          ),
-                        _RightNavigatorContainer(
-                          onPopPage: _onPopPage,
-                          pages:
-                              _rightPages.map((_PageNode e) => e.page).toList(),
-                          placeholder: _rightContainerPlaceholder,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                AnimatedTopNavigationContainer(
-                  onPopPage: _onPopPage,
-                  isNotSinglePage:
-                      _leftPages.isNotEmpty || _rightPages.isNotEmpty,
-                  onBarrierTap: () {
-                    popUntilRoot(ContainerType.top);
-                  },
-                  pages: _topPages.map((_PageNode e) => e.page).toList(),
-                ),
-              ],
-            );
-          } else {
-            finalWidget = _NavigatorContainer(
-              onPopPage: _onPopPage,
-              pages: _compactPages.map((_PageNode e) => e.page).toList(),
-              navigatorKey: _topNavigatorKey,
-            );
-          }
-          return finalWidget;
-        },
+    return SplitViewScope(
+      state: this,
+      child: WillPopScope(
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            _onWidthChanged(constraints.maxWidth);
+            if (constraints.maxWidth > widget.config.maxCompactWidth) {
+              return const _SplitLayout();
+            } else {
+              return const _CompactLayout();
+            }
+          },
+        ),
+        onWillPop: _onWillPop,
       ),
-      onWillPop: () async {
-        if (_isCompact) {
-          return !(await _topNavigatorKey.currentState!.maybePop());
-        }
-
-        if (_topPages.isNotEmpty) {
-          if (_leftPages.isEmpty && _rightPages.isEmpty) {
-            return true;
-          } else {
-            setState(() {
-              _topPages.removeLast();
-            });
-          }
-          return false;
-        } else if (_rightPages.isNotEmpty) {
-          setState(() {
-            _rightPages.removeLast();
-          });
-          return false;
-        } else if (_leftPages.isNotEmpty) {
-          // first node is root page
-          if (_leftPages.length == 1) {
-            return true;
-          } else {
-            setState(() {
-              _leftPages.removeLast();
-            });
-          }
-          return false;
-        }
-        return true;
-      },
     );
   }
 
-  Widget wrapWithoutTopPadding(Widget child) {
-    final MediaQueryData baseMediaQuery = MediaQuery.of(context);
-    return MediaQuery(
-      data: baseMediaQuery.copyWith(
-        padding: baseMediaQuery.padding.copyWith(top: 0),
-      ),
-      child: child,
-    );
+  Future<bool> _onWillPop() async {
+    if (_isCompact) {
+      return !(await _topNavigatorKey.currentState!.maybePop());
+    }
+
+    if (_topPages.isNotEmpty) {
+      if (_leftPages.isEmpty && _rightPages.isEmpty) {
+        return true;
+      } else {
+        setState(() {
+          _topPages.removeLast();
+        });
+      }
+      return false;
+    } else if (_rightPages.isNotEmpty) {
+      setState(() {
+        _rightPages.removeLast();
+      });
+      return false;
+    } else if (_leftPages.isNotEmpty) {
+      // first node is root page
+      if (_leftPages.length == 1) {
+        return true;
+      } else {
+        setState(() {
+          _leftPages.removeLast();
+        });
+      }
+      return false;
+    }
+    return true;
   }
 
   bool _shouldAnimate(LocalKey key, ContainerType container) {
@@ -690,6 +628,81 @@ class RemoveToPadding extends StatelessWidget {
         padding: baseMediaQuery.padding.copyWith(top: 0),
       ),
       child: child,
+    );
+  }
+}
+
+class _CompactLayout extends StatelessWidget {
+  const _CompactLayout({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final SplitViewState splitViewState = SplitViewScope.of(context);
+    return _NavigatorContainer(
+      onPopPage: splitViewState._onPopPage,
+      pages: splitViewState._compactPages.map((_PageNode e) => e.page).toList(),
+      navigatorKey: splitViewState._topNavigatorKey,
+    );
+  }
+}
+
+class _SplitLayout extends StatelessWidget {
+  const _SplitLayout({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final SplitViewState splitViewState = SplitViewScope.of(context);
+    return Stack(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            ClipRect(
+              child: Container(
+                child: _NavigatorContainer(
+                  onPopPage: splitViewState._onPopPage,
+                  pages: splitViewState._leftPages
+                      .map((_PageNode e) => e.page)
+                      .toList(),
+                ),
+                constraints: BoxConstraints.expand(
+                  width: splitViewState._leftContainerWidth,
+                ),
+              ),
+            ),
+            if (splitViewState._leftPages.isNotEmpty ||
+                splitViewState._rightPages.isNotEmpty)
+              _DraggableDivider(
+                isDraggableDivider:
+                    splitViewState.widget.config.isDraggableDivider,
+                onPointerMove: (PointerMoveEvent event) {
+                  splitViewState.setState(() {
+                    splitViewState._leftContainerWidth =
+                        event.position.dx.clamp(
+                      splitViewState.widget.config.minLeftContainerWidth,
+                      splitViewState.widget.config.maxLeftContainerWidth,
+                    );
+                  });
+                },
+              ),
+            _RightNavigatorContainer(
+              onPopPage: splitViewState._onPopPage,
+              pages: splitViewState._rightPages
+                  .map((_PageNode e) => e.page)
+                  .toList(),
+              placeholder: splitViewState._rightContainerPlaceholder,
+            ),
+          ],
+        ),
+        AnimatedTopNavigationContainer(
+          onPopPage: splitViewState._onPopPage,
+          isNotSinglePage: splitViewState._leftPages.isNotEmpty ||
+              splitViewState._rightPages.isNotEmpty,
+          onBarrierTap: () {
+            splitViewState.popUntilRoot(ContainerType.top);
+          },
+          pages: splitViewState._topPages.map((_PageNode e) => e.page).toList(),
+        ),
+      ],
     );
   }
 }
