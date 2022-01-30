@@ -20,8 +20,7 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
+    return Material(
       child: Stack(children: <Widget>[
         SplitView(
           delegate: const DefaultSplitViewDelegate(),
@@ -29,121 +28,120 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
         ),
         Align(
           alignment: Alignment.bottomLeft,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('back'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _navigationKey.currentState?.setLeftRootPage(
-                    _buildPage(title: 'Root left', color: _generateColor()),
-                  );
-                },
-                child: const Text('set root left'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _count++;
-                  final int c = _count;
-                  final Color color = _generateColor();
-
-                  _navigationKey.currentState?.push(
-                    key: UniqueKey(),
-                    builder: (_) {
-                      return _buildPage(title: 'left $c', color: color);
-                    },
-                    container: ContainerType.left,
-                  );
-                },
-                child: const Text('push left'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _count++;
-                  final int c = _count;
-                  final Color color = _generateColor();
-                  _navigationKey.currentState?.push(
-                    key: UniqueKey(),
-                    builder: (_) {
-                      return _buildPage(title: 'top $c', color: color);
-                    },
-                    container: ContainerType.top,
-                  );
-                },
-                child: const Text('push top'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _count++;
-                  final int c = _count;
-                  final Color color = _generateColor();
-                  _navigationKey.currentState?.push(
-                    key: UniqueKey(),
-                    builder: (_) {
-                      return _buildPage(title: 'right $c', color: color);
-                    },
-                    container: ContainerType.right,
-                  );
-                },
-                child: const Text('push right'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _count++;
-                  _navigationKey.currentState
-                      ?.setRightContainerPlaceholder(Container(
-                    color: Colors.redAccent,
-                    child: const Material(
-                      child: Center(child: Text('placeholder')),
-                    ),
-                  ));
-                },
-                child: const Text('set right placeholder'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  final SplitViewState? currentState =
-                      _navigationKey.currentState;
-                  if (currentState == null) {
-                    return;
-                  }
-                  _count++;
-                  currentState
-                    ..popUntilRoot(ContainerType.left)
-                    ..popUntilRoot(ContainerType.top)
-                    ..popUntilRoot(ContainerType.right)
-                    ..setLeftRootPage(_buildPage(
-                      title: 'root left $_count',
-                      color: _generateColor(),
-                    ))
-                    ..setRightContainerPlaceholder(Container(
-                      color: Colors.redAccent,
-                      child: const Material(
-                        child: Center(child: Text('placeholder')),
-                      ),
-                    ));
-                },
-                child: const Text('set initial state'),
-              ),
-            ],
+          child: Wrap(
+            direction: Axis.vertical,
+            spacing: 8.0,
+            children: _actions(context),
           ),
         ),
         LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            return Material(
-              child: Text(
-                '${constraints.maxWidth} : ${constraints.maxHeight}',
-              ),
+            return Text(
+              '${constraints.maxWidth} : ${constraints.maxHeight}',
             );
           },
         )
       ]),
     );
+  }
+
+  List<Widget> _actions(BuildContext context) {
+    return <Widget>[
+      ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('back'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          _navigationKey.currentState?.setLeftRootPage(
+            _buildPage(title: 'Root left', color: _generateColor()),
+          );
+        },
+        child: const Text('set root left'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          _count++;
+          final int c = _count;
+          final Color color = _generateColor();
+
+          _navigationKey.currentState?.push(
+            key: UniqueKey(),
+            builder: (_) {
+              return _buildPage(title: 'left $c', color: color);
+            },
+            container: ContainerType.left,
+          );
+        },
+        child: const Text('add left'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          _count++;
+          final int c = _count;
+          final Color color = _generateColor();
+          _navigationKey.currentState?.push(
+            key: UniqueKey(),
+            builder: (_) {
+              return _buildPage(title: 'top $c', color: color);
+            },
+            container: ContainerType.top,
+          );
+        },
+        child: const Text('add top'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          _count++;
+          final int c = _count;
+          final Color color = _generateColor();
+          _navigationKey.currentState?.push(
+            key: UniqueKey(),
+            builder: (_) {
+              return _buildPage(title: 'right $c', color: color);
+            },
+            container: ContainerType.right,
+          );
+        },
+        child: const Text('add right'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          _navigationKey.currentState?.push(
+            key: UniqueKey(),
+            builder: (_) {
+              return const Center(child: Text('placeholder'));
+            },
+            container: ContainerType.right,
+          );
+        },
+        child: const Text('add right placeholder'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          final SplitViewState? currentState = _navigationKey.currentState;
+          if (currentState == null) {
+            return;
+          }
+          _count++;
+          currentState
+            ..popUntilRoot(ContainerType.left)
+            ..popUntilRoot(ContainerType.top)
+            ..popUntilRoot(ContainerType.right)
+            ..setLeftRootPage(_buildPage(
+              title: 'root left $_count',
+              color: _generateColor(),
+            ))
+            ..setRightContainerPlaceholder(Container(
+              color: Colors.redAccent,
+              child: const Center(child: Text('placeholder')),
+            ));
+        },
+        child: const Text('set initial state'),
+      ),
+    ];
   }
 
   Color _generateColor() {

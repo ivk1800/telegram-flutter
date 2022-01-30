@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:split_view/src/page_animation_strategy.dart';
 import 'package:split_view/src/split_view_scope.dart';
 import 'container_divider.dart';
 import 'split_view_delegate.dart';
@@ -66,6 +67,11 @@ class PageNode {
   final int order;
 
   final Page<dynamic> _page;
+
+  LocalKey get pageKey {
+    assert(_page.key != null);
+    return _page.key!;
+  }
 }
 
 class SplitViewState extends State<SplitView> {
@@ -284,22 +290,35 @@ class SplitViewState extends State<SplitView> {
   }
 
   bool _shouldAnimate(LocalKey key, ContainerType container) {
-    bool shouldAnimate(List<PageNode> pages) {
-      final int indexWhere =
-          pages.indexWhere((PageNode element) => element._page.key == key);
-      return indexWhere > 0;
-    }
+    final PageAnimationStrategy pageAnimationStrategy =
+        widget.delegate.pageAnimationStrategy;
 
     if (_isCompact) {
-      return shouldAnimate(_compactPages);
+      return pageAnimationStrategy.shouldAnimateCompact(
+        _compactPages,
+        key,
+        container,
+      );
     }
     switch (container) {
       case ContainerType.left:
-        return shouldAnimate(_leftPages);
+        return pageAnimationStrategy.shouldAnimateLeft(
+          _leftPages,
+          key,
+          container,
+        );
       case ContainerType.right:
-        return shouldAnimate(_rightPages);
+        return pageAnimationStrategy.shouldAnimateRight(
+          _rightPages,
+          key,
+          container,
+        );
       case ContainerType.top:
-        return shouldAnimate(_topPages);
+        return pageAnimationStrategy.shouldAnimateCompact(
+          _topPages,
+          key,
+          container,
+        );
     }
   }
 
@@ -467,21 +486,11 @@ class _RightNavigatorContainer extends StatelessWidget {
     if (pages.isEmpty) {
       return Expanded(child: placeholder);
     }
-    final UniqueKey key = UniqueKey();
     return Expanded(
       child: ClipRect(
         child: _NavigatorContainer(
           onPopPage: onPopPage,
-          pages: <Page<dynamic>>[
-            // add stub page for trigger navigation button
-            _SimplePage(
-              key: key,
-              animateRouterProvider: () => true,
-              builder: (_) => Container(),
-              containerType: ContainerType.top,
-            ),
-            ...pages,
-          ],
+          pages: pages,
         ),
       ),
     );
