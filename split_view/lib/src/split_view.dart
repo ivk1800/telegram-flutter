@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:split_view/src/page_animation_strategy.dart';
 import 'package:split_view/src/split_view_scope.dart';
 import 'container_divider.dart';
+import 'package:collection/collection.dart';
 import 'split_view_delegate.dart';
 
 class Config {
@@ -168,6 +169,34 @@ class SplitViewState extends State<SplitView> {
   void setRightContainerPlaceholder(Widget widget) {
     setState(() {
       _rightContainerPlaceholder = widget;
+    });
+  }
+
+  void removeUntil(ContainerType container, bool Function(PageNode node) test) {
+    setState(() {
+      void _removeUntil(List<PageNode> pages) {
+        PageNode? candidate = pages.lastOrNull;
+        while (candidate != null) {
+          if (test.call(candidate)) {
+            return;
+          }
+          pages.removeLast();
+          candidate = pages.lastOrNull;
+        }
+      }
+
+      switch (container) {
+        case ContainerType.left:
+          _removeUntil(_leftPages);
+          break;
+        case ContainerType.right:
+          _removeUntil(_rightPages);
+          break;
+        case ContainerType.top:
+          _removeUntil(_topPages);
+          break;
+      }
+      _refreshCompactPages();
     });
   }
 

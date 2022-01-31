@@ -49,6 +49,8 @@ class TestSplitViewController {
     expect(find.byType(SplitView), findsOneWidget);
   }
 
+  SplitViewState get splitView => splitViewNavigatorKey.currentState!;
+
   int addPage({
     required ContainerType container,
     required int pageId,
@@ -195,6 +197,10 @@ class TestSplitViewController {
   Element? _findNavigatorByLocation(NavigatorLocation location) {
     // todo: magic numbers
     final List<Element> navigators = _findNavigators();
+    if (navigators.isEmpty) {
+      return null;
+    }
+
     expect(navigators.length, greaterThanOrEqualTo(1));
     switch (location) {
       case NavigatorLocation.left:

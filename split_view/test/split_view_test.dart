@@ -1,4 +1,5 @@
 // ignore_for_file: cascade_invocations
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:split_view/split_view.dart';
 
@@ -129,6 +130,394 @@ void main() {
 
     _topPagesGroup();
     _defaultCompactLayoutMergeStrategyGroup();
+  });
+
+  _removeUntilLSplitModeGroup();
+}
+
+void _removeUntilLSplitModeGroup() {
+  testWidgets('should remove until first page from left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    controller.addPage(container: ContainerType.left, pageId: 3);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1, 2, 3],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.left,
+      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should remove all pages from left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    controller.addPage(container: ContainerType.left, pageId: 3);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1, 2, 3],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.left,
+      (PageNode node) => false,
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+  });
+
+  testWidgets('should remove all pages if page not found in left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    controller.addPage(container: ContainerType.left, pageId: 3);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1, 2, 3],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.left,
+      (PageNode node) => node.pageKey == const ValueKey<int>(4),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+  });
+
+  testWidgets('should ignore remove until action if single page in container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.left,
+      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should ignore remove until action if left container is empty', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    await tester.pump();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+
+    controller.splitView.removeUntil(
+      ContainerType.left,
+      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+  });
+
+  testWidgets('should remove until first page from right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    controller.addPage(container: ContainerType.right, pageId: 3);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1, 2, 3],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.right,
+      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should remove all pages from right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    controller.addPage(container: ContainerType.right, pageId: 3);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1, 2, 3],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.right,
+      (PageNode node) => false,
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+  });
+
+  testWidgets('should remove all pages if page not found in right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    controller.addPage(container: ContainerType.right, pageId: 3);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1, 2, 3],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.right,
+      (PageNode node) => node.pageKey == const ValueKey<int>(4),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+  });
+
+  testWidgets('should ignore remove until action if single page in container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.right,
+      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should ignore remove until action if right container is empty', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    await tester.pump();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+
+    controller.splitView.removeUntil(
+      ContainerType.right,
+      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+  });
+
+  testWidgets('should remove until first page from top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    controller.addPage(container: ContainerType.top, pageId: 3);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1, 2, 3],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.top,
+      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should remove all pages from top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    controller.addPage(container: ContainerType.top, pageId: 3);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1, 2, 3],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.top,
+      (PageNode node) => false,
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+  });
+
+  testWidgets('should remove all pages if page not found in top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    controller.addPage(container: ContainerType.top, pageId: 3);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1, 2, 3],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.top,
+      (PageNode node) => node.pageKey == const ValueKey<int>(4),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+  });
+
+  testWidgets('should ignore remove until action if single page in container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1],
+    );
+
+    controller.splitView.removeUntil(
+      ContainerType.top,
+      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should ignore remove until action if top container is empty', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    await tester.pump();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
+
+    controller.splitView.removeUntil(
+      ContainerType.top,
+      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectDisplayedNavigators(const <NavigatorLocation>[]);
   });
 }
 
