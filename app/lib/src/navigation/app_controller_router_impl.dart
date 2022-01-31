@@ -25,9 +25,9 @@ class AppControllerRouterImpl implements IAppControllerRouter {
     }
 
     currentState
-      ..popUntilRoot(ContainerType.left)
-      ..popUntilRoot(ContainerType.top)
-      ..popUntilRoot(ContainerType.right)
+      ..removeUntilRoot(ContainerType.left)
+      ..removeUntilRoot(ContainerType.top)
+      ..removeUntilRoot(ContainerType.right)
       ..setRightContainerPlaceholder(
         const Material(
           child: Center(
@@ -48,7 +48,7 @@ class AppControllerRouterImpl implements IAppControllerRouter {
   }
 
   void _push(Widget widget, ContainerType container) {
-    _navigationKey.currentState?.push(
+    _navigationKey.currentState?.add(
       key: UniqueKey(),
       builder: (_) => widget,
       container: container,

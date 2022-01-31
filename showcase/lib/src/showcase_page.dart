@@ -32,7 +32,7 @@ class _ShowcasePageState extends State<ShowcasePage> {
       );
     }).then((_ShowcaseData value) {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
-        splitViewNavigatorKey.currentState?.push(
+        splitViewNavigatorKey.currentState?.add(
           key: UniqueKey(),
           builder: (_) => const ShowcaseListPage(),
           container: ContainerType.left,

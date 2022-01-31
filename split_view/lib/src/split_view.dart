@@ -101,7 +101,7 @@ class SplitViewState extends State<SplitView> {
     _topPages = <PageNode>[];
   }
 
-  void popUntilRoot(ContainerType container) {
+  void removeUntilRoot(ContainerType container) {
     setState(() {
       switch (container) {
         case ContainerType.left:
@@ -122,14 +122,14 @@ class SplitViewState extends State<SplitView> {
     });
   }
 
-  void pushAllReplacement({
+  void addAllReplacement({
     required LocalKey key,
     required WidgetBuilder builder,
     required ContainerType container,
   }) {
     setState(() {
-      popUntilRoot(container);
-      push(key: key, builder: builder, container: container);
+      removeUntilRoot(container);
+      add(key: key, builder: builder, container: container);
       _refreshCompactPages();
     });
   }
@@ -150,12 +150,12 @@ class SplitViewState extends State<SplitView> {
     });
   }
 
-  void push({
+  void add({
     required LocalKey key,
     required WidgetBuilder builder,
     required ContainerType container,
   }) {
-    _push(
+    _add(
       _SimplePage(
         key: key,
         animateRouterProvider: () => _shouldAnimate(key, container),
@@ -200,7 +200,7 @@ class SplitViewState extends State<SplitView> {
     });
   }
 
-  void _push(MyPage<dynamic> page, ContainerType containerType) {
+  void _add(MyPage<dynamic> page, ContainerType containerType) {
     setState(() {
       switch (containerType) {
         case ContainerType.left:
@@ -742,7 +742,7 @@ class _SplitLayout extends StatelessWidget {
           isNotSinglePage: splitViewState._leftPages.isNotEmpty ||
               splitViewState._rightPages.isNotEmpty,
           onBarrierTap: () {
-            splitViewState.popUntilRoot(ContainerType.top);
+            splitViewState.removeUntilRoot(ContainerType.top);
           },
           pages: splitViewState._topPages.map((PageNode e) => e._page).toList(),
         ),

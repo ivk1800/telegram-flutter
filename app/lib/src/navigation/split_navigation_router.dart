@@ -17,7 +17,7 @@ class SplitNavigationDelegateImpl implements ISplitNavigationDelegate {
     required ContainerType container,
   }) {
     _navigationKey.currentState
-        ?.pushAllReplacement(key: key, builder: builder, container: container);
+        ?.addAllReplacement(key: key, builder: builder, container: container);
   }
 
   @override
@@ -26,7 +26,7 @@ class SplitNavigationDelegateImpl implements ISplitNavigationDelegate {
     required WidgetBuilder builder,
     required ContainerType container,
   }) {
-    _navigationKey.currentState?.push(
+    _navigationKey.currentState?.add(
       key: key,
       builder: builder,
       container: container,

@@ -67,7 +67,7 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
           final int c = _count;
           final Color color = _generateColor();
 
-          _navigationKey.currentState?.push(
+          _navigationKey.currentState?.add(
             key: UniqueKey(),
             builder: (_) {
               return _buildPage(title: 'left $c', color: color);
@@ -82,7 +82,7 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
           _count++;
           final int c = _count;
           final Color color = _generateColor();
-          _navigationKey.currentState?.push(
+          _navigationKey.currentState?.add(
             key: UniqueKey(),
             builder: (_) {
               return _buildPage(title: 'top $c', color: color);
@@ -97,7 +97,7 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
           _count++;
           final int c = _count;
           final Color color = _generateColor();
-          _navigationKey.currentState?.push(
+          _navigationKey.currentState?.add(
             key: UniqueKey(),
             builder: (_) {
               return _buildPage(title: 'right $c', color: color);
@@ -109,7 +109,7 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
       ),
       ElevatedButton(
         onPressed: () {
-          _navigationKey.currentState?.push(
+          _navigationKey.currentState?.add(
             key: UniqueKey(),
             builder: (_) {
               return const Center(child: Text('placeholder'));
@@ -127,9 +127,9 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
           }
           _count++;
           currentState
-            ..popUntilRoot(ContainerType.left)
-            ..popUntilRoot(ContainerType.top)
-            ..popUntilRoot(ContainerType.right)
+            ..removeUntilRoot(ContainerType.left)
+            ..removeUntilRoot(ContainerType.top)
+            ..removeUntilRoot(ContainerType.right)
             ..setLeftRootPage(_buildPage(
               title: 'root left $_count',
               color: _generateColor(),

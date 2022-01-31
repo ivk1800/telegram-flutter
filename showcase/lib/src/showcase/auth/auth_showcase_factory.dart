@@ -40,7 +40,7 @@ class AuthShowcaseFactory {
             }
             return Future<void>.delayed(const Duration(milliseconds: 1000))
                 .then((_) {
-              splitView.popUntilRoot(ContainerType.top);
+              splitView.removeUntilRoot(ContainerType.top);
               return null;
             });
           },
@@ -79,7 +79,7 @@ class _Router implements IAuthFeatureRouter {
     void Function(Country country) callback,
   ) {
     final Widget widget = _chooseCountryScreenFactory.create(callback);
-    _splitView.push(
+    _splitView.add(
       key: UniqueKey(),
       builder: (_) => widget,
       container: ContainerType.top,

@@ -55,7 +55,7 @@ class TestSplitViewController {
     required ContainerType container,
     required int pageId,
   }) {
-    splitViewNavigatorKey.currentState!.push(
+    splitViewNavigatorKey.currentState!.add(
       key: ValueKey<int>(pageId),
       builder: (BuildContext context) {
         return TestPage(
