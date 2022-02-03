@@ -194,6 +194,12 @@ class TestSplitViewController {
     await tester.tap(iconButtonFinder);
   }
 
+  Future<void> backPress({required bool didPop}) async {
+    final dynamic widgetsAppState = tester.state(find.byType(WidgetsApp));
+    // ignore: avoid_dynamic_calls
+    expect(await widgetsAppState.didPopRoute(), didPop);
+  }
+
   Element? _findNavigatorByLocation(NavigatorLocation location) {
     // todo: magic numbers
     final List<Element> navigators = _findNavigators();

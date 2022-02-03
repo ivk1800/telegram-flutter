@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:split_view/src/page_animation_strategy.dart';
-import 'package:split_view/src/split_view_scope.dart';
-import 'container_divider.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
+import 'package:split_view/src/split_view_scope.dart';
+
+import 'container_divider.dart';
+import 'page_animation_strategy.dart';
+import 'page_pop_strategy.dart';
 import 'split_view_delegate.dart';
 
 class Config {
@@ -80,7 +82,35 @@ class SplitViewState extends State<SplitView> {
   late List<PageNode> _rightPages;
   late List<PageNode> _topPages;
 
+  late final _PagesContainer _leftPagesContainer = _PagesContainer(
+    countFunc: () => _leftPages.length,
+    tryPopTopFunc: () async {
+      assert(_leftPages.isNotEmpty);
+      return !(await _leftNavigatorKey.currentState!.maybePop());
+    },
+  );
+
+  late final _PagesContainer _rightPagesContainer = _PagesContainer(
+    countFunc: () => _rightPages.length,
+    tryPopTopFunc: () async {
+      assert(_rightPages.isNotEmpty);
+      return !(await _rightNavigatorKey.currentState!.maybePop());
+    },
+  );
+
+  late final _PagesContainer _topPagesContainer = _PagesContainer(
+    countFunc: () => _topPages.length,
+    tryPopTopFunc: () async {
+      assert(_topPages.isNotEmpty);
+      return !(await _topNavigatorKey.currentState!.maybePop());
+    },
+  );
+
   final GlobalKey<NavigatorState> _topNavigatorKey =
+      GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _leftNavigatorKey =
+      GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> _rightNavigatorKey =
       GlobalKey<NavigatorState>();
 
   PageNode? _leftRootPage;
@@ -290,32 +320,11 @@ class SplitViewState extends State<SplitView> {
       return !(await _topNavigatorKey.currentState!.maybePop());
     }
 
-    if (_topPages.isNotEmpty) {
-      if (_leftPages.isEmpty && _rightPages.isEmpty) {
-        return true;
-      } else {
-        setState(() {
-          _topPages.removeLast();
-        });
-      }
-      return false;
-    } else if (_rightPages.isNotEmpty) {
-      setState(() {
-        _rightPages.removeLast();
-      });
-      return false;
-    } else if (_leftPages.isNotEmpty) {
-      // first node is root page
-      if (_leftPages.length == 1) {
-        return true;
-      } else {
-        setState(() {
-          _leftPages.removeLast();
-        });
-      }
-      return false;
-    }
-    return true;
+    return widget.delegate.pagePopStrategy.onWillPop(
+      _leftPagesContainer,
+      _rightPagesContainer,
+      _topPagesContainer,
+    );
   }
 
   bool _shouldAnimate(LocalKey key, ContainerType container) {
@@ -515,9 +524,11 @@ class _RightNavigatorContainer extends StatelessWidget {
     if (pages.isEmpty) {
       return Expanded(child: placeholder);
     }
+    final SplitViewState splitViewState = SplitViewScope.of(context);
     return Expanded(
       child: ClipRect(
         child: _NavigatorContainer(
+          navigatorKey: splitViewState._rightNavigatorKey,
           onPopPage: onPopPage,
           pages: pages,
         ),
@@ -573,6 +584,7 @@ class TopNavigationContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SplitViewState splitViewState = SplitViewScope.of(context);
     return Align(
       key: key,
       child: Stack(
@@ -601,6 +613,7 @@ class TopNavigationContainer extends StatelessWidget {
                   constraints:
                       const BoxConstraints(maxHeight: 600, maxWidth: 500),
                   child: _NavigatorContainer(
+                    navigatorKey: splitViewState._topNavigatorKey,
                     onPopPage: onPopPage,
                     pages: <Page<dynamic>>[
                       // add stub page for trigger navigation button
@@ -703,6 +716,7 @@ class _SplitLayout extends StatelessWidget {
             ClipRect(
               child: Container(
                 child: _NavigatorContainer(
+                  navigatorKey: splitViewState._leftNavigatorKey,
                   onPopPage: splitViewState._onPopPage,
                   pages: splitViewState._leftPages
                       .map((PageNode e) => e._page)
@@ -749,4 +763,20 @@ class _SplitLayout extends StatelessWidget {
       ],
     );
   }
+}
+
+class _PagesContainer implements PagesContainer {
+  final int Function() countFunc;
+  final Future<bool> Function() tryPopTopFunc;
+
+  _PagesContainer({
+    required this.countFunc,
+    required this.tryPopTopFunc,
+  });
+
+  @override
+  int get count => countFunc.call();
+
+  @override
+  Future<bool> tryPopTop() => tryPopTopFunc.call();
 }

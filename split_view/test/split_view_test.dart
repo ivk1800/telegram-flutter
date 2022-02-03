@@ -1,5 +1,5 @@
 // ignore_for_file: cascade_invocations
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:split_view/split_view.dart';
 
@@ -133,6 +133,194 @@ void main() {
   });
 
   _removeUntilLSplitModeGroup();
+
+  _willPopSplitModeGroup();
+}
+
+void _willPopSplitModeGroup() {
+  testWidgets('should pop left page by back press', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1, 2],
+    );
+
+    await controller.backPress(didPop: true);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should pop right page by back press', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1, 2],
+    );
+
+    await controller.backPress(didPop: true);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should pop top page by back press', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1, 2],
+    );
+
+    await controller.backPress(didPop: true);
+
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1],
+    );
+  });
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  testWidgets('should not pop by back press if single left page', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+
+    await controller.backPress(didPop: false);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should not pop by back press if single right page', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1],
+    );
+
+    await controller.backPress(didPop: false);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should not pop by back press if single top page', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1],
+    );
+
+    await controller.backPress(didPop: false);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets(
+      'should not pop by back press if one page in left and right containers', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1],
+    );
+
+    await controller.backPress(didPop: false);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1],
+    );
+  });
 }
 
 void _removeUntilLSplitModeGroup() {
