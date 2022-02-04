@@ -2,7 +2,7 @@
 ### (WIP) Telegram client written in Dart and uses Flutter.
 ---
 
-preferred flutter version: `stable, 2.8.0, revision cf44000065`
+preferred flutter version: `stable, 2.10.0, revision 5f105a6ca7`
 
 td lib version: `1.8.0` c0385078
 
@@ -24,7 +24,7 @@ td lib version: `1.8.0` c0385078
 
 1. `git clone git@github.com:tdlib/td.git`
 2. cd td
-3. git checkout ``
+3. git checkout `c0385078`
 
 #### android
 Instruction: https://github.com/tdlib/td/issues/77#issuecomment-640719893
