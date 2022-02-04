@@ -1,8 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:split_view/src/split_view_scope.dart';
-
-import 'container_divider.dart';
 import 'page_animation_strategy.dart';
 import 'page_pop_strategy.dart';
 import 'split_view_delegate.dart';
@@ -15,6 +13,8 @@ class Config {
     required this.minRightContainerWidth,
     required this.maxCompactWidth,
     required this.isDraggableDivider,
+    required this.draggableDividerWidth,
+    required this.draggableDividerColor,
   });
 
   final double leftContainerWidth;
@@ -22,8 +22,10 @@ class Config {
   final double maxLeftContainerWidth;
   final double minRightContainerWidth;
   final double maxCompactWidth;
+  final double draggableDividerWidth;
 
   final bool isDraggableDivider;
+  final Color draggableDividerColor;
 }
 
 class SplitView extends StatefulWidget {
@@ -35,6 +37,8 @@ class SplitView extends StatefulWidget {
       maxLeftContainerWidth: 400,
       isDraggableDivider: true,
       minRightContainerWidth: 500,
+      draggableDividerWidth: 6,
+      draggableDividerColor: Colors.grey,
       maxCompactWidth: 699,
     ),
     Key? key,
@@ -537,37 +541,6 @@ class _RightNavigatorContainer extends StatelessWidget {
   }
 }
 
-class _DraggableDivider extends StatelessWidget {
-  const _DraggableDivider({
-    Key? key,
-    required this.isDraggableDivider,
-    required this.onPointerMove,
-  }) : super(key: key);
-
-  final bool isDraggableDivider;
-  final PointerMoveEventListener onPointerMove;
-
-  @override
-  Widget build(BuildContext context) {
-    final Container divider = Container(
-      color: Colors.transparent,
-      constraints:
-          const BoxConstraints.expand(width: 3, height: double.infinity),
-      child: const ContainerDivider(),
-    );
-    if (isDraggableDivider) {
-      return MouseRegion(
-        cursor: SystemMouseCursors.resizeColumn,
-        child: Listener(
-          onPointerMove: onPointerMove,
-          child: divider,
-        ),
-      );
-    }
-    return divider;
-  }
-}
-
 class TopNavigationContainer extends StatelessWidget {
   const TopNavigationContainer({
     Key? key,
@@ -709,6 +682,8 @@ class _SplitLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SplitViewState splitViewState = SplitViewScope.of(context);
+    final double draggableDividerWidth =
+        splitViewState.widget.config.draggableDividerWidth;
     return Stack(
       children: <Widget>[
         Row(
@@ -729,18 +704,11 @@ class _SplitLayout extends StatelessWidget {
             ),
             if (splitViewState._leftPages.isNotEmpty ||
                 splitViewState._rightPages.isNotEmpty)
-              _DraggableDivider(
-                isDraggableDivider:
-                    splitViewState.widget.config.isDraggableDivider,
-                onPointerMove: (PointerMoveEvent event) {
-                  splitViewState.setState(() {
-                    splitViewState._leftContainerWidth =
-                        event.position.dx.clamp(
-                      splitViewState.widget.config.minLeftContainerWidth,
-                      splitViewState.widget.config.maxLeftContainerWidth,
-                    );
-                  });
-                },
+              ConstrainedBox(
+                constraints: const BoxConstraints.expand(width: 1),
+                child: ColoredBox(
+                  color: splitViewState.widget.config.draggableDividerColor,
+                ),
               ),
             _RightNavigatorContainer(
               onPopPage: splitViewState._onPopPage,
@@ -751,6 +719,33 @@ class _SplitLayout extends StatelessWidget {
             ),
           ],
         ),
+        if (splitViewState.widget.config.isDraggableDivider)
+          Padding(
+            padding: EdgeInsets.only(
+              left: splitViewState._leftContainerWidth -
+                  draggableDividerWidth / 2,
+            ),
+            child: ConstrainedBox(
+              constraints: BoxConstraints.expand(width: draggableDividerWidth),
+              child: MouseRegion(
+                cursor: SystemMouseCursors.resizeColumn,
+                child: Listener(
+                  onPointerMove: (PointerMoveEvent event) {
+                    splitViewState.setState(() {
+                      splitViewState._leftContainerWidth =
+                          event.position.dx.clamp(
+                        splitViewState.widget.config.minLeftContainerWidth,
+                        splitViewState.widget.config.maxLeftContainerWidth,
+                      );
+                    });
+                  },
+                  child: const ColoredBox(
+                    color: Colors.transparent,
+                  ),
+                ),
+              ),
+            ),
+          ),
         AnimatedTopNavigationContainer(
           onPopPage: splitViewState._onPopPage,
           isNotSinglePage: splitViewState._leftPages.isNotEmpty ||
