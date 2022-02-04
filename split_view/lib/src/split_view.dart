@@ -434,14 +434,16 @@ abstract class MyPage<T> extends Page<T> {
 }
 
 class _SimplePage extends MyPage<dynamic> {
-  const _SimplePage({
+  _SimplePage({
     required this.builder,
     required this.animateRouterProvider,
     required ContainerType containerType,
     required LocalKey key,
-  }) : super(key: key, container: containerType);
+  })  : _key = GlobalKey(),
+        super(key: key, container: containerType);
 
   final WidgetBuilder builder;
+  final GlobalKey<dynamic> _key;
   final bool Function() animateRouterProvider;
 
   @override
@@ -454,7 +456,9 @@ class _SimplePage extends MyPage<dynamic> {
         }
         return null;
       },
-      builder: builder.call,
+      builder: (BuildContext context) {
+        return KeyedSubtree(key: _key, child: builder.call(context));
+      },
     );
   }
 }
