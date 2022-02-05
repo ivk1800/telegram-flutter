@@ -55,14 +55,6 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
       ),
       ElevatedButton(
         onPressed: () {
-          _navigationKey.currentState?.setLeftRootPage(
-            _buildPage(title: 'Root left', color: _generateColor()),
-          );
-        },
-        child: const Text('set root left'),
-      ),
-      ElevatedButton(
-        onPressed: () {
           _count++;
           final int c = _count;
           final Color color = _generateColor();
@@ -109,15 +101,19 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
       ),
       ElevatedButton(
         onPressed: () {
-          _navigationKey.currentState?.add(
-            key: UniqueKey(),
-            builder: (_) {
-              return const Center(child: Text('placeholder'));
-            },
-            container: ContainerType.right,
+          _navigationKey.currentState?.removeUntil(
+            ContainerType.right,
+            (PageNode node) => false,
           );
         },
-        child: const Text('add right placeholder'),
+        child: const Text('remove right until placeholder'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          _navigationKey.currentState!.setRightContainerPlaceholder(
+              const Center(child: Text('placeholder')));
+        },
+        child: const Text('set right placeholder'),
       ),
       ElevatedButton(
         onPressed: () {
@@ -130,12 +126,8 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
             ..removeUntilRoot(ContainerType.left)
             ..removeUntilRoot(ContainerType.top)
             ..removeUntilRoot(ContainerType.right)
-            ..setLeftRootPage(_buildPage(
-              title: 'root left $_count',
-              color: _generateColor(),
-            ))
             ..setRightContainerPlaceholder(Container(
-              color: Colors.redAccent,
+              color: Colors.grey,
               child: const Center(child: Text('placeholder')),
             ));
         },

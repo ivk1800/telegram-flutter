@@ -24,6 +24,7 @@ class AppControllerRouterImpl implements IAppControllerRouter {
       return;
     }
 
+    final Widget mainScreenWidget = _mainScreenFactory.create();
     currentState
       ..removeUntilRoot(ContainerType.left)
       ..removeUntilRoot(ContainerType.top)
@@ -36,7 +37,10 @@ class AppControllerRouterImpl implements IAppControllerRouter {
           ),
         ),
       )
-      ..setLeftRootPage(_mainScreenFactory.create());
+      ..add(
+          key: UniqueKey(),
+          builder: (_) => mainScreenWidget,
+          container: ContainerType.left);
   }
 
   @override

@@ -131,8 +131,7 @@ class SplitViewState extends State<SplitView> implements SplitLayoutConfig {
   final GlobalKey<NavigatorState> _rightNavigatorKey =
       GlobalKey<NavigatorState>();
 
-  PageNode? _leftRootPage;
-  Widget _rightContainerPlaceholder = Container();
+  Widget _rightContainerPlaceholder = const SizedBox.shrink();
 
   late List<PageNode> _compactPages = const <PageNode>[];
   bool _isCompact = false;
@@ -178,22 +177,6 @@ class SplitViewState extends State<SplitView> implements SplitLayoutConfig {
     setState(() {
       removeUntilRoot(container);
       add(key: key, builder: builder, container: container);
-      _refreshCompactPages();
-    });
-  }
-
-  void setLeftRootPage(Widget widget) {
-    setState(() {
-      if (_leftRootPage == null) {
-        _leftRootPage = _createLeftRootPage(widget);
-        _leftPages.add(_leftRootPage!);
-      } else {
-        _leftRootPage = _createLeftRootPage(widget);
-        final int indexOfRootPage = _leftPages.indexOf(_leftPages.firstWhere(
-          (PageNode element) => element.order == kLeftRootPageIndex,
-        ));
-        _leftPages[indexOfRootPage] = _leftRootPage!;
-      }
       _refreshCompactPages();
     });
   }
