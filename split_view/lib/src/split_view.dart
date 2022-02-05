@@ -1,5 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:split_view/src/page_animation_strategy.dart';
+import 'package:split_view/src/page_route_configurator.dart';
 import 'package:split_view/src/split_view_scope.dart';
 import 'page_animation_strategy.dart';
 import 'page_pop_strategy.dart';
@@ -432,6 +434,21 @@ class SplitViewState extends State<SplitView> implements SplitLayoutConfig {
     }
   }
 
+  List<PageNode> _getPagesOf(ContainerType container) {
+    if (_isCompact) {
+      return _compactPages;
+    }
+
+    switch (container) {
+      case ContainerType.left:
+        return _leftPages;
+      case ContainerType.right:
+        return _rightPages;
+      case ContainerType.top:
+        return _topPages;
+    }
+  }
+
   static const int kLeftRootPageIndex = 0;
   static const int kRightRootPageIndex = -1;
 }
@@ -460,8 +477,30 @@ class _SimplePage extends MyPage<dynamic> {
 
   @override
   Route<dynamic> createRoute(BuildContext context) {
+    final SplitViewState splitViewState = SplitViewScope.of(context);
+    final PageRouteConfigurator configurator =
+        splitViewState.widget.delegate.pageRouteConfigurator;
+
     return _DefaultRoute<dynamic>(
       settings: this,
+      isWillHandlePopInternally: () {
+        return !splitViewState._isCompact
+            ? configurator.isWillHandlePopInternally(
+                pages: splitViewState._getPagesOf(container),
+                key: key!,
+                container: container,
+              )
+            : null;
+      },
+      isFullscreenDialog: () {
+        return !splitViewState._isCompact
+            ? configurator.isFullscreenDialog(
+                pages: splitViewState._getPagesOf(container),
+                key: key!,
+                container: container,
+              )
+            : null;
+      },
       routerDurationProvider: () {
         if (!animateRouterProvider()) {
           return Duration.zero;
@@ -479,10 +518,14 @@ class _DefaultRoute<T> extends MaterialPageRoute<T> {
   _DefaultRoute({
     required RouteSettings? settings,
     required WidgetBuilder builder,
+    required this.isFullscreenDialog,
+    required this.isWillHandlePopInternally,
     required this.routerDurationProvider,
   }) : super(builder: builder, settings: settings);
 
   final Duration? Function() routerDurationProvider;
+  final bool? Function() isWillHandlePopInternally;
+  final bool? Function() isFullscreenDialog;
 
   @override
   Duration get transitionDuration {
@@ -493,6 +536,15 @@ class _DefaultRoute<T> extends MaterialPageRoute<T> {
   Duration get reverseTransitionDuration {
     return routerDurationProvider() ?? super.reverseTransitionDuration;
   }
+
+  @override
+  bool get willHandlePopInternally {
+    return isWillHandlePopInternally.call() ?? super.willHandlePopInternally;
+  }
+
+  @override
+  bool get fullscreenDialog =>
+      isFullscreenDialog.call() ?? super.fullscreenDialog;
 }
 
 extension _Extensions on List<PageNode> {
@@ -557,8 +609,8 @@ class _RightNavigatorContainer extends StatelessWidget {
   }
 }
 
-class TopNavigationContainer extends StatelessWidget {
-  const TopNavigationContainer({
+class _TopNavigationContainer extends StatelessWidget {
+  const _TopNavigationContainer({
     Key? key,
     required this.isNotSinglePage,
     required this.onPopPage,
@@ -626,8 +678,8 @@ class TopNavigationContainer extends StatelessWidget {
   }
 }
 
-class AnimatedTopNavigationContainer extends StatelessWidget {
-  const AnimatedTopNavigationContainer({
+class _AnimatedTopNavigationContainer extends StatelessWidget {
+  const _AnimatedTopNavigationContainer({
     Key? key,
     required this.isNotSinglePage,
     required this.onPopPage,
@@ -647,7 +699,7 @@ class AnimatedTopNavigationContainer extends StatelessWidget {
       child: pages.isEmpty
           ? const SizedBox()
           : RemoveToPadding(
-              child: TopNavigationContainer(
+              child: _TopNavigationContainer(
                 isNotSinglePage: isNotSinglePage,
                 onPopPage: onPopPage,
                 pages: pages,
@@ -757,7 +809,7 @@ class _SplitLayout extends StatelessWidget {
               ),
             ),
           ),
-        AnimatedTopNavigationContainer(
+        _AnimatedTopNavigationContainer(
           onPopPage: splitViewState._onPopPage,
           isNotSinglePage: splitViewState._leftPages.isNotEmpty ||
               splitViewState._rightPages.isNotEmpty,

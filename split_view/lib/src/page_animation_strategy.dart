@@ -57,7 +57,7 @@ class _DefaultPageAnimationStrategy implements PageAnimationStrategy {
     LocalKey key,
     ContainerType container,
   ) {
-    return _indexOf(pages, key) > 1;
+    return _indexOf(pages, key) > 0;
   }
 
   @override
