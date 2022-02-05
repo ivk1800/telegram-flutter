@@ -722,7 +722,6 @@ class _CompactLayout extends StatelessWidget {
     return _NavigatorContainer(
       onPopPage: splitViewState._onPopPage,
       pages: splitViewState._compactPages.map((PageNode e) => e._page).toList(),
-      navigatorKey: splitViewState._topNavigatorKey,
     );
   }
 }
