@@ -2,6 +2,7 @@ import 'compact_layout_merge_strategy.dart';
 import 'compact_layout_strategy.dart';
 import 'page_animation_strategy.dart';
 import 'page_pop_strategy.dart';
+import 'split_layout_delegate.dart';
 
 abstract class SplitViewDelegate {
   CompactLayoutMergeStrategy get compactLayoutMergeStrategy;
@@ -11,6 +12,8 @@ abstract class SplitViewDelegate {
   PageAnimationStrategy get pageAnimationStrategy;
 
   PagePopStrategy get pagePopStrategy;
+
+  SplitLayoutDelegate get splitLayoutDelegate;
 }
 
 class DefaultSplitViewDelegate implements SplitViewDelegate {
@@ -30,4 +33,8 @@ class DefaultSplitViewDelegate implements SplitViewDelegate {
 
   @override
   PagePopStrategy get pagePopStrategy => const PagePopStrategy.create();
+
+  @override
+  SplitLayoutDelegate get splitLayoutDelegate =>
+      const SplitLayoutDelegate.create();
 }

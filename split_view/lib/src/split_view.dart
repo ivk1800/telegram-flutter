@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:split_view/src/split_view_scope.dart';
 import 'page_animation_strategy.dart';
 import 'page_pop_strategy.dart';
+import 'split_layout_delegate.dart';
 import 'split_view_delegate.dart';
 
 class Config {
@@ -10,7 +11,6 @@ class Config {
     required this.leftContainerWidth,
     required this.minLeftContainerWidth,
     required this.maxLeftContainerWidth,
-    required this.minRightContainerWidth,
     required this.maxCompactWidth,
     required this.isDraggableDivider,
     required this.draggableDividerWidth,
@@ -20,7 +20,6 @@ class Config {
   final double leftContainerWidth;
   final double minLeftContainerWidth;
   final double maxLeftContainerWidth;
-  final double minRightContainerWidth;
   final double maxCompactWidth;
   final double draggableDividerWidth;
 
@@ -36,7 +35,6 @@ class SplitView extends StatefulWidget {
       leftContainerWidth: 350,
       maxLeftContainerWidth: 400,
       isDraggableDivider: true,
-      minRightContainerWidth: 500,
       draggableDividerWidth: 6,
       draggableDividerColor: Colors.grey,
       maxCompactWidth: 699,
@@ -81,7 +79,21 @@ class PageNode {
   }
 }
 
-class SplitViewState extends State<SplitView> {
+class SplitViewState extends State<SplitView> implements SplitLayoutConfig {
+  @override
+  // ignore: avoid_setters_without_getters
+  set leftContainerWidth(double value) {
+    setState(() {
+      _leftContainerWidth = value;
+    });
+  }
+
+  @override
+  double get maxLeftContainerWidth => widget.config.maxLeftContainerWidth;
+
+  @override
+  double get minLeftContainerWidth => widget.config.minLeftContainerWidth;
+
   late List<PageNode> _leftPages;
   late List<PageNode> _rightPages;
   late List<PageNode> _topPages;
@@ -735,13 +747,8 @@ class _SplitLayout extends StatelessWidget {
                 cursor: SystemMouseCursors.resizeColumn,
                 child: Listener(
                   onPointerMove: (PointerMoveEvent event) {
-                    splitViewState.setState(() {
-                      splitViewState._leftContainerWidth =
-                          event.position.dx.clamp(
-                        splitViewState.widget.config.minLeftContainerWidth,
-                        splitViewState.widget.config.maxLeftContainerWidth,
-                      );
-                    });
+                    splitViewState.widget.delegate.splitLayoutDelegate
+                        .onDragDivider(splitViewState, event.position.dx);
                   },
                   child: const ColoredBox(
                     color: Colors.transparent,
