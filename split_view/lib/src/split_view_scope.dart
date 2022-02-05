@@ -7,10 +7,13 @@ class SplitViewScope extends InheritedWidget {
     Key? key,
     required Widget child,
     required SplitViewState state,
+    required int version,
   })  : _state = state,
+        _version = version,
         super(key: key, child: child);
 
   final SplitViewState _state;
+  final int _version;
 
   static SplitViewState of(BuildContext context) {
     final SplitViewScope? result =
@@ -21,5 +24,6 @@ class SplitViewScope extends InheritedWidget {
 
   // todo: handle update
   @override
-  bool updateShouldNotify(SplitViewScope oldWidget) => true;
+  bool updateShouldNotify(SplitViewScope oldWidget) =>
+      oldWidget._version != _version;
 }

@@ -1,7 +1,7 @@
 abstract class SplitLayoutDelegate {
   const factory SplitLayoutDelegate.create() = _DefaultSplitLayoutDelegate;
 
-  void onDragDivider(SplitLayoutConfig data, double dx);
+  double calculateLeftContainerWidth(SplitLayoutConfig config, double dx);
 }
 
 abstract class SplitLayoutConfig {
@@ -17,10 +17,7 @@ class _DefaultSplitLayoutDelegate implements SplitLayoutDelegate {
   const _DefaultSplitLayoutDelegate();
 
   @override
-  void onDragDivider(SplitLayoutConfig data, double dx) {
-    data.leftContainerWidth = dx.clamp(
-      data.minLeftContainerWidth,
-      data.maxLeftContainerWidth,
-    );
+  double calculateLeftContainerWidth(SplitLayoutConfig config, double dx) {
+    return dx.clamp(config.minLeftContainerWidth, config.maxLeftContainerWidth);
   }
 }
