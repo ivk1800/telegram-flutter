@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_country_impl/src/repository/country_repository.dart';
@@ -13,31 +12,22 @@ class ChooseCountryBloc extends Bloc<ChooseCountryEvent, ChooseCountryState> {
     required CountryRepository countryRepository,
   })  : _args = args,
         _countryRepository = countryRepository,
-        super(const LoadingState()) {
-    _countryRepository
-        .getCountries()
-        .then((List<Country> value) => emit(DataState(countries: value)));
+        super(const ChooseCountryState.loading()) {
+    _init();
   }
 
   final ChooseCountryArgs _args;
   final CountryRepository _countryRepository;
 
-  @override
-  Stream<ChooseCountryState> mapEventToState(ChooseCountryEvent event) async* {
-    switch (event.runtimeType) {
-      case InitEvent:
-        {
-          final List<Country> countries =
-              await _countryRepository.getCountries();
-          yield DataState(countries: countries);
-          break;
-        }
-      case ChooseEvent:
-        {
-          yield const DoneState();
-          _args.callback.call((event as ChooseEvent).country);
-          break;
-        }
-    }
+  void _init() {
+    on<Init>((Init event, Emitter<ChooseCountryState> emit) async {
+      final List<Country> countries = await _countryRepository.getCountries();
+      emit(ChooseCountryState.data(countries));
+    });
+    on<Choose>((Choose event, Emitter<ChooseCountryState> emit) {
+      // TODO: close screen through router
+      emit(const ChooseCountryState.done());
+      _args.callback.call(event.country);
+    });
   }
 }

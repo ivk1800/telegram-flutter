@@ -3,6 +3,8 @@ library feature_dev;
 import 'dart:async';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:dialog_api/dialog_api.dart';
+import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:feature_dev/src/screen/dev_root_page.dart';
 import 'package:feature_dev/src/screen/events_list_page.dart';
@@ -45,7 +47,9 @@ class DevFeature {
   }
 }
 
-abstract class IDevFeatureRouter {
+abstract class IDevFeatureRouter implements IDialogRouter {
   void toEventsList();
   void toCreateNewChat();
+  // todo use router from navigation module of country
+  void toChooseCountry(void Function(Country country) callback);
 }

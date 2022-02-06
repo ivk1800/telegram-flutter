@@ -10,6 +10,10 @@ dependencies:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
+  dialog_api:
+    path: ../../dialog_api
+  feature_country_api:
+    path: ../feature_country_api
   flutter:
     sdk: flutter
   jugger: ^2.0.0

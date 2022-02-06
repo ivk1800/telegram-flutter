@@ -1,26 +1,12 @@
-import 'package:equatable/equatable.dart';
 import 'package:feature_country_api/feature_country_api.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class ChooseCountryState extends Equatable {
-  const ChooseCountryState();
+part 'choose_country_state.freezed.dart';
 
-  @override
-  List<Object?> get props => <dynamic>[];
-}
-
-class LoadingState extends ChooseCountryState {
-  const LoadingState();
-}
-
-class DataState extends ChooseCountryState {
-  const DataState({required this.countries});
-
-  final List<Country> countries;
-
-  @override
-  List<Object> get props => <Object>[countries];
-}
-
-class DoneState extends ChooseCountryState {
-  const DoneState();
+@freezed
+@immutable
+class ChooseCountryState with _$ChooseCountryState {
+  const factory ChooseCountryState.loading() = Loading;
+  const factory ChooseCountryState.done() = Done;
+  const factory ChooseCountryState.data(List<Country> countries) = Data;
 }

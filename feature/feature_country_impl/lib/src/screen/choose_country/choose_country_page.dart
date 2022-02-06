@@ -22,21 +22,21 @@ class ChooseCountyPage extends StatelessWidget {
       ),
       body: BlocConsumer<ChooseCountryBloc, ChooseCountryState>(
         listener: (BuildContext context, ChooseCountryState state) {
-          if (state is DoneState) {
+          if (state is Done) {
             Navigator.of(context).pop();
           }
         },
         builder: (BuildContext context, ChooseCountryState state) {
-          if (state is DataState) {
+          if (state is Data) {
             return ListView.builder(
               itemCount: state.countries.length,
               itemBuilder: (BuildContext context, int index) {
                 final Country country = state.countries[index];
                 return ListTile(
                   onTap: () {
-                    context.read<ChooseCountryBloc>().add(ChooseEvent(
-                          country: country,
-                        ));
+                    context.read<ChooseCountryBloc>().add(
+                          ChooseCountryEvent.choose(country),
+                        );
                   },
                   title: Text(country.name),
                   trailing: Text(

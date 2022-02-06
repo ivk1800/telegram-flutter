@@ -26,7 +26,7 @@ class ChooseCountryScreenFactory implements IChooseCountryScreenFactory {
           args: ChooseCountryArgs(callback: callback),
           //todo get from feature component
           countryRepository: const CountryRepository(),
-        )..add(const InitEvent()),
+        )..add(const ChooseCountryEvent.init()),
         child: const ChooseCountyPage(),
       ),
     );
