@@ -1,50 +1,28 @@
-import 'package:equatable/equatable.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class ProfileState extends Equatable {
-  const ProfileState({
-    required this.headerState,
-    required this.bodyState,
-  });
+part 'profile_state.freezed.dart';
 
-  final HeaderState headerState;
-  final BodyState bodyState;
-
-  @override
-  List<Object> get props => <Object>[
-        headerState,
-        bodyState,
-      ];
+@freezed
+@immutable
+class ProfileState with _$ProfileState {
+  const factory ProfileState({
+    required HeaderState headerState,
+    required BodyState bodyState,
+  }) = Profile;
 }
 
-class HeaderState extends Equatable {
-  const HeaderState({required this.info});
-
-  final ChatHeaderInfo info;
-
-  @override
-  List<Object> get props => <Object>[info];
+@freezed
+@immutable
+class HeaderState with _$HeaderState {
+  const factory HeaderState.info(ChatHeaderInfo info) = Info;
 }
 
-abstract class BodyState extends Equatable {
-  const BodyState();
-}
+@freezed
+@immutable
+class BodyState with _$BodyState {
+  const factory BodyState.loading() = Loading;
 
-class LoadingBodyState extends BodyState {
-  const LoadingBodyState();
-
-  @override
-  List<Object?> get props => <dynamic>[];
-}
-
-class DataBodyState extends BodyState {
-  const DataBodyState({
-    required this.content,
-  });
-
-  final ContentData content;
-
-  @override
-  List<Object> get props => <Object>[content];
+  const factory BodyState.data(ContentData content) = Data;
 }

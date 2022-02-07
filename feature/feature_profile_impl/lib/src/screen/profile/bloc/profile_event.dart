@@ -1,27 +1,18 @@
-import 'package:equatable/equatable.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class ProfileEvent extends Equatable {
-  const ProfileEvent();
+import 'profile_state.dart';
 
-  @override
-  List<Object> get props => <Object>[];
-}
+part 'profile_event.freezed.dart';
 
-abstract class ActionEvent extends ProfileEvent {
-  const ActionEvent();
-}
-
-class NotificationToggleTap extends ActionEvent {
-  const NotificationToggleTap();
-}
-
-class NotificationTap extends ActionEvent {
-  const NotificationTap();
-}
-
-class MessagesTap extends ActionEvent {
-  const MessagesTap({required this.type});
-
-  final SharedContentType type;
+@freezed
+@immutable
+class ProfileEvent with _$ProfileEvent {
+  const factory ProfileEvent.init() = Init;
+  const factory ProfileEvent.notificationToggleTap() = NotificationToggleTap;
+  const factory ProfileEvent.notificationTap() = NotificationTap;
+  const factory ProfileEvent.messagesTap(SharedContentType type) = MessagesTap;
+  // TODO: internal logic in state, refactor
+  const factory ProfileEvent.newProfileState(ProfileState state) =
+      NewProfileState;
 }

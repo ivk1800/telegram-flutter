@@ -1,10 +1,9 @@
-import 'dart:ffi';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:split_view/src/page_animation_strategy.dart';
 import 'package:split_view/src/page_route_configurator.dart';
 import 'package:split_view/src/split_view_scope.dart';
+
 import 'page_animation_strategy.dart';
 import 'page_pop_strategy.dart';
 import 'split_layout_delegate.dart';

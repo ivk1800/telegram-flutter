@@ -44,6 +44,8 @@ class ContentInteractor {
         .toList();
 
     final td.Chat chat = await _chatRepository.getChat(_args.id);
+
+    // TODO: replace by map extension
     switch (chat.type.getConstructor()) {
       case td.ChatTypeSecret.CONSTRUCTOR:
         {

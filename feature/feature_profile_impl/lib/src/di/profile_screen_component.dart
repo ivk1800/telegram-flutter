@@ -1,6 +1,7 @@
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
 import 'package:feature_profile_impl/src/screen/profile/bloc/profile_bloc.dart';
+import 'package:feature_profile_impl/src/screen/profile/bloc/profile_event.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -49,7 +50,7 @@ abstract class ProfileScreenModule {
         headerInfoInteractor: dependencies.chatHeaderInfoFeatureApi
             .getChatHeaderInfoInteractor(args.id),
         contentInteractor: contentInteractor,
-      );
+      )..add(const ProfileEvent.init());
 
   @j.provides
   @j.singleton

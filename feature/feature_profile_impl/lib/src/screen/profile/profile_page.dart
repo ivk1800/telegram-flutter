@@ -39,66 +39,82 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager =
-        Provider.of(context, listen: false);
     final ProfileBloc bloc = BlocProvider.of(context, listen: false);
     final BodyState state = this.state;
-    if (state is DataBodyState) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          if (state.content.description.isNotEmpty)
-            tg.Section(
-              text: localizationManager.getString('Info'),
-            ),
-          if (state.content.description.isNotEmpty)
-            tg.TextCell(
-              title: state.content.description,
-            ),
-          const tg.Divider(),
-          tg.TextCell.toggle(
-            onTap: () {
-              bloc.add(const NotificationTap());
-            },
-            value: !state.content.isMuted,
-            title: localizationManager.getString('Notifications'),
-            subtitle: state.content.isMuted
-                ? localizationManager.getString('NotificationsOff')
-                : localizationManager.getString('NotificationsOn'),
-            onChanged: (bool v) {
-              bloc.add(const NotificationToggleTap());
-            },
-          ),
-          if (state.content.sharedContent.isNotEmpty) const tg.SectionDivider(),
-          if (state.content.sharedContent.isNotEmpty)
-            Expanded(
-              child: ListView.separated(
-                itemBuilder: (BuildContext context, int index) {
-                  final SharedContentInfo info =
-                      state.content.sharedContent[index];
-                  return tg.TextCell.textValue(
-                    onTap: () {
-                      bloc.add(MessagesTap(type: info.type));
-                    },
-                    title: info.title,
-                    value: '${info.count}',
-                    leading: const Icon(
-                      Icons.circle,
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const tg.Divider();
-                },
-                itemCount: state.content.sharedContent.length,
-              ),
-            ),
-          const tg.SectionDivider(),
-        ],
-      );
-    }
+    return state.map(
+      loading: (Loading value) =>
+          const Center(child: CircularProgressIndicator()),
+      data: (Data state) => _Content(state: state, bloc: bloc),
+    );
+  }
+}
 
-    return const Center(child: CircularProgressIndicator());
+class _Content extends StatelessWidget {
+  const _Content({
+    Key? key,
+    required this.bloc,
+    required this.state,
+  }) : super(key: key);
+
+  final Data state;
+  final ProfileBloc bloc;
+
+  @override
+  Widget build(BuildContext context) {
+    final ILocalizationManager localizationManager =
+        Provider.of(context, listen: false);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        if (state.content.description.isNotEmpty)
+          tg.Section(
+            text: localizationManager.getString('Info'),
+          ),
+        if (state.content.description.isNotEmpty)
+          tg.TextCell(
+            title: state.content.description,
+          ),
+        const tg.Divider(),
+        tg.TextCell.toggle(
+          onTap: () {
+            bloc.add(const NotificationTap());
+          },
+          value: !state.content.isMuted,
+          title: localizationManager.getString('Notifications'),
+          subtitle: state.content.isMuted
+              ? localizationManager.getString('NotificationsOff')
+              : localizationManager.getString('NotificationsOn'),
+          onChanged: (bool v) {
+            bloc.add(const NotificationToggleTap());
+          },
+        ),
+        if (state.content.sharedContent.isNotEmpty) const tg.SectionDivider(),
+        if (state.content.sharedContent.isNotEmpty)
+          Expanded(
+            child: ListView.separated(
+              itemBuilder: (BuildContext context, int index) {
+                final SharedContentInfo info =
+                    state.content.sharedContent[index];
+                return tg.TextCell.textValue(
+                  onTap: () {
+                    bloc.add(ProfileEvent.messagesTap(info.type));
+                  },
+                  title: info.title,
+                  value: '${info.count}',
+                  leading: const Icon(
+                    Icons.circle,
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const tg.Divider();
+              },
+              itemCount: state.content.sharedContent.length,
+            ),
+          ),
+        const tg.SectionDivider(),
+      ],
+    );
   }
 }
 
