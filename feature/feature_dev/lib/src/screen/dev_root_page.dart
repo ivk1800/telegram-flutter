@@ -128,6 +128,12 @@ class _Body extends StatelessWidget {
           },
           title: const Text('to Choose Country'),
         ),
+        ListTile(
+          onTap: () {
+            DevWidget.of(context).devFeature.router.toWallPapers();
+          },
+          title: const Text('to WallPapers'),
+        ),
         const Divider(),
       ],
     );

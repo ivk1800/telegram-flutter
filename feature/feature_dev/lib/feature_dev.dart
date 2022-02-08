@@ -50,6 +50,7 @@ class DevFeature {
 abstract class IDevFeatureRouter implements IDialogRouter {
   void toEventsList();
   void toCreateNewChat();
+  void toWallPapers();
   // todo use router from navigation module of country
   void toChooseCountry(void Function(Country country) callback);
 }
