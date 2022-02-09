@@ -148,6 +148,8 @@ class SplitViewState extends State<SplitView> {
     },
   );
 
+  final GlobalKey<NavigatorState> _compactNavigatorKey =
+      GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> _topNavigatorKey =
       GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> _leftNavigatorKey =
@@ -326,7 +328,7 @@ class SplitViewState extends State<SplitView> {
 
   Future<bool> _onWillPop() async {
     if (_internalState.isCompact) {
-      return !(await _topNavigatorKey.currentState!.maybePop());
+      return !(await _compactNavigatorKey.currentState!.maybePop());
     }
 
     return widget.delegate.pagePopStrategy.onWillPop(
@@ -728,6 +730,7 @@ class _CompactLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final SplitViewState splitViewState = SplitViewScope.of(context);
     return _NavigatorContainer(
+      navigatorKey: splitViewState._compactNavigatorKey,
       onPopPage: splitViewState._onPopPage,
       pages: splitViewState._internalState.compactPages
           .map((PageNode e) => e._page)

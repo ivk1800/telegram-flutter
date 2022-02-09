@@ -135,6 +135,84 @@ void main() {
   _removeUntilLSplitModeGroup();
 
   _willPopSplitModeGroup();
+  _willPopCompactGroup();
+}
+
+void _willPopCompactGroup() {
+  testWidgets('should pop right page by back press', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2],
+    );
+
+    await controller.backPress(didPop: true);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should pop top page by back press', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2],
+    );
+
+    await controller.backPress(didPop: true);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should pop left page by back press', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2],
+    );
+
+    await controller.backPress(didPop: true);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1],
+    );
+  });
 }
 
 void _willPopSplitModeGroup() {

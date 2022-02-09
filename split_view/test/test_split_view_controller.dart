@@ -230,7 +230,11 @@ class TestSplitViewController {
     required NavigatorLocation navigatorLocation,
   }) {
     final Element? navigator = _findNavigatorByLocation(navigatorLocation);
-    expect(navigator, isNotNull);
+    expect(
+      navigator,
+      isNotNull,
+      reason: 'navigatorLocation=$navigatorLocation',
+    );
 
     return find.descendant(
       of: find.byWidget(navigator!.widget),
