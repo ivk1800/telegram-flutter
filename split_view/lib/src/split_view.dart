@@ -18,6 +18,7 @@ class Config {
     required this.isDraggableDivider,
     required this.draggableDividerWidth,
     required this.draggableDividerColor,
+    required this.topContainerConfig,
   });
 
   final double leftContainerWidth;
@@ -28,6 +29,19 @@ class Config {
 
   final bool isDraggableDivider;
   final Color draggableDividerColor;
+  final TopContainerConfig topContainerConfig;
+}
+
+class TopContainerConfig {
+  const TopContainerConfig({
+    required this.size,
+    required this.borderRadius,
+    required this.elevation,
+  });
+
+  final Size size;
+  final double borderRadius;
+  final double elevation;
 }
 
 class SplitView extends StatefulWidget {
@@ -39,6 +53,11 @@ class SplitView extends StatefulWidget {
       maxLeftContainerWidth: 400,
       isDraggableDivider: true,
       draggableDividerWidth: 6,
+      topContainerConfig: TopContainerConfig(
+        size: Size(530, 528),
+        borderRadius: 0,
+        elevation: 40,
+      ),
       draggableDividerColor: Colors.grey,
       maxCompactWidth: 699,
     ),
@@ -619,6 +638,8 @@ class _TopNavigationContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SplitViewState splitViewState = SplitViewScope.of(context);
+    final TopContainerConfig topContainerConfig =
+        splitViewState._internalState.config.topContainerConfig;
     return Align(
       key: key,
       child: Stack(
@@ -639,13 +660,17 @@ class _TopNavigationContainer extends StatelessWidget {
             child: Card(
               clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(
+                  topContainerConfig.borderRadius,
+                ),
               ),
-              elevation: 40,
+              elevation: topContainerConfig.elevation,
               child: ClipRect(
                 child: ConstrainedBox(
-                  constraints:
-                      const BoxConstraints(maxHeight: 600, maxWidth: 500),
+                  constraints: BoxConstraints(
+                    maxWidth: topContainerConfig.size.width,
+                    maxHeight: topContainerConfig.size.height,
+                  ),
                   child: _NavigatorContainer(
                     navigatorKey: splitViewState._topNavigatorKey,
                     onPopPage: onPopPage,
