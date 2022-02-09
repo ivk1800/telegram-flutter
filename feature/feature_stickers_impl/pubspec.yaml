@@ -12,12 +12,10 @@ dependencies:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
-  equatable: ^2.0.0
   feature_stickers_api:
     path: ../feature_stickers_api
   flutter:
     sdk: flutter
-  flutter_bloc: 7.2.0
   localization_api:
     path: ../../localization_api
   tile:

@@ -10,12 +10,11 @@ dependencies:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
-  equatable: ^2.0.0
   feature_data_settings_api:
     path: ../feature_data_settings_api
-  flutter_bloc: 7.2.0
   localization_api:
     path: ../../localization_api
+  provider: ^6.0.0
 
 dev_dependencies:
   dependency_validator: ^3.1.2

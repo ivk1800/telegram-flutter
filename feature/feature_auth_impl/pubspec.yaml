@@ -24,7 +24,6 @@ dependencies:
     path: ../feature_country_api
   flutter:
     sdk: flutter
-  flutter_bloc: 7.2.0
   freezed_annotation: ^1.1.0
   jugger: ^2.0.0
   localization_api:
