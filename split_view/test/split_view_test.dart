@@ -136,6 +136,51 @@ void main() {
 
   _willPopSplitModeGroup();
   _willPopCompactGroup();
+  _rightPlaceholderGroup();
+}
+
+void _rightPlaceholderGroup() {
+  testWidgets('should display placeholder in large layout', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.setPlaceholder(const Text('hello'));
+    await tester.pump();
+
+    expect(find.text('hello'), findsOneWidget);
+  });
+
+  testWidgets('should not display placeholder in compact layout', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.setPlaceholder(const Text('hello'));
+    await tester.pump();
+
+    expect(find.text('hello'), findsNothing);
+  });
+
+  testWidgets('should display placeholder after switch layout to large', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.setPlaceholder(const Text('hello'));
+    await tester.pump();
+
+    expect(find.text('hello'), findsNothing);
+    controller.largeScreen();
+    await tester.pump();
+    expect(find.text('hello'), findsOneWidget);
+  });
 }
 
 void _willPopCompactGroup() {

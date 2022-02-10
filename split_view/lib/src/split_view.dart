@@ -228,6 +228,7 @@ class SplitViewState extends State<SplitView> {
   void setRightContainerPlaceholder(Widget widget) {
     setState(() {
       _internalState.rightContainerPlaceholder = widget;
+      _incrementStateVersion(notify: true);
     });
   }
 

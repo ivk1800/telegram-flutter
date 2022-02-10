@@ -67,6 +67,11 @@ class TestSplitViewController {
     return pageId;
   }
 
+  void setPlaceholder(Widget placeholder) {
+    splitViewNavigatorKey.currentState!
+        .setRightContainerPlaceholder(placeholder);
+  }
+
   void compactScreen() {
     binding.window.physicalSizeTestValue = const Size(300, 300);
   }
