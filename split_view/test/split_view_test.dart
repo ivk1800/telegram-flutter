@@ -7,6 +7,8 @@ import 'test_split_view_controller.dart';
 
 void main() {
   group('compact mode', () {
+    group('willPop', _willPopCompactGroup);
+
     testWidgets('should not display empty navigator in compact mode', (
       WidgetTester tester,
     ) async {
@@ -65,7 +67,11 @@ void main() {
           navigatorLocation: NavigatorLocation.compact, pages: const <int>[1]);
     });
   });
+
   group('split mode', () {
+    group('removeUntil', _removeUntilSplitModeGroup);
+    group('willPop', _willPopSplitModeGroup);
+
     testWidgets('should not display empty navigator in split mode', (
       WidgetTester tester,
     ) async {
@@ -132,11 +138,7 @@ void main() {
     _defaultCompactLayoutMergeStrategyGroup();
   });
 
-  _removeUntilLSplitModeGroup();
-
-  _willPopSplitModeGroup();
-  _willPopCompactGroup();
-  _rightPlaceholderGroup();
+  group('placeholder', _rightPlaceholderGroup);
 }
 
 void _rightPlaceholderGroup() {
@@ -446,7 +448,7 @@ void _willPopSplitModeGroup() {
   });
 }
 
-void _removeUntilLSplitModeGroup() {
+void _removeUntilSplitModeGroup() {
   testWidgets('should remove until first page from left container', (
     WidgetTester tester,
   ) async {

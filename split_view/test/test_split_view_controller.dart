@@ -38,14 +38,14 @@ class TestSplitViewController {
   final GlobalKey<SplitViewState> splitViewNavigatorKey =
       GlobalKey<SplitViewState>();
 
+  late final SplitView _splitView = SplitView(
+    delegate: const DefaultSplitViewDelegate(),
+    key: splitViewNavigatorKey,
+  );
+
   Future<void> setup() async {
     binding.window.devicePixelRatioTestValue = 1.0;
-    await _wrapAndPump(
-        tester,
-        SplitView(
-          delegate: const DefaultSplitViewDelegate(),
-          key: splitViewNavigatorKey,
-        ));
+    await _wrapAndPump(tester, _splitView);
     expect(find.byType(SplitView), findsOneWidget);
   }
 
@@ -206,25 +206,36 @@ class TestSplitViewController {
   }
 
   Element? _findNavigatorByLocation(NavigatorLocation location) {
-    // todo: magic numbers
     final List<Element> navigators = _findNavigators();
     if (navigators.isEmpty) {
       return null;
     }
 
     expect(navigators.length, greaterThanOrEqualTo(1));
+
+    final double leftContainerWidth = _splitView.config.leftContainerWidth;
     switch (location) {
       case NavigatorLocation.left:
-        return navigators
-            .firstWhereOrNull((Element element) => element.size!.width == 350);
+        return navigators.firstWhereOrNull(
+          (Element element) {
+            return element.size!.width == leftContainerWidth;
+          },
+        );
       case NavigatorLocation.right:
-        return navigators.firstWhereOrNull((Element element) =>
-            element.size!.width != 350 &&
-            element.size!.width != binding.window.physicalSize.width &&
-            element.size!.height == binding.window.physicalSize.height);
+        return navigators.firstWhereOrNull(
+          (Element element) =>
+              element.size!.width ==
+              binding.window.physicalSize.width -
+                  leftContainerWidth -
+                  _dividerWidth,
+        );
       case NavigatorLocation.top:
-        return navigators.firstWhereOrNull((Element element) =>
-            element.size!.height == 600 && element.size!.width == 500);
+        return navigators.firstWhereOrNull((Element element) {
+          final Size topContainerSize =
+              _splitView.config.topContainerConfig.size;
+          return element.size!.height == topContainerSize.height &&
+              element.size!.width == topContainerSize.width;
+        });
       case NavigatorLocation.compact:
         return navigators.firstWhereOrNull(
             (Element element) => element.size! == binding.window.physicalSize);
@@ -258,6 +269,8 @@ class TestSplitViewController {
         .evaluate()
         .toList();
   }
+
+  static const int _dividerWidth = 1;
 }
 
 enum NavigatorLocation {
