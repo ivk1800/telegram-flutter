@@ -185,6 +185,8 @@ class SplitViewState extends State<SplitView> {
   final GlobalKey<NavigatorState> _rightNavigatorKey =
       GlobalKey<NavigatorState>();
 
+  // region public api
+
   void removeUntilRoot(ContainerType container) {
     setState(() {
       switch (container) {
@@ -269,6 +271,19 @@ class SplitViewState extends State<SplitView> {
     });
   }
 
+  bool hasKey(LocalKey key, ContainerType container) {
+    switch (container) {
+      case ContainerType.left:
+        return _leftPages.hasKey(key);
+      case ContainerType.right:
+        return _rightPages.hasKey(key);
+      case ContainerType.top:
+        return _topPages.hasKey(key);
+    }
+  }
+
+  // endregion public api
+
   void _incrementStateVersion({bool notify = false}) {
     void fn() {
       _internalState.version += 1;
@@ -325,17 +340,6 @@ class SplitViewState extends State<SplitView> {
     } else {
       _internalState.compactPages = const <PageNode>[];
       _incrementStateVersion();
-    }
-  }
-
-  bool hasKey(LocalKey key, ContainerType container) {
-    switch (container) {
-      case ContainerType.left:
-        return _leftPages.hasKey(key);
-      case ContainerType.right:
-        return _rightPages.hasKey(key);
-      case ContainerType.top:
-        return _topPages.hasKey(key);
     }
   }
 

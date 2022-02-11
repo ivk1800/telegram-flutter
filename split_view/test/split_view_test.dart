@@ -140,6 +140,159 @@ void main() {
 
   group('placeholder', _rightPlaceholderGroup);
   group('observer events', _observerEventsGroup);
+  group('has key in compact layout', _hasKeyCompactLayoutGroup);
+}
+
+void _hasKeyCompactLayoutGroup() {
+  testWidgets('should return true if page contains in left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    await tester.pump();
+
+    expect(
+      controller.splitView.hasKey(createTestPageKey(1), ContainerType.left),
+      true,
+    );
+  });
+
+  testWidgets('should return true if page contains in right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    await tester.pump();
+
+    expect(
+      controller.splitView.hasKey(createTestPageKey(1), ContainerType.right),
+      true,
+    );
+  });
+
+  testWidgets('should return true if page contains in top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    await tester.pump();
+
+    expect(
+      controller.splitView.hasKey(createTestPageKey(1), ContainerType.top),
+      true,
+    );
+  });
+
+  testWidgets(
+      'should return false if page not contains in left container but right', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    await tester.pump();
+
+    expect(
+      controller.splitView.hasKey(createTestPageKey(1), ContainerType.left),
+      false,
+    );
+  });
+
+  testWidgets(
+      'should return false if page not contains in left container but top', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    await tester.pump();
+
+    expect(
+      controller.splitView.hasKey(createTestPageKey(1), ContainerType.left),
+      false,
+    );
+  });
+
+  testWidgets(
+      'should return false if page not contains in right container but left', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    await tester.pump();
+
+    expect(
+      controller.splitView.hasKey(createTestPageKey(1), ContainerType.right),
+      false,
+    );
+  });
+
+  testWidgets(
+      'should return false if page not contains in right container but top', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    await tester.pump();
+
+    expect(
+      controller.splitView.hasKey(createTestPageKey(1), ContainerType.left),
+      false,
+    );
+  });
+
+  testWidgets(
+      'should return false if page not contains in top container but left', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    await tester.pump();
+
+    expect(
+      controller.splitView.hasKey(createTestPageKey(1), ContainerType.top),
+      false,
+    );
+  });
+
+  testWidgets(
+      'should return false if page not contains in top container but right', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    await tester.pump();
+
+    expect(
+      controller.splitView.hasKey(createTestPageKey(1), ContainerType.left),
+      false,
+    );
+  });
 }
 
 void _observerEventsGroup() {
