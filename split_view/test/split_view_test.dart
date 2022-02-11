@@ -139,6 +139,465 @@ void main() {
   });
 
   group('placeholder', _rightPlaceholderGroup);
+  group('observer events', _observerEventsGroup);
+}
+
+void _observerEventsGroup() {
+  testWidgets('should call didAdd if add page to left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    await tester.pump();
+
+    controller.expectObserveEventCount(1);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(1),
+      container: ContainerType.left,
+      event: ObserverEvent.add,
+    );
+  });
+
+  testWidgets('should call didAdd if add page to right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    await tester.pump();
+
+    controller.expectObserveEventCount(1);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(1),
+      container: ContainerType.right,
+      event: ObserverEvent.add,
+    );
+  });
+
+  testWidgets('should call didAdd if add page to top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    await tester.pump();
+
+    controller.expectObserveEventCount(1);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(1),
+      container: ContainerType.top,
+      event: ObserverEvent.add,
+    );
+  });
+
+  testWidgets('should call didRemove if pop page from left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    await tester.pumpAndSettle();
+    await controller.backPress(didPop: true);
+
+    controller.expectObserveEventCount(3);
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(2),
+      container: ContainerType.left,
+      event: ObserverEvent.remove,
+    );
+  });
+
+  testWidgets('should call didRemove if pop page from right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    await tester.pumpAndSettle();
+    await controller.backPress(didPop: true);
+
+    controller.expectObserveEventCount(3);
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(2),
+      container: ContainerType.right,
+      event: ObserverEvent.remove,
+    );
+  });
+
+  testWidgets('should call didRemove if pop page from top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pumpAndSettle();
+    await controller.backPress(didPop: true);
+
+    controller.expectObserveEventCount(3);
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(2),
+      container: ContainerType.top,
+      event: ObserverEvent.remove,
+    );
+  });
+
+  testWidgets('should call didAdd if add pages to left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    controller.addPage(container: ContainerType.left, pageId: 3);
+    await tester.pumpAndSettle();
+
+    controller.expectObserveEventCount(3);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(1),
+      container: ContainerType.left,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(2),
+      container: ContainerType.left,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(3),
+      container: ContainerType.left,
+      event: ObserverEvent.add,
+    );
+  });
+
+  testWidgets('should call didAdd if add pages to right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    controller.addPage(container: ContainerType.right, pageId: 3);
+    await tester.pumpAndSettle();
+
+    controller.expectObserveEventCount(3);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(1),
+      container: ContainerType.right,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(2),
+      container: ContainerType.right,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(3),
+      container: ContainerType.right,
+      event: ObserverEvent.add,
+    );
+  });
+
+  testWidgets('should call didAdd if add pages to top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    controller.addPage(container: ContainerType.top, pageId: 3);
+    await tester.pumpAndSettle();
+
+    controller.expectObserveEventCount(3);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(1),
+      container: ContainerType.top,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(2),
+      container: ContainerType.top,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(3),
+      container: ContainerType.top,
+      event: ObserverEvent.add,
+    );
+  });
+
+  testWidgets('should call didAdd and didRemove if add pages to all containers',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 0);
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    controller.addPage(container: ContainerType.top, pageId: 3);
+    await tester.pumpAndSettle();
+
+    await controller.backPress(didPop: true);
+    await controller.backPress(didPop: true);
+    await controller.backPress(didPop: true);
+
+    controller.expectObserveEventCount(7);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(0),
+      container: ContainerType.left,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(1),
+      container: ContainerType.left,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(2),
+      container: ContainerType.right,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 3,
+      key: createTestPageKey(3),
+      container: ContainerType.top,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 4,
+      key: createTestPageKey(3),
+      container: ContainerType.top,
+      event: ObserverEvent.remove,
+    );
+    controller.expectObserverEvent(
+      index: 5,
+      key: createTestPageKey(2),
+      container: ContainerType.right,
+      event: ObserverEvent.remove,
+    );
+    controller.expectObserverEvent(
+      index: 6,
+      key: createTestPageKey(1),
+      container: ContainerType.left,
+      event: ObserverEvent.remove,
+    );
+  });
+
+  testWidgets('should call didRemove if remove until pages form left container',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    controller.addPage(container: ContainerType.left, pageId: 3);
+    await tester.pumpAndSettle();
+
+    controller.splitView.removeUntil(
+      ContainerType.left,
+      (PageNode node) => false,
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectObserveEventCount(6);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(1),
+      container: ContainerType.left,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(2),
+      container: ContainerType.left,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(3),
+      container: ContainerType.left,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 3,
+      key: createTestPageKey(3),
+      container: ContainerType.left,
+      event: ObserverEvent.remove,
+    );
+    controller.expectObserverEvent(
+      index: 4,
+      key: createTestPageKey(2),
+      container: ContainerType.left,
+      event: ObserverEvent.remove,
+    );
+    controller.expectObserverEvent(
+      index: 5,
+      key: createTestPageKey(1),
+      container: ContainerType.left,
+      event: ObserverEvent.remove,
+    );
+  });
+
+  testWidgets(
+      'should call didRemove if remove until pages form right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    controller.addPage(container: ContainerType.right, pageId: 3);
+    await tester.pumpAndSettle();
+
+    controller.splitView.removeUntil(
+      ContainerType.right,
+      (PageNode node) => false,
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectObserveEventCount(6);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(1),
+      container: ContainerType.right,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(2),
+      container: ContainerType.right,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(3),
+      container: ContainerType.right,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 3,
+      key: createTestPageKey(3),
+      container: ContainerType.right,
+      event: ObserverEvent.remove,
+    );
+    controller.expectObserverEvent(
+      index: 4,
+      key: createTestPageKey(2),
+      container: ContainerType.right,
+      event: ObserverEvent.remove,
+    );
+    controller.expectObserverEvent(
+      index: 5,
+      key: createTestPageKey(1),
+      container: ContainerType.right,
+      event: ObserverEvent.remove,
+    );
+  });
+
+  testWidgets('should call didRemove if remove until pages form top container',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    controller.addPage(container: ContainerType.top, pageId: 3);
+    await tester.pumpAndSettle();
+
+    controller.splitView.removeUntil(
+      ContainerType.top,
+      (PageNode node) => false,
+    );
+    await tester.pumpAndSettle();
+
+    controller.expectObserveEventCount(6);
+    controller.expectObserverEvent(
+      index: 0,
+      key: createTestPageKey(1),
+      container: ContainerType.top,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(2),
+      container: ContainerType.top,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 2,
+      key: createTestPageKey(3),
+      container: ContainerType.top,
+      event: ObserverEvent.add,
+    );
+    controller.expectObserverEvent(
+      index: 3,
+      key: createTestPageKey(3),
+      container: ContainerType.top,
+      event: ObserverEvent.remove,
+    );
+    controller.expectObserverEvent(
+      index: 4,
+      key: createTestPageKey(2),
+      container: ContainerType.top,
+      event: ObserverEvent.remove,
+    );
+    controller.expectObserverEvent(
+      index: 5,
+      key: createTestPageKey(1),
+      container: ContainerType.top,
+      event: ObserverEvent.remove,
+    );
+  });
 }
 
 void _rightPlaceholderGroup() {

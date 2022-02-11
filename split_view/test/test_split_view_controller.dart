@@ -9,6 +9,8 @@ Future<void> _wrapAndPump(WidgetTester tester, Widget widget) async {
   await tester.pumpWidget(wrapped);
 }
 
+LocalKey createTestPageKey(int id) => ValueKey<int>(id);
+
 class TestPage extends StatelessWidget {
   const TestPage({
     Key? key,
@@ -26,7 +28,24 @@ class TestPage extends StatelessWidget {
   }
 }
 
-class TestSplitViewController {
+enum ObserverEvent {
+  add,
+  remove,
+}
+
+class _ObserverEventInfo {
+  _ObserverEventInfo({
+    required this.key,
+    required this.event,
+    required this.container,
+  });
+
+  final LocalKey key;
+  final ObserverEvent event;
+  final ContainerType container;
+}
+
+class TestSplitViewController implements SplitViewNavigatorObserver {
   TestSplitViewController({required this.tester});
 
   final WidgetTester tester;
@@ -38,7 +57,10 @@ class TestSplitViewController {
   final GlobalKey<SplitViewState> splitViewNavigatorKey =
       GlobalKey<SplitViewState>();
 
+  final List<_ObserverEventInfo> observerHistory = <_ObserverEventInfo>[];
+
   late final SplitView _splitView = SplitView(
+    observer: this,
     delegate: const DefaultSplitViewDelegate(),
     key: splitViewNavigatorKey,
   );
@@ -56,7 +78,7 @@ class TestSplitViewController {
     required int pageId,
   }) {
     splitViewNavigatorKey.currentState!.add(
-      key: ValueKey<int>(pageId),
+      key: createTestPageKey(pageId),
       builder: (BuildContext context) {
         return TestPage(
           id: pageId,
@@ -205,6 +227,27 @@ class TestSplitViewController {
     expect(await widgetsAppState.didPopRoute(), didPop);
   }
 
+  void expectObserverEvent({
+    required int index,
+    required LocalKey key,
+    required ContainerType container,
+    required ObserverEvent event,
+  }) {
+    final _ObserverEventInfo info = observerHistory[index];
+    expect(info.key, key);
+    expect(info.container, container);
+    expect(info.event, event);
+  }
+
+  void expectObserveEventCount(int count) {
+    expect(
+      observerHistory.length,
+      count,
+      reason:
+          'order: ${observerHistory.map((_ObserverEventInfo e) => '${e.event.name}-${e.key}').join(',')}',
+    );
+  }
+
   Element? _findNavigatorByLocation(NavigatorLocation location) {
     final List<Element> navigators = _findNavigators();
     if (navigators.isEmpty) {
@@ -268,6 +311,28 @@ class TestSplitViewController {
             of: find.byType(SplitView), matching: find.byType(Navigator))
         .evaluate()
         .toList();
+  }
+
+  @override
+  void didAdd(LocalKey key, ContainerType container) {
+    observerHistory.add(
+      _ObserverEventInfo(
+        key: key,
+        event: ObserverEvent.add,
+        container: container,
+      ),
+    );
+  }
+
+  @override
+  void didRemove(LocalKey key, ContainerType container) {
+    observerHistory.add(
+      _ObserverEventInfo(
+        key: key,
+        event: ObserverEvent.remove,
+        container: container,
+      ),
+    );
   }
 
   static const int _dividerWidth = 1;

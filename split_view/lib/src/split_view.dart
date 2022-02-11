@@ -47,6 +47,7 @@ class TopContainerConfig {
 class SplitView extends StatefulWidget {
   const SplitView({
     required this.delegate,
+    this.observer,
     this.config = const Config(
       minLeftContainerWidth: 290,
       leftContainerWidth: 350,
@@ -66,6 +67,7 @@ class SplitView extends StatefulWidget {
 
   final Config config;
   final SplitViewDelegate delegate;
+  final SplitViewNavigatorObserver? observer;
 
   @override
   SplitViewState createState() => SplitViewState();
@@ -78,6 +80,13 @@ class SplitView extends StatefulWidget {
     navigator = navigator ?? context.findAncestorStateOfType<SplitViewState>();
     return navigator!;
   }
+}
+
+abstract class SplitViewNavigatorObserver {
+  const SplitViewNavigatorObserver();
+
+  void didRemove(LocalKey key, ContainerType container);
+  void didAdd(LocalKey key, ContainerType container);
 }
 
 enum ContainerType { left, right, top }
@@ -240,7 +249,7 @@ class SplitViewState extends State<SplitView> {
           if (test.call(candidate)) {
             return;
           }
-          pages.removeLast();
+          widget.observer?.didRemove(pages.removeLast().pageKey, container);
           candidate = pages.lastOrNull;
         }
       }
@@ -273,6 +282,10 @@ class SplitViewState extends State<SplitView> {
   }
 
   void _add(MyPage<dynamic> page, ContainerType containerType) {
+    assert(page.key != null);
+    assert(!_leftPages.any((PageNode element) => element.pageKey == page.key));
+    assert(!_rightPages.any((PageNode element) => element.pageKey == page.key));
+    assert(!_topPages.any((PageNode element) => element.pageKey == page.key));
     setState(() {
       switch (containerType) {
         case ContainerType.left:
@@ -286,6 +299,7 @@ class SplitViewState extends State<SplitView> {
           break;
       }
       _refreshCompactPages();
+      widget.observer?.didAdd(page.key!, containerType);
     });
   }
 
@@ -425,25 +439,35 @@ class SplitViewState extends State<SplitView> {
   }
 
   void _removeTopFromContainer(ContainerType container) {
+    PageNode? removed;
     switch (container) {
       case ContainerType.left:
-        final PageNode lastWhere = _leftPages.lastWhere(
+        final PageNode last = _leftPages.lastWhere(
           (PageNode element) => element.container == ContainerType.left,
         );
-        _leftPages.remove(lastWhere);
+        if (_leftPages.remove(last)) {
+          removed = last;
+        }
         break;
       case ContainerType.right:
-        final PageNode lastWhere = _rightPages.lastWhere(
+        final PageNode last = _rightPages.lastWhere(
           (PageNode element) => element.container == ContainerType.right,
         );
-        _rightPages.remove(lastWhere);
+        if (_rightPages.remove(last)) {
+          removed = last;
+        }
         break;
       case ContainerType.top:
-        final PageNode lastWhere = _topPages.lastWhere(
+        final PageNode last = _topPages.lastWhere(
           (PageNode element) => element.container == ContainerType.top,
         );
-        _topPages.remove(lastWhere);
+        if (_topPages.remove(last)) {
+          removed = last;
+        }
         break;
+    }
+    if (removed != null) {
+      widget.observer?.didRemove(removed.pageKey, container);
     }
   }
 
