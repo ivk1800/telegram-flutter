@@ -34,11 +34,13 @@ class ChatsListScreenRouterImpl implements IChatsListScreenRouter {
     } else {
       final Widget widget =
           _featureProvider.chatFeatureApi.chatScreenFactory.create(chatId);
-      _navigationDelegate.pushAllReplacement(
-        key: key,
-        builder: (BuildContext context) => widget,
-        container: ContainerType.right,
-      );
+      _navigationDelegate
+        ..removeUntil(ContainerType.right, (_) => false)
+        ..add(
+          key: key,
+          builder: (BuildContext context) => widget,
+          container: ContainerType.right,
+        );
     }
   }
 }

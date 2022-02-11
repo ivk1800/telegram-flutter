@@ -352,7 +352,7 @@ class CommonScreenRouterImpl
     required Widget widget,
     required ContainerType container,
   }) {
-    _navigationDelegate.push(
+    _navigationDelegate.add(
       key: UniqueKey(),
       builder: (_) => widget,
       container: container,

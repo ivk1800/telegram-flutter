@@ -40,7 +40,7 @@ class AuthShowcaseFactory {
             }
             return Future<void>.delayed(const Duration(milliseconds: 1000))
                 .then((_) {
-              splitView.removeUntilRoot(ContainerType.top);
+              splitView.removeUntil(ContainerType.top, (_) => false);
               return null;
             });
           },

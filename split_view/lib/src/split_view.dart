@@ -187,39 +187,6 @@ class SplitViewState extends State<SplitView> {
 
   // region public api
 
-  void removeUntilRoot(ContainerType container) {
-    setState(() {
-      switch (container) {
-        case ContainerType.left:
-          _leftPages.removeWhere(
-            (PageNode element) => element.order != kLeftRootPageIndex,
-          );
-          break;
-        case ContainerType.right:
-          _rightPages.removeWhere(
-            (PageNode element) => element.order != kRightRootPageIndex,
-          );
-          break;
-        case ContainerType.top:
-          _topPages.clear();
-          break;
-      }
-      _refreshCompactPages();
-    });
-  }
-
-  void addAllReplacement({
-    required LocalKey key,
-    required WidgetBuilder builder,
-    required ContainerType container,
-  }) {
-    setState(() {
-      removeUntilRoot(container);
-      add(key: key, builder: builder, container: container);
-      _refreshCompactPages();
-    });
-  }
-
   void add({
     required LocalKey key,
     required WidgetBuilder builder,
@@ -251,7 +218,8 @@ class SplitViewState extends State<SplitView> {
           if (test.call(candidate)) {
             return;
           }
-          widget.observer?.didRemove(pages.removeLast().pageKey, container);
+          final PageNode last = pages.removeLast();
+          widget.observer?.didRemove(last.pageKey, container);
           candidate = pages.lastOrNull;
         }
       }
@@ -869,7 +837,7 @@ class _SplitLayout extends StatelessWidget {
           isNotSinglePage: splitViewState._leftPages.isNotEmpty ||
               splitViewState._rightPages.isNotEmpty,
           onBarrierTap: () {
-            splitViewState.removeUntilRoot(ContainerType.top);
+            splitViewState.removeUntil(ContainerType.top, (_) => false);
           },
           pages: splitViewState._topPages.map((PageNode e) => e._page).toList(),
         ),

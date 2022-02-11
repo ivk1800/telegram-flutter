@@ -123,9 +123,9 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
           }
           _count++;
           currentState
-            ..removeUntilRoot(ContainerType.left)
-            ..removeUntilRoot(ContainerType.top)
-            ..removeUntilRoot(ContainerType.right)
+            ..removeUntil(ContainerType.left, (_) => false)
+            ..removeUntil(ContainerType.right, (_) => false)
+            ..removeUntil(ContainerType.top, (_) => false)
             ..setRightContainerPlaceholder(Container(
               color: Colors.grey,
               child: const Center(child: Text('placeholder')),

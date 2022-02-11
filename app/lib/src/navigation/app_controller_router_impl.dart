@@ -26,9 +26,9 @@ class AppControllerRouterImpl implements IAppControllerRouter {
 
     final Widget mainScreenWidget = _mainScreenFactory.create();
     currentState
-      ..removeUntilRoot(ContainerType.left)
-      ..removeUntilRoot(ContainerType.top)
-      ..removeUntilRoot(ContainerType.right)
+      ..removeUntil(ContainerType.left, (_) => false)
+      ..removeUntil(ContainerType.right, (_) => false)
+      ..removeUntil(ContainerType.top, (_) => false)
       ..setRightContainerPlaceholder(
         const Material(
           child: Center(

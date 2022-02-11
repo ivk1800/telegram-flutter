@@ -19,7 +19,7 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
       title: 'chat cells',
       routeCallback: (BuildContext context) {
         SplitView.of(context)
-          ..removeUntilRoot(ContainerType.right)
+          ..removeUntil(ContainerType.right, (_) => false)
           ..add(
             key: UniqueKey(),
             builder: (_) {
@@ -33,7 +33,7 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
       title: 'messages',
       routeCallback: (BuildContext context) {
         SplitView.of(context)
-          ..removeUntilRoot(ContainerType.right)
+          ..removeUntil(ContainerType.right, (_) => false)
           ..add(
             key: UniqueKey(),
             builder: (_) {
@@ -63,7 +63,7 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
         final Widget widget = AuthShowcaseFactory().create(context);
 
         SplitView.of(context)
-          ..removeUntilRoot(ContainerType.top)
+          ..removeUntil(ContainerType.top, (_) => false)
           ..add(
             key: UniqueKey(),
             builder: (_) => widget,

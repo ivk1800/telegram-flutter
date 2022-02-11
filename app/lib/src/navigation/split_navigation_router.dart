@@ -11,17 +11,15 @@ class SplitNavigationDelegateImpl implements ISplitNavigationDelegate {
   final GlobalKey<SplitViewState> _navigationKey;
 
   @override
-  void pushAllReplacement({
-    required LocalKey key,
-    required WidgetBuilder builder,
-    required ContainerType container,
-  }) {
-    _navigationKey.currentState
-        ?.addAllReplacement(key: key, builder: builder, container: container);
+  void removeUntil(ContainerType container, bool Function(LocalKey key) test) {
+    _navigationKey.currentState?.removeUntil(
+      container,
+      (PageNode node) => test.call(node.pageKey),
+    );
   }
 
   @override
-  void push({
+  void add({
     required LocalKey key,
     required WidgetBuilder builder,
     required ContainerType container,
