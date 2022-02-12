@@ -141,6 +141,213 @@ void main() {
   group('placeholder', _rightPlaceholderGroup);
   group('observer events', _observerEventsGroup);
   group('has key in compact layout', _hasKeyCompactLayoutGroup);
+  group('remove by key in compact layout', _removeByKeyCompactLayoutGroup);
+  group('remove by key in split layout', _removeByKeySplitLayoutGroup);
+  group('remove by key', _removeByKeyGroup);
+}
+
+void _removeByKeyGroup() {
+  testWidgets('should not remove remove page is not exist in compact layout', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(2));
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1],
+    );
+  });
+
+  testWidgets('should not remove remove page is not exist in split layout', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(2));
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+  });
+}
+
+void _removeByKeySplitLayoutGroup() {
+  testWidgets('should remove first page from left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(1));
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1, 2],
+    );
+  });
+
+  testWidgets('should remove first page from right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(1));
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1, 2],
+    );
+  });
+
+  testWidgets('should remove first page from top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(1));
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1, 2],
+    );
+  });
+}
+
+void _removeByKeyCompactLayoutGroup() {
+  testWidgets('should remove first page from left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(1));
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2],
+    );
+  });
+
+  testWidgets('should remove first page from right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(1));
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2],
+    );
+  });
+
+  testWidgets('should remove first page from top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(1));
+    await tester.pump();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1, 2],
+    );
+  });
 }
 
 void _hasKeyCompactLayoutGroup() {
@@ -296,6 +503,69 @@ void _hasKeyCompactLayoutGroup() {
 }
 
 void _observerEventsGroup() {
+  testWidgets('should call didRemove if remove page by key from left container',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    await tester.pump();
+    controller.splitView.removeByKey(createTestPageKey(1));
+    await tester.pump();
+
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(1),
+      container: ContainerType.left,
+      event: ObserverEvent.remove,
+    );
+  });
+
+  testWidgets(
+      'should call didRemove if remove page by key from right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    await tester.pump();
+    controller.splitView.removeByKey(createTestPageKey(1));
+    await tester.pump();
+
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(1),
+      container: ContainerType.right,
+      event: ObserverEvent.remove,
+    );
+  });
+
+  testWidgets('should call didRemove if remove page by key from top container',
+      (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    await tester.pump();
+    controller.splitView.removeByKey(createTestPageKey(1));
+    await tester.pump();
+
+    controller.expectObserverEvent(
+      index: 1,
+      key: createTestPageKey(1),
+      container: ContainerType.top,
+      event: ObserverEvent.remove,
+    );
+  });
+
   testWidgets('should call didAdd if add page to left container', (
     WidgetTester tester,
   ) async {

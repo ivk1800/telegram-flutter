@@ -239,6 +239,25 @@ class SplitViewState extends State<SplitView> {
     });
   }
 
+  void removeByKey(LocalKey key) {
+    void remove(List<PageNode> pages) {
+      final PageNode page =
+          pages.firstWhere((PageNode page) => page.pageKey == key);
+      pages.remove(page);
+    }
+
+    if (hasKey(key, ContainerType.top)) {
+      remove(_topPages);
+      widget.observer?.didRemove(key, ContainerType.top);
+    } else if (hasKey(key, ContainerType.right)) {
+      remove(_rightPages);
+      widget.observer?.didRemove(key, ContainerType.right);
+    } else if (hasKey(key, ContainerType.left)) {
+      remove(_leftPages);
+      widget.observer?.didRemove(key, ContainerType.left);
+    }
+  }
+
   bool hasKey(LocalKey key, ContainerType container) {
     switch (container) {
       case ContainerType.left:
