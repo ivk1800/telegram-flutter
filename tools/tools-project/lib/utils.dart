@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:pubspec_parse/pubspec_parse.dart';
+import 'package:pubspec_parse/pubspec_parse.dart' as pp;
 
 import 'dart_project.dart';
 
@@ -22,7 +22,7 @@ Future<List<DartProject>> getDartProjects(String directory) async {
       final String lines =
           await File(e.path).openRead().map(utf8.decode).single;
 
-      final Pubspec pubspec = Pubspec.parse(lines);
+      final pp.Pubspec pubspec = pp.Pubspec.parse(lines);
 
       final bool isFlutter =
           (pubspec.environment?.keys.any((String env) => env == 'flutter') ??
@@ -33,12 +33,28 @@ Future<List<DartProject>> getDartProjects(String directory) async {
 
       final bool withTest =
           pubspec.devDependencies.keys.any((String env) => env == 'test');
+
+      List<Dependency> _map(Map<String, pp.Dependency> dependencies) {
+        return dependencies.keys
+            .where((String key) => dependencies[key] is pp.HostedDependency)
+            .map((String key) {
+          return Dependency(
+              name: key,
+              version: (dependencies[key] as pp.HostedDependency)
+                  .version
+                  .toString());
+        }).toList();
+      }
+
+      final List<Dependency> dependencies = _map(pubspec.dependencies);
+      final List<Dependency> devDependencies = _map(pubspec.devDependencies);
       return DartProject(
         name: pubspec.name,
         path: e.path.replaceAll('pubspec.yaml', ''),
         isFlutter: isFlutter,
         withTest: withTest,
         withBuildRunner: withBuildRunner,
+        dependencies: dependencies + devDependencies,
       );
     },
   );

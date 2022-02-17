@@ -5,6 +5,7 @@ import 'package:console/console.dart';
 import 'package:tools/strings_provider_generator.dart';
 import 'command/pub_get_command.dart';
 import 'dart_project.dart';
+import 'dependencies_info.dart';
 import 'utils.dart';
 
 Future<void> main(List<String> arguments) async {
@@ -16,6 +17,7 @@ Future<void> main(List<String> arguments) async {
     ..addCommand('analyze')
     ..addCommand('validate_dependencies')
     ..addCommand('generate_stings_provider')
+    ..addCommand('dependencies_info')
     ..addCommand('test');
 
   final ArgResults results = parser.parse(arguments);
@@ -59,5 +61,7 @@ Future<void> main(List<String> arguments) async {
     );
   } else if (command == 'generate_stings_provider') {
     generateStringsProvider(workDirectory);
+  } else if (command == 'dependencies_info') {
+    await printDependenciesInfo(workDirectory);
   }
 }
