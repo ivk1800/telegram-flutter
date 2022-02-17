@@ -1,16 +1,11 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class LogoutEvent extends Equatable {
-  const LogoutEvent();
+part 'logout_event.freezed.dart';
 
-  @override
-  List<Object> get props => <Object>[];
-}
-
-class TapEvent extends LogoutEvent {
-  const TapEvent(this.tap);
-
-  final TapType tap;
+@freezed
+@immutable
+class LogoutEvent with _$LogoutEvent {
+  const factory LogoutEvent.tap(TapType tap) = Tap;
 }
 
 enum TapType {

@@ -7,25 +7,21 @@ import 'chat_settings_state.dart';
 class ChatSettingsBloc extends Bloc<ChatSettingsEvent, ChatSettingsState> {
   ChatSettingsBloc({required IChatSettingsScreenRouter router})
       : _router = router,
-        super(const DefaultState());
-  final IChatSettingsScreenRouter _router;
-
-  @override
-  Stream<ChatSettingsState> mapEventToState(ChatSettingsEvent event) async* {
-    if (event is ActionEvent) {
-      _handleActionEvent(event);
-      return;
-    }
+        super(const ChatSettingsState()) {
+    on<StickersAndMasksTap>(_onStickersAndMasksTap);
+    on<WallpapersTap>(_onWallpapersTap);
   }
 
-  void _handleActionEvent(ActionEvent event) {
-    switch (event.runtimeType) {
-      case StickersAndMasksTap:
-        _router.toStickersAndMasks();
-        return;
-      case WallpapersTap:
-        _router.toWallPapers();
-        return;
-    }
+  final IChatSettingsScreenRouter _router;
+
+  void _onStickersAndMasksTap(
+    StickersAndMasksTap event,
+    Emitter<ChatSettingsState> emit,
+  ) {
+    _router.toStickersAndMasks();
+  }
+
+  void _onWallpapersTap(WallpapersTap event, Emitter<ChatSettingsState> emit) {
+    _router.toWallPapers();
   }
 }

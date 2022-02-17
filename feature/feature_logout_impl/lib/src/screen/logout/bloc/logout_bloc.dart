@@ -12,70 +12,69 @@ class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
     required ILocalizationManager localizationManager,
   })  : _router = router,
         _localizationManager = localizationManager,
-        super(const LogoutState());
+        super(const LogoutState()) {
+    on<Tap>(_onTapEvent);
+  }
 
   final ILogoutFeatureRouter _router;
   final ILocalizationManager _localizationManager;
 
-  @override
-  Stream<LogoutState> mapEventToState(LogoutEvent event) async* {
-    if (event is TapEvent) {
-      switch (event.tap) {
-        case TapType.addAnotherAccount:
-          _router.toAddAccount();
-          break;
-        case TapType.setPasscode:
-          _router.toPasscodeSettings();
-          break;
-        case TapType.clearCache:
-          _router.toStorageUsageSettings();
-          break;
-        case TapType.changePhoneNumber:
-          _router.toChangeNumber();
-          break;
-        case TapType.contactSupport:
-          _router.toDialog(
-            title: _getString('AskAQuestion'),
-            body: const Body.text(text: 'AskAQuestionInfo'),
-            actions: <Action>[
-              Action(
-                text: _getString('Cancel'),
-                callback: (IDismissible dismissible) {
-                  dismissible.dismiss();
-                },
-              ),
-              Action(
-                text: _getString('AskButton'),
-                callback: (IDismissible dismissible) {
-                  _router.toChat(0);
-                  dismissible.dismiss();
-                },
-              ),
-            ],
-          );
-          break;
-        case TapType.logOut:
-          _router.toDialog(
-            title: _getString('LogOutTitle'),
-            body: Body.text(text: _getString('AreYouSureLogout')),
-            actions: <Action>[
-              Action(
-                text: _getString('Cancel'),
-                callback: (IDismissible dismissible) {
-                  dismissible.dismiss();
-                },
-              ),
-              Action(
-                type: ActionType.attention,
-                text: _getString('LogOutTitle'),
-                callback: (IDismissible dismissible) {
-                  dismissible.dismiss();
-                },
-              ),
-            ],
-          );
-          break;
-      }
+  void _onTapEvent(Tap tap, Emitter<LogoutState> emit) {
+    switch (tap.tap) {
+      case TapType.addAnotherAccount:
+        _router.toAddAccount();
+        break;
+      case TapType.setPasscode:
+        _router.toPasscodeSettings();
+        break;
+      case TapType.clearCache:
+        _router.toStorageUsageSettings();
+        break;
+      case TapType.changePhoneNumber:
+        _router.toChangeNumber();
+        break;
+      case TapType.contactSupport:
+        _router.toDialog(
+          title: _getString('AskAQuestion'),
+          body: const Body.text(text: 'AskAQuestionInfo'),
+          actions: <Action>[
+            Action(
+              text: _getString('Cancel'),
+              callback: (IDismissible dismissible) {
+                dismissible.dismiss();
+              },
+            ),
+            Action(
+              text: _getString('AskButton'),
+              callback: (IDismissible dismissible) {
+                _router.toChat(0);
+                dismissible.dismiss();
+              },
+            ),
+          ],
+        );
+        break;
+      case TapType.logOut:
+        _router.toDialog(
+          title: _getString('LogOutTitle'),
+          body: Body.text(text: _getString('AreYouSureLogout')),
+          actions: <Action>[
+            Action(
+              text: _getString('Cancel'),
+              callback: (IDismissible dismissible) {
+                dismissible.dismiss();
+              },
+            ),
+            Action(
+              type: ActionType.attention,
+              text: _getString('LogOutTitle'),
+              callback: (IDismissible dismissible) {
+                dismissible.dismiss();
+              },
+            ),
+          ],
+        );
+        break;
     }
   }
 

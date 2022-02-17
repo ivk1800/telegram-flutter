@@ -1,24 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class ChatSettingsEvent extends Equatable {
-  const ChatSettingsEvent();
+part 'chat_settings_event.freezed.dart';
 
-  @override
-  List<Object> get props => <Object>[];
-}
-
-abstract class ActionEvent extends ChatSettingsEvent {
-  const ActionEvent();
-}
-
-class StickersAndMasksTap extends ActionEvent {
-  const StickersAndMasksTap();
-}
-
-class WallpapersTap extends ActionEvent {
-  const WallpapersTap();
-}
-
-class LoadingEvent extends ChatSettingsEvent {
-  const LoadingEvent();
+@freezed
+@immutable
+class ChatSettingsEvent with _$ChatSettingsEvent {
+  const factory ChatSettingsEvent.stickersAndMasksTap() = StickersAndMasksTap;
+  const factory ChatSettingsEvent.wallpapersTap() = WallpapersTap;
 }

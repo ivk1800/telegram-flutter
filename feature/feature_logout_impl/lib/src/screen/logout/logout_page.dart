@@ -38,7 +38,7 @@ class _Body extends StatelessWidget {
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.addAnotherAccount));
+            bloc.add(const LogoutEvent.tap(TapType.addAnotherAccount));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('AddAnotherAccount'),
@@ -49,7 +49,7 @@ class _Body extends StatelessWidget {
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.setPasscode));
+            bloc.add(const LogoutEvent.tap(TapType.setPasscode));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('SetPasscode'),
@@ -60,7 +60,7 @@ class _Body extends StatelessWidget {
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.clearCache));
+            bloc.add(const LogoutEvent.tap(TapType.clearCache));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('ClearCache'),
@@ -71,7 +71,7 @@ class _Body extends StatelessWidget {
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.changePhoneNumber));
+            bloc.add(const LogoutEvent.tap(TapType.changePhoneNumber));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('ChangePhoneNumber'),
@@ -82,7 +82,7 @@ class _Body extends StatelessWidget {
         ),
         tg.TextCell(
           onTap: () {
-            bloc.add(const TapEvent(TapType.contactSupport));
+            bloc.add(const LogoutEvent.tap(TapType.contactSupport));
           },
           leading: const Icon(Icons.circle),
           title: localizationManager.getString('ContactSupport'),
@@ -93,7 +93,7 @@ class _Body extends StatelessWidget {
           titleColor: Theme.of(context).errorColor,
           title: localizationManager.getString('LogOutTitle'),
           onTap: () {
-            bloc.add(const TapEvent(TapType.logOut));
+            bloc.add(const LogoutEvent.tap(TapType.logOut));
           },
         ),
         tg.Annotation(
