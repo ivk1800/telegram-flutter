@@ -9,10 +9,11 @@ import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:localization_api/localization_api.dart';
 
-import 'src/chat_screen_router.dart';
+import 'feature_chat_impl.dart';
 import 'src/widget/factory/chat_screen_factory.dart';
 
 export 'src/chat_screen_router.dart';
+export 'src/chat_screen_router_factory.dart';
 export 'src/component/message_mapper_component.dart';
 export 'src/component/message_tile_factory_component.dart';
 export 'src/mapper/message_tile_mapper.dart';
@@ -48,7 +49,7 @@ class ChatFeatureDependencies {
     required this.fileRepository,
     required this.userRepository,
     required this.chatMessageRepository,
-    required this.router,
+    required this.routerFactory,
     required this.dateFormatter,
     required this.dateParser,
     required this.connectionStateProvider,
@@ -73,7 +74,7 @@ class ChatFeatureDependencies {
 
   final IChatMessageRepository chatMessageRepository;
 
-  final IChatScreenRouter router;
+  final IChatScreenRouterFactory routerFactory;
 
   final DateFormatter dateFormatter;
 

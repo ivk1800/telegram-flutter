@@ -92,11 +92,11 @@ class ChatViewModel extends BaseViewModel {
               type: ActionType.attention,
               text: _getString('LeaveMegaMenu'),
               callback: (IDismissible dismissible) {
-                // todo block ui until do request, it is not offine request
+                // todo block ui until done request, it is not offline request
                 _chatManager.leave(_args.chatId).then((_) {
                   // todo check is dispose viewmodel,
-                  // todo maybe popped not current screen
-                  _router.back();
+                  // todo wrap to CancelableOperation
+                  _router.close();
                   return _;
                 });
 

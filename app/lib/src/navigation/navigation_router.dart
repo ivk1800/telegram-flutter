@@ -11,4 +11,6 @@ abstract class ISplitNavigationDelegate {
   });
 
   void back();
+
+  void removeByKey(LocalKey key);
 }

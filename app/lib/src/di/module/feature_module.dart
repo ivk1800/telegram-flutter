@@ -56,6 +56,9 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
 
+import '../../navigation/router/chat_screen_router_factory.dart';
+import '../../navigation/router/chat_screen_router_impl.dart';
+
 @j.module
 abstract class FeatureModule {
   // region dependencies
@@ -130,7 +133,7 @@ abstract class FeatureModule {
     DateParser dateParser,
     IFileRepository fileRepository,
     IUserRepository userRepository,
-    IChatScreenRouter router,
+    IChatScreenRouterFactory routerFactory,
     IChatMessageRepository chatMessageRepository,
     IConnectionStateProvider connectionStateProvider,
     IChatRepository chatRepository,
@@ -166,7 +169,7 @@ abstract class FeatureModule {
         ),
         connectionStateProvider: connectionStateProvider,
         chatMessageRepository: chatMessageRepository,
-        router: router,
+        routerFactory: routerFactory,
         localizationManager: localizationManager,
         dateParser: dateParser,
         fileRepository: fileRepository,
@@ -592,11 +595,13 @@ abstract class FeatureModule {
   static CommonScreenRouterImpl provideCommonScreenRouter(
     FeatureProvider featureProvider,
     ISplitNavigationDelegate navigationDelegate,
+    KeyGenerator keyGenerator,
   ) =>
       CommonScreenRouterImpl(
         dialogNavigatorKey: TgApp.navigatorKey,
         featureProvider: featureProvider,
         navigationDelegate: navigationDelegate,
+        keyGenerator: keyGenerator,
       );
 
   @j.binds
@@ -608,7 +613,9 @@ abstract class FeatureModule {
   IMainScreenRouter bindMainScreenRouter(CommonScreenRouterImpl impl);
 
   @j.binds
-  IChatScreenRouter bindChatScreenRouter(CommonScreenRouterImpl impl);
+  IChatScreenRouterFactory bindChatScreenRouterFactory(
+    ChatScreenRouterFactory impl,
+  );
 
   @j.binds
   IProfileFeatureRouter bindProfileFeatureRouter(CommonScreenRouterImpl impl);

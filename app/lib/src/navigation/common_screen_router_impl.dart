@@ -1,4 +1,5 @@
 import 'package:app/src/feature/feature_provider.dart';
+import 'package:app/src/navigation/key_generator.dart';
 import 'package:dialog_api/dialog_api.dart' as dialog_api;
 import 'package:dialog_api/dialog_api.dart';
 import 'package:dialog_api_flutter/dialog_api_flutter.dart';
@@ -52,8 +53,10 @@ class CommonScreenRouterImpl
     required ISplitNavigationDelegate navigationDelegate,
     required GlobalKey<NavigatorState> dialogNavigatorKey,
     required FeatureProvider featureProvider,
+    required KeyGenerator keyGenerator,
   })  : _navigationDelegate = navigationDelegate,
         _dialogNavigatorKey = dialogNavigatorKey,
+        _keyGenerator = keyGenerator,
         _dialogRouter =
             DialogRouterImpl(dialogNavigatorKey: dialogNavigatorKey),
         _featureProvider = featureProvider;
@@ -62,6 +65,7 @@ class CommonScreenRouterImpl
   final FeatureProvider _featureProvider;
   final GlobalKey<NavigatorState> _dialogNavigatorKey;
   final DialogRouterImpl _dialogRouter;
+  final KeyGenerator _keyGenerator;
 
   // TODO extract chat router delegate
   @override
@@ -69,6 +73,7 @@ class CommonScreenRouterImpl
     _add(
       widget: _featureProvider.chatFeatureApi.chatScreenFactory.create(id),
       container: ContainerType.right,
+      key: _keyGenerator.generateForChat(id),
     );
   }
 
@@ -351,16 +356,17 @@ class CommonScreenRouterImpl
   void _add({
     required Widget widget,
     required ContainerType container,
+    LocalKey? key,
   }) {
     _navigationDelegate.add(
-      key: UniqueKey(),
+      key: key ?? UniqueKey(),
       builder: (_) => widget,
       container: container,
     );
   }
 
   @override
-  void back() {
-    _navigationDelegate.back();
+  void close() {
+    throw Exception('not allowed here, you must implement router for screen');
   }
 }
