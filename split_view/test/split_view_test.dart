@@ -171,7 +171,7 @@ void _removeByKeyGroup() {
     );
   });
 
-  testWidgets('should not remove remove page is not exist in split layout', (
+  testWidgets('should not remove page is not exist in split layout', (
     WidgetTester tester,
   ) async {
     final TestSplitViewController controller =
@@ -218,7 +218,7 @@ void _removeByKeySplitLayoutGroup() {
 
     controller.expectPagesOrder(
       navigatorLocation: NavigatorLocation.left,
-      pages: const <int>[1, 2],
+      pages: const <int>[2],
     );
   });
 
@@ -243,7 +243,7 @@ void _removeByKeySplitLayoutGroup() {
 
     controller.expectPagesOrder(
       navigatorLocation: NavigatorLocation.right,
-      pages: const <int>[1, 2],
+      pages: const <int>[2],
     );
   });
 
@@ -268,7 +268,7 @@ void _removeByKeySplitLayoutGroup() {
 
     controller.expectPagesOrder(
       navigatorLocation: NavigatorLocation.top,
-      pages: const <int>[1, 2],
+      pages: const <int>[2],
     );
   });
 }

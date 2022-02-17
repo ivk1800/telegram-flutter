@@ -244,6 +244,7 @@ class SplitViewState extends State<SplitView> {
       final PageNode page =
           pages.firstWhere((PageNode page) => page.pageKey == key);
       pages.remove(page);
+      _incrementStateVersion(notify: true);
     }
 
     if (hasKey(key, ContainerType.top)) {
