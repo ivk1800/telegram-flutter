@@ -2,6 +2,8 @@ import 'package:feature_chat_impl/src/resolver/chat_info_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:localization_api/localization_api.dart';
 
+import '../screen/chat/header_state.dart';
+
 class ChatHeaderActionsInteractor {
   ChatHeaderActionsInteractor({
     required ChatInfoResolver chatInfoResolver,

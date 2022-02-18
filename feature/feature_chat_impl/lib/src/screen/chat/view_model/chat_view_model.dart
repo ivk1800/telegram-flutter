@@ -43,10 +43,7 @@ class ChatViewModel extends BaseViewModel {
         _headerInfoInteractor.infoStream,
         _headerActionsInteractor.actionsStream,
         (ChatHeaderInfo headerInfo, List<HeaderActionData> headerActions) =>
-            HeaderState(
-          info: headerInfo,
-          actions: headerActions,
-        ),
+            HeaderState.data(headerInfo, headerActions),
       );
 
   Stream<BodyState> get bodyStateStream => _messagesInteractor.messagesStream

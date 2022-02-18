@@ -11,7 +11,8 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
-import 'chat_state.dart';
+import 'body_state.dart';
+import 'header_state.dart';
 import 'message_factory.dart';
 import 'messages_scroll_controller.dart';
 import 'view_model/chat_actions_panel_view_model.dart';
@@ -36,9 +37,9 @@ class ChatPageState extends State<ChatPage> {
   void initState() {
     final ChatViewModel viewModel = context.read();
     final Stream<int> itemsCountStream = viewModel.bodyStateStream
-        .where((BodyState event) => event is Data)
-        .cast<Data>()
-        .map((Data data) => data.models.length);
+        .where((BodyState event) => event is BodyData)
+        .cast<BodyData>()
+        .map((BodyData data) => data.models.length);
     _messagesScrollController = MessagesScrollController(
       onScrollToNewest: viewModel.onLoadNewestMessages,
       onScrollToOldest: viewModel.onLoadOldestMessages,

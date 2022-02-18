@@ -45,7 +45,7 @@ class AuthViewModel extends BaseViewModel {
   void onCountryCodeChanged(String code) => _handleCountryCodeChanged(code);
 
   void onSubmitCodeTap(String code) {
-    final AuthState state = _stateSubject.value!;
+    final AuthState state = _stateSubject.value;
     // todo prevent resend code after success auth
     // TextEditingController triggered again
     if (state is CodeState && !state.blockInteraction) {

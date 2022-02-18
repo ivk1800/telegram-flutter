@@ -98,7 +98,7 @@ class GlobalSearchInteractor {
 
   Stream<GlobalSearchState> get stateStream => _stateSubject;
 
-  GlobalSearchState get state => _stateSubject.value!;
+  GlobalSearchState get state => _stateSubject.value;
 
   void onQuery(String query) {
     _currentQuery = query;

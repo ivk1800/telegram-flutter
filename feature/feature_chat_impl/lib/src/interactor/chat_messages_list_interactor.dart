@@ -31,7 +31,7 @@ class ChatMessagesInteractor {
   final BehaviorSubject<List<ITileModel>> _messagesSubject =
       BehaviorSubject<List<ITileModel>>();
 
-  List<ITileModel> get messages => _messagesSubject.value ?? <ITileModel>[];
+  List<ITileModel> get messages => _messagesSubject.value;
 
   Stream<List<ITileModel>> get messagesStream => _messagesSubject;
 
@@ -39,7 +39,7 @@ class ChatMessagesInteractor {
   bool _isCnBeLodOldest = true;
   CancelableOperation<_Result>? _oldestMessagesOperation;
 
-  List<ITileModel> get currentItems => _messagesSubject.value ?? <ITileModel>[];
+  List<ITileModel> get currentItems => _messagesSubject.value;
 
   Future<void> init() async {
     _chatMessageUpdatesHandler.attach(

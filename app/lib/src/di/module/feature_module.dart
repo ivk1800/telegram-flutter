@@ -57,7 +57,6 @@ import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
 
 import '../../navigation/router/chat_screen_router_factory.dart';
-import '../../navigation/router/chat_screen_router_impl.dart';
 
 @j.module
 abstract class FeatureModule {

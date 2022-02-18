@@ -64,7 +64,7 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
       });
 
   @override
-  ChatHeaderInfo get current => _infoSubject.value!;
+  ChatHeaderInfo get current => _infoSubject.value;
 
   Stream<ChatHeaderInfo> _asBasicGroup(int id, td.Chat chat) {
     return Stream<td.BasicGroup>.fromFuture(_basicGroupRepository.getGroup(id))
