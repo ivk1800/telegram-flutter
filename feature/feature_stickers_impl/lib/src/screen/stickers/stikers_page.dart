@@ -26,15 +26,15 @@ class StickersPage extends StatelessWidget {
       ),
       body: BlocBuilder<StickersBloc, StickersState>(
         builder: (BuildContext context, StickersState state) {
-          if (state is DefaultState) {
-            return SingleChildScrollView(
-              child: _DefaultWidget(
-                state: state,
-              ),
-            );
-          }
-
-          return const SizedBox.shrink();
+          return state.map(
+            data: (Data state) {
+              return SingleChildScrollView(
+                child: _DefaultWidget(
+                  state: state,
+                ),
+              );
+            },
+          );
         },
       ),
     );
@@ -44,7 +44,7 @@ class StickersPage extends StatelessWidget {
 class _DefaultWidget extends StatelessWidget {
   const _DefaultWidget({Key? key, required this.state}) : super(key: key);
 
-  final DefaultState state;
+  final Data state;
 
   @override
   Widget build(BuildContext context) {

@@ -1,18 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tile/tile.dart';
 
-abstract class StickersState extends Equatable {
-  const StickersState();
+part 'stickers_state.freezed.dart';
 
-  @override
-  List<Object> get props => <Object>[];
-}
-
-class DefaultState extends StickersState {
-  const DefaultState({required this.tiles});
-
-  final List<ITileModel> tiles;
-
-  @override
-  List<Object> get props => <Object>[tiles];
+@immutable
+@freezed
+class StickersState with _$StickersState {
+  const factory StickersState.data(final List<ITileModel> tiles) = Data;
 }

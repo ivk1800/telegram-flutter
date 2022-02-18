@@ -29,7 +29,7 @@ class StickersWidgetFactory implements IStickersWidgetFactory {
                 StickerSetTileModel: StickerSetTileFactoryDelegate(
                   tap: (BuildContext context, int setId) {
                     BlocProvider.of<StickersBloc>(context)
-                        .add(StickerSetTap(setId: setId));
+                        .add(StickersEvent.stickerSetTap(setId));
                   },
                 ),
               },
@@ -45,7 +45,7 @@ class StickersWidgetFactory implements IStickersWidgetFactory {
           create: (BuildContext context) => StickersBloc(
             router: dependencies.stickersFeatureRouter,
             stickerRepository: dependencies.stickerRepository,
-          ),
+          )..add(const StickersEvent.init()),
           child: const StickersPage(),
         ),
       );
