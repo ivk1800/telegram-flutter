@@ -16,9 +16,9 @@ dependencies:
     sdk: flutter
   localization_api:
     path: ../../localization_api
-  rxdart: ^0.26.0
+  rxdart: 0.27.3
 
 dev_dependencies:
-  dependency_validator: ^3.1.2
+  dependency_validator: 3.1.2
   tg_lint_rules:
     path: ../../tg_lint_rules

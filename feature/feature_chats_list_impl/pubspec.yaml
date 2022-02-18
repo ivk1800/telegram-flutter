@@ -24,8 +24,8 @@ dependencies:
     path: ../feature_message_preview_resolver
   flutter:
     sdk: flutter
-  flutter_svg: 1.0.0
-  jugger: ^2.0.0
+  flutter_svg: 1.0.3
+  jugger: 2.0.0
   localization_api:
     path: ../../localization_api
   provider_extensions:
@@ -37,12 +37,12 @@ dependencies:
     path: ../../td_client
   tile:
     path: ../../tile
-  tuple: ^2.0.0
+  tuple: 2.0.0
 
 dev_dependencies:
-  build_runner: ^2.1.7
-  dependency_validator: ^3.1.2
-  freezed: ^1.1.1
-  jugger_generator: ^2.0.0
+  build_runner: 2.1.7
+  dependency_validator: 3.1.2
+  freezed: 1.1.1
+  jugger_generator: 2.0.0
   tg_lint_rules:
     path: ../../tg_lint_rules

@@ -10,11 +10,11 @@ dependencies:
     sdk: flutter
   localization_api:
     path: ../localization_api
-  sprintf: "^6.0.0"
+  sprintf: 6.0.0
   xml: 5.1.1
 
 dev_dependencies:
-  dependency_validator: ^3.1.2
+  dependency_validator: 3.1.2
   tg_lint_rules:
     path: ../tg_lint_rules
 

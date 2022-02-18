@@ -5,14 +5,14 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dev_dependencies:
-  args: ^2.3.0
+  args: 2.3.0
   code_builder: 4.1.0
-  console: ^4.1.0
-  dart_style: 2.0.3
+  console: 4.1.0
+  dart_style: 2.2.1
   meta: 1.7.0
-  pubspec_parse: ^1.2.0
+  pubspec_parse: 1.2.0
   quiver: 3.0.1+1
-  rxdart: ^0.27.3
+  rxdart: 0.27.3
   tg_lint_rules:
     path: ../../tg_lint_rules
   xml: ^5.3.1
