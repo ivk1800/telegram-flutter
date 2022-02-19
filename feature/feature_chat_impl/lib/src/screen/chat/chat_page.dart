@@ -4,6 +4,7 @@ import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_theme/chat_theme.dart';
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
+import 'package:feature_chat_impl/src/screen/chat/view_model/chat_action_bar_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -161,7 +162,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ChatViewModel viewModel = context.read();
+    final ChatActionBarModel viewModel = context.read();
     return StreamListener<HeaderState>(
       stream: viewModel.headerStateStream,
       builder: (BuildContext context, HeaderState data) {

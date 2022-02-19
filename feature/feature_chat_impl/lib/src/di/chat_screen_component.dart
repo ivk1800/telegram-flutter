@@ -13,7 +13,6 @@ import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
-import 'package:feature_chat_impl/src/screen/chat/view_model/chat_actions_panel_view_model.dart';
 import 'package:feature_chat_impl/src/tile/model/loading_tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/loading_tile_factory_delegate.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
@@ -38,6 +37,8 @@ abstract class IChatScreenComponent {
   IChatHeaderInfoFactory getChatHeaderInfoFactory();
 
   ChatViewModel getChatViewModel();
+
+  ChatActionBarModel getChatActionBarModel();
 
   ChatActionsPanelViewModel getChatActionsPanelViewModel();
 
@@ -172,22 +173,45 @@ abstract class ChatScreenModule {
 
   @j.provides
   @j.singleton
-  static ChatViewModel provideChatBloc(
+  static IStringsProvider provideStringsProvider(
+    ChatFeatureDependencies dependencies,
+  ) =>
+      dependencies.localizationManager.stringsProvider;
+
+  @j.provides
+  @j.singleton
+  static ChatViewModel provideChatViewModel(
     ChatArgs args,
     ChatMessagesInteractor chatMessagesInteractor,
-    IChatHeaderInfoInteractor headerInfoInteractor,
-    ChatHeaderActionsInteractor headerActionsInteractor,
     ChatFeatureDependencies dependencies,
     IChatManager chatManager,
   ) =>
       ChatViewModel(
+        chatManager: chatManager,
+        router: dependencies.routerFactory.create(args.chatId),
+        messagesInteractor: chatMessagesInteractor,
+        args: args,
+      )..init();
+
+  @j.provides
+  @j.singleton
+  static ChatActionBarModel provideChatActionBarViewModel(
+    ChatArgs args,
+    ChatMessagesInteractor chatMessagesInteractor,
+    IChatHeaderInfoInteractor headerInfoInteractor,
+    IStringsProvider stringsProvider,
+    ChatHeaderActionsInteractor headerActionsInteractor,
+    ChatFeatureDependencies dependencies,
+    IChatManager chatManager,
+  ) =>
+      ChatActionBarModel(
         localizationManager: dependencies.localizationManager,
         headerActionsInteractor: headerActionsInteractor,
         chatManager: chatManager,
         headerInfoInteractor: headerInfoInteractor,
         router: dependencies.routerFactory.create(args.chatId),
-        messagesInteractor: chatMessagesInteractor,
         args: args,
+        stringsProvider: stringsProvider,
       )..init();
 
   @j.provides

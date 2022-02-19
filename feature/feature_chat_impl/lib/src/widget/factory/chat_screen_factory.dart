@@ -8,7 +8,6 @@ import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
-import 'package:feature_chat_impl/src/screen/chat/view_model/chat_actions_panel_view_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -47,6 +46,9 @@ class ChatScreenFactory implements IChatScreenFactory {
           ),
           ViewModelProvider<ChatViewModel>(
             create: (_) => component.getChatViewModel(),
+          ),
+          ViewModelProvider<ChatActionBarModel>(
+            create: (_) => component.getChatActionBarModel(),
           ),
           ViewModelProvider<ChatActionsPanelViewModel>(
             create: (_) => component.getChatActionsPanelViewModel(),

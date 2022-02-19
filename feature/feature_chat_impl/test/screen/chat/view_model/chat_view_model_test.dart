@@ -27,32 +27,23 @@ import 'chat_view_model_test.mocks.dart';
 void main() {
   ChatArgs mockChatArgs;
   IChatScreenRouter mockChatScreenRouter;
-  ILocalizationManager mockLocalizationManager;
-  IChatHeaderInfoInteractor mockChatHeaderInfoInteractor;
   ChatMessagesInteractor mockChatMessagesInteractor;
   IChatManager mockChatManager;
-  ChatHeaderActionsInteractor mockChatHeaderActionsInteractor;
 
   ChatViewModel viewModel;
 
   setUp(() {
     mockChatArgs = MockChatArgs();
     mockChatScreenRouter = MockIChatScreenRouter();
-    mockLocalizationManager = MockILocalizationManager();
-    mockChatHeaderInfoInteractor = MockIChatHeaderInfoInteractor();
     mockChatMessagesInteractor = MockChatMessagesInteractor();
     mockChatManager = MockIChatManager();
-    mockChatHeaderActionsInteractor = MockChatHeaderActionsInteractor();
 
     when(mockChatArgs.chatId).thenReturn(0);
 
     viewModel = ChatViewModel(
       args: mockChatArgs,
-      localizationManager: mockLocalizationManager,
       router: mockChatScreenRouter,
       chatManager: mockChatManager,
-      headerActionsInteractor: mockChatHeaderActionsInteractor,
-      headerInfoInteractor: mockChatHeaderInfoInteractor,
       messagesInteractor: mockChatMessagesInteractor,
     );
   });

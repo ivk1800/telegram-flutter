@@ -39,7 +39,8 @@ class ChatMessagesInteractor {
   bool _isCnBeLodOldest = true;
   CancelableOperation<_Result>? _oldestMessagesOperation;
 
-  List<ITileModel> get currentItems => _messagesSubject.value;
+  List<ITileModel> get currentItems =>
+      _messagesSubject.hasValue ? _messagesSubject.value : const <ITileModel>[];
 
   Future<void> init() async {
     _chatMessageUpdatesHandler.attach(
