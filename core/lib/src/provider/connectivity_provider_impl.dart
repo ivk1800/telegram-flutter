@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart' as c;
 import 'package:core/core.dart';
 import 'package:rxdart/rxdart.dart';
@@ -6,19 +8,15 @@ import 'connectivity_provider.dart';
 
 class ConnectivityProviderImpl implements IConnectivityProvider {
   ConnectivityProviderImpl() {
-    final c.Connectivity connectivity = c.Connectivity();
-    connectivity.onConnectivityChanged.listen(_dispatchStatus);
-
-    connectivity.checkConnectivity().then((c.ConnectivityResult value) {
-      _onStatusChangeSubject.add(value.toConnectivityStatus());
-      return value;
-    });
+    _init();
   }
 
   final PublishSubject<ConnectivityStatus> _onStatusChangeSubject =
       PublishSubject<ConnectivityStatus>();
 
   ConnectivityStatus _currentStatus = ConnectivityStatus.none;
+
+  StreamSubscription<c.ConnectivityResult>? _connectivityChangedSubscription;
 
   @override
   Stream<ConnectivityStatus> get onStatusChange =>
@@ -27,10 +25,25 @@ class ConnectivityProviderImpl implements IConnectivityProvider {
   @override
   ConnectivityStatus get status => _currentStatus;
 
+  void _init() {
+    final c.Connectivity connectivity = c.Connectivity();
+    _connectivityChangedSubscription =
+        connectivity.onConnectivityChanged.listen(_dispatchStatus);
+
+    connectivity.checkConnectivity().then((c.ConnectivityResult value) {
+      _onStatusChangeSubject.add(value.toConnectivityStatus());
+      return value;
+    });
+  }
+
   void _dispatchStatus(c.ConnectivityResult connectivityResult) {
     final ConnectivityStatus status = connectivityResult.toConnectivityStatus();
     _onStatusChangeSubject.add(status);
     _currentStatus = status;
+  }
+
+  void dispose() {
+    _connectivityChangedSubscription?.cancel();
   }
 }
 

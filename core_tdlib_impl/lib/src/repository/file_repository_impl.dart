@@ -1,24 +1,20 @@
+import 'dart:async';
+
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class FileRepositoryImpl implements IFileRepository {
   FileRepositoryImpl({required TdClient client}) : _client = client {
-    _client.events
-        .where((td.TdObject event) => event is td.UpdateFile)
-        .map((td.TdObject event) => event as td.UpdateFile)
-        .listen((td.UpdateFile event) {
-      if (!event.file.local.isDownloadingCompleted &&
-          event.file.local.path.isEmpty) {
-        _cache.remove(event.file.id);
-      }
-    });
+    _init();
   }
 
   final TdClient _client;
 
   final Map<int, Future<td.LocalFile>> _cache = <int, Future<td.LocalFile>>{};
   final Map<int, String> _pathCache = <int, String>{};
+
+  StreamSubscription<td.UpdateFile>? _fileUpdatesSubscription;
 
   @override
   Future<td.LocalFile> getLocalFile(int id) {
@@ -54,4 +50,20 @@ class FileRepositoryImpl implements IFileRepository {
   @override
   Future<td.File> getFile(int id) =>
       _client.send<td.File>(td.GetFile(fileId: id));
+
+  void dispose() {
+    _fileUpdatesSubscription?.cancel();
+  }
+
+  void _init() {
+    _fileUpdatesSubscription = _client.events
+        .where((td.TdObject event) => event is td.UpdateFile)
+        .map((td.TdObject event) => event as td.UpdateFile)
+        .listen((td.UpdateFile event) {
+      if (!event.file.local.isDownloadingCompleted &&
+          event.file.local.path.isEmpty) {
+        _cache.remove(event.file.id);
+      }
+    });
+  }
 }

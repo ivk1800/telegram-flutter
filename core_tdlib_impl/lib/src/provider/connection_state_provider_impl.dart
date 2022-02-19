@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:rxdart/rxdart.dart';
@@ -7,8 +9,15 @@ class ConnectionStateProviderImpl implements IConnectionStateProvider {
   ConnectionStateProviderImpl({
     required UpdatesProvider updatesProvider,
   }) : _updatesProvider = updatesProvider {
-    // TODO: need dispose?
-    _updatesProvider.connectionStateUpdates
+    _init();
+  }
+
+  StreamSubscription<td.UpdateConnectionState>?
+      _connectionStateUpdatesSubscription;
+
+  void _init() {
+    _connectionStateUpdatesSubscription = _updatesProvider
+        .connectionStateUpdates
         .listen((td.UpdateConnectionState event) {
       _currentState = event.state;
     });
@@ -24,4 +33,8 @@ class ConnectionStateProviderImpl implements IConnectionStateProvider {
       _updatesProvider.connectionStateUpdates
           .map((td.UpdateConnectionState event) => event.state)
           .startWith(_currentState);
+
+  void dispose() {
+    _connectionStateUpdatesSubscription?.cancel();
+  }
 }
