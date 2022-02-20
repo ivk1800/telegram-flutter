@@ -1,6 +1,5 @@
 import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
-import 'package:feature_create_new_chat_impl/src/screen/new_chat/new_chat_screen_router.dart';
-import 'package:feature_create_new_chat_impl/src/screen/new_chat/new_chat_view_model.dart';
+import 'package:feature_create_new_chat_impl/src/screen/new_chat/new_chat.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 

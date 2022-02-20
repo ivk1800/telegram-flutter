@@ -1,7 +1,7 @@
-import 'package:feature_create_new_chat_impl/src/screen/new_channel/new_channel_model.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
+import '../screen/new_channel/new_channel.dart';
 import 'create_new_chat_component.dart';
 
 @j.Component(

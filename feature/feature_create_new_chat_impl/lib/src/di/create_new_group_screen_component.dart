@@ -1,4 +1,4 @@
-import 'package:feature_create_new_chat_impl/src/screen/new_group/new_group_model.dart';
+import 'package:feature_create_new_chat_impl/src/screen/new_group/new_group.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 

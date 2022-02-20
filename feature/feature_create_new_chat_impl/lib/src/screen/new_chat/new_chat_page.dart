@@ -1,8 +1,7 @@
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_create_new_chat_impl/src/screen/new_chat/new_chat_view_model.dart';
+import 'package:feature_create_new_chat_impl/src/screen/new_chat/new_chat.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
 
 class NewChatPage extends StatefulWidget {
   const NewChatPage({Key? key}) : super(key: key);
@@ -26,8 +25,10 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager = context.read();
-    final NewChatViewModel viewModel = context.read();
+    final ILocalizationManager localizationManager =
+        NewChatScreenScope.getILocalizationManager(context);
+    final NewChatViewModel viewModel =
+        NewChatScreenScope.getNewChatViewModel(context);
 
     return Column(
       children: <Widget>[
