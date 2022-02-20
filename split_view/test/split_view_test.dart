@@ -147,7 +147,7 @@ void main() {
 }
 
 void _removeByKeyGroup() {
-  testWidgets('should not remove remove page is not exist in compact layout', (
+  testWidgets('should not remove page is not exist in compact layout', (
     WidgetTester tester,
   ) async {
     final TestSplitViewController controller =
@@ -222,6 +222,31 @@ void _removeByKeySplitLayoutGroup() {
     );
   });
 
+  testWidgets('should remove last page from left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(2));
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.left,
+      pages: const <int>[1],
+    );
+  });
+
   testWidgets('should remove first page from right container', (
     WidgetTester tester,
   ) async {
@@ -247,6 +272,31 @@ void _removeByKeySplitLayoutGroup() {
     );
   });
 
+  testWidgets('should remove last page from right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(2));
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.right,
+      pages: const <int>[1],
+    );
+  });
+
   testWidgets('should remove first page from top container', (
     WidgetTester tester,
   ) async {
@@ -269,6 +319,31 @@ void _removeByKeySplitLayoutGroup() {
     controller.expectPagesOrder(
       navigatorLocation: NavigatorLocation.top,
       pages: const <int>[2],
+    );
+  });
+
+  testWidgets('should remove last page from top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.largeScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(2));
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.top,
+      pages: const <int>[1],
     );
   });
 }
@@ -291,11 +366,36 @@ void _removeByKeyCompactLayoutGroup() {
     );
 
     controller.splitView.removeByKey(createTestPageKey(1));
-    await tester.pump();
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[2],
+    );
+  });
+
+  testWidgets('should remove last page from left container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.left, pageId: 1);
+    controller.addPage(container: ContainerType.left, pageId: 2);
+    await tester.pumpAndSettle();
 
     controller.expectPagesOrder(
       navigatorLocation: NavigatorLocation.compact,
       pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(2));
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1],
     );
   });
 
@@ -320,7 +420,32 @@ void _removeByKeyCompactLayoutGroup() {
 
     controller.expectPagesOrder(
       navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[2],
+    );
+  });
+
+  testWidgets('should remove last page from right container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.right, pageId: 1);
+    controller.addPage(container: ContainerType.right, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
       pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(2));
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1],
     );
   });
 
@@ -345,7 +470,32 @@ void _removeByKeyCompactLayoutGroup() {
 
     controller.expectPagesOrder(
       navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[2],
+    );
+  });
+
+  testWidgets('should remove last page from top container', (
+    WidgetTester tester,
+  ) async {
+    final TestSplitViewController controller =
+        TestSplitViewController(tester: tester);
+    await controller.setup();
+    controller.compactScreen();
+    controller.addPage(container: ContainerType.top, pageId: 1);
+    controller.addPage(container: ContainerType.top, pageId: 2);
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
       pages: const <int>[1, 2],
+    );
+
+    controller.splitView.removeByKey(createTestPageKey(2));
+    await tester.pumpAndSettle();
+
+    controller.expectPagesOrder(
+      navigatorLocation: NavigatorLocation.compact,
+      pages: const <int>[1],
     );
   });
 }

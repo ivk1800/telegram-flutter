@@ -244,7 +244,7 @@ class SplitViewState extends State<SplitView> {
       final PageNode page =
           pages.firstWhere((PageNode page) => page.pageKey == key);
       pages.remove(page);
-      _incrementStateVersion(notify: true);
+      _refreshCompactPages(notify: true);
     }
 
     if (hasKey(key, ContainerType.top)) {
@@ -320,14 +320,14 @@ class SplitViewState extends State<SplitView> {
     }
   }
 
-  void _refreshCompactPages() {
+  void _refreshCompactPages({bool notify = false}) {
     if (_internalState.isCompact) {
       _internalState.compactPages = widget.delegate.compactLayoutMergeStrategy
           .process(_leftPages, _rightPages, _topPages);
-      _incrementStateVersion();
+      _incrementStateVersion(notify: notify);
     } else {
       _internalState.compactPages = const <PageNode>[];
-      _incrementStateVersion();
+      _incrementStateVersion(notify: notify);
     }
   }
 
