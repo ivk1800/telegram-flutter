@@ -8,6 +8,6 @@ class MessageActionListener implements IMessageActionListener {
   final ChatViewModel _viewModel;
 
   @override
-  void onSenderAvatarTap({required int senderId}) =>
-      _viewModel.onSenderTap(senderId);
+  void onSenderAvatarTap({required int senderId, required SenderType type}) =>
+      _viewModel.onSenderTap(senderId, type);
 }

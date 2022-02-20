@@ -1,17 +1,14 @@
-name: feature_profile_api
+name: profile_navigation_api
 publish_to: 'none'
 
 environment:
   sdk: ">=2.12.0-0 <3.0.0"
-  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  profile_navigation_api:
-    path: ../profile/profile_navigation_api
 
 dev_dependencies:
   dependency_validator: 3.1.2
   tg_lint_rules:
-    path: ../../tg_lint_rules
+    path: ../../../tg_lint_rules

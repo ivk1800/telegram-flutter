@@ -1,4 +1,5 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:localization_api/localization_api.dart';
@@ -30,8 +31,26 @@ class ContentInteractor {
   final IChatRepository _chatRepository;
   final ILocalizationManager _localizationManager;
 
-  // todo handle Update*FullInfo events
   Future<ContentData> getContent() async {
+    switch (_args.type) {
+      case ProfileType.user:
+        return _getUserContent(_args.id);
+      case ProfileType.chat:
+        return _getChatContent(_args.id);
+    }
+  }
+
+  Future<ContentData> _getUserContent(int id) async {
+    // TODO: implement for user
+    return ContentData(
+      sharedContent: <SharedContentInfo>[],
+      description: 'not implemented for user',
+      isMuted: false,
+    );
+  }
+
+  // todo handle Update*FullInfo events
+  Future<ContentData> _getChatContent(int id) async {
     final List<SharedContentInfo> messagesInfo = (await _getMessagesCount())
         .where((Tuple2<SharedContentType, int> element) => element.item2 > 0)
         .map(

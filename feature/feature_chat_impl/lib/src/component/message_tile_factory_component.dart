@@ -26,7 +26,12 @@ class MessageTileFactoryDependencies {
 }
 
 abstract class IMessageActionListener {
-  void onSenderAvatarTap({required int senderId});
+  void onSenderAvatarTap({required int senderId, required SenderType type});
+}
+
+enum SenderType {
+  user,
+  chat,
 }
 
 class MessageTileFactoryComponent {

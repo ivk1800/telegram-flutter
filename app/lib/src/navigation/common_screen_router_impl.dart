@@ -78,10 +78,10 @@ class CommonScreenRouterImpl
   }
 
   @override
-  void toChatProfile(int chatId) {
+  void toChatProfile({required int chatId, required ProfileType type}) {
     _add(
       widget: _featureProvider.profileFeatureApi.profileScreenFactory
-          .create(chatId),
+          .create(chatId, type),
       container: ContainerType.top,
     );
   }

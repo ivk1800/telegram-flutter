@@ -1,3 +1,5 @@
+import 'package:feature_chat_impl/feature_chat_impl.dart';
+
 import 'base_message_tile_model.dart';
 
 abstract class BaseConversationMessageTileModel extends BaseMessageTileModel {
@@ -29,11 +31,13 @@ class ReplyInfo {
 class SenderInfo {
   const SenderInfo({
     required this.id,
+    required this.type,
     required this.senderName,
     required this.senderPhotoId,
   });
 
   final int id;
+  final SenderType type;
   final String senderName;
   final int? senderPhotoId;
 }

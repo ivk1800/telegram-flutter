@@ -42,8 +42,17 @@ class ChatViewModel extends BaseViewModel {
 
   void onLoadNewestMessages() => _messagesInteractor.loadNewestMessages();
 
-  void onSenderTap(int senderId) {
-    _router.toChatProfile(senderId);
+  void onSenderTap(int senderId, SenderType type) {
+    final ProfileType profileType;
+    switch (type) {
+      case SenderType.user:
+        profileType = ProfileType.user;
+        break;
+      case SenderType.chat:
+        profileType = ProfileType.chat;
+        break;
+    }
+    _router.toChatProfile(chatId: senderId, type: profileType);
   }
 
   @override

@@ -149,7 +149,7 @@ abstract class IMessageShowcaseComponentBuilder {
 
 class _MessageActionListenerStub implements IMessageActionListener {
   @override
-  void onSenderAvatarTap({required int senderId}) {}
+  void onSenderAvatarTap({required int senderId, required SenderType type}) {}
 }
 
 class _FakeMessageWallContext implements IMessageWallContext {

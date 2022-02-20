@@ -12,6 +12,8 @@ import 'package:localization_api/localization_api.dart';
 import 'feature_chat_impl.dart';
 import 'src/widget/factory/chat_screen_factory.dart';
 
+export 'package:profile_navigation_api/profile_navigation_api.dart';
+
 export 'src/chat_screen_router.dart';
 export 'src/chat_screen_router_factory.dart';
 export 'src/component/message_mapper_component.dart';

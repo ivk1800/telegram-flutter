@@ -18,10 +18,10 @@ class ProfileScreenFactory implements IProfileScreenFactory {
   final ProfileFeatureDependencies _dependencies;
 
   @override
-  Widget create(int id) => Provider<IProfileScreenComponent>(
+  Widget create(int id, ProfileType type) => Provider<IProfileScreenComponent>(
         create: (_) => JuggerProfileScreenComponentBuilder()
             .dependencies(_dependencies)
-            .chatArgs(ProfileArgs(id))
+            .chatArgs(ProfileArgs(id: id, type: type))
             .build(),
         child: MultiProvider(
           providers: <Provider<dynamic>>[

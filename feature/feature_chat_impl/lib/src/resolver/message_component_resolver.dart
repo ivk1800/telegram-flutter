@@ -43,6 +43,7 @@ class MessageComponentResolver {
         senderInfo: model.senderInfo,
         onTap: () => _messageActionListener.onSenderAvatarTap(
           senderId: model.senderInfo.id,
+          type: model.senderInfo.type,
         ),
       );
     } else {
