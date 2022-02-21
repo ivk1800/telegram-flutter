@@ -18,6 +18,9 @@ class MainViewModel extends BaseViewModel {
       case MenuItem.dev:
         _router.toDev();
         break;
+      case MenuItem.contacts:
+        _router.toContacts();
+        break;
     }
   }
 }

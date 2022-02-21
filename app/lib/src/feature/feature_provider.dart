@@ -2,6 +2,7 @@ import 'package:app/src/feature/feature.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
+import 'package:feature_contacts_api/feature_contacts_api.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
 import 'package:feature_data_settings_api/feature_data_settings_api.dart';
@@ -81,4 +82,7 @@ class FeatureProvider {
 
   late final ICreateNewChatFeatureApi newChatFeatureApi =
       _featureFactory.createCreateNewChatFeatureApi();
+
+  late final IContactsFeatureApi contactsFeatureApi =
+      _featureFactory.createContactsFeatureApi();
 }

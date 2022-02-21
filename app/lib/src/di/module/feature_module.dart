@@ -16,6 +16,8 @@ import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
+import 'package:feature_contacts_api/feature_contacts_api.dart';
+import 'package:feature_contacts_impl/feature_contacts_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_country_impl/feature_country_impl.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
@@ -429,6 +431,18 @@ abstract class FeatureModule {
             localizationManager: localizationManager,
           );
 
+  @j.provides
+  static ContactsFeatureDependencies provideContactsFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ILocalizationManager localizationManager,
+    IContactsRouter router,
+  ) =>
+      ContactsFeatureDependencies(
+        router: router,
+        connectionStateProvider: connectionStateProvider,
+        stringsProvider: localizationManager.stringsProvider,
+      );
+
   // endregion dependencies
 
   // region api
@@ -573,6 +587,12 @@ abstract class FeatureModule {
   ) =>
       CreateNewChatFeature(dependencies: dependencies);
 
+  @j.provides
+  static IContactsFeatureApi provideContactsFeatureApi(
+    ContactsFeatureDependencies dependencies,
+  ) =>
+      ContactsFeature(dependencies: dependencies);
+
   // endregion api
 
   @j.provides
@@ -679,6 +699,9 @@ abstract class FeatureModule {
 
   @j.binds
   ICreateNewChatRouter bindCreateNewChatRouter(CommonScreenRouterImpl impl);
+
+  @j.binds
+  IContactsRouter bindContactsRouter(CommonScreenRouterImpl impl);
 
 // endregion router
 

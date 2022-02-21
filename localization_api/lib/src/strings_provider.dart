@@ -318,4 +318,10 @@ abstract class IStringsProvider {
   String get mapPreviewProvider;
 
   String get secretWebPage;
+
+  String get contacts;
+
+  String get inviteFriends;
+
+  String get addPeopleNearby;
 }

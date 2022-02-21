@@ -487,5 +487,14 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get secretWebPage => _get('SecretWebPage');
 
+  @override
+  String get contacts => _get('Contacts');
+
+  @override
+  String get inviteFriends => _get('InviteFriends');
+
+  @override
+  String get addPeopleNearby => _get('AddPeopleNearby');
+
   String _get(String key) => _stringGetter.call(key);
 }

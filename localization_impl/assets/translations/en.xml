@@ -326,4 +326,10 @@
     <string lang="MapPreviewProvider">Map Preview Provider</string>
     <!-- https://translations.telegram.org/en/android/settings/SecretWebPage -->
     <string lang="SecretWebPage">Link Previews</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/Contacts -->
+    <string lang="Contacts">Contacts</string>
+    <!-- https://translations.telegram.org/en/android/settings/InviteFriends -->
+    <string lang="InviteFriends">Invite Friends</string>
+    <!-- https://translations.telegram.org/en/android/general/AddPeopleNearby -->
+    <string lang="AddPeopleNearby">Find People Nearby</string>
 </resources>

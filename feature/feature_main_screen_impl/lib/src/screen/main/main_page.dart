@@ -163,6 +163,8 @@ class _MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ILocalizationManager localizationManager = context.read();
+    final IStringsProvider stringsProvider =
+        localizationManager.stringsProvider;
     final MainViewModel viewModel = context.read();
 
     return Drawer(
@@ -199,9 +201,10 @@ class _MainDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
+              viewModel.onMenuItemTap(MenuItem.contacts);
             },
             leading: const Icon(Icons.person),
-            title: const Text('Contacts'),
+            title: Text(stringsProvider.contacts),
           ),
           ListTile(
             onTap: () {

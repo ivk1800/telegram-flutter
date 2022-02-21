@@ -6,6 +6,7 @@ import 'package:dialog_api_flutter/dialog_api_flutter.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
+import 'package:feature_contacts_impl/feature_contacts_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
@@ -48,6 +49,7 @@ class CommonScreenRouterImpl
         IGlobalSearchFeatureRouter,
         IDialogRouter,
         ILogoutFeatureRouter,
+        IContactsRouter,
         IAuthFeatureRouter {
   CommonScreenRouterImpl({
     required ISplitNavigationDelegate navigationDelegate,
@@ -332,6 +334,30 @@ class CommonScreenRouterImpl
           .create(),
       container: ContainerType.top,
     );
+  }
+
+  @override
+  void toContacts() {
+    _add(
+      widget:
+          _featureProvider.contactsFeatureApi.contactsScreenFactory.create(),
+      container: ContainerType.top,
+    );
+  }
+
+  @override
+  void toAddContact() {
+    _showNotImplementedDialog();
+  }
+
+  @override
+  void toFindPeopleNearby() {
+    _showNotImplementedDialog();
+  }
+
+  @override
+  void toInviteFriends() {
+    _showNotImplementedDialog();
   }
 
   void _showDialog({required WidgetBuilder builder}) {
