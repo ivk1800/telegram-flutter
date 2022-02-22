@@ -13,6 +13,7 @@ import 'package:feature_folders_api/feature_folders_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_logout_api/feature_logout_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
+import 'package:feature_new_contact_api/feature_new_contact_api.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
@@ -96,4 +97,7 @@ class FeatureFactory {
 
   IContactsFeatureApi createContactsFeatureApi() =>
       _featureComponent.getContactsFeatureApi();
+
+  INewContactFeatureApi createNewContactFeatureApi() =>
+      _featureComponent.getNewContactFeatureApi();
 }

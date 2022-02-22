@@ -15,6 +15,7 @@ import 'package:feature_folders_impl/feature_folders_impl.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_logout_impl/feature_logout_impl.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
+import 'package:feature_new_contact_impl/feature_new_contact_impl.dart';
 import 'package:feature_notifications_settings_impl/feature_notifications_settings_impl.dart';
 import 'package:feature_privacy_settings_impl/feature_privacy_settings_impl.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
@@ -50,6 +51,7 @@ class CommonScreenRouterImpl
         IDialogRouter,
         ILogoutFeatureRouter,
         IContactsRouter,
+        INewContactRouter,
         IAuthFeatureRouter {
   CommonScreenRouterImpl({
     required ISplitNavigationDelegate navigationDelegate,
@@ -347,7 +349,11 @@ class CommonScreenRouterImpl
 
   @override
   void toAddContact() {
-    _showNotImplementedDialog();
+    _add(
+      widget: _featureProvider.newContactFeatureApi.newContactScreenFactory
+          .create(),
+      container: ContainerType.top,
+    );
   }
 
   @override

@@ -89,6 +89,10 @@ dependencies:
     path: ../feature/feature_message_preview_resolver
   feature_message_preview_resolver_impl:
     path: ../feature/feature_message_preview_resolver_impl
+  feature_new_contact_api:
+    path: ../feature/contact/new_contact/feature_new_contact_api
+  feature_new_contact_impl:
+    path: ../feature/contact/new_contact/feature_new_contact_impl
   feature_notifications_settings_api:
     path: ../feature/feature_notifications_settings_api
   feature_notifications_settings_impl:

@@ -36,6 +36,8 @@ import 'package:feature_logout_impl/feature_logout_impl.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
 import 'package:feature_message_preview_resolver_impl/feature_message_preview_resolver_impl.dart';
+import 'package:feature_new_contact_api/feature_new_contact_api.dart';
+import 'package:feature_new_contact_impl/feature_new_contact_impl.dart';
 import 'package:feature_notifications_settings_api/feature_notifications_settings_api.dart';
 import 'package:feature_notifications_settings_impl/feature_notifications_settings_impl.dart';
 import 'package:feature_privacy_settings_api/feature_privacy_settings_api.dart';
@@ -443,6 +445,18 @@ abstract class FeatureModule {
         stringsProvider: localizationManager.stringsProvider,
       );
 
+  @j.provides
+  static NewContactFeatureDependencies provideNewContactFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ILocalizationManager localizationManager,
+    INewContactRouter router,
+  ) =>
+      NewContactFeatureDependencies(
+        router: router,
+        connectionStateProvider: connectionStateProvider,
+        stringsProvider: localizationManager.stringsProvider,
+      );
+
   // endregion dependencies
 
   // region api
@@ -593,6 +607,12 @@ abstract class FeatureModule {
   ) =>
       ContactsFeature(dependencies: dependencies);
 
+  @j.provides
+  static INewContactFeatureApi provideNewContactFeatureApi(
+    NewContactFeatureDependencies dependencies,
+  ) =>
+      NewContactFeature(dependencies: dependencies);
+
   // endregion api
 
   @j.provides
@@ -702,6 +722,9 @@ abstract class FeatureModule {
 
   @j.binds
   IContactsRouter bindContactsRouter(CommonScreenRouterImpl impl);
+
+  @j.binds
+  INewContactRouter bindNewContactRouter(CommonScreenRouterImpl impl);
 
 // endregion router
 

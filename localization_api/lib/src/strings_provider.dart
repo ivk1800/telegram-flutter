@@ -324,4 +324,6 @@ abstract class IStringsProvider {
   String get inviteFriends;
 
   String get addPeopleNearby;
+
+  String get addContactTitle;
 }

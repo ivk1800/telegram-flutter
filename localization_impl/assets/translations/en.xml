@@ -332,4 +332,6 @@
     <string lang="InviteFriends">Invite Friends</string>
     <!-- https://translations.telegram.org/en/android/general/AddPeopleNearby -->
     <string lang="AddPeopleNearby">Find People Nearby</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/AddContactTitle -->
+    <string lang="AddContactTitle">Add Contact</string>
 </resources>
