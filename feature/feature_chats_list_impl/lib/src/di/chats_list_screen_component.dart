@@ -49,20 +49,6 @@ abstract class ChatsListScreenModule {
 
   @j.provides
   @j.singleton
-  static IUserRepository provideUserRepository(
-    ChatsListFeatureDependencies dependencies,
-  ) =>
-      dependencies.userRepository;
-
-  @j.provides
-  @j.singleton
-  static ILocalizationManager provideLocalizationManager(
-    ChatsListFeatureDependencies dependencies,
-  ) =>
-      dependencies.localizationManager;
-
-  @j.provides
-  @j.singleton
   static IChatsListScreenRouter provideChatsListScreenRouter(
     ChatsListFeatureDependencies dependencies,
   ) =>

@@ -141,15 +141,6 @@ abstract class ChatScreenModule {
 
   @j.provides
   @j.singleton
-  static tg.AvatarWidgetFactory provideAvatarWidgetFactory(
-    ChatFeatureDependencies dependencies,
-  ) =>
-      tg.AvatarWidgetFactory(
-        fileRepository: dependencies.fileRepository,
-      );
-
-  @j.provides
-  @j.singleton
   static IMessageActionListener provideMessageActionListener(
     ChatViewModel bloc,
   ) =>

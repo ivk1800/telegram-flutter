@@ -22,15 +22,6 @@ abstract class IProfileScreenComponent {
 abstract class ProfileScreenModule {
   @j.provides
   @j.singleton
-  static IChatHeaderInfoInteractor provideChatHeaderInfoInteractor(
-    ProfileArgs args,
-    ProfileFeatureDependencies dependencies,
-  ) =>
-      dependencies.chatHeaderInfoFeatureApi
-          .getChatHeaderInfoInteractor(args.id);
-
-  @j.provides
-  @j.singleton
   static IChatHeaderInfoFactory provideChatHeaderInfoFactory(
     ProfileArgs args,
     ProfileFeatureDependencies dependencies,

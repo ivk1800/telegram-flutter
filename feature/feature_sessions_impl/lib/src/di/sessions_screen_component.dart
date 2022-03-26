@@ -38,13 +38,6 @@ abstract class SessionsScreenModule {
 
   @j.singleton
   @j.provides
-  static ISessionsScreenRouter provideSessionsScreenRouter(
-    SessionsFeatureDependencies dependencies,
-  ) =>
-      dependencies.router;
-
-  @j.singleton
-  @j.provides
   static ISessionRepository provideSessionRepository(
     SessionsFeatureDependencies dependencies,
   ) =>

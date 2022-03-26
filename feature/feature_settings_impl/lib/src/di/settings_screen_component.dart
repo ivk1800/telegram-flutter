@@ -52,13 +52,6 @@ abstract class SettingsScreenModule {
   ) =>
       dependencies.connectionStateProvider;
 
-  @j.provides
-  @j.singleton
-  static ISettingsScreenRouter provideRouter(
-    SettingsFeatureDependencies dependencies,
-  ) =>
-      dependencies.router;
-
   @j.singleton
   @j.provides
   static ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(

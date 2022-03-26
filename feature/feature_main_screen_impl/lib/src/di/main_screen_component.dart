@@ -72,20 +72,6 @@ abstract class MainScreenModule {
 
   @j.provides
   @j.singleton
-  static IConnectionStateProvider provideConnectionStateProvider(
-    MainScreenFeatureDependencies dependencies,
-  ) =>
-      dependencies.connectionStateProvider;
-
-  @j.provides
-  @j.singleton
-  static IMainScreenRouter provideMainRouter(
-    MainScreenFeatureDependencies dependencies,
-  ) =>
-      dependencies.router;
-
-  @j.provides
-  @j.singleton
   static ILocalizationManager provideLocalizationManager(
     MainScreenFeatureDependencies dependencies,
   ) =>
