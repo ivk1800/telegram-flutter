@@ -173,6 +173,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
           title: chatHeaderInfoFactory.create(
             context: context,
             info: data.info,
+            onProfileTap: viewModel.onOpenSelfProfileTap,
           ),
           actions: <Widget>[
             _AppBarPopupMenu(

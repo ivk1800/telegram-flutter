@@ -64,6 +64,7 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
       });
 
   @override
+  // todo check is hasValue
   ChatHeaderInfo get current => _infoSubject.value;
 
   Stream<ChatHeaderInfo> _asBasicGroup(int id, td.Chat chat) {
@@ -125,6 +126,7 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
   }
 
   String statusToString(td.UserStatus status) {
+    // todo use map
     switch (status.getConstructor()) {
       case td.UserStatusEmpty.CONSTRUCTOR:
         {

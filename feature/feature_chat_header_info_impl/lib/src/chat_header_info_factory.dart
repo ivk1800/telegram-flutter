@@ -13,8 +13,13 @@ class ChatHeaderInfoFactory implements IChatHeaderInfoFactory {
   final tg.AvatarWidgetFactory _avatarWidgetFactory;
 
   @override
-  Widget create({required BuildContext context, required ChatHeaderInfo info}) {
+  Widget create({
+    required BuildContext context,
+    required ChatHeaderInfo info,
+    void Function()? onProfileTap,
+  }) {
     return ListTile(
+      onTap: onProfileTap,
       contentPadding: EdgeInsets.zero,
       leading: _avatarWidgetFactory.create(
         context,

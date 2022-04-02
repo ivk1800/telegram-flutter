@@ -4,11 +4,16 @@ import 'package:flutter/widgets.dart';
 
 abstract class IChatHeaderInfoFeatureApi {
   IChatHeaderInfoInteractor getChatHeaderInfoInteractor(int chatId);
+
   IChatHeaderInfoFactory getChatHeaderInfoFactory();
 }
 
 abstract class IChatHeaderInfoFactory {
-  Widget create({required BuildContext context, required ChatHeaderInfo info});
+  Widget create({
+    required BuildContext context,
+    required ChatHeaderInfo info,
+    void Function()? onProfileTap,
+  });
 }
 
 abstract class IChatHeaderInfoInteractor {

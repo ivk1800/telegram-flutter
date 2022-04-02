@@ -202,6 +202,7 @@ abstract class ChatScreenModule {
         headerInfoInteractor: headerInfoInteractor,
         router: dependencies.routerFactory.create(args.chatId),
         args: args,
+        chatRepository: dependencies.chatRepository,
         stringsProvider: stringsProvider,
       )..init();
 
