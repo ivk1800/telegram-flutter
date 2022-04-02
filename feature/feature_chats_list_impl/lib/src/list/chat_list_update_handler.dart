@@ -138,7 +138,7 @@ class ChatListUpdateHandler {
       final OrderedChat newOrderedChat =
           OrderedChat(chatId: chatData.chat.id, order: position.order);
       chatData
-        ..chat = chatData.chat.copy(positions: <td.ChatPosition>[position])
+        ..chat = chatData.chat.copyWith(positions: <td.ChatPosition>[position])
         ..model = chatData.model.copy(
           isPinned: position.isPinned,
         );
@@ -155,7 +155,7 @@ class ChatListUpdateHandler {
     }
     final ChatData chatData = _chats[chatId]!;
     chatData
-      ..chat = chatData.chat.copy(lastMessage: message)
+      ..chat = chatData.chat.copyWith(lastMessage: message)
       // ignore: flutter_style_todos
       //TODO(Ivan): map only changed part
       ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
@@ -170,7 +170,7 @@ class ChatListUpdateHandler {
     }
 
     chatData
-      ..chat = chatData.chat.copy(
+      ..chat = chatData.chat.copyWith(
         unreadCount: update.unreadCount,
         // all messages was read, set 0 to MentionCount
         // because Update for it not incoming
@@ -192,7 +192,9 @@ class ChatListUpdateHandler {
     }
 
     chatData
-      ..chat = chatData.chat.copy(unreadMentionCount: update.unreadMentionCount)
+      ..chat = chatData.chat.copyWith(
+        unreadMentionCount: update.unreadMentionCount,
+      )
       ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }
@@ -207,7 +209,9 @@ class ChatListUpdateHandler {
     }
 
     chatData
-      ..chat = chatData.chat.copy(unreadMentionCount: update.unreadMentionCount)
+      ..chat = chatData.chat.copyWith(
+        unreadMentionCount: update.unreadMentionCount,
+      )
       ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }
@@ -222,8 +226,9 @@ class ChatListUpdateHandler {
     }
 
     chatData
-      ..chat =
-          chatData.chat.copy(notificationSettings: update.notificationSettings)
+      ..chat = chatData.chat.copyWith(
+        notificationSettings: update.notificationSettings,
+      )
       ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
     return true;
   }

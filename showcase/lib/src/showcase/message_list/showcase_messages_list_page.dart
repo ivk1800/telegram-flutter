@@ -74,8 +74,8 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
           MessageData(
             name: 'gif with caption',
             messageFactory: () => _getMessage('message_animation_gif').then(
-              (td.Message value) => value.copy(
-                content: (value.content as td.MessageAnimation).copy(
+              (td.Message value) => value.copyWith(
+                content: (value.content as td.MessageAnimation).copyWith(
                   caption: _fakeFormattedText(),
                 ),
               ),
@@ -108,9 +108,9 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
             name: 'outgoing hang up',
             messageFactory: () =>
                 _getMessage('message_call_incoming_hang_up').then(
-              (td.Message value) => value.copy(
+              (td.Message value) => value.copyWith(
                 isOutgoing: true,
-                content: (value.content as td.MessageCall).copy(
+                content: (value.content as td.MessageCall).copyWith(
                   duration: 1,
                   discardReason: const td.CallDiscardReasonHungUp(),
                 ),
@@ -125,9 +125,9 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
             name: 'incoming missed',
             messageFactory: () =>
                 _getMessage('message_call_incoming_hang_up').then(
-              (td.Message value) => value.copy(
+              (td.Message value) => value.copyWith(
                 isOutgoing: false,
-                content: (value.content as td.MessageCall).copy(
+                content: (value.content as td.MessageCall).copyWith(
                   duration: 0,
                   discardReason: const td.CallDiscardReasonMissed(),
                 ),
@@ -138,10 +138,11 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
             name: 'outgoing declined',
             messageFactory: () =>
                 _getMessage('message_call_incoming_hang_up').then(
-              (td.Message value) => value.copy(
+              (td.Message value) => value.copyWith(
                 isOutgoing: true,
-                content: (value.content as td.MessageCall)
-                    .copy(discardReason: const td.CallDiscardReasonDeclined()),
+                content: (value.content as td.MessageCall).copyWith(
+                  discardReason: const td.CallDiscardReasonDeclined(),
+                ),
               ),
             ),
           ),
@@ -149,9 +150,9 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
             name: 'outgoing missed',
             messageFactory: () =>
                 _getMessage('message_call_incoming_hang_up').then(
-              (td.Message value) => value.copy(
+              (td.Message value) => value.copyWith(
                 isOutgoing: true,
-                content: (value.content as td.MessageCall).copy(
+                content: (value.content as td.MessageCall).copyWith(
                   duration: 0,
                   discardReason: const td.CallDiscardReasonMissed(),
                 ),
@@ -179,9 +180,10 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
           MessageData(
             name: 'video 16:9 with caption',
             messageFactory: () => _getMessage('message_video_1').then(
-              (td.Message value) => value.copy(
-                content: (value.content as td.MessageVideo)
-                    .copy(caption: _fakeFormattedText()),
+              (td.Message value) => value.copyWith(
+                content: (value.content as td.MessageVideo).copyWith(
+                  caption: _fakeFormattedText(),
+                ),
               ),
             ),
           ),
@@ -197,9 +199,9 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
           MessageData(
             name: 'multiple',
             messageFactory: () => _getMessage('message_chat_add_members').then(
-              (td.Message value) => value.copy(
+              (td.Message value) => value.copyWith(
                 content: (value.content as td.MessageChatAddMembers)
-                    .copy(memberUserIds: <int>[1, 2, 3]),
+                    .copyWith(memberUserIds: <int>[1, 2, 3]),
               ),
             ),
           ),
@@ -268,10 +270,11 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
           ),
           MessageData(
             name: 'chat set ttl(outgoing)',
-            messageFactory: () => _getMessage('message_chat_set_ttl')
-                .then((td.Message value) => value.copy(
-                      isOutgoing: true,
-                    )),
+            messageFactory: () => _getMessage('message_chat_set_ttl').then(
+              (td.Message value) => value.copyWith(
+                isOutgoing: true,
+              ),
+            ),
           ),
         ],
       ),

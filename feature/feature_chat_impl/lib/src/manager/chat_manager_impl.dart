@@ -26,7 +26,7 @@ class ChatManagerImpl implements IChatManager {
   Future<void> muteFor(int chatId, int seconds) async {
     final td.Chat chat = await _chatRepository.getChat(chatId);
     final td.ChatNotificationSettings notificationSettings =
-        chat.notificationSettings.copy(
+        chat.notificationSettings.copyWith(
       useDefaultMuteFor: false,
       muteFor: seconds,
     );

@@ -16,7 +16,10 @@ class FakeUserRepository implements IUserRepository {
   @override
   Future<td.User> getUser(int id) {
     return fakeUserProvider.getFakeUser().then((td.User value) {
-      return value.copy(firstName: generator.generateRandom(), lastName: '');
+      return value.copyWith(
+        firstName: generator.generateRandom(),
+        lastName: '',
+      );
     });
   }
 
