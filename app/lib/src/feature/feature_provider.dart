@@ -1,5 +1,6 @@
 import 'package:app/src/feature/feature.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
+import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_contacts_api/feature_contacts_api.dart';
@@ -89,4 +90,7 @@ class FeatureProvider {
 
   late final INewContactFeatureApi newContactFeatureApi =
       _featureFactory.createNewContactFeatureApi();
+
+  late final IChatAdministrationFeatureApi chatAdministrationFeatureApi =
+      _featureFactory.createChatAdministrationFeatureApi();
 }

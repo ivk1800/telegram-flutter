@@ -334,4 +334,6 @@
     <string lang="AddPeopleNearby">Find People Nearby</string>
     <!-- https://translations.telegram.org/en/android/private_chats/AddContactTitle -->
     <string lang="AddContactTitle">Add Contact</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/ChannelEdit -->
+    <string lang="ChannelEdit">Edit</string>
 </resources>

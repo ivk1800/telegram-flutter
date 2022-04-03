@@ -3,5 +3,6 @@
 
 * ...
 * Contacts list screen
-* Add new contact screen
+* New contact screen
+* Chat administration screen
 * ...

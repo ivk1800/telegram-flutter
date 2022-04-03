@@ -326,4 +326,6 @@ abstract class IStringsProvider {
   String get addPeopleNearby;
 
   String get addContactTitle;
+
+  String get channelEdit;
 }

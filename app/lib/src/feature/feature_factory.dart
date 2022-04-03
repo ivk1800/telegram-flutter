@@ -1,5 +1,6 @@
 import 'package:app/src/di/component/feature_component.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
+import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
@@ -100,4 +101,7 @@ class FeatureFactory {
 
   INewContactFeatureApi createNewContactFeatureApi() =>
       _featureComponent.getNewContactFeatureApi();
+
+  IChatAdministrationFeatureApi createChatAdministrationFeatureApi() =>
+      _featureComponent.getChatAdministrationFeatureApi();
 }

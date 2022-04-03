@@ -4,4 +4,6 @@ abstract class IProfileFeatureRouter {
   void toSharedMedia(SharedContentType type);
 
   void toQuickNotificationSettings();
+
+  void toChatAdministration(int chatId);
 }

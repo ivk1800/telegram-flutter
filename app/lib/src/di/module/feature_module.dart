@@ -3,11 +3,14 @@ import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
+import 'package:app/src/navigation/router/chat_administration_router_factory.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
+import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
+import 'package:feature_chat_administration_impl/feature_chat_administration_impl.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_header_info_impl/feature_chat_header_info_impl.dart';
@@ -457,6 +460,19 @@ abstract class FeatureModule {
         stringsProvider: localizationManager.stringsProvider,
       );
 
+  @j.provides
+  static ChatAdministrationFeatureDependencies
+      provideChatAdministrationFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    ILocalizationManager localizationManager,
+    IChatAdministrationRouterFactory routerFactory,
+  ) =>
+          ChatAdministrationFeatureDependencies(
+            routerFactory: routerFactory,
+            connectionStateProvider: connectionStateProvider,
+            stringsProvider: localizationManager.stringsProvider,
+          );
+
   // endregion dependencies
 
   // region api
@@ -613,6 +629,12 @@ abstract class FeatureModule {
   ) =>
       NewContactFeature(dependencies: dependencies);
 
+  @j.provides
+  static IChatAdministrationFeatureApi provideChatAdministrationFeatureApi(
+    ChatAdministrationFeatureDependencies dependencies,
+  ) =>
+      ChatAdministrationFeature(dependencies: dependencies);
+
   // endregion api
 
   @j.provides
@@ -725,6 +747,11 @@ abstract class FeatureModule {
 
   @j.binds
   INewContactRouter bindNewContactRouter(CommonScreenRouterImpl impl);
+
+  @j.binds
+  IChatAdministrationRouterFactory bindChatAdministrationRouterFactory(
+    ChatAdministrationRouterFactory impl,
+  );
 
 // endregion router
 

@@ -366,6 +366,16 @@ class CommonScreenRouterImpl
     _showNotImplementedDialog();
   }
 
+  @override
+  void toChatAdministration(int chatId) {
+    _add(
+      widget: _featureProvider
+          .chatAdministrationFeatureApi.chatAdministrationScreenFactory
+          .create(chatId),
+      container: ContainerType.top,
+    );
+  }
+
   void _showDialog({required WidgetBuilder builder}) {
     final BuildContext? context = _dialogNavigatorKey.currentContext;
 

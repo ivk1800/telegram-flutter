@@ -499,5 +499,8 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get addContactTitle => _get('AddContactTitle');
 
+  @override
+  String get channelEdit => _get('ChannelEdit');
+
   String _get(String key) => _stringGetter.call(key);
 }
