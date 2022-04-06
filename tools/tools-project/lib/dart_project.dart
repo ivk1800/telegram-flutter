@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 import 'package:quiver/core.dart';
 
 @immutable
-class DartProject {
+class DartProject implements Comparable<DartProject> {
   const DartProject({
     required this.name,
     required this.path,
@@ -23,6 +23,9 @@ class DartProject {
   String toString() {
     return 'path=$path, isFlutter=$isFlutter, isBuildRunner=$withBuildRunner';
   }
+
+  @override
+  int compareTo(DartProject other) => name.compareTo(other.name);
 }
 
 @immutable
