@@ -7,6 +7,6 @@ environment:
 dev_dependencies:
   async_utils:
     path: ../async_utils
-  dependency_validator: 3.1.2
+  dependency_validator: 3.2.0
   tg_lint_rules:
     path: ../tg_lint_rules

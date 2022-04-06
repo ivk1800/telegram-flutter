@@ -11,7 +11,6 @@ dependencies:
     path: ../core_arch
   core_tdlib_api:
     path: ../core_tdlib_api
-  dependency_validator: 3.1.2
   flutter:
     sdk: flutter
   intl: 0.17.0
@@ -20,5 +19,6 @@ dependencies:
     path: ../td_client
 
 dev_dependencies:
+  dependency_validator: 3.2.0
   tg_lint_rules:
     path: ../tg_lint_rules
