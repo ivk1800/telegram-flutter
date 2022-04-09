@@ -35,6 +35,5 @@ class ChatHeaderActionsInteractor {
     });
   }
 
-  Stream<ChatInfo> _getChatIfo() =>
-      Stream<ChatInfo>.fromFuture(_chatInfoResolver.resolve(_chatId));
+  Stream<ChatInfo> _getChatIfo() => _chatInfoResolver.resolveAsStream(_chatId);
 }

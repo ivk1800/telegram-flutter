@@ -2,6 +2,8 @@ import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'header_action_data.dart';
+
 part 'profile_state.freezed.dart';
 
 @freezed
@@ -16,7 +18,10 @@ class ProfileState with _$ProfileState {
 @freezed
 @immutable
 class HeaderState with _$HeaderState {
-  const factory HeaderState.info(ChatHeaderInfo info) = Info;
+  const factory HeaderState.info(
+    ChatHeaderInfo info,
+    List<HeaderActionData> actions,
+  ) = Info;
 }
 
 @freezed

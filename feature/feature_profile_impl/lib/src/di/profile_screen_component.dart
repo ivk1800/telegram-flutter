@@ -1,3 +1,4 @@
+import 'package:chat_info/chat_info.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
 import 'package:feature_profile_impl/src/screen/profile/bloc/profile_bloc.dart';
@@ -34,14 +35,27 @@ abstract class ProfileScreenModule {
     ProfileArgs args,
     ProfileFeatureDependencies dependencies,
     ContentInteractor contentInteractor,
+    ChatInfoResolver chatInfoResolver,
   ) =>
       ProfileBloc(
         router: dependencies.router,
         args: args,
+        chatInfoResolver: chatInfoResolver,
         headerInfoInteractor: dependencies.chatHeaderInfoFeatureApi
             .getChatHeaderInfoInteractor(args.id),
         contentInteractor: contentInteractor,
       )..add(const ProfileEvent.init());
+
+  @j.provides
+  @j.singleton
+  static ChatInfoResolver provideChatInfoResolver(
+    ProfileFeatureDependencies dependencies,
+  ) =>
+      ChatInfoResolver(
+        basicGroupRepository: dependencies.basicGroupRepository,
+        chatRepository: dependencies.chatRepository,
+        superGroupRepository: dependencies.superGroupRepository,
+      );
 
   @j.provides
   @j.singleton

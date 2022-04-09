@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chat_info/chat_info.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/src/profile_feature_router.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
@@ -7,6 +8,7 @@ import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'header_action_data.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';
 
@@ -16,7 +18,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     required IProfileFeatureRouter router,
     required IChatHeaderInfoInteractor headerInfoInteractor,
     required ContentInteractor contentInteractor,
+    required ChatInfoResolver chatInfoResolver,
   })  : _contentInteractor = contentInteractor,
+        _chatInfoResolver = chatInfoResolver,
+        _args = args,
         _router = router,
         _headerInfoInteractor = headerInfoInteractor,
         super(
@@ -28,6 +33,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
                 chatId: args.id,
                 subtitle: 'subtitle',
               ),
+              const <HeaderActionData>[],
             ),
             bodyState: const BodyState.loading(),
           ),
@@ -38,6 +44,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ContentInteractor _contentInteractor;
   final IProfileFeatureRouter _router;
   final IChatHeaderInfoInteractor _headerInfoInteractor;
+  final ProfileArgs _args;
+  final ChatInfoResolver _chatInfoResolver;
   StreamSubscription<dynamic>? _compositeStateSubscription;
 
   @override
@@ -52,6 +60,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<MessagesTap>(_onMessagesTap);
     on<Init>(_onInit);
     on<NewProfileState>(_onNewProfileState);
+    on<HeaderActionTap>(_onHeaderActionTap);
   }
 
   void _onNotificationToggleTap(
@@ -82,15 +91,30 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     _initCompositeStateSubscription(emit);
   }
 
+  void _onHeaderActionTap(HeaderActionTap event, Emitter<ProfileState> emit) {
+    switch (event.action) {
+      case HeaderAction.edit:
+        _router.toChatAdministration(_args.id);
+        break;
+    }
+  }
+
   void _initCompositeStateSubscription(Emitter<ProfileState> emit) {
     final Stream<BodyState> body =
         Stream<ContentData>.fromFuture(_contentInteractor.getContent())
             .map<BodyState>((ContentData data) => BodyState.data(data))
             .startWith(const BodyState.loading());
 
-    final Stream<HeaderState> header = _headerInfoInteractor.infoStream
-        .startWith(_headerInfoInteractor.current)
-        .map((ChatHeaderInfo info) => HeaderState.info(info));
+    final Stream<ChatHeaderInfo> info = _headerInfoInteractor.infoStream
+        .startWith(_headerInfoInteractor.current);
+
+    final Stream<HeaderState> header = Rx.zip2(
+      info,
+      _actions(),
+      (ChatHeaderInfo info, List<HeaderActionData> actions) {
+        return HeaderState.info(info, actions);
+      },
+    );
 
     _compositeStateSubscription =
         Rx.combineLatest2<BodyState, HeaderState, ProfileState>(
@@ -99,5 +123,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       (BodyState body, HeaderState header) =>
           ProfileState(headerState: header, bodyState: body),
     ).map((ProfileState s) => ProfileEvent.newProfileState(s)).listen(add);
+  }
+
+  Stream<List<HeaderActionData>> _actions() {
+    return _chatInfoResolver.resolveAsStream(_args.id).map((ChatInfo info) {
+      return <HeaderActionData>[
+        if (info.isCreator || info.isAdmin)
+          HeaderActionData(
+            action: HeaderAction.edit,
+            label: 'edit',
+          )
+      ];
+    });
   }
 }

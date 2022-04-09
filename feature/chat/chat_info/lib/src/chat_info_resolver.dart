@@ -14,7 +14,11 @@ class ChatInfoResolver {
   final IBasicGroupRepository _basicGroupRepository;
   final ISuperGroupRepository _superGroupRepository;
 
-  Future<ChatInfo> resolve(int chatId) async {
+  Stream<ChatInfo> resolveAsStream(int chatId) {
+    return Stream<ChatInfo>.fromFuture(_resolve(chatId));
+  }
+
+  Future<ChatInfo> _resolve(int chatId) async {
     final td.Chat chat = await _chatRepository.getChat(chatId);
 
     td.Supergroup? supergroup;
@@ -48,6 +52,8 @@ class ChatInfoResolver {
       isChannel: supergroup?.isChannel ?? true,
       isCreator: (supergroup?.status.isCreator ?? false) ||
           (basicGroup?.status.isCreator ?? false),
+      isAdmin: (supergroup?.status.isAdmin ?? false) ||
+          (basicGroup?.status.isAdmin ?? false),
     );
   }
 }
@@ -58,12 +64,14 @@ class ChatInfo {
     required this.isCreator,
     required this.isMember,
     required this.isGroup,
+    required this.isAdmin,
   });
 
   final bool isChannel;
   final bool isGroup;
   final bool isCreator;
   final bool isMember;
+  final bool isAdmin;
 }
 
 extension _ChatMemberStatusExt on td.ChatMemberStatus {
@@ -71,6 +79,5 @@ extension _ChatMemberStatusExt on td.ChatMemberStatus {
 
   bool get isAdmin => this is td.ChatMemberStatusAdministrator;
 
-  bool get isMember =>
-      this is td.ChatMemberStatusMember || isAdmin || isCreator;
+  bool get isMember => this is td.ChatMemberStatusMember;
 }
