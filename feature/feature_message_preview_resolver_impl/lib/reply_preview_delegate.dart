@@ -45,13 +45,13 @@ class ReplyPreviewDelegate implements IPreviewDelegate {
 
   Future<String> _getSenderNameToDisplay(td.MessageSender sender) async {
     switch (sender.getConstructor()) {
-      case td.MessageSenderUser.CONSTRUCTOR:
+      case td.MessageSenderUser.constructor:
         {
           final td.User user = await _userRepository
               .getUser((sender as td.MessageSenderUser).userId);
           return '${user.firstName} ${user.lastName}';
         }
-      case td.MessageSenderChat.CONSTRUCTOR:
+      case td.MessageSenderChat.constructor:
         {
           final td.Chat chat = await _chatRepository
               .getChat((sender as td.MessageSenderChat).chatId);

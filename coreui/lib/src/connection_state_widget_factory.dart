@@ -22,7 +22,7 @@ class ConnectionStateWidgetFactory {
         final td.ConnectionState? state = snapshot.data;
 
         if (state != null) {
-          if (state.getConstructor() == td.ConnectionStateReady.CONSTRUCTOR) {
+          if (state.getConstructor() == td.ConnectionStateReady.constructor) {
             return readyWidgetFactory.call(context);
           } else {
             return Text(_getStateText(state) ?? '');
@@ -35,19 +35,19 @@ class ConnectionStateWidgetFactory {
 
   String? _getStateText(td.ConnectionState state) {
     switch (state.getConstructor()) {
-      case td.ConnectionStateUpdating.CONSTRUCTOR:
+      case td.ConnectionStateUpdating.constructor:
         {
           return 'Updating';
         }
-      case td.ConnectionStateConnecting.CONSTRUCTOR:
+      case td.ConnectionStateConnecting.constructor:
         {
           return 'Connecting...';
         }
-      case td.ConnectionStateConnectingToProxy.CONSTRUCTOR:
+      case td.ConnectionStateConnectingToProxy.constructor:
         {
           return 'Connecting to proxy';
         }
-      case td.ConnectionStateWaitingForNetwork.CONSTRUCTOR:
+      case td.ConnectionStateWaitingForNetwork.constructor:
         {
           return 'Waiting for network...';
         }

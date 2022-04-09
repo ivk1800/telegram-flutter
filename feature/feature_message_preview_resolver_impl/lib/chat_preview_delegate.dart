@@ -35,7 +35,7 @@ class ChatPreviewDelegate implements IPreviewDelegate {
 
   Future<String?> _getSenderNameToDisplay(td.MessageSender sender) async {
     switch (sender.getConstructor()) {
-      case td.MessageSenderUser.CONSTRUCTOR:
+      case td.MessageSenderUser.constructor:
         {
           final td.User user = await _userRepository
               .getUser((sender as td.MessageSenderUser).userId);

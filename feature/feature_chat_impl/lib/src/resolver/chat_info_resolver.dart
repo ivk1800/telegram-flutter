@@ -21,18 +21,18 @@ class ChatInfoResolver {
     td.BasicGroup? basicGroup;
 
     switch (chat.type.getConstructor()) {
-      case td.ChatTypeSecret.CONSTRUCTOR:
-      case td.ChatTypePrivate.CONSTRUCTOR:
+      case td.ChatTypeSecret.constructor:
+      case td.ChatTypePrivate.constructor:
         {
           break;
         }
-      case td.ChatTypeSupergroup.CONSTRUCTOR:
+      case td.ChatTypeSupergroup.constructor:
         {
           supergroup = await _superGroupRepository
               .getGroup((chat.type as td.ChatTypeSupergroup).supergroupId);
           break;
         }
-      case td.ChatTypeBasicGroup.CONSTRUCTOR:
+      case td.ChatTypeBasicGroup.constructor:
         {
           basicGroup = await _basicGroupRepository
               .getGroup((chat.type as td.ChatTypeBasicGroup).basicGroupId);

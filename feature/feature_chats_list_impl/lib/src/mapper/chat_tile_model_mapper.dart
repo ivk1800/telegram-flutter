@@ -28,7 +28,7 @@ class ChatTileModelMapper {
 
     assert(chat.positions.length == 1);
     final bool isSecret =
-        chat.type.getConstructor() == td.ChatTypeSecret.CONSTRUCTOR;
+        chat.type.getConstructor() == td.ChatTypeSecret.constructor;
     return ChatTileModel(
       isMuted: chat.notificationSettings.muteFor > 0,
       isVerified: await getVerified(chat),
@@ -49,7 +49,7 @@ class ChatTileModelMapper {
   }
 
   Future<bool> getVerified(td.Chat chat) async {
-    if (chat.type.getConstructor() == td.ChatTypeSupergroup.CONSTRUCTOR) {
+    if (chat.type.getConstructor() == td.ChatTypeSupergroup.constructor) {
       final td.ChatTypeSupergroup supergroupType =
           chat.type as td.ChatTypeSupergroup;
       return (await _chatRepository.getSupergroup(supergroupType.supergroupId))

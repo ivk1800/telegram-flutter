@@ -7,10 +7,10 @@ extension TdErrorExt<T extends td.TdObject> on Future<T> {
   Future<T> catchTdError() {
     return catchError(
       (Object error) {
-        error as TdFunctionError;
+        error as TdFunctionException;
         Error.throwWithStackTrace(error, error.stackTrace!);
       },
-      test: (Object error) => error is TdFunctionError,
+      test: (Object error) => error is TdFunctionException,
     );
   }
 }

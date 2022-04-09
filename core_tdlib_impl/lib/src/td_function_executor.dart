@@ -11,8 +11,8 @@ class TdFunctionExecutor implements ITdFunctionExecutor {
   final TdClient _client;
 
   @override
-  Future<T> execute<T extends td.TdObject>(td.TdFunction object) =>
-      _client.execute<T>(object).catchTdError();
+  T execute<T extends td.TdObject>(td.TdFunction object) =>
+      _client.execute<T>(object);
 
   @override
   Future<T> send<T extends td.TdObject>(td.TdFunction object) =>

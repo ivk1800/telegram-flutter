@@ -30,7 +30,7 @@ class WallpaperListBloc extends Bloc<WallpaperListEvent, WallpaperListState> {
       backgrounds
           .map((td.Background background) {
             switch (background.type.getConstructor()) {
-              case td.BackgroundTypeWallpaper.CONSTRUCTOR:
+              case td.BackgroundTypeWallpaper.constructor:
                 {
                   final td.Document document = background.document!;
                   return BackgroundWallpaperTileModel(
@@ -39,7 +39,7 @@ class WallpaperListBloc extends Bloc<WallpaperListEvent, WallpaperListState> {
                         background.document?.minithumbnail?.toMinithumbnail(),
                   );
                 }
-              case td.BackgroundTypePattern.CONSTRUCTOR:
+              case td.BackgroundTypePattern.constructor:
                 {
                   final td.BackgroundTypePattern fill =
                       background.type as td.BackgroundTypePattern;
@@ -49,7 +49,7 @@ class WallpaperListBloc extends Bloc<WallpaperListEvent, WallpaperListState> {
                     fill: fill.fill.toBackgroundFill(),
                   );
                 }
-              case td.BackgroundTypeFill.CONSTRUCTOR:
+              case td.BackgroundTypeFill.constructor:
                 {
                   final td.BackgroundTypeFill fill =
                       background.type as td.BackgroundTypeFill;

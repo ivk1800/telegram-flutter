@@ -22,7 +22,7 @@ class Parser {
         .where(
           (td.TextEntity element) =>
               element.type.getConstructor() ==
-              td.TextEntityTypeTextUrl.CONSTRUCTOR,
+              td.TextEntityTypeTextUrl.constructor,
         )
         .toList();
 

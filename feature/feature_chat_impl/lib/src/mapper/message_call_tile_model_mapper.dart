@@ -62,31 +62,31 @@ class MessageCallTileModelMapper {
 
   String _toHumanString(bool isOutgoing, td.CallDiscardReason reason) {
     switch (reason.getConstructor()) {
-      case td.CallDiscardReasonEmpty.CONSTRUCTOR:
+      case td.CallDiscardReasonEmpty.constructor:
         {
           //TODO replace by actual text
           return 'todo ???';
         }
-      case td.CallDiscardReasonMissed.CONSTRUCTOR:
+      case td.CallDiscardReasonMissed.constructor:
         {
           if (isOutgoing) {
             return _localizationManager.getString('CallMessageOutgoingMissed');
           }
           return _localizationManager.getString('CallMessageIncomingMissed');
         }
-      case td.CallDiscardReasonDeclined.CONSTRUCTOR:
+      case td.CallDiscardReasonDeclined.constructor:
         {
           if (isOutgoing) {
             return _localizationManager.getString('CallMessageOutgoing');
           }
           return _localizationManager.getString('CallMessageIncomingDeclined');
         }
-      case td.CallDiscardReasonDisconnected.CONSTRUCTOR:
+      case td.CallDiscardReasonDisconnected.constructor:
         {
           //TODO replace by actual text
           return 'todo Disconnected';
         }
-      case td.CallDiscardReasonHungUp.CONSTRUCTOR:
+      case td.CallDiscardReasonHungUp.constructor:
         {
           if (isOutgoing) {
             return _localizationManager.getString('CallMessageOutgoing');

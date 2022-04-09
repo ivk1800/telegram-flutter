@@ -41,18 +41,18 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
       Stream<td.Chat>.fromFuture(_chatRepository.getChat(_chatId))
           .flatMap((td.Chat chat) {
         switch (chat.type.getConstructor()) {
-          case td.ChatTypeSecret.CONSTRUCTOR:
-          case td.ChatTypePrivate.CONSTRUCTOR:
+          case td.ChatTypeSecret.constructor:
+          case td.ChatTypePrivate.constructor:
             {
               return _asUser(chat.id, chat);
             }
-          case td.ChatTypeSupergroup.CONSTRUCTOR:
+          case td.ChatTypeSupergroup.constructor:
             {
               final td.ChatTypeSupergroup type =
                   chat.type as td.ChatTypeSupergroup;
               return _asSupergroup(type.supergroupId, chat);
             }
-          case td.ChatTypeBasicGroup.CONSTRUCTOR:
+          case td.ChatTypeBasicGroup.constructor:
             {
               final td.ChatTypeBasicGroup type =
                   chat.type as td.ChatTypeBasicGroup;
@@ -89,7 +89,7 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
     return Stream<td.User>.fromFuture(_userRepository.getUser(id))
         .flatMap((td.User user) {
       switch (user.type.getConstructor()) {
-        case td.UserTypeRegular.CONSTRUCTOR:
+        case td.UserTypeRegular.constructor:
           {
             return Stream<ChatHeaderInfo>.value(ChatHeaderInfo(
               photoId: chat.photo?.small.id,
@@ -98,8 +98,8 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
               subtitle: statusToString(user.status),
             ));
           }
-        case td.UserTypeUnknown.CONSTRUCTOR:
-        case td.UserTypeDeleted.CONSTRUCTOR:
+        case td.UserTypeUnknown.constructor:
+        case td.UserTypeDeleted.constructor:
           {
             return Stream<ChatHeaderInfo>.value(ChatHeaderInfo(
               photoId: chat.photo?.small.id,
@@ -110,7 +110,7 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
             ));
           }
 
-        case td.UserTypeBot.CONSTRUCTOR:
+        case td.UserTypeBot.constructor:
           {
             return Stream<ChatHeaderInfo>.value(ChatHeaderInfo(
               photoId: chat.photo?.small.id,
@@ -128,29 +128,29 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
   String statusToString(td.UserStatus status) {
     // todo use map
     switch (status.getConstructor()) {
-      case td.UserStatusEmpty.CONSTRUCTOR:
+      case td.UserStatusEmpty.constructor:
         {
           return _getString('ALongTimeAgo');
         }
-      case td.UserStatusOnline.CONSTRUCTOR:
+      case td.UserStatusOnline.constructor:
         {
           // todo handle expires value
           return _getString('Online');
         }
-      case td.UserStatusOffline.CONSTRUCTOR:
+      case td.UserStatusOffline.constructor:
         {
           // todo implement last seen format https://git.io/J4877
           return 'last seen todo';
         }
-      case td.UserStatusRecently.CONSTRUCTOR:
+      case td.UserStatusRecently.constructor:
         {
           return _getString('Lately');
         }
-      case td.UserStatusLastWeek.CONSTRUCTOR:
+      case td.UserStatusLastWeek.constructor:
         {
           return _getString('WithinAWeek');
         }
-      case td.UserStatusLastMonth.CONSTRUCTOR:
+      case td.UserStatusLastMonth.constructor:
         {
           return _getString('WithinAMonth');
         }

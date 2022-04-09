@@ -24,40 +24,40 @@ extension ChatMessageUpdatesExtensions on td.Update {
     required void Function(td.UpdateDeleteMessages value) updateDeleteMessages,
   }) {
     switch (getConstructor()) {
-      case td.UpdateMessageContent.CONSTRUCTOR:
+      case td.UpdateMessageContent.constructor:
         content.call(this as td.UpdateMessageContent);
         break;
-      case td.UpdateMessageContentOpened.CONSTRUCTOR:
+      case td.UpdateMessageContentOpened.constructor:
         contentOpened.call(this as td.UpdateMessageContentOpened);
         break;
-      case td.UpdateMessageEdited.CONSTRUCTOR:
+      case td.UpdateMessageEdited.constructor:
         edited.call(this as td.UpdateMessageEdited);
         break;
-      case td.UpdateMessageInteractionInfo.CONSTRUCTOR:
+      case td.UpdateMessageInteractionInfo.constructor:
         interactionInfo.call(this as td.UpdateMessageInteractionInfo);
         break;
-      case td.UpdateMessageIsPinned.CONSTRUCTOR:
+      case td.UpdateMessageIsPinned.constructor:
         isPinned.call(this as td.UpdateMessageIsPinned);
         break;
-      case td.UpdateMessageLiveLocationViewed.CONSTRUCTOR:
+      case td.UpdateMessageLiveLocationViewed.constructor:
         liveLocationViewed.call(this as td.UpdateMessageLiveLocationViewed);
         break;
-      case td.UpdateMessageMentionRead.CONSTRUCTOR:
+      case td.UpdateMessageMentionRead.constructor:
         mentionRead.call(this as td.UpdateMessageMentionRead);
         break;
-      case td.UpdateMessageSendAcknowledged.CONSTRUCTOR:
+      case td.UpdateMessageSendAcknowledged.constructor:
         sendAcknowledged.call(this as td.UpdateMessageSendAcknowledged);
         break;
-      // case td.UpdateMessageSendFailed.CONSTRUCTOR:
+      // case td.UpdateMessageSendFailed.constructor:
       //   sendFailed.call(this as td.UpdateMessageSendFailed);
       //   break;
-      // case td.UpdateMessageSendSucceeded.CONSTRUCTOR:
+      // case td.UpdateMessageSendSucceeded.constructor:
       //   sendSucceeded.call(this as td.UpdateMessageSendSucceeded);
       //   break;
-      case td.UpdateNewMessage.CONSTRUCTOR:
+      case td.UpdateNewMessage.constructor:
         newMessage.call(this as td.UpdateNewMessage);
         break;
-      case td.UpdateDeleteMessages.CONSTRUCTOR:
+      case td.UpdateDeleteMessages.constructor:
         updateDeleteMessages.call(this as td.UpdateDeleteMessages);
         break;
     }

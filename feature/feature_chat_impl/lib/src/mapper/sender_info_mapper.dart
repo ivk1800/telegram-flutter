@@ -15,7 +15,7 @@ class SenderInfoMapper {
 
   Future<SenderInfo> map(td.MessageSender sender) async {
     switch (sender.getConstructor()) {
-      case td.MessageSenderUser.CONSTRUCTOR:
+      case td.MessageSenderUser.constructor:
         {
           final td.User user = await _userRepository
               .getUser((sender as td.MessageSenderUser).userId);
@@ -26,7 +26,7 @@ class SenderInfoMapper {
             senderPhotoId: user.profilePhoto?.small.id,
           );
         }
-      case td.MessageSenderChat.CONSTRUCTOR:
+      case td.MessageSenderChat.constructor:
         {
           final td.Chat chat = await _chatRepository
               .getChat((sender as td.MessageSenderChat).chatId);

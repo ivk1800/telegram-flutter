@@ -55,7 +55,7 @@ void main() {
           .capturedSingle<td.SetNetworkType>()
           .type
           .getConstructor(),
-      td.NetworkTypeWiFi.CONSTRUCTOR,
+      td.NetworkTypeWiFi.constructor,
     );
   });
 

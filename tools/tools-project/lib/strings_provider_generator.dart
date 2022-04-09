@@ -106,7 +106,7 @@ void _generateTgStringProvider(List<_Item> list, String workDirectory) {
               mBuilder.type = MethodType.getter;
               mBuilder.returns = const Reference('String');
               mBuilder.body = Code("""_get('${item.key}')""");
-              // mBuilder.body = Code('CONSTRUCTOR');
+              // mBuilder.body = Code('constructor');
             }),
           );
         }
@@ -122,7 +122,7 @@ void _generateTgStringProvider(List<_Item> list, String workDirectory) {
             mBuilder.lambda = true;
             mBuilder.returns = const Reference('String');
             mBuilder.body = const Code('_stringGetter.call(key)');
-            // mBuilder.body = Code('CONSTRUCTOR');
+            // mBuilder.body = Code('constructor');
           }),
         );
       },

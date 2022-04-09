@@ -66,7 +66,7 @@ class ContentInteractor {
 
     // TODO: replace by map extension
     switch (chat.type.getConstructor()) {
-      case td.ChatTypeSecret.CONSTRUCTOR:
+      case td.ChatTypeSecret.constructor:
         {
           return _getContentForUser(
             messagesInfo,
@@ -75,7 +75,7 @@ class ContentInteractor {
             chat,
           );
         }
-      case td.ChatTypePrivate.CONSTRUCTOR:
+      case td.ChatTypePrivate.constructor:
         {
           return _getContentForUser(
             messagesInfo,
@@ -84,7 +84,7 @@ class ContentInteractor {
             chat,
           );
         }
-      case td.ChatTypeBasicGroup.CONSTRUCTOR:
+      case td.ChatTypeBasicGroup.constructor:
         {
           return _getContentForBasicGroup(
             messagesInfo,
@@ -94,7 +94,7 @@ class ContentInteractor {
             chat,
           );
         }
-      case td.ChatTypeSupergroup.CONSTRUCTOR:
+      case td.ChatTypeSupergroup.constructor:
         {
           return _getContentForSupergroup(
             messagesInfo,
