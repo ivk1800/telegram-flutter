@@ -328,4 +328,14 @@ abstract class IStringsProvider {
   String get addContactTitle;
 
   String get channelEdit;
+
+  String get areYouSureDeleteAndExit;
+
+  String get deleteMega;
+
+  String get deleteAndExit;
+
+  String get channelDelete;
+
+  String get deleteAndExitButton;
 }

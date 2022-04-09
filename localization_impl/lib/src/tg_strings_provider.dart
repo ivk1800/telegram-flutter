@@ -502,5 +502,20 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get channelEdit => _get('ChannelEdit');
 
+  @override
+  String get areYouSureDeleteAndExit => _get('AreYouSureDeleteAndExit');
+
+  @override
+  String get deleteMega => _get('DeleteMega');
+
+  @override
+  String get deleteAndExit => _get('DeleteAndExit');
+
+  @override
+  String get channelDelete => _get('ChannelDelete');
+
+  @override
+  String get deleteAndExitButton => _get('DeleteAndExitButton');
+
   String _get(String key) => _stringGetter.call(key);
 }

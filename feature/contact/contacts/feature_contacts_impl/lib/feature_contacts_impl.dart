@@ -4,8 +4,8 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_contacts_api/feature_contacts_api.dart';
 import 'package:localization_api/localization_api.dart';
 
-import 'src/screen/contacts/contacts_screen_factory.dart';
 import 'src/screen/contacts/contacts_router.dart';
+import 'src/screen/contacts/contacts_screen_factory.dart';
 
 export 'src/screen/contacts/contacts_router.dart';
 

@@ -17,6 +17,8 @@ import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:error_transformer_api/error_transformer_api.dart';
+import 'package:error_transformer_td/error_transformer_td.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
@@ -192,6 +194,10 @@ abstract class AppModule {
   IBlockInteractionManager bindBlockInteractionManager(
     BlockInteractionManager impl,
   );
+
+  @j.singleton
+  @j.provides
+  static IErrorTransformer provideErrorTransformer() => TdErrorTransformer();
 
   // region component
 

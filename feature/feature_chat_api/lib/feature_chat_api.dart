@@ -22,4 +22,6 @@ abstract class IChatManager {
   void markAsOpenedChat(int chatId);
 
   void markAsClosedChat(int chatId);
+
+  Future<void> delete(int chatId);
 }

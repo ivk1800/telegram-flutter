@@ -10,6 +10,7 @@ import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
@@ -90,6 +91,8 @@ abstract class IAppComponent {
   IBlockInteractionManager getBlockInteractionManager();
 
   BlockInteractionManager getBlockInteractionManagerImpl();
+
+  IErrorTransformer getErrorTransformer();
 }
 
 @j.componentBuilder

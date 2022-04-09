@@ -86,6 +86,7 @@ class CommonScreenRouterImpl
     _add(
       widget: _featureProvider.profileFeatureApi.profileScreenFactory
           .create(chatId, type),
+      key: _keyGenerator.generateForChatProfile(chatId),
       container: ContainerType.top,
     );
   }
@@ -372,6 +373,7 @@ class CommonScreenRouterImpl
       widget: _featureProvider
           .chatAdministrationFeatureApi.chatAdministrationScreenFactory
           .create(chatId),
+      key: _keyGenerator.generateForChatAdministration(chatId),
       container: ContainerType.top,
     );
   }

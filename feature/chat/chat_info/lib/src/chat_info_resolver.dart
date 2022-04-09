@@ -49,7 +49,7 @@ class ChatInfoResolver {
       isGroup: supergroup != null || basicGroup != null,
       isMember: (supergroup?.status.isMember ?? false) ||
           (basicGroup?.status.isMember ?? false),
-      isChannel: supergroup?.isChannel ?? true,
+      isChannel: supergroup?.isChannel ?? false,
       isCreator: (supergroup?.status.isCreator ?? false) ||
           (basicGroup?.status.isCreator ?? false),
       isAdmin: (supergroup?.status.isAdmin ?? false) ||

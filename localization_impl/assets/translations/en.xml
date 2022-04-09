@@ -336,4 +336,14 @@
     <string lang="AddContactTitle">Add Contact</string>
     <!-- https://translations.telegram.org/en/android/groups_and_channels/ChannelEdit -->
     <string lang="ChannelEdit">Edit</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/AreYouSureDeleteAndExit -->
+    <string lang="AreYouSureDeleteAndExit">Are you sure you want to delete and leave the group?</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/DeleteMega -->
+    <string lang="DeleteMega">Delete Group</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/DeleteAndExit -->
+    <string lang="DeleteAndExit">Delete and leave group</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/ChannelDelete -->
+    <string lang="ChannelDelete">Delete Channel</string>
+    <!-- https://translations.telegram.org/en/android/groups_and_channels/DeleteAndExitButton -->
+    <string lang="DeleteAndExitButton">Delete and Leave Group</string>
 </resources>

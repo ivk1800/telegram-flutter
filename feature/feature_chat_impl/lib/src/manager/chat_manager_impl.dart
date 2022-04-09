@@ -45,4 +45,8 @@ class ChatManagerImpl implements IChatManager {
   void markAsOpenedChat(int chatId) {
     unawaited(_functionExecutor.send<td.Ok>(td.OpenChat(chatId: chatId)));
   }
+
+  @override
+  Future<void> delete(int chatId) =>
+      _functionExecutor.send<td.Ok>(td.DeleteChat(chatId: chatId));
 }

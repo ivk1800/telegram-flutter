@@ -27,7 +27,8 @@ class ChatAdministrationRouterFactory
     return ChatAdministrationRouterImpl(
       commonScreenRouter: _commonScreenRouter,
       navigationDelegate: _navigationDelegate,
-      screenKey: _keyGenerator.generateForChat(chatId),
+      keyGenerator: _keyGenerator,
+      chatId: chatId,
     );
   }
 }

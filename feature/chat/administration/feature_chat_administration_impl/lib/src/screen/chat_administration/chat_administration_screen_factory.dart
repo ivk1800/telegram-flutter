@@ -20,6 +20,7 @@ class ChatAdministrationScreenFactory
       child: const ChatAdministrationPage(),
       create: () => JuggerChatAdministrationScreenComponentBuilder()
           .dependencies(_dependencies)
+          .args(Args(chatId: chatId))
           .build(),
     );
   }

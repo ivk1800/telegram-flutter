@@ -5,8 +5,10 @@ import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app/src/navigation/router/chat_administration_router_factory.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
+import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
@@ -466,9 +468,22 @@ abstract class FeatureModule {
     IConnectionStateProvider connectionStateProvider,
     ILocalizationManager localizationManager,
     IChatAdministrationRouterFactory routerFactory,
+    IBlockInteractionManager blockInteractionManager,
+    IChatRepository chatRepository,
+    IErrorTransformer errorTransformer,
+    ISuperGroupRepository superGroupRepository,
+    IBasicGroupRepository basicGroupRepository,
+    // todo do not depend on feature
+    IChatFeatureApi chatFeatureApi,
   ) =>
           ChatAdministrationFeatureDependencies(
+            errorTransformer: errorTransformer,
+            chatRepository: chatRepository,
+            basicGroupRepository: basicGroupRepository,
+            superGroupRepository: superGroupRepository,
+            blockInteractionManager: blockInteractionManager,
             routerFactory: routerFactory,
+            chatManager: chatFeatureApi.chatManager,
             connectionStateProvider: connectionStateProvider,
             stringsProvider: localizationManager.stringsProvider,
           );

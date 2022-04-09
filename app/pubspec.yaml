@@ -29,6 +29,10 @@ dependencies:
     path: ../dialog_api
   dialog_api_flutter:
     path: ../dialog_api_flutter
+  error_transformer_api:
+    path: ../error_transformer_api
+  error_transformer_td:
+    path: ../error_transformer_td
   feature_auth_api:
     path: ../feature/feature_auth_api
   feature_auth_impl:
