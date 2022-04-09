@@ -21,7 +21,10 @@ Future<void> launch() async {
 
   appComponent.getAppController().onInit();
 
-  runApp(const TgApp());
+  final TgApp app = TgApp(
+    blockInteractionManager: appComponent.getBlockInteractionManagerImpl(),
+  );
+  runApp(app);
 
   final TdClient client = appComponent.getTdClient();
   await client.init();

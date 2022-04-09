@@ -11,6 +11,8 @@ dependencies:
     path: ../component/auth_manager/auth_manager_api
   auth_manager_impl:
     path: ../component/auth_manager/auth_manager_impl
+  block_interaction_api:
+    path: ../block_interaction_api
   chat_theme:
     path: ../feature/chat/chat_theme
   core:

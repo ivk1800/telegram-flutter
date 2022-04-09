@@ -8,9 +8,11 @@ import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app/src/navigation/split_navigation_router.dart';
 import 'package:app/src/tdlib/config_provider.dart';
+import 'package:app/src/widget/block_interaction_manager.dart';
 import 'package:app_controller/app_controller_component.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:auth_manager_impl/auth_manager_impl.dart';
+import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
@@ -184,6 +186,12 @@ abstract class AppModule {
     ILocalizationManager localizationManager,
   ) =>
       localizationManager.stringsProvider;
+
+  @j.singleton
+  @j.binds
+  IBlockInteractionManager bindBlockInteractionManager(
+    BlockInteractionManager impl,
+  );
 
   // region component
 

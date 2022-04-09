@@ -3,8 +3,10 @@ import 'package:app/src/di/module/td_module.dart';
 import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
+import 'package:app/src/widget/block_interaction_manager.dart';
 import 'package:app_controller/app_controller_component.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
+import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
@@ -84,6 +86,10 @@ abstract class IAppComponent {
   IStringsProvider getStringsProvider();
 
   ITdFunctionExecutor getTdFunctionExecutor();
+
+  IBlockInteractionManager getBlockInteractionManager();
+
+  BlockInteractionManager getBlockInteractionManagerImpl();
 }
 
 @j.componentBuilder

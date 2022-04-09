@@ -1,3 +1,5 @@
+import 'package:app/src/widget/block_interaction_manager.dart';
+import 'package:coreui/coreui.dart';
 import 'package:flutter/material.dart';
 import 'package:split_view/split_view.dart';
 
@@ -6,7 +8,10 @@ import 'tg_theme.dart';
 class TgApp extends StatelessWidget {
   const TgApp({
     Key? key,
+    required this.blockInteractionManager,
   }) : super(key: key);
+
+  final BlockInteractionManager blockInteractionManager;
 
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
@@ -17,7 +22,16 @@ class TgApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       builder: (BuildContext context, Widget? child) {
-        return TgAppTheme(child: child!);
+        return ValueListenableBuilder<bool>(
+          child: child,
+          valueListenable: blockInteractionManager,
+          builder: (BuildContext context, bool value, Widget? child) {
+            return BlockInteraction(
+              block: value,
+              child: TgAppTheme(child: child!),
+            );
+          },
+        );
       },
       debugShowCheckedModeBanner: false,
       navigatorKey: TgApp.navigatorKey,
