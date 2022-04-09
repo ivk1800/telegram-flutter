@@ -10,6 +10,8 @@ dependencies:
     path: ../../async_utils
   chat_actions_panel:
     path: ../chat/chat_actions_panel
+  chat_info:
+    path: ../chat/chat_info
   chat_router_api:
     path: ../chat/chat_router_api
   chat_theme:

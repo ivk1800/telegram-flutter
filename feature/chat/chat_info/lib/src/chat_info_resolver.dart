@@ -20,6 +20,7 @@ class ChatInfoResolver {
     td.Supergroup? supergroup;
     td.BasicGroup? basicGroup;
 
+    // todo use when extension
     switch (chat.type.getConstructor()) {
       case td.ChatTypeSecret.constructor:
       case td.ChatTypePrivate.constructor:
