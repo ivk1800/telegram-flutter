@@ -30,7 +30,7 @@ class ContactsPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.person_add),
+        child: const Icon(Icons.person_add),
         onPressed: contactsViewModel.onAddContactTap,
       ),
     );

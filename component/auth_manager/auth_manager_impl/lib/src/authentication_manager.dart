@@ -24,7 +24,9 @@ class AuthenticationManager implements IAuthenticationManager {
 
   @override
   Future<td.AuthorizationState> get currentAuthorizationState =>
-      _functionExecutor.send<td.AuthorizationState>(td.GetAuthorizationState());
+      _functionExecutor.send<td.AuthorizationState>(
+        const td.GetAuthorizationState(),
+      );
 
   @override
   Stream<td.AuthorizationState> get onAuthorizationStateChange =>
@@ -35,10 +37,10 @@ class AuthenticationManager implements IAuthenticationManager {
   Future<td.Ok> setAuthenticationPhoneNumber(String phoneNumber) =>
       _functionExecutor.send<td.Ok>(td.SetAuthenticationPhoneNumber(
         phoneNumber: phoneNumber,
-        settings: td.PhoneNumberAuthenticationSettings(
+        settings: const td.PhoneNumberAuthenticationSettings(
           allowSmsRetrieverApi: false,
           allowMissedCall: false,
-          authenticationTokens: const <String>[],
+          authenticationTokens: <String>[],
           allowFlashCall: false,
           isCurrentPhoneNumber: false,
         ),

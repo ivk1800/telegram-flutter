@@ -11,7 +11,7 @@ class StickerRepositoryImpl implements IStickerRepository {
   @override
   Future<List<td.StickerSetInfo>> getInstalledStickers() {
     return _functionExecutor
-        .send<td.StickerSets>(td.GetInstalledStickerSets(isMasks: false))
+        .send<td.StickerSets>(const td.GetInstalledStickerSets(isMasks: false))
         .then((td.StickerSets value) => value.sets);
   }
 }

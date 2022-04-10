@@ -10,6 +10,6 @@ class BackgroundRepositoryImpl implements IBackgroundRepository {
 
   @override
   Future<List<td.Background>> get backgrounds => _functionExecutor
-      .send<td.Backgrounds>(td.GetBackgrounds(forDarkTheme: false))
+      .send<td.Backgrounds>(const td.GetBackgrounds(forDarkTheme: false))
       .then((td.Backgrounds value) => value.backgrounds);
 }

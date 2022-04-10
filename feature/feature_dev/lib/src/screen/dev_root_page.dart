@@ -59,7 +59,7 @@ class _Body extends StatelessWidget {
             OutlinedButton(
               onPressed: () {
                 DevWidget.of(context).devFeature.client.send(
-                      td.SetNetworkType(type: const td.NetworkTypeNone()),
+                      const td.SetNetworkType(type: td.NetworkTypeNone()),
                     );
               },
               child: const Text('NetworkTypeNone'),
@@ -68,7 +68,7 @@ class _Body extends StatelessWidget {
             OutlinedButton(
               onPressed: () {
                 DevWidget.of(context).devFeature.client.send(
-                      td.SetNetworkType(type: const td.NetworkTypeWiFi()),
+                      const td.SetNetworkType(type: td.NetworkTypeWiFi()),
                     );
               },
               child: const Text('NetworkTypeWiFi'),

@@ -315,7 +315,7 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
       _fakeMessagesProvider.getMessageByFileName(fileName);
 
   td.FormattedText _fakeFormattedText() {
-    return td.FormattedText(text: fakeText, entities: <td.TextEntity>[]);
+    return const td.FormattedText(text: fakeText, entities: <td.TextEntity>[]);
   }
 
   static const String fakeText =

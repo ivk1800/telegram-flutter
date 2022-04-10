@@ -7,9 +7,10 @@ class FakeAuthenticationStateUpdatesProvider
     Stream<td.UpdateAuthorizationState>? fakeStateStream,
   }) : _fakeStateStream = fakeStateStream ??
             Stream<td.UpdateAuthorizationState>.value(
-                td.UpdateAuthorizationState(
-              authorizationState: const td.AuthorizationStateWaitPhoneNumber(),
-            ));
+              const td.UpdateAuthorizationState(
+                authorizationState: td.AuthorizationStateWaitPhoneNumber(),
+              ),
+            );
 
   final Stream<td.UpdateAuthorizationState> _fakeStateStream;
 

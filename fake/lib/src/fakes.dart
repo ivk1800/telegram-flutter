@@ -1,7 +1,7 @@
 import 'package:tdlib/td_api.dart' as td;
 
 td.Message createFakeMessage() {
-  return td.Message(
+  return const td.Message(
     canBeSaved: false,
     canGetMediaTimestampLinks: false,
     canGetViewers: false,
@@ -41,7 +41,7 @@ td.Message createFakeMessage() {
 }
 
 td.Chat createFakeChat() {
-  return td.Chat(
+  return const td.Chat(
     hasProtectedContent: false,
     messageTtl: 0,
     themeName: '',
