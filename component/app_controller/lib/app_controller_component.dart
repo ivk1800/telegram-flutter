@@ -56,6 +56,8 @@ abstract class ITdConfigProvider {
   Future<String> getApiHash();
 
   Future<String> getEncryptionKey();
+
+  Future<bool> isUseTestDc();
 }
 
 class AppControllerComponentDependencies {

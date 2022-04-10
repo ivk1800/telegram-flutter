@@ -37,4 +37,11 @@ class TdConfigProvider implements ITdConfigProvider {
 
     return Map<String, String>.fromEntries(entries);
   }
+
+  @override
+  Future<bool> isUseTestDc() async {
+    final String? useTestDcString = (await _cache)['useTestDc'];
+    assert(useTestDcString == 'true' || useTestDcString == 'false');
+    return useTestDcString == 'true';
+  }
 }

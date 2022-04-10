@@ -61,7 +61,7 @@ class AuthorizationStateDelegate {
       td.SetTdlibParameters(
         parameters: td.TdlibParameters(
           systemVersion: await _deviceInfoProvider.systemVersion,
-          useTestDc: false,
+          useTestDc: await _tdConfigProvider.isUseTestDc(),
           useSecretChats: false,
           useMessageDatabase: true,
           useFileDatabase: true,
