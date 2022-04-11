@@ -14,4 +14,10 @@ class KeyGenerator {
 
   ValueKey<dynamic> generateForChatAdministration(int chatId) =>
       ValueKey<dynamic>('chat administration $chatId}');
+
+  ValueKey<dynamic> generateForCreateNewChannel() =>
+      const ValueKey<dynamic>('create new channel');
+
+  ValueKey<dynamic> generateForCreateNewChat() =>
+      const ValueKey<dynamic>('create new chat');
 }

@@ -1,6 +1,9 @@
 library feature_create_new_chat_impl;
 
+import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:error_transformer_api/error_transformer_api.dart';
+import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:localization_api/localization_api.dart';
@@ -60,9 +63,15 @@ class CreateNewChatFeatureDependencies {
     required this.localizationManager,
     required this.connectionStateProvider,
     required this.router,
+    required this.chatManager,
+    required this.blockInteractionManager,
+    required this.errorTransformer,
   });
 
   final ILocalizationManager localizationManager;
   final IConnectionStateProvider connectionStateProvider;
   final ICreateNewChatRouter router;
+  final IChatManager chatManager;
+  final IBlockInteractionManager blockInteractionManager;
+  final IErrorTransformer errorTransformer;
 }

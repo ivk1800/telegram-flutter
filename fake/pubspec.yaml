@@ -10,6 +10,10 @@ dependencies:
     path: ../component/auth_manager/auth_manager_api
   core_tdlib_api:
     path: ../core_tdlib_api
+  error_transformer_api:
+    path: ../error_transformer_api
+  feature_chat_api:
+    path: ../feature/feature_chat_api
   feature_chat_header_info_api:
     path: ../feature/feature_chat_header_info_api
   feature_file_api:

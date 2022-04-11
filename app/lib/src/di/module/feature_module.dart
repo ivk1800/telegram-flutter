@@ -4,6 +4,7 @@ import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app/src/navigation/router/chat_administration_router_factory.dart';
+import 'package:app/src/navigation/router/create_new_chat_router_impl.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
@@ -431,8 +432,15 @@ abstract class FeatureModule {
     IConnectionStateProvider connectionStateProvider,
     ILocalizationManager localizationManager,
     ICreateNewChatRouter router,
+    // todo do not depend on feature
+    IChatFeatureApi chatFeatureApi,
+    IErrorTransformer errorTransformer,
+    IBlockInteractionManager blockInteractionManager,
   ) =>
           CreateNewChatFeatureDependencies(
+            errorTransformer: errorTransformer,
+            blockInteractionManager: blockInteractionManager,
+            chatManager: chatFeatureApi.chatManager,
             router: router,
             connectionStateProvider: connectionStateProvider,
             localizationManager: localizationManager,
@@ -755,7 +763,7 @@ abstract class FeatureModule {
   ISessionsScreenRouter bindSessionsScreenRouter(CommonScreenRouterImpl impl);
 
   @j.binds
-  ICreateNewChatRouter bindCreateNewChatRouter(CommonScreenRouterImpl impl);
+  ICreateNewChatRouter bindCreateNewChatRouter(CreateNewChatRouterImpl impl);
 
   @j.binds
   IContactsRouter bindContactsRouter(CommonScreenRouterImpl impl);

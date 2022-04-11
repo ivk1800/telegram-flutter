@@ -6,6 +6,10 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  async_utils:
+    path: ../../async_utils
+  block_interaction_api:
+    path: ../../block_interaction_api
   core_arch:
     path: ../../core_arch
   core_arch_flutter:
@@ -14,6 +18,12 @@ dependencies:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
+  dialog_api:
+    path: ../../dialog_api
+  error_transformer_api:
+    path: ../../error_transformer_api
+  feature_chat_api:
+    path: ../feature_chat_api
   feature_create_new_chat_api:
     path: ../feature_create_new_chat_api
   flutter:

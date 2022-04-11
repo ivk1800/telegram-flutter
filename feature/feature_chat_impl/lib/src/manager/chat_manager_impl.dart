@@ -49,4 +49,20 @@ class ChatManagerImpl implements IChatManager {
   @override
   Future<void> delete(int chatId) =>
       _functionExecutor.send<td.Ok>(td.DeleteChat(chatId: chatId));
+
+  @override
+  Future<int> createChannel({
+    required String name,
+    required String description,
+  }) async {
+    final td.Chat chat = await _functionExecutor.send<td.Chat>(
+      td.CreateNewSupergroupChat(
+        description: description,
+        title: name,
+        forImport: false,
+        isChannel: true,
+      ),
+    );
+    return chat.id;
+  }
 }

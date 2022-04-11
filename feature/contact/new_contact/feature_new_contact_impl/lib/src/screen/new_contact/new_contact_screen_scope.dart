@@ -26,7 +26,7 @@ class NewContactScreenScope extends StatefulWidget {
 }
 
 class _NewContactScreenScopeState extends State<NewContactScreenScope> {
-  late final _component = widget.create.call();
+  late final INewContactScreenComponent _component = widget.create.call();
 
   late final IStringsProvider _stringsProvider =
       _component.getStringsProvider();

@@ -50,7 +50,7 @@ class TgApp extends StatelessWidget {
           color: Color(0xff5682a3),
         ),
       ),
-      home: Container(
+      home: ColoredBox(
         // TODO maybe add color property to SplitView?
         color: Theme.of(context).scaffoldBackgroundColor,
         child: SplitView(

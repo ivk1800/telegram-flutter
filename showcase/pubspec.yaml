@@ -6,6 +6,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  block_interaction_api:
+    path: ../block_interaction_api
   chat_theme:
     path: ../feature/chat/chat_theme
   core_arch:
@@ -36,6 +38,8 @@ dependencies:
     path: ../feature/feature_country_api
   feature_country_impl:
     path: ../feature/feature_country_impl
+  feature_create_new_chat_impl:
+    path: ../feature/feature_create_new_chat_impl
   feature_file_api:
     path: ../feature/feature_file_api
   feature_message_preview_resolver:

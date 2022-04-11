@@ -1,7 +1,9 @@
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:flutter/widgets.dart';
+import 'package:localization_api/localization_api.dart';
 import 'package:provider_extensions/provider_extensions.dart';
 
+import 'new_channel_controller.dart';
 import 'new_channel_view_model.dart';
 
 class CreateNewChannelScreenScore extends StatefulWidget {
@@ -20,6 +22,12 @@ class CreateNewChannelScreenScore extends StatefulWidget {
 
   static NewChannelViewModel getNewChannelViewModel(BuildContext context) =>
       _InheritedScope.of(context)._viewModel;
+
+  static IStringsProvider getStringsProvider(BuildContext context) =>
+      _InheritedScope.of(context)._stringsProvider;
+
+  static NewChannelController getNewChannelController(BuildContext context) =>
+      _InheritedScope.of(context)._newChannelController;
 }
 
 class _CreateNewChannelScreenScoreState
@@ -29,12 +37,25 @@ class _CreateNewChannelScreenScoreState
   late final NewChannelViewModel _viewModel =
       _component.getNewChannelViewModel();
 
+  late final IStringsProvider _stringsProvider =
+      _component.getLocalizationManager().stringsProvider;
+
+  late final NewChannelController _newChannelController =
+      _component.getNewChannelController();
+
   @override
   Widget build(BuildContext context) {
     return _InheritedScope(
       holderState: this,
       child: widget.child,
     );
+  }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    _newChannelController.dispose();
+    super.dispose();
   }
 }
 

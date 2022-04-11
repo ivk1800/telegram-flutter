@@ -338,4 +338,10 @@ abstract class IStringsProvider {
   String get channelDelete;
 
   String get deleteAndExitButton;
+
+  String get enterChannelName;
+
+  String get descriptionInfo;
+
+  String get descriptionPlaceholder;
 }

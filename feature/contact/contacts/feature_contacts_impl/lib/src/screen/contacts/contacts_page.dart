@@ -9,16 +9,16 @@ class ContactsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ContactsViewModel contactsViewModel =
+    final ContactsViewModel contactsViewModel =
         ContactsScreenScope.getContactsViewModel(context);
-    IStringsProvider stringsProvider =
+    final IStringsProvider stringsProvider =
         ContactsScreenScope.getStringsProvider(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(stringsProvider.contacts),
       ),
       body: Column(
-        children: [
+        children: <Widget>[
           ListTile(
             title: Text(stringsProvider.inviteFriends),
             onTap: contactsViewModel.onInviteFriendsTap,

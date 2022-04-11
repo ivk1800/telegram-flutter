@@ -24,4 +24,9 @@ abstract class IChatManager {
   void markAsClosedChat(int chatId);
 
   Future<void> delete(int chatId);
+
+  Future<int> createChannel({
+    required String name,
+    required String description,
+  });
 }

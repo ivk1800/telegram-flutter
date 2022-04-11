@@ -8,7 +8,6 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_settings_impl/feature_chat_settings_impl.dart';
 import 'package:feature_contacts_impl/feature_contacts_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
-import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
 import 'package:feature_data_settings_impl/feature_data_settings_impl.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_folders_impl/feature_folders_impl.dart';
@@ -37,7 +36,6 @@ class CommonScreenRouterImpl
         IStickersFeatureRouter,
         ISettingsScreenRouter,
         ISessionsScreenRouter,
-        ICreateNewChatRouter,
         IPrivacySettingsScreenRouter,
         INotificationsSettingsScreenRouter,
         IDataSettingsScreenRouter,
@@ -308,19 +306,19 @@ class CommonScreenRouterImpl
     _add(
       widget: _featureProvider.newChatFeatureApi.newChatScreenFactory.create(),
       container: ContainerType.top,
+      key: _keyGenerator.generateForCreateNewChat(),
     );
   }
 
-  @override
   void toCreateNewChannel() {
     _add(
       widget: _featureProvider.newChatFeatureApi.createNewChannelScreenFactory
           .create(),
+      key: _keyGenerator.generateForCreateNewChannel(),
       container: ContainerType.top,
     );
   }
 
-  @override
   void toCreateNewGroup() {
     _add(
       widget: _featureProvider.newChatFeatureApi.createNewGroupScreenFactory
@@ -329,7 +327,6 @@ class CommonScreenRouterImpl
     );
   }
 
-  @override
   void toCreateNewSecretChat() {
     _add(
       widget: _featureProvider

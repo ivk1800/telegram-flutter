@@ -12,14 +12,31 @@ abstract class ICreateNewChannelScreenComponent {
   NewChannelViewModel getNewChannelViewModel();
 
   ILocalizationManager getLocalizationManager();
+
+  NewChannelController getNewChannelController();
 }
 
 @j.module
 abstract class CreateNewChannelScreenModule {
   @j.singleton
   @j.provides
-  static NewChannelViewModel provideNewChannelViewModel() =>
-      NewChannelViewModel()..init();
+  static NewChannelViewModel provideNewChannelViewModel(
+    ICreateNewChatComponent parentComponent,
+  ) =>
+      NewChannelViewModel(
+        stringsProvider: parentComponent.getStringsProvider(),
+        blockInteractionManager: parentComponent.getBlockInteractionManager(),
+        errorTransformer: parentComponent.getErrorTransformer(),
+        router: parentComponent.getNewChannelScreenRouter(),
+        chatManager: parentComponent.getChatManager(),
+      )..init();
+
+  @j.singleton
+  @j.provides
+  static NewChannelController provideNewChannelController(
+    NewChannelViewModel viewModel,
+  ) =>
+      NewChannelController(viewModel: viewModel);
 }
 
 @j.componentBuilder
