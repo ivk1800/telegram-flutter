@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:chat_info/chat_info.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/src/profile_feature_router.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'header_action_data.dart';
+import 'header_actions_resolver.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';
 
@@ -18,9 +18,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     required IProfileFeatureRouter router,
     required IChatHeaderInfoInteractor headerInfoInteractor,
     required ContentInteractor contentInteractor,
-    required ChatInfoResolver chatInfoResolver,
+    required HeaderActionsResolver headerActionsResolver,
   })  : _contentInteractor = contentInteractor,
-        _chatInfoResolver = chatInfoResolver,
+        _headerActionsResolver = headerActionsResolver,
         _args = args,
         _router = router,
         _headerInfoInteractor = headerInfoInteractor,
@@ -45,7 +45,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final IProfileFeatureRouter _router;
   final IChatHeaderInfoInteractor _headerInfoInteractor;
   final ProfileArgs _args;
-  final ChatInfoResolver _chatInfoResolver;
+  final HeaderActionsResolver _headerActionsResolver;
   StreamSubscription<dynamic>? _compositeStateSubscription;
 
   @override
@@ -96,6 +96,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       case HeaderAction.edit:
         _router.toChatAdministration(_args.id);
         break;
+      case HeaderAction.addToContacts:
+        _router.toAddNewContact(_args.id);
+        break;
     }
   }
 
@@ -110,7 +113,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     final Stream<HeaderState> header = Rx.zip2(
       info,
-      _actions(),
+      _headerActionsResolver.resolveActions(id: _args.id, type: _args.type),
       (ChatHeaderInfo info, List<HeaderActionData> actions) {
         return HeaderState.info(info, actions);
       },
@@ -123,17 +126,5 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       (BodyState body, HeaderState header) =>
           ProfileState(headerState: header, bodyState: body),
     ).map((ProfileState s) => ProfileEvent.newProfileState(s)).listen(add);
-  }
-
-  Stream<List<HeaderActionData>> _actions() {
-    return _chatInfoResolver.resolveAsStream(_args.id).map((ChatInfo info) {
-      return <HeaderActionData>[
-        if (info.isCreator || info.isAdmin)
-          HeaderActionData(
-            action: HeaderAction.edit,
-            label: 'edit',
-          )
-      ];
-    });
   }
 }

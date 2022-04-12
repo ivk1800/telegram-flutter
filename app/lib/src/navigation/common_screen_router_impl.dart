@@ -375,6 +375,11 @@ class CommonScreenRouterImpl
     );
   }
 
+  @override
+  void toAddNewContact(int userId) {
+    _showNotImplementedDialog();
+  }
+
   void _showDialog({required WidgetBuilder builder}) {
     final BuildContext? context = _dialogNavigatorKey.currentContext;
 

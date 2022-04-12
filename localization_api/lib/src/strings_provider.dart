@@ -344,4 +344,8 @@ abstract class IStringsProvider {
   String get descriptionInfo;
 
   String get descriptionPlaceholder;
+
+  String get addToContacts;
+
+  String get blockContact;
 }

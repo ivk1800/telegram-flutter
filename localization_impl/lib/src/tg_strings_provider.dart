@@ -526,5 +526,11 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get descriptionPlaceholder => _get('DescriptionPlaceholder');
 
+  @override
+  String get addToContacts => _get('AddToContacts');
+
+  @override
+  String get blockContact => _get('BlockContact');
+
   String _get(String key) => _stringGetter.call(key);
 }

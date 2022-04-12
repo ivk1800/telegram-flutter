@@ -6,4 +6,6 @@ abstract class IProfileFeatureRouter {
   void toQuickNotificationSettings();
 
   void toChatAdministration(int chatId);
+
+  void toAddNewContact(int userId);
 }

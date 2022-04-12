@@ -1,6 +1,7 @@
 import 'package:chat_info/chat_info.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
+import 'package:feature_profile_impl/src/screen/profile/bloc/header_actions_resolver.dart';
 import 'package:feature_profile_impl/src/screen/profile/bloc/profile_bloc.dart';
 import 'package:feature_profile_impl/src/screen/profile/bloc/profile_event.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
@@ -35,12 +36,12 @@ abstract class ProfileScreenModule {
     ProfileArgs args,
     ProfileFeatureDependencies dependencies,
     ContentInteractor contentInteractor,
-    ChatInfoResolver chatInfoResolver,
+    HeaderActionsResolver headerActionsResolver,
   ) =>
       ProfileBloc(
         router: dependencies.router,
         args: args,
-        chatInfoResolver: chatInfoResolver,
+        headerActionsResolver: headerActionsResolver,
         headerInfoInteractor: dependencies.chatHeaderInfoFeatureApi
             .getChatHeaderInfoInteractor(args.id),
         contentInteractor: contentInteractor,
@@ -55,6 +56,18 @@ abstract class ProfileScreenModule {
         basicGroupRepository: dependencies.basicGroupRepository,
         chatRepository: dependencies.chatRepository,
         superGroupRepository: dependencies.superGroupRepository,
+      );
+
+  @j.provides
+  @j.singleton
+  static HeaderActionsResolver provideHeaderActionsResolver(
+    ChatInfoResolver chatInfoResolver,
+    ProfileFeatureDependencies dependencies,
+  ) =>
+      HeaderActionsResolver(
+        stringsProvider: dependencies.localizationManager.stringsProvider,
+        chatInfoResolver: chatInfoResolver,
+        userRepository: dependencies.userRepository,
       );
 
   @j.provides

@@ -352,4 +352,8 @@
     <string lang="DescriptionInfo">You can provide an optional description for your channel.</string>
     <!-- https://translations.telegram.org/en/android/groups_and_channels/DescriptionPlaceholder -->
     <string lang="DescriptionPlaceholder">Description</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/AddToContacts -->
+    <string lang="AddToContacts">Add to contacts</string>
+    <!-- https://translations.telegram.org/en/android/profile/BlockContact -->
+    <string lang="BlockContact">Block user</string>
 </resources>

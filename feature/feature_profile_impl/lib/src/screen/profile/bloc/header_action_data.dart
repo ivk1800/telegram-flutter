@@ -11,4 +11,5 @@ class HeaderActionData {
 
 enum HeaderAction {
   edit,
+  addToContacts,
 }
