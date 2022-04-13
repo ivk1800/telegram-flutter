@@ -21,7 +21,7 @@ class LocalizationManager implements ILocalizationManager {
     } else {
       _currentStrings = await _readStrings(defaultLanguage);
     }
-    _stringsProvider = TgStringsProvider(getString);
+    _stringsProvider = TgStringsProvider(getString, getStringFormatted);
   }
 
   @override

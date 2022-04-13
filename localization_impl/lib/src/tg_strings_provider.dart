@@ -1,9 +1,11 @@
 import 'package:localization_api/localization_api.dart';
 
 class TgStringsProvider implements IStringsProvider {
-  TgStringsProvider(this._stringGetter);
+  TgStringsProvider(this._stringGetter, this._stringFormattedGetter);
 
   final String Function(String key) _stringGetter;
+
+  final String Function(String key, List<dynamic> args) _stringFormattedGetter;
 
   @override
   String get telegramFeatures => _get('TelegramFeatures');
@@ -129,7 +131,8 @@ class TgStringsProvider implements IStringsProvider {
   String get changeChatBackground => _get('ChangeChatBackground');
 
   @override
-  String get actionCreateGroup => _get('ActionCreateGroup');
+  String actionCreateGroup(List<dynamic> args) =>
+      _getFormatted('ActionCreateGroup', args);
 
   @override
   String get callMessageIncomingMissed => _get('CallMessageIncomingMissed');
@@ -147,33 +150,40 @@ class TgStringsProvider implements IStringsProvider {
   String get callMessageOutgoingMissed => _get('CallMessageOutgoingMissed');
 
   @override
-  String get eventLogGroupJoined => _get('EventLogGroupJoined');
+  String eventLogGroupJoined(List<dynamic> args) =>
+      _getFormatted('EventLogGroupJoined', args);
 
   @override
-  String get actionChangedPhoto => _get('ActionChangedPhoto');
+  String actionChangedPhoto(List<dynamic> args) =>
+      _getFormatted('ActionChangedPhoto', args);
 
   @override
-  String get actionMigrateFromGroupNotify =>
-      _get('ActionMigrateFromGroupNotify');
+  String actionMigrateFromGroupNotify(List<dynamic> args) =>
+      _getFormatted('ActionMigrateFromGroupNotify', args);
 
   @override
-  String get actionChangedTitle => _get('ActionChangedTitle');
+  String actionChangedTitle(List<dynamic> args) =>
+      _getFormatted('ActionChangedTitle', args);
 
   @override
-  String get actionKickUser => _get('ActionKickUser');
+  String actionKickUser(List<dynamic> args) =>
+      _getFormatted('ActionKickUser', args);
 
   @override
-  String get actionRemovedPhoto => _get('ActionRemovedPhoto');
+  String actionRemovedPhoto(List<dynamic> args) =>
+      _getFormatted('ActionRemovedPhoto', args);
 
   @override
-  String get actionInviteUser => _get('ActionInviteUser');
+  String actionInviteUser(List<dynamic> args) =>
+      _getFormatted('ActionInviteUser', args);
 
   @override
-  String get messageLifetimeChanged => _get('MessageLifetimeChanged');
+  String messageLifetimeChanged(List<dynamic> args) =>
+      _getFormatted('MessageLifetimeChanged', args);
 
   @override
-  String get messageLifetimeChangedOutgoing =>
-      _get('MessageLifetimeChangedOutgoing');
+  String messageLifetimeChangedOutgoing(List<dynamic> args) =>
+      _getFormatted('MessageLifetimeChangedOutgoing', args);
 
   @override
   String get actionMigrateFromGroup => _get('ActionMigrateFromGroup');
@@ -200,7 +210,7 @@ class TgStringsProvider implements IStringsProvider {
   String get online => _get('Online');
 
   @override
-  String get onlineCount => _get('OnlineCount');
+  String onlineCount(List<dynamic> args) => _getFormatted('OnlineCount', args);
 
   @override
   String get lately => _get('Lately');
@@ -212,7 +222,7 @@ class TgStringsProvider implements IStringsProvider {
   String get withinAMonth => _get('WithinAMonth');
 
   @override
-  String get members => _get('Members');
+  String members(List<dynamic> args) => _getFormatted('Members', args);
 
   @override
   String get info => _get('Info');
@@ -344,10 +354,12 @@ class TgStringsProvider implements IStringsProvider {
   String get leaveChannelMenu => _get('LeaveChannelMenu');
 
   @override
-  String get megaLeaveAlertWithName => _get('MegaLeaveAlertWithName');
+  String megaLeaveAlertWithName(List<dynamic> args) =>
+      _getFormatted('MegaLeaveAlertWithName', args);
 
   @override
-  String get channelLeaveAlertWithName => _get('ChannelLeaveAlertWithName');
+  String channelLeaveAlertWithName(List<dynamic> args) =>
+      _getFormatted('ChannelLeaveAlertWithName', args);
 
   @override
   String get filters => _get('Filters');
@@ -532,5 +544,25 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get blockContact => _get('BlockContact');
 
+  @override
+  String get newContact => _get('NewContact');
+
+  @override
+  String get firstName => _get('FirstName');
+
+  @override
+  String get lastName => _get('LastName');
+
+  @override
+  String mobileHiddenExceptionInfo(List<dynamic> args) =>
+      _getFormatted('MobileHiddenExceptionInfo', args);
+
+  @override
+  String sharePhoneNumberWith(List<dynamic> args) =>
+      _getFormatted('SharePhoneNumberWith', args);
+
   String _get(String key) => _stringGetter.call(key);
+
+  String _getFormatted(String key, List<dynamic> args) =>
+      _stringFormattedGetter.call(key, args);
 }

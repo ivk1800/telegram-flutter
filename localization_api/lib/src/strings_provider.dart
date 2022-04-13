@@ -81,7 +81,7 @@ abstract class IStringsProvider {
 
   String get changeChatBackground;
 
-  String get actionCreateGroup;
+  String actionCreateGroup(List<dynamic> args);
 
   String get callMessageIncomingMissed;
 
@@ -93,23 +93,23 @@ abstract class IStringsProvider {
 
   String get callMessageOutgoingMissed;
 
-  String get eventLogGroupJoined;
+  String eventLogGroupJoined(List<dynamic> args);
 
-  String get actionChangedPhoto;
+  String actionChangedPhoto(List<dynamic> args);
 
-  String get actionMigrateFromGroupNotify;
+  String actionMigrateFromGroupNotify(List<dynamic> args);
 
-  String get actionChangedTitle;
+  String actionChangedTitle(List<dynamic> args);
 
-  String get actionKickUser;
+  String actionKickUser(List<dynamic> args);
 
-  String get actionRemovedPhoto;
+  String actionRemovedPhoto(List<dynamic> args);
 
-  String get actionInviteUser;
+  String actionInviteUser(List<dynamic> args);
 
-  String get messageLifetimeChanged;
+  String messageLifetimeChanged(List<dynamic> args);
 
-  String get messageLifetimeChangedOutgoing;
+  String messageLifetimeChangedOutgoing(List<dynamic> args);
 
   String get actionMigrateFromGroup;
 
@@ -127,7 +127,7 @@ abstract class IStringsProvider {
 
   String get online;
 
-  String get onlineCount;
+  String onlineCount(List<dynamic> args);
 
   String get lately;
 
@@ -135,7 +135,7 @@ abstract class IStringsProvider {
 
   String get withinAMonth;
 
-  String get members;
+  String members(List<dynamic> args);
 
   String get info;
 
@@ -223,9 +223,9 @@ abstract class IStringsProvider {
 
   String get leaveChannelMenu;
 
-  String get megaLeaveAlertWithName;
+  String megaLeaveAlertWithName(List<dynamic> args);
 
-  String get channelLeaveAlertWithName;
+  String channelLeaveAlertWithName(List<dynamic> args);
 
   String get filters;
 
@@ -348,4 +348,14 @@ abstract class IStringsProvider {
   String get addToContacts;
 
   String get blockContact;
+
+  String get newContact;
+
+  String get firstName;
+
+  String get lastName;
+
+  String mobileHiddenExceptionInfo(List<dynamic> args);
+
+  String sharePhoneNumberWith(List<dynamic> args);
 }

@@ -356,4 +356,14 @@
     <string lang="AddToContacts">Add to contacts</string>
     <!-- https://translations.telegram.org/en/android/profile/BlockContact -->
     <string lang="BlockContact">Block user</string>
+    <!-- https://translations.telegram.org/en/android/general/NewContact -->
+    <string lang="NewContact">New Contact</string>
+    <!-- https://translations.telegram.org/en/android/login/FirstName -->
+    <string lang="FirstName">First name (required)</string>
+    <!-- https://translations.telegram.org/en/android/login/LastName -->
+    <string lang="LastName">Last name (optional)</string>
+    <!-- https://translations.telegram.org/en/android/general/MobileHiddenExceptionInfo -->
+    <string lang="MobileHiddenExceptionInfo">Phone number will be visible once %1$s adds you as a contact.</string>
+    <!-- https://translations.telegram.org/en/android/general/SharePhoneNumberWith -->
+    <string lang="SharePhoneNumberWith">Share my phone number with %1$s</string>
 </resources>

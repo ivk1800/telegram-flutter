@@ -16,10 +16,13 @@ void generateStringsProvider(String workDirectory) {
     final String stringName = _handleReservedName(p0.attributes[0].value);
     final String stringValue = p0.children.first.toString();
 
+    final RegExp regExp = RegExp(r'(%[0-9]?\$?s)');
+
     return _Item(
       name: stringName,
       key: p0.attributes[0].value,
       value: stringValue,
+      formatted: regExp.hasMatch(stringValue),
     );
   }).toList();
 
@@ -51,7 +54,19 @@ void _generateStringProvider(List<_Item> list, String workDirectory) {
             Method((MethodBuilder mBuilder) {
               mBuilder.name =
                   item.name[0].toLowerCase() + item.name.substring(1);
-              mBuilder.type = MethodType.getter;
+
+              if (item.formatted) {
+                mBuilder.requiredParameters.add(
+                  Parameter(
+                    (ParameterBuilder pBuilder) {
+                      pBuilder.name = 'args';
+                      pBuilder.type = refer('List<dynamic>');
+                    },
+                  ),
+                );
+              } else {
+                mBuilder.type = MethodType.getter;
+              }
               mBuilder.returns = const Reference('String');
             }),
           );
@@ -83,11 +98,22 @@ void _generateTgStringProvider(List<_Item> list, String workDirectory) {
             pBuilder.name = '_stringGetter';
             pBuilder.toThis = true;
           }));
+          cBuilder.requiredParameters
+              .add(Parameter((ParameterBuilder pBuilder) {
+            pBuilder.name = '_stringFormattedGetter';
+            pBuilder.toThis = true;
+          }));
         }));
 
         builder.fields.add(Field((FieldBuilder fBuilder) {
           fBuilder.type = refer('String Function(String key)');
           fBuilder.name = '_stringGetter';
+          fBuilder.modifier = FieldModifier.final$;
+        }));
+        builder.fields.add(Field((FieldBuilder fBuilder) {
+          fBuilder.type =
+              refer('String Function(String key, List<dynamic> args)');
+          fBuilder.name = '_stringFormattedGetter';
           fBuilder.modifier = FieldModifier.final$;
         }));
 
@@ -103,9 +129,25 @@ void _generateTgStringProvider(List<_Item> list, String workDirectory) {
                   item.name[0].toLowerCase() + item.name.substring(1);
               mBuilder.lambda = true;
               mBuilder.annotations.add(const Reference('override'));
-              mBuilder.type = MethodType.getter;
+
+              if (item.formatted) {
+                mBuilder.requiredParameters.add(
+                  Parameter(
+                    (ParameterBuilder pBuilder) {
+                      pBuilder.name = 'args';
+                      pBuilder.type = refer('List<dynamic>');
+                    },
+                  ),
+                );
+              } else {
+                mBuilder.type = MethodType.getter;
+              }
               mBuilder.returns = const Reference('String');
-              mBuilder.body = Code("""_get('${item.key}')""");
+              if (item.formatted) {
+                mBuilder.body = Code("""_getFormatted('${item.key}',args)""");
+              } else {
+                mBuilder.body = Code("""_get('${item.key}')""");
+              }
               // mBuilder.body = Code('constructor');
             }),
           );
@@ -123,6 +165,27 @@ void _generateTgStringProvider(List<_Item> list, String workDirectory) {
             mBuilder.returns = const Reference('String');
             mBuilder.body = const Code('_stringGetter.call(key)');
             // mBuilder.body = Code('constructor');
+          }),
+        );
+
+        builder.methods.add(
+          Method((MethodBuilder mBuilder) {
+            mBuilder.name = '_getFormatted';
+            mBuilder.requiredParameters
+                .add(Parameter((ParameterBuilder pBuilder) {
+              pBuilder.name = 'key';
+              pBuilder.type = const Reference('String');
+            }));
+            mBuilder.requiredParameters
+                .add(Parameter((ParameterBuilder pBuilder) {
+              pBuilder.name = 'args';
+              pBuilder.type = const Reference('List<dynamic>');
+            }));
+            mBuilder.lambda = true;
+            mBuilder.returns = const Reference('String');
+            mBuilder.body =
+                const Code('_stringFormattedGetter.call(key, args)');
+            // mBuilder.body = Code('CONSTRUCTOR');
           }),
         );
       },
@@ -147,10 +210,12 @@ class _Item {
     required this.name,
     required this.key,
     required this.value,
+    required this.formatted,
   });
 
   final String value;
 
   final String key;
   final String name;
+  final bool formatted;
 }
