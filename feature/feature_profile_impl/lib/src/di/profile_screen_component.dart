@@ -8,6 +8,7 @@ import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart'
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:user_info/user_info.dart';
 
 @j.Component(
   modules: <Type>[ProfileScreenModule],
@@ -60,14 +61,24 @@ abstract class ProfileScreenModule {
 
   @j.provides
   @j.singleton
+  static UserInfoResolver provideUserInfoResolver(
+    ProfileFeatureDependencies dependencies,
+  ) =>
+      UserInfoResolver(
+        userRepository: dependencies.userRepository,
+      );
+
+  @j.provides
+  @j.singleton
   static HeaderActionsResolver provideHeaderActionsResolver(
     ChatInfoResolver chatInfoResolver,
     ProfileFeatureDependencies dependencies,
+    UserInfoResolver userInfoResolver,
   ) =>
       HeaderActionsResolver(
         stringsProvider: dependencies.localizationManager.stringsProvider,
         chatInfoResolver: chatInfoResolver,
-        userRepository: dependencies.userRepository,
+        userInfoResolver: userInfoResolver,
       );
 
   @j.provides

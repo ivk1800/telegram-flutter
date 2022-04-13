@@ -1,23 +1,22 @@
 import 'package:chat_info/chat_info.dart';
-import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:user_info/user_info.dart';
 
 import 'header_action_data.dart';
 
 class HeaderActionsResolver {
   HeaderActionsResolver({
     required ChatInfoResolver chatInfoResolver,
-    required IUserRepository userRepository,
+    required UserInfoResolver userInfoResolver,
     required IStringsProvider stringsProvider,
   })  : _chatInfoResolver = chatInfoResolver,
         _stringsProvider = stringsProvider,
-        _userRepository = userRepository;
+        _userInfoResolver = userInfoResolver;
 
   final ChatInfoResolver _chatInfoResolver;
   final IStringsProvider _stringsProvider;
-  final IUserRepository _userRepository;
+  final UserInfoResolver _userInfoResolver;
 
   Stream<List<HeaderActionData>> resolveActions({
     required int id,
@@ -25,8 +24,7 @@ class HeaderActionsResolver {
   }) {
     switch (type) {
       case ProfileType.user:
-        return Stream<td.User>.fromFuture(_userRepository.getUser(id))
-            .map(_resolveForUser);
+        return _userInfoResolver.resolveAsStream(id).map(_resolveForUser);
       case ProfileType.chat:
         return _chatInfoResolver.resolveAsStream(id).map((ChatInfo info) {
           return <HeaderActionData>[
@@ -40,9 +38,9 @@ class HeaderActionsResolver {
     }
   }
 
-  List<HeaderActionData> _resolveForUser(td.User user) {
+  List<HeaderActionData> _resolveForUser(UserInfo info) {
     return <HeaderActionData>[
-      if (!user.isContact)
+      if (!info.isContact)
         HeaderActionData(
           action: HeaderAction.addToContacts,
           label: _stringsProvider.addToContacts,
