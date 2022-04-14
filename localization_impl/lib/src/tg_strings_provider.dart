@@ -561,6 +561,12 @@ class TgStringsProvider implements IStringsProvider {
   String sharePhoneNumberWith(List<dynamic> args) =>
       _getFormatted('SharePhoneNumberWith', args);
 
+  @override
+  String get mobileHidden => _get('MobileHidden');
+
+  @override
+  String get done => _get('Done');
+
   String _get(String key) => _stringGetter.call(key);
 
   String _getFormatted(String key, List<dynamic> args) =>

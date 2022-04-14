@@ -5,6 +5,7 @@ export 'src/fake_basic_group_repository.dart';
 export 'src/fake_chat_manager.dart';
 export 'src/fake_chat_message_repository.dart';
 export 'src/fake_chat_repository.dart';
+export 'src/fake_contacts_manager.dart';
 export 'src/fake_error_transformer.dart';
 export 'src/fake_file_downloader.dart';
 export 'src/fake_file_repository.dart';

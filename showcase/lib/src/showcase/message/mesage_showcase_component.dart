@@ -91,7 +91,7 @@ abstract class MessageShowcaseModule {
   @j.provides
   @j.singleton
   static IUserRepository provideUserRepository() => fake.FakeUserRepository(
-        fakeUserProvider: fake.FakeUserProvider(),
+        fakeUserProvider: const fake.FakeUserProvider(),
       );
 
   @j.provides

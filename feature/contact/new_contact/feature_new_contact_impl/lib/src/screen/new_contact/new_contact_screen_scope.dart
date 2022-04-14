@@ -1,8 +1,10 @@
+import 'package:coreui/coreui.dart';
 import 'package:feature_new_contact_impl/src/di/new_contact_screen_component.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider_extensions/provider_extensions.dart';
 
+import 'new_contact_controller.dart';
 import 'new_contact_view_model.dart';
 
 class NewContactScreenScope extends StatefulWidget {
@@ -23,6 +25,12 @@ class NewContactScreenScope extends StatefulWidget {
 
   static NewContactViewModel getNewContactsViewModel(BuildContext context) =>
       _InheritedScope.of(context)._newContactViewModel;
+
+  static NewContactController getNewContactController(BuildContext context) =>
+      _InheritedScope.of(context)._newContactController;
+
+  static AvatarWidgetFactory getAvatarWidgetFactory(BuildContext context) =>
+      _InheritedScope.of(context)._avatarWidgetFactory;
 }
 
 class _NewContactScreenScopeState extends State<NewContactScreenScope> {
@@ -32,6 +40,10 @@ class _NewContactScreenScopeState extends State<NewContactScreenScope> {
       _component.getStringsProvider();
   late final NewContactViewModel _newContactViewModel =
       _component.getNewContactViewModel();
+  late final NewContactController _newContactController =
+      _component.getNewContactController();
+  late final AvatarWidgetFactory _avatarWidgetFactory =
+      _component.getAvatarWidgetFactory();
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +51,13 @@ class _NewContactScreenScopeState extends State<NewContactScreenScope> {
       holderState: this,
       child: widget.child,
     );
+  }
+
+  @override
+  void dispose() {
+    _newContactViewModel.dispose();
+    _newContactController.dispose();
+    super.dispose();
   }
 }
 

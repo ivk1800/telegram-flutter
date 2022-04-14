@@ -1,50 +1,52 @@
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:dialog_api_flutter/dialog_api_flutter.dart';
 import 'package:fake/fake.dart';
-import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
+import 'package:feature_new_contact_impl/feature_new_contact_impl.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 import 'package:showcase/showcase.dart';
 import 'package:split_view/split_view.dart';
+import 'package:tdlib/td_api.dart' as td;
 
-class CreateNewChannelShowcaseFactory {
+class NewContactShowcaseFactory {
   Widget create(BuildContext context) {
     final ILocalizationManager localizationManager =
         context.read<ILocalizationManager>();
 
-    final CreateNewChatFeatureDependencies dependencies =
-        CreateNewChatFeatureDependencies(
+    final NewContactFeatureDependencies dependencies =
+        NewContactFeatureDependencies(
       errorTransformer: const FakeErrorTransformer(),
-      blockInteractionManager: showcaseBlockInteractionManager,
-      chatManager: FakeChatManager(
-        createChannelFunction: (String name, String description) async {
-          if (name == 'error') {
-            await Future<void>.delayed(const Duration(milliseconds: 200));
-            throw Exception('invalid name');
-          }
-          return Future<void>.delayed(const Duration(milliseconds: 1000))
-              .then((_) {
-            return 0;
-          });
-        },
+      fileRepository: const FakeFileRepository(),
+      userRepository: FakeUserRepository(
+        fakeUserProvider: const FakeUserProvider(),
       ),
       connectionStateProvider: const FakeConnectionStateProvider(),
       router: _Router(
         splitView: SplitView.of(context),
         dialogNavigatorKey: navigatorKey,
       ),
-      localizationManager: localizationManager,
+      blockInteractionManager: showcaseBlockInteractionManager,
+      stringsProvider: localizationManager.stringsProvider,
+      contactsManager: FakeContactsManager(
+        addContactCallback: (td.Contact contact, bool sharePhoneNumber) async {
+          if (contact.lastName == 'error') {
+            await Future<void>.delayed(const Duration(milliseconds: 200));
+            throw Exception('invalid lastname');
+          }
+          return Future<void>.delayed(const Duration(milliseconds: 500));
+        },
+      ),
     );
-    final CreateNewChatFeature feature = CreateNewChatFeature(
+    final NewContactFeature feature = NewContactFeature(
       dependencies: dependencies,
     );
 
-    return feature.createNewChannelScreenFactory.create();
+    return feature.newContactScreenFactory.create(0);
   }
 }
 
-class _Router implements ICreateNewChatRouter {
+class _Router implements INewContactRouter {
   _Router({
     required SplitViewState splitView,
     required GlobalKey<NavigatorState> dialogNavigatorKey,
@@ -55,15 +57,6 @@ class _Router implements ICreateNewChatRouter {
 
   final SplitViewState _splitView;
   final DialogRouterImpl _dialogRouterImpl;
-
-  @override
-  void toCreateNewChannel() {}
-
-  @override
-  void toCreateNewGroup() {}
-
-  @override
-  void toCreateNewSecretChat() {}
 
   @override
   void toDialog({
@@ -78,7 +71,7 @@ class _Router implements ICreateNewChatRouter {
       );
 
   @override
-  void closeAfterCreateChannel(int chatId) {
+  void close() {
     _splitView.removeUntil(ContainerType.top, (PageNode node) => false);
   }
 }

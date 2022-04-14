@@ -7,5 +7,5 @@ abstract class INewContactFeatureApi {
 }
 
 abstract class INewContactScreenFactory {
-  Widget create();
+  Widget create(int userId);
 }

@@ -24,7 +24,7 @@ class AuthShowcaseFactory {
       dependencies: AuthFeatureDependencies(
         authenticationStateUpdatesProvider:
             FakeAuthenticationStateUpdatesProvider(),
-        connectionStateProvider: FakeConnectionStateProvider(),
+        connectionStateProvider: const FakeConnectionStateProvider(),
         authenticationManager: FakeAuthenticationManager(
           phoneNumberCallback: (String phone) async {
             if (phone != '71111111111') {

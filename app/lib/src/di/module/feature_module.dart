@@ -5,8 +5,10 @@ import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app/src/navigation/router/chat_administration_router_factory.dart';
 import 'package:app/src/navigation/router/create_new_chat_router_impl.dart';
+import 'package:app/src/navigation/router/new_contact_router.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
+import 'package:contacts_manager_api/contacts_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:error_transformer_api/error_transformer_api.dart';
@@ -463,9 +465,19 @@ abstract class FeatureModule {
     IConnectionStateProvider connectionStateProvider,
     ILocalizationManager localizationManager,
     INewContactRouter router,
+    IBlockInteractionManager blockInteractionManager,
+    IFileRepository fileRepository,
+    IUserRepository userRepository,
+    IContactsManager contactsManager,
+    IErrorTransformer errorTransformer,
   ) =>
       NewContactFeatureDependencies(
+        errorTransformer: errorTransformer,
+        contactsManager: contactsManager,
         router: router,
+        userRepository: userRepository,
+        fileRepository: fileRepository,
+        blockInteractionManager: blockInteractionManager,
         connectionStateProvider: connectionStateProvider,
         stringsProvider: localizationManager.stringsProvider,
       );
@@ -769,7 +781,7 @@ abstract class FeatureModule {
   IContactsRouter bindContactsRouter(CommonScreenRouterImpl impl);
 
   @j.binds
-  INewContactRouter bindNewContactRouter(CommonScreenRouterImpl impl);
+  INewContactRouter bindNewContactRouter(NewContactRouterImpl impl);
 
   @j.binds
   IChatAdministrationRouterFactory bindChatAdministrationRouterFactory(

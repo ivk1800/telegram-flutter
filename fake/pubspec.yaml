@@ -8,6 +8,8 @@ environment:
 dependencies:
   auth_manager_api:
     path: ../component/auth_manager/auth_manager_api
+  contacts_manager_api:
+    path: ../feature/contact/contacts_manager/contacts_manager_api
   core_tdlib_api:
     path: ../core_tdlib_api
   error_transformer_api:

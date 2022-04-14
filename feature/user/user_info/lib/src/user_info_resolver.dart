@@ -8,22 +8,26 @@ class UserInfoResolver {
 
   final IUserRepository _userRepository;
 
-  Stream<UserInfo> resolveAsStream(int chatId) {
-    return Stream<UserInfo>.fromFuture(_resolve(chatId));
+  Stream<UserInfo> resolveAsStream(int userId) {
+    return Stream<UserInfo>.fromFuture(_resolve(userId));
   }
 
   Future<UserInfo> _resolve(int userId) async {
     final td.User user = await _userRepository.getUser(userId);
     return UserInfo(
-      isContact: user.isContact,
+      user: user,
+      statusHumanString: user.status.toString(),
     );
   }
 }
 
 class UserInfo {
   const UserInfo({
-    required this.isContact,
+    required this.user,
+    required this.statusHumanString,
   });
 
-  final bool isContact;
+  final td.User user;
+
+  final String statusHumanString;
 }

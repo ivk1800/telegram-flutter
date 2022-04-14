@@ -20,4 +20,7 @@ class KeyGenerator {
 
   ValueKey<dynamic> generateForCreateNewChat() =>
       const ValueKey<dynamic>('create new chat');
+
+  ValueKey<dynamic> generateForNewContact() =>
+      const ValueKey<dynamic>('new contact');
 }

@@ -22,7 +22,9 @@ class FakeProvider {
   }
 
   IUserRepository getUserRepository() {
-    return fake.FakeUserRepository(fakeUserProvider: fake.FakeUserProvider());
+    return fake.FakeUserRepository(
+      fakeUserProvider: const fake.FakeUserProvider(),
+    );
   }
 
   IFileRepository getFileRepository() {
@@ -30,7 +32,7 @@ class FakeProvider {
   }
 
   IConnectionStateProvider getConnectionStateProvider() {
-    return fake.FakeConnectionStateProvider();
+    return const fake.FakeConnectionStateProvider();
   }
 
   IChatMessageRepository getChatMessageRepository() {

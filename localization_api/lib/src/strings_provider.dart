@@ -358,4 +358,8 @@ abstract class IStringsProvider {
   String mobileHiddenExceptionInfo(List<dynamic> args);
 
   String sharePhoneNumberWith(List<dynamic> args);
+
+  String get mobileHidden;
+
+  String get done;
 }

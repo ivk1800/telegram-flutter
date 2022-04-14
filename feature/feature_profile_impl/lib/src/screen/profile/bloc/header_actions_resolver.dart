@@ -40,7 +40,7 @@ class HeaderActionsResolver {
 
   List<HeaderActionData> _resolveForUser(UserInfo info) {
     return <HeaderActionData>[
-      if (!info.isContact)
+      if (!info.user.isContact)
         HeaderActionData(
           action: HeaderAction.addToContacts,
           label: _stringsProvider.addToContacts,

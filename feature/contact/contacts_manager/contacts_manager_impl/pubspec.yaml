@@ -1,0 +1,16 @@
+name: contacts_manager_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+
+dependencies:
+  contacts_manager_api:
+    path: ../contacts_manager_api
+  core_tdlib_api:
+    path: ../../../../core_tdlib_api
+
+dev_dependencies:
+  dependency_validator: 3.1.2
+  tg_lint_rules:
+    path: ../../../../tg_lint_rules

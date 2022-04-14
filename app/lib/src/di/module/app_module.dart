@@ -13,6 +13,8 @@ import 'package:app_controller/app_controller_component.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:auth_manager_impl/auth_manager_impl.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
+import 'package:contacts_manager_api/contacts_manager_api.dart';
+import 'package:contacts_manager_impl/contacts_manager_impl.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
@@ -56,6 +58,15 @@ abstract class AppModule {
     ITdFunctionExecutor functionExecutor,
   ) =>
       OptionsManager(
+        functionExecutor: functionExecutor,
+      );
+
+  @j.singleton
+  @j.provides
+  static IContactsManager provideContactsManager(
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      ContactsManager(
         functionExecutor: functionExecutor,
       );
 

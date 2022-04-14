@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:showcase/src/showcase/chat_cell/chat_cell_showcase.dart';
 import 'package:showcase/src/showcase/create_new_channel/create_new_channel_showcase_factory.dart';
 import 'package:showcase/src/showcase/message_list/showcase_messages_list_page.dart';
+import 'package:showcase/src/showcase/new_contact/new_contact_showcase_factory.dart';
 import 'package:showcase/src/showcase_split_view_page.dart';
 import 'package:split_view/split_view.dart';
 
@@ -77,6 +78,19 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
       subtitle: "channel name = 'error' for error",
       routeCallback: (BuildContext context) {
         final Widget widget = CreateNewChannelShowcaseFactory().create(context);
+
+        SplitView.of(context).add(
+          key: UniqueKey(),
+          builder: (_) => widget,
+          container: ContainerType.top,
+        );
+      },
+    ),
+    _ShowcaseData(
+      title: 'new contact',
+      // subtitle: "channel name = 'error' for error",
+      routeCallback: (BuildContext context) {
+        final Widget widget = NewContactShowcaseFactory().create(context);
 
         SplitView.of(context).add(
           key: UniqueKey(),

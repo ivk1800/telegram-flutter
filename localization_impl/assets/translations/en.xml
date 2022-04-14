@@ -366,4 +366,8 @@
     <string lang="MobileHiddenExceptionInfo">Phone number will be visible once %1$s adds you as a contact.</string>
     <!-- https://translations.telegram.org/en/android/general/SharePhoneNumberWith -->
     <string lang="SharePhoneNumberWith">Share my phone number with %1$s</string>
+    <!-- https://translations.telegram.org/en/android/general/MobileHidden -->
+    <string lang="MobileHidden">Mobile hidden</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/Done -->
+    <string lang="Done">Done</string>
 </resources>

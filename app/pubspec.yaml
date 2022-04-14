@@ -15,6 +15,10 @@ dependencies:
     path: ../block_interaction_api
   chat_theme:
     path: ../feature/chat/chat_theme
+  contacts_manager_api:
+    path: ../feature/contact/contacts_manager/contacts_manager_api
+  contacts_manager_impl:
+    path: ../feature/contact/contacts_manager/contacts_manager_impl
   core:
     path: ../core
   core_tdlib_api:
