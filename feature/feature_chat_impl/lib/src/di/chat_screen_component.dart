@@ -276,7 +276,6 @@ abstract class ChatScreenModule {
       );
 
   @j.provides
-  @j.singleton
   static IChatActionPanelInteractor provideChatActionPanelInteractor(
     ChatFeatureDependencies dependencies,
     ChatArgs args,
