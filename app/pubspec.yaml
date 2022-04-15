@@ -116,9 +116,9 @@ dependencies:
   feature_privacy_settings_impl:
     path: ../feature/feature_privacy_settings_impl
   feature_profile_api:
-    path: ../feature/feature_profile_api
+    path: ../feature/profile/feature_profile_api
   feature_profile_impl:
-    path: ../feature/feature_profile_impl
+    path: ../feature/profile/feature_profile_impl
   feature_sessions_api:
     path: ../feature/feature_sessions_api
   feature_sessions_impl:

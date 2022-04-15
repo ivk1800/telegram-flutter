@@ -9,9 +9,9 @@ dependencies:
   flutter:
     sdk: flutter
   profile_navigation_api:
-    path: ../profile/profile_navigation_api
+    path: ../profile_navigation_api
 
 dev_dependencies:
   dependency_validator: 3.2.0
   tg_lint_rules:
-    path: ../../tg_lint_rules
+    path: ../../../tg_lint_rules
