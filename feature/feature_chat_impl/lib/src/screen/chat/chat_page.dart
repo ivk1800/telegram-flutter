@@ -4,29 +4,24 @@ import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_theme/chat_theme.dart';
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
-import 'package:feature_chat_impl/src/screen/chat/view_model/chat_action_bar_model.dart';
+import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
-import 'body_state.dart';
-import 'header_state.dart';
 import 'message_factory.dart';
 import 'messages_scroll_controller.dart';
-import 'view_model/chat_actions_panel_view_model.dart';
-import 'view_model/chat_view_model.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
 
   @override
-  ChatPageState createState() => ChatPageState();
+  _ChatPageState createState() => _ChatPageState();
 }
 
-class ChatPageState extends State<ChatPage> {
+class _ChatPageState extends State<ChatPage> {
   final ItemScrollController _itemScrollController = ItemScrollController();
 
   final ItemPositionsListener _itemPositionsListener =
@@ -36,7 +31,8 @@ class ChatPageState extends State<ChatPage> {
 
   @override
   void initState() {
-    final ChatViewModel viewModel = context.read();
+    final ChatViewModel viewModel = ChatScreenScope.getChatViewModel(context);
+
     final Stream<int> itemsCountStream = viewModel.bodyStateStream
         .where((BodyState event) => event is BodyData)
         .cast<BodyData>()
@@ -58,8 +54,10 @@ class ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ChatViewModel viewModel = context.read();
-    final ChatActionsPanelViewModel chatActionsViewModel = context.read();
+    final ChatViewModel viewModel = ChatScreenScope.getChatViewModel(context);
+    final ChatActionsPanelViewModel chatActionsViewModel =
+        ChatScreenScope.getChatActionsPanelViewModel(context);
+
     return Scaffold(
       backgroundColor:
           TgTheme.of(context).themeOf<ChatThemeData>().backgroundColor,
@@ -73,18 +71,11 @@ class ChatPageState extends State<ChatPage> {
               loading: () => const Center(child: CircularProgressIndicator()),
               data: (List<ITileModel> models) {
                 return _ChatContextWrapper(
-                  child: MultiProvider(
-                    providers: <Provider<dynamic>>[
-                      Provider<ItemScrollController>(
-                        create: (_) => _itemScrollController,
-                      ),
-                      Provider<ItemPositionsListener>(
-                        create: (_) => _itemPositionsListener,
-                      ),
-                    ],
+                  child: _InheritedChatScreenContext(
                     child: _Messages(
                       models: models,
                     ),
+                    state: this,
                   ),
                 );
               },
@@ -96,7 +87,8 @@ class ChatPageState extends State<ChatPage> {
         child: StreamListener<PanelState>(
           stream: chatActionsViewModel.actionsPanelState,
           builder: (BuildContext context, PanelState state) {
-            final IChatActionPanelFactory factory = context.read();
+            final IChatActionPanelFactory factory =
+                ChatScreenScope.getChatActionPanelFactory(context);
             return factory.create(state);
           },
         ),
@@ -123,6 +115,30 @@ class _ChatContextWrapper extends StatelessWidget {
   }
 }
 
+class _InheritedChatScreenContext extends InheritedWidget {
+  const _InheritedChatScreenContext({
+    Key? key,
+    required Widget child,
+    required _ChatPageState state,
+  })  : _state = state,
+        super(key: key, child: child);
+
+  final _ChatPageState _state;
+
+  static _ChatPageState of(BuildContext context) {
+    final _ChatPageState? result = (context
+            .getElementForInheritedWidgetOfExactType<
+                _InheritedChatScreenContext>()
+            ?.widget as _InheritedChatScreenContext?)
+        ?._state;
+    assert(result != null, 'No _ChatPageState found in context');
+    return result!;
+  }
+
+  @override
+  bool updateShouldNotify(_InheritedChatScreenContext oldWidget) => false;
+}
+
 class _Messages extends StatelessWidget {
   const _Messages({
     Key? key,
@@ -133,13 +149,16 @@ class _Messages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MessageFactory messageFactory = context.read();
+    final MessageFactory messageFactory =
+        ChatScreenScope.getMessageFactory(context);
+    final _ChatPageState state = _InheritedChatScreenContext.of(context);
+
     return Scrollbar(
       child: ScrollablePositionedList.separated(
         // todo extract to config
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-        itemPositionsListener: context.read(),
-        itemScrollController: context.read(),
+        itemPositionsListener: state._itemPositionsListener,
+        itemScrollController: state._itemScrollController,
         reverse: true,
         itemCount: models.length,
         itemBuilder: (BuildContext context, int index) {
@@ -162,11 +181,13 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ChatActionBarModel viewModel = context.read();
+    final ChatActionBarViewModel viewModel =
+        ChatScreenScope.getChatActionBarModel(context);
     return StreamListener<HeaderState>(
       stream: viewModel.headerStateStream,
       builder: (BuildContext context, HeaderState data) {
-        final IChatHeaderInfoFactory chatHeaderInfoFactory = context.read();
+        final IChatHeaderInfoFactory chatHeaderInfoFactory =
+            ChatScreenScope.getChatHeaderInfoFactory(context);
         return AppBar(
           titleSpacing: 0.0,
           // todo wrap to builder?

@@ -31,6 +31,7 @@ class ChatMessagesInteractor {
   final BehaviorSubject<List<ITileModel>> _messagesSubject =
       BehaviorSubject<List<ITileModel>>();
 
+  // todo check is hasValue
   List<ITileModel> get messages => _messagesSubject.value;
 
   Stream<List<ITileModel>> get messagesStream => _messagesSubject;

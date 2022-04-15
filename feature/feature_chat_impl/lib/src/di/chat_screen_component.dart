@@ -30,15 +30,13 @@ abstract class IChatScreenComponent {
 
   MessageFactory getMessageFactory();
 
-  ChatMessageFactory getChatMessageFactory();
-
   ILocalizationManager getLocalizationManager();
 
   IChatHeaderInfoFactory getChatHeaderInfoFactory();
 
   ChatViewModel getChatViewModel();
 
-  ChatActionBarModel getChatActionBarModel();
+  ChatActionBarViewModel getChatActionBarViewModel();
 
   ChatActionsPanelViewModel getChatActionsPanelViewModel();
 
@@ -186,7 +184,7 @@ abstract class ChatScreenModule {
 
   @j.provides
   @j.singleton
-  static ChatActionBarModel provideChatActionBarViewModel(
+  static ChatActionBarViewModel provideChatActionBarViewModel(
     ChatArgs args,
     ChatMessagesInteractor chatMessagesInteractor,
     IChatHeaderInfoInteractor headerInfoInteractor,
@@ -195,7 +193,7 @@ abstract class ChatScreenModule {
     ChatFeatureDependencies dependencies,
     IChatManager chatManager,
   ) =>
-      ChatActionBarModel(
+      ChatActionBarViewModel(
         localizationManager: dependencies.localizationManager,
         headerActionsInteractor: headerActionsInteractor,
         chatManager: chatManager,
@@ -205,11 +203,6 @@ abstract class ChatScreenModule {
         chatRepository: dependencies.chatRepository,
         stringsProvider: stringsProvider,
       )..init();
-
-  @j.provides
-  @j.singleton
-  static ChatMessageFactory provideChatMessageFactory() =>
-      const ChatMessageFactory();
 
   @j.provides
   @j.singleton

@@ -15,8 +15,8 @@ import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 
-class ChatActionBarModel extends BaseViewModel {
-  ChatActionBarModel({
+class ChatActionBarViewModel extends BaseViewModel {
+  ChatActionBarViewModel({
     required ChatArgs args,
     required IChatScreenRouter router,
     required ILocalizationManager localizationManager,
