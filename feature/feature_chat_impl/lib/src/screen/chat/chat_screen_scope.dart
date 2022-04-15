@@ -37,8 +37,8 @@ class ChatScreenScope extends StatefulWidget {
           BuildContext context) =>
       _InheritedScope.of(context)._chatHeaderInfoFactory;
 
-  static ChatViewModel getChatViewModel(BuildContext context) =>
-      _InheritedScope.of(context)._chatViewModel;
+  static ChatMessagesViewModel getChatMessagesViewModel(BuildContext context) =>
+      _InheritedScope.of(context)._chatMessagesViewModel;
 
   static ChatActionBarViewModel getChatActionBarModel(BuildContext context) =>
       _InheritedScope.of(context)._chatActionBarModel;
@@ -62,7 +62,8 @@ class _ChatScreenScopeState extends State<ChatScreenScope> {
   late final IChatHeaderInfoFactory _chatHeaderInfoFactory =
       _component.getChatHeaderInfoFactory();
 
-  late final ChatViewModel _chatViewModel = _component.getChatViewModel();
+  late final ChatMessagesViewModel _chatMessagesViewModel =
+      _component.getChatMessagesViewModel();
 
   late final ChatActionBarViewModel _chatActionBarModel =
       _component.getChatActionBarViewModel();
@@ -80,7 +81,7 @@ class _ChatScreenScopeState extends State<ChatScreenScope> {
 
   @override
   void dispose() {
-    _chatViewModel.dispose();
+    _chatMessagesViewModel.dispose();
     _chatActionBarModel.dispose();
     _chatActionsPanelViewModel.dispose();
     super.dispose();

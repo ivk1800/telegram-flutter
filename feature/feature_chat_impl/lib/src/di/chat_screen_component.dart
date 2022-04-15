@@ -34,7 +34,7 @@ abstract class IChatScreenComponent {
 
   IChatHeaderInfoFactory getChatHeaderInfoFactory();
 
-  ChatViewModel getChatViewModel();
+  ChatMessagesViewModel getChatMessagesViewModel();
 
   ChatActionBarViewModel getChatActionBarViewModel();
 
@@ -140,10 +140,10 @@ abstract class ChatScreenModule {
   @j.provides
   @j.singleton
   static IMessageActionListener provideMessageActionListener(
-    ChatViewModel bloc,
+    ChatMessagesViewModel viewModel,
   ) =>
       MessageActionListener(
-        bloc: bloc,
+        viewModel: viewModel,
       );
 
   @j.provides
@@ -169,13 +169,13 @@ abstract class ChatScreenModule {
 
   @j.provides
   @j.singleton
-  static ChatViewModel provideChatViewModel(
+  static ChatMessagesViewModel provideChatMessagesViewModel(
     ChatArgs args,
     ChatMessagesInteractor chatMessagesInteractor,
     ChatFeatureDependencies dependencies,
     IChatManager chatManager,
   ) =>
-      ChatViewModel(
+      ChatMessagesViewModel(
         chatManager: chatManager,
         router: dependencies.routerFactory.create(args.chatId),
         messagesInteractor: chatMessagesInteractor,

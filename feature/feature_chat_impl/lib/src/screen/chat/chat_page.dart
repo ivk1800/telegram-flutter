@@ -31,7 +31,8 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   void initState() {
-    final ChatViewModel viewModel = ChatScreenScope.getChatViewModel(context);
+    final ChatMessagesViewModel viewModel =
+        ChatScreenScope.getChatMessagesViewModel(context);
 
     final Stream<int> itemsCountStream = viewModel.bodyStateStream
         .where((BodyState event) => event is BodyData)
@@ -54,7 +55,8 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ChatViewModel viewModel = ChatScreenScope.getChatViewModel(context);
+    final ChatMessagesViewModel viewModel =
+        ChatScreenScope.getChatMessagesViewModel(context);
     final ChatActionsPanelViewModel chatActionsViewModel =
         ChatScreenScope.getChatActionsPanelViewModel(context);
 

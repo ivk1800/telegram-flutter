@@ -9,8 +9,8 @@ import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tile/tile.dart';
 
-class ChatViewModel extends BaseViewModel {
-  ChatViewModel({
+class ChatMessagesViewModel extends BaseViewModel {
+  ChatMessagesViewModel({
     required ChatArgs args,
     required IChatScreenRouter router,
     required ChatMessagesInteractor messagesInteractor,

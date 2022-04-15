@@ -30,7 +30,7 @@ void main() {
   ChatMessagesInteractor mockChatMessagesInteractor;
   IChatManager mockChatManager;
 
-  ChatViewModel viewModel;
+  ChatMessagesViewModel viewModel;
 
   setUp(() {
     mockChatArgs = MockChatArgs();
@@ -40,7 +40,7 @@ void main() {
 
     when(mockChatArgs.chatId).thenReturn(0);
 
-    viewModel = ChatViewModel(
+    viewModel = ChatMessagesViewModel(
       args: mockChatArgs,
       router: mockChatScreenRouter,
       chatManager: mockChatManager,
