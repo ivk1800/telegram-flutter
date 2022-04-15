@@ -8,6 +8,10 @@ environment:
 dependencies:
   chat_info:
     path: ../chat/chat_info
+  core_arch:
+    path: ../../core_arch
+  core_arch_flutter:
+    path: ../../core_arch_flutter
   core_tdlib_api:
     path: ../../core_tdlib_api
   coreui:
@@ -20,11 +24,13 @@ dependencies:
     path: ../feature_shared_media_api
   flutter:
     sdk: flutter
-  flutter_bloc: 8.0.1
   freezed_annotation: 1.1.0
   jugger: 2.0.0
   localization_api:
     path: ../../localization_api
+  provider_extensions:
+    path: ../../provider_extensions
+  rxdart: 0.27.3
   tuple: 2.0.0
   user_info:
     path: ../user/user_info

@@ -1,28 +1,31 @@
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
-import 'package:feature_profile_impl/src/screen/profile/bloc/profile_bloc.dart';
-import 'package:feature_profile_impl/src/screen/profile/bloc/profile_event.dart';
-import 'package:feature_profile_impl/src/screen/profile/bloc/profile_state.dart';
-import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
+import 'package:feature_profile_impl/src/screen/profile/profile_screen_scope.dart';
+import 'package:feature_profile_impl/src/screen/profile/profile_state.dart';
+import 'package:feature_profile_impl/src/screen/profile/profile_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
 
-import 'bloc/header_action_data.dart';
+import 'content_interactor.dart';
+import 'header_action_data.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const _AppBar(),
-      body: BlocConsumer<ProfileBloc, ProfileState>(
-        listener: (BuildContext context, ProfileState state) {},
-        builder: (BuildContext context, ProfileState state) =>
-            _Body(state: state.bodyState),
-      ),
+    final ProfileViewModel viewModel =
+        ProfileScreenScope.getProfileViewModel(context);
+
+    return StreamListener<ProfileState>(
+      stream: viewModel.state,
+      builder: (BuildContext context, ProfileState state) {
+        return Scaffold(
+          appBar: _AppBar(state: state.headerState),
+          body: _Body(state: state.bodyState),
+        );
+      },
     );
   }
 }
@@ -30,28 +33,30 @@ class ProfilePage extends StatelessWidget {
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   const _AppBar({
     Key? key,
+    required this.state,
   }) : super(key: key);
+
+  final HeaderState state;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileBloc, ProfileState>(
-      listener: (BuildContext context, ProfileState state) {},
-      builder: (BuildContext context, ProfileState state) {
+    final ProfileViewModel viewModel =
+        ProfileScreenScope.getProfileViewModel(context);
+
+    return state.map(
+      info: (Info value) {
         return AppBar(
           titleSpacing: 0.0,
-          title: _Header(info: state.headerState.info),
+          title: _Header(info: value.info),
           actions: <Widget>[
             _AppBarPopupMenu(
-              actions: state.headerState.actions,
-              onSelected: (HeaderAction action) {
-                context
-                    .read<ProfileBloc>()
-                    .add(ProfileEvent.headerActionTap(action));
-              },
+              actions: value.actions,
+              onSelected: viewModel.onHeaderActionTap,
             ),
           ],
         );
       },
+      loading: (_) => AppBar(),
     );
   }
 
@@ -110,12 +115,9 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProfileBloc bloc = BlocProvider.of(context, listen: false);
-    final BodyState state = this.state;
     return state.map(
-      loading: (Loading value) =>
-          const Center(child: CircularProgressIndicator()),
-      data: (Data state) => _Content(state: state, bloc: bloc),
+      loading: (_) => const Center(child: CircularProgressIndicator()),
+      data: (BodyData data) => _Content(state: data),
     );
   }
 }
@@ -123,23 +125,25 @@ class _Body extends StatelessWidget {
 class _Content extends StatelessWidget {
   const _Content({
     Key? key,
-    required this.bloc,
     required this.state,
   }) : super(key: key);
 
-  final Data state;
-  final ProfileBloc bloc;
+  final BodyData state;
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager =
-        Provider.of(context, listen: false);
+    final ProfileViewModel viewModel =
+        ProfileScreenScope.getProfileViewModel(context);
+
+    final IStringsProvider stringsProvider =
+        ProfileScreenScope.getStringProvider(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (state.content.description.isNotEmpty)
           tg.Section(
-            text: localizationManager.getString('Info'),
+            text: stringsProvider.info,
           ),
         if (state.content.description.isNotEmpty)
           tg.TextCell(
@@ -147,16 +151,14 @@ class _Content extends StatelessWidget {
           ),
         const tg.Divider(),
         tg.TextCell.toggle(
-          onTap: () {
-            bloc.add(const NotificationTap());
-          },
+          onTap: viewModel.onNotificationTap,
           value: !state.content.isMuted,
-          title: localizationManager.getString('Notifications'),
+          title: stringsProvider.notifications,
           subtitle: state.content.isMuted
-              ? localizationManager.getString('NotificationsOff')
-              : localizationManager.getString('NotificationsOn'),
+              ? stringsProvider.notificationsOff
+              : stringsProvider.notificationsOn,
           onChanged: (bool v) {
-            bloc.add(const NotificationToggleTap());
+            viewModel.onNotificationToggleTap();
           },
         ),
         if (state.content.sharedContent.isNotEmpty) const tg.SectionDivider(),
@@ -168,7 +170,7 @@ class _Content extends StatelessWidget {
                     state.content.sharedContent[index];
                 return tg.TextCell.textValue(
                   onTap: () {
-                    bloc.add(ProfileEvent.messagesTap(info.type));
+                    viewModel.onMessagesTap(info.type);
                   },
                   title: info.title,
                   value: '${info.count}',
@@ -196,7 +198,8 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IChatHeaderInfoFactory chatHeaderInfoFactory = Provider.of(context);
+    final IChatHeaderInfoFactory chatHeaderInfoFactory =
+        ProfileScreenScope.getChatHeaderInfoFactory(context);
     return chatHeaderInfoFactory.create(
       context: context,
       info: info,

@@ -22,12 +22,14 @@ class HeaderState with _$HeaderState {
     ChatHeaderInfo info,
     List<HeaderActionData> actions,
   ) = Info;
+
+  const factory HeaderState.loading() = HeaderLoading;
 }
 
 @freezed
 @immutable
 class BodyState with _$BodyState {
-  const factory BodyState.loading() = Loading;
+  const factory BodyState.loading() = BodyLoading;
 
-  const factory BodyState.data(ContentData content) = Data;
+  const factory BodyState.data(ContentData content) = BodyData;
 }

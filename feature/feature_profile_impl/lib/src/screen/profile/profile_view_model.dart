@@ -1,19 +1,18 @@
 import 'dart:async';
-
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/src/profile_feature_router.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'header_action_data.dart';
 import 'header_actions_resolver.dart';
-import 'profile_event.dart';
 import 'profile_state.dart';
 
-class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc({
+class ProfileViewModel extends BaseViewModel {
+  ProfileViewModel({
     required ProfileArgs args,
     required IProfileFeatureRouter router,
     required IChatHeaderInfoInteractor headerInfoInteractor,
@@ -23,76 +22,63 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         _headerActionsResolver = headerActionsResolver,
         _args = args,
         _router = router,
-        _headerInfoInteractor = headerInfoInteractor,
-        super(
-          ProfileState(
-            headerState: HeaderState.info(
-              ChatHeaderInfo(
-                photoId: 0,
-                title: 'title',
-                chatId: args.id,
-                subtitle: 'subtitle',
-              ),
-              const <HeaderActionData>[],
-            ),
-            bodyState: const BodyState.loading(),
-          ),
-        ) {
-    _init();
-  }
+        _headerInfoInteractor = headerInfoInteractor;
 
   final ContentInteractor _contentInteractor;
   final IProfileFeatureRouter _router;
   final IChatHeaderInfoInteractor _headerInfoInteractor;
   final ProfileArgs _args;
   final HeaderActionsResolver _headerActionsResolver;
-  StreamSubscription<dynamic>? _compositeStateSubscription;
+
+  final BehaviorSubject<ProfileState> _stateSubject =
+      BehaviorSubject<ProfileState>.seeded(
+    const ProfileState(
+      bodyState: BodyState.loading(),
+      headerState: HeaderState.loading(),
+    ),
+  );
+
+  Stream<ProfileState> get state => _stateSubject;
 
   @override
-  Future<void> close() {
-    _compositeStateSubscription?.cancel();
-    return super.close();
+  void init() {
+    super.init();
+    _initCompositeStateSubscription();
   }
 
-  void _init() {
-    on<NotificationToggleTap>(_onNotificationToggleTap);
-    on<NotificationTap>(_onNotificationTap);
-    on<MessagesTap>(_onMessagesTap);
-    on<Init>(_onInit);
-    on<NewProfileState>(_onNewProfileState);
-    on<HeaderActionTap>(_onHeaderActionTap);
+  @override
+  void dispose() {
+    _stateSubject.close();
+    return super.dispose();
   }
 
-  void _onNotificationToggleTap(
-      NotificationToggleTap event, Emitter<ProfileState> emit) {
-    final Data bodyState = state.bodyState as Data;
+  void onNotificationToggleTap() {
+    if (!_stateSubject.hasValue) {
+      return;
+    }
 
-    state.copyWith(
-      bodyState: bodyState.copyWith(
-          content: bodyState.content.copy(
-        isMuted: !bodyState.content.isMuted,
-      )),
-    );
+    final BodyState state = _stateSubject.value.bodyState;
+    if (state is BodyData) {
+      _stateSubject.add(
+        _stateSubject.value.copyWith(
+            bodyState: state.copyWith(
+                content: state.content.copy(
+          isMuted: !state.content.isMuted,
+        ))),
+      );
+    }
   }
 
-  void _onNotificationTap(NotificationTap event, Emitter<ProfileState> emit) {
+  void onNotificationTap() {
     _router.toQuickNotificationSettings();
   }
 
-  void _onNewProfileState(NewProfileState event, Emitter<ProfileState> emit) {
-    emit(event.state);
+  void onMessagesTap(SharedContentType type) {
+    _router.toSharedMedia(type);
   }
 
-  void _onMessagesTap(MessagesTap event, Emitter<ProfileState> emit) {
-    _router.toSharedMedia(event.type);
-  }
-
-  void _onInit(Init event, Emitter<ProfileState> emit) {
-    _initCompositeStateSubscription(emit);
-  }
-
-  void _onHeaderActionTap(HeaderActionTap event, Emitter<ProfileState> emit) {
-    switch (event.action) {
+  void onHeaderActionTap(HeaderAction action) {
+    switch (action) {
       case HeaderAction.edit:
         _router.toChatAdministration(_args.id);
         break;
@@ -102,7 +88,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     }
   }
 
-  void _initCompositeStateSubscription(Emitter<ProfileState> emit) {
+  void _initCompositeStateSubscription() {
     final Stream<BodyState> body =
         Stream<ContentData>.fromFuture(_contentInteractor.getContent())
             .map<BodyState>((ContentData data) => BodyState.data(data))
@@ -119,12 +105,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       },
     );
 
-    _compositeStateSubscription =
+    final Stream<ProfileState> profileStateStream =
         Rx.combineLatest2<BodyState, HeaderState, ProfileState>(
       body,
       header,
       (BodyState body, HeaderState header) =>
           ProfileState(headerState: header, bodyState: body),
-    ).map((ProfileState s) => ProfileEvent.newProfileState(s)).listen(add);
+    );
+
+    subscribe<ProfileState>(profileStateStream, _stateSubject.add);
   }
 }

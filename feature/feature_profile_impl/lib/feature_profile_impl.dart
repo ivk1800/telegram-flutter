@@ -6,7 +6,7 @@ import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'src/profile_feature_router.dart';
-import 'src/screen/factory/profile_screen_factory.dart';
+import 'src/screen/profile/profile_screen_factory.dart';
 
 export 'src/profile_feature_router.dart';
 
