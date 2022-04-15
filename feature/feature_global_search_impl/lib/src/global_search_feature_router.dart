@@ -1,3 +1,3 @@
-import 'package:chat_router_api/chat_router_api.dart';
+import 'package:chat_navigation_api/chat_router_api.dart';
 
 abstract class IGlobalSearchFeatureRouter extends IChatRouter {}

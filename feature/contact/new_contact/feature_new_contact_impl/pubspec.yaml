@@ -10,8 +10,8 @@ dependencies:
     path: ../../../../async_utils
   block_interaction_api:
     path: ../../../../block_interaction_api
-  chat_router_api:
-    path: ../../../chat/chat_router_api
+  chat_navigation_api:
+    path: ../../../chat/chat_navigation_api
   contacts_manager_api:
     path: ../../../contact/contacts_manager/contacts_manager_api
   core_arch:

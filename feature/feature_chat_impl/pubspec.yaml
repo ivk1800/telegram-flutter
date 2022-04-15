@@ -12,8 +12,8 @@ dependencies:
     path: ../chat/chat_actions_panel
   chat_info:
     path: ../chat/chat_info
-  chat_router_api:
-    path: ../chat/chat_router_api
+  chat_navigation_api:
+    path: ../chat/chat_navigation_api
   chat_theme:
     path: ../chat/chat_theme
   core_arch:

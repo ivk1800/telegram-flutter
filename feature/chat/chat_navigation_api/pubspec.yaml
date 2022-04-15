@@ -1,4 +1,4 @@
-name: chat_router_api
+name: chat_navigation_api
 publish_to: 'none'
 
 environment:
