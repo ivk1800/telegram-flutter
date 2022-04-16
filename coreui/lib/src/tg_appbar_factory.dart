@@ -20,12 +20,17 @@ class TgAppBarFactory {
 
   final ConnectionStateWidgetFactory _connectionStateWidgetFactory;
 
-  PreferredSizeWidget createDefaultTitle(BuildContext context, String title) {
+  PreferredSizeWidget createDefaultTitle(
+    BuildContext context,
+    String title, {
+    List<Widget>? actions,
+  }) {
     return AppBar(
       title: _connectionStateWidgetFactory.create(
         context,
         (BuildContext context) => Text(title),
       ),
+      actions: actions,
     );
   }
 }

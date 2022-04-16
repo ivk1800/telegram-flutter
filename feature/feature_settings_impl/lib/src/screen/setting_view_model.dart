@@ -20,6 +20,8 @@ class SettingViewModel extends BaseViewModel {
 
   void onNotificationsSettingsTap() => _router.toNotificationsSettings();
 
+  void onUsernameTap() => _router.toChangeUsername();
+
   void onPrivacySettingsTap() => _router.toPrivacySettings();
 
   void onDataSettingsTap() => _router.toDataSettings();

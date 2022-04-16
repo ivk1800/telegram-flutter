@@ -12,4 +12,6 @@ abstract class ISettingsScreenRouter {
   void toChatSettings();
 
   void toLogOut();
+
+  void toChangeUsername();
 }

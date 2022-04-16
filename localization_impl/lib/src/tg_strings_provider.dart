@@ -567,6 +567,38 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get done => _get('Done');
 
+  @override
+  String get usernameInvalid => _get('UsernameInvalid');
+
+  @override
+  String get usernameInUse => _get('UsernameInUse');
+
+  @override
+  String get usernameInvalidShort => _get('UsernameInvalidShort');
+
+  @override
+  String get usernameInvalidLong => _get('UsernameInvalidLong');
+
+  @override
+  String get usernameInvalidStartNumber => _get('UsernameInvalidStartNumber');
+
+  @override
+  String get usernameChecking => _get('UsernameChecking');
+
+  @override
+  String get usernameHelp => _get('UsernameHelp');
+
+  @override
+  String usernameHelpLink(List<dynamic> args) =>
+      _getFormatted('UsernameHelpLink', args);
+
+  @override
+  String usernameAvailable(List<dynamic> args) =>
+      _getFormatted('UsernameAvailable', args);
+
+  @override
+  String get usernamePlaceholder => _get('UsernamePlaceholder');
+
   String _get(String key) => _stringGetter.call(key);
 
   String _getFormatted(String key, List<dynamic> args) =>

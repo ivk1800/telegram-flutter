@@ -284,6 +284,7 @@ class _SettingsBodyContent extends StatelessWidget {
         ),
         const tg.Divider(),
         tg.TextCell(
+          onTap: viewModel.onUsernameTap,
           title: 'None',
           subtitle: stringsProvider.username,
         ),

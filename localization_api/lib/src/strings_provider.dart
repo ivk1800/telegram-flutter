@@ -362,4 +362,24 @@ abstract class IStringsProvider {
   String get mobileHidden;
 
   String get done;
+
+  String get usernameInvalid;
+
+  String get usernameInUse;
+
+  String get usernameInvalidShort;
+
+  String get usernameInvalidLong;
+
+  String get usernameInvalidStartNumber;
+
+  String get usernameChecking;
+
+  String get usernameHelp;
+
+  String usernameHelpLink(List<dynamic> args);
+
+  String usernameAvailable(List<dynamic> args);
+
+  String get usernamePlaceholder;
 }

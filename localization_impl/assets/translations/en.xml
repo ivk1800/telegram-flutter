@@ -370,4 +370,29 @@
     <string lang="MobileHidden">Mobile hidden</string>
     <!-- https://translations.telegram.org/en/android/private_chats/Done -->
     <string lang="Done">Done</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameInvalid -->
+    <string lang="UsernameInvalid">Sorry, this username is invalid.</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameInUse -->
+    <string lang="UsernameInUse">Sorry, this username is already taken.</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameInvalidShort -->
+    <string lang="UsernameInvalidShort">A username must have at least 5 characters.</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameInvalidLong -->
+    <string lang="UsernameInvalidLong">The username must not exceed 32 characters.</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameInvalidStartNumber -->
+    <string lang="UsernameInvalidStartNumber">Usernames can't start with a number.</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameChecking -->
+    <string lang="UsernameChecking">Checking username...</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameHelp -->
+    <string lang="UsernameHelp">
+You can choose a username on **Telegram**. If you do, people will be able to find you by this username and contact you without needing your phone number.
+
+You can use **a–z**, **0–9** and underscores. Minimum length is **5** characters.</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameHelpLink -->
+    <string lang="UsernameHelpLink">
+This link opens a chat with you:
+%1$s</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameAvailable -->
+    <string lang="UsernameAvailable">%1$s is available.</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernamePlaceholder -->
+    <string lang="UsernamePlaceholder">Your Username</string>
 </resources>

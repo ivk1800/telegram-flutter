@@ -23,4 +23,7 @@ class KeyGenerator {
 
   ValueKey<dynamic> generateForNewContact() =>
       const ValueKey<dynamic>('new contact');
+
+  ValueKey<dynamic> generateForChangeUsername() =>
+      const ValueKey<dynamic>('change username');
 }

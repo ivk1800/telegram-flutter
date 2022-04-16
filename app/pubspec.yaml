@@ -41,6 +41,10 @@ dependencies:
     path: ../feature/feature_auth_api
   feature_auth_impl:
     path: ../feature/feature_auth_impl
+  feature_change_username_api:
+    path: ../feature/user/feature_change_username_api
+  feature_change_username_impl:
+    path: ../feature/user/feature_change_username_impl
   feature_chat_administration_api:
     path: ../feature/chat/administration/feature_chat_administration_api
   feature_chat_administration_impl:

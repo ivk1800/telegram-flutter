@@ -2,7 +2,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class OptionsManager {
-  OptionsManager({
+  const OptionsManager({
     required ITdFunctionExecutor functionExecutor,
   }) : _functionExecutor = functionExecutor;
 

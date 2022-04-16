@@ -12,6 +12,8 @@ class UserInfoResolver {
     return Stream<UserInfo>.fromFuture(_resolve(userId));
   }
 
+  Future<UserInfo> resolveAsFuture(int userId) => _resolve(userId);
+
   Future<UserInfo> _resolve(int userId) async {
     final td.User user = await _userRepository.getUser(userId);
     return UserInfo(

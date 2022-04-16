@@ -379,6 +379,17 @@ class CommonScreenRouterImpl
     );
   }
 
+  @override
+  void toChangeUsername() {
+    _add(
+      widget: _featureProvider
+          .changeUsernameFeatureApi.changeUsernameScreenFactory
+          .create(),
+      key: _keyGenerator.generateForChangeUsername(),
+      container: ContainerType.top,
+    );
+  }
+
   void _showDialog({required WidgetBuilder builder}) {
     final BuildContext? context = _dialogNavigatorKey.currentContext;
 

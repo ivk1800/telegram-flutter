@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:showcase/src/showcase/change_username_showcase_factory.dart';
 import 'package:showcase/src/showcase/chat_cell/chat_cell_showcase.dart';
 import 'package:showcase/src/showcase/create_new_channel/create_new_channel_showcase_factory.dart';
 import 'package:showcase/src/showcase/message_list/showcase_messages_list_page.dart';
@@ -88,9 +89,21 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
     ),
     _ShowcaseData(
       title: 'new contact',
-      // subtitle: "channel name = 'error' for error",
       routeCallback: (BuildContext context) {
         final Widget widget = NewContactShowcaseFactory().create(context);
+
+        SplitView.of(context).add(
+          key: UniqueKey(),
+          builder: (_) => widget,
+          container: ContainerType.top,
+        );
+      },
+    ),
+    _ShowcaseData(
+      title: 'change username',
+      subtitle: 'username = invalid, taken : for errors',
+      routeCallback: (BuildContext context) {
+        final Widget widget = ChangeUsernameShowcaseFactory().create(context);
 
         SplitView.of(context).add(
           key: UniqueKey(),

@@ -3,6 +3,7 @@ import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
+import 'package:app/src/navigation/router/change_username_router.dart';
 import 'package:app/src/navigation/router/chat_administration_router_factory.dart';
 import 'package:app/src/navigation/router/create_new_chat_router_impl.dart';
 import 'package:app/src/navigation/router/new_contact_router.dart';
@@ -15,6 +16,8 @@ import 'package:core_utils/core_utils.dart';
 import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
+import 'package:feature_change_username_api/feature_change_username_api.dart';
+import 'package:feature_change_username_impl/feature_change_username_impl.dart';
 import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
 import 'package:feature_chat_administration_impl/feature_chat_administration_impl.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
@@ -513,6 +516,29 @@ abstract class FeatureModule {
             stringsProvider: localizationManager.stringsProvider,
           );
 
+  @j.provides
+  static ChangeUsernameFeatureDependencies
+      provideChangeUsernameFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    IStringsProvider stringsProvider,
+    IBlockInteractionManager blockInteractionManager,
+    IErrorTransformer errorTransformer,
+    IChangeUsernameRouter router,
+    ITdFunctionExecutor functionExecutor,
+    OptionsManager optionsManager,
+    IUserRepository userRepository,
+  ) =>
+          ChangeUsernameFeatureDependencies(
+            optionManager: optionsManager,
+            userRepository: userRepository,
+            functionExecutor: functionExecutor,
+            router: router,
+            errorTransformer: errorTransformer,
+            blockInteractionManager: blockInteractionManager,
+            connectionStateProvider: connectionStateProvider,
+            stringsProvider: stringsProvider,
+          );
+
   // endregion dependencies
 
   // region api
@@ -675,6 +701,12 @@ abstract class FeatureModule {
   ) =>
       ChatAdministrationFeature(dependencies: dependencies);
 
+  @j.provides
+  static IChangeUsernameFeatureApi provideChangeUsernameFeatureApi(
+    ChangeUsernameFeatureDependencies dependencies,
+  ) =>
+      ChangeUsernameFeature(dependencies: dependencies);
+
   // endregion api
 
   @j.provides
@@ -792,6 +824,9 @@ abstract class FeatureModule {
   IChatAdministrationRouterFactory bindChatAdministrationRouterFactory(
     ChatAdministrationRouterFactory impl,
   );
+
+  @j.binds
+  IChangeUsernameRouter bindChangeUsernameRouter(ChangeUsernameRouterImpl impl);
 
 // endregion router
 

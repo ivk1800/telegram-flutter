@@ -1,6 +1,7 @@
 import 'package:app/src/di/component/app_component.dart';
 import 'package:app/src/di/module/feature_module.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
+import 'package:feature_change_username_api/feature_change_username_api.dart';
 import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
@@ -81,6 +82,8 @@ abstract class IFeatureComponent {
   INewContactFeatureApi getNewContactFeatureApi();
 
   IChatAdministrationFeatureApi getChatAdministrationFeatureApi();
+
+  IChangeUsernameFeatureApi getChangeUsernameFeatureApi();
 }
 
 @j.componentBuilder

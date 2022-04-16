@@ -1,5 +1,6 @@
 import 'package:app/src/feature/feature.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
+import 'package:feature_change_username_api/feature_change_username_api.dart';
 import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
@@ -93,4 +94,7 @@ class FeatureProvider {
 
   late final IChatAdministrationFeatureApi chatAdministrationFeatureApi =
       _featureFactory.createChatAdministrationFeatureApi();
+
+  late final IChangeUsernameFeatureApi changeUsernameFeatureApi =
+      _featureFactory.createChangeUsernameFeatureApi();
 }

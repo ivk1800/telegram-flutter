@@ -8,4 +8,6 @@
 * Delete a chat
 * Create a new channel screen
 * Adds a user to the contact list
+* Change username screen
+* Changes the username of the current user
 * ...
