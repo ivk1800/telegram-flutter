@@ -1,3 +1,4 @@
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_settings_impl/src/screen/setting_view_model.dart';
 import 'package:feature_settings_impl/src/screen/settings_screen_scope.dart';
@@ -5,6 +6,7 @@ import 'package:feature_settings_impl/src/screen/settings_screen_widget_model.da
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
+import 'content_state.dart';
 import 'settings_screen.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -38,10 +40,17 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SettingViewModel settingsScreenViewModel =
+        SettingsScreenScope.getSettingViewModel(context);
+
     return Stack(
-      children: const <Widget>[
-        SingleChildScrollView(child: _SettingsBody()),
-        _SearchBody(),
+      children: <Widget>[
+        StreamListener<ContentState>(
+            stream: settingsScreenViewModel.stateStream,
+            builder: (BuildContext context, ContentState state) {
+              return _SettingsBody(state: state);
+            }),
+        const _SearchBody(),
       ],
     );
   }
@@ -100,7 +109,14 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
             onLeadingTap: settingsScreenWidgetModel.onLeadingTap,
           );
         } else {
-          return const _SettingsStateAppBar();
+          final SettingViewModel settingsScreenViewModel =
+              SettingsScreenScope.getSettingViewModel(context);
+
+          return StreamListener<ContentState>(
+              stream: settingsScreenViewModel.stateStream,
+              builder: (BuildContext context, ContentState state) {
+                return _SettingsStateAppBar(state: state);
+              });
         }
       },
     );
@@ -111,38 +127,61 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class _SettingsStateAppBar extends StatelessWidget {
-  const _SettingsStateAppBar({
-    Key? key,
-  }) : super(key: key);
+  const _SettingsStateAppBar({Key? key, required this.state}) : super(key: key);
+
+  final ContentState state;
 
   @override
   Widget build(BuildContext context) {
-    final SettingsScreenWidgetModel settingsScreenWidgetModel =
-        SettingsScreenScope.getSettingsScreenWidgetModel(context);
-    final tg.ConnectionStateWidgetFactory connectionStateWidgetFactory =
-        SettingsScreenScope.getConnectionStateWidgetFactory(context);
+    return state.map(
+      loading: (_) {
+        return AppBar(
+          title: Text(
+            SettingsScreenScope.getStringsProvider(context).appName,
+          ),
+        );
+      },
+      data: (ContentStateData data) {
+        final SettingsScreenWidgetModel settingsScreenWidgetModel =
+            SettingsScreenScope.getSettingsScreenWidgetModel(context);
 
-    return AppBar(
-      title: Align(
-        child: connectionStateWidgetFactory.create(
-          context,
-          (BuildContext context) {
-            return Text(
-              SettingsScreenScope.getStringsProvider(context).appName,
-            );
-          },
-        ),
-        alignment: Alignment.centerLeft,
-      ),
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: settingsScreenWidgetModel.onSearchTap,
-        ),
-        _AppBarPopupMenu(
-          onSelected: settingsScreenWidgetModel.onAppBarMenuTap,
-        ),
-      ],
+        final tg.AvatarWidgetFactory avatarWidgetFactory =
+            SettingsScreenScope.getAvatarWidgetFactory(context);
+
+        final TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
+        return AppBar(
+          titleSpacing: 0.0,
+          title: Align(
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: avatarWidgetFactory.create(
+                context,
+                chatId: data.appBarState.userId,
+              ),
+              title: Text(
+                data.appBarState.name,
+                maxLines: 1,
+                style: primaryTextTheme.titleMedium,
+              ),
+              subtitle: Text(
+                data.appBarState.onlineStatus,
+                maxLines: 1,
+                style: primaryTextTheme.caption,
+              ),
+            ),
+            alignment: Alignment.centerLeft,
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: settingsScreenWidgetModel.onSearchTap,
+            ),
+            _AppBarPopupMenu(
+              onSelected: settingsScreenWidgetModel.onAppBarMenuTap,
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -189,7 +228,30 @@ class _AppBarPopupMenu extends StatelessWidget {
 }
 
 class _SettingsBody extends StatelessWidget {
-  const _SettingsBody({Key? key}) : super(key: key);
+  const _SettingsBody({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final ContentState state;
+
+  @override
+  Widget build(BuildContext context) {
+    return state.map(loading: (_) {
+      return const Center(child: CircularProgressIndicator());
+    }, data: (ContentStateData data) {
+      return SingleChildScrollView(child: _SettingsBodyContent(data: data));
+    });
+  }
+}
+
+class _SettingsBodyContent extends StatelessWidget {
+  const _SettingsBodyContent({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  final ContentStateData data;
 
   @override
   Widget build(BuildContext context) {

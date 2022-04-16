@@ -9,6 +9,7 @@ import 'package:app/src/navigation/router/new_contact_router.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:contacts_manager_api/contacts_manager_api.dart';
+import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:error_transformer_api/error_transformer_api.dart';
@@ -191,14 +192,18 @@ abstract class FeatureModule {
   static SettingsFeatureDependencies provideSettingsFeatureDependencies(
     ILocalizationManager localizationManager,
     ISettingsScreenRouter router,
-    IConnectionStateProvider connectionStateProvider,
+    IFileRepository fileRepository,
+    IUserRepository userRepository,
+    OptionsManager optionsManager,
     // todo do not depend on feature
     ISettingsSearchFeatureApi settingsSearchFeatureApi,
   ) =>
       SettingsFeatureDependencies(
+        optionsManager: optionsManager,
+        userRepository: userRepository,
+        fileRepository: fileRepository,
         localizationManager: localizationManager,
         router: router,
-        connectionStateProvider: connectionStateProvider,
         settingsSearchFeatureApi: settingsSearchFeatureApi,
       );
 

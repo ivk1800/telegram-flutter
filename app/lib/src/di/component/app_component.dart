@@ -96,6 +96,8 @@ abstract class IAppComponent {
   IErrorTransformer getErrorTransformer();
 
   IContactsManager getContactsManager();
+
+  OptionsManager getOptionsManager();
 }
 
 @j.componentBuilder

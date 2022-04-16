@@ -24,13 +24,6 @@ class SettingsScreenScope extends StatefulWidget {
   static IStringsProvider getStringsProvider(BuildContext context) =>
       _InheritedScope.of(context)._stringsProvider;
 
-  static tg.TgAppBarFactory getTgAppBarFactory(BuildContext context) =>
-      _InheritedScope.of(context)._tgAppBarFactory;
-
-  static tg.ConnectionStateWidgetFactory getConnectionStateWidgetFactory(
-          BuildContext context) =>
-      _InheritedScope.of(context)._connectionStateWidgetFactory;
-
   static ISettingsSearchScreenFactory getSettingsSearchScreenFactory(
           BuildContext context) =>
       _InheritedScope.of(context)._settingsSearchScreenFactory;
@@ -41,6 +34,9 @@ class SettingsScreenScope extends StatefulWidget {
   static SettingsScreenWidgetModel getSettingsScreenWidgetModel(
           BuildContext context) =>
       _InheritedScope.of(context)._settingsScreenWidgetModel;
+
+  static tg.AvatarWidgetFactory getAvatarWidgetFactory(BuildContext context) =>
+      _InheritedScope.of(context)._avatarWidgetFactory;
 }
 
 class _SettingsScreenScopeState extends State<SettingsScreenScope> {
@@ -48,12 +44,6 @@ class _SettingsScreenScopeState extends State<SettingsScreenScope> {
 
   late final IStringsProvider _stringsProvider =
       _component.getLocalizationManager().stringsProvider;
-
-  late final tg.TgAppBarFactory _tgAppBarFactory =
-      _component.getTgAppBarFactory();
-
-  late final tg.ConnectionStateWidgetFactory _connectionStateWidgetFactory =
-      _component.getConnectionStateWidgetFactory();
 
   late final ISettingsSearchScreenFactory _settingsSearchScreenFactory =
       _component.getSettingsSearchScreenFactory();
@@ -63,6 +53,9 @@ class _SettingsScreenScopeState extends State<SettingsScreenScope> {
 
   late final SettingsScreenWidgetModel _settingsScreenWidgetModel =
       _component.getSettingsScreenWidgetModel();
+
+  late final tg.AvatarWidgetFactory _avatarWidgetFactory =
+      _component.getAvatarWidgetFactory();
 
   @override
   Widget build(BuildContext context) {
