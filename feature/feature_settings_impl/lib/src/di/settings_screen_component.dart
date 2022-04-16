@@ -3,6 +3,7 @@ import 'package:coreui/coreui.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_settings_impl/feature_settings_impl.dart';
 import 'package:feature_settings_impl/src/screen/setting_view_model.dart';
+import 'package:feature_settings_impl/src/screen/settings_screen_widget_model.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
@@ -17,9 +18,11 @@ abstract class ISettingsComponent {
 
   tg.TgAppBarFactory getTgAppBarFactory();
 
-  ISettingsSearchScreenFactory getSettingsSearchWidgetFactory();
+  ISettingsSearchScreenFactory getSettingsSearchScreenFactory();
 
   SettingViewModel getSettingViewModel();
+
+  SettingsScreenWidgetModel getSettingsScreenWidgetModel();
 }
 
 @j.module
@@ -78,6 +81,18 @@ abstract class SettingsScreenModule {
       TgAppBarFactory(
         connectionStateWidgetFactory: connectionStateWidgetFactory,
       );
+
+  @j.singleton
+  @j.provides
+  static SettingsScreenWidgetModel provideSettingsScreenWidgetModel(
+    SettingsFeatureDependencies dependencies,
+    SettingViewModel viewModel,
+  ) =>
+      SettingsScreenWidgetModel(
+        viewModel: viewModel,
+        settingsSearchScreenFactory:
+            dependencies.settingsSearchFeatureApi.settingsSearchScreenFactory,
+      )..init();
 }
 
 @j.componentBuilder

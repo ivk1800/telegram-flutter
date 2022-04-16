@@ -1,9 +1,11 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_settings_impl/src/screen/setting_view_model.dart';
-import 'package:feature_settings_search_api/feature_settings_search_api.dart';
+import 'package:feature_settings_impl/src/screen/settings_screen_scope.dart';
+import 'package:feature_settings_impl/src/screen/settings_screen_widget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
+
+import 'settings_screen.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -14,146 +16,139 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage>
     with TickerProviderStateMixin {
-  late GlobalObjectKey<tg.TgSwitchedAppBarState> _appbarKey;
-
-  _ScreenState _screenState = _ScreenState.settings;
-
-  final FocusNode _searchQueryFocusNode = FocusNode();
-  final TextEditingController _searchQueryController = TextEditingController();
-
-  final SettingsSearchScreenController _settingsSearchScreenController =
-      SettingsSearchScreenController();
-
-  late Widget _searchWidget;
-
-  @override
-  void initState() {
-    _searchWidget = context
-        .read<ISettingsSearchScreenFactory>()
-        .create(_settingsSearchScreenController);
-    _appbarKey = _AppBarKey(hashCode);
-    _searchQueryController.addListener(_onSearchEvent);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _searchQueryController.removeListener(_onSearchEvent);
-    _settingsSearchScreenController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final SettingsScreenWidgetModel settingsScreenWidgetModel =
+        SettingsScreenScope.getSettingsScreenWidgetModel(context);
+
     return WillPopScope(
-      onWillPop: () async {
-        if (_screenState != _ScreenState.settings) {
-          setState(() {
-            _screenState = _ScreenState.settings;
-            _searchQueryController.text = '';
-            _appbarKey.currentState?.setActive(active: false);
-          });
-          return false;
-        }
-        return true;
-      },
-      child: Scaffold(
-        appBar: tg.TgSwitchedAppBar(
-          key: _appbarKey,
-          backgroundColor: AppBarTheme.of(context).backgroundColor!,
-          appBarBuilder: (
-            AnimationController animationController,
-            BuildContext context,
-            bool isActive,
-          ) {
-            if (isActive) {
-              return tg.SearchAppBar(
-                focusNode: _searchQueryFocusNode,
-                isOverrideLeading: false,
-                searchQueryController: _searchQueryController,
-                animationController: animationController,
-                onLeadingTap: () {
-                  if (_screenState == _ScreenState.search) {
-                    setState(() {
-                      _screenState = _ScreenState.settings;
-                      _searchQueryController.text = '';
-                      _appbarKey.currentState?.setActive(active: false);
-                    });
-                  } else if (_screenState == _ScreenState.settings) {
-                    Navigator.of(context).pop();
-                  }
-                },
-              );
-            } else {
-              final tg.ConnectionStateWidgetFactory
-                  connectionStateWidgetFactory = context.read();
-              return AppBar(
-                title: Align(
-                  child: connectionStateWidgetFactory.create(
-                    context,
-                    (BuildContext context) {
-                      return Text(
-                        context
-                            .read<ILocalizationManager>()
-                            .getString('AppName'),
-                      );
-                    },
-                  ),
-                  alignment: Alignment.centerLeft,
-                ),
-                actions: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      setState(() {
-                        _screenState = _ScreenState.search;
-                        _searchQueryFocusNode.requestFocus();
-                        _appbarKey.currentState?.setActive(active: true);
-                      });
-                    },
-                  ),
-                  _AppBarPopupMenu(
-                    onSelected: (_AppBarMenu value) {
-                      switch (value) {
-                        case _AppBarMenu.logOut:
-                          context.read<SettingViewModel>().onLogOutTap();
-                          break;
-                      }
-                    },
-                  ),
-                ],
-              );
-            }
-          },
-        ),
-        body: Stack(
-          children: <Widget>[
-            const SingleChildScrollView(child: _Body()),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: _screenState == _ScreenState.search
-                  ? Material(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      child: _searchWidget,
-                    )
-                  : null,
-            ),
-          ],
-        ),
+      onWillPop: settingsScreenWidgetModel.onWillPop,
+      child: const Scaffold(
+        appBar: _AppBar(),
+        body: _Body(),
       ),
     );
   }
-
-  void _onSearchEvent() =>
-      _settingsSearchScreenController.onQuery(_searchQueryController.text);
 }
 
-enum _AppBarMenu { logOut }
+class _Body extends StatelessWidget {
+  const _Body({
+    Key? key,
+  }) : super(key: key);
 
-enum _ScreenState { settings, search }
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: const <Widget>[
+        SingleChildScrollView(child: _SettingsBody()),
+        _SearchBody(),
+      ],
+    );
+  }
+}
 
-class AppBarPopupMenuItem extends StatelessWidget {
-  const AppBarPopupMenuItem({
+class _SearchBody extends StatelessWidget {
+  const _SearchBody({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final SettingsScreenWidgetModel settingsScreenWidgetModel =
+        SettingsScreenScope.getSettingsScreenWidgetModel(context);
+
+    return ValueListenableBuilder<ScreenState>(
+      valueListenable: settingsScreenWidgetModel.screenState,
+      builder: (BuildContext context, ScreenState screenState, Widget? child) {
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: screenState == ScreenState.search
+              ? Material(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: settingsScreenWidgetModel.searchWidget,
+                )
+              : null,
+        );
+      },
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _AppBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final SettingsScreenWidgetModel settingsScreenWidgetModel =
+        SettingsScreenScope.getSettingsScreenWidgetModel(context);
+
+    return tg.TgSwitchedAppBar(
+      key: settingsScreenWidgetModel.appbarKey,
+      backgroundColor: AppBarTheme.of(context).backgroundColor!,
+      appBarBuilder: (
+        AnimationController animationController,
+        BuildContext context,
+        bool isActive,
+      ) {
+        if (isActive) {
+          return tg.SearchAppBar(
+            focusNode: settingsScreenWidgetModel.searchQueryFocusNode,
+            isOverrideLeading: false,
+            searchQueryController:
+                settingsScreenWidgetModel.searchQueryController,
+            animationController: animationController,
+            onLeadingTap: settingsScreenWidgetModel.onLeadingTap,
+          );
+        } else {
+          return const _SettingsStateAppBar();
+        }
+      },
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size(double.infinity, kToolbarHeight);
+}
+
+class _SettingsStateAppBar extends StatelessWidget {
+  const _SettingsStateAppBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final SettingsScreenWidgetModel settingsScreenWidgetModel =
+        SettingsScreenScope.getSettingsScreenWidgetModel(context);
+    final tg.ConnectionStateWidgetFactory connectionStateWidgetFactory =
+        SettingsScreenScope.getConnectionStateWidgetFactory(context);
+
+    return AppBar(
+      title: Align(
+        child: connectionStateWidgetFactory.create(
+          context,
+          (BuildContext context) {
+            return Text(
+              SettingsScreenScope.getStringsProvider(context).appName,
+            );
+          },
+        ),
+        alignment: Alignment.centerLeft,
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.search),
+          onPressed: settingsScreenWidgetModel.onSearchTap,
+        ),
+        _AppBarPopupMenu(
+          onSelected: settingsScreenWidgetModel.onAppBarMenuTap,
+        ),
+      ],
+    );
+  }
+}
+
+class _AppBarPopupMenuItem extends StatelessWidget {
+  const _AppBarPopupMenuItem({
     Key? key,
     required this.title,
   }) : super(key: key);
@@ -174,16 +169,16 @@ class _AppBarPopupMenu extends StatelessWidget {
   const _AppBarPopupMenu({Key? key, required this.onSelected})
       : super(key: key);
 
-  final PopupMenuItemSelected<_AppBarMenu> onSelected;
+  final PopupMenuItemSelected<AppBarMenu> onSelected;
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<_AppBarMenu>(
+    return PopupMenuButton<AppBarMenu>(
       onSelected: onSelected,
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<_AppBarMenu>>[
-        const PopupMenuItem<_AppBarMenu>(
-          value: _AppBarMenu.logOut,
-          child: AppBarPopupMenuItem(
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<AppBarMenu>>[
+        const PopupMenuItem<AppBarMenu>(
+          value: AppBarMenu.logOut,
+          child: _AppBarPopupMenuItem(
             // todo extract string
             title: 'Log out',
           ),
@@ -193,21 +188,18 @@ class _AppBarPopupMenu extends StatelessWidget {
   }
 }
 
-class _AppBarKey extends GlobalObjectKey<tg.TgSwitchedAppBarState> {
-  const _AppBarKey(Object value) : super(value);
-}
-
-class _Body extends StatelessWidget {
-  const _Body({Key? key}) : super(key: key);
+class _SettingsBody extends StatelessWidget {
+  const _SettingsBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final Color accentColor = Theme.of(context).colorScheme.secondary;
 
-    final SettingViewModel viewModel = context.read();
+    final SettingViewModel viewModel =
+        SettingsScreenScope.getSettingViewModel(context);
 
-    final ILocalizationManager localizationManager = context.read();
-    String _getString(String key) => localizationManager.getString(key);
+    final IStringsProvider stringsProvider =
+        SettingsScreenScope.getStringsProvider(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,82 +210,82 @@ class _Body extends StatelessWidget {
             Icons.add_a_photo_outlined,
             color: accentColor,
           ),
-          title: _getString('SetProfilePhoto'),
+          title: stringsProvider.setProfilePhoto,
         ),
         const tg.SectionDivider(),
         tg.Section(
-          text: _getString('Account'),
+          text: stringsProvider.account,
         ),
         tg.TextCell(
           title: '123',
-          subtitle: _getString('TapToChangePhone'),
+          subtitle: stringsProvider.tapToChangePhone,
         ),
         const tg.Divider(),
         tg.TextCell(
           title: 'None',
-          subtitle: _getString('Username'),
+          subtitle: stringsProvider.username,
         ),
         const tg.Divider(),
         tg.TextCell(
-          title: _getString('UserBio'),
-          subtitle: _getString('UserBioDetail'),
+          title: stringsProvider.userBio,
+          subtitle: stringsProvider.userBioDetail,
         ),
         const tg.SectionDivider(),
         tg.Section(
-          text: _getString('Settings'),
+          text: stringsProvider.settings,
         ),
         tg.TextCell(
           onTap: viewModel.onNotificationsSettingsTap,
           leading: const Icon(Icons.notifications_none),
-          title: _getString('NotificationsAndSounds'),
+          title: stringsProvider.notificationsAndSounds,
         ),
         const tg.Divider(),
         tg.TextCell(
           onTap: viewModel.onPrivacySettingsTap,
           leading: const Icon(Icons.lock_open),
-          title: _getString('PrivacySettings'),
+          title: stringsProvider.privacySettings,
         ),
         const tg.Divider(),
         tg.TextCell(
           onTap: viewModel.onDataSettingsTap,
           leading: const Icon(Icons.data_usage),
-          title: _getString('DataSettings'),
+          title: stringsProvider.dataSettings,
         ),
         const tg.Divider(),
         tg.TextCell(
           onTap: viewModel.onChatSettingsTap,
           leading: const Icon(Icons.chat_bubble_outline),
-          title: _getString('ChatSettings'),
+          title: stringsProvider.chatSettings,
         ),
         const tg.Divider(),
         tg.TextCell(
           onTap: viewModel.onFoldersTap,
           leading: const Icon(Icons.folder),
-          title: _getString('Filters'),
+          title: stringsProvider.filters,
         ),
         const tg.Divider(),
         tg.TextCell(
           onTap: viewModel.onSessionsTap,
           leading: const Icon(Icons.devices_sharp),
-          title: _getString('Devices'),
+          title: stringsProvider.devices,
         ),
         const tg.SectionDivider(),
         tg.Section(
-          text: _getString('SettingsHelp'),
+          text: stringsProvider.settingsHelp,
         ),
         tg.TextCell(
           leading: const Icon(Icons.chat),
-          title: _getString('AskAQuestion'),
+          title: stringsProvider.askAQuestion,
         ),
         const tg.Divider(),
         tg.TextCell(
           leading: const Icon(Icons.help_outline),
-          title: _getString('TelegramFAQ'),
+          title: stringsProvider.telegramFAQ,
         ),
         const tg.Divider(),
         tg.TextCell(
           leading: const Icon(Icons.shield),
-          title: _getString('PrivacyPolicy'),
+          title: stringsProvider.privacyPolicy,
         ),
         const tg.Annotation(
           align: TextAlign.center,
