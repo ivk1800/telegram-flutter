@@ -101,8 +101,12 @@ abstract class AppModule {
   @j.provides
   static IUserRepository provideUserRepository(
     ITdFunctionExecutor functionExecutor,
+    IUserUpdatesProvider userUpdatesProvider,
   ) =>
-      UserRepositoryImpl(functionExecutor: functionExecutor);
+      UserRepositoryImpl(
+        userUpdatesProvider: userUpdatesProvider,
+        functionExecutor: functionExecutor,
+      );
 
   @j.singleton
   @j.provides

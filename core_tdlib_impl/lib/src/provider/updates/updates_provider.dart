@@ -10,6 +10,7 @@ class UpdatesProvider
         ISuperGroupUpdatesProvider,
         IBasicGroupUpdatesProvider,
         IFileUpdatesProvider,
+        IUserUpdatesProvider,
         IAuthenticationStateUpdatesProvider {
   UpdatesProvider({
     required TdClient client,
@@ -45,6 +46,9 @@ class UpdatesProvider
   @override
   Stream<td.Update> get chatMessageUpdates =>
       _client.events.messageUpdatesFilter();
+
+  @override
+  Stream<td.UpdateUser> get userUpdates => _client.events.userUpdatesFilter();
 }
 
 extension _UpdatesExtensions on Stream<td.TdObject> {
@@ -71,6 +75,10 @@ extension _UpdatesExtensions on Stream<td.TdObject> {
   Stream<td.UpdateBasicGroup> basicGroupUpdatesFilter() =>
       where((td.TdObject event) => event is td.UpdateBasicGroup)
           .cast<td.UpdateBasicGroup>();
+
+  Stream<td.UpdateUser> userUpdatesFilter() =>
+      where((td.TdObject event) => event is td.UpdateUser)
+          .cast<td.UpdateUser>();
 
   // todo add more updates after update lib version
   Stream<td.Update> chatUpdatesFilter() => where((td.TdObject event) =>

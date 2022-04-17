@@ -279,13 +279,13 @@ class _SettingsBodyContent extends StatelessWidget {
           text: stringsProvider.account,
         ),
         tg.TextCell(
-          title: '123',
+          title: data.bodyState.phoneNumberFormatted,
           subtitle: stringsProvider.tapToChangePhone,
         ),
         const tg.Divider(),
         tg.TextCell(
           onTap: viewModel.onUsernameTap,
-          title: 'None',
+          title: data.bodyState.username,
           subtitle: stringsProvider.username,
         ),
         const tg.Divider(),

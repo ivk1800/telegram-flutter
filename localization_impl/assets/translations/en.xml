@@ -395,4 +395,6 @@ This link opens a chat with you:
     <string lang="UsernameAvailable">%1$s is available.</string>
     <!-- https://translations.telegram.org/en/android/settings/UsernamePlaceholder -->
     <string lang="UsernamePlaceholder">Your Username</string>
+    <!-- https://translations.telegram.org/en/android/settings/UsernameEmpty -->
+    <string lang="UsernameEmpty">None</string>
 </resources>

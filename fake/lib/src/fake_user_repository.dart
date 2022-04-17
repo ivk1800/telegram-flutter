@@ -26,4 +26,8 @@ class FakeUserRepository implements IUserRepository {
   @override
   Future<td.UserFullInfo> getUserFullInfo(int id) =>
       Completer<td.UserFullInfo>().future;
+
+  @override
+  Stream<td.User> getUserAsStream(int id) =>
+      Stream<td.User>.fromFuture(getUser(id));
 }

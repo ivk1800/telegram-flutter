@@ -75,6 +75,7 @@ abstract class SettingsScreenModule {
     UserInfoResolver userInfoResolver,
   ) =>
       SettingsScreenContentInteractor(
+        stringsProvider: dependencies.localizationManager.stringsProvider,
         userInfoResolver: userInfoResolver,
         optionsManager: dependencies.optionsManager,
       );

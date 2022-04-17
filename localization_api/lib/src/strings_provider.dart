@@ -382,4 +382,6 @@ abstract class IStringsProvider {
   String usernameAvailable(List<dynamic> args);
 
   String get usernamePlaceholder;
+
+  String get usernameEmpty;
 }

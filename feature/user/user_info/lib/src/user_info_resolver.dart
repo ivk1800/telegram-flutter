@@ -9,13 +9,17 @@ class UserInfoResolver {
   final IUserRepository _userRepository;
 
   Stream<UserInfo> resolveAsStream(int userId) {
-    return Stream<UserInfo>.fromFuture(_resolve(userId));
+    return _userRepository.getUserAsStream(userId).map(_mapToUserInfo);
   }
 
   Future<UserInfo> resolveAsFuture(int userId) => _resolve(userId);
 
   Future<UserInfo> _resolve(int userId) async {
     final td.User user = await _userRepository.getUser(userId);
+    return _mapToUserInfo(user);
+  }
+
+  UserInfo _mapToUserInfo(td.User user) {
     return UserInfo(
       user: user,
       statusHumanString: user.status.toString(),

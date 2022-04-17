@@ -27,6 +27,11 @@ abstract class TdModule {
   );
 
   @j.singleton
+  @j.binds
+  @j.nonLazy
+  IUserUpdatesProvider bindUserUpdatesProvider(UpdatesProvider impl);
+
+  @j.singleton
   @j.provides
   static IConnectionStateProvider bindConnectionStateProvider(
     UpdatesProvider updatesProvider,

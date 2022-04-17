@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:feature_settings_impl/src/screen/content_state.dart';
+import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:user_info/user_info.dart';
 
@@ -9,14 +10,24 @@ class SettingsScreenContentInteractor {
   SettingsScreenContentInteractor({
     required UserInfoResolver userInfoResolver,
     required OptionsManager optionsManager,
+    required IStringsProvider stringsProvider,
   })  : _userInfoResolver = userInfoResolver,
+        _stringsProvider = stringsProvider,
         _optionsManager = optionsManager;
 
   final UserInfoResolver _userInfoResolver;
   final OptionsManager _optionsManager;
+  final IStringsProvider _stringsProvider;
 
   late final Stream<ContentState> _stateStream = _userInfoStream().map(
     (UserInfo info) {
+      final String username;
+      if (info.user.username.isEmpty) {
+        username = _stringsProvider.usernameEmpty;
+      } else {
+        username = '@${info.user.username}';
+      }
+
       return ContentState.data(
         appBarState: AppBarState(
           name: <String>[info.user.firstName, info.user.lastName]
@@ -28,8 +39,9 @@ class SettingsScreenContentInteractor {
         ),
         bodyState: BodyState(
           bio: '',
-          phoneNumberFormatted: info.user.phoneNumber,
-          username: info.user.username,
+          // todo format
+          phoneNumberFormatted: '+${info.user.phoneNumber}',
+          username: username,
         ),
       );
     },

@@ -5,3 +5,4 @@ export 'chat_updates_provider.dart';
 export 'file_updates_provider.dart';
 export 'message_updates_provider.dart';
 export 'super_group_updates_provider.dart';
+export 'user_updates_provider.dart';
