@@ -39,7 +39,7 @@ dependencies:
   flutter_svg: 1.0.3
   freezed_annotation: 1.1.0
   intl: 0.17.0
-  jugger: 2.0.0
+  jugger: 2.1.0
   localization_api:
     path: ../../localization_api
   path_provider: 2.0.9
@@ -66,7 +66,7 @@ dev_dependencies:
   build_runner: 2.1.7
   dependency_validator: 3.2.0
   freezed: 1.1.1
-  jugger_generator: 2.1.0
+  jugger_generator: 2.2.0
   mockito: 5.1.0
   test: 1.20.1
   tg_lint_rules:

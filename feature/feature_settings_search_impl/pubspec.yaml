@@ -19,7 +19,7 @@ dependencies:
   feature_settings_search_api:
     path: ../feature_settings_search_api
   freezed_annotation: 1.1.0
-  jugger: 2.0.0
+  jugger: 2.1.0
   localization_api:
     path: ../../localization_api
   provider_extensions:
@@ -35,6 +35,6 @@ dev_dependencies:
   flutter:
     sdk: flutter
   freezed: 1.1.1
-  jugger_generator: 2.1.0
+  jugger_generator: 2.2.0
   tg_lint_rules:
     path: ../../tg_lint_rules
