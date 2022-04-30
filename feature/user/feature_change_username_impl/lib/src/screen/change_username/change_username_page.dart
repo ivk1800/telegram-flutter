@@ -65,6 +65,7 @@ class _BodyContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TextField(
+          autofocus: true,
           controller: widgetModel.usernameController,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(

@@ -40,6 +40,7 @@ class _Body extends StatelessWidget {
             const SizedBox(width: 16),
             Flexible(
               child: TextField(
+                  autofocus: true,
                   controller: newChannelWidgetModel.channelNameController,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(

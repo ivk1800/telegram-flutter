@@ -15,9 +15,11 @@ class NewContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: _AppBar(),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: _Body(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: _Body(),
+        ),
       ),
     );
   }
@@ -70,6 +72,7 @@ class _Body extends StatelessWidget {
         const _UserInfo(),
         const SizedBox(height: 16),
         TextField(
+          autofocus: true,
           controller: newContactWidgetModel.firstNameController,
           decoration: InputDecoration(
             hintText: stringsProvider.firstName,
