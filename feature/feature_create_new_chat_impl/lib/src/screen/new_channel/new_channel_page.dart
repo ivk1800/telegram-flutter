@@ -28,8 +28,8 @@ class _Body extends StatelessWidget {
     final IStringsProvider stringsProvider =
         CreateNewChannelScreenScore.getStringsProvider(context);
 
-    final NewChannelController newChannelController =
-        CreateNewChannelScreenScore.getNewChannelController(context);
+    final NewChannelWidgetModel newChannelWidgetModel =
+        CreateNewChannelScreenScore.getNewChannelWidgetModel(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class _Body extends StatelessWidget {
             const SizedBox(width: 16),
             Flexible(
               child: TextField(
-                  controller: newChannelController.channelNameController,
+                  controller: newChannelWidgetModel.channelNameController,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     hintText: stringsProvider.enterChannelName,
@@ -54,7 +54,7 @@ class _Body extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
-          controller: newChannelController.channelDescriptionController,
+          controller: newChannelWidgetModel.channelDescriptionController,
           keyboardType: TextInputType.multiline,
           maxLines: null,
           decoration: InputDecoration(
@@ -78,8 +78,8 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
     final IStringsProvider stringsProvider =
         CreateNewChannelScreenScore.getStringsProvider(context);
 
-    final NewChannelController newChannelController =
-        CreateNewChannelScreenScore.getNewChannelController(context);
+    final NewChannelWidgetModel newChannelController =
+        CreateNewChannelScreenScore.getNewChannelWidgetModel(context);
 
     return AppBar(
       title: Text(stringsProvider.newChannel),

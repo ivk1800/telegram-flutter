@@ -13,7 +13,7 @@ abstract class ICreateNewChannelScreenComponent {
 
   ILocalizationManager getLocalizationManager();
 
-  NewChannelController getNewChannelController();
+  NewChannelWidgetModel getNewChannelWidgetModel();
 }
 
 @j.module
@@ -33,10 +33,10 @@ abstract class CreateNewChannelScreenModule {
 
   @j.singleton
   @j.provides
-  static NewChannelController provideNewChannelController(
+  static NewChannelWidgetModel provideNewChannelController(
     NewChannelViewModel viewModel,
   ) =>
-      NewChannelController(viewModel: viewModel);
+      NewChannelWidgetModel(viewModel: viewModel);
 }
 
 @j.componentBuilder

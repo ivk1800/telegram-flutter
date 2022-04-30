@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 
 import 'new_channel.dart';
 
-class NewChannelController {
-  NewChannelController({
+class NewChannelWidgetModel {
+  NewChannelWidgetModel({
     required NewChannelViewModel viewModel,
   }) : _viewModel = viewModel;
 

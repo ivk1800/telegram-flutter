@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider_extensions/provider_extensions.dart';
 
-import 'new_channel_controller.dart';
 import 'new_channel_view_model.dart';
+import 'new_channel_widget_model.dart';
 
 class CreateNewChannelScreenScore extends StatefulWidget {
   const CreateNewChannelScreenScore({
@@ -26,8 +26,8 @@ class CreateNewChannelScreenScore extends StatefulWidget {
   static IStringsProvider getStringsProvider(BuildContext context) =>
       _InheritedScope.of(context)._stringsProvider;
 
-  static NewChannelController getNewChannelController(BuildContext context) =>
-      _InheritedScope.of(context)._newChannelController;
+  static NewChannelWidgetModel getNewChannelWidgetModel(BuildContext context) =>
+      _InheritedScope.of(context)._newChannelWidgetModel;
 }
 
 class _CreateNewChannelScreenScoreState
@@ -40,8 +40,8 @@ class _CreateNewChannelScreenScoreState
   late final IStringsProvider _stringsProvider =
       _component.getLocalizationManager().stringsProvider;
 
-  late final NewChannelController _newChannelController =
-      _component.getNewChannelController();
+  late final NewChannelWidgetModel _newChannelWidgetModel =
+      _component.getNewChannelWidgetModel();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _CreateNewChannelScreenScoreState
   @override
   void dispose() {
     _viewModel.dispose();
-    _newChannelController.dispose();
+    _newChannelWidgetModel.dispose();
     super.dispose();
   }
 }

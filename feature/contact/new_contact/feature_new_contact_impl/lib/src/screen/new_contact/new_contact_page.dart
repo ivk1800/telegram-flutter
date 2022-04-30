@@ -1,12 +1,12 @@
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart';
-import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_controller.dart';
 import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_state.dart';
 import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'new_contact_screen_scope.dart';
+import 'new_contact_widget_model.dart';
 
 class NewContactPage extends StatelessWidget {
   const NewContactPage({Key? key}) : super(key: key);
@@ -30,8 +30,8 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final IStringsProvider stringsProvider =
         NewContactScreenScope.getStringsProvider(context);
-    final NewContactController newContactController =
-        NewContactScreenScope.getNewContactController(context);
+    final NewContactWidgetModel newContactWidgetModel =
+        NewContactScreenScope.getNewContactWidgetModel(context);
 
     return AppBar(
       title: Text(stringsProvider.newContact),
@@ -39,7 +39,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           constraints: const BoxConstraints.expand(width: 80),
           icon: Text(stringsProvider.done.toUpperCase()),
-          onPressed: newContactController.onDoneTap,
+          onPressed: newContactWidgetModel.onDoneTap,
         ),
         // TextButton(onPressed: () {}, child: Text(stringsProvider.done))
       ],
@@ -61,8 +61,8 @@ class _Body extends StatelessWidget {
 
     final IStringsProvider stringsProvider =
         NewContactScreenScope.getStringsProvider(context);
-    final NewContactController newContactController =
-        NewContactScreenScope.getNewContactController(context);
+    final NewContactWidgetModel newContactWidgetModel =
+        NewContactScreenScope.getNewContactWidgetModel(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,14 +70,14 @@ class _Body extends StatelessWidget {
         const _UserInfo(),
         const SizedBox(height: 16),
         TextField(
-          controller: newContactController.firstNameController,
+          controller: newContactWidgetModel.firstNameController,
           decoration: InputDecoration(
             hintText: stringsProvider.firstName,
           ),
         ),
         const SizedBox(height: 16),
         TextField(
-          controller: newContactController.lastNameController,
+          controller: newContactWidgetModel.lastNameController,
           decoration: InputDecoration(
             hintText: stringsProvider.lastName,
           ),
@@ -91,12 +91,12 @@ class _Body extends StatelessWidget {
         Row(
           children: <Widget>[
             ValueListenableBuilder<bool>(
-              valueListenable: newContactController.shareMyPhone,
+              valueListenable: newContactWidgetModel.shareMyPhone,
               builder: (BuildContext context, bool value, Widget? child) {
                 return Checkbox(
                   value: value,
                   onChanged: (bool? value) {
-                    newContactController.shareMyPhone.value = value!;
+                    newContactWidgetModel.shareMyPhone.value = value!;
                   },
                 );
               },
@@ -122,11 +122,11 @@ class _UserInfo extends StatelessWidget {
         NewContactScreenScope.getStringsProvider(context);
     final AvatarWidgetFactory avatarWidgetFactory =
         NewContactScreenScope.getAvatarWidgetFactory(context);
-    final NewContactController newContactController =
-        NewContactScreenScope.getNewContactController(context);
+    final NewContactWidgetModel newContactWidgetModel =
+        NewContactScreenScope.getNewContactWidgetModel(context);
 
     return StreamListener<NewContactState>(
-      stream: newContactController.state,
+      stream: newContactWidgetModel.state,
       builder: (BuildContext context, NewContactState state) {
         return state.map(loading: (_) {
           return const Center(child: CircularProgressIndicator());

@@ -1,8 +1,8 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_new_contact_impl/feature_new_contact_impl.dart';
 import 'package:feature_new_contact_impl/src/screen/new_contact/args.dart';
-import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_controller.dart';
 import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_view_model.dart';
+import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_widget_model.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:user_info/user_info.dart';
@@ -15,7 +15,7 @@ abstract class INewContactScreenComponent {
 
   NewContactViewModel getNewContactViewModel();
 
-  NewContactController getNewContactController();
+  NewContactWidgetModel getNewContactWidgetModel();
 
   AvatarWidgetFactory getAvatarWidgetFactory();
 }

@@ -1,11 +1,12 @@
 import 'dart:async';
 
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_change_username_impl/src/screen/change_username/change_username_view_model.dart';
 import 'package:flutter/widgets.dart';
 
 import 'change_username_state.dart';
 
-class ChangeUsernameScreenWidgetModel {
+class ChangeUsernameScreenWidgetModel with SubscriptionMixin {
   ChangeUsernameScreenWidgetModel({
     required ChangeUsernameViewModel viewModel,
   }) : _viewModel = viewModel {
@@ -16,24 +17,29 @@ class ChangeUsernameScreenWidgetModel {
 
   final ChangeUsernameViewModel _viewModel;
 
-  StreamSubscription<CheckUsernameStateData>? _initialStateStreamSubscription;
-
   Stream<CheckUsernameState> get state => _viewModel.state;
 
   void onSaveTap() => _viewModel.onSaveTap(usernameController.text);
 
+  @override
   void dispose() {
-    _initialStateStreamSubscription?.cancel();
     usernameController.dispose();
+    super.dispose();
   }
 
   void _init() {
-    _initialStateStreamSubscription = _viewModel.state
-        .where((CheckUsernameState state) => state is CheckUsernameStateData)
-        .cast<CheckUsernameStateData>()
-        .take(1)
-        .listen((CheckUsernameStateData data) {
-      usernameController.text = data.initialUsername;
-    });
+    final Stream<CheckUsernameStateData> checkUsernameStateDataStream =
+        _viewModel.state
+            .where(
+                (CheckUsernameState state) => state is CheckUsernameStateData)
+            .cast<CheckUsernameStateData>()
+            .take(1);
+
+    subscribe(
+      checkUsernameStateDataStream,
+      (CheckUsernameStateData data) {
+        usernameController.text = data.initialUsername;
+      },
+    );
   }
 }
