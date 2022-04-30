@@ -35,6 +35,6 @@ dev_dependencies:
   flutter:
     sdk: flutter
   freezed: 1.1.1
-  jugger_generator: 2.2.0
+  jugger_generator: 2.2.1
   tg_lint_rules:
     path: ../../tg_lint_rules
