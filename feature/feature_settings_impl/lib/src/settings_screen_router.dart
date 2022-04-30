@@ -14,4 +14,6 @@ abstract class ISettingsScreenRouter {
   void toLogOut();
 
   void toChangeUsername();
+
+  void toChangeBio();
 }

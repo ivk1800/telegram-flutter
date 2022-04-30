@@ -26,4 +26,7 @@ class KeyGenerator {
 
   ValueKey<dynamic> generateForChangeUsername() =>
       const ValueKey<dynamic>('change username');
+
+  ValueKey<dynamic> generateForChangeBio() =>
+      const ValueKey<dynamic>('change bio');
 }

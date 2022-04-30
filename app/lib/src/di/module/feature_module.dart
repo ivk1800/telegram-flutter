@@ -3,6 +3,7 @@ import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
+import 'package:app/src/navigation/router/change_bio_router.dart';
 import 'package:app/src/navigation/router/change_username_router.dart';
 import 'package:app/src/navigation/router/chat_administration_router_factory.dart';
 import 'package:app/src/navigation/router/create_new_chat_router_impl.dart';
@@ -16,6 +17,8 @@ import 'package:core_utils/core_utils.dart';
 import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
+import 'package:feature_change_bio_api/feature_change_bio_api.dart';
+import 'package:feature_change_bio_impl/feature_change_bio_impl.dart';
 import 'package:feature_change_username_api/feature_change_username_api.dart';
 import 'package:feature_change_username_impl/feature_change_username_impl.dart';
 import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
@@ -539,6 +542,22 @@ abstract class FeatureModule {
             stringsProvider: stringsProvider,
           );
 
+  @j.provides
+  static ChangeBioFeatureDependencies provideChangeBioFeatureDependencies(
+    IConnectionStateProvider connectionStateProvider,
+    IStringsProvider stringsProvider,
+    IBlockInteractionManager blockInteractionManager,
+    IErrorTransformer errorTransformer,
+    IChangeBioRouter router,
+  ) =>
+      ChangeBioFeatureDependencies(
+        router: router,
+        errorTransformer: errorTransformer,
+        blockInteractionManager: blockInteractionManager,
+        connectionStateProvider: connectionStateProvider,
+        stringsProvider: stringsProvider,
+      );
+
   // endregion dependencies
 
   // region api
@@ -707,6 +726,12 @@ abstract class FeatureModule {
   ) =>
       ChangeUsernameFeature(dependencies: dependencies);
 
+  @j.provides
+  static IChangeBioFeatureApi provideChangeBioFeatureApi(
+    ChangeBioFeatureDependencies dependencies,
+  ) =>
+      ChangeBioFeature(dependencies: dependencies);
+
   // endregion api
 
   @j.provides
@@ -828,6 +853,8 @@ abstract class FeatureModule {
   @j.binds
   IChangeUsernameRouter bindChangeUsernameRouter(ChangeUsernameRouterImpl impl);
 
+  @j.binds
+  IChangeBioRouter bindChangeBioRouter(ChangeBioRouterImpl impl);
 // endregion router
 
 }

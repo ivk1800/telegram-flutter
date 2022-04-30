@@ -10,4 +10,5 @@
 * Adds a user to the contact list
 * Change username screen
 * Changes the username of the current user
+* Change bio screen
 * ...

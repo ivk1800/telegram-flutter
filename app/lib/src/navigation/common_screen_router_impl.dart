@@ -390,6 +390,16 @@ class CommonScreenRouterImpl
     );
   }
 
+  @override
+  void toChangeBio() {
+    _add(
+      widget:
+          _featureProvider.changeBioFeatureApi.changeBioScreenFactory.create(),
+      key: _keyGenerator.generateForChangeBio(),
+      container: ContainerType.top,
+    );
+  }
+
   void _showDialog({required WidgetBuilder builder}) {
     final BuildContext? context = _dialogNavigatorKey.currentContext;
 

@@ -1,5 +1,6 @@
 import 'package:app/src/di/component/feature_component.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
+import 'package:feature_change_bio_api/feature_change_bio_api.dart';
 import 'package:feature_change_username_api/feature_change_username_api.dart';
 import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
@@ -108,4 +109,7 @@ class FeatureFactory {
 
   IChangeUsernameFeatureApi createChangeUsernameFeatureApi() =>
       _featureComponent.getChangeUsernameFeatureApi();
+
+  IChangeBioFeatureApi createChangeBioFeatureApi() =>
+      _featureComponent.getChangeBioFeatureApi();
 }

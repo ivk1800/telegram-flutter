@@ -290,6 +290,7 @@ class _SettingsBodyContent extends StatelessWidget {
         ),
         const tg.Divider(),
         tg.TextCell(
+          onTap: viewModel.onBioTap,
           title: stringsProvider.userBio,
           subtitle: stringsProvider.userBioDetail,
         ),

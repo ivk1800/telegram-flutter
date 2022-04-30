@@ -22,6 +22,8 @@ class SettingViewModel extends BaseViewModel {
 
   void onUsernameTap() => _router.toChangeUsername();
 
+  void onBioTap() => _router.toChangeBio();
+
   void onPrivacySettingsTap() => _router.toPrivacySettings();
 
   void onDataSettingsTap() => _router.toDataSettings();
