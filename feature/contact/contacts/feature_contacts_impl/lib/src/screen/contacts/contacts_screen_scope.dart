@@ -36,6 +36,12 @@ class _ContactsScreenScopeState extends State<ContactsScreenScope> {
   Widget build(BuildContext context) {
     return _InheritedScope(state: this, child: widget.child);
   }
+
+  @override
+  void dispose() {
+    _contactsViewModel.dispose();
+    super.dispose();
+  }
 }
 
 class _InheritedScope extends InheritedWidget {

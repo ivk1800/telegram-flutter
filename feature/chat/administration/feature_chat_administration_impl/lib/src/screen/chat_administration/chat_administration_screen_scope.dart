@@ -44,6 +44,12 @@ class _ChatAdministrationScreenScopeState
       child: widget.child,
     );
   }
+
+  @override
+  void dispose() {
+    _newContactViewModel.dispose();
+    super.dispose();
+  }
 }
 
 class _InheritedScope extends InheritedWidget {

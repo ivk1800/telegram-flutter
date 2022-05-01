@@ -34,6 +34,12 @@ class _CreateNewGroupScreenScopeState extends State<CreateNewGroupScreenScope> {
       child: widget.child,
     );
   }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
 }
 
 class _InheritedScope extends InheritedWidget {

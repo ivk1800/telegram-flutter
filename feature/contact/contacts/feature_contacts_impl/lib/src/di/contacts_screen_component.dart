@@ -23,10 +23,10 @@ abstract class ContactsScreenModule {
 
   @j.provides
   @j.singleton
-  static IContactsRouter provideIContactsRouter(
+  static ContactsViewModel provideContactsViewModel(
     ContactsFeatureDependencies dependencies,
   ) =>
-      dependencies.router;
+      ContactsViewModel(router: dependencies.router)..init();
 }
 
 @j.componentBuilder

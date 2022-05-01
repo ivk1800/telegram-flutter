@@ -38,6 +38,12 @@ class _NewSecretChatScreenScopeState extends State<NewSecretChatScreenScope> {
       child: widget.child,
     );
   }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
 }
 
 class _InheritedScope extends InheritedWidget {

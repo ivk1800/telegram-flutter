@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider_extensions/provider_extensions.dart';
 
+import 'change_bio_view_model.dart';
+
 class ChangeBioScreenScope extends StatefulWidget {
   const ChangeBioScreenScope({
     Key? key,
@@ -26,12 +28,21 @@ class _ChangeBioScreenScopeState extends State<ChangeBioScreenScope> {
   late final IStringsProvider _stringsProvider =
       _component.getStringsProvider();
 
+  late final ChangeBioViewModel _changeBioViewModel =
+      _component.getChangeBioViewModel();
+
   @override
   Widget build(BuildContext context) {
     return _InheritedScope(
       holderState: this,
       child: widget.child,
     );
+  }
+
+  @override
+  void dispose() {
+    _changeBioViewModel.dispose();
+    super.dispose();
   }
 }
 

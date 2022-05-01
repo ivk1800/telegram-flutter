@@ -36,6 +36,12 @@ class _AuthScreenScopeState extends State<AuthScreenScope> {
   Widget build(BuildContext context) {
     return _InheritedScope(state: this, child: widget.child);
   }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
 }
 
 class _InheritedScope extends InheritedWidget {
