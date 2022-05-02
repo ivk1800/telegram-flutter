@@ -13,7 +13,7 @@ class NewChatScreenScope extends StatefulWidget {
   }) : super(key: key);
 
   final Widget child;
-  final CreateComponent<CreateNewChatScreenComponent> create;
+  final CreateComponent<ICreateNewChatScreenComponent> create;
 
   @override
   State<NewChatScreenScope> createState() => _NewChatScreenScopeState();
@@ -26,7 +26,7 @@ class NewChatScreenScope extends StatefulWidget {
 }
 
 class _NewChatScreenScopeState extends State<NewChatScreenScope> {
-  late final CreateNewChatScreenComponent _component = widget.create.call();
+  late final ICreateNewChatScreenComponent _component = widget.create.call();
 
   late final NewChatViewModel _viewModel = _component.getNewChatViewModel();
   late final ILocalizationManager _localizationManager =

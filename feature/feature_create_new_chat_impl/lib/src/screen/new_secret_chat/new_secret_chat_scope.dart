@@ -12,7 +12,7 @@ class NewSecretChatScreenScope extends StatefulWidget {
   }) : super(key: key);
 
   final Widget child;
-  final CreateComponent<CreateNewSecretChatScreenComponent> create;
+  final CreateComponent<ICreateNewSecretChatScreenComponent> create;
 
   @override
   State<NewSecretChatScreenScope> createState() =>
@@ -25,7 +25,7 @@ class NewSecretChatScreenScope extends StatefulWidget {
 }
 
 class _NewSecretChatScreenScopeState extends State<NewSecretChatScreenScope> {
-  late final CreateNewSecretChatScreenComponent _component =
+  late final ICreateNewSecretChatScreenComponent _component =
       widget.create.call();
 
   late final NewSecretChatViewModel _viewModel =

@@ -8,7 +8,7 @@ import 'create_new_chat_component.dart';
   dependencies: <Type>[ICreateNewChatComponent],
   modules: <Type>[CreateNewSecretChatScreenModule],
 )
-abstract class CreateNewSecretChatScreenComponent {
+abstract class ICreateNewSecretChatScreenComponent {
   NewSecretChatViewModel getNewSecretChatViewModel();
 
   ILocalizationManager getLocalizationManager();
@@ -28,5 +28,5 @@ abstract class CreateNewSecretChatScreenComponentBuilder {
     ICreateNewChatComponent component,
   );
 
-  CreateNewSecretChatScreenComponent build();
+  ICreateNewSecretChatScreenComponent build();
 }

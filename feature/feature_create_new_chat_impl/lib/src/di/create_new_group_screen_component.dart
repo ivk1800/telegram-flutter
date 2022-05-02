@@ -8,7 +8,7 @@ import 'create_new_chat_component.dart';
   dependencies: <Type>[ICreateNewChatComponent],
   modules: <Type>[CreateNewGroupScreenModule],
 )
-abstract class CreateNewGroupScreenComponent {
+abstract class ICreateNewGroupScreenComponent {
   NewGroupViewModel getNewGroupViewModel();
 
   ILocalizationManager getLocalizationManager();
@@ -28,5 +28,5 @@ abstract class CreateNewGroupScreenComponentBuilder {
     ICreateNewChatComponent component,
   );
 
-  CreateNewGroupScreenComponent build();
+  ICreateNewGroupScreenComponent build();
 }

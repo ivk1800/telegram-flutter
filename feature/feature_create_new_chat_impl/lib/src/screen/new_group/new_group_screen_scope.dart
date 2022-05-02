@@ -12,7 +12,7 @@ class CreateNewGroupScreenScope extends StatefulWidget {
   }) : super(key: key);
 
   final Widget child;
-  final CreateComponent<CreateNewGroupScreenComponent> create;
+  final CreateComponent<ICreateNewGroupScreenComponent> create;
 
   @override
   State<CreateNewGroupScreenScope> createState() =>
@@ -23,7 +23,7 @@ class CreateNewGroupScreenScope extends StatefulWidget {
 }
 
 class _CreateNewGroupScreenScopeState extends State<CreateNewGroupScreenScope> {
-  late final CreateNewGroupScreenComponent _component = widget.create.call();
+  late final ICreateNewGroupScreenComponent _component = widget.create.call();
 
   late final NewGroupViewModel _viewModel = _component.getNewGroupViewModel();
 
