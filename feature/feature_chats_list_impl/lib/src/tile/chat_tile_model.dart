@@ -1,7 +1,7 @@
 import 'package:tile/tile.dart';
 
 class ChatTileModel implements ITileModel {
-  ChatTileModel({
+  const ChatTileModel({
     this.photoId,
     required this.id,
     required this.unreadMessagesCount,

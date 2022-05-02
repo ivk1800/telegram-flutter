@@ -38,10 +38,10 @@ class ChatListUpdateHandler {
   Future<bool> handleNewChat({required td.Chat chat}) =>
       _enqueue(() => _handleNewChat(chat: chat));
 
-  Future<bool> handleNewPositions(
-    int chatId,
-    List<td.ChatPosition> positions,
-  ) =>
+  Future<bool> handleNewPositions({
+    required int chatId,
+    required List<td.ChatPosition> positions,
+  }) =>
       _enqueue(() => _handleNewPositions(chatId, positions));
 
   Future<bool> handleNewPosition(int chatId, td.ChatPosition position) =>
@@ -100,6 +100,25 @@ class ChatListUpdateHandler {
     int chatId,
     List<td.ChatPosition> positions,
   ) async {
+    if (!_chats.containsKey(chatId)) {
+      return false;
+    }
+
+    if (positions.isEmpty) {
+      final ChatData? removeChat = _chats.remove(chatId);
+      assert(removeChat != null);
+
+      final bool removedPrevChat = _orderedChats.remove(
+        OrderedChat(
+          chatId: removeChat!.chat.id,
+          order: removeChat.chat.getPosition().order,
+        ),
+      );
+      assert(removedPrevChat);
+
+      return true;
+    }
+
     final td.ChatPosition? position = positions.firstWhereOrNull(
       (td.ChatPosition position) =>
           position.list.getConstructor() ==

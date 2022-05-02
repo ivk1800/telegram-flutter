@@ -40,16 +40,19 @@ td.Message createFakeMessage() {
   );
 }
 
-td.Chat createFakeChat() {
-  return const td.Chat(
+td.Chat createFakeChat({
+  int? id,
+  List<td.ChatPosition>? positions,
+}) {
+  return td.Chat(
     hasProtectedContent: false,
     messageTtl: 0,
     themeName: '',
-    videoChat: td.VideoChat(
+    videoChat: const td.VideoChat(
       groupCallId: 0,
       hasParticipants: false,
     ),
-    id: 0,
+    id: id ?? 0,
     title: 'title',
     canBeReported: false,
     clientData: '',
@@ -60,10 +63,10 @@ td.Chat createFakeChat() {
     lastReadInboxMessageId: 0,
     lastReadOutboxMessageId: 0,
     replyMarkupMessageId: 0,
-    type: td.ChatTypePrivate(
+    type: const td.ChatTypePrivate(
       userId: 0,
     ),
-    permissions: td.ChatPermissions(
+    permissions: const td.ChatPermissions(
       canAddWebPagePreviews: false,
       canChangeInfo: false,
       canInviteUsers: false,
@@ -73,10 +76,10 @@ td.Chat createFakeChat() {
       canSendOtherMessages: false,
       canSendPolls: false,
     ),
-    positions: <td.ChatPosition>[],
+    positions: positions ?? <td.ChatPosition>[],
     unreadCount: 0,
     unreadMentionCount: 0,
-    notificationSettings: td.ChatNotificationSettings(
+    notificationSettings: const td.ChatNotificationSettings(
       muteFor: 0,
       disableMentionNotifications: false,
       disablePinnedMessageNotifications: false,

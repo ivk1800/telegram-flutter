@@ -5,6 +5,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_state.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:feature_chats_list_impl/src/util/loader.dart';
+import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
@@ -104,8 +105,11 @@ class ChatListInteractor {
     } else if (event is td.UpdateChatLastMessage) {
       final bool handleLastMessage = await _chatListUpdateHandler
           .handleLastMessage(event.chatId, event.lastMessage);
-      final bool handleNewPositions = await _chatListUpdateHandler
-          .handleNewPositions(event.chatId, event.positions);
+      final bool handleNewPositions =
+          await _chatListUpdateHandler.handleNewPositions(
+        chatId: event.chatId,
+        positions: event.positions,
+      );
       if (handleLastMessage || handleNewPositions) {
         _dispatchChats();
       }
