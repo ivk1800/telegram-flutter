@@ -468,9 +468,6 @@ class SplitViewState extends State<SplitView> {
         return _topPages;
     }
   }
-
-  static const int kLeftRootPageIndex = 0;
-  static const int kRightRootPageIndex = -1;
 }
 
 abstract class MyPage<T> extends Page<T> {
