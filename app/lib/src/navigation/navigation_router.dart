@@ -10,7 +10,5 @@ abstract class ISplitNavigationDelegate {
     required ContainerType container,
   });
 
-  void back();
-
   void removeByKey(LocalKey key);
 }

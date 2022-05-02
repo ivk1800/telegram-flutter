@@ -32,11 +32,6 @@ class SplitNavigationDelegateImpl implements ISplitNavigationDelegate {
   }
 
   @override
-  void back() {
-    _navigationKey.currentState?.pop();
-  }
-
-  @override
   void removeByKey(LocalKey key) {
     _navigationKey.currentState?.removeByKey(key);
   }

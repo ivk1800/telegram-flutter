@@ -405,22 +405,6 @@ class SplitViewState extends State<SplitView> {
     return true;
   }
 
-  void pop() {
-    if (_internalState.isCompact) {
-      final PageNode removed = _internalState.compactPages.removeLast();
-      _removeTopFromContainer(removed.container);
-      _refreshCompactPages();
-    } else {
-      if (_topPages.isNotEmpty) {
-        _removeTopFromContainer(ContainerType.top);
-      } else if (_rightPages.isNotEmpty) {
-        _removeTopFromContainer(ContainerType.right);
-      } else if (_leftPages.isNotEmpty) {
-        _removeTopFromContainer(ContainerType.left);
-      }
-    }
-  }
-
   void _removeTopFromContainer(ContainerType container) {
     PageNode? removed;
     switch (container) {
