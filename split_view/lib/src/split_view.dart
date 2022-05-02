@@ -86,6 +86,7 @@ abstract class SplitViewNavigatorObserver {
   const SplitViewNavigatorObserver();
 
   void didRemove(LocalKey key, ContainerType container);
+
   void didAdd(LocalKey key, ContainerType container);
 }
 
@@ -204,39 +205,35 @@ class SplitViewState extends State<SplitView> {
   }
 
   void setRightContainerPlaceholder(Widget widget) {
-    setState(() {
-      _internalState.rightContainerPlaceholder = widget;
-      _incrementStateVersion(notify: true);
-    });
+    _internalState.rightContainerPlaceholder = widget;
+    _incrementStateVersion(notify: true);
   }
 
   void removeUntil(ContainerType container, bool Function(PageNode node) test) {
-    setState(() {
-      void _removeUntil(List<PageNode> pages) {
-        PageNode? candidate = pages.lastOrNull;
-        while (candidate != null) {
-          if (test.call(candidate)) {
-            return;
-          }
-          final PageNode last = pages.removeLast();
-          widget.observer?.didRemove(last.pageKey, container);
-          candidate = pages.lastOrNull;
+    void _removeUntil(List<PageNode> pages) {
+      PageNode? candidate = pages.lastOrNull;
+      while (candidate != null) {
+        if (test.call(candidate)) {
+          return;
         }
+        final PageNode last = pages.removeLast();
+        widget.observer?.didRemove(last.pageKey, container);
+        candidate = pages.lastOrNull;
       }
+    }
 
-      switch (container) {
-        case ContainerType.left:
-          _removeUntil(_leftPages);
-          break;
-        case ContainerType.right:
-          _removeUntil(_rightPages);
-          break;
-        case ContainerType.top:
-          _removeUntil(_topPages);
-          break;
-      }
-      _refreshCompactPages();
-    });
+    switch (container) {
+      case ContainerType.left:
+        _removeUntil(_leftPages);
+        break;
+      case ContainerType.right:
+        _removeUntil(_rightPages);
+        break;
+      case ContainerType.top:
+        _removeUntil(_topPages);
+        break;
+    }
+    _refreshCompactPages(notify: true);
   }
 
   void removeByKey(LocalKey key) {
@@ -289,21 +286,19 @@ class SplitViewState extends State<SplitView> {
     assert(!_leftPages.any((PageNode element) => element.pageKey == page.key));
     assert(!_rightPages.any((PageNode element) => element.pageKey == page.key));
     assert(!_topPages.any((PageNode element) => element.pageKey == page.key));
-    setState(() {
-      switch (containerType) {
-        case ContainerType.left:
-          _leftPages.add(PageNode(container: containerType, page: page));
-          break;
-        case ContainerType.right:
-          _rightPages.add(PageNode(container: containerType, page: page));
-          break;
-        case ContainerType.top:
-          _topPages.add(PageNode(container: containerType, page: page));
-          break;
-      }
-      _refreshCompactPages();
-      widget.observer?.didAdd(page.key!, containerType);
-    });
+    switch (containerType) {
+      case ContainerType.left:
+        _leftPages.add(PageNode(container: containerType, page: page));
+        break;
+      case ContainerType.right:
+        _rightPages.add(PageNode(container: containerType, page: page));
+        break;
+      case ContainerType.top:
+        _topPages.add(PageNode(container: containerType, page: page));
+        break;
+    }
+    _refreshCompactPages(notify: true);
+    widget.observer?.didAdd(page.key!, containerType);
   }
 
   void _onSizeChanged(BoxConstraints constraints) {
@@ -402,32 +397,28 @@ class SplitViewState extends State<SplitView> {
       return false;
     }
     if (route.settings is MyPage) {
-      setState(() {
-        final MyPage<dynamic> myPage = route.settings as MyPage<dynamic>;
-        _removeTopFromContainer(myPage.container);
-        _refreshCompactPages();
-      });
+      final MyPage<dynamic> myPage = route.settings as MyPage<dynamic>;
+      _removeTopFromContainer(myPage.container);
+      _refreshCompactPages(notify: true);
     }
 
     return true;
   }
 
   void pop() {
-    setState(() {
-      if (_internalState.isCompact) {
-        final PageNode removed = _internalState.compactPages.removeLast();
-        _removeTopFromContainer(removed.container);
-        _refreshCompactPages();
-      } else {
-        if (_topPages.isNotEmpty) {
-          _removeTopFromContainer(ContainerType.top);
-        } else if (_rightPages.isNotEmpty) {
-          _removeTopFromContainer(ContainerType.right);
-        } else if (_leftPages.isNotEmpty) {
-          _removeTopFromContainer(ContainerType.left);
-        }
+    if (_internalState.isCompact) {
+      final PageNode removed = _internalState.compactPages.removeLast();
+      _removeTopFromContainer(removed.container);
+      _refreshCompactPages();
+    } else {
+      if (_topPages.isNotEmpty) {
+        _removeTopFromContainer(ContainerType.top);
+      } else if (_rightPages.isNotEmpty) {
+        _removeTopFromContainer(ContainerType.right);
+      } else if (_leftPages.isNotEmpty) {
+        _removeTopFromContainer(ContainerType.left);
       }
-    });
+    }
   }
 
   void _removeTopFromContainer(ContainerType container) {
