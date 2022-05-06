@@ -81,13 +81,20 @@ class ChatListUpdateHandler {
   ChatData? _getChatData(int chatId) => _chats[chatId];
 
   Future<bool> _handleNewChat({required td.Chat chat}) async {
+    if (_chats.containsKey(chat.id)) {
+      return false;
+    }
+
     if (chat.positions.isEmpty) {
       return false;
     }
     assert(chat.positions.length == 1);
 
     final int order = chat.getPosition().order;
-    _orderedChats.add(OrderedChat(chatId: chat.id, order: order));
+    final bool add = _orderedChats.add(
+      OrderedChat(chatId: chat.id, order: order),
+    );
+    assert(add);
 
     final ChatData data = await _toChatData(chat);
     assert(data.chat.positions.length == 1);
