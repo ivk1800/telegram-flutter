@@ -12,15 +12,15 @@ void generateStringsProvider(String workDirectory) {
   final XmlDocument document = XmlDocument.parse(file.readAsStringSync());
 
   final List<_Item> list =
-      document.children[2].children.whereType<XmlElement>().map((XmlNode p0) {
-    final String stringName = _handleReservedName(p0.attributes[0].value);
-    final String stringValue = p0.children.first.toString();
+      document.children[2].children.whereType<XmlElement>().map((XmlNode node) {
+    final String stringName = _handleReservedName(node.attributes[0].value);
+    final String stringValue = node.children.first.toString();
 
     final RegExp regExp = RegExp(r'(%[0-9]?\$?s)');
 
     return _Item(
       name: stringName,
-      key: p0.attributes[0].value,
+      key: node.attributes[0].value,
       value: stringValue,
       formatted: regExp.hasMatch(stringValue),
     );
