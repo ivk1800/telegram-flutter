@@ -22,10 +22,13 @@ class UserRepositoryImpl extends IUserRepository {
 
   @override
   Future<td.User> getUser(int id) {
+    return _functionExecutor.send<td.User>(td.GetUser(userId: id));
+    /*
     return _cache.putIfAbsent(
       id,
       () => _functionExecutor.send<td.User>(td.GetUser(userId: id)),
     );
+     */
   }
 
   @override
