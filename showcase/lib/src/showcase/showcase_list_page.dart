@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:showcase/src/showcase/change_username_showcase_factory.dart';
 import 'package:showcase/src/showcase/chat_cell/chat_cell_showcase.dart';
-import 'package:showcase/src/showcase/create_new_channel/create_new_channel_showcase_factory.dart';
-import 'package:showcase/src/showcase/message_list/showcase_messages_list_page.dart';
-import 'package:showcase/src/showcase/new_contact/new_contact_showcase_factory.dart';
+import 'package:showcase/src/showcase_messages_list_page.dart';
+import 'package:showcase/src/showcase/showcase_scope.dart';
 import 'package:showcase/src/showcase_split_view_page.dart';
 import 'package:split_view/split_view.dart';
-
-import 'auth/auth_showcase_factory.dart';
 
 class ShowcaseListPage extends StatefulWidget {
   const ShowcaseListPage({Key? key}) : super(key: key);
@@ -63,22 +59,25 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
       title: 'auth',
       subtitle: 'phone: 7-111-111-11-11, code: 11111',
       routeCallback: (BuildContext context) {
-        final Widget widget = AuthShowcaseFactory().create(context);
+        final Widget widget =
+            ShowcaseScope.getAuthShowcaseFactory(context).create(context);
 
         SplitView.of(context)
-          ..removeUntil(ContainerType.top, (_) => false)
-          ..add(
-            key: UniqueKey(),
-            builder: (_) => widget,
-            container: ContainerType.top,
-          );
+            // ..removeUntil(ContainerType.top, (_) => false)
+            .add(
+          key: UniqueKey(),
+          builder: (_) => widget,
+          container: ContainerType.top,
+        );
       },
     ),
     _ShowcaseData(
       title: 'create new channel',
       subtitle: "channel name = 'error' for error",
       routeCallback: (BuildContext context) {
-        final Widget widget = CreateNewChannelShowcaseFactory().create(context);
+        final Widget widget =
+            ShowcaseScope.getCreateNewChannelShowcaseFactory(context)
+                .create(context);
 
         SplitView.of(context).add(
           key: UniqueKey(),
@@ -90,7 +89,8 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
     _ShowcaseData(
       title: 'new contact',
       routeCallback: (BuildContext context) {
-        final Widget widget = NewContactShowcaseFactory().create(context);
+        final Widget widget =
+            ShowcaseScope.getNewContactShowcaseFactory(context).create(context);
 
         SplitView.of(context).add(
           key: UniqueKey(),
@@ -103,7 +103,9 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
       title: 'change username',
       subtitle: 'username = invalid, taken : for errors',
       routeCallback: (BuildContext context) {
-        final Widget widget = ChangeUsernameShowcaseFactory().create(context);
+        final Widget widget =
+            ShowcaseScope.getChangeUsernameShowcaseFactory(context)
+                .create(context);
 
         SplitView.of(context).add(
           key: UniqueKey(),

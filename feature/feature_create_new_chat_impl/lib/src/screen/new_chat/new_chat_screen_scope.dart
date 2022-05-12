@@ -21,16 +21,16 @@ class NewChatScreenScope extends StatefulWidget {
   static NewChatViewModel getNewChatViewModel(BuildContext context) =>
       _InheritedScope.of(context)._viewModel;
 
-  static ILocalizationManager getILocalizationManager(BuildContext context) =>
-      _InheritedScope.of(context)._localizationManager;
+  static IStringsProvider getStringsProvider(BuildContext context) =>
+      _InheritedScope.of(context)._stringsProvider;
 }
 
 class _NewChatScreenScopeState extends State<NewChatScreenScope> {
   late final ICreateNewChatScreenComponent _component = widget.create.call();
 
   late final NewChatViewModel _viewModel = _component.getNewChatViewModel();
-  late final ILocalizationManager _localizationManager =
-      _component.getLocalizationManager();
+  late final IStringsProvider _stringsProvider =
+      _component.getStringsProvider();
 
   @override
   Widget build(BuildContext context) {

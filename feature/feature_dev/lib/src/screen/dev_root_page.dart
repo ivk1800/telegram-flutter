@@ -4,7 +4,6 @@ import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_dev/src/dev/dev_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:showcase/showcase.dart' as showcase;
 import 'package:tdlib/td_api.dart' as td;
 
 class DevRootPage extends StatelessWidget {
@@ -83,7 +82,7 @@ class _Body extends StatelessWidget {
           title: const Text('Events'),
         ),
         const Divider(),
-        ListTile(
+        /* ListTile(
           onTap: () {
             Navigator.of(context, rootNavigator: true).push<dynamic>(
               MaterialPageRoute<dynamic>(
@@ -93,7 +92,7 @@ class _Body extends StatelessWidget {
             );
           },
           title: const Text('Demo'),
-        ),
+        ),*/
         const Divider(),
         ListTile(
           title: Text(

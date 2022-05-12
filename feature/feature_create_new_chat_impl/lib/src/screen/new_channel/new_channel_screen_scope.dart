@@ -38,7 +38,7 @@ class _CreateNewChannelScreenScoreState
       _component.getNewChannelViewModel();
 
   late final IStringsProvider _stringsProvider =
-      _component.getLocalizationManager().stringsProvider;
+      _component.getStringsProvider();
 
   late final NewChannelWidgetModel _newChannelWidgetModel =
       _component.getNewChannelWidgetModel();

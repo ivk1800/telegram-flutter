@@ -10,7 +10,7 @@ class ChooseCountyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager = Provider.of(context);
+    final IStringsProvider stringsProvider = Provider.of(context);
 
     // todo implement search
     // todo add ConnectionState
@@ -18,7 +18,7 @@ class ChooseCountyPage extends StatelessWidget {
     // todo implement fast side a-z scroll
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizationManager.getString('ChooseCountry')),
+        title: Text(stringsProvider.chooseCountry),
       ),
       body: BlocConsumer<ChooseCountryBloc, ChooseCountryState>(
         listener: (BuildContext context, ChooseCountryState state) {

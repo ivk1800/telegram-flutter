@@ -363,10 +363,10 @@ abstract class FeatureModule {
 
   @j.provides
   static CountryFeatureDependencies provideCountryFeatureDependencies(
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
   ) =>
       CountryFeatureDependencies(
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
       );
 
   @j.provides
@@ -444,7 +444,7 @@ abstract class FeatureModule {
   static CreateNewChatFeatureDependencies
       provideCreateNewChatFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     ICreateNewChatRouter router,
     // todo do not depend on feature
     IChatFeatureApi chatFeatureApi,
@@ -457,7 +457,7 @@ abstract class FeatureModule {
             chatManager: chatFeatureApi.chatManager,
             router: router,
             connectionStateProvider: connectionStateProvider,
-            localizationManager: localizationManager,
+            stringsProvider: stringsProvider,
           );
 
   @j.provides

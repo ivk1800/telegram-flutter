@@ -1,19 +1,29 @@
+import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:dialog_api_flutter/dialog_api_flutter.dart';
 import 'package:fake/fake.dart';
 import 'package:feature_new_contact_impl/feature_new_contact_impl.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
-import 'package:showcase/showcase.dart';
 import 'package:split_view/split_view.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class NewContactShowcaseFactory {
-  Widget create(BuildContext context) {
-    final ILocalizationManager localizationManager =
-        context.read<ILocalizationManager>();
+  @j.inject
+  NewContactShowcaseFactory({
+    required IStringsProvider stringsProvider,
+    required IBlockInteractionManager blockInteractionManager,
+    required GlobalKey<NavigatorState> navigatorKey,
+  })  : _stringsProvider = stringsProvider,
+        _navigatorKey = navigatorKey,
+        _blockInteractionManager = blockInteractionManager;
 
+  final IStringsProvider _stringsProvider;
+  final IBlockInteractionManager _blockInteractionManager;
+  final GlobalKey<NavigatorState> _navigatorKey;
+
+  Widget create(BuildContext context) {
     final NewContactFeatureDependencies dependencies =
         NewContactFeatureDependencies(
       errorTransformer: const FakeErrorTransformer(),
@@ -24,10 +34,10 @@ class NewContactShowcaseFactory {
       connectionStateProvider: const FakeConnectionStateProvider(),
       router: _Router(
         splitView: SplitView.of(context),
-        dialogNavigatorKey: navigatorKey,
+        dialogNavigatorKey: _navigatorKey,
       ),
-      blockInteractionManager: showcaseBlockInteractionManager,
-      stringsProvider: localizationManager.stringsProvider,
+      blockInteractionManager: _blockInteractionManager,
+      stringsProvider: _stringsProvider,
       contactsManager: FakeContactsManager(
         addContactCallback: (td.Contact contact, bool sharePhoneNumber) async {
           if (contact.lastName == 'error') {

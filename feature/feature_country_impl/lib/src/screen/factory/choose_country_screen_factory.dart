@@ -17,8 +17,8 @@ class ChooseCountryScreenFactory implements IChooseCountryScreenFactory {
   Widget create(void Function(Country country) callback) {
     return MultiProvider(
       providers: <Provider<dynamic>>[
-        Provider<ILocalizationManager>(
-          create: (BuildContext context) => _dependencies.localizationManager,
+        Provider<IStringsProvider>(
+          create: (BuildContext context) => _dependencies.stringsProvider,
         ),
       ],
       child: BlocProvider<ChooseCountryBloc>(

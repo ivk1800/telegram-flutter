@@ -11,7 +11,7 @@ import 'create_new_chat_component.dart';
 abstract class ICreateNewSecretChatScreenComponent {
   NewSecretChatViewModel getNewSecretChatViewModel();
 
-  ILocalizationManager getLocalizationManager();
+  IStringsProvider getStringsProvider();
 }
 
 @j.module

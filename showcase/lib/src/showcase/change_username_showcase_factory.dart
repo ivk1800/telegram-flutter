@@ -1,19 +1,30 @@
+import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:dialog_api_flutter/dialog_api_flutter.dart';
 import 'package:fake/fake.dart';
 import 'package:feature_change_username_impl/feature_change_username_impl.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
-import 'package:showcase/showcase.dart';
 import 'package:split_view/split_view.dart';
 import 'package:tdlib/td_api.dart' as td;
 
+@j.singleton
 class ChangeUsernameShowcaseFactory {
-  Widget create(BuildContext context) {
-    final ILocalizationManager localizationManager =
-        context.read<ILocalizationManager>();
+  @j.inject
+  ChangeUsernameShowcaseFactory({
+    required IStringsProvider stringsProvider,
+    required IBlockInteractionManager blockInteractionManager,
+    required GlobalKey<NavigatorState> navigatorKey,
+  })  : _stringsProvider = stringsProvider,
+        _navigatorKey = navigatorKey,
+        _blockInteractionManager = blockInteractionManager;
 
+  final IStringsProvider _stringsProvider;
+  final IBlockInteractionManager _blockInteractionManager;
+  final GlobalKey<NavigatorState> _navigatorKey;
+
+  Widget create(BuildContext context) {
     final FakeTdFunctionExecutor fakeTdFunctionExecutor =
         FakeTdFunctionExecutor(
       resultFactory: (td.TdFunction object) async {
@@ -57,10 +68,10 @@ class ChangeUsernameShowcaseFactory {
       ),
       router: _Router(
         splitView: SplitView.of(context),
-        dialogNavigatorKey: navigatorKey,
+        dialogNavigatorKey: _navigatorKey,
       ),
-      blockInteractionManager: showcaseBlockInteractionManager,
-      stringsProvider: localizationManager.stringsProvider,
+      blockInteractionManager: _blockInteractionManager,
+      stringsProvider: _stringsProvider,
     );
     final ChangeUsernameFeature feature = ChangeUsernameFeature(
       dependencies: dependencies,

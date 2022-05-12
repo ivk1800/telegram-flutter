@@ -12,7 +12,7 @@ import 'create_new_chat_component.dart';
 abstract class ICreateNewChatScreenComponent {
   NewChatViewModel getNewChatViewModel();
 
-  ILocalizationManager getLocalizationManager();
+  IStringsProvider getStringsProvider();
 }
 
 @j.module

@@ -10,8 +10,6 @@ import 'package:localization_api/localization_api.dart';
   modules: <Type>[CreateNewChatModule],
 )
 abstract class ICreateNewChatComponent {
-  ILocalizationManager getLocalizationManager();
-
   IStringsProvider getStringsProvider();
 
   ICreateNewChatRouter getCreateNewChatRouter();
@@ -28,16 +26,10 @@ abstract class ICreateNewChatComponent {
 @j.module
 abstract class CreateNewChatModule {
   @j.provides
-  static ILocalizationManager provideLocalizationManager(
-    CreateNewChatFeatureDependencies dependencies,
-  ) =>
-      dependencies.localizationManager;
-
-  @j.provides
   static IStringsProvider provideStringsProvider(
     CreateNewChatFeatureDependencies dependencies,
   ) =>
-      dependencies.localizationManager.stringsProvider;
+      dependencies.stringsProvider;
 
   @j.provides
   static ICreateNewChatRouter provideCreateNewChatRouter(

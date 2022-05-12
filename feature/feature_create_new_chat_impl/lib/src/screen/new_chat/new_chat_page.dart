@@ -25,8 +25,8 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager =
-        NewChatScreenScope.getILocalizationManager(context);
+    final IStringsProvider stringsProvider =
+        NewChatScreenScope.getStringsProvider(context);
     final NewChatViewModel viewModel =
         NewChatScreenScope.getNewChatViewModel(context);
 
@@ -35,17 +35,17 @@ class _Body extends StatelessWidget {
         tg.TextCell(
           onTap: viewModel.onNewGroupTap,
           leading: const Icon(Icons.circle),
-          title: localizationManager.getString('NewGroup'),
+          title: stringsProvider.newGroup,
         ),
         tg.TextCell(
           onTap: viewModel.onNewSecretChatTap,
           leading: const Icon(Icons.circle),
-          title: localizationManager.getString('NewSecretChat'),
+          title: stringsProvider.newSecretChat,
         ),
         tg.TextCell(
           onTap: viewModel.onNewChannelTap,
           leading: const Icon(Icons.circle),
-          title: localizationManager.getString('NewChannel'),
+          title: stringsProvider.newChannel,
         ),
       ],
     );

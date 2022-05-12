@@ -63,7 +63,6 @@ dependencies:
     path: ../localization_api
   localization_impl:
     path: ../localization_impl
-  provider: 6.0.2
   provider_extensions:
     path: ../provider_extensions
   rxdart: 0.27.3

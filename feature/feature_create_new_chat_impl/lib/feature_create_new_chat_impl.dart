@@ -60,7 +60,7 @@ class CreateNewChatFeature implements ICreateNewChatFeatureApi {
 
 class CreateNewChatFeatureDependencies {
   CreateNewChatFeatureDependencies({
-    required this.localizationManager,
+    required this.stringsProvider,
     required this.connectionStateProvider,
     required this.router,
     required this.chatManager,
@@ -68,7 +68,7 @@ class CreateNewChatFeatureDependencies {
     required this.errorTransformer,
   });
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
   final IConnectionStateProvider connectionStateProvider;
   final ICreateNewChatRouter router;
   final IChatManager chatManager;

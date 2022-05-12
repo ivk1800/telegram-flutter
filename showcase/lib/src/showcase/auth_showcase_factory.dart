@@ -5,18 +5,25 @@ import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_country_impl/feature_country_impl.dart';
 import 'package:flutter/material.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
-import 'package:showcase/showcase.dart';
 import 'package:split_view/split_view.dart';
 
 class AuthShowcaseFactory {
+  @j.inject
+  AuthShowcaseFactory({
+    required IStringsProvider stringsProvider,
+    required GlobalKey<NavigatorState> navigatorKey,
+  })  : _stringsProvider = stringsProvider,
+        _navigatorKey = navigatorKey;
+
+  final IStringsProvider _stringsProvider;
+  final GlobalKey<NavigatorState> _navigatorKey;
+
   Widget create(BuildContext context) {
-    final ILocalizationManager localizationManager =
-        context.read<ILocalizationManager>();
     final CountryFeature countryFeature = CountryFeature(
       dependencies: CountryFeatureDependencies(
-        localizationManager: localizationManager,
+        stringsProvider: _stringsProvider,
       ),
     );
     final SplitViewState splitView = SplitView.of(context);
@@ -48,9 +55,9 @@ class AuthShowcaseFactory {
         router: _Router(
           chooseCountryScreenFactory: countryFeature.chooseCountryScreenFactory,
           splitView: splitView,
-          dialogNavigatorKey: navigatorKey,
+          dialogNavigatorKey: _navigatorKey,
         ),
-        stringsProvider: localizationManager.stringsProvider,
+        stringsProvider: _stringsProvider,
         countryRepository: countryFeature.countryRepository,
       ),
     );

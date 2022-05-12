@@ -11,7 +11,7 @@ import 'create_new_chat_component.dart';
 abstract class ICreateNewChannelScreenComponent {
   NewChannelViewModel getNewChannelViewModel();
 
-  ILocalizationManager getLocalizationManager();
+  IStringsProvider getStringsProvider();
 
   NewChannelWidgetModel getNewChannelWidgetModel();
 }

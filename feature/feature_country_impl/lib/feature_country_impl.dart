@@ -27,7 +27,9 @@ class CountryFeature implements ICountryFeatureApi {
 }
 
 class CountryFeatureDependencies {
-  CountryFeatureDependencies({required this.localizationManager});
+  CountryFeatureDependencies({
+    required this.stringsProvider,
+  });
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
 }

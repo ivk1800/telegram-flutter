@@ -1,22 +1,32 @@
+import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:dialog_api_flutter/dialog_api_flutter.dart';
 import 'package:fake/fake.dart';
 import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
-import 'package:showcase/showcase.dart';
 import 'package:split_view/split_view.dart';
 
 class CreateNewChannelShowcaseFactory {
-  Widget create(BuildContext context) {
-    final ILocalizationManager localizationManager =
-        context.read<ILocalizationManager>();
+  @j.inject
+  CreateNewChannelShowcaseFactory({
+    required IStringsProvider stringsProvider,
+    required IBlockInteractionManager blockInteractionManager,
+    required GlobalKey<NavigatorState> navigatorKey,
+  })  : _stringsProvider = stringsProvider,
+        _navigatorKey = navigatorKey,
+        _blockInteractionManager = blockInteractionManager;
 
+  final IStringsProvider _stringsProvider;
+  final IBlockInteractionManager _blockInteractionManager;
+  final GlobalKey<NavigatorState> _navigatorKey;
+
+  Widget create(BuildContext context) {
     final CreateNewChatFeatureDependencies dependencies =
         CreateNewChatFeatureDependencies(
       errorTransformer: const FakeErrorTransformer(),
-      blockInteractionManager: showcaseBlockInteractionManager,
+      blockInteractionManager: _blockInteractionManager,
       chatManager: FakeChatManager(
         createChannelFunction: (String name, String description) async {
           if (name == 'error') {
@@ -32,9 +42,9 @@ class CreateNewChannelShowcaseFactory {
       connectionStateProvider: const FakeConnectionStateProvider(),
       router: _Router(
         splitView: SplitView.of(context),
-        dialogNavigatorKey: navigatorKey,
+        dialogNavigatorKey: _navigatorKey,
       ),
-      localizationManager: localizationManager,
+      stringsProvider: _stringsProvider,
     );
     final CreateNewChatFeature feature = CreateNewChatFeature(
       dependencies: dependencies,

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:showcase/src/showcase/message/message_bundle.dart';
 import 'package:tdlib/td_api.dart' as td;
 
-import '../message/mesage_showcase_factory.dart';
-import '../message/message_data.dart';
+import 'showcase/message/mesage_showcase_factory.dart';
+import 'showcase/message/message_data.dart';
 
 class ShowcaseMessageListPage extends StatefulWidget {
   const ShowcaseMessageListPage({
