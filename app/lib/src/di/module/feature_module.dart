@@ -1,5 +1,6 @@
 import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/feature/feature_provider.dart';
+import 'package:app/src/navigation/chat_router_delegate.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
@@ -754,8 +755,10 @@ abstract class FeatureModule {
     FeatureProvider featureProvider,
     ISplitNavigationDelegate navigationDelegate,
     KeyGenerator keyGenerator,
+    ChatRouterDelegate chatRouterDelegate,
   ) =>
       CommonScreenRouterImpl(
+        chatRouterDelegate: chatRouterDelegate,
         dialogNavigatorKey: TgApp.navigatorKey,
         featureProvider: featureProvider,
         navigationDelegate: navigationDelegate,

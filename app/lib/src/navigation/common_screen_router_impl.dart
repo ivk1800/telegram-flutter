@@ -26,6 +26,7 @@ import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:split_view/split_view.dart';
 
+import 'chat_router_delegate.dart';
 import 'navigation_router.dart';
 
 class CommonScreenRouterImpl
@@ -54,28 +55,24 @@ class CommonScreenRouterImpl
     required GlobalKey<NavigatorState> dialogNavigatorKey,
     required FeatureProvider featureProvider,
     required KeyGenerator keyGenerator,
+    required ChatRouterDelegate chatRouterDelegate,
   })  : _navigationDelegate = navigationDelegate,
         _dialogNavigatorKey = dialogNavigatorKey,
         _keyGenerator = keyGenerator,
+        _chatRouterDelegate = chatRouterDelegate,
         _dialogRouter =
             DialogRouterImpl(dialogNavigatorKey: dialogNavigatorKey),
         _featureProvider = featureProvider;
 
   final ISplitNavigationDelegate _navigationDelegate;
   final FeatureProvider _featureProvider;
+  final ChatRouterDelegate _chatRouterDelegate;
   final GlobalKey<NavigatorState> _dialogNavigatorKey;
   final DialogRouterImpl _dialogRouter;
   final KeyGenerator _keyGenerator;
 
-  // TODO extract chat router delegate
   @override
-  void toChat(int id) {
-    _add(
-      widget: _featureProvider.chatFeatureApi.chatScreenFactory.create(id),
-      container: ContainerType.right,
-      key: _keyGenerator.generateForChat(id),
-    );
-  }
+  void toChat(int id) => _chatRouterDelegate.toChat(id);
 
   @override
   void toChatProfile({required int chatId, required ProfileType type}) {
