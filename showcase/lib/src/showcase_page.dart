@@ -31,7 +31,7 @@ class _ShowcasePageState extends State<ShowcasePage> {
         localizationManager: localizationManager,
       );
     }).then((_ShowcaseData value) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         splitViewNavigatorKey.currentState?.add(
           key: UniqueKey(),
           builder: (_) => const ShowcaseListPage(),

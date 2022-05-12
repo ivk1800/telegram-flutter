@@ -6,7 +6,7 @@ import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
 import 'main_view_model.dart';
-import 'menu_item.dart';
+import 'menu_item.dart' as m;
 
 class MainPage extends StatefulWidget {
   const MainPage({
@@ -186,7 +186,7 @@ class _MainDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
-              viewModel.onMenuItemTap(MenuItem.dev);
+              viewModel.onMenuItemTap(m.MenuItem.dev);
             },
             leading: const Icon(Icons.developer_board),
             title: const Text('Dev'),
@@ -201,7 +201,7 @@ class _MainDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
-              viewModel.onMenuItemTap(MenuItem.contacts);
+              viewModel.onMenuItemTap(m.MenuItem.contacts);
             },
             leading: const Icon(Icons.person),
             title: Text(stringsProvider.contacts),
@@ -230,7 +230,7 @@ class _MainDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
-              viewModel.onMenuItemTap(MenuItem.settings);
+              viewModel.onMenuItemTap(m.MenuItem.settings);
             },
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),

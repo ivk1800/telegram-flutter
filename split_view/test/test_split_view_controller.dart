@@ -51,8 +51,7 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
   final WidgetTester tester;
 
   final TestWidgetsFlutterBinding binding =
-      TestWidgetsFlutterBinding.ensureInitialized()
-          as TestWidgetsFlutterBinding;
+      TestWidgetsFlutterBinding.ensureInitialized();
 
   final GlobalKey<SplitViewState> splitViewNavigatorKey =
       GlobalKey<SplitViewState>();
