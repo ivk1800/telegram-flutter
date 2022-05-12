@@ -14,7 +14,7 @@ class SplitNavigationDelegateImpl implements ISplitNavigationDelegate {
   void removeUntil(ContainerType container, bool Function(LocalKey key) test) {
     _navigationKey.currentState?.removeUntil(
       container,
-      (PageNode node) => test.call(node.pageKey),
+      (PageInfo info) => test.call(info.pageKey),
     );
   }
 

@@ -72,6 +72,6 @@ class _Router implements INewContactRouter {
 
   @override
   void close() {
-    _splitView.removeUntil(ContainerType.top, (PageNode node) => false);
+    _splitView.removeUntil(ContainerType.top, (_) => false);
   }
 }

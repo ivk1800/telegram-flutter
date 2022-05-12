@@ -79,6 +79,6 @@ class _Router implements ICreateNewChatRouter {
 
   @override
   void closeAfterCreateChannel(int chatId) {
-    _splitView.removeUntil(ContainerType.top, (PageNode node) => false);
+    _splitView.removeUntil(ContainerType.top, (_) => false);
   }
 }

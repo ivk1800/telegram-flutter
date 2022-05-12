@@ -1013,7 +1013,7 @@ void _observerEventsGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.left,
-      (PageNode node) => false,
+      (PageInfo info) => false,
     );
     await tester.pumpAndSettle();
 
@@ -1071,7 +1071,7 @@ void _observerEventsGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.right,
-      (PageNode node) => false,
+      (PageInfo info) => false,
     );
     await tester.pumpAndSettle();
 
@@ -1129,7 +1129,7 @@ void _observerEventsGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.top,
-      (PageNode node) => false,
+      (PageInfo info) => false,
     );
     await tester.pumpAndSettle();
 
@@ -1500,7 +1500,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.left,
-      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(1),
     );
     await tester.pumpAndSettle();
 
@@ -1529,7 +1529,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.left,
-      (PageNode node) => false,
+      (PageInfo info) => false,
     );
     await tester.pumpAndSettle();
 
@@ -1555,7 +1555,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.left,
-      (PageNode node) => node.pageKey == const ValueKey<int>(4),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(4),
     );
     await tester.pumpAndSettle();
 
@@ -1579,7 +1579,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.left,
-      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(1),
     );
     await tester.pumpAndSettle();
 
@@ -1602,7 +1602,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.left,
-      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(1),
     );
     await tester.pumpAndSettle();
 
@@ -1628,7 +1628,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.right,
-      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(1),
     );
     await tester.pumpAndSettle();
 
@@ -1657,7 +1657,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.right,
-      (PageNode node) => false,
+      (PageInfo info) => false,
     );
     await tester.pumpAndSettle();
 
@@ -1683,7 +1683,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.right,
-      (PageNode node) => node.pageKey == const ValueKey<int>(4),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(4),
     );
     await tester.pumpAndSettle();
 
@@ -1707,7 +1707,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.right,
-      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(1),
     );
     await tester.pumpAndSettle();
 
@@ -1730,7 +1730,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.right,
-      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(1),
     );
     await tester.pumpAndSettle();
 
@@ -1756,7 +1756,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.top,
-      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(1),
     );
     await tester.pumpAndSettle();
 
@@ -1785,7 +1785,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.top,
-      (PageNode node) => false,
+      (PageInfo info) => false,
     );
     await tester.pumpAndSettle();
 
@@ -1811,7 +1811,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.top,
-      (PageNode node) => node.pageKey == const ValueKey<int>(4),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(4),
     );
     await tester.pumpAndSettle();
 
@@ -1835,7 +1835,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.top,
-      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(1),
     );
     await tester.pumpAndSettle();
 
@@ -1858,7 +1858,7 @@ void _removeUntilSplitModeGroup() {
 
     controller.splitView.removeUntil(
       ContainerType.top,
-      (PageNode node) => node.pageKey == const ValueKey<int>(1),
+      (PageInfo info) => info.pageKey == const ValueKey<int>(1),
     );
     await tester.pumpAndSettle();
 

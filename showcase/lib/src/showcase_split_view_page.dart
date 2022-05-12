@@ -103,7 +103,7 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
         onPressed: () {
           _navigationKey.currentState?.removeUntil(
             ContainerType.right,
-            (PageNode node) => false,
+            (_) => false,
           );
         },
         child: const Text('remove right until placeholder'),

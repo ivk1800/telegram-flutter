@@ -4,13 +4,13 @@ import '../split_view.dart';
 
 abstract class PageRouteConfigurator {
   bool? isWillHandlePopInternally({
-    required List<PageNode> pages,
+    required List<PageInfo> pages,
     required LocalKey key,
     required ContainerType container,
   });
 
   bool? isFullscreenDialog({
-    required List<PageNode> pages,
+    required List<PageInfo> pages,
     required LocalKey key,
     required ContainerType container,
   });
@@ -23,7 +23,7 @@ class _DefaultPageRouteConfigurator implements PageRouteConfigurator {
 
   @override
   bool? isWillHandlePopInternally({
-    required List<PageNode> pages,
+    required List<PageInfo> pages,
     required LocalKey key,
     required ContainerType container,
   }) =>
@@ -31,14 +31,14 @@ class _DefaultPageRouteConfigurator implements PageRouteConfigurator {
 
   @override
   bool? isFullscreenDialog({
-    required List<PageNode> pages,
+    required List<PageInfo> pages,
     required LocalKey key,
     required ContainerType container,
   }) =>
       _isRootPage(pages, key, container);
 
   bool? _isRootPage(
-    List<PageNode> pages,
+    List<PageInfo> pages,
     LocalKey key,
     ContainerType container,
   ) {
@@ -59,7 +59,7 @@ class _DefaultPageRouteConfigurator implements PageRouteConfigurator {
         index == 0;
   }
 
-  int _indexOf(List<PageNode> pages, LocalKey key) {
-    return pages.indexWhere((PageNode element) => element.pageKey == key);
+  int _indexOf(List<PageInfo> pages, LocalKey key) {
+    return pages.indexWhere((PageInfo element) => element.pageKey == key);
   }
 }

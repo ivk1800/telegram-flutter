@@ -1,10 +1,10 @@
 import '../split_view.dart';
 
 abstract class CompactLayoutMergeStrategy {
-  List<PageNode> process(
-    List<PageNode> leftPages,
-    List<PageNode> rightPages,
-    List<PageNode> topPages,
+  List<PageInfo> process(
+    List<PageInfo> leftPages,
+    List<PageInfo> rightPages,
+    List<PageInfo> topPages,
   );
 
   const factory CompactLayoutMergeStrategy.create() =
@@ -21,10 +21,10 @@ class _DefaultCompactLayoutMergeStrategy implements CompactLayoutMergeStrategy {
   };
 
   @override
-  List<PageNode> process(List<PageNode> leftPages, List<PageNode> rightPages,
-      List<PageNode> topPages) {
+  List<PageInfo> process(List<PageInfo> leftPages, List<PageInfo> rightPages,
+      List<PageInfo> topPages) {
     return (leftPages + rightPages + topPages)
-      ..sort((PageNode a, PageNode b) {
+      ..sort((PageInfo a, PageInfo b) {
         final int containerCompare =
             _priority[a.container]!.compareTo(_priority[b.container]!);
         if (containerCompare != 0) {
