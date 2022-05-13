@@ -77,18 +77,24 @@ class ChatRepositoryImpl extends IChatRepository {
       ),
     );
 
-    chats.addAll(await Stream<td.Chat>.fromFutures(result.chatIds.map(
-      (int e) => _functionExecutor.send<td.Chat>(td.GetChat(chatId: e)),
-    )).toList());
+    chats.addAll(
+      await Stream<td.Chat>.fromFutures(
+        result.chatIds.map(
+          (int e) => _functionExecutor.send<td.Chat>(td.GetChat(chatId: e)),
+        ),
+      ).toList(),
+    );
 
     if (chats.length < limit && chats.isNotEmpty) {
       final td.Chat lastChat = chats.last;
-      chats.addAll(await getChats(
-        chatList: chatList,
-        limit: limit - chats.length,
-        offsetChatId: lastChat.id,
-        offsetOrder: lastChat.positions[0].order,
-      ));
+      chats.addAll(
+        await getChats(
+          chatList: chatList,
+          limit: limit - chats.length,
+          offsetChatId: lastChat.id,
+          offsetOrder: lastChat.positions[0].order,
+        ),
+      );
     }
 
     return chats.take(limit).toList();

@@ -8,7 +8,7 @@ import 'package:localization_api/localization_api.dart';
 import 'change_username_screen_scope.dart';
 
 class ChangeUsernamePage extends StatelessWidget {
-  const ChangeUsernamePage({Key? key}) : super(key: key);
+  const ChangeUsernamePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +23,7 @@ class ChangeUsernamePage extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({
-    Key? key,
-  }) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +45,7 @@ class _Body extends StatelessWidget {
 }
 
 class _BodyContent extends StatelessWidget {
-  const _BodyContent({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
+  const _BodyContent({required this.state});
 
   final CheckUsernameStateData state;
 
@@ -81,7 +76,7 @@ class _BodyContent extends StatelessWidget {
 }
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBar({Key? key}) : super(key: key);
+  const _AppBar();
 
   @override
   Widget build(BuildContext context) {

@@ -4,8 +4,7 @@ import 'package:rich_text_format_flutter/rich_text_format_flutter.dart';
 import 'message/message_skeleton.dart';
 
 class MessageText extends StatelessWidget {
-  const MessageText({Key? key, required this.text, required this.shortInfo})
-      : super(key: key);
+  const MessageText({super.key, required this.text, required this.shortInfo});
 
   final rt.RichText text;
   final Widget shortInfo;

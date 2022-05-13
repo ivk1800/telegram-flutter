@@ -54,10 +54,9 @@ class AvatarWidgetFactory {
 
 class _DefaultAvatar extends StatelessWidget {
   const _DefaultAvatar({
-    Key? key,
     required this.radius,
     required this.chatId,
-  }) : super(key: key);
+  });
 
   final double radius;
   final int chatId;

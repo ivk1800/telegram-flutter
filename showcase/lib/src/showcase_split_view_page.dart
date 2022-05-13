@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:split_view/split_view.dart';
 
 class ShowcaseSplitViewPage extends StatefulWidget {
-  const ShowcaseSplitViewPage({Key? key}) : super(key: key);
+  const ShowcaseSplitViewPage({super.key});
 
   @override
   _ShowcaseSplitViewPageState createState() => _ShowcaseSplitViewPageState();
@@ -21,27 +21,29 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Stack(children: <Widget>[
-        SplitView(
-          delegate: const DefaultSplitViewDelegate(),
-          key: _navigationKey,
-        ),
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Wrap(
-            direction: Axis.vertical,
-            spacing: 8.0,
-            children: _actions(context),
+      child: Stack(
+        children: <Widget>[
+          SplitView(
+            delegate: const DefaultSplitViewDelegate(),
+            key: _navigationKey,
           ),
-        ),
-        LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return Text(
-              '${constraints.maxWidth} : ${constraints.maxHeight}',
-            );
-          },
-        )
-      ]),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Wrap(
+              direction: Axis.vertical,
+              spacing: 8.0,
+              children: _actions(context),
+            ),
+          ),
+          LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return Text(
+                '${constraints.maxWidth} : ${constraints.maxHeight}',
+              );
+            },
+          )
+        ],
+      ),
     );
   }
 
@@ -111,7 +113,8 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
       ElevatedButton(
         onPressed: () {
           _navigationKey.currentState!.setRightContainerPlaceholder(
-              const Center(child: Text('placeholder')));
+            const Center(child: Text('placeholder')),
+          );
         },
         child: const Text('set right placeholder'),
       ),
@@ -126,10 +129,12 @@ class _ShowcaseSplitViewPageState extends State<ShowcaseSplitViewPage> {
             ..removeUntil(ContainerType.left, (_) => false)
             ..removeUntil(ContainerType.right, (_) => false)
             ..removeUntil(ContainerType.top, (_) => false)
-            ..setRightContainerPlaceholder(Container(
-              color: Colors.grey,
-              child: const Center(child: Text('placeholder')),
-            ));
+            ..setRightContainerPlaceholder(
+              Container(
+                color: Colors.grey,
+                child: const Center(child: Text('placeholder')),
+              ),
+            );
         },
         child: const Text('set initial state'),
       ),

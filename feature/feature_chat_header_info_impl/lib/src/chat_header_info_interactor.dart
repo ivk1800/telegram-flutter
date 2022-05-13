@@ -18,12 +18,14 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
         _basicGroupRepository = basicGroupRepository,
         _localizationManager = localizationManager,
         _userRepository = userRepository {
-    _infoSubject.add(ChatHeaderInfo(
-      title: 'chat',
-      subtitle: '',
-      photoId: null,
-      chatId: chatId,
-    ));
+    _infoSubject.add(
+      ChatHeaderInfo(
+        title: 'chat',
+        subtitle: '',
+        photoId: null,
+        chatId: chatId,
+      ),
+    );
   }
 
   final int _chatId;
@@ -91,33 +93,39 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
       switch (user.type.getConstructor()) {
         case td.UserTypeRegular.constructor:
           {
-            return Stream<ChatHeaderInfo>.value(ChatHeaderInfo(
-              photoId: chat.photo?.small.id,
-              chatId: chat.id,
-              title: chat.title,
-              subtitle: statusToString(user.status),
-            ));
+            return Stream<ChatHeaderInfo>.value(
+              ChatHeaderInfo(
+                photoId: chat.photo?.small.id,
+                chatId: chat.id,
+                title: chat.title,
+                subtitle: statusToString(user.status),
+              ),
+            );
           }
         case td.UserTypeUnknown.constructor:
         case td.UserTypeDeleted.constructor:
           {
-            return Stream<ChatHeaderInfo>.value(ChatHeaderInfo(
-              photoId: chat.photo?.small.id,
-              chatId: chat.id,
-              title: _getString('HiddenName'),
-              // https://git.io/J483z
-              subtitle: _getString('ALongTimeAgo'),
-            ));
+            return Stream<ChatHeaderInfo>.value(
+              ChatHeaderInfo(
+                photoId: chat.photo?.small.id,
+                chatId: chat.id,
+                title: _getString('HiddenName'),
+                // https://git.io/J483z
+                subtitle: _getString('ALongTimeAgo'),
+              ),
+            );
           }
 
         case td.UserTypeBot.constructor:
           {
-            return Stream<ChatHeaderInfo>.value(ChatHeaderInfo(
-              photoId: chat.photo?.small.id,
-              chatId: chat.id,
-              title: chat.title,
-              subtitle: _getString('Bot'),
-            ));
+            return Stream<ChatHeaderInfo>.value(
+              ChatHeaderInfo(
+                photoId: chat.photo?.small.id,
+                chatId: chat.id,
+                title: chat.title,
+                subtitle: _getString('Bot'),
+              ),
+            );
           }
       }
       // todo preferred do not throw exception

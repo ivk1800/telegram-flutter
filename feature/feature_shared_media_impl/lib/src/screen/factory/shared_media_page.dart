@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SharedMediaPage extends StatelessWidget {
-  const SharedMediaPage({Key? key}) : super(key: key);
+  const SharedMediaPage({super.key});
 
   @override
   Widget build(BuildContext context) {

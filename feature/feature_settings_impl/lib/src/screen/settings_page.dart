@@ -10,7 +10,7 @@ import 'content_state.dart';
 import 'settings_screen.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   @override
   SettingsPageState createState() => SettingsPageState();
@@ -34,9 +34,7 @@ class SettingsPageState extends State<SettingsPage>
 }
 
 class _Body extends StatelessWidget {
-  const _Body({
-    Key? key,
-  }) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +44,11 @@ class _Body extends StatelessWidget {
     return Stack(
       children: <Widget>[
         StreamListener<ContentState>(
-            stream: settingsScreenViewModel.stateStream,
-            builder: (BuildContext context, ContentState state) {
-              return _SettingsBody(state: state);
-            }),
+          stream: settingsScreenViewModel.stateStream,
+          builder: (BuildContext context, ContentState state) {
+            return _SettingsBody(state: state);
+          },
+        ),
         const _SearchBody(),
       ],
     );
@@ -57,9 +56,7 @@ class _Body extends StatelessWidget {
 }
 
 class _SearchBody extends StatelessWidget {
-  const _SearchBody({
-    Key? key,
-  }) : super(key: key);
+  const _SearchBody();
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +81,7 @@ class _SearchBody extends StatelessWidget {
 }
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBar({Key? key}) : super(key: key);
+  const _AppBar();
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +110,11 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
               SettingsScreenScope.getSettingViewModel(context);
 
           return StreamListener<ContentState>(
-              stream: settingsScreenViewModel.stateStream,
-              builder: (BuildContext context, ContentState state) {
-                return _SettingsStateAppBar(state: state);
-              });
+            stream: settingsScreenViewModel.stateStream,
+            builder: (BuildContext context, ContentState state) {
+              return _SettingsStateAppBar(state: state);
+            },
+          );
         }
       },
     );
@@ -127,7 +125,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class _SettingsStateAppBar extends StatelessWidget {
-  const _SettingsStateAppBar({Key? key, required this.state}) : super(key: key);
+  const _SettingsStateAppBar({required this.state});
 
   final ContentState state;
 
@@ -188,9 +186,8 @@ class _SettingsStateAppBar extends StatelessWidget {
 
 class _AppBarPopupMenuItem extends StatelessWidget {
   const _AppBarPopupMenuItem({
-    Key? key,
     required this.title,
-  }) : super(key: key);
+  });
 
   final String title;
 
@@ -205,8 +202,7 @@ class _AppBarPopupMenuItem extends StatelessWidget {
 }
 
 class _AppBarPopupMenu extends StatelessWidget {
-  const _AppBarPopupMenu({Key? key, required this.onSelected})
-      : super(key: key);
+  const _AppBarPopupMenu({required this.onSelected});
 
   final PopupMenuItemSelected<AppBarMenu> onSelected;
 
@@ -229,27 +225,28 @@ class _AppBarPopupMenu extends StatelessWidget {
 
 class _SettingsBody extends StatelessWidget {
   const _SettingsBody({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final ContentState state;
 
   @override
   Widget build(BuildContext context) {
-    return state.map(loading: (_) {
-      return const Center(child: CircularProgressIndicator());
-    }, data: (ContentStateData data) {
-      return SingleChildScrollView(child: _SettingsBodyContent(data: data));
-    });
+    return state.map(
+      loading: (_) {
+        return const Center(child: CircularProgressIndicator());
+      },
+      data: (ContentStateData data) {
+        return SingleChildScrollView(child: _SettingsBodyContent(data: data));
+      },
+    );
   }
 }
 
 class _SettingsBodyContent extends StatelessWidget {
   const _SettingsBodyContent({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ContentStateData data;
 

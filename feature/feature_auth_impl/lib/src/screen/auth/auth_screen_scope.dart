@@ -7,10 +7,10 @@ import 'view_model/auth_view_model.dart';
 
 class AuthScreenScope extends StatefulWidget {
   const AuthScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<IAuthScreenComponent> create;
@@ -46,11 +46,9 @@ class _AuthScreenScopeState extends State<AuthScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _AuthScreenScopeState state,
-  })  : _state = state,
-        super(key: key, child: child);
+  }) : _state = state;
 
   final _AuthScreenScopeState _state;
 

@@ -8,7 +8,7 @@ import 'sessions_state.dart';
 import 'sessions_view_model.dart';
 
 class SessionsPage extends StatefulWidget {
-  const SessionsPage({Key? key}) : super(key: key);
+  const SessionsPage({super.key});
 
   @override
   SessionsPageState createState() => SessionsPageState();
@@ -59,10 +59,9 @@ class SessionsPageState extends State<SessionsPage> {
 
 class _Body extends StatelessWidget {
   const _Body({
-    Key? key,
     required this.activeSession,
     required this.sessions,
-  }) : super(key: key);
+  });
 
   final ITileModel activeSession;
   final List<ITileModel> sessions;

@@ -16,10 +16,12 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
 
-@j.Component(modules: <Type>[
-  AppModule,
-  TdModule,
-])
+@j.Component(
+  modules: <Type>[
+    AppModule,
+    TdModule,
+  ],
+)
 abstract class IAppComponent {
   // region component
 

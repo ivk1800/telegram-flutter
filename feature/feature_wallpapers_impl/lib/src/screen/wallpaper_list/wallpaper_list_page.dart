@@ -9,7 +9,7 @@ import 'package:localization_api/localization_api.dart';
 import 'package:tile/tile.dart';
 
 class WallpaperListPage extends StatelessWidget {
-  const WallpaperListPage({Key? key}) : super(key: key);
+  const WallpaperListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +36,8 @@ class WallpaperListPage extends StatelessWidget {
 
 class _Body extends StatelessWidget {
   const _Body({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final WallpaperListState state;
 
@@ -60,10 +59,9 @@ class _Body extends StatelessWidget {
 
 class _Grid extends StatelessWidget {
   const _Grid({
-    Key? key,
     required this.tileModels,
     required this.width,
-  }) : super(key: key);
+  });
 
   final List<ITileModel> tileModels;
   final double width;

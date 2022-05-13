@@ -2,7 +2,7 @@ name: contacts_manager_impl
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   contacts_manager_api:

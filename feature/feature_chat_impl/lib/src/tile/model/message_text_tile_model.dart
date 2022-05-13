@@ -3,19 +3,13 @@ import 'package:rich_text_format/rich_text_format.dart';
 
 class MessageTextTileModel extends BaseConversationMessageTileModel {
   const MessageTextTileModel({
-    required int id,
-    required SenderInfo senderInfo,
-    required bool isOutgoing,
-    required ReplyInfo? replyInfo,
-    required AdditionalInfo additionalInfo,
+    required super.id,
+    required super.senderInfo,
+    required super.isOutgoing,
+    required super.replyInfo,
+    required super.additionalInfo,
     required this.text,
-  }) : super(
-          isOutgoing: isOutgoing,
-          id: id,
-          replyInfo: replyInfo,
-          additionalInfo: additionalInfo,
-          senderInfo: senderInfo,
-        );
+  });
 
   final RichText text;
 }

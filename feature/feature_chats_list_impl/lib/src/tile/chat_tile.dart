@@ -71,8 +71,7 @@ class ChatTileFactory implements ITileFactoryDelegate<ChatTileModel> {
 class _Cell extends StatelessWidget {
   const _Cell({
     required this.model,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final ChatTileModel model;
 
@@ -123,8 +122,7 @@ class _Cell extends StatelessWidget {
 class _Title extends StatelessWidget {
   const _Title({
     required this.model,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final ChatTileModel model;
 
@@ -176,8 +174,7 @@ class _Title extends StatelessWidget {
 class _SecondRow extends StatelessWidget {
   const _SecondRow({
     required this.model,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final ChatTileModel model;
 
@@ -251,13 +248,15 @@ class _SecondRow extends StatelessWidget {
       if (model.isMentioned) {
         widgets.add(const SizedBox(width: 4));
       }
-      widgets.add(Align(
-        alignment: Alignment.bottomCenter,
-        child: UnreadMessagesCount(
-          count: model.unreadMessagesCount,
-          isMuted: model.isMuted,
+      widgets.add(
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: UnreadMessagesCount(
+            count: model.unreadMessagesCount,
+            isMuted: model.isMuted,
+          ),
         ),
-      ));
+      );
     }
 
     return Flexible(
@@ -272,8 +271,7 @@ class _SecondRow extends StatelessWidget {
 class _FirstSubtitle extends StatelessWidget {
   const _FirstSubtitle({
     required this.model,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final ChatTileModel model;
 
@@ -299,8 +297,7 @@ class _FirstSubtitle extends StatelessWidget {
 class _SecondSubtitle extends StatelessWidget {
   const _SecondSubtitle({
     required this.model,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final ChatTileModel model;
 
@@ -326,8 +323,7 @@ class _SecondSubtitle extends StatelessWidget {
 class _FirstRow extends StatelessWidget {
   const _FirstRow({
     required this.model,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final ChatTileModel model;
 

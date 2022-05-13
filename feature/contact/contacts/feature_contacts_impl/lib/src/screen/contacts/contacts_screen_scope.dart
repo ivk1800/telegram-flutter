@@ -6,10 +6,10 @@ import 'package:provider_extensions/provider_extensions.dart';
 
 class ContactsScreenScope extends StatefulWidget {
   const ContactsScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<IContactsScreenComponent> create;
@@ -46,11 +46,9 @@ class _ContactsScreenScopeState extends State<ContactsScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _ContactsScreenScopeState state,
-  })  : _state = state,
-        super(key: key, child: child);
+  }) : _state = state;
 
   final _ContactsScreenScopeState _state;
 

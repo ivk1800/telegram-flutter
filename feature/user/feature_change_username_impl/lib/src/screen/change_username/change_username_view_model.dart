@@ -112,7 +112,9 @@ class ChangeUsernameViewModel extends BaseViewModel {
   }
 
   Future<CheckResult> _checkUsernameFuture(String username) {
-    return _usernameChecker.check(username).catchError((Object error) =>
-        CheckResult.error(_errorTransformer.transformToString(error)));
+    return _usernameChecker.check(username).catchError(
+          (Object error) =>
+              CheckResult.error(_errorTransformer.transformToString(error)),
+        );
   }
 }

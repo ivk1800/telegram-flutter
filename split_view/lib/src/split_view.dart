@@ -62,8 +62,8 @@ class SplitView extends StatefulWidget {
       draggableDividerColor: Colors.grey,
       maxCompactWidth: 699,
     ),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Config config;
   final SplitViewDelegate delegate;
@@ -225,7 +225,9 @@ class SplitViewState extends State<SplitView> {
   }
 
   void removeUntil(
-      ContainerType container, bool Function(_PageNode node) test) {
+    ContainerType container,
+    bool Function(_PageNode node) test,
+  ) {
     void _removeUntil(List<_PageNode> pages) {
       _PageNode? candidate = pages.lastOrNull;
       while (candidate != null) {
@@ -301,7 +303,8 @@ class SplitViewState extends State<SplitView> {
     assert(page.key != null);
     assert(!_leftPages.any((_PageNode element) => element.pageKey == page.key));
     assert(
-        !_rightPages.any((_PageNode element) => element.pageKey == page.key));
+      !_rightPages.any((_PageNode element) => element.pageKey == page.key),
+    );
     assert(!_topPages.any((_PageNode element) => element.pageKey == page.key));
     switch (containerType) {
       case ContainerType.left:
@@ -337,12 +340,14 @@ class SplitViewState extends State<SplitView> {
       final List<PageInfo> newPages = widget.delegate.compactLayoutMergeStrategy
           .process(_leftPages, _rightPages, _topPages);
 
-      assert(() {
-        for (final PageInfo element in newPages) {
-          assert(element is _PageNode);
-        }
-        return true;
-      }());
+      assert(
+        () {
+          for (final PageInfo element in newPages) {
+            assert(element is _PageNode);
+          }
+          return true;
+        }(),
+      );
 
       _internalState.compactPages = newPages
           // todo clarify contact, must return same pages
@@ -537,12 +542,12 @@ class _SimplePage extends Page<dynamic> {
 
 class _DefaultRoute<T> extends MaterialPageRoute<T> {
   _DefaultRoute({
-    required RouteSettings? settings,
-    required WidgetBuilder builder,
+    required super.settings,
+    required super.builder,
     required this.isFullscreenDialog,
     required this.isWillHandlePopInternally,
     required this.routerDurationProvider,
-  }) : super(builder: builder, settings: settings);
+  });
 
   final Duration? Function() routerDurationProvider;
   final bool? Function() isWillHandlePopInternally;
@@ -575,11 +580,10 @@ extension _Extensions on List<_PageNode> {
 
 class _NavigatorContainer extends StatelessWidget {
   const _NavigatorContainer({
-    Key? key,
     this.navigatorKey,
     required this.pages,
     required this.onPopPage,
-  }) : super(key: key);
+  });
 
   final List<Page<dynamic>> pages;
   final PopPageCallback onPopPage;
@@ -601,11 +605,10 @@ class _NavigatorContainer extends StatelessWidget {
 
 class _RightNavigatorContainer extends StatelessWidget {
   const _RightNavigatorContainer({
-    Key? key,
     required this.pages,
     required this.onPopPage,
     required this.placeholder,
-  }) : super(key: key);
+  });
 
   //.map((__PageNode e) => e.page).toList()
   final List<Page<dynamic>> pages;
@@ -632,12 +635,11 @@ class _RightNavigatorContainer extends StatelessWidget {
 
 class _TopNavigationContainer extends StatelessWidget {
   const _TopNavigationContainer({
-    Key? key,
     required this.isNotSinglePage,
     required this.onPopPage,
     required this.pages,
     required this.onBarrierTap,
-  }) : super(key: key);
+  });
 
   final bool isNotSinglePage;
   final PopPageCallback onPopPage;
@@ -707,12 +709,11 @@ class _TopNavigationContainer extends StatelessWidget {
 
 class _AnimatedTopNavigationContainer extends StatelessWidget {
   const _AnimatedTopNavigationContainer({
-    Key? key,
     required this.isNotSinglePage,
     required this.onPopPage,
     required this.pages,
     required this.onBarrierTap,
-  }) : super(key: key);
+  });
 
   final bool isNotSinglePage;
   final PopPageCallback onPopPage;
@@ -739,9 +740,9 @@ class _AnimatedTopNavigationContainer extends StatelessWidget {
 
 class RemoveToPadding extends StatelessWidget {
   const RemoveToPadding({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
 
@@ -758,7 +759,7 @@ class RemoveToPadding extends StatelessWidget {
 }
 
 class _CompactLayout extends StatelessWidget {
-  const _CompactLayout({Key? key}) : super(key: key);
+  const _CompactLayout();
 
   @override
   Widget build(BuildContext context) {
@@ -774,7 +775,7 @@ class _CompactLayout extends StatelessWidget {
 }
 
 class _SplitLayout extends StatelessWidget {
-  const _SplitLayout({Key? key}) : super(key: key);
+  const _SplitLayout();
 
   @override
   Widget build(BuildContext context) {

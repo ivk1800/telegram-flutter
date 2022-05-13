@@ -2,7 +2,7 @@ name: error_transformer_td
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   error_transformer_api:

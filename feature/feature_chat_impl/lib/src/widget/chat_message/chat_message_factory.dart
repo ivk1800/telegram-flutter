@@ -131,11 +131,10 @@ class ChatMessageFactory {
 
 class _BaseMessage extends StatelessWidget {
   const _BaseMessage({
-    Key? key,
     required this.id,
     required this.alignment,
     required this.body,
-  }) : super(key: key);
+  });
 
   final int id;
   final AlignmentGeometry alignment;
@@ -159,8 +158,7 @@ class _Bubble extends StatelessWidget {
   const _Bubble({
     required this.isOutgoing,
     required this.child,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final bool isOutgoing;
   final Widget child;
@@ -181,8 +179,8 @@ class _Bubble extends StatelessWidget {
 class _Notification extends StatelessWidget {
   const _Notification({
     required this.child,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget child;
 

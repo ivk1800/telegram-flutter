@@ -6,10 +6,10 @@ import 'new_secret_chat.dart';
 
 class NewSecretChatScreenScope extends StatefulWidget {
   const NewSecretChatScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<ICreateNewSecretChatScreenComponent> create;
@@ -48,11 +48,9 @@ class _NewSecretChatScreenScopeState extends State<NewSecretChatScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _NewSecretChatScreenScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _NewSecretChatScreenScopeState _state;
 

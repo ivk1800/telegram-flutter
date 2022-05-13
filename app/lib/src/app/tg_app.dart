@@ -7,9 +7,9 @@ import 'tg_theme.dart';
 
 class TgApp extends StatelessWidget {
   const TgApp({
-    Key? key,
+    super.key,
     required this.blockInteractionManager,
-  }) : super(key: key);
+  });
 
   final BlockInteractionManager blockInteractionManager;
 

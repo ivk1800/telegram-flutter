@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Section extends StatelessWidget {
-  const Section({Key? key, required this.text}) : super(key: key);
+  const Section({super.key, required this.text});
 
   final String text;
 

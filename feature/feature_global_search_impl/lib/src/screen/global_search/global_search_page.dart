@@ -11,9 +11,9 @@ import 'global_search_result_category.dart';
 
 class GlobalSearchPage extends StatefulWidget {
   const GlobalSearchPage({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final GlobalSearchScreenController controller;
 
@@ -123,10 +123,7 @@ class _GlobalSearchPageState extends State<GlobalSearchPage>
 }
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBar({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const _AppBar({required this.child});
 
   final Widget child;
 
@@ -145,9 +142,8 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class _SearchPage extends StatelessWidget {
   const _SearchPage({
-    Key? key,
     required this.pageState,
-  }) : super(key: key);
+  });
 
   final PageState pageState;
 

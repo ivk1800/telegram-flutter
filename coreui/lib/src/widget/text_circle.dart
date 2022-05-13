@@ -5,8 +5,8 @@ class TextCircle extends StatelessWidget {
     required this.context,
     required this.text,
     required this.color,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final BuildContext context;
   final String text;

@@ -15,7 +15,7 @@ import 'message_factory.dart';
 import 'messages_scroll_controller.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  const ChatPage({super.key});
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -100,7 +100,7 @@ class _ChatPageState extends State<ChatPage> {
 }
 
 class _ChatContextWrapper extends StatelessWidget {
-  const _ChatContextWrapper({Key? key, required this.child}) : super(key: key);
+  const _ChatContextWrapper({required this.child});
 
   final Widget child;
 
@@ -119,11 +119,9 @@ class _ChatContextWrapper extends StatelessWidget {
 
 class _InheritedChatScreenContext extends InheritedWidget {
   const _InheritedChatScreenContext({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _ChatPageState state,
-  })  : _state = state,
-        super(key: key, child: child);
+  }) : _state = state;
 
   final _ChatPageState _state;
 
@@ -142,10 +140,7 @@ class _InheritedChatScreenContext extends InheritedWidget {
 }
 
 class _Messages extends StatelessWidget {
-  const _Messages({
-    Key? key,
-    required this.models,
-  }) : super(key: key);
+  const _Messages({required this.models});
 
   final List<ITileModel> models;
 
@@ -179,7 +174,7 @@ class _Messages extends StatelessWidget {
 }
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBar({Key? key}) : super(key: key);
+  const _AppBar();
 
   @override
   Widget build(BuildContext context) {
@@ -215,10 +210,9 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class _AppBarPopupMenu extends StatelessWidget {
   const _AppBarPopupMenu({
-    Key? key,
     required this.onSelected,
     required this.actions,
-  }) : super(key: key);
+  });
 
   final List<HeaderActionData> actions;
   final PopupMenuItemSelected<HeaderAction> onSelected;
@@ -228,12 +222,14 @@ class _AppBarPopupMenu extends StatelessWidget {
     return PopupMenuButton<HeaderAction>(
       onSelected: onSelected,
       itemBuilder: (BuildContext context) => actions
-          .map((HeaderActionData e) => PopupMenuItem<HeaderAction>(
-                value: e.action,
-                child: AppBarPopupMenuItem(
-                  title: e.label,
-                ),
-              ))
+          .map(
+            (HeaderActionData e) => PopupMenuItem<HeaderAction>(
+              value: e.action,
+              child: AppBarPopupMenuItem(
+                title: e.label,
+              ),
+            ),
+          )
           .toList(),
     );
   }
@@ -241,7 +237,7 @@ class _AppBarPopupMenu extends StatelessWidget {
 
 // todo same in settings page, extract common widget
 class AppBarPopupMenuItem extends StatelessWidget {
-  const AppBarPopupMenuItem({Key? key, required this.title}) : super(key: key);
+  const AppBarPopupMenuItem({super.key, required this.title});
 
   final String title;
 

@@ -2,7 +2,7 @@ name: td_rich_text_parser
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   rich_text_format:

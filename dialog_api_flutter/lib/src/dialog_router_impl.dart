@@ -37,19 +37,21 @@ class DialogRouterImpl implements d.IDialogRouter {
           title: title != null ? Text(title) : null,
           content: createContent(),
           actions: actions
-              .map((d.Action action) => TextButton(
-                    child: Text(
-                      action.text,
-                      style: TextStyle(color: getActionColor(action.type)),
-                    ),
-                    onPressed: () {
-                      if (action.callback == null) {
-                        Navigator.of(context).pop();
-                      } else {
-                        action.callback!.call(_Dismissible(context: context));
-                      }
-                    },
-                  ))
+              .map(
+                (d.Action action) => TextButton(
+                  child: Text(
+                    action.text,
+                    style: TextStyle(color: getActionColor(action.type)),
+                  ),
+                  onPressed: () {
+                    if (action.callback == null) {
+                      Navigator.of(context).pop();
+                    } else {
+                      action.callback!.call(_Dismissible(context: context));
+                    }
+                  },
+                ),
+              )
               .toList(),
         );
       },

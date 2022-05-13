@@ -4,10 +4,10 @@ import 'base_message_tile_model.dart';
 
 class MessageChatDeletePhotoTileModel extends BaseMessageTileModel {
   const MessageChatDeletePhotoTileModel({
-    required int id,
-    required bool isOutgoing,
+    required super.id,
+    required super.isOutgoing,
     required this.title,
-  }) : super(isOutgoing: isOutgoing, id: id);
+  });
 
   final RichText title;
 }

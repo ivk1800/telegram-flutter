@@ -11,9 +11,10 @@ class CountryRepository implements ICountryRepository {
   Future<List<Country>> getCountries() => _readFromAssets();
 
   @override
-  Future<Country?> findByCode({required int code}) =>
-      getCountries().then((List<Country> value) =>
-          value.firstWhereOrNull((Country element) => element.code == code));
+  Future<Country?> findByCode({required int code}) => getCountries().then(
+        (List<Country> value) =>
+            value.firstWhereOrNull((Country element) => element.code == code),
+      );
 
   Future<List<Country>> _readFromAssets() async {
     final String raw = await rootBundle

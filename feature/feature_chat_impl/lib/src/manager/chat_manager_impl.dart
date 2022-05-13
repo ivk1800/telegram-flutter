@@ -30,10 +30,12 @@ class ChatManagerImpl implements IChatManager {
       useDefaultMuteFor: false,
       muteFor: seconds,
     );
-    await _functionExecutor.send<td.Ok>(td.SetChatNotificationSettings(
-      chatId: chatId,
-      notificationSettings: notificationSettings,
-    ));
+    await _functionExecutor.send<td.Ok>(
+      td.SetChatNotificationSettings(
+        chatId: chatId,
+        notificationSettings: notificationSettings,
+      ),
+    );
   }
 
   @override

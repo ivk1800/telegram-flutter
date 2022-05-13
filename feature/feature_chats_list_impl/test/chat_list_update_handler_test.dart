@@ -63,19 +63,20 @@ class TestScope {
       (_) {
         return Future<ChatTileModel>.value(
           const ChatTileModel(
-              secondSubtitle: '',
-              photoId: 0,
-              lastMessageDate: '',
-              isVerified: false,
-              isSecret: false,
-              isRead: false,
-              isMentioned: false,
-              firstSubtitle: '',
-              isMuted: false,
-              id: 0,
-              title: '',
-              isPinned: false,
-              unreadMessagesCount: 0),
+            secondSubtitle: '',
+            photoId: 0,
+            lastMessageDate: '',
+            isVerified: false,
+            isSecret: false,
+            isRead: false,
+            isMentioned: false,
+            firstSubtitle: '',
+            isMuted: false,
+            id: 0,
+            title: '',
+            isPinned: false,
+            unreadMessagesCount: 0,
+          ),
         );
       },
     );
@@ -97,10 +98,10 @@ class TestScope {
         _createChat(
           id: kTestChatId,
           positions: <td.ChatPosition>[
-            td.ChatPosition(
+            const td.ChatPosition(
               order: 7074313342742953984,
               isPinned: false,
-              list: const td.ChatListMain(),
+              list: td.ChatListMain(),
             ),
           ],
         ),
@@ -115,10 +116,10 @@ void _newPositionGroup() {
 
     await _currentTestScope.handler.handleNewPosition(
       kTestChatId,
-      td.ChatPosition(
+      const td.ChatPosition(
         order: 7074313342742953984,
         isPinned: false,
-        list: const td.ChatListMain(),
+        list: td.ChatListMain(),
       ),
     );
 

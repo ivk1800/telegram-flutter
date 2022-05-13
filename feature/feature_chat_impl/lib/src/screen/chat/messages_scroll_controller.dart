@@ -30,14 +30,13 @@ class MessagesScrollController {
 
   void attach() {
     _scrollDataSubscription = Rx.combineLatest2<
-                int,
-                Tuple2<_ItemInfo, _ItemInfo>,
-                Tuple2<int, Tuple2<_ItemInfo, _ItemInfo>>>(
-            _itemsCountStream,
-            _positionsSubject,
-            (int a, Tuple2<_ItemInfo, _ItemInfo> b) =>
-                Tuple2<int, Tuple2<_ItemInfo, _ItemInfo>>(a, b))
-        .listen((Tuple2<int, Tuple2<_ItemInfo, _ItemInfo>> event) {
+        int,
+        Tuple2<_ItemInfo, _ItemInfo>,
+        Tuple2<int, Tuple2<_ItemInfo, _ItemInfo>>>(
+      _itemsCountStream,
+      _positionsSubject,
+      Tuple2<int, Tuple2<_ItemInfo, _ItemInfo>>.new,
+    ).listen((Tuple2<int, Tuple2<_ItemInfo, _ItemInfo>> event) {
       _onScroll(event.item1, event.item2.item1, event.item2.item2);
     });
 
@@ -86,17 +85,21 @@ class MessagesScrollController {
       // item whose trailing edge in visible in the viewport.
       min = positions
           .where((ItemPosition position) => position.itemTrailingEdge > 0)
-          .reduce((ItemPosition min, ItemPosition position) =>
-              position.itemTrailingEdge < min.itemTrailingEdge
-                  ? position
-                  : min);
+          .reduce(
+            (ItemPosition min, ItemPosition position) =>
+                position.itemTrailingEdge < min.itemTrailingEdge
+                    ? position
+                    : min,
+          );
       // Determine the last visible item by finding the item with the
       // greatest leading edge that is less than 1.  i.e. the last
       // item whose leading edge in visible in the viewport.
       max = positions
           .where((ItemPosition position) => position.itemLeadingEdge < 1)
-          .reduce((ItemPosition max, ItemPosition position) =>
-              position.itemLeadingEdge > max.itemLeadingEdge ? position : max);
+          .reduce(
+            (ItemPosition max, ItemPosition position) =>
+                position.itemLeadingEdge > max.itemLeadingEdge ? position : max,
+          );
     }
     if (min != null && max != null) {
       final _ItemInfo minItemInfo = _ItemInfo(

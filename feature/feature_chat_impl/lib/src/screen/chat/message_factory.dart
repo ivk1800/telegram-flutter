@@ -36,8 +36,7 @@ class _Leading extends StatelessWidget {
   const _Leading({
     required this.leading,
     required this.body,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final Widget? leading;
   final Widget body;

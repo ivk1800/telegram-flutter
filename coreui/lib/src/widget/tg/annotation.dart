@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Annotation extends StatelessWidget {
-  const Annotation({Key? key, required this.text, this.align = TextAlign.start})
-      : super(key: key);
+  const Annotation({
+    super.key,
+    required this.text,
+    this.align = TextAlign.start,
+  });
 
   final String text;
   final TextAlign align;

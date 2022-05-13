@@ -10,8 +10,8 @@ class Scope<T> extends StatelessWidget {
     required this.create,
     required this.providers,
     required this.child,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final CreateComponent<T> create;
   final CreateProviders<T> providers;

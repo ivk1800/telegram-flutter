@@ -35,16 +35,18 @@ class AuthenticationManager implements IAuthenticationManager {
 
   @override
   Future<td.Ok> setAuthenticationPhoneNumber(String phoneNumber) =>
-      _functionExecutor.send<td.Ok>(td.SetAuthenticationPhoneNumber(
-        phoneNumber: phoneNumber,
-        settings: const td.PhoneNumberAuthenticationSettings(
-          allowSmsRetrieverApi: false,
-          allowMissedCall: false,
-          authenticationTokens: <String>[],
-          allowFlashCall: false,
-          isCurrentPhoneNumber: false,
+      _functionExecutor.send<td.Ok>(
+        td.SetAuthenticationPhoneNumber(
+          phoneNumber: phoneNumber,
+          settings: const td.PhoneNumberAuthenticationSettings(
+            allowSmsRetrieverApi: false,
+            allowMissedCall: false,
+            authenticationTokens: <String>[],
+            allowFlashCall: false,
+            isCurrentPhoneNumber: false,
+          ),
         ),
-      ));
+      );
 
   @override
   Future<td.Ok> setTdlibParameters(td.SetTdlibParameters parameters) =>

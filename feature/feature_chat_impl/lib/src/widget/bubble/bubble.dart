@@ -3,8 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'bubble_clipper.dart';
 
 class Bubble extends StatelessWidget {
-  const Bubble({Key? key, required this.child, required this.radius})
-      : super(key: key);
+  const Bubble({super.key, required this.child, required this.radius});
 
   final Widget child;
   final double radius;

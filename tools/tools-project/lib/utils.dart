@@ -39,10 +39,10 @@ Future<List<DartProject>> getDartProjects(String directory) async {
             .where((String key) => dependencies[key] is pp.HostedDependency)
             .map((String key) {
           return Dependency(
-              name: key,
-              version: (dependencies[key] as pp.HostedDependency)
-                  .version
-                  .toString());
+            name: key,
+            version:
+                (dependencies[key] as pp.HostedDependency).version.toString(),
+          );
         }).toList();
       }
 

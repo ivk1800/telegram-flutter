@@ -252,6 +252,9 @@ linter:
     void_checks: true
     lines_longer_than_80_chars: false
     flutter_style_todos: false
+    use_super_parameters: true
+    require_trailing_commas: true
+    use_enums: true
 
     # Pub rules.
     package_names: true

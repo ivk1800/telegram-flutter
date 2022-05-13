@@ -26,19 +26,21 @@ class ShortInfoFactory {
         style: caption,
         children: <InlineSpan>[
           if (additionalInfo.viewCount != null)
-            TextSpan(children: <InlineSpan>[
-              WidgetSpan(
-                alignment: ui.PlaceholderAlignment.middle,
-                baseline: TextBaseline.ideographic,
-                child: Icon(
-                  Icons.remove_red_eye,
-                  color: caption.color,
-                  size: iconSize,
+            TextSpan(
+              children: <InlineSpan>[
+                WidgetSpan(
+                  alignment: ui.PlaceholderAlignment.middle,
+                  baseline: TextBaseline.ideographic,
+                  child: Icon(
+                    Icons.remove_red_eye,
+                    color: caption.color,
+                    size: iconSize,
+                  ),
                 ),
-              ),
-              // todo double tab?
-              TextSpan(text: ' ${additionalInfo.viewCount}\u0009\u0009'),
-            ]),
+                // todo double tab?
+                TextSpan(text: ' ${additionalInfo.viewCount}\u0009\u0009'),
+              ],
+            ),
           if (additionalInfo.authorSignature != null)
             TextSpan(text: '${additionalInfo.authorSignature}, '),
           if (additionalInfo.isEdited)

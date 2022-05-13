@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TrendingStickersPage extends StatelessWidget {
-  const TrendingStickersPage({Key? key}) : super(key: key);
+  const TrendingStickersPage({super.key});
 
   @override
   Widget build(BuildContext context) {

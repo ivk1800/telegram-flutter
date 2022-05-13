@@ -6,7 +6,7 @@ import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
 class ChooseCountyPage extends StatelessWidget {
-  const ChooseCountyPage({Key? key}) : super(key: key);
+  const ChooseCountyPage({super.key});
 
   @override
   Widget build(BuildContext context) {

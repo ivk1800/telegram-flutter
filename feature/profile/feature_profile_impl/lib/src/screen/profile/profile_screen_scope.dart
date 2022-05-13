@@ -8,10 +8,10 @@ import 'profile_view_model.dart';
 
 class ProfileScreenScope extends StatefulWidget {
   const ProfileScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<IProfileScreenComponent> create;
@@ -26,7 +26,8 @@ class ProfileScreenScope extends StatefulWidget {
       _InheritedScope.of(context)._stringsProvider;
 
   static IChatHeaderInfoFactory getChatHeaderInfoFactory(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._chatHeaderInfoFactory;
 }
 
@@ -58,11 +59,9 @@ class _ProfileScreenScopeState extends State<ProfileScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _ProfileScreenScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _ProfileScreenScopeState _state;
 

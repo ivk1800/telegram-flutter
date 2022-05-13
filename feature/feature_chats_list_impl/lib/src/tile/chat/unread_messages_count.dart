@@ -5,8 +5,8 @@ class UnreadMessagesCount extends StatefulWidget {
   const UnreadMessagesCount({
     required this.count,
     required this.isMuted,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final int count;
   final bool isMuted;

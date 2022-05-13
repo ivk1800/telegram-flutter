@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ContainerDivider extends StatelessWidget {
-  const ContainerDivider({Key? key}) : super(key: key);
+  const ContainerDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

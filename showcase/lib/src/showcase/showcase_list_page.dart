@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:showcase/src/showcase/chat_cell/chat_cell_showcase.dart';
-import 'package:showcase/src/showcase_messages_list_page.dart';
 import 'package:showcase/src/showcase/showcase_scope.dart';
+import 'package:showcase/src/showcase_messages_list_page.dart';
 import 'package:showcase/src/showcase_split_view_page.dart';
 import 'package:split_view/split_view.dart';
 
 class ShowcaseListPage extends StatefulWidget {
-  const ShowcaseListPage({Key? key}) : super(key: key);
+  const ShowcaseListPage({super.key});
 
   @override
   State<ShowcaseListPage> createState() => _ShowcaseListPageState();

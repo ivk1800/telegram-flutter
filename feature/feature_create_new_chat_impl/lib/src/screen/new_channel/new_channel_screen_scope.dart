@@ -8,10 +8,10 @@ import 'new_channel_widget_model.dart';
 
 class CreateNewChannelScreenScore extends StatefulWidget {
   const CreateNewChannelScreenScore({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<ICreateNewChannelScreenComponent> create;
@@ -61,11 +61,9 @@ class _CreateNewChannelScreenScoreState
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _CreateNewChannelScreenScoreState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _CreateNewChannelScreenScoreState _state;
 

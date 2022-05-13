@@ -7,10 +7,10 @@ import 'change_bio_view_model.dart';
 
 class ChangeBioScreenScope extends StatefulWidget {
   const ChangeBioScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<IChangeBioScreenComponent> create;
@@ -48,11 +48,9 @@ class _ChangeBioScreenScopeState extends State<ChangeBioScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _ChangeBioScreenScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _ChangeBioScreenScopeState _state;
 

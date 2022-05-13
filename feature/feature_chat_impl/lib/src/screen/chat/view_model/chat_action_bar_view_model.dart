@@ -47,8 +47,7 @@ class ChatActionBarViewModel extends BaseViewModel {
       Rx.combineLatest2<ChatHeaderInfo, List<HeaderActionData>, HeaderState>(
         _headerInfoInteractor.infoStream,
         _headerActionsInteractor.actionsStream,
-        (ChatHeaderInfo headerInfo, List<HeaderActionData> headerActions) =>
-            HeaderState.data(headerInfo, headerActions),
+        HeaderState.data,
       );
 
   void onHeaderActionTap(HeaderAction action) {

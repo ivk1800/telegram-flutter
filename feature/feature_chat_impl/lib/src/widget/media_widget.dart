@@ -5,11 +5,11 @@ import 'chat_context.dart';
 
 class MediaWrapper extends StatelessWidget {
   const MediaWrapper({
-    Key? key,
+    super.key,
     required this.child,
     required this.aspectRatio,
     required this.type,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final double aspectRatio;
@@ -38,9 +38,9 @@ class MediaWrapper extends StatelessWidget {
 // widget marker for MessageContent
 class Media extends SingleChildRenderObjectWidget {
   const Media({
-    Key? key,
-    required Widget child,
-  }) : super(key: key, child: child);
+    super.key,
+    required Widget super.child,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) => MediaRender();

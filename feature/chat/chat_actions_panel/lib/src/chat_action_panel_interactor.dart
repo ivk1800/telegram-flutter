@@ -140,8 +140,10 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
     );
 
     return groupInfoUpdates.flatMap(
-      (Tuple3<td.Supergroup, td.ChatNotificationSettings, td.ChatPermissions>
-          data) {
+      (
+        Tuple3<td.Supergroup, td.ChatNotificationSettings, td.ChatPermissions>
+            data,
+      ) {
         final td.Supergroup group = data.item1;
         final td.ChatNotificationSettings notificationSettings = data.item2;
         final td.ChatPermissions permissions = data.item3;
@@ -191,8 +193,10 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
     );
 
     return groupInfoUpdates.flatMap(
-      (Tuple3<td.BasicGroup, td.ChatNotificationSettings, td.ChatPermissions>
-          data) {
+      (
+        Tuple3<td.BasicGroup, td.ChatNotificationSettings, td.ChatPermissions>
+            data,
+      ) {
         final td.BasicGroup group = data.item1;
         final td.ChatNotificationSettings notificationSettings = data.item2;
         final td.ChatPermissions permissions = data.item3;
@@ -211,10 +215,14 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
   ) =>
       _chatUpdatesProvider.chatUpdates
           .whereType<td.UpdateChatNotificationSettings>()
-          .where((td.UpdateChatNotificationSettings update) =>
-              update.chatId == chatId)
-          .map((td.UpdateChatNotificationSettings update) =>
-              update.notificationSettings);
+          .where(
+            (td.UpdateChatNotificationSettings update) =>
+                update.chatId == chatId,
+          )
+          .map(
+            (td.UpdateChatNotificationSettings update) =>
+                update.notificationSettings,
+          );
 
   Stream<td.ChatPermissions> _getChatPermissionsUpdatesStream(
     int chatId,
@@ -226,13 +234,17 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
 
   Stream<td.Supergroup> _getSuperGroupUpdatesStream(int supergroupId) =>
       _superGroupUpdatesProvider.superGroupUpdates
-          .where((td.UpdateSupergroup update) =>
-              update.supergroup.id == supergroupId)
+          .where(
+            (td.UpdateSupergroup update) =>
+                update.supergroup.id == supergroupId,
+          )
           .map((td.UpdateSupergroup update) => update.supergroup);
 
   Stream<td.BasicGroup> _getBasicGroupUpdatesStream(int basicGroupId) =>
       _basicGroupUpdatesProvider.basicGroupUpdates
-          .where((td.UpdateBasicGroup update) =>
-              update.basicGroup.id == basicGroupId)
+          .where(
+            (td.UpdateBasicGroup update) =>
+                update.basicGroup.id == basicGroupId,
+          )
           .map((td.UpdateBasicGroup update) => update.basicGroup);
 }

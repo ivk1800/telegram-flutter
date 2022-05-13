@@ -5,20 +5,14 @@ import 'base_conversation_message_tile_model.dart';
 
 class MessageAnimationTileModel extends BaseConversationMessageTileModel {
   const MessageAnimationTileModel({
-    required int id,
-    required SenderInfo senderInfo,
-    required bool isOutgoing,
-    required ReplyInfo? replyInfo,
-    required AdditionalInfo additionalInfo,
+    required super.id,
+    required super.senderInfo,
+    required super.isOutgoing,
+    required super.replyInfo,
+    required super.additionalInfo,
     required this.minithumbnail,
     required this.caption,
-  }) : super(
-          isOutgoing: isOutgoing,
-          id: id,
-          replyInfo: replyInfo,
-          additionalInfo: additionalInfo,
-          senderInfo: senderInfo,
-        );
+  });
 
   final Minithumbnail? minithumbnail;
   final RichText? caption;

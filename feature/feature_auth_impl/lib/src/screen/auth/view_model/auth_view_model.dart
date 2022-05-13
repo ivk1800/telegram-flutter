@@ -29,11 +29,13 @@ class AuthViewModel extends BaseViewModel {
   final PublishSubject<AuthAction> _actionSubject =
       PublishSubject<AuthAction>();
   late final BehaviorSubject<AuthState> _stateSubject =
-      BehaviorSubject<AuthState>.seeded(AuthState.phoneNumber(
-    title: _stringsProvider.yourPhone,
-    countryTitle: _stringsProvider.chooseCountry,
-    blockInteraction: false,
-  ));
+      BehaviorSubject<AuthState>.seeded(
+    AuthState.phoneNumber(
+      title: _stringsProvider.yourPhone,
+      countryTitle: _stringsProvider.chooseCountry,
+      blockInteraction: false,
+    ),
+  );
 
   String? _phoneNumber;
   Country? _country;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StickerSetPage extends StatelessWidget {
-  const StickerSetPage({Key? key}) : super(key: key);
+  const StickerSetPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class TextCell extends StatelessWidget {
   const TextCell({
-    Key? key,
+    super.key,
     required this.title,
     this.titleColor,
     this.subtitle,
     this.valueWidget,
     this.leading,
     this.onTap,
-  }) : super(key: key);
+  });
 
   factory TextCell.textValue({
     required String value,

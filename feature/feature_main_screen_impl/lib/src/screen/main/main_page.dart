@@ -10,8 +10,8 @@ import 'menu_item.dart' as m;
 
 class MainPage extends StatefulWidget {
   const MainPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   MainPageState createState() => MainPageState();
@@ -136,9 +136,7 @@ class MainPageState extends State<MainPage> with TickerProviderStateMixin {
 }
 
 class _DefaultTitle extends StatelessWidget {
-  const _DefaultTitle({
-    Key? key,
-  }) : super(key: key);
+  const _DefaultTitle();
 
   @override
   Widget build(BuildContext context) {
@@ -156,9 +154,7 @@ class _DefaultTitle extends StatelessWidget {
 }
 
 class _MainDrawer extends StatelessWidget {
-  const _MainDrawer({
-    Key? key,
-  }) : super(key: key);
+  const _MainDrawer();
 
   @override
   Widget build(BuildContext context) {
@@ -259,5 +255,5 @@ class _MainDrawer extends StatelessWidget {
 enum _ScreenState { chats, search }
 
 class _AppBarKey extends GlobalObjectKey<tg.TgSwitchedAppBarState> {
-  const _AppBarKey(Object value) : super(value);
+  const _AppBarKey(super.value);
 }

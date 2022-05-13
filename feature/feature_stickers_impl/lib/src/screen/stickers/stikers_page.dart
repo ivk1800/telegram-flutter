@@ -10,7 +10,7 @@ import 'bloc/stickers_event.dart';
 import 'bloc/stickers_state.dart';
 
 class StickersPage extends StatelessWidget {
-  const StickersPage({Key? key}) : super(key: key);
+  const StickersPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class StickersPage extends StatelessWidget {
 }
 
 class _DefaultWidget extends StatelessWidget {
-  const _DefaultWidget({Key? key, required this.state}) : super(key: key);
+  const _DefaultWidget({required this.state});
 
   final Data state;
 

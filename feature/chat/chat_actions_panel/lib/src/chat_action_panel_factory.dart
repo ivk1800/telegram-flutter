@@ -31,9 +31,8 @@ class ChatActionPanelFactory implements IChatActionPanelFactory {
 
 class _PanelContainer extends StatelessWidget {
   const _PanelContainer({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final PanelState state;
 
@@ -69,9 +68,8 @@ class _PanelContainer extends StatelessWidget {
 
 class _ChannelSubscriber extends StatelessWidget {
   const _ChannelSubscriber({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final ChannelSubscriber state;
 
@@ -99,9 +97,8 @@ class _ChannelSubscriber extends StatelessWidget {
 
 class _Join extends StatelessWidget {
   const _Join({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final Join state;
 
@@ -121,9 +118,8 @@ class _Join extends StatelessWidget {
 
 class _Writer extends StatelessWidget {
   const _Writer({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final Writer state;
 

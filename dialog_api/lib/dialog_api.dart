@@ -34,9 +34,10 @@ abstract class IDismissible {
 extension DialogRouterExt on IDialogRouter {
   void toNotImplemented() {
     toDialog(
-        body: const Body.text(text: 'not implemented :('),
-        actions: <Action>[
-          Action(text: 'OK'),
-        ]);
+      body: const Body.text(text: 'not implemented :('),
+      actions: <Action>[
+        Action(text: 'OK'),
+      ],
+    );
   }
 }

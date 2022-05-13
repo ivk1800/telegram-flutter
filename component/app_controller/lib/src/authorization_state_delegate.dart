@@ -42,7 +42,8 @@ class AuthorizationStateDelegate {
   }
 
   Future<void> _handleAuthorizationState(
-      td.AuthorizationState authorizationState) async {
+    td.AuthorizationState authorizationState,
+  ) async {
     if (authorizationState is td.AuthorizationStateWaitTdlibParameters) {
       unawaited(_handleWaitTdlibParametersState());
     } else if (authorizationState is td.AuthorizationStateWaitEncryptionKey) {

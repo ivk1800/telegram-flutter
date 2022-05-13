@@ -37,11 +37,13 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
     required int messageId,
   }) {
     return _functionExecutor
-        .send<td.Message>(td.GetMessage(
-          chatId: chatId,
-          messageId: messageId,
-        ))
-        .then((td.Message value) => Future<td.Message?>.value(value))
+        .send<td.Message>(
+          td.GetMessage(
+            chatId: chatId,
+            messageId: messageId,
+          ),
+        )
+        .then(Future<td.Message?>.value)
         .catchError(
           // todo log error
           (Object? error) => null,
@@ -78,16 +80,18 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
     return _get<td.Message>(
       (td.Message? last) async {
         return _functionExecutor
-            .send<td.Messages>(td.SearchMessages(
-              minDate: 0,
-              maxDate: 0,
-              offsetChatId: last?.chatId ?? fromChatId,
-              offsetDate: 0,
-              offsetMessageId: last?.id ?? fromMessageId,
-              filter: filter,
-              limit: limit,
-              query: query,
-            ))
+            .send<td.Messages>(
+              td.SearchMessages(
+                minDate: 0,
+                maxDate: 0,
+                offsetChatId: last?.chatId ?? fromChatId,
+                offsetDate: 0,
+                offsetMessageId: last?.id ?? fromMessageId,
+                filter: filter,
+                limit: limit,
+                query: query,
+              ),
+            )
             .then((td.Messages value) => value.messages ?? <td.Message>[]);
       },
       limit,
@@ -114,10 +118,12 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
     required td.SearchMessagesFilter filter,
   }) =>
       _functionExecutor
-          .send<td.Count>(td.GetChatMessageCount(
-            chatId: chatId,
-            filter: filter,
-            returnLocal: false,
-          ))
+          .send<td.Count>(
+            td.GetChatMessageCount(
+              chatId: chatId,
+              filter: filter,
+              returnLocal: false,
+            ),
+          )
           .then((td.Count value) => value.count);
 }

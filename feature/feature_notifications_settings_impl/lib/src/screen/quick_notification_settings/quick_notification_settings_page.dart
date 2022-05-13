@@ -3,7 +3,7 @@ import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
 class QuickNotificationSettingsPage extends StatelessWidget {
-  const QuickNotificationSettingsPage({Key? key}) : super(key: key);
+  const QuickNotificationSettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

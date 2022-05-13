@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as m;
 
 class Divider extends StatelessWidget {
-  const Divider({Key? key, this.indent = DividerIndent.small})
-      : super(key: key);
+  const Divider({super.key, this.indent = DividerIndent.small});
 
   final DividerIndent indent;
 

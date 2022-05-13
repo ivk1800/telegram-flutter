@@ -8,14 +8,13 @@ typedef AppBarBuilder = Widget Function(
 
 class TgSwitchedAppBar extends StatefulWidget implements PreferredSizeWidget {
   TgSwitchedAppBar({
-    Key? key,
+    super.key,
     required this.appBarBuilder,
     this.bottom,
     this.backgroundColor = Colors.transparent,
-  })  : preferredSize = Size.fromHeight(
+  }) : preferredSize = Size.fromHeight(
           kToolbarHeight + (bottom?.preferredSize.height ?? 0.0),
-        ),
-        super(key: key);
+        );
 
   final AppBarBuilder? appBarBuilder;
   final PreferredSizeWidget? bottom;

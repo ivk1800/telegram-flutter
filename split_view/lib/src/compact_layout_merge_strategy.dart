@@ -21,8 +21,11 @@ class _DefaultCompactLayoutMergeStrategy implements CompactLayoutMergeStrategy {
   };
 
   @override
-  List<PageInfo> process(List<PageInfo> leftPages, List<PageInfo> rightPages,
-      List<PageInfo> topPages) {
+  List<PageInfo> process(
+    List<PageInfo> leftPages,
+    List<PageInfo> rightPages,
+    List<PageInfo> topPages,
+  ) {
     return (leftPages + rightPages + topPages)
       ..sort((PageInfo a, PageInfo b) {
         final int containerCompare =

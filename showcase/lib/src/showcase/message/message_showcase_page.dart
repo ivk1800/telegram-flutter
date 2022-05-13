@@ -9,7 +9,7 @@ import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
 class MessageShowcasePage extends StatelessWidget {
-  const MessageShowcasePage({Key? key}) : super(key: key);
+  const MessageShowcasePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +56,19 @@ class MessageShowcasePage extends StatelessWidget {
 
 class _Required extends StatelessWidget {
   const _Required({
-    Key? key,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return TgTheme(
-      data: TgThemeData(themes: <Type, ITgThemeData>{
-        ChatThemeData: ChatThemeData.def(context: context),
-      }),
+      data: TgThemeData(
+        themes: <Type, ITgThemeData>{
+          ChatThemeData: ChatThemeData.def(context: context),
+        },
+      ),
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) =>
             ChatContext(

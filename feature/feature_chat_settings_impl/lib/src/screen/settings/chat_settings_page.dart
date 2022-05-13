@@ -8,7 +8,7 @@ import 'bloc/chat_settings_bloc.dart';
 import 'bloc/chat_settings_event.dart';
 
 class ChatSettingsPage extends StatefulWidget {
-  const ChatSettingsPage({Key? key}) : super(key: key);
+  const ChatSettingsPage({super.key});
 
   @override
   ChatSettingsPageState createState() => ChatSettingsPageState();
@@ -31,7 +31,7 @@ class ChatSettingsPageState extends State<ChatSettingsPage> {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context) {

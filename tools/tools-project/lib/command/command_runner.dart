@@ -77,25 +77,29 @@ Future<void> _runCommand({
       process.stdout,
       process.stderr,
     ],
-  ).listen((List<int> event) {
-    final String output = utf8.decode(event);
-    lastOutputs.add(output);
-    if (withOutputs && output.isNotEmpty) {
-      Console.write(output);
-    }
-  }, onDone: () async {
-    final int exitCode = await process.exitCode;
-    if (exitCode != 0) {
-      if (!withOutputs && lastOutputs.isNotEmpty) {
-        Console.write(lastOutputs.join('\n'));
+  ).listen(
+    (List<int> event) {
+      final String output = utf8.decode(event);
+      lastOutputs.add(output);
+      if (withOutputs && output.isNotEmpty) {
+        Console.write(output);
       }
-      completer.completeError('command finished with exit code $exitCode');
-    } else {
-      completer.complete(null);
-    }
-  }, onError: (Object error) {
-    completer.completeError(error);
-  });
+    },
+    onDone: () async {
+      final int exitCode = await process.exitCode;
+      if (exitCode != 0) {
+        if (!withOutputs && lastOutputs.isNotEmpty) {
+          Console.write(lastOutputs.join('\n'));
+        }
+        completer.completeError('command finished with exit code $exitCode');
+      } else {
+        completer.complete(null);
+      }
+    },
+    onError: (Object error) {
+      completer.completeError(error);
+    },
+  );
 
   return completer.future;
 }

@@ -49,7 +49,9 @@ void main() {
 
       controller.expectCompactNavigator();
       controller.expectPagesOrder(
-          navigatorLocation: NavigatorLocation.compact, pages: const <int>[1]);
+        navigatorLocation: NavigatorLocation.compact,
+        pages: const <int>[1],
+      );
     });
 
     testWidgets('should display page if add to top container', (
@@ -64,7 +66,9 @@ void main() {
 
       controller.expectCompactNavigator();
       controller.expectPagesOrder(
-          navigatorLocation: NavigatorLocation.compact, pages: const <int>[1]);
+        navigatorLocation: NavigatorLocation.compact,
+        pages: const <int>[1],
+      );
     });
   });
 
@@ -2177,7 +2181,8 @@ void _topPagesGroup() {
     );
 
     await controller.tapBackButtonAtTopPage(
-        navigatorLocation: NavigatorLocation.top);
+      navigatorLocation: NavigatorLocation.top,
+    );
     await tester.pumpAndSettle();
 
     controller.expectPagesCount(

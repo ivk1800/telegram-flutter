@@ -10,9 +10,9 @@ import 'settings_search_view_model.dart';
 
 class SettingsSearchPage extends StatefulWidget {
   const SettingsSearchPage({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final SettingsSearchScreenController controller;
 

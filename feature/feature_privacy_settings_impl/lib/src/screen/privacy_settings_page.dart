@@ -4,7 +4,7 @@ import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
 class PrivacySettingsPage extends StatelessWidget {
-  const PrivacySettingsPage({Key? key}) : super(key: key);
+  const PrivacySettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

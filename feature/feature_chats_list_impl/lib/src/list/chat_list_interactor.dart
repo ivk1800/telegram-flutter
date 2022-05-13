@@ -28,12 +28,14 @@ class ChatListInteractor {
     _loader = Loader<td.Chat>(
       builder: () {
         final OrderedChat? lastChat = _chatsHolder.orderedChats.lastOrNull;
-        return Stream<List<td.Chat>>.fromFuture(_chatRepository.getChats(
-          offsetChatId: lastChat?.chatId ?? 0,
-          offsetOrder: lastChat?.order ?? 9223372036854775807,
-          chatList: _chatListConfig.chatList,
-          limit: 30,
-        ));
+        return Stream<List<td.Chat>>.fromFuture(
+          _chatRepository.getChats(
+            offsetChatId: lastChat?.chatId ?? 0,
+            offsetOrder: lastChat?.order ?? 9223372036854775807,
+            chatList: _chatListConfig.chatList,
+            limit: 30,
+          ),
+        );
       },
       onResult: (List<td.Chat> newChats) async {
         _done = true;
@@ -87,8 +89,10 @@ class ChatListInteractor {
   void _dispatchChats() {
     //todo need optimizing, new list created on each dispatch
     final List<ChatTileModel> list = _chatsHolder.orderedChats
-        .map((OrderedChat element) =>
-            _chatsHolder.chatsData[element.chatId]!.model)
+        .map(
+          (OrderedChat element) =>
+              _chatsHolder.chatsData[element.chatId]!.model,
+        )
         .toList();
     _chatsSubject.add(ChatsListState.data(list));
   }

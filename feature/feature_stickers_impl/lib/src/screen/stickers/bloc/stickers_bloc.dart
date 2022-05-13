@@ -26,12 +26,16 @@ class StickersBloc extends Bloc<StickersEvent, StickersState> {
   final IStickersFeatureRouter _router;
 
   void _onTrendingStickersTap(
-      TrendingStickersTap event, Emitter<StickersState> emit) {
+    TrendingStickersTap event,
+    Emitter<StickersState> emit,
+  ) {
     _router.toTrendingStickers();
   }
 
   void _onArchivedStickersTap(
-      ArchivedStickersTap event, Emitter<StickersState> emit) {
+    ArchivedStickersTap event,
+    Emitter<StickersState> emit,
+  ) {
     _router.toArchivedStickers();
   }
 
@@ -48,8 +52,10 @@ class StickersBloc extends Bloc<StickersEvent, StickersState> {
         await _stickerRepository.getInstalledStickers();
 
     final List<StickerSetTileModel> tiles = stickerSets
-        .map((td.StickerSetInfo e) =>
-            StickerSetTileModel(id: e.id, title: e.title, name: e.name))
+        .map(
+          (td.StickerSetInfo e) =>
+              StickerSetTileModel(id: e.id, title: e.title, name: e.name),
+        )
         .toList();
     emit(StickersState.data(tiles));
   }

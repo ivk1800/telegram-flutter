@@ -2,10 +2,10 @@ import 'package:flutter/widgets.dart';
 
 class StreamListener<T> extends StatelessWidget {
   const StreamListener({
-    Key? key,
+    super.key,
     required this.stream,
     required this.builder,
-  }) : super(key: key);
+  });
 
   final Stream<T> stream;
   final Widget Function(BuildContext context, T data) builder;

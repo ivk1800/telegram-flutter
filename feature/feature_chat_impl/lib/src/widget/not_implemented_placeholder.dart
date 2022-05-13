@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NotImplementedPlaceholder extends StatelessWidget {
-  const NotImplementedPlaceholder({Key? key, this.additional})
-      : super(key: key);
+  const NotImplementedPlaceholder({super.key, this.additional});
 
   final String? additional;
 

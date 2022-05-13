@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SectionDivider extends StatelessWidget {
-  const SectionDivider({Key? key}) : super(key: key);
+  const SectionDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

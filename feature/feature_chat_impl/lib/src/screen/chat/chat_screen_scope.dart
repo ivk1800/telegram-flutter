@@ -12,10 +12,10 @@ import 'message_factory.dart';
 
 class ChatScreenScope extends StatefulWidget {
   const ChatScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<IChatScreenComponent> create;
@@ -24,7 +24,8 @@ class ChatScreenScope extends StatefulWidget {
   State<ChatScreenScope> createState() => _ChatScreenScopeState();
 
   static IChatActionPanelFactory getChatActionPanelFactory(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._chatActionPanelFactory;
 
   static MessageFactory getMessageFactory(BuildContext context) =>
@@ -34,7 +35,8 @@ class ChatScreenScope extends StatefulWidget {
       _InheritedScope.of(context)._stringsProvider;
 
   static IChatHeaderInfoFactory getChatHeaderInfoFactory(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._chatHeaderInfoFactory;
 
   static ChatMessagesViewModel getChatMessagesViewModel(BuildContext context) =>
@@ -44,7 +46,8 @@ class ChatScreenScope extends StatefulWidget {
       _InheritedScope.of(context)._chatActionBarModel;
 
   static ChatActionsPanelViewModel getChatActionsPanelViewModel(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._chatActionsPanelViewModel;
 }
 
@@ -90,11 +93,9 @@ class _ChatScreenScopeState extends State<ChatScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _ChatScreenScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _ChatScreenScopeState _state;
 

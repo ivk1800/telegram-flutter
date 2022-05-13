@@ -10,9 +10,9 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'src/app_controller.dart';
 
 class AppControllerComponent {
-  AppControllerComponent(
-      {required AppControllerComponentDependencies dependencies})
-      : _dependencies = dependencies;
+  AppControllerComponent({
+    required AppControllerComponentDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final AppControllerComponentDependencies _dependencies;
 

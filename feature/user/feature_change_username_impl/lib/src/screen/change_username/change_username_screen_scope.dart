@@ -9,10 +9,10 @@ import 'change_username_screen_widget_model.dart';
 
 class ChangeUsernameScreenScope extends StatefulWidget {
   const ChangeUsernameScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<IChangeUsernameScreenComponent> create;
@@ -28,7 +28,8 @@ class ChangeUsernameScreenScope extends StatefulWidget {
       _InheritedScope.of(context)._tgAppBarFactory;
 
   static ChangeUsernameScreenWidgetModel getChangeUsernameScreenWidgetModel(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._changeUsernameScreenWidgetModel;
 }
 
@@ -65,11 +66,9 @@ class _ChangeUsernameScreenScopeState extends State<ChangeUsernameScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _ChangeUsernameScreenScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _ChangeUsernameScreenScopeState _state;
 

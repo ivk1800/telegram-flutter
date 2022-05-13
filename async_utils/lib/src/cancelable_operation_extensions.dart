@@ -11,20 +11,25 @@ extension CancelableOperationExt<T> on CancelableOperation<T> {
   }
 
   CancelableOperation<T> onError(void Function(Object error) callback) {
-    return then((T result) => result,
-        onError: (Object error, StackTrace stackTrace) {
-      callback.call(error);
-      return Future<T>.error(error, stackTrace);
-    });
+    return then(
+      (T result) => result,
+      onError: (Object error, StackTrace stackTrace) {
+        callback.call(error);
+        return Future<T>.error(error, stackTrace);
+      },
+    );
   }
 
   CancelableOperation<T> onTerminate(void Function() callback) {
-    return then((T result) {
-      callback.call();
-      return result;
-    }, onError: (Object error, StackTrace stackTrace) {
-      callback.call();
-      return Future<T>.error(error, stackTrace);
-    });
+    return then(
+      (T result) {
+        callback.call();
+        return result;
+      },
+      onError: (Object error, StackTrace stackTrace) {
+        callback.call();
+        return Future<T>.error(error, stackTrace);
+      },
+    );
   }
 }

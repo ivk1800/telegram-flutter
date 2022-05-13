@@ -14,8 +14,10 @@ class ContactsManager implements IContactsManager {
     required td.Contact contact,
     required bool sharePhoneNumber,
   }) =>
-      _functionExecutor.send(td.AddContact(
-        contact: contact,
-        sharePhoneNumber: sharePhoneNumber,
-      ));
+      _functionExecutor.send(
+        td.AddContact(
+          contact: contact,
+          sharePhoneNumber: sharePhoneNumber,
+        ),
+      );
 }

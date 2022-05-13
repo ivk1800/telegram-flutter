@@ -5,10 +5,10 @@ import 'package:flutter/widgets.dart';
 
 class MessageSkeleton extends StatelessWidget {
   const MessageSkeleton({
-    Key? key,
+    super.key,
     required this.content,
     required this.shortInfo,
-  }) : super(key: key);
+  });
 
   final Widget content;
   final Widget shortInfo;
@@ -23,9 +23,8 @@ class MessageSkeleton extends StatelessWidget {
 
 class _Body extends MultiChildRenderObjectWidget {
   _Body({
-    Key? key,
-    List<Widget> children = const <Widget>[],
-  }) : super(key: key, children: children);
+    super.children,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) {

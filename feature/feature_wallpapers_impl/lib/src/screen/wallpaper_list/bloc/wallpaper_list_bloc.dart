@@ -19,10 +19,14 @@ class WallpaperListBloc extends Bloc<WallpaperListEvent, WallpaperListState> {
   final IBackgroundRepository _backgroundRepository;
 
   Future<void> _onInitEvent(
-      Init event, Emitter<WallpaperListState> emit) async {
-    final WallpaperListState state = await _backgroundRepository.backgrounds
-        .then((List<td.Background> backgrounds) =>
-            WallpaperListState(backgrounds: _mapTileModels(backgrounds)));
+    Init event,
+    Emitter<WallpaperListState> emit,
+  ) async {
+    final WallpaperListState state =
+        await _backgroundRepository.backgrounds.then(
+      (List<td.Background> backgrounds) =>
+          WallpaperListState(backgrounds: _mapTileModels(backgrounds)),
+    );
     emit(state);
   }
 

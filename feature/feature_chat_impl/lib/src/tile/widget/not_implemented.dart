@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tg_theme/tg_theme.dart';
 
 class NotImplementedWidget extends StatelessWidget {
-  const NotImplementedWidget({Key? key, required this.type}) : super(key: key);
+  const NotImplementedWidget({super.key, required this.type});
 
   final String type;
 

@@ -13,9 +13,9 @@ LocalKey createTestPageKey(int id) => ValueKey<int>(id);
 
 class TestPage extends StatelessWidget {
   const TestPage({
-    Key? key,
+    super.key,
     required this.id,
-  }) : super(key: key);
+  });
 
   final int id;
 
@@ -138,7 +138,9 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
   void expectTotalNavigatorsCount(int count) {
     expect(
       find.descendant(
-          of: find.byType(SplitView), matching: find.byType(Navigator)),
+        of: find.byType(SplitView),
+        matching: find.byType(Navigator),
+      ),
       findsNWidgets(count),
     );
   }
@@ -146,7 +148,9 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
   void expectLeftAndRightNavigator() {
     expect(
       find.descendant(
-          of: find.byType(SplitView), matching: find.byType(Navigator)),
+        of: find.byType(SplitView),
+        matching: find.byType(Navigator),
+      ),
       findsNWidgets(2),
     );
   }
@@ -154,7 +158,9 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
   void expectThreeNavigator() {
     expect(
       find.descendant(
-          of: find.byType(SplitView), matching: find.byType(Navigator)),
+        of: find.byType(SplitView),
+        matching: find.byType(Navigator),
+      ),
       findsNWidgets(3),
     );
   }
@@ -196,7 +202,9 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
     expect(pages.length, greaterThanOrEqualTo(1));
 
     final Finder iconButtonFinder = find.descendant(
-        of: find.byWidget(pages.last), matching: find.byType(IconButton));
+      of: find.byWidget(pages.last),
+      matching: find.byType(IconButton),
+    );
     expect(
       iconButtonFinder,
       displayed ? findsOneWidget : findsNothing,
@@ -212,7 +220,9 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
     expect(pages.length, greaterThanOrEqualTo(1));
 
     final Finder iconButtonFinder = find.descendant(
-        of: find.byWidget(pages.last), matching: find.byType(IconButton));
+      of: find.byWidget(pages.last),
+      matching: find.byType(IconButton),
+    );
     expect(
       iconButtonFinder,
       findsOneWidget,
@@ -280,7 +290,8 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
         });
       case NavigatorLocation.compact:
         return navigators.firstWhereOrNull(
-            (Element element) => element.size! == binding.window.physicalSize);
+          (Element element) => element.size! == binding.window.physicalSize,
+        );
     }
   }
 
@@ -307,7 +318,9 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
   List<Element> _findNavigators() {
     return find
         .descendant(
-            of: find.byType(SplitView), matching: find.byType(Navigator))
+          of: find.byType(SplitView),
+          matching: find.byType(Navigator),
+        )
         .evaluate()
         .toList();
   }

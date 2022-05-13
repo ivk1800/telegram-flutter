@@ -11,7 +11,7 @@ import 'content_interactor.dart';
 import 'header_action_data.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +32,8 @@ class ProfilePage extends StatelessWidget {
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   const _AppBar({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final HeaderState state;
 
@@ -66,10 +65,9 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class _AppBarPopupMenu extends StatelessWidget {
   const _AppBarPopupMenu({
-    Key? key,
     required this.onSelected,
     required this.actions,
-  }) : super(key: key);
+  });
 
   final List<HeaderActionData> actions;
   final PopupMenuItemSelected<HeaderAction> onSelected;
@@ -94,7 +92,7 @@ class _AppBarPopupMenu extends StatelessWidget {
 
 // todo same in settings page, extract common widget
 class AppBarPopupMenuItem extends StatelessWidget {
-  const AppBarPopupMenuItem({Key? key, required this.title}) : super(key: key);
+  const AppBarPopupMenuItem({super.key, required this.title});
 
   final String title;
 
@@ -109,7 +107,7 @@ class AppBarPopupMenuItem extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key? key, required this.state}) : super(key: key);
+  const _Body({required this.state});
 
   final BodyState state;
 
@@ -124,9 +122,8 @@ class _Body extends StatelessWidget {
 
 class _Content extends StatelessWidget {
   const _Content({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final BodyData state;
 
@@ -192,7 +189,7 @@ class _Content extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({Key? key, required this.info}) : super(key: key);
+  const _Header({required this.info});
 
   final ChatHeaderInfo info;
 

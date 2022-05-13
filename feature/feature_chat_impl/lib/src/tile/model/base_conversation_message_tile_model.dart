@@ -4,12 +4,12 @@ import 'base_message_tile_model.dart';
 
 abstract class BaseConversationMessageTileModel extends BaseMessageTileModel {
   const BaseConversationMessageTileModel({
-    required int id,
+    required super.id,
     required this.senderInfo,
-    required bool isOutgoing,
+    required super.isOutgoing,
     required this.replyInfo,
     required this.additionalInfo,
-  }) : super(id: id, isOutgoing: isOutgoing);
+  });
 
   final ReplyInfo? replyInfo;
   final AdditionalInfo additionalInfo;

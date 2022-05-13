@@ -9,9 +9,7 @@ import 'showcase/message/mesage_showcase_factory.dart';
 import 'showcase/message/message_data.dart';
 
 class ShowcaseMessageListPage extends StatefulWidget {
-  const ShowcaseMessageListPage({
-    Key? key,
-  }) : super(key: key);
+  const ShowcaseMessageListPage({super.key});
 
   @override
   _ShowcaseMessageListPageState createState() =>
@@ -287,18 +285,24 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
           ),
         ],
       ),
-      MessageBundle(name: 'message_contact_registered', messages: <MessageData>[
-        MessageData(
-          name: 'contact registered',
-          messageFactory: () => _getMessage('message_contact_registered'),
-        ),
-      ]),
-      MessageBundle(name: 'message_contact', messages: <MessageData>[
-        MessageData(
-          name: 'message contact',
-          messageFactory: () => _getMessage('message_contact'),
-        ),
-      ]),
+      MessageBundle(
+        name: 'message_contact_registered',
+        messages: <MessageData>[
+          MessageData(
+            name: 'contact registered',
+            messageFactory: () => _getMessage('message_contact_registered'),
+          ),
+        ],
+      ),
+      MessageBundle(
+        name: 'message_contact',
+        messages: <MessageData>[
+          MessageData(
+            name: 'message contact',
+            messageFactory: () => _getMessage('message_contact'),
+          ),
+        ],
+      ),
       MessageBundle(
         name: 'message_custom_service_action',
         messages: <MessageData>[

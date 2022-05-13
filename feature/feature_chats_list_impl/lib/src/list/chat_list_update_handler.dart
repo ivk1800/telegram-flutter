@@ -151,10 +151,12 @@ class ChatListUpdateHandler {
 
     final ChatData chatData = _chats[chatId]!;
     assert(chatData.chat.positions.length == 1);
-    final bool removedPrevChat = _orderedChats.remove(OrderedChat(
-      chatId: chatData.chat.id,
-      order: chatData.chat.getPosition().order,
-    ));
+    final bool removedPrevChat = _orderedChats.remove(
+      OrderedChat(
+        chatId: chatData.chat.id,
+        order: chatData.chat.getPosition().order,
+      ),
+    );
     assert(removedPrevChat);
 
     if (position.order == 0) {

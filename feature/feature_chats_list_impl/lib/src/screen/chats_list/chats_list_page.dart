@@ -7,7 +7,7 @@ import 'chats_list_state.dart';
 import 'chats_list_view_model.dart';
 
 class ChatsListPage extends StatelessWidget {
-  const ChatsListPage({Key? key}) : super(key: key);
+  const ChatsListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,7 @@ class ChatsListPage extends StatelessWidget {
 }
 
 class _SkeletonItem extends StatelessWidget {
-  const _SkeletonItem({
-    Key? key,
-  }) : super(key: key);
+  const _SkeletonItem();
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +82,7 @@ class _SkeletonItem extends StatelessWidget {
 }
 
 class _Skeleton extends StatelessWidget {
-  const _Skeleton({
-    Key? key,
-  }) : super(key: key);
+  const _Skeleton();
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +100,7 @@ class _Skeleton extends StatelessWidget {
 class _Data extends StatelessWidget {
   const _Data({
     required this.models,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final List<ITileModel> models;
 

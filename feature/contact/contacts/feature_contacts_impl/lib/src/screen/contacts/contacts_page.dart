@@ -5,7 +5,7 @@ import 'package:localization_api/localization_api.dart';
 import 'contacts_screen_scope.dart';
 
 class ContactsPage extends StatelessWidget {
-  const ContactsPage({Key? key}) : super(key: key);
+  const ContactsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

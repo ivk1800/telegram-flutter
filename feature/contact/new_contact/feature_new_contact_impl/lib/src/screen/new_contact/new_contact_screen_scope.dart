@@ -9,10 +9,10 @@ import 'new_contact_view_model.dart';
 
 class NewContactScreenScope extends StatefulWidget {
   const NewContactScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<INewContactScreenComponent> create;
@@ -63,11 +63,9 @@ class _NewContactScreenScopeState extends State<NewContactScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _NewContactScreenScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _NewContactScreenScopeState _state;
 

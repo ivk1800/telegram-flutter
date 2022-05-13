@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NewSecretChatPage extends StatefulWidget {
-  const NewSecretChatPage({Key? key}) : super(key: key);
+  const NewSecretChatPage({super.key});
 
   @override
   State<NewSecretChatPage> createState() => _NewSecretChatPageState();

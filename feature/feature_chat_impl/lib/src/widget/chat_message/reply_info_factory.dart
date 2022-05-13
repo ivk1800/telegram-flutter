@@ -43,9 +43,8 @@ class _Painter extends CustomPainter {
 
 class _Decoration extends StatelessWidget {
   const _Decoration({
-    Key? key,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
 
@@ -75,9 +74,8 @@ class _Decoration extends StatelessWidget {
 
 class _Body extends StatelessWidget {
   const _Body({
-    Key? key,
     required this.replyInfo,
-  }) : super(key: key);
+  });
 
   final ReplyInfo replyInfo;
 

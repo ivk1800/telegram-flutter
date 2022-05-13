@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ArchivedStickersPage extends StatelessWidget {
-  const ArchivedStickersPage({Key? key}) : super(key: key);
+  const ArchivedStickersPage({super.key});
 
   @override
   Widget build(BuildContext context) {

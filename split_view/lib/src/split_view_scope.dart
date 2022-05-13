@@ -4,13 +4,12 @@ import '../split_view.dart';
 
 class SplitViewScope extends InheritedWidget {
   const SplitViewScope({
-    Key? key,
-    required Widget child,
+    super.key,
+    required super.child,
     required SplitViewState state,
     required int version,
   })  : _state = state,
-        _version = version,
-        super(key: key, child: child);
+        _version = version;
 
   final SplitViewState _state;
   final int _version;

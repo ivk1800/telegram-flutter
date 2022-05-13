@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class DevRootPage extends StatelessWidget {
-  const DevRootPage({
-    Key? key,
-  }) : super(key: key);
+  const DevRootPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +34,7 @@ class DevRootPage extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({
-    Key? key,
-  }) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +113,12 @@ class _Body extends StatelessWidget {
             router.toChooseCountry(
               (Country country) {
                 router.toDialog(
-                    title: 'Result',
-                    body: d.Body.text(text: country.name),
-                    actions: <d.Action>[
-                      d.Action(text: 'OK'),
-                    ]);
+                  title: 'Result',
+                  body: d.Body.text(text: country.name),
+                  actions: <d.Action>[
+                    d.Action(text: 'OK'),
+                  ],
+                );
               },
             );
           },

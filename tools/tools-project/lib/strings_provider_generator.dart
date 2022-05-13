@@ -92,33 +92,43 @@ void _generateTgStringProvider(List<_Item> list, String workDirectory) {
     Class(
       (ClassBuilder builder) {
         builder.name = 'TgStringsProvider';
-        builder.constructors.add(Constructor((ConstructorBuilder cBuilder) {
-          cBuilder.requiredParameters
-              .add(Parameter((ParameterBuilder pBuilder) {
-            pBuilder.name = '_stringGetter';
-            pBuilder.toThis = true;
-          }));
-          cBuilder.requiredParameters
-              .add(Parameter((ParameterBuilder pBuilder) {
-            pBuilder.name = '_stringFormattedGetter';
-            pBuilder.toThis = true;
-          }));
-        }));
+        builder.constructors.add(
+          Constructor((ConstructorBuilder cBuilder) {
+            cBuilder.requiredParameters.add(
+              Parameter((ParameterBuilder pBuilder) {
+                pBuilder.name = '_stringGetter';
+                pBuilder.toThis = true;
+              }),
+            );
+            cBuilder.requiredParameters.add(
+              Parameter((ParameterBuilder pBuilder) {
+                pBuilder.name = '_stringFormattedGetter';
+                pBuilder.toThis = true;
+              }),
+            );
+          }),
+        );
 
-        builder.fields.add(Field((FieldBuilder fBuilder) {
-          fBuilder.type = refer('String Function(String key)');
-          fBuilder.name = '_stringGetter';
-          fBuilder.modifier = FieldModifier.final$;
-        }));
-        builder.fields.add(Field((FieldBuilder fBuilder) {
-          fBuilder.type =
-              refer('String Function(String key, List<dynamic> args)');
-          fBuilder.name = '_stringFormattedGetter';
-          fBuilder.modifier = FieldModifier.final$;
-        }));
+        builder.fields.add(
+          Field((FieldBuilder fBuilder) {
+            fBuilder.type = refer('String Function(String key)');
+            fBuilder.name = '_stringGetter';
+            fBuilder.modifier = FieldModifier.final$;
+          }),
+        );
+        builder.fields.add(
+          Field((FieldBuilder fBuilder) {
+            fBuilder.type =
+                refer('String Function(String key, List<dynamic> args)');
+            fBuilder.name = '_stringFormattedGetter';
+            fBuilder.modifier = FieldModifier.final$;
+          }),
+        );
 
-        const Reference reference = Reference('IStringsProvider',
-            'package:localization_api/localization_api.dart');
+        const Reference reference = Reference(
+          'IStringsProvider',
+          'package:localization_api/localization_api.dart',
+        );
         allocator.allocate(reference);
         builder.implements.add(const Reference('IStringsProvider'));
 
@@ -156,11 +166,12 @@ void _generateTgStringProvider(List<_Item> list, String workDirectory) {
         builder.methods.add(
           Method((MethodBuilder mBuilder) {
             mBuilder.name = '_get';
-            mBuilder.requiredParameters
-                .add(Parameter((ParameterBuilder pBuilder) {
-              pBuilder.name = 'key';
-              pBuilder.type = const Reference('String');
-            }));
+            mBuilder.requiredParameters.add(
+              Parameter((ParameterBuilder pBuilder) {
+                pBuilder.name = 'key';
+                pBuilder.type = const Reference('String');
+              }),
+            );
             mBuilder.lambda = true;
             mBuilder.returns = const Reference('String');
             mBuilder.body = const Code('_stringGetter.call(key)');
@@ -171,16 +182,18 @@ void _generateTgStringProvider(List<_Item> list, String workDirectory) {
         builder.methods.add(
           Method((MethodBuilder mBuilder) {
             mBuilder.name = '_getFormatted';
-            mBuilder.requiredParameters
-                .add(Parameter((ParameterBuilder pBuilder) {
-              pBuilder.name = 'key';
-              pBuilder.type = const Reference('String');
-            }));
-            mBuilder.requiredParameters
-                .add(Parameter((ParameterBuilder pBuilder) {
-              pBuilder.name = 'args';
-              pBuilder.type = const Reference('List<dynamic>');
-            }));
+            mBuilder.requiredParameters.add(
+              Parameter((ParameterBuilder pBuilder) {
+                pBuilder.name = 'key';
+                pBuilder.type = const Reference('String');
+              }),
+            );
+            mBuilder.requiredParameters.add(
+              Parameter((ParameterBuilder pBuilder) {
+                pBuilder.name = 'args';
+                pBuilder.type = const Reference('List<dynamic>');
+              }),
+            );
             mBuilder.lambda = true;
             mBuilder.returns = const Reference('String');
             mBuilder.body =

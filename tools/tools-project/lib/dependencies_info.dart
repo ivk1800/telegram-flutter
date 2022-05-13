@@ -13,8 +13,10 @@ Future<void> printDependenciesInfo(String workDirectory) async {
 
   final String result = allDependencies.keys
       .sortedBy((String key) => key)
-      .map((String dep) =>
-          '$dep: ${allDependencies[dep]!.map((Dependency d) => d.version).join(', ')}')
+      .map(
+        (String dep) =>
+            '$dep: ${allDependencies[dep]!.map((Dependency d) => d.version).join(', ')}',
+      )
       .join('\n');
 
   Console.write(result);

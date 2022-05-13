@@ -10,10 +10,10 @@ import 'widget/showcase_block_interaction_manager.dart';
 
 class ShowcaseScope extends StatefulWidget {
   const ShowcaseScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<IShowcaseComponent> create;
@@ -22,22 +22,26 @@ class ShowcaseScope extends StatefulWidget {
   State<ShowcaseScope> createState() => _ShowcaseScopeState();
 
   static ChangeUsernameShowcaseFactory getChangeUsernameShowcaseFactory(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._changeUsernameShowcaseFactory;
 
   static NewContactShowcaseFactory getNewContactShowcaseFactory(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._newContactShowcaseFactory;
 
   static CreateNewChannelShowcaseFactory getCreateNewChannelShowcaseFactory(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._createNewChannelShowcaseFactory;
 
   static AuthShowcaseFactory getAuthShowcaseFactory(BuildContext context) =>
       _InheritedScope.of(context)._authShowcaseFactory;
 
   static ShowcaseBlockInteractionManager getShowcaseBlockInteractionManager(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._showcaseBlockInteractionManager;
 }
 
@@ -70,11 +74,9 @@ class _ShowcaseScopeState extends State<ShowcaseScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _ShowcaseScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _ShowcaseScopeState _state;
 

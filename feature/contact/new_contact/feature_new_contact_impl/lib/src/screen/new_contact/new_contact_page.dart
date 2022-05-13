@@ -9,7 +9,7 @@ import 'new_contact_screen_scope.dart';
 import 'new_contact_widget_model.dart';
 
 class NewContactPage extends StatelessWidget {
-  const NewContactPage({Key? key}) : super(key: key);
+  const NewContactPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class NewContactPage extends StatelessWidget {
 }
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBar({Key? key}) : super(key: key);
+  const _AppBar();
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +53,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({
-    Key? key,
-  }) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +103,9 @@ class _Body extends StatelessWidget {
               },
             ),
             Flexible(
-                child: Text(
-                    stringsProvider.sharePhoneNumberWith(<dynamic>['args'])))
+              child:
+                  Text(stringsProvider.sharePhoneNumberWith(<dynamic>['args'])),
+            )
           ],
         )
       ],
@@ -115,9 +114,7 @@ class _Body extends StatelessWidget {
 }
 
 class _UserInfo extends StatelessWidget {
-  const _UserInfo({
-    Key? key,
-  }) : super(key: key);
+  const _UserInfo();
 
   @override
   Widget build(BuildContext context) {
@@ -131,37 +128,40 @@ class _UserInfo extends StatelessWidget {
     return StreamListener<NewContactState>(
       stream: newContactWidgetModel.state,
       builder: (BuildContext context, NewContactState state) {
-        return state.map(loading: (_) {
-          return const Center(child: CircularProgressIndicator());
-        }, data: (DataState dataState) {
-          final UserInformation information = dataState.userInformation;
-          return Row(
-            children: <Widget>[
-              avatarWidgetFactory.create(
-                context,
-                chatId: information.id,
-                imageId: information.avatarImageId,
-                radius: 32,
-              ),
-              const SizedBox(width: 16),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      information.phoneNumber,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Text(
-                      information.onlineStatus,
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                  ],
+        return state.map(
+          loading: (_) {
+            return const Center(child: CircularProgressIndicator());
+          },
+          data: (DataState dataState) {
+            final UserInformation information = dataState.userInformation;
+            return Row(
+              children: <Widget>[
+                avatarWidgetFactory.create(
+                  context,
+                  chatId: information.id,
+                  imageId: information.avatarImageId,
+                  radius: 32,
                 ),
-              ),
-            ],
-          );
-        });
+                const SizedBox(width: 16),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        information.phoneNumber,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      Text(
+                        information.onlineStatus,
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        );
       },
     );
   }

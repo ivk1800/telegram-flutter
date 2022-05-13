@@ -30,7 +30,9 @@ class ChatRouterDelegate implements IChatRouter {
         _keyGenerator.generateForChat(chatId);
 
     if (_splitNavigationInfoProvider.hasKey(
-        chatScreenKey, ContainerType.right)) {
+      chatScreenKey,
+      ContainerType.right,
+    )) {
       _navigationDelegate.removeUntil(
         ContainerType.right,
         (LocalKey key) => key == chatScreenKey,

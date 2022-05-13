@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'chat_context.dart';
 
 class MessageHeader extends StatelessWidget {
-  const MessageHeader({Key? key, required this.title}) : super(key: key);
+  const MessageHeader({super.key, required this.title});
 
   final String title;
 

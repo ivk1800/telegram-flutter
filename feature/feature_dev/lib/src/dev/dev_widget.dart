@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class DevWidget extends StatefulWidget {
   const DevWidget({
-    Key? key,
+    super.key,
     required this.child,
     required this.devFeature,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final DevFeature devFeature;

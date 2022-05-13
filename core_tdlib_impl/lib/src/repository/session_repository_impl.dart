@@ -9,8 +9,9 @@ class SessionRepositoryImpl implements ISessionRepository {
   final ITdFunctionExecutor _functionExecutor;
 
   @override
-  Stream<List<td.Session>> get activeSessions =>
-      Stream<td.Sessions>.fromFuture(_functionExecutor.send<td.Sessions>(
-        const td.GetActiveSessions(),
-      )).map((td.Sessions event) => event.sessions);
+  Stream<List<td.Session>> get activeSessions => Stream<td.Sessions>.fromFuture(
+        _functionExecutor.send<td.Sessions>(
+          const td.GetActiveSessions(),
+        ),
+      ).map((td.Sessions event) => event.sessions);
 }

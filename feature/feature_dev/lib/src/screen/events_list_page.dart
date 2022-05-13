@@ -7,8 +7,8 @@ import 'package:tdlib/td_api.dart' as td;
 
 class EventsListPage extends StatefulWidget {
   const EventsListPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   EventsListPageState createState() => EventsListPageState();

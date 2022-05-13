@@ -7,7 +7,6 @@ import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_tile_li
 import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_view_model.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:localization_api/localization_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tile/tile.dart';
 

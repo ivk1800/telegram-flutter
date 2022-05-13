@@ -32,12 +32,11 @@ typedef ImageLayoutBuilder = Widget Function(Widget imageWidget);
 
 class _ImageWidget extends StatefulWidget {
   const _ImageWidget({
-    Key? key,
     required this.photoId,
     required this.minithumbnail,
     required this.fileDownloader,
     this.layoutBuilder,
-  }) : super(key: key);
+  });
 
   final int? photoId;
   final Minithumbnail? minithumbnail;
@@ -108,10 +107,9 @@ class _ImageWidgetState extends State<_ImageWidget> {
 
 class _FinalImage extends StatelessWidget {
   const _FinalImage({
-    Key? key,
     required this.path,
     required this.layoutBuilder,
-  }) : super(key: key);
+  });
 
   final String path;
   final ImageLayoutBuilder? layoutBuilder;
@@ -133,9 +131,8 @@ class _FinalImage extends StatelessWidget {
 
 class _Minithumbnail extends StatelessWidget {
   const _Minithumbnail({
-    Key? key,
     required this.minithumbnail,
-  }) : super(key: key);
+  });
 
   final Minithumbnail minithumbnail;
 
@@ -158,10 +155,9 @@ class _Minithumbnail extends StatelessWidget {
 
 class _Image extends StatelessWidget {
   const _Image({
-    Key? key,
     required this.path,
     required this.layoutBuilder,
-  }) : super(key: key);
+  });
 
   final String? path;
   final ImageLayoutBuilder? layoutBuilder;

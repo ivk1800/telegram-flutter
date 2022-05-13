@@ -4,7 +4,7 @@ import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
 class SetupFolderPage extends StatefulWidget {
-  const SetupFolderPage({Key? key}) : super(key: key);
+  const SetupFolderPage({super.key});
 
   @override
   State<SetupFolderPage> createState() => _SetupFolderPageState();

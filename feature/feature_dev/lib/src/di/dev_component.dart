@@ -35,9 +35,10 @@ abstract class DevModule {
     IStringsProvider stringsProvider,
   ) =>
       ShowcaseFeature(
-          dependencies: ShowcaseDependencies(
-        stringsProvider: stringsProvider,
-      ));
+        dependencies: ShowcaseDependencies(
+          stringsProvider: stringsProvider,
+        ),
+      );
 
   @j.singleton
   @j.provides

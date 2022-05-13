@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class SearchAppBar extends StatefulWidget {
   const SearchAppBar({
-    Key? key,
+    super.key,
     required this.animationController,
     required this.searchQueryController,
     required this.onLeadingTap,
     required this.focusNode,
     this.isOverrideLeading = true,
-  }) : super(key: key);
+  });
 
   final AnimationController animationController;
   final VoidCallback onLeadingTap;

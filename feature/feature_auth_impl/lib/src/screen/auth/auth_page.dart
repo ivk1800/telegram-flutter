@@ -14,7 +14,7 @@ import 'view_model/auth_state.dart';
 import 'view_model/auth_view_model.dart';
 
 class AuthPage extends StatefulWidget {
-  const AuthPage({Key? key}) : super(key: key);
+  const AuthPage({super.key});
 
   @override
   _AuthPageState createState() => _AuthPageState();
@@ -157,11 +157,10 @@ class _AuthPageState extends State<AuthPage> {
 
 class _CodeCell extends StatelessWidget {
   const _CodeCell({
-    Key? key,
     required this.controller,
     this.focusNode,
     this.focusNext = true,
-  }) : super(key: key);
+  });
 
   final FocusNode? focusNode;
   final TextEditingController controller;
@@ -191,9 +190,8 @@ class _CodeCell extends StatelessWidget {
 
 class _AuthScaffold extends StatelessWidget {
   const _AuthScaffold({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final AuthState state;
 
@@ -202,29 +200,29 @@ class _AuthScaffold extends StatelessWidget {
     final AuthState state = this.state;
 
     return Scaffold(
-        appBar: _AppBar(state: state),
-        body: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          child: state.map(
-            phoneNumber: (PhoneNumberState value) =>
-                _PhoneNumberStateWidget(state: value),
-            code: (CodeState value) => CodeStateWidget(
-              state: value,
-            ),
+      appBar: _AppBar(state: state),
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 200),
+        child: state.map(
+          phoneNumber: (PhoneNumberState value) =>
+              _PhoneNumberStateWidget(state: value),
+          code: (CodeState value) => CodeStateWidget(
+            state: value,
           ),
         ),
-        floatingActionButton: state.maybeMap(
-          phoneNumber: (_) => const _SubmitPhone(),
-          orElse: () => null,
-        ));
+      ),
+      floatingActionButton: state.maybeMap(
+        phoneNumber: (_) => const _SubmitPhone(),
+        orElse: () => null,
+      ),
+    );
   }
 }
 
 class _PhoneNumberStateWidget extends StatelessWidget {
   const _PhoneNumberStateWidget({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final PhoneNumberState state;
 
@@ -295,9 +293,9 @@ class _PhoneNumberStateWidget extends StatelessWidget {
 
 class CodeStateWidget extends StatelessWidget {
   const CodeStateWidget({
-    Key? key,
+    super.key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final CodeState state;
 
@@ -391,9 +389,7 @@ class CodeStateWidget extends StatelessWidget {
 }
 
 class _SubmitPhone extends StatelessWidget {
-  const _SubmitPhone({
-    Key? key,
-  }) : super(key: key);
+  const _SubmitPhone();
 
   @override
   Widget build(BuildContext context) {
@@ -411,9 +407,8 @@ class _SubmitPhone extends StatelessWidget {
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   const _AppBar({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final AuthState state;
 

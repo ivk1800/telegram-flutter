@@ -38,9 +38,10 @@ class AppControllerRouterImpl implements IAppControllerRouter {
         ),
       )
       ..add(
-          key: UniqueKey(),
-          builder: (_) => mainScreenWidget,
-          container: ContainerType.left);
+        key: UniqueKey(),
+        builder: (_) => mainScreenWidget,
+        container: ContainerType.left,
+      );
   }
 
   @override

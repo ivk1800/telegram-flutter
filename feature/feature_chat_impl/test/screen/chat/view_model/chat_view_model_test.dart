@@ -14,16 +14,19 @@ import 'package:test/test.dart';
 
 import 'chat_view_model_test.mocks.dart';
 
-@GenerateMocks(<Type>[
-  ChatArgs,
-  IChatScreenRouter,
-  ILocalizationManager,
-  IChatHeaderInfoInteractor,
-  ChatHeaderActionsInteractor,
-], customMocks: <MockSpec<dynamic>>[
-  MockSpec<ChatMessagesInteractor>(returnNullOnMissingStub: true),
-  MockSpec<IChatManager>(returnNullOnMissingStub: true)
-])
+@GenerateMocks(
+  <Type>[
+    ChatArgs,
+    IChatScreenRouter,
+    ILocalizationManager,
+    IChatHeaderInfoInteractor,
+    ChatHeaderActionsInteractor,
+  ],
+  customMocks: <MockSpec<dynamic>>[
+    MockSpec<ChatMessagesInteractor>(returnNullOnMissingStub: true),
+    MockSpec<IChatManager>(returnNullOnMissingStub: true)
+  ],
+)
 void main() {
   ChatArgs mockChatArgs;
   IChatScreenRouter mockChatScreenRouter;

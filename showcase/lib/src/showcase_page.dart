@@ -4,9 +4,7 @@ import 'package:split_view/split_view.dart';
 import 'showcase/showcase_list_page.dart';
 
 class ShowcasePage extends StatefulWidget {
-  const ShowcasePage({
-    Key? key,
-  }) : super(key: key);
+  const ShowcasePage({super.key});
 
   @override
   _ShowcasePageState createState() => _ShowcasePageState();

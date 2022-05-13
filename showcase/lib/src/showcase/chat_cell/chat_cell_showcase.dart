@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ChatCellShowCase extends StatefulWidget {
-  const ChatCellShowCase({Key? key}) : super(key: key);
+  const ChatCellShowCase({super.key});
 
   @override
   State<ChatCellShowCase> createState() => _ChatCellShowCaseState();

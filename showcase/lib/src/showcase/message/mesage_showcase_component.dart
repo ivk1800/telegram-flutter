@@ -30,11 +30,12 @@ abstract class MessageShowcaseModule {
   @j.provides
   @j.singleton
   static TileFactory provideTileFactory(
-          IFileDownloader fileDownloader,
-          IMessageWallContext messageWallContext,
-          IMessageActionListener messageActionListener,
-          IFileRepository fileRepository,
-          ILocalizationManager localizationManager) =>
+    IFileDownloader fileDownloader,
+    IMessageWallContext messageWallContext,
+    IMessageActionListener messageActionListener,
+    IFileRepository fileRepository,
+    ILocalizationManager localizationManager,
+  ) =>
       MessageTileFactoryComponent(
         dependencies: MessageTileFactoryDependencies(
           fileDownloader: fileDownloader,

@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class ChatContext extends StatelessWidget {
-  const ChatContext({Key? key, required this.data, required this.child})
-      : super(key: key);
+  const ChatContext({super.key, required this.data, required this.child});
 
   final ChatContextData data;
 
@@ -57,10 +56,9 @@ class ChatContextData {
 
 class _InheritedContext extends InheritedTheme {
   const _InheritedContext({
-    Key? key,
     required this.theme,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   final ChatContext theme;
 

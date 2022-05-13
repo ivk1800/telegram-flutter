@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MasksPage extends StatelessWidget {
-  const MasksPage({Key? key}) : super(key: key);
+  const MasksPage({super.key});
 
   @override
   Widget build(BuildContext context) {

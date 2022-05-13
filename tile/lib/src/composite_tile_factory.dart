@@ -8,10 +8,18 @@ class CompositeTileFactory extends TileFactory {
     required List<TileFactory> factories,
   }) : super(
           delegates: factories
-              .map((TileFactory e) =>
-                  Map<Type, ITileFactoryDelegate<ITileModel>>.from(e.delegates))
-              .reduce((Map<Type, ITileFactoryDelegate<ITileModel>> value,
-                      Map<Type, ITileFactoryDelegate<ITileModel>> element) =>
-                  value..addAll(element)),
+              .map(
+                (TileFactory e) =>
+                    Map<Type, ITileFactoryDelegate<ITileModel>>.from(
+                  e.delegates,
+                ),
+              )
+              .reduce(
+                (
+                  Map<Type, ITileFactoryDelegate<ITileModel>> value,
+                  Map<Type, ITileFactoryDelegate<ITileModel>> element,
+                ) =>
+                    value..addAll(element),
+              ),
         );
 }

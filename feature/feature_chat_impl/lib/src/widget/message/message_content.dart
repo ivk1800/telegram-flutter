@@ -6,9 +6,9 @@ import 'package:flutter/widgets.dart';
 
 class MessageContent extends MultiChildRenderObjectWidget {
   MessageContent({
-    Key? key,
-    List<Widget> children = const <Widget>[],
-  }) : super(key: key, children: children);
+    super.key,
+    super.children,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) => _ContentRenderBox();

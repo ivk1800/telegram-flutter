@@ -7,10 +7,10 @@ import 'chat_administration_view_model.dart';
 
 class ChatAdministrationScreenScope extends StatefulWidget {
   const ChatAdministrationScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<IChatAdministrationScreenComponent> create;
@@ -23,7 +23,8 @@ class ChatAdministrationScreenScope extends StatefulWidget {
       _InheritedScope.of(context)._stringsProvider;
 
   static ChatAdministrationViewModel getChatAdministrationViewModel(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._newContactViewModel;
 }
 
@@ -54,11 +55,9 @@ class _ChatAdministrationScreenScopeState
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _ChatAdministrationScreenScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _ChatAdministrationScreenScopeState _state;
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class BlockInteraction extends StatelessWidget {
   const BlockInteraction({
-    Key? key,
+    super.key,
     required this.block,
     required this.child,
     this.canPop = false,
-  }) : super(key: key);
+  });
 
   final bool block;
   final bool canPop;

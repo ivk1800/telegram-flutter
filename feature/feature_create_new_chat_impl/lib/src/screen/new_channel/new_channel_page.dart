@@ -4,7 +4,7 @@ import 'package:localization_api/localization_api.dart';
 import 'new_channel.dart';
 
 class NewChannelPage extends StatelessWidget {
-  const NewChannelPage({Key? key}) : super(key: key);
+  const NewChannelPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,7 @@ class NewChannelPage extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({
-    Key? key,
-  }) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +38,17 @@ class _Body extends StatelessWidget {
             const SizedBox(width: 16),
             Flexible(
               child: TextField(
-                  autofocus: true,
-                  controller: newChannelWidgetModel.channelNameController,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    hintText: stringsProvider.enterChannelName,
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.tag_faces),
-                      onPressed: () {},
-                    ),
-                  )),
+                autofocus: true,
+                controller: newChannelWidgetModel.channelNameController,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  hintText: stringsProvider.enterChannelName,
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.tag_faces),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -70,9 +69,7 @@ class _Body extends StatelessWidget {
 }
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBar({
-    Key? key,
-  }) : super(key: key);
+  const _AppBar();
 
   @override
   Widget build(BuildContext context) {

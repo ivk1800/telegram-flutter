@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
 class NewChatPage extends StatefulWidget {
-  const NewChatPage({Key? key}) : super(key: key);
+  const NewChatPage({super.key});
 
   @override
   State<NewChatPage> createState() => _NewChatPageState();
@@ -21,7 +21,7 @@ class _NewChatPageState extends State<NewChatPage> {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context) {

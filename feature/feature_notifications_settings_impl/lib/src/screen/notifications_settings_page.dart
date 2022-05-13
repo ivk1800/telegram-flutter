@@ -4,7 +4,7 @@ import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
 class NotificationsSettingsPage extends StatelessWidget {
-  const NotificationsSettingsPage({Key? key}) : super(key: key);
+  const NotificationsSettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

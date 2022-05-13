@@ -17,8 +17,10 @@ class SearchRepository {
 
     final List<SearchItemData> all = await _cache;
     return all
-        .where((SearchItemData item) => queryParts
-            .every((String part) => item.name.toLowerCase().contains(part)))
+        .where(
+          (SearchItemData item) => queryParts
+              .every((String part) => item.name.toLowerCase().contains(part)),
+        )
         .toList();
   }
 

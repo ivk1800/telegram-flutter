@@ -8,7 +8,7 @@ import 'chat_administration_screen_scope.dart';
 import 'chat_administration_view_model.dart';
 
 class ChatAdministrationPage extends StatelessWidget {
-  const ChatAdministrationPage({Key? key}) : super(key: key);
+  const ChatAdministrationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,7 @@ class ChatAdministrationPage extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({
-    Key? key,
-  }) : super(key: key);
+  const _Body();
 
   @override
   Widget build(BuildContext context) {

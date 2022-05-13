@@ -6,10 +6,10 @@ import 'message_text.dart';
 
 class MessageCaption extends StatelessWidget {
   const MessageCaption({
-    Key? key,
+    super.key,
     required this.text,
     required this.shortInfo,
-  }) : super(key: key);
+  });
 
   final rt.RichText text;
   final Widget shortInfo;

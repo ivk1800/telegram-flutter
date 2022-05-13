@@ -6,10 +6,10 @@ import 'new_group_view_model.dart';
 
 class CreateNewGroupScreenScope extends StatefulWidget {
   const CreateNewGroupScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<ICreateNewGroupScreenComponent> create;
@@ -44,11 +44,9 @@ class _CreateNewGroupScreenScopeState extends State<CreateNewGroupScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _CreateNewGroupScreenScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _CreateNewGroupScreenScopeState _state;
 

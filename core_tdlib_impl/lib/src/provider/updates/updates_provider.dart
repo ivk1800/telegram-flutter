@@ -81,39 +81,43 @@ extension _UpdatesExtensions on Stream<td.TdObject> {
           .cast<td.UpdateUser>();
 
   // todo add more updates after update lib version
-  Stream<td.Update> chatUpdatesFilter() => where((td.TdObject event) =>
-      event is td.UpdateNewChat ||
-      event is td.UpdateChatTitle ||
-      event is td.UpdateChatPhoto ||
-      event is td.UpdateChatPermissions ||
-      event is td.UpdateChatLastMessage ||
-      event is td.UpdateChatPosition ||
-      event is td.UpdateChatIsMarkedAsUnread ||
-      event is td.UpdateChatIsBlocked ||
-      event is td.UpdateChatHasScheduledMessages ||
-      event is td.UpdateChatDefaultDisableNotification ||
-      event is td.UpdateChatReadInbox ||
-      event is td.UpdateChatReadOutbox ||
-      event is td.UpdateChatUnreadMentionCount ||
-      event is td.UpdateChatNotificationSettings ||
-      event is td.UpdateScopeNotificationSettings ||
-      event is td.UpdateChatActionBar ||
-      event is td.UpdateChatReplyMarkup ||
-      event is td.UpdateChatDraftMessage ||
-      event is td.UpdateChatFilters ||
-      event is td.UpdateChatOnlineMemberCount).cast<td.Update>();
+  Stream<td.Update> chatUpdatesFilter() => where(
+        (td.TdObject event) =>
+            event is td.UpdateNewChat ||
+            event is td.UpdateChatTitle ||
+            event is td.UpdateChatPhoto ||
+            event is td.UpdateChatPermissions ||
+            event is td.UpdateChatLastMessage ||
+            event is td.UpdateChatPosition ||
+            event is td.UpdateChatIsMarkedAsUnread ||
+            event is td.UpdateChatIsBlocked ||
+            event is td.UpdateChatHasScheduledMessages ||
+            event is td.UpdateChatDefaultDisableNotification ||
+            event is td.UpdateChatReadInbox ||
+            event is td.UpdateChatReadOutbox ||
+            event is td.UpdateChatUnreadMentionCount ||
+            event is td.UpdateChatNotificationSettings ||
+            event is td.UpdateScopeNotificationSettings ||
+            event is td.UpdateChatActionBar ||
+            event is td.UpdateChatReplyMarkup ||
+            event is td.UpdateChatDraftMessage ||
+            event is td.UpdateChatFilters ||
+            event is td.UpdateChatOnlineMemberCount,
+      ).cast<td.Update>();
 
-  Stream<td.Update> messageUpdatesFilter() => where((td.TdObject event) =>
-      event is td.UpdateMessageContent ||
-      event is td.UpdateMessageContentOpened ||
-      event is td.UpdateMessageEdited ||
-      event is td.UpdateMessageInteractionInfo ||
-      event is td.UpdateMessageIsPinned ||
-      event is td.UpdateMessageLiveLocationViewed ||
-      event is td.UpdateMessageMentionRead ||
-      event is td.UpdateMessageSendAcknowledged ||
-      event is td.UpdateMessageSendFailed ||
-      event is td.UpdateMessageSendSucceeded ||
-      event is td.UpdateNewMessage ||
-      event is td.UpdateDeleteMessages).cast<td.Update>();
+  Stream<td.Update> messageUpdatesFilter() => where(
+        (td.TdObject event) =>
+            event is td.UpdateMessageContent ||
+            event is td.UpdateMessageContentOpened ||
+            event is td.UpdateMessageEdited ||
+            event is td.UpdateMessageInteractionInfo ||
+            event is td.UpdateMessageIsPinned ||
+            event is td.UpdateMessageLiveLocationViewed ||
+            event is td.UpdateMessageMentionRead ||
+            event is td.UpdateMessageSendAcknowledged ||
+            event is td.UpdateMessageSendFailed ||
+            event is td.UpdateMessageSendSucceeded ||
+            event is td.UpdateNewMessage ||
+            event is td.UpdateDeleteMessages,
+      ).cast<td.Update>();
 }

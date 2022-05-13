@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 
 class ColoredContainer extends StatelessWidget {
   const ColoredContainer({
-    Key? key,
+    super.key,
     required this.fill,
     this.child,
-  }) : super(key: key);
+  });
 
   final IBackgroundFill fill;
   final Widget? child;

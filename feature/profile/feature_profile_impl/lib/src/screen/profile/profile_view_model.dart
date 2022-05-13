@@ -61,10 +61,12 @@ class ProfileViewModel extends BaseViewModel {
     if (state is BodyData) {
       _stateSubject.add(
         _stateSubject.value.copyWith(
-            bodyState: state.copyWith(
-                content: state.content.copy(
-          isMuted: !state.content.isMuted,
-        ))),
+          bodyState: state.copyWith(
+            content: state.content.copy(
+              isMuted: !state.content.isMuted,
+            ),
+          ),
+        ),
       );
     }
   }
@@ -91,7 +93,7 @@ class ProfileViewModel extends BaseViewModel {
   void _initCompositeStateSubscription() {
     final Stream<BodyState> body =
         Stream<ContentData>.fromFuture(_contentInteractor.getContent())
-            .map<BodyState>((ContentData data) => BodyState.data(data))
+            .map<BodyState>(BodyState.data)
             .startWith(const BodyState.loading());
 
     final Stream<ChatHeaderInfo> info = _headerInfoInteractor.infoStream

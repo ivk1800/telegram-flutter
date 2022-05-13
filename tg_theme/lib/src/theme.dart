@@ -4,10 +4,10 @@ import 'theme_data.dart';
 
 class TgTheme extends StatelessWidget {
   const TgTheme({
-    Key? key,
+    super.key,
     required this.data,
     required this.child,
-  }) : super(key: key);
+  });
 
   final TgThemeData data;
 
@@ -30,10 +30,9 @@ class TgTheme extends StatelessWidget {
 
 class _InheritedTheme extends InheritedTheme {
   const _InheritedTheme({
-    Key? key,
     required this.theme,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   final TgTheme theme;
 

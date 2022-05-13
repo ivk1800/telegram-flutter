@@ -10,10 +10,10 @@ import 'settings_screen_widget_model.dart';
 
 class SettingsScreenScope extends StatefulWidget {
   const SettingsScreenScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final CreateComponent<ISettingsComponent> create;
@@ -25,14 +25,16 @@ class SettingsScreenScope extends StatefulWidget {
       _InheritedScope.of(context)._stringsProvider;
 
   static ISettingsSearchScreenFactory getSettingsSearchScreenFactory(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._settingsSearchScreenFactory;
 
   static SettingViewModel getSettingViewModel(BuildContext context) =>
       _InheritedScope.of(context)._settingViewModel;
 
   static SettingsScreenWidgetModel getSettingsScreenWidgetModel(
-          BuildContext context) =>
+    BuildContext context,
+  ) =>
       _InheritedScope.of(context)._settingsScreenWidgetModel;
 
   static tg.AvatarWidgetFactory getAvatarWidgetFactory(BuildContext context) =>
@@ -75,11 +77,9 @@ class _SettingsScreenScopeState extends State<SettingsScreenScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _SettingsScreenScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _SettingsScreenScopeState _state;
 
