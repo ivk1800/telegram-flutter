@@ -2,7 +2,7 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_dev/feature_dev.dart';
-import 'package:feature_dev/src/dev/dev_widget.dart';
+import 'package:feature_dev/src/dev_scope.dart';
 import 'package:flutter/material.dart';
 import 'package:tdlib/td_api.dart' as td;
 
@@ -16,9 +16,7 @@ class DevRootPage extends StatelessWidget {
         title: Builder(
           builder: (BuildContext context) {
             final tg.ConnectionStateWidgetFactory connectionStateProvider =
-                DevWidget.of(context)
-                    .devComponent
-                    .getConnectionStateWidgetFactory();
+                DevScope.getConnectionStateWidgetFactory(context);
             return connectionStateProvider.create(
               context,
               (BuildContext context) => const Text('Events'),
@@ -53,18 +51,18 @@ class _Body extends StatelessWidget {
           children: <Widget>[
             OutlinedButton(
               onPressed: () {
-                DevWidget.of(context).devFeature.client.send(
-                      const td.SetNetworkType(type: td.NetworkTypeNone()),
-                    );
+                DevScope.getTdFunctionExecutor(context).send(
+                  const td.SetNetworkType(type: td.NetworkTypeNone()),
+                );
               },
               child: const Text('NetworkTypeNone'),
             ),
             const SizedBox(width: 8),
             OutlinedButton(
               onPressed: () {
-                DevWidget.of(context).devFeature.client.send(
-                      const td.SetNetworkType(type: td.NetworkTypeWiFi()),
-                    );
+                DevScope.getTdFunctionExecutor(context).send(
+                  const td.SetNetworkType(type: td.NetworkTypeWiFi()),
+                );
               },
               child: const Text('NetworkTypeWiFi'),
             ),
@@ -73,22 +71,23 @@ class _Body extends StatelessWidget {
         const Divider(),
         ListTile(
           onTap: () {
-            DevWidget.of(context).devFeature.router.toEventsList();
+            DevScope.getRouter(context).toEventsList();
           },
           title: const Text('Events'),
         ),
         const Divider(),
-        /* ListTile(
+        ListTile(
           onTap: () {
+            final Widget screenWidget =
+                DevScope.getShowcaseScreenFactory(context).create();
             Navigator.of(context, rootNavigator: true).push<dynamic>(
               MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) =>
-                    const showcase.ShowcasePage(),
+                builder: (BuildContext context) => screenWidget,
               ),
             );
           },
           title: const Text('Demo'),
-        ),*/
+        ),
         const Divider(),
         ListTile(
           title: Text(
@@ -102,14 +101,13 @@ class _Body extends StatelessWidget {
         const Divider(),
         ListTile(
           onTap: () {
-            DevWidget.of(context).devFeature.router.toCreateNewChat();
+            DevScope.getRouter(context).toCreateNewChat();
           },
           title: const Text('to New chat screen'),
         ),
         ListTile(
           onTap: () {
-            final IDevFeatureRouter router =
-                DevWidget.of(context).devFeature.router;
+            final IDevFeatureRouter router = DevScope.getRouter(context);
             router.toChooseCountry(
               (Country country) {
                 router.toDialog(
@@ -126,7 +124,7 @@ class _Body extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
-            DevWidget.of(context).devFeature.router.toWallPapers();
+            DevScope.getRouter(context).toWallPapers();
           },
           title: const Text('to WallPapers'),
         ),

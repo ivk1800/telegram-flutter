@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:showcase/src/showcase/showcase_scope.dart';
 
 import 'di/showcase_component.dart';
 import 'di/showcase_component.jugger.dart';
 import 'showcase/widget/showcase_block_interaction_manager.dart';
-import 'showcase_page.dart';
+import 'showcase_screen_factory.dart';
 
 class ShowcaseFeature {
   ShowcaseFeature({
@@ -22,12 +21,10 @@ class ShowcaseFeature {
 
   GlobalKey<NavigatorState> get navigationKey => _component.getNavigatorKey();
 
-  Widget createScreen() {
-    return ShowcaseScope(
-      child: const ShowcasePage(),
-      create: () => _component,
-    );
-  }
+  late final ShowcaseScreenFactory showcaseScreenFactory =
+      ShowcaseScreenFactory(
+    component: _component,
+  );
 }
 
 class ShowcaseDependencies {

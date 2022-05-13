@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_dev/src/dev/dev_widget.dart';
+import 'package:feature_dev/src/dev_scope.dart';
 import 'package:flutter/material.dart';
 import 'package:tdlib/td_api.dart' as td;
 
@@ -17,7 +17,7 @@ class EventsListPage extends StatefulWidget {
 class EventsListPageState extends State<EventsListPage> {
   late ScrollController _scrollController;
 
-  List<td.TdObject> _events = <td.TdObject>[];
+  final List<td.TdObject> _events = <td.TdObject>[];
 
   late StreamSubscription<List<td.TdObject>> _eventsSubscription;
 
@@ -26,6 +26,7 @@ class EventsListPageState extends State<EventsListPage> {
   @override
   void initState() {
     _scrollController = ScrollController();
+    /*
     _eventsSubscription = DevWidget.of(context)
         .devFeature
         .events
@@ -37,6 +38,7 @@ class EventsListPageState extends State<EventsListPage> {
         }
       });
     });
+    */
     super.initState();
   }
 
@@ -54,9 +56,7 @@ class EventsListPageState extends State<EventsListPage> {
         title: Builder(
           builder: (BuildContext context) {
             final tg.ConnectionStateWidgetFactory connectionStateProvider =
-                DevWidget.of(context)
-                    .devComponent
-                    .getConnectionStateWidgetFactory();
+                DevScope.getConnectionStateWidgetFactory(context);
             return connectionStateProvider.create(
               context,
               (BuildContext context) => const Text('Events'),

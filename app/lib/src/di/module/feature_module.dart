@@ -74,7 +74,6 @@ import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
-import 'package:td_client/td_client.dart';
 
 import '../../navigation/router/chat_screen_router_factory.dart';
 
@@ -559,6 +558,22 @@ abstract class FeatureModule {
         stringsProvider: stringsProvider,
       );
 
+  @j.provides
+  static DevDependencies provideDevDependencies(
+    IStringsProvider stringsProvider,
+    IDevFeatureRouter router,
+    ITdFunctionExecutor functionExecutor,
+    IConnectionStateProvider connectionStateProvider,
+    IEventsProvider eventsProvider,
+  ) =>
+      DevDependencies(
+        eventsProvider: eventsProvider,
+        router: router,
+        functionExecutor: functionExecutor,
+        stringsProvider: stringsProvider,
+        connectionStateProvider: connectionStateProvider,
+      );
+
   // endregion dependencies
 
   // region api
@@ -737,14 +752,10 @@ abstract class FeatureModule {
 
   @j.provides
   static DevFeature provideDevFeature(
-    IDevFeatureRouter router,
-    TdClient client,
-    IConnectionStateProvider connectionStateProvider,
+    DevDependencies dependencies,
   ) =>
       DevFeature(
-        router: router,
-        connectionStateProvider: connectionStateProvider,
-        client: client,
+        dependencies: dependencies,
       );
 
   // region router

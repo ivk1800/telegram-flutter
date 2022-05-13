@@ -9,6 +9,7 @@ class UpdatesProvider
         IChatFiltersUpdatesProvider,
         ISuperGroupUpdatesProvider,
         IBasicGroupUpdatesProvider,
+        IEventsProvider,
         IFileUpdatesProvider,
         IUserUpdatesProvider,
         IAuthenticationStateUpdatesProvider {
@@ -49,6 +50,9 @@ class UpdatesProvider
 
   @override
   Stream<td.UpdateUser> get userUpdates => _client.events.userUpdatesFilter();
+
+  @override
+  Stream<td.TdObject> get events => _client.events;
 }
 
 extension _UpdatesExtensions on Stream<td.TdObject> {

@@ -52,6 +52,10 @@ abstract class TdModule {
 
   @j.singleton
   @j.binds
+  IEventsProvider bindEventsProvider(UpdatesProvider impl);
+
+  @j.singleton
+  @j.binds
   ISuperGroupUpdatesProvider bindSuperGroupUpdatesProvider(
     UpdatesProvider impl,
   );

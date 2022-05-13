@@ -75,6 +75,8 @@ abstract class IAppComponent {
 
   IBasicGroupUpdatesProvider getBasicGroupUpdatesProvider();
 
+  IEventsProvider getEventsProvider();
+
   IAuthenticationStateUpdatesProvider getAuthenticationStateUpdatesProvider();
 
   IConnectionStateProvider getConnectionStateProvider();

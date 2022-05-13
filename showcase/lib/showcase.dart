@@ -7,6 +7,7 @@ import 'package:showcase/src/showcase_app.dart';
 import 'src/showcase_feature.dart';
 
 export 'src/showcase_feature.dart';
+export 'src/showcase_screen_factory.dart';
 
 Future<void> launch() async {
   WidgetsFlutterBinding.ensureInitialized();

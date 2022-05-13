@@ -36,7 +36,7 @@ class ShowcaseAppFactory {
       navigatorKey: showcase.navigationKey,
       title: 'showcase',
       debugShowCheckedModeBanner: false,
-      home: showcase.createScreen(),
+      home: showcase.showcaseScreenFactory.create(),
     );
   }
 }
