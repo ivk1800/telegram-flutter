@@ -33,4 +33,10 @@ class SettingViewModel extends BaseViewModel {
   void onFoldersTap() => _router.toFolders();
 
   void onSessionsTap() => _router.toSessions();
+
+  @override
+  void dispose() {
+    _contentInteractor.dispose();
+    super.dispose();
+  }
 }
