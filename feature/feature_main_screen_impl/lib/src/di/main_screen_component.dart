@@ -30,8 +30,10 @@ abstract class MainScreenModule {
   @j.singleton
   static MainScreenWidgetModel provideMainScreenWidgetModel(
     MainScreenFeatureDependencies dependencies,
+    MainViewModel viewModel,
   ) =>
       MainScreenWidgetModel(
+        viewModel: viewModel,
         chatsListScreenFactory:
             dependencies.chatsListFeatureApi.chatsListScreenFactory,
         globalSearchScreenFactory:

@@ -38,6 +38,7 @@ class SettingsScreenWidgetModel {
   void dispose() {
     searchQueryController.removeListener(_onSearchEvent);
     _settingsSearchScreenController.dispose();
+    screenState.dispose();
   }
 
   Future<bool> onWillPop() async {

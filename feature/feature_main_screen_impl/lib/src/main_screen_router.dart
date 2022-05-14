@@ -4,4 +4,6 @@ abstract class IMainScreenRouter {
   void toDev();
 
   void toContacts();
+
+  void toCreateNewChat();
 }

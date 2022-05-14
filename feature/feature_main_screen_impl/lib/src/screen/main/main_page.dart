@@ -29,7 +29,36 @@ class MainPageState extends State<MainPage> with TickerProviderStateMixin {
         appBar: _AppBar(),
         drawer: _MainDrawer(),
         body: _Body(),
+        floatingActionButton: _FloatingActionButton(),
       ),
+    );
+  }
+}
+
+class _FloatingActionButton extends StatelessWidget {
+  const _FloatingActionButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final MainScreenWidgetModel widgetModel =
+        MainScreenScope.getMainScreenWidgetModel(context);
+    return ValueListenableBuilder<bool>(
+      valueListenable: widgetModel.floatingButtonState,
+      builder: (BuildContext context, bool active, Widget? child) {
+        const Duration duration = Duration(milliseconds: 300);
+        return AnimatedSlide(
+          duration: duration,
+          offset: active ? Offset.zero : const Offset(0, 2),
+          child: AnimatedOpacity(
+            duration: duration,
+            opacity: active ? 1 : 0,
+            child: FloatingActionButton(
+              child: const Icon(Icons.edit),
+              onPressed: widgetModel.onNewMessageTap,
+            ),
+          ),
+        );
+      },
     );
   }
 }

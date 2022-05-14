@@ -23,4 +23,8 @@ class MainViewModel extends BaseViewModel {
         break;
     }
   }
+
+  void onNewMessageTap() {
+    _router.toCreateNewChat();
+  }
 }
