@@ -57,7 +57,7 @@ dependencies:
   td_rich_text_parser:
     path: ../../rich_text/td_rich_text_parser
   tg_theme:
-    path: ../../tg_theme
+    path: ../theme/tg_theme
   tile:
     path: ../../tile
   tuple: 2.0.0

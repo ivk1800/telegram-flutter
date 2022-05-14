@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
+import 'package:theme_manager_api/theme_manager_api.dart';
 
 import 'src/di/dev_component.dart';
 import 'src/di/dev_component.jugger.dart';
@@ -63,6 +64,7 @@ class DevDependencies {
     required this.connectionStateProvider,
     required this.stringsProvider,
     required this.eventsProvider,
+    required this.themeManager,
   });
 
   final ITdFunctionExecutor functionExecutor;
@@ -70,4 +72,5 @@ class DevDependencies {
   final IStringsProvider stringsProvider;
   final IConnectionStateProvider connectionStateProvider;
   final IEventsProvider eventsProvider;
+  final IThemeManager themeManager;
 }

@@ -165,7 +165,11 @@ dependencies:
   td_client:
     path: ../td_client
   tg_theme:
-    path: ../tg_theme
+    path: ../feature/theme/tg_theme
+  theme_manager_api:
+    path: ../feature/theme/theme_manager_api
+  theme_manager_flutter:
+    path: ../feature/theme/theme_manager_flutter
 
 dev_dependencies:
   build_runner: 2.1.7

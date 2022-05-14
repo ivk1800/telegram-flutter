@@ -74,6 +74,7 @@ import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:theme_manager_api/theme_manager_api.dart';
 
 import '../../navigation/router/chat_screen_router_factory.dart';
 
@@ -565,8 +566,10 @@ abstract class FeatureModule {
     ITdFunctionExecutor functionExecutor,
     IConnectionStateProvider connectionStateProvider,
     IEventsProvider eventsProvider,
+    IThemeManager themeManager,
   ) =>
       DevDependencies(
+        themeManager: themeManager,
         eventsProvider: eventsProvider,
         router: router,
         functionExecutor: functionExecutor,

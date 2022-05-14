@@ -3,6 +3,7 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_dev/feature_dev.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:showcase/showcase.dart';
+import 'package:theme_manager_api/theme_manager_api.dart';
 
 @j.Component(
   modules: <Type>[DevModule],
@@ -19,6 +20,8 @@ abstract class IDevComponent {
   ShowcaseScreenFactory getShowcaseScreenFactory();
 
   ITdFunctionExecutor getTdFunctionExecutor();
+
+  IThemeManager getThemeManager();
 }
 
 @j.module
@@ -40,6 +43,12 @@ abstract class DevModule {
     ShowcaseFeature showcaseFeature,
   ) =>
       showcaseFeature.showcaseScreenFactory;
+
+  @j.provides
+  static IThemeManager provideThemeManager(
+    DevDependencies dependencies,
+  ) =>
+      dependencies.themeManager;
 
   @j.provides
   static ITdFunctionExecutor provideTdFunctionExecutor(

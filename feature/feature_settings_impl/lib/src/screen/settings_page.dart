@@ -90,7 +90,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return tg.TgSwitchedAppBar(
       key: settingsScreenWidgetModel.appbarKey,
-      backgroundColor: AppBarTheme.of(context).backgroundColor!,
+      backgroundColor: AppBarTheme.of(context).backgroundColor,
       appBarBuilder: (
         AnimationController animationController,
         BuildContext context,

@@ -69,7 +69,7 @@ dependencies:
   split_view:
     path: ../split_view
   tg_theme:
-    path: ../tg_theme
+    path: ../feature/theme/tg_theme
   tile:
     path: ../tile
 

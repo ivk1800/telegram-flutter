@@ -22,6 +22,8 @@ dependencies:
     path: ../../showcase
   td_client:
     path: ../../td_client
+  theme_manager_api:
+    path: ../theme/theme_manager_api
 
 dev_dependencies:
   build_runner: 2.1.7

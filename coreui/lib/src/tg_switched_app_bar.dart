@@ -18,7 +18,7 @@ class TgSwitchedAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   final AppBarBuilder? appBarBuilder;
   final PreferredSizeWidget? bottom;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   @override
   TgSwitchedAppBarState createState() => TgSwitchedAppBarState();
@@ -56,7 +56,7 @@ class TgSwitchedAppBarState extends State<TgSwitchedAppBar>
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: widget.backgroundColor,
+      color: widget.backgroundColor ?? Theme.of(context).primaryColor,
       child: AnimatedSwitcher(
         duration: _animationDuration,
         transitionBuilder: (Widget child, Animation<double> animation) {

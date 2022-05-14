@@ -22,6 +22,8 @@ Future<void> launch() async {
   appComponent.getAppController().onInit();
 
   final TgApp app = TgApp(
+    themeDataResolver: appComponent.getThemeDataResolver(),
+    themeManager: appComponent.getThemeManagerImpl(),
     blockInteractionManager: appComponent.getBlockInteractionManagerImpl(),
   );
   runApp(app);

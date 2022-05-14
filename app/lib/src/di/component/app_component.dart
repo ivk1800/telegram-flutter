@@ -1,5 +1,6 @@
 import 'package:app/src/di/module/app_module.dart';
 import 'package:app/src/di/module/td_module.dart';
+import 'package:app/src/di/module/theme_module.dart';
 import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
@@ -15,11 +16,13 @@ import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
+import 'package:theme_manager_flutter/theme_manager_flutter.dart';
 
 @j.Component(
   modules: <Type>[
     AppModule,
     TdModule,
+    ThemeModule,
   ],
 )
 abstract class IAppComponent {
@@ -102,6 +105,16 @@ abstract class IAppComponent {
   IContactsManager getContactsManager();
 
   OptionsManager getOptionsManager();
+
+  // region theme
+
+  IThemeManager getThemeManager();
+
+  ThemeManager getThemeManagerImpl();
+
+  ThemeDataResolver getThemeDataResolver();
+
+// endregion
 }
 
 @j.componentBuilder

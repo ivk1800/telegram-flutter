@@ -4,6 +4,7 @@ import 'package:feature_dev/feature_dev.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider_extensions/provider_extensions.dart';
 import 'package:showcase/showcase.dart';
+import 'package:theme_manager_api/theme_manager_api.dart';
 
 import 'di/dev_component.dart';
 
@@ -36,6 +37,9 @@ class DevScope extends StatefulWidget {
 
   static ITdFunctionExecutor getTdFunctionExecutor(BuildContext context) =>
       _InheritedScope.of(context)._functionExecutor;
+
+  static IThemeManager getThemeManager(BuildContext context) =>
+      _InheritedScope.of(context)._themeManager;
 }
 
 class _DevScopeState extends State<DevScope> {
@@ -53,6 +57,8 @@ class _DevScopeState extends State<DevScope> {
 
   late final ITdFunctionExecutor _functionExecutor =
       _component.getTdFunctionExecutor();
+
+  late final IThemeManager _themeManager = _component.getThemeManager();
 
   @override
   Widget build(BuildContext context) {
