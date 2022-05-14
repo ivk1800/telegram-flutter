@@ -2,6 +2,7 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
+import 'package:feature_main_screen_impl/src/screen/main/main_screen_widget_model.dart';
 import 'package:feature_main_screen_impl/src/screen/main/main_view_model.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
@@ -12,7 +13,9 @@ import 'package:localization_api/localization_api.dart';
 abstract class IMainScreenComponent {
   MainViewModel getMainViewModel();
 
-  ILocalizationManager getLocalizationManager();
+  MainScreenWidgetModel getMainScreenWidgetModel();
+
+  IStringsProvider getStringsProvider();
 
   IGlobalSearchScreenFactory getGlobalSearchScreenFactory();
 
@@ -23,6 +26,18 @@ abstract class IMainScreenComponent {
 
 @j.module
 abstract class MainScreenModule {
+  @j.provides
+  @j.singleton
+  static MainScreenWidgetModel provideMainScreenWidgetModel(
+    MainScreenFeatureDependencies dependencies,
+  ) =>
+      MainScreenWidgetModel(
+        chatsListScreenFactory:
+            dependencies.chatsListFeatureApi.chatsListScreenFactory,
+        globalSearchScreenFactory:
+            dependencies.globalSearchFeatureApi.globalSearchScreenFactory,
+      );
+
   @j.provides
   @j.singleton
   static MainViewModel provideMainViewModel(
@@ -71,10 +86,10 @@ abstract class MainScreenModule {
 
   @j.provides
   @j.singleton
-  static ILocalizationManager provideLocalizationManager(
+  static IStringsProvider provideStringsProvider(
     MainScreenFeatureDependencies dependencies,
   ) =>
-      dependencies.localizationManager;
+      dependencies.localizationManager.stringsProvider;
 }
 
 @j.componentBuilder

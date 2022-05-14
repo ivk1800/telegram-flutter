@@ -1,10 +1,10 @@
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_chats_list_api/feature_chats_list_api.dart';
-import 'package:feature_global_search_api/feature_global_search_api.dart';
+import 'package:feature_main_screen_impl/src/screen/main/main_screen_scope.dart';
+import 'package:feature_main_screen_impl/src/screen/main/main_screen_widget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
 
+import 'main_screen.dart';
 import 'main_view_model.dart';
 import 'menu_item.dart' as m;
 
@@ -18,120 +18,102 @@ class MainPage extends StatefulWidget {
 }
 
 class MainPageState extends State<MainPage> with TickerProviderStateMixin {
-  _ScreenState _screenState = _ScreenState.chats;
-  final GlobalSearchScreenController _globalSearchScreenController =
-      GlobalSearchScreenController();
-
-  late Widget _chatsListWidget;
-  late Widget _globalSearchWidget;
-
-  late GlobalObjectKey<tg.TgSwitchedAppBarState> _appbarKey;
-
-  @override
-  void initState() {
-    super.initState();
-    _appbarKey = _AppBarKey(hashCode);
-    _chatsListWidget = context.read<IChatsListScreenFactory>().create();
-    _globalSearchWidget = context.read<IGlobalSearchScreenFactory>().create(
-          _globalSearchScreenController,
-        );
-    _searchQueryController.addListener(_onSearchEvent);
-  }
-
-  final FocusNode _searchQueryFocusNode = FocusNode();
-  final TextEditingController _searchQueryController = TextEditingController();
-
-  @override
-  void dispose() {
-    _searchQueryController.removeListener(_onSearchEvent);
-    _searchQueryFocusNode.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final MainScreenWidgetModel widgetModel =
+        MainScreenScope.getMainScreenWidgetModel(context);
+
     return WillPopScope(
-      onWillPop: () async {
-        if (_screenState != _ScreenState.chats) {
-          _switchToChatState();
-          return false;
-        }
-        return true;
-      },
-      child: Scaffold(
-        appBar: tg.TgSwitchedAppBar(
-          backgroundColor: AppBarTheme.of(context).backgroundColor!,
-          appBarBuilder: (
-            AnimationController animationController,
-            BuildContext context,
-            bool isActive,
-          ) {
-            if (isActive) {
-              return tg.SearchAppBar(
-                animationController: animationController,
-                focusNode: _searchQueryFocusNode,
-                searchQueryController: _searchQueryController,
-                onLeadingTap: _switchToChatState,
-              );
-            } else {
-              return AppBar(
-                title: const _DefaultTitle(),
-                leading: IconButton(
-                  // color: _navigationIconColorTween.value,
-                  icon: AnimatedIcon(
-                    progress: animationController,
-                    icon: AnimatedIcons.menu_arrow,
-                  ),
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                ),
-                actions: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      setState(() {
-                        _screenState = _ScreenState.search;
-                        _searchQueryFocusNode.requestFocus();
-                        _appbarKey.currentState?.setActive(active: true);
-                      });
-                    },
-                  ),
-                ],
-              );
-            }
-          },
-          key: _appbarKey,
-        ),
-        drawer: const _MainDrawer(),
-        body: Stack(
-          children: <Widget>[
-            _chatsListWidget,
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: _screenState == _ScreenState.search
-                  ? ColoredBox(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      child: _globalSearchWidget,
-                    )
-                  : null,
-            ),
-          ],
-        ),
+      onWillPop: widgetModel.onWillPop,
+      child: const Scaffold(
+        appBar: _AppBar(),
+        drawer: _MainDrawer(),
+        body: _Body(),
       ),
     );
   }
+}
 
-  void _onSearchEvent() {
-    _globalSearchScreenController.onQuery(_searchQueryController.text);
+class _AppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _AppBar();
+
+  @override
+  Widget build(BuildContext context) {
+    final MainScreenWidgetModel widgetModel =
+        MainScreenScope.getMainScreenWidgetModel(context);
+
+    return tg.TgSwitchedAppBar(
+      backgroundColor: AppBarTheme.of(context).backgroundColor!,
+      appBarBuilder: (
+        AnimationController animationController,
+        BuildContext context,
+        bool isActive,
+      ) {
+        if (isActive) {
+          return tg.SearchAppBar(
+            animationController: animationController,
+            focusNode: widgetModel.searchQueryFocusNode,
+            searchQueryController: widgetModel.searchQueryController,
+            onLeadingTap: widgetModel.onSearchCloseTap,
+          );
+        } else {
+          return AppBar(
+            title: const _DefaultTitle(),
+            leading: IconButton(
+              // color: _navigationIconColorTween.value,
+              icon: AnimatedIcon(
+                progress: animationController,
+                icon: AnimatedIcons.menu_arrow,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: widgetModel.onSearchTap,
+              ),
+            ],
+          );
+        }
+      },
+      key: widgetModel.appbarKey,
+    );
   }
 
-  void _switchToChatState() {
-    setState(() {
-      _screenState = _ScreenState.chats;
-      _searchQueryController.text = '';
-      _appbarKey.currentState?.setActive(active: false);
-    });
+  @override
+  Size get preferredSize => const Size(double.infinity, kToolbarHeight);
+}
+
+class _Body extends StatelessWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context) {
+    final MainScreenWidgetModel widgetModel =
+        MainScreenScope.getMainScreenWidgetModel(context);
+
+    return Stack(
+      children: <Widget>[
+        widgetModel.chatsListWidget,
+        ValueListenableBuilder<ScreenState>(
+          valueListenable: widgetModel.screenState,
+          builder:
+              (BuildContext context, ScreenState screenState, Widget? child) {
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: screenState == ScreenState.search
+                  ? ColoredBox(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      child: widgetModel.globalSearchWidget,
+                    )
+                  : null,
+            );
+          },
+        )
+      ],
+    );
   }
 }
 
@@ -141,7 +123,7 @@ class _DefaultTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      child: context.read<tg.ConnectionStateWidgetFactory>().create(
+      child: MainScreenScope.getConnectionStateWidgetFactory(context).create(
         context,
         (BuildContext context) {
           // TODO extract text to stings
@@ -158,10 +140,9 @@ class _MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager = context.read();
     final IStringsProvider stringsProvider =
-        localizationManager.stringsProvider;
-    final MainViewModel viewModel = context.read();
+        MainScreenScope.getStringsProvider(context);
+    final MainViewModel viewModel = MainScreenScope.getMainViewModel(context);
 
     return Drawer(
       child: ListView(
@@ -244,16 +225,10 @@ class _MainDrawer extends StatelessWidget {
               Navigator.of(context).pop();
             },
             leading: const Icon(Icons.help_outline),
-            title: Text(localizationManager.getString('TelegramFeatures')),
+            title: Text(stringsProvider.telegramFeatures),
           ),
         ],
       ),
     );
   }
-}
-
-enum _ScreenState { chats, search }
-
-class _AppBarKey extends GlobalObjectKey<tg.TgSwitchedAppBarState> {
-  const _AppBarKey(super.value);
 }
