@@ -91,13 +91,21 @@ abstract class FeatureModule {
     // todo do not depend on feature
     IChatsListFeatureApi chatsListFeatureApi,
     IConnectionStateProvider connectionStateProvider,
+    IThemeManager themeManager,
+    IUserRepository userRepository,
+    OptionsManager optionsManager,
+    IFileRepository fileRepository,
   ) =>
       MainScreenFeatureDependencies(
+        themeManager: themeManager,
+        userRepository: userRepository,
         localizationManager: localizationManager,
+        fileRepository: fileRepository,
         router: router,
         connectionStateProvider: connectionStateProvider,
         chatsListFeatureApi: chatsListFeatureApi,
         globalSearchFeatureApi: globalSearchFeatureApi,
+        optionsManager: optionsManager,
       );
 
   @j.provides

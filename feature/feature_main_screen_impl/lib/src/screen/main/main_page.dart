@@ -1,9 +1,12 @@
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_main_screen_impl/src/screen/main/header_state.dart';
 import 'package:feature_main_screen_impl/src/screen/main/main_screen_scope.dart';
 import 'package:feature_main_screen_impl/src/screen/main/main_screen_widget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
+import 'header_view_model.dart';
 import 'main_screen.dart';
 import 'main_view_model.dart';
 import 'menu_item.dart' as m;
@@ -177,18 +180,7 @@ class _MainDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const <Widget>[
-                SizedBox(height: 70, width: 70, child: CircleAvatar()),
-              ],
-            ),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-          ),
+          const _Header(),
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
@@ -257,6 +249,95 @@ class _MainDrawer extends StatelessWidget {
             title: Text(stringsProvider.telegramFeatures),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header();
+
+  @override
+  Widget build(BuildContext context) {
+    final HeaderViewModel viewModel =
+        MainScreenScope.getHeaderViewModel(context);
+
+    return StreamListener<HeaderState>(
+      stream: viewModel.state,
+      builder: (BuildContext context, HeaderState state) {
+        return state.map(
+          loading: (_) {
+            return DrawerHeader(
+              child: const SizedBox.shrink(),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            );
+          },
+          data: (Data data) => _HeaderData(data: data),
+        );
+      },
+    );
+  }
+}
+
+class _HeaderData extends StatelessWidget {
+  const _HeaderData({
+    required this.data,
+  });
+
+  final Data data;
+
+  @override
+  Widget build(BuildContext context) {
+    final HeaderViewModel viewModel =
+        MainScreenScope.getHeaderViewModel(context);
+    final tg.AvatarWidgetFactory avatarWidgetFactory =
+        MainScreenScope.getAvatarWidgetFactory(context);
+
+    final Color textColor = Theme.of(context).colorScheme.onSecondary;
+    return DrawerHeader(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              SizedBox(
+                height: 70,
+                width: 70,
+                child: avatarWidgetFactory.create(
+                  context,
+                  chatId: data.userId,
+                  imageId: data.avatarFileId,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                data.name,
+                style: TextStyle(color: textColor),
+              ),
+              Text(
+                data.phoneNumberFormatted,
+                style: TextStyle(color: textColor),
+              ),
+            ],
+          ),
+          IconButton(
+            onPressed: viewModel.onToggleThemeTap,
+            icon: Icon(
+              data.isDarkTheme
+                  ? Icons.toggle_off_outlined
+                  : Icons.toggle_on_outlined,
+              color: textColor,
+            ),
+          )
+        ],
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary,
       ),
     );
   }

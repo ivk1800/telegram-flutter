@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider_extensions/provider_extensions.dart';
 
+import 'header_view_model.dart';
 import 'main_view_model.dart';
 
 class MainScreenScope extends StatefulWidget {
@@ -33,6 +34,12 @@ class MainScreenScope extends StatefulWidget {
 
   static IStringsProvider getStringsProvider(BuildContext context) =>
       _InheritedScope.of(context)._stringsProvider;
+
+  static HeaderViewModel getHeaderViewModel(BuildContext context) =>
+      _InheritedScope.of(context)._headerViewModel;
+
+  static tg.AvatarWidgetFactory getAvatarWidgetFactory(BuildContext context) =>
+      _InheritedScope.of(context)._avatarWidgetFactory;
 }
 
 class _MainScreenScopeState extends State<MainScreenScope> {
@@ -48,6 +55,11 @@ class _MainScreenScopeState extends State<MainScreenScope> {
   late final tg.ConnectionStateWidgetFactory _connectionStateWidgetFactory =
       _component.getConnectionStateWidgetFactory();
 
+  late final HeaderViewModel _headerViewModel = _component.getHeaderViewModel();
+
+  late final tg.AvatarWidgetFactory _avatarWidgetFactory =
+      _component.getAvatarWidgetFactory();
+
   @override
   Widget build(BuildContext context) {
     return _InheritedScope(
@@ -58,6 +70,7 @@ class _MainScreenScopeState extends State<MainScreenScope> {
 
   @override
   void dispose() {
+    _headerViewModel.dispose();
     _mainScreenWidgetModel.dispose();
     _mainViewModel.dispose();
     super.dispose();

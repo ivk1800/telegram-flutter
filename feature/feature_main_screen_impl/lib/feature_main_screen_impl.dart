@@ -1,10 +1,12 @@
 library feature_main_screen_impl;
 
+import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:localization_api/localization_api.dart';
+import 'package:theme_manager_api/theme_manager_api.dart';
 
 import 'src/main_screen_router.dart';
 import 'src/screen/main/main_screen_factory.dart';
@@ -31,6 +33,10 @@ class MainScreenFeatureDependencies {
     required this.connectionStateProvider,
     required this.router,
     required this.localizationManager,
+    required this.userRepository,
+    required this.themeManager,
+    required this.optionsManager,
+    required this.fileRepository,
   });
 
   final IGlobalSearchFeatureApi globalSearchFeatureApi;
@@ -42,4 +48,12 @@ class MainScreenFeatureDependencies {
   final IMainScreenRouter router;
 
   final ILocalizationManager localizationManager;
+
+  final IUserRepository userRepository;
+
+  final IThemeManager themeManager;
+
+  final OptionsManager optionsManager;
+
+  final IFileRepository fileRepository;
 }
