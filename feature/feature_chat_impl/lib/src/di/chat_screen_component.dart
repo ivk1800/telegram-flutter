@@ -1,14 +1,13 @@
 import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_info/chat_info.dart';
+import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/chat_message_updates_handler.dart';
 import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
-import 'package:feature_chat_impl/src/manager/chat_manager_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
@@ -304,16 +303,12 @@ abstract class ChatScreenModule {
         chatActionPanelInteractor: chatActionPanelInteractor,
       )..init();
 
-  // todo move to chat feature component
   @j.provides
   @j.singleton
   static IChatManager provideChatManager(
     ChatFeatureDependencies dependencies,
   ) =>
-      ChatManagerImpl(
-        chatRepository: dependencies.chatRepository,
-        functionExecutor: dependencies.functionExecutor,
-      );
+      dependencies.chatManager;
 }
 
 @j.componentBuilder

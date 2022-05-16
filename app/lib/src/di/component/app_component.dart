@@ -8,6 +8,7 @@ import 'package:app/src/widget/block_interaction_manager.dart';
 import 'package:app_controller/app_controller_component.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
+import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:contacts_manager_api/contacts_manager_api.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
@@ -114,7 +115,9 @@ abstract class IAppComponent {
 
   ThemeDataResolver getThemeDataResolver();
 
-// endregion
+  // endregion
+
+  IChatManager get chatManager;
 }
 
 @j.componentBuilder

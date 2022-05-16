@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:async_utils/async_utils.dart';
+import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:dialog_api/dialog_api.dart';
-import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';

@@ -1,6 +1,6 @@
 import 'package:chat_actions_panel/chat_actions_panel.dart';
+import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_arch/core_arch.dart';
-import 'package:feature_chat_api/feature_chat_api.dart';
 
 class ChatActionsPanelViewModel extends BaseViewModel
     implements IActionsListener {

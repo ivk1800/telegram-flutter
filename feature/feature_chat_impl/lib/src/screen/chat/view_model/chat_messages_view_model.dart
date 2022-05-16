@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_arch/core_arch.dart';
-import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';

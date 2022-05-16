@@ -1,6 +1,6 @@
 // @dart=2.9
 
-import 'package:feature_chat_api/feature_chat_api.dart';
+import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';

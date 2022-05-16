@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:feature_chat_api/feature_chat_api.dart';
+import 'package:chat_manager_api/chat_manager_api.dart';
 
 class FakeChatManager implements IChatManager {
   FakeChatManager({this.createChannelFunction});

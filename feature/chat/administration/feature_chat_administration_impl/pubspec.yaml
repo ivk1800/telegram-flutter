@@ -12,6 +12,8 @@ dependencies:
     path: ../../../../block_interaction_api
   chat_info:
     path: ../../chat_info
+  chat_manager_api:
+    path: ../../../../feature/chat/chat_manager/chat_manager_api
   core_arch:
     path: ../../../../core_arch
   core_arch_flutter:
@@ -26,8 +28,6 @@ dependencies:
     path: ../../../../error_transformer_api
   feature_chat_administration_api:
     path: ../feature_chat_administration_api
-  feature_chat_api:
-    path: ../../../feature_chat_api
   flutter:
     sdk: flutter
   jugger: 2.1.0

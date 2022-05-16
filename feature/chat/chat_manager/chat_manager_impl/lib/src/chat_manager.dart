@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
-class ChatManagerImpl implements IChatManager {
-  ChatManagerImpl({
+class ChatManager implements IChatManager {
+  ChatManager({
     required ITdFunctionExecutor functionExecutor,
     required IChatRepository chatRepository,
   })  : _functionExecutor = functionExecutor,

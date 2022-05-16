@@ -8,6 +8,8 @@ environment:
 dependencies:
   auth_manager_api:
     path: ../component/auth_manager/auth_manager_api
+  chat_manager_api:
+    path: ../feature/chat/chat_manager/chat_manager_api
   contacts_manager_api:
     path: ../feature/contact/contacts_manager/contacts_manager_api
   core:

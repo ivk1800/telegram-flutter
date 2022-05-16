@@ -11,6 +11,7 @@ import 'package:app/src/navigation/router/create_new_chat_router_impl.dart';
 import 'package:app/src/navigation/router/new_contact_router.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
+import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:contacts_manager_api/contacts_manager_api.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
@@ -174,8 +175,10 @@ abstract class FeatureModule {
     ISuperGroupRepository superGroupRepository,
     IBasicGroupRepository basicGroupRepository,
     IChatMessagesUpdatesProvider chatMessagesUpdatesProvider,
+    IChatManager chatManager,
   ) =>
       ChatFeatureDependencies(
+        chatManager: chatManager,
         chatMessagesUpdatesProvider: chatMessagesUpdatesProvider,
         chatUpdatesProvider: chatUpdatesProvider,
         basicGroupRepository: basicGroupRepository,
@@ -454,15 +457,14 @@ abstract class FeatureModule {
     IConnectionStateProvider connectionStateProvider,
     IStringsProvider stringsProvider,
     ICreateNewChatRouter router,
-    // todo do not depend on feature
-    IChatFeatureApi chatFeatureApi,
+    IChatManager chatManager,
     IErrorTransformer errorTransformer,
     IBlockInteractionManager blockInteractionManager,
   ) =>
           CreateNewChatFeatureDependencies(
             errorTransformer: errorTransformer,
             blockInteractionManager: blockInteractionManager,
-            chatManager: chatFeatureApi.chatManager,
+            chatManager: chatManager,
             router: router,
             connectionStateProvider: connectionStateProvider,
             stringsProvider: stringsProvider,
@@ -513,8 +515,7 @@ abstract class FeatureModule {
     IErrorTransformer errorTransformer,
     ISuperGroupRepository superGroupRepository,
     IBasicGroupRepository basicGroupRepository,
-    // todo do not depend on feature
-    IChatFeatureApi chatFeatureApi,
+    IChatManager chatManager,
   ) =>
           ChatAdministrationFeatureDependencies(
             errorTransformer: errorTransformer,
@@ -523,7 +524,7 @@ abstract class FeatureModule {
             superGroupRepository: superGroupRepository,
             blockInteractionManager: blockInteractionManager,
             routerFactory: routerFactory,
-            chatManager: chatFeatureApi.chatManager,
+            chatManager: chatManager,
             connectionStateProvider: connectionStateProvider,
             stringsProvider: localizationManager.stringsProvider,
           );

@@ -13,6 +13,8 @@ import 'package:app_controller/app_controller_component.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:auth_manager_impl/auth_manager_impl.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
+import 'package:chat_manager_api/chat_manager_api.dart';
+import 'package:chat_manager_impl/chat_manager_impl.dart';
 import 'package:contacts_manager_api/contacts_manager_api.dart';
 import 'package:contacts_manager_impl/contacts_manager_impl.dart';
 import 'package:core/core.dart';
@@ -261,6 +263,17 @@ abstract class AppModule {
         authScreenFactory: featureProvider.authFeatureApi.authScreenFactory,
         mainScreenFactory:
             featureProvider.mainScreenFeatureApi.mainScreenFactory,
+      );
+
+  @j.singleton
+  @j.provides
+  static IChatManager provideChatManager(
+    IChatRepository chatRepository,
+    ITdFunctionExecutor functionExecutor,
+  ) =>
+      ChatManager(
+        chatRepository: chatRepository,
+        functionExecutor: functionExecutor,
       );
 
 // endregion component

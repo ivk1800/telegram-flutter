@@ -1,0 +1,13 @@
+name: chat_manager_impl
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dev_dependencies:
+  chat_manager_api:
+    path: ../chat_manager_api
+  core_tdlib_api:
+    path: ../../../../core_tdlib_api
+  tg_lint_rules:
+    path: ../../../../tg_lint_rules

@@ -1,10 +1,10 @@
 import 'package:async/async.dart';
 import 'package:async_utils/async_utils.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
+import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:error_transformer_api/error_transformer_api.dart';
-import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'new_channel_screen_router.dart';

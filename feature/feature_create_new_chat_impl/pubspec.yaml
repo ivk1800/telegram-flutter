@@ -10,6 +10,8 @@ dependencies:
     path: ../../async_utils
   block_interaction_api:
     path: ../../block_interaction_api
+  chat_manager_api:
+    path: ../../feature/chat/chat_manager/chat_manager_api
   core_arch:
     path: ../../core_arch
   core_arch_flutter:
@@ -22,8 +24,6 @@ dependencies:
     path: ../../dialog_api
   error_transformer_api:
     path: ../../error_transformer_api
-  feature_chat_api:
-    path: ../feature_chat_api
   feature_create_new_chat_api:
     path: ../feature_create_new_chat_api
   flutter:
