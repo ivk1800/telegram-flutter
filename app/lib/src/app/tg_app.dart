@@ -34,9 +34,11 @@ class TgApp extends StatelessWidget {
               child: child,
               valueListenable: blockInteractionManager,
               builder: (BuildContext context, bool value, Widget? child) {
-                return BlockInteraction(
-                  block: value,
-                  child: TgAppTheme(child: child!),
+                return _FixedTextFactor(
+                  child: BlockInteraction(
+                    block: value,
+                    child: TgAppTheme(child: child!),
+                  ),
                 );
               },
             );
@@ -54,6 +56,23 @@ class TgApp extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _FixedTextFactor extends StatelessWidget {
+  const _FixedTextFactor({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final MediaQueryData baseMediaQuery = MediaQuery.of(context);
+    return MediaQuery(
+      data: baseMediaQuery.copyWith(
+        textScaleFactor: 1.0,
+      ),
+      child: child,
     );
   }
 }
