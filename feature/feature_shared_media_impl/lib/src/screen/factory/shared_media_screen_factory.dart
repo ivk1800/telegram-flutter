@@ -1,15 +1,11 @@
-import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:feature_shared_media_impl/feature_shared_media_impl.dart';
-import 'package:feature_shared_media_impl/src/di/shared_media_component.dart';
 import 'package:feature_shared_media_impl/src/di/shared_media_component.jugger.dart';
 import 'package:feature_shared_media_impl/src/screen/factory/shared_media_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
-import 'share_media_view_model.dart';
+import 'shared_media_screen_scope.dart';
 
 class SharedMediaScreenFactory implements ISharedMediaScreenFactory {
   SharedMediaScreenFactory({
@@ -20,20 +16,11 @@ class SharedMediaScreenFactory implements ISharedMediaScreenFactory {
 
   @override
   Widget create(SharedContentType type) {
-    return Scope<ISharedMediaComponent>(
-      create: () {
-        return JuggerSharedMediaComponentBuilder()
-            .dependencies(_dependencies)
-            .build();
-      },
-      providers: (ISharedMediaComponent component) {
-        return <Provider<dynamic>>[
-          ViewModelProvider<SharedMediaViewModel>(
-            create: (_) => component.getSharedMediaViewModel(),
-          ),
-        ];
-      },
+    return SharedMediaScreenScope(
       child: const SharedMediaPage(),
+      create: () => JuggerSharedMediaComponentBuilder()
+          .dependencies(_dependencies)
+          .build(),
     );
   }
 }
