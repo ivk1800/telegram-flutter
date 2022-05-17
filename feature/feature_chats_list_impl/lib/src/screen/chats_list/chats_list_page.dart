@@ -1,5 +1,5 @@
+import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_scope.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tile/tile.dart';
 
@@ -11,9 +11,12 @@ class ChatsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ChatsListViewModel chatsListViewModel =
+        ChatsListScope.getChatsListViewModel(context);
+
     return Scaffold(
       body: StreamBuilder<ChatsListState>(
-        stream: context.read<ChatsListViewModel>().chatsListState,
+        stream: chatsListViewModel.chatsListState,
         initialData: const ChatsListState.loading(),
         builder:
             (BuildContext context, AsyncSnapshot<ChatsListState> snapshot) {
@@ -106,7 +109,8 @@ class _Data extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TileFactory tileFactory = context.read();
+    final TileFactory tileFactory = ChatsListScope.getTileFactory(context);
+
     return Scrollbar(
       child: ListView.separated(
         separatorBuilder: (BuildContext context, int index) {
