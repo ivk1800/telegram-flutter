@@ -26,14 +26,14 @@ class GlobalSearchFeature implements IGlobalSearchFeatureApi {
 
 class GlobalSearchFeatureDependencies {
   const GlobalSearchFeatureDependencies({
-    required this.localizationManager,
+    required this.stringsProvider,
     required this.chatRepository,
     required this.chatMessageRepository,
     required this.router,
     required this.fileRepository,
   });
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
   final IGlobalSearchFeatureRouter router;
   final IChatRepository chatRepository;
   final IChatMessageRepository chatMessageRepository;

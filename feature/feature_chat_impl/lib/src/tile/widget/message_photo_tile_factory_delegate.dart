@@ -42,6 +42,7 @@ class MessagePhotoTileFactoryDelegate
             minithumbnail: model.minithumbnail,
             imageId: model.photoId,
           ),
+          // todo maybe crash
           aspectRatio: model.minithumbnail!.aspectRatio(),
         ),
         if (model.caption != null)

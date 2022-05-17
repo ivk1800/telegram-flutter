@@ -1,13 +1,14 @@
 import 'package:coreui/coreui.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
-import 'package:feature_global_search_impl/src/screen/global_search/cubit/global_search_cubit.dart';
 import 'package:feature_global_search_impl/src/screen/global_search/global_search_interactor.dart';
 import 'package:feature_global_search_impl/src/screen/global_search/global_search_result_tile_mapper.dart';
+import 'package:feature_global_search_impl/src/screen/global_search/global_search_screen_scope.dart';
+import 'package:feature_global_search_impl/src/screen/global_search/global_search_view_model.dart';
+import 'package:feature_global_search_impl/src/screen/global_search/global_search_widget_model.dart';
 import 'package:feature_global_search_impl/src/screen/global_search/search_interactor_factory.dart';
 import 'package:feature_global_search_impl/src/screen/global_search/tile/delegate/delegate.dart';
 import 'package:feature_global_search_impl/src/screen/global_search/tile/model/model.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:tile/tile.dart';
@@ -16,27 +17,43 @@ import 'package:tile/tile.dart';
 abstract class GlobalSearchScreenModule {
   @j.singleton
   @j.provides
-  static GlobalSearchCubit provideGlobalSearchBloc(
+  static GlobalSearchViewModel provideGlobalSearchViewModel(
     GlobalSearchFeatureDependencies dependencies,
+    GlobalSearchInteractor globalSearchInteractor,
   ) =>
-      GlobalSearchCubit(
+      GlobalSearchViewModel(
         router: dependencies.router,
-        searchInteractor: GlobalSearchInteractor(
-          resultTileMapper: GlobalSearchResultTileMapper(
-            chatRepository: dependencies.chatRepository,
-          ),
-          chatMessageRepository: dependencies.chatMessageRepository,
-          chatRepository: dependencies.chatRepository,
-          searchInteractorFactory: const SearchInteractorFactory(),
-        ),
+        searchInteractor: globalSearchInteractor,
       );
 
   @j.singleton
   @j.provides
-  static ILocalizationManager provideLocalizationManager(
+  static GlobalSearchWidgetModel provideGlobalSearchWidgetModel(
+    GlobalSearchViewModel viewModel,
+  ) =>
+      GlobalSearchWidgetModel(
+        viewModel: viewModel,
+      );
+
+  @j.provides
+  static GlobalSearchInteractor provideGlobalSearchInteractor(
     GlobalSearchFeatureDependencies dependencies,
   ) =>
-      dependencies.localizationManager;
+      GlobalSearchInteractor(
+        resultTileMapper: GlobalSearchResultTileMapper(
+          chatRepository: dependencies.chatRepository,
+        ),
+        chatMessageRepository: dependencies.chatMessageRepository,
+        chatRepository: dependencies.chatRepository,
+        searchInteractorFactory: const SearchInteractorFactory(),
+      );
+
+  @j.singleton
+  @j.provides
+  static IStringsProvider provideStringsProvider(
+    GlobalSearchFeatureDependencies dependencies,
+  ) =>
+      dependencies.stringsProvider;
 
   @j.singleton
   @j.provides
@@ -57,7 +74,8 @@ abstract class GlobalSearchScreenModule {
           ChatResultTileModel: ChatResultTileFactoryDelegate(
             avatarWidgetFactory: avatarWidgetFactory,
             onTap: (BuildContext context, int chatId) {
-              context.read<GlobalSearchCubit>().onChatTap(chatId);
+              GlobalSearchScreenScope.getGlobalSearchWidgetModel(context)
+                  .onChatTap(chatId);
             },
           ),
           FileResultTileModel: const FileResultTileFactoryDelegate(),

@@ -141,7 +141,7 @@ abstract class FeatureModule {
 
   @j.provides
   static GlobalSearchFeatureDependencies provideGlobalSearchFeatureDependencies(
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     IChatRepository chatRepository,
     IFileRepository fileRepository,
     IChatMessageRepository chatMessageRepository,
@@ -149,7 +149,7 @@ abstract class FeatureModule {
   ) =>
       GlobalSearchFeatureDependencies(
         router: router,
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
         chatRepository: chatRepository,
         fileRepository: fileRepository,
         chatMessageRepository: chatMessageRepository,

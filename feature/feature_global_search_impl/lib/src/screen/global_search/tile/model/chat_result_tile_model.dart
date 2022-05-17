@@ -11,6 +11,7 @@ class ChatResultTileModel implements ITileModel {
 
   final int chatId;
   final int? avatarId;
+  // todo use RichText
   final InlineSpan title;
   final InlineSpan subtitle;
 }

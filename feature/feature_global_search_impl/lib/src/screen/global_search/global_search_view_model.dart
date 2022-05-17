@@ -1,22 +1,21 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:feature_global_search_impl/feature_global_search_impl.dart';
 import 'package:feature_global_search_impl/src/screen/global_search/global_search_interactor.dart';
 import 'package:feature_global_search_impl/src/screen/global_search/global_search_result_category.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'global_search_state.dart';
 
-class GlobalSearchCubit extends Cubit<GlobalSearchState> {
-  GlobalSearchCubit({
+class GlobalSearchViewModel extends BaseViewModel {
+  GlobalSearchViewModel({
     required IGlobalSearchFeatureRouter router,
     required GlobalSearchInteractor searchInteractor,
   })  : _searchInteractor = searchInteractor,
-        _router = router,
-        super(searchInteractor.state) {
-    _searchInteractor.stateStream.listen(emit);
-  }
+        _router = router;
 
   final IGlobalSearchFeatureRouter _router;
   final GlobalSearchInteractor _searchInteractor;
+
+  Stream<GlobalSearchState> get stateStream => _searchInteractor.stateStream;
 
   void onChatTap(int chatId) {
     _router.toChat(chatId);
@@ -31,8 +30,8 @@ class GlobalSearchCubit extends Cubit<GlobalSearchState> {
   }
 
   @override
-  Future<void> close() {
+  void dispose() {
     _searchInteractor.dispose();
-    return super.close();
+    super.dispose();
   }
 }

@@ -8,6 +8,10 @@ environment:
 dependencies:
   chat_navigation_api:
     path: ../chat/chat_navigation_api
+  core_arch:
+    path: ../../core_arch
+  core_arch_flutter:
+    path: ../../core_arch_flutter
   core_tdlib_api:
     path: ../../core_tdlib_api
   coreui:
@@ -19,7 +23,6 @@ dependencies:
   freezed_annotation: 1.1.0
   localization_api:
     path: ../../localization_api
-  provider: 6.0.2
   provider_extensions:
     path: ../../provider_extensions
   rxdart: 0.27.3

@@ -1,13 +1,13 @@
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_global_search_api/feature_global_search_api.dart';
+import 'package:feature_global_search_impl/src/screen/global_search/global_search_screen_scope.dart';
+import 'package:feature_global_search_impl/src/screen/global_search/global_search_widget_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tile/tile.dart';
 
-import 'cubit/global_search_cubit.dart';
-import 'cubit/global_search_state.dart';
-import 'cubit/search_page_state.dart';
-import 'global_search_result_category.dart';
+import 'global_search_state.dart';
+import 'search_page_state.dart';
 
 class GlobalSearchPage extends StatefulWidget {
   const GlobalSearchPage({
@@ -23,81 +23,20 @@ class GlobalSearchPage extends StatefulWidget {
 
 class _GlobalSearchPageState extends State<GlobalSearchPage>
     with SingleTickerProviderStateMixin {
-  late GlobalSearchCubit _searchCubit;
-
   @override
   void initState() {
-    _searchCubit = context.read<GlobalSearchCubit>();
-    _listenController();
+    GlobalSearchScreenScope.getGlobalSearchWidgetModel(context).init(
+      this,
+      widget.controller,
+    );
     super.initState();
-    tabController = TabController(vsync: this, length: 6);
-    tabController.addListener(() {
-      _searchCubit.onCurrentPageChanged(
-        GlobalSearchResultCategory.values[tabController.index],
-      );
-    });
-  }
-
-  late TabController tabController;
-
-  void onCallback() {
-    final String query = widget.controller.queryValue.value;
-    _searchCubit.onQueryChanged(query);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<GlobalSearchCubit, GlobalSearchState>(
-        listener: (BuildContext context, GlobalSearchState state) {},
-        builder: (BuildContext context, GlobalSearchState state) {
-          return Column(
-            children: <Widget>[
-              _AppBar(
-                child: TabBar(
-                  controller: tabController,
-                  indicatorColor: Colors.red,
-                  isScrollable: true,
-                  // todo extract strings
-                  tabs: const <Widget>[
-                    Tab(
-                      text: 'Chats',
-                    ),
-                    Tab(
-                      text: 'Media',
-                    ),
-                    Tab(
-                      text: 'Links',
-                    ),
-                    Tab(
-                      text: 'Files',
-                    ),
-                    Tab(
-                      text: 'Music',
-                    ),
-                    Tab(
-                      text: 'Voice',
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  controller: tabController,
-                  children: <Widget>[
-                    _SearchPage(pageState: state.chatsPageState),
-                    _SearchPage(pageState: state.mediaPageState),
-                    _SearchPage(pageState: state.linksPageState),
-                    _SearchPage(pageState: state.filesPageState),
-                    _SearchPage(pageState: state.musicPageState),
-                    _SearchPage(pageState: state.voicePageState),
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
-      ),
+    return const Scaffold(
+      appBar: _AppBar(),
+      body: _Body(),
     );
   }
 
@@ -105,34 +44,100 @@ class _GlobalSearchPageState extends State<GlobalSearchPage>
   void didUpdateWidget(covariant GlobalSearchPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller) {
-      oldWidget.controller.queryValue.removeListener(onCallback);
-      _listenController();
+      GlobalSearchScreenScope.getGlobalSearchWidgetModel(context)
+          .onNewController(widget.controller);
     }
   }
+}
+
+class _Body extends StatelessWidget {
+  const _Body();
 
   @override
-  void dispose() {
-    widget.controller.queryValue.removeListener(onCallback);
-    tabController.dispose();
-    super.dispose();
-  }
+  Widget build(BuildContext context) {
+    final GlobalSearchWidgetModel widgetModel =
+        GlobalSearchScreenScope.getGlobalSearchWidgetModel(context);
 
-  void _listenController() {
-    widget.controller.queryValue.addListener(onCallback);
+    return StreamListener<GlobalSearchState>(
+      stream: widgetModel.state,
+      builder: (BuildContext context, GlobalSearchState state) {
+        return _Tabs(state: state);
+      },
+    );
+  }
+}
+
+class _Tabs extends StatelessWidget {
+  const _Tabs({
+    required this.state,
+  });
+
+  final GlobalSearchState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final GlobalSearchWidgetModel widgetModel =
+        GlobalSearchScreenScope.getGlobalSearchWidgetModel(context);
+
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: TabBarView(
+            controller: widgetModel.tabController,
+            children: <Widget>[
+              _SearchPage(pageState: state.chatsPageState),
+              _SearchPage(pageState: state.mediaPageState),
+              _SearchPage(pageState: state.linksPageState),
+              _SearchPage(pageState: state.filesPageState),
+              _SearchPage(pageState: state.musicPageState),
+              _SearchPage(pageState: state.voicePageState),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBar({required this.child});
-
-  final Widget child;
+  const _AppBar();
 
   @override
   Widget build(BuildContext context) {
+    final GlobalSearchWidgetModel widgetModel =
+        GlobalSearchScreenScope.getGlobalSearchWidgetModel(context);
+
     return Container(
       constraints: const BoxConstraints(minWidth: double.infinity),
       color: Theme.of(context).colorScheme.secondary,
-      child: Center(child: child),
+      child: Center(
+        child: TabBar(
+          controller: widgetModel.tabController,
+          indicatorColor: Colors.red,
+          isScrollable: true,
+          // todo extract strings
+          tabs: const <Widget>[
+            Tab(
+              text: 'Chats',
+            ),
+            Tab(
+              text: 'Media',
+            ),
+            Tab(
+              text: 'Links',
+            ),
+            Tab(
+              text: 'Files',
+            ),
+            Tab(
+              text: 'Music',
+            ),
+            Tab(
+              text: 'Voice',
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -160,7 +165,8 @@ class _SearchPage extends StatelessWidget {
         return const Center(child: Text('empty'));
       },
       data: (List<ITileModel> models) {
-        final TileFactory tileFactory = context.read();
+        final TileFactory tileFactory =
+            GlobalSearchScreenScope.getTileFactory(context);
         return ListView.separated(
           separatorBuilder: (BuildContext context, int index) =>
               const tg.Divider(
