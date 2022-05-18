@@ -1,12 +1,13 @@
 import 'dart:async';
 
-import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tuple/tuple.dart';
 
-class ChatActionPanelInteractor implements IChatActionPanelInteractor {
+import 'panel_state.dart';
+
+class ChatActionPanelInteractor {
   ChatActionPanelInteractor({
     required int chatId,
     required IChatRepository chatRepository,
@@ -37,10 +38,8 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
   final BehaviorSubject<PanelState> _stateSubject =
       BehaviorSubject<PanelState>.seeded(const PanelState.empty());
 
-  @override
   Stream<PanelState> get panelStateStream => _stateSubject;
 
-  @override
   void dispose() {
     _stateSubject.close();
     _subscription?.cancel();
@@ -52,7 +51,7 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
             .flatMap((td.Chat chat) {
       return chat.type.map(
         private: (td.ChatTypePrivate value) {
-          return Stream<PanelState>.value(const PanelState.empty());
+          return _getPrivateChatState(chat);
         },
         basicGroup: (td.ChatTypeBasicGroup value) {
           return Stream<td.BasicGroup>.fromFuture(
@@ -71,6 +70,14 @@ class ChatActionPanelInteractor implements IChatActionPanelInteractor {
     });
 
     _subscription = stateStream.listen(_stateSubject.add);
+  }
+
+  Stream<PanelState> _getPrivateChatState(td.Chat chat) {
+    if (chat.permissions.canSendMessages) {
+      return Stream<PanelState>.value(const PanelState.writer());
+    }
+
+    return Stream<PanelState>.value(const PanelState.empty());
   }
 
   Stream<PanelState> _finalPanelState({

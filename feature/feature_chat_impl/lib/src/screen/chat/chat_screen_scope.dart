@@ -1,6 +1,6 @@
 import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
-import 'package:feature_chat_impl/src/di/di.dart';
+import 'package:feature_chat_impl/src/di/chat_screen_component.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class ChatScreenScope extends StatefulWidget {
   @override
   State<ChatScreenScope> createState() => _ChatScreenScopeState();
 
-  static IChatActionPanelFactory getChatActionPanelFactory(
+  static ChatActionPanelFactory getChatActionPanelFactory(
     BuildContext context,
   ) =>
       _InheritedScope.of(context)._chatActionPanelFactory;
@@ -44,17 +44,12 @@ class ChatScreenScope extends StatefulWidget {
 
   static ChatActionBarViewModel getChatActionBarModel(BuildContext context) =>
       _InheritedScope.of(context)._chatActionBarModel;
-
-  static ChatActionsPanelViewModel getChatActionsPanelViewModel(
-    BuildContext context,
-  ) =>
-      _InheritedScope.of(context)._chatActionsPanelViewModel;
 }
 
 class _ChatScreenScopeState extends State<ChatScreenScope> {
   late final IChatScreenComponent _component = widget.create.call();
 
-  late final IChatActionPanelFactory _chatActionPanelFactory =
+  late final ChatActionPanelFactory _chatActionPanelFactory =
       _component.getChatActionPanelFactory();
 
   late final MessageFactory _messageFactory = _component.getMessageFactory();
@@ -71,9 +66,6 @@ class _ChatScreenScopeState extends State<ChatScreenScope> {
   late final ChatActionBarViewModel _chatActionBarModel =
       _component.getChatActionBarViewModel();
 
-  late final ChatActionsPanelViewModel _chatActionsPanelViewModel =
-      _component.getChatActionsPanelViewModel();
-
   @override
   Widget build(BuildContext context) {
     return _InheritedScope(
@@ -86,7 +78,6 @@ class _ChatScreenScopeState extends State<ChatScreenScope> {
   void dispose() {
     _chatMessagesViewModel.dispose();
     _chatActionBarModel.dispose();
-    _chatActionsPanelViewModel.dispose();
     super.dispose();
   }
 }

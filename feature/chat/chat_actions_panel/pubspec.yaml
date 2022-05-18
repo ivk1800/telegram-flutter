@@ -6,14 +6,28 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  async_utils:
+    path: ../../../async_utils
+  chat_manager_api:
+    path: ../chat_manager/chat_manager_api
+  core_arch:
+    path: ../../../core_arch
+  core_arch_flutter:
+    path: ../../../core_arch_flutter
   core_tdlib_api:
     path: ../../../core_tdlib_api
+  dialog_api:
+    path: ../../../dialog_api
+  error_transformer_api:
+    path: ../../../error_transformer_api
   flutter:
     sdk: flutter
   freezed_annotation: 1.1.0
+  jugger: 2.1.0
   localization_api:
     path: ../../../localization_api
-  provider: 6.0.2
+  provider_extensions:
+    path: ../../../provider_extensions
   rxdart: 0.27.3
   tuple: 2.0.0
 
@@ -21,5 +35,6 @@ dev_dependencies:
   build_runner: 2.1.7
   dependency_validator: 3.2.0
   freezed: 1.1.1
+  jugger_generator: 2.2.1
   tg_lint_rules:
     path: ../../../tg_lint_rules

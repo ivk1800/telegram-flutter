@@ -397,4 +397,6 @@ This link opens a chat with you:
     <string lang="UsernamePlaceholder">Your Username</string>
     <!-- https://translations.telegram.org/en/android/settings/UsernameEmpty -->
     <string lang="UsernameEmpty">None</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/Message -->
+    <string lang="Message">Message</string>
 </resources>

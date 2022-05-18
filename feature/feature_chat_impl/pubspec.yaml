@@ -30,6 +30,8 @@ dependencies:
     path: ../../coreui
   dialog_api:
     path: ../../dialog_api
+  error_transformer_api:
+    path: ../../error_transformer_api
   feature_chat_api:
     path: ../feature_chat_api
   feature_chat_header_info_api:

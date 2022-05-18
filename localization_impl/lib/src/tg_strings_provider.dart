@@ -602,6 +602,9 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get usernameEmpty => _get('UsernameEmpty');
 
+  @override
+  String get message => _get('Message');
+
   String _get(String key) => _stringGetter.call(key);
 
   String _getFormatted(String key, List<dynamic> args) =>

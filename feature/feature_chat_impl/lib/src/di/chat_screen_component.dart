@@ -37,11 +37,7 @@ abstract class IChatScreenComponent {
 
   ChatActionBarViewModel getChatActionBarViewModel();
 
-  ChatActionsPanelViewModel getChatActionsPanelViewModel();
-
-  IChatActionPanelFactory getChatActionPanelFactory();
-
-  IChatActionPanelInteractor getChatActionPanelInteractor();
+  ChatActionPanelFactory getChatActionPanelFactory();
 }
 
 @j.module
@@ -265,43 +261,27 @@ abstract class ChatScreenModule {
 
   @j.provides
   @j.singleton
-  static IChatActionPanelFactory provideChatActionPanelFactory(
+  static ChatActionPanelFactory provideChatActionPanelFactory(
     ChatFeatureDependencies dependencies,
-    ChatActionsPanelViewModel chatActionsViewModel,
+    ChatArgs args,
   ) =>
       ChatActionPanelFactory(
-        actionsListener: chatActionsViewModel,
-        localizationManager: dependencies.localizationManager,
+        dependencies: ChatActionPanelDependencies(
+          errorTransformer: dependencies.errorTransformer,
+          // todo pass dialog router
+          dialogRouter: dependencies.routerFactory.create(args.chatId),
+          functionExecutor: dependencies.functionExecutor,
+          chatManager: dependencies.chatManager,
+          chatId: args.chatId,
+          chatRepository: dependencies.chatRepository,
+          stringsProvider: dependencies.localizationManager.stringsProvider,
+          superGroupRepository: dependencies.superGroupRepository,
+          basicGroupRepository: dependencies.basicGroupRepository,
+          basicGroupUpdatesProvider: dependencies.basicGroupUpdatesProvider,
+          chatUpdatesProvider: dependencies.chatUpdatesProvider,
+          superGroupUpdatesProvider: dependencies.superGroupUpdatesProvider,
+        ),
       );
-
-  @j.provides
-  static IChatActionPanelInteractor provideChatActionPanelInteractor(
-    ChatFeatureDependencies dependencies,
-    ChatArgs args,
-  ) =>
-      ChatActionPanelInteractor(
-        basicGroupUpdatesProvider: dependencies.basicGroupUpdatesProvider,
-        chatUpdatesProvider: dependencies.chatUpdatesProvider,
-        superGroupUpdatesProvider: dependencies.superGroupUpdatesProvider,
-        superGroupRepository: dependencies.superGroupRepository,
-        basicGroupRepository: dependencies.basicGroupRepository,
-        chatRepository: dependencies.chatRepository,
-        chatId: args.chatId,
-      );
-
-  @j.provides
-  @j.singleton
-  static ChatActionsPanelViewModel provideChatActionsViewModel(
-    ChatFeatureDependencies dependencies,
-    ChatArgs args,
-    IChatManager chatManager,
-    IChatActionPanelInteractor chatActionPanelInteractor,
-  ) =>
-      ChatActionsPanelViewModel(
-        chatId: args.chatId,
-        chatManager: chatManager,
-        chatActionPanelInteractor: chatActionPanelInteractor,
-      )..init();
 
   @j.provides
   @j.singleton

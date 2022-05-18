@@ -384,4 +384,6 @@ abstract class IStringsProvider {
   String get usernamePlaceholder;
 
   String get usernameEmpty;
+
+  String get message;
 }

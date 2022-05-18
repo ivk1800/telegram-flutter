@@ -3,6 +3,7 @@ library feature_chat_impl;
 import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_file_api/feature_file_api.dart';
@@ -59,6 +60,7 @@ class ChatFeatureDependencies {
     required this.chatUpdatesProvider,
     required this.chatMessagesUpdatesProvider,
     required this.chatManager,
+    required this.errorTransformer,
   });
 
   final IChatRepository chatRepository;
@@ -100,4 +102,6 @@ class ChatFeatureDependencies {
   final IChatMessagesUpdatesProvider chatMessagesUpdatesProvider;
 
   final IChatManager chatManager;
+
+  final IErrorTransformer errorTransformer;
 }

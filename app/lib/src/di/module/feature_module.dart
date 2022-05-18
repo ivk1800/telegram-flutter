@@ -176,8 +176,10 @@ abstract class FeatureModule {
     IBasicGroupRepository basicGroupRepository,
     IChatMessagesUpdatesProvider chatMessagesUpdatesProvider,
     IChatManager chatManager,
+    IErrorTransformer errorTransformer,
   ) =>
       ChatFeatureDependencies(
+        errorTransformer: errorTransformer,
         chatManager: chatManager,
         chatMessagesUpdatesProvider: chatMessagesUpdatesProvider,
         chatUpdatesProvider: chatUpdatesProvider,

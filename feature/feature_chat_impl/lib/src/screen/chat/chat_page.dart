@@ -57,8 +57,8 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     final ChatMessagesViewModel viewModel =
         ChatScreenScope.getChatMessagesViewModel(context);
-    final ChatActionsPanelViewModel chatActionsViewModel =
-        ChatScreenScope.getChatActionsPanelViewModel(context);
+    final ChatActionPanelFactory chatActionPanelFactory =
+        ChatScreenScope.getChatActionPanelFactory(context);
 
     return Scaffold(
       backgroundColor:
@@ -85,16 +85,7 @@ class _ChatPageState extends State<ChatPage> {
           );
         },
       ),
-      bottomNavigationBar: SafeArea(
-        child: StreamListener<PanelState>(
-          stream: chatActionsViewModel.actionsPanelState,
-          builder: (BuildContext context, PanelState state) {
-            final IChatActionPanelFactory factory =
-                ChatScreenScope.getChatActionPanelFactory(context);
-            return factory.create(state);
-          },
-        ),
-      ),
+      bottomNavigationBar: chatActionPanelFactory.create(),
     );
   }
 }
