@@ -118,8 +118,6 @@ class _UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IStringsProvider stringsProvider =
-        NewContactScreenScope.getStringsProvider(context);
     final AvatarWidgetFactory avatarWidgetFactory =
         NewContactScreenScope.getAvatarWidgetFactory(context);
     final NewContactWidgetModel newContactWidgetModel =

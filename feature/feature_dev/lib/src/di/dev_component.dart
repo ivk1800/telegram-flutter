@@ -1,6 +1,8 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_dev/feature_dev.dart';
+import 'package:feature_dev/src/events_repository.dart';
+import 'package:feature_dev/src/screen/events_list/events_list_screen_factory.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:showcase/showcase.dart';
 import 'package:theme_manager_api/theme_manager_api.dart';
@@ -22,6 +24,10 @@ abstract class IDevComponent {
   ITdFunctionExecutor getTdFunctionExecutor();
 
   IThemeManager getThemeManager();
+
+  EventsRepository getEventsRepository();
+
+  EventsListScreenFactory getEventsListScreenFactory();
 }
 
 @j.module
@@ -37,6 +43,26 @@ abstract class DevModule {
     DevDependencies dependencies,
   ) =>
       dependencies.router;
+
+  @j.provides
+  @j.singleton
+  static EventsRepository provideEventsRepository(
+    DevDependencies dependencies,
+  ) =>
+      EventsRepository(
+        eventsProvider: dependencies.eventsProvider,
+      )..init();
+
+  @j.provides
+  @j.singleton
+  static EventsListScreenFactory provideEventsListScreenFactory(
+    EventsRepository eventsRepository,
+    DevDependencies dependencies,
+  ) =>
+      EventsListScreenFactory(
+        eventsRepository: eventsRepository,
+        connectionStateProvider: dependencies.connectionStateProvider,
+      );
 
   @j.provides
   static ShowcaseScreenFactory provideShowcaseScreenFactory(

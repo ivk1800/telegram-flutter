@@ -271,7 +271,8 @@ class CommonScreenRouterImpl
 
   @override
   void toEventsList() {
-    final Widget widget = _featureProvider.devFeature.createEventsListWidget();
+    final Widget widget =
+        _featureProvider.devFeature.eventsListScreenFactory.create();
     _add(
       widget: widget,
       container: ContainerType.top,

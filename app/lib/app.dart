@@ -19,6 +19,7 @@ Future<void> launch() async {
       .localizationManager(localizationManager)
       .build();
 
+  appComponent.getFeatureProvider().devFeature.init();
   appComponent.getAppController().onInit();
 
   final TgApp app = TgApp(
