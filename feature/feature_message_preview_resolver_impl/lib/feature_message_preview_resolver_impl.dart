@@ -21,8 +21,8 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
     required IUserRepository userRepository,
     required IChatMessageRepository messageRepository,
     required IChatRepository chatRepository,
-    required ILocalizationManager localizationManager,
-  })  : _localizationManager = localizationManager,
+    required IStringsProvider stringsProvider,
+  })  : _stringsProvider = stringsProvider,
         _userRepository = userRepository,
         _delegate = mode == Mode.chatPreview
             ? ChatPreviewDelegate(
@@ -37,7 +37,7 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
               );
 
   final IUserRepository _userRepository;
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
   final IPreviewDelegate _delegate;
 
   @override
@@ -68,10 +68,8 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
         final String joinedUsernames = await Future.wait(userNamesFutures)
             .then((List<String> users) => users.join(', '));
         return MessagePreviewData(
-          firstText: _localizationManager.getStringFormatted(
-            'EventLogGroupJoined',
-            <dynamic>[joinedUsernames],
-          ),
+          firstText:
+              _stringsProvider.eventLogGroupJoined(<dynamic>[joinedUsernames]),
         );
       },
       messageDocument: (td.MessageDocument value) {

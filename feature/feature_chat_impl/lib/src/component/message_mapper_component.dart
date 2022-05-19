@@ -17,11 +17,11 @@ class MessageMapperDependencies {
     required this.userRepository,
     required this.chatMessageRepository,
     required this.messagePreviewResolver,
-    required this.localizationManager,
+    required this.stringsProvider,
   });
 
   final DateParser dateParser;
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
   final IFileRepository fileRepository;
   final IChatRepository chatRepository;
   final IUserRepository userRepository;
@@ -57,7 +57,7 @@ class MessageMapperComponent {
       additionalInfoMapper: additionalInfoMapper,
       userRepository: _dependencies.userRepository,
       dateParser: DateParser(),
-      localizationManager: _dependencies.localizationManager,
+      stringsProvider: _dependencies.stringsProvider,
       formattedTextResolver: FormattedTextResolver(
         parser: const Parser(),
       ),

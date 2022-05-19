@@ -11,7 +11,7 @@ import 'package:tile/tile.dart';
 class MessagesTileFactoryFactory {
   TileFactory create({
     required ChatMessageFactory chatMessageFactory,
-    required ILocalizationManager localizationManager,
+    required IStringsProvider stringsProvider,
     required ReplyInfoFactory replyInfoFactory,
     required SenderTitleFactory senderTitleFactory,
     required SenderAvatarFactory senderAvatarFactory,
@@ -80,7 +80,7 @@ class MessagesTileFactoryFactory {
         MessageContactTileModel: MessageContactTileFactoryDelegate(
           messageComponentResolver: messageComponentResolver,
           replyInfoFactory: replyInfoFactory,
-          localizationManager: localizationManager,
+          stringsProvider: stringsProvider,
           shortInfoFactory: shortInfoFactory,
           chatMessageFactory: chatMessageFactory,
         ),

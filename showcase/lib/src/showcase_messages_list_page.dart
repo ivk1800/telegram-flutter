@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:fake/fake.dart' as fake;
 import 'package:flutter/material.dart';
 import 'package:showcase/src/showcase/message/message_bundle.dart';
+import 'package:showcase/src/showcase/showcase_scope.dart';
 import 'package:tdlib/td_api.dart' as td;
 
-import 'showcase/message/mesage_showcase_factory.dart';
 import 'showcase/message/message_data.dart';
 
 class ShowcaseMessageListPage extends StatefulWidget {
@@ -40,8 +40,8 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
           return ListTile(
             title: Text('${index + 1}: ${bundle.name}'),
             onTap: () {
-              final Widget widget = MessageShowcaseFactory().create(
-                context,
+              final Widget widget =
+                  ShowcaseScope.getMessageShowcaseFactory(context).create(
                 bundle,
               );
 

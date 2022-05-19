@@ -7,13 +7,13 @@ import '../screen/chat/header_state.dart';
 class ChatHeaderActionsInteractor {
   ChatHeaderActionsInteractor({
     required ChatInfoResolver chatInfoResolver,
-    required ILocalizationManager localizationManager,
+    required IStringsProvider stringsProvider,
     required int chatId,
   })  : _chatId = chatId,
-        _localizationManager = localizationManager,
+        _stringsProvider = stringsProvider,
         _chatInfoResolver = chatInfoResolver;
 
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
   final ChatInfoResolver _chatInfoResolver;
   final int _chatId;
 
@@ -24,12 +24,12 @@ class ChatHeaderActionsInteractor {
           if (chatIfo.isChannel)
             HeaderActionData(
               action: HeaderAction.leave,
-              label: _localizationManager.getString('LeaveChannelMenu'),
+              label: _stringsProvider.leaveChannelMenu,
             )
           else
             HeaderActionData(
               action: HeaderAction.leave,
-              label: _localizationManager.getString('LeaveMegaMenu'),
+              label: _stringsProvider.leaveMegaMenu,
             ),
       ];
     });

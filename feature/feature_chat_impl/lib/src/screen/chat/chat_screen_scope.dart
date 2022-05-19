@@ -55,7 +55,7 @@ class _ChatScreenScopeState extends State<ChatScreenScope> {
   late final MessageFactory _messageFactory = _component.getMessageFactory();
 
   late final IStringsProvider _stringsProvider =
-      _component.getLocalizationManager().stringsProvider;
+      _component.getStringsProvider();
 
   late final IChatHeaderInfoFactory _chatHeaderInfoFactory =
       _component.getChatHeaderInfoFactory();

@@ -2,7 +2,7 @@ import 'package:chat_theme/chat_theme.dart';
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:showcase/src/showcase/message/message_showcase_scope.dart';
 import 'package:showcase/src/showcase/message/message_showcase_state.dart';
 import 'package:showcase/src/showcase/message/message_showcase_view_model.dart';
 import 'package:tg_theme/tg_theme.dart';
@@ -14,7 +14,7 @@ class MessageShowcasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MessageShowcaseViewModel viewModel =
-        context.read<MessageShowcaseViewModel>();
+        MessageShowcaseScope.getMessageShowcaseViewModel(context);
     return Scaffold(
       appBar: AppBar(
         title: StreamListener<String>(
@@ -29,7 +29,8 @@ class MessageShowcasePage extends StatelessWidget {
         builder: (BuildContext context, MessageShowcaseState data) {
           return data.when(
             (List<ITileModel> items) {
-              final TileFactory tileFactory = context.read();
+              final TileFactory tileFactory =
+                  MessageShowcaseScope.getTileFactory(context);
               return _Required(
                 child: ListView.separated(
                   padding: const EdgeInsets.all(8.0),

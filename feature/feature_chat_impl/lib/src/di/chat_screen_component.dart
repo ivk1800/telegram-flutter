@@ -29,7 +29,7 @@ abstract class IChatScreenComponent {
 
   MessageFactory getMessageFactory();
 
-  ILocalizationManager getLocalizationManager();
+  IStringsProvider getStringsProvider();
 
   IChatHeaderInfoFactory getChatHeaderInfoFactory();
 
@@ -50,7 +50,7 @@ abstract class ChatScreenModule {
       MessageMapperComponent(
         dependencies: MessageMapperDependencies(
           dateParser: dependencies.dateParser,
-          localizationManager: dependencies.localizationManager,
+          stringsProvider: dependencies.stringsProvider,
           fileRepository: dependencies.fileRepository,
           chatRepository: dependencies.chatRepository,
           userRepository: dependencies.userRepository,
@@ -71,7 +71,7 @@ abstract class ChatScreenModule {
         fileDownloader: dependencies.fileDownloader,
         messageActionListener: messageActionListener,
         messageWallContext: messageWallContext,
-        localizationManager: dependencies.localizationManager,
+        stringsProvider: dependencies.stringsProvider,
         fileRepository: dependencies.fileRepository,
       ),
     ).create();
@@ -150,17 +150,10 @@ abstract class ChatScreenModule {
 
   @j.provides
   @j.singleton
-  static ILocalizationManager provideLocalizationManager(
-    ChatFeatureDependencies dependencies,
-  ) =>
-      dependencies.localizationManager;
-
-  @j.provides
-  @j.singleton
   static IStringsProvider provideStringsProvider(
     ChatFeatureDependencies dependencies,
   ) =>
-      dependencies.localizationManager.stringsProvider;
+      dependencies.stringsProvider;
 
   @j.provides
   @j.singleton
@@ -189,7 +182,6 @@ abstract class ChatScreenModule {
     IChatManager chatManager,
   ) =>
       ChatActionBarViewModel(
-        localizationManager: dependencies.localizationManager,
         headerActionsInteractor: headerActionsInteractor,
         chatManager: chatManager,
         headerInfoInteractor: headerInfoInteractor,
@@ -243,7 +235,7 @@ abstract class ChatScreenModule {
     ChatFeatureDependencies dependencies,
   ) =>
       ChatHeaderActionsInteractor(
-        localizationManager: dependencies.localizationManager,
+        stringsProvider: dependencies.stringsProvider,
         chatInfoResolver: chatInfoResolver,
         chatId: args.chatId,
       );
@@ -274,7 +266,7 @@ abstract class ChatScreenModule {
           chatManager: dependencies.chatManager,
           chatId: args.chatId,
           chatRepository: dependencies.chatRepository,
-          stringsProvider: dependencies.localizationManager.stringsProvider,
+          stringsProvider: dependencies.stringsProvider,
           superGroupRepository: dependencies.superGroupRepository,
           basicGroupRepository: dependencies.basicGroupRepository,
           basicGroupUpdatesProvider: dependencies.basicGroupUpdatesProvider,

@@ -11,12 +11,12 @@ import 'message_reply_info_mapper.dart';
 
 class MessageCallTileModelMapper {
   MessageCallTileModelMapper({
-    required ILocalizationManager localizationManager,
+    required IStringsProvider stringsProvider,
     required SenderInfoMapper senderInfoResolver,
     required AdditionalInfoMapper additionalInfoMapper,
     required MessageReplyInfoMapper messageReplyInfoMapper,
     required DateParser dateParser,
-  })  : _localizationManager = localizationManager,
+  })  : _stringsProvider = stringsProvider,
         _senderInfoResolver = senderInfoResolver,
         _additionalInfoMapper = additionalInfoMapper,
         _messageReplyInfoMapper = messageReplyInfoMapper,
@@ -25,7 +25,7 @@ class MessageCallTileModelMapper {
   final DateFormat _callDateFormat = DateFormat('HH:mm');
 
   final SenderInfoMapper _senderInfoResolver;
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
   final MessageReplyInfoMapper _messageReplyInfoMapper;
   final AdditionalInfoMapper _additionalInfoMapper;
   final DateParser _dateParser;
@@ -70,16 +70,16 @@ class MessageCallTileModelMapper {
       case td.CallDiscardReasonMissed.constructor:
         {
           if (isOutgoing) {
-            return _localizationManager.getString('CallMessageOutgoingMissed');
+            return _stringsProvider.callMessageOutgoingMissed;
           }
-          return _localizationManager.getString('CallMessageIncomingMissed');
+          return _stringsProvider.callMessageIncomingMissed;
         }
       case td.CallDiscardReasonDeclined.constructor:
         {
           if (isOutgoing) {
-            return _localizationManager.getString('CallMessageOutgoing');
+            return _stringsProvider.callMessageOutgoing;
           }
-          return _localizationManager.getString('CallMessageIncomingDeclined');
+          return _stringsProvider.callMessageIncomingDeclined;
         }
       case td.CallDiscardReasonDisconnected.constructor:
         {
@@ -89,9 +89,9 @@ class MessageCallTileModelMapper {
       case td.CallDiscardReasonHungUp.constructor:
         {
           if (isOutgoing) {
-            return _localizationManager.getString('CallMessageOutgoing');
+            return _stringsProvider.callMessageOutgoing;
           }
-          return _localizationManager.getString('CallMessageIncoming');
+          return _stringsProvider.callMessageIncoming;
         }
     }
     return '';

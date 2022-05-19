@@ -19,7 +19,6 @@ class ChatActionBarViewModel extends BaseViewModel {
   ChatActionBarViewModel({
     required ChatArgs args,
     required IChatScreenRouter router,
-    required ILocalizationManager localizationManager,
     required IStringsProvider stringsProvider,
     required IChatHeaderInfoInteractor headerInfoInteractor,
     required IChatManager chatManager,
@@ -29,7 +28,6 @@ class ChatActionBarViewModel extends BaseViewModel {
         _headerInfoInteractor = headerInfoInteractor,
         _router = router,
         _chatManager = chatManager,
-        _localizationManager = localizationManager,
         _stringsProvider = stringsProvider,
         _chatRepository = chatRepository,
         _headerActionsInteractor = headerActionsInteractor;
@@ -38,7 +36,6 @@ class ChatActionBarViewModel extends BaseViewModel {
   final IChatHeaderInfoInteractor _headerInfoInteractor;
   final ChatHeaderActionsInteractor _headerActionsInteractor;
   final IStringsProvider _stringsProvider;
-  final ILocalizationManager _localizationManager;
   final IChatRepository _chatRepository;
   final IChatManager _chatManager;
   final IChatScreenRouter _router;
@@ -55,10 +52,7 @@ class ChatActionBarViewModel extends BaseViewModel {
       case HeaderAction.leave:
         _router.toDialog(
           body: Body.text(
-            text: _localizationManager.getStringFormatted(
-              'MegaLeaveAlertWithName',
-              <dynamic>['name'],
-            ),
+            text: _stringsProvider.megaLeaveAlertWithName(<dynamic>['name']),
           ),
           title: _stringsProvider.leaveMegaMenu,
           actions: <Action>[

@@ -20,8 +20,8 @@ class MessageTileMapper {
     required SenderInfoMapper senderInfoMapper,
     required MessageReplyInfoMapper messageReplyInfoMapper,
     required AdditionalInfoMapper additionalInfoMapper,
-    required ILocalizationManager localizationManager,
-  })  : _localizationManager = localizationManager,
+    required IStringsProvider stringsProvider,
+  })  : _stringsProvider = stringsProvider,
         _userRepository = userRepository,
         _senderInfoMapper = senderInfoMapper,
         _messageReplyInfoMapper = messageReplyInfoMapper,
@@ -29,7 +29,7 @@ class MessageTileMapper {
         _messageCallTileModelMapper = MessageCallTileModelMapper(
           additionalInfoMapper: additionalInfoMapper,
           senderInfoResolver: senderInfoMapper,
-          localizationManager: localizationManager,
+          stringsProvider: stringsProvider,
           dateParser: dateParser,
           messageReplyInfoMapper: messageReplyInfoMapper,
         ),
@@ -38,7 +38,7 @@ class MessageTileMapper {
   final SenderInfoMapper _senderInfoMapper;
   final AdditionalInfoMapper _additionalInfoMapper;
   final FormattedTextResolver _formattedTextResolver;
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
   final MessageReplyInfoMapper _messageReplyInfoMapper;
   final IUserRepository _userRepository;
 
@@ -81,10 +81,7 @@ class MessageTileMapper {
           // todo add a tap for username
           // todo add username
           text: rt.RichText.planeText(
-            _localizationManager.getStringFormatted(
-              'ActionCreateGroup',
-              <dynamic>['todo'],
-            ),
+            _stringsProvider.actionCreateGroup(<dynamic>['todo']),
           ),
         );
       },
@@ -112,10 +109,7 @@ class MessageTileMapper {
           id: message.id,
           isOutgoing: message.isOutgoing,
           title: rt.RichText.planeText(
-            _localizationManager.getStringFormatted(
-              'EventLogGroupJoined',
-              <dynamic>[joinedUserNames],
-            ),
+            _stringsProvider.eventLogGroupJoined(<dynamic>[joinedUserNames]),
           ),
         );
       },
@@ -124,10 +118,7 @@ class MessageTileMapper {
           id: message.id,
           // todo missing user name
           title: rt.RichText.planeText(
-            _getStringFormatted(
-              'ActionChangedPhoto',
-              <dynamic>['todo'],
-            ),
+            _stringsProvider.actionChangedPhoto(<dynamic>['todo']),
           ),
           minithumbnail: value.photo.minithumbnail?.toMinithumbnail(),
         );
@@ -138,8 +129,7 @@ class MessageTileMapper {
           isOutgoing: message.isOutgoing,
           // todo missing user name
           title: rt.RichText.planeText(
-            _getStringFormatted(
-              'ActionChangedTitle',
+            _stringsProvider.actionChangedTitle(
               <dynamic>['todo', value.title],
             ),
           ),
@@ -152,8 +142,7 @@ class MessageTileMapper {
           isOutgoing: message.isOutgoing,
           // todo missing user name
           title: rt.RichText.planeText(
-            _getStringFormatted(
-              'ActionKickUser',
+            _stringsProvider.actionKickUser(
               <dynamic>[
                 'todo',
                 // todo extract to extension for concat first and last names
@@ -173,10 +162,7 @@ class MessageTileMapper {
           isOutgoing: message.isOutgoing,
           // todo missing user name
           title: rt.RichText.planeText(
-            _getStringFormatted(
-              'ActionRemovedPhoto',
-              <dynamic>['todo'],
-            ),
+            _stringsProvider.actionRemovedPhoto(<dynamic>['todo']),
           ),
         );
       },
@@ -186,10 +172,7 @@ class MessageTileMapper {
           isOutgoing: message.isOutgoing,
           // todo missing user name
           title: rt.RichText.planeText(
-            _getStringFormatted(
-              'ActionInviteUser',
-              <dynamic>['todo'],
-            ),
+            _stringsProvider.actionInviteUser(<dynamic>['todo']),
           ),
         );
       },
@@ -200,15 +183,10 @@ class MessageTileMapper {
           isOutgoing: message.isOutgoing,
           title: rt.RichText.planeText(
             message.isOutgoing
-                ? _getStringFormatted(
-                    'MessageLifetimeChangedOutgoing',
-                    <dynamic>['todo'],
-                  )
-                : _getStringFormatted(
-                    'MessageLifetimeChanged',
-                    // todo missing user name
-                    <dynamic>['todo', 'todo'],
-                  ),
+                ? _stringsProvider
+                    .messageLifetimeChangedOutgoing(<dynamic>['todo'])
+                : _stringsProvider
+                    .messageLifetimeChanged(<dynamic>['todo', 'todo']),
           ),
         );
       },
@@ -217,8 +195,7 @@ class MessageTileMapper {
           id: message.id,
           isOutgoing: message.isOutgoing,
           title: rt.RichText.planeText(
-            _getStringFormatted(
-              'ActionMigrateFromGroupNotify',
+            _stringsProvider.actionMigrateFromGroupNotify(
               <dynamic>[value.title],
             ),
           ),
@@ -229,7 +206,7 @@ class MessageTileMapper {
           id: message.id,
           isOutgoing: message.isOutgoing,
           title: rt.RichText.planeText(
-            _localizationManager.getString('ActionMigrateFromGroup'),
+            _stringsProvider.actionMigrateFromGroup,
           ),
         );
       },
@@ -238,7 +215,7 @@ class MessageTileMapper {
           id: message.id,
           isOutgoing: message.isOutgoing,
           title: rt.RichText.planeText(
-            _localizationManager.getString('ContactJoined'),
+            _stringsProvider.actionMigrateFromGroup,
           ),
         );
       },
@@ -519,9 +496,6 @@ class MessageTileMapper {
       },
     );
   }
-
-  String _getStringFormatted(String key, List<dynamic> formatArgs) =>
-      _localizationManager.getStringFormatted(key, formatArgs);
 }
 
 extension ContentExtension on td.MessageContent {

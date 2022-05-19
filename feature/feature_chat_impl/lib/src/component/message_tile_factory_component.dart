@@ -12,13 +12,13 @@ import 'package:tile/tile.dart';
 class MessageTileFactoryDependencies {
   const MessageTileFactoryDependencies({
     required this.fileRepository,
-    required this.localizationManager,
+    required this.stringsProvider,
     required this.messageWallContext,
     required this.messageActionListener,
     required this.fileDownloader,
   });
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
   final IFileRepository fileRepository;
   final IMessageWallContext messageWallContext;
   final IMessageActionListener messageActionListener;
@@ -46,7 +46,7 @@ class MessageTileFactoryComponent {
         MessagesTileFactoryFactory();
 
     final ShortInfoFactory shortInfoFactory = ShortInfoFactory(
-      localizationManager: _dependencies.localizationManager,
+      stringsProvider: _dependencies.stringsProvider,
     );
     final ReplyInfoFactory replyInfoFactory = ReplyInfoFactory();
     const SenderTitleFactory senderTitleFactory = SenderTitleFactory();
@@ -75,7 +75,7 @@ class MessageTileFactoryComponent {
       senderTitleFactory: senderTitleFactory,
       replyInfoFactory: replyInfoFactory,
       shortInfoFactory: shortInfoFactory,
-      localizationManager: _dependencies.localizationManager,
+      stringsProvider: _dependencies.stringsProvider,
       chatMessageFactory: chatMessageFactory,
     );
   }

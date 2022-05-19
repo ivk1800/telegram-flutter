@@ -135,7 +135,7 @@ abstract class FeatureModule {
           chatRepository: chatRepository,
           mode: Mode.chatPreview,
           userRepository: userRepository,
-          localizationManager: localizationManager,
+          stringsProvider: localizationManager.stringsProvider,
         ),
       );
 
@@ -157,7 +157,7 @@ abstract class FeatureModule {
 
   @j.provides
   static ChatFeatureDependencies provideChatFeatureDependencies(
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     DateParser dateParser,
     IFileRepository fileRepository,
     IUserRepository userRepository,
@@ -197,15 +197,15 @@ abstract class FeatureModule {
           mode: Mode.replyPreview,
           chatRepository: chatRepository,
           userRepository: userRepository,
-          localizationManager: localizationManager,
+          stringsProvider: stringsProvider,
         ),
         connectionStateProvider: connectionStateProvider,
         chatMessageRepository: chatMessageRepository,
         routerFactory: routerFactory,
-        localizationManager: localizationManager,
         dateParser: dateParser,
         fileRepository: fileRepository,
         userRepository: userRepository,
+        stringsProvider: stringsProvider,
       );
 
   @j.provides

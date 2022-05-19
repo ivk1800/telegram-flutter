@@ -48,7 +48,7 @@ class ChatFeatureDependencies {
     required this.dateFormatter,
     required this.dateParser,
     required this.connectionStateProvider,
-    required this.localizationManager,
+    required this.stringsProvider,
     required this.messagePreviewResolver,
     required this.chatHeaderInfoFeatureApi,
     required this.fileDownloader,
@@ -79,7 +79,7 @@ class ChatFeatureDependencies {
 
   final IConnectionStateProvider connectionStateProvider;
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
 
   final IMessagePreviewResolver messagePreviewResolver;
 

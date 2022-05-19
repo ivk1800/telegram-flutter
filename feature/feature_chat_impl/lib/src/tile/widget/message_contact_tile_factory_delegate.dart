@@ -9,19 +9,19 @@ class MessageContactTileFactoryDelegate
     implements ITileFactoryDelegate<MessageContactTileModel> {
   MessageContactTileFactoryDelegate({
     required ChatMessageFactory chatMessageFactory,
-    required ILocalizationManager localizationManager,
+    required IStringsProvider stringsProvider,
     required MessageComponentResolver messageComponentResolver,
     required ReplyInfoFactory replyInfoFactory,
     required ShortInfoFactory shortInfoFactory,
   })  : _chatMessageFactory = chatMessageFactory,
         _replyInfoFactory = replyInfoFactory,
         _messageComponentResolver = messageComponentResolver,
-        _localizationManager = localizationManager,
+        _stringsProvider = stringsProvider,
         _shortInfoFactory = shortInfoFactory;
 
   final ChatMessageFactory _chatMessageFactory;
   final ShortInfoFactory _shortInfoFactory;
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
   final ReplyInfoFactory _replyInfoFactory;
   final MessageComponentResolver _messageComponentResolver;
 
@@ -75,7 +75,7 @@ class MessageContactTileFactoryDelegate
                     // todo handle tap
                   },
                   child: Text(
-                    _localizationManager.getString('ViewContact'),
+                    _stringsProvider.viewContact,
                   ),
                 ),
                 Align(

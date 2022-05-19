@@ -6,10 +6,10 @@ import 'package:localization_api/localization_api.dart';
 
 class ShortInfoFactory {
   const ShortInfoFactory({
-    required ILocalizationManager localizationManager,
-  }) : _localizationManager = localizationManager;
+    required IStringsProvider stringsProvider,
+  }) : _stringsProvider = stringsProvider;
 
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
 
   Widget create(BuildContext context, AdditionalInfo additionalInfo) {
     return _createBase(context, additionalInfo);
@@ -45,7 +45,7 @@ class ShortInfoFactory {
             TextSpan(text: '${additionalInfo.authorSignature}, '),
           if (additionalInfo.isEdited)
             TextSpan(
-              text: '${_localizationManager.getString('EditedMessage')} ',
+              text: '${_stringsProvider.editedMessage} ',
             ),
           TextSpan(text: additionalInfo.sentDate),
           if (additionalInfo.hasBeenRead != null)

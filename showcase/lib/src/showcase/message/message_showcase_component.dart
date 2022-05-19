@@ -12,14 +12,11 @@ import 'package:tile/tile.dart';
 
 import 'message_bundle.dart';
 import 'message_showcase_view_model.dart';
-// import 'showcase_message_page.dart';
 
 @j.Component(
   modules: <Type>[MessageShowcaseModule],
 )
 abstract class IMessageShowcaseComponent {
-  ILocalizationManager getLocalizationManager();
-
   MessageShowcaseViewModel getMessageShowcaseViewModel();
 
   TileFactory getTileFactory();
@@ -34,7 +31,7 @@ abstract class MessageShowcaseModule {
     IMessageWallContext messageWallContext,
     IMessageActionListener messageActionListener,
     IFileRepository fileRepository,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
   ) =>
       MessageTileFactoryComponent(
         dependencies: MessageTileFactoryDependencies(
@@ -42,7 +39,7 @@ abstract class MessageShowcaseModule {
           messageWallContext: messageWallContext,
           messageActionListener: messageActionListener,
           fileRepository: fileRepository,
-          localizationManager: localizationManager,
+          stringsProvider: stringsProvider,
         ),
       ).create();
 
@@ -98,7 +95,7 @@ abstract class MessageShowcaseModule {
   @j.provides
   @j.singleton
   static MessageTileMapper provideMessageTileMapper(
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     IChatMessageRepository chatMessageRepository,
     IChatRepository chatRepository,
     IUserRepository userRepository,
@@ -113,7 +110,7 @@ abstract class MessageShowcaseModule {
           userRepository: userRepository,
           messagePreviewResolver: messagePreviewResolver,
           fileRepository: fileRepository,
-          localizationManager: localizationManager,
+          stringsProvider: stringsProvider,
         ),
       ).create();
 
@@ -122,13 +119,13 @@ abstract class MessageShowcaseModule {
   static IMessagePreviewResolver provideMessagePreviewResolver(
     IUserRepository userRepository,
     IChatRepository chatRepository,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     IChatMessageRepository chatMessageRepository,
   ) {
     return MessagePreviewResolver(
       userRepository: userRepository,
       chatRepository: chatRepository,
-      localizationManager: localizationManager,
+      stringsProvider: stringsProvider,
       mode: Mode.replyPreview,
       messageRepository: chatMessageRepository,
     );
@@ -137,8 +134,8 @@ abstract class MessageShowcaseModule {
 
 @j.componentBuilder
 abstract class IMessageShowcaseComponentBuilder {
-  IMessageShowcaseComponentBuilder localizationManager(
-    ILocalizationManager value,
+  IMessageShowcaseComponentBuilder stringsProvider(
+    IStringsProvider value,
   );
 
   IMessageShowcaseComponentBuilder messageBundle(

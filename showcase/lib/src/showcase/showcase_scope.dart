@@ -5,6 +5,7 @@ import 'package:showcase/src/showcase/auth_showcase_factory.dart';
 
 import 'change_username_showcase_factory.dart';
 import 'create_new_channel_showcase_factory.dart';
+import 'message/message_showcase_factory.dart';
 import 'new_contact_showcase_factory.dart';
 import 'widget/showcase_block_interaction_manager.dart';
 
@@ -43,6 +44,11 @@ class ShowcaseScope extends StatefulWidget {
     BuildContext context,
   ) =>
       _InheritedScope.of(context)._showcaseBlockInteractionManager;
+
+  static MessageShowcaseFactory getMessageShowcaseFactory(
+    BuildContext context,
+  ) =>
+      _InheritedScope.of(context)._messageShowcaseFactory;
 }
 
 class _ShowcaseScopeState extends State<ShowcaseScope> {
@@ -62,6 +68,9 @@ class _ShowcaseScopeState extends State<ShowcaseScope> {
 
   late final ShowcaseBlockInteractionManager _showcaseBlockInteractionManager =
       _component.getShowcaseBlockInteractionManager();
+
+  late final MessageShowcaseFactory _messageShowcaseFactory =
+      _component.getMessageShowcaseFactory();
 
   @override
   Widget build(BuildContext context) {
