@@ -1,6 +1,6 @@
 {
   "id": 162529280,
-  "sender": {
+  "sender_id": {
     "chat_id": 1,
     "@type": "messageSenderChat"
   },

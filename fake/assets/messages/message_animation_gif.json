@@ -1,6 +1,6 @@
 {
   "id": 82837504,
-  "sender": {
+  "sender_id": {
     "user_id": 1,
     "@type": "messageSenderUser"
   },

@@ -1,6 +1,6 @@
 {
   "id": 1,
-  "sender": {
+  "sender_id": {
     "user_id": 2,
     "@type": "messageSenderUser"
   },
