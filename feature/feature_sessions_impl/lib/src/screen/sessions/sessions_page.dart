@@ -1,7 +1,7 @@
 import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_sessions_impl/src/screen/sessions/sessions_screen_scope.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
 import 'package:tile/tile.dart';
 
 import 'sessions_state.dart';
@@ -17,22 +17,28 @@ class SessionsPage extends StatefulWidget {
 class SessionsPageState extends State<SessionsPage> {
   @override
   Widget build(BuildContext context) {
+    final SessionsViewModel sessionsViewModel =
+        SessionsScreenScope.getSessionsViewModel(context);
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Builder(
           builder: (BuildContext context) {
-            final tg.TgAppBarFactory factory = context.read();
-            final ILocalizationManager localizationManager = context.read();
+            final tg.TgAppBarFactory factory =
+                SessionsScreenScope.getTgAppBarFactory(context);
+            final IStringsProvider stringsProvider =
+                SessionsScreenScope.getStringsProvider(context);
+
             return factory.createDefaultTitle(
               context,
-              localizationManager.getString('Devices'),
+              stringsProvider.devices,
             );
           },
         ),
       ),
       body: StreamBuilder<SessionsState>(
-        stream: context.read<SessionsViewModel>().state,
+        stream: sessionsViewModel.state,
         initialData: const SessionsState.loading(),
         builder: (BuildContext context, AsyncSnapshot<SessionsState> snapshot) {
           return AnimatedSwitcher(
@@ -68,11 +74,11 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TileFactory tileFactory = context.read();
-    final ILocalizationManager localizationManager = context.read();
-    final SessionsViewModel viewModel = context.read();
-
-    String _getString(String key) => localizationManager.getString(key);
+    final TileFactory tileFactory = SessionsScreenScope.getTileFactory(context);
+    final IStringsProvider stringsProvider =
+        SessionsScreenScope.getStringsProvider(context);
+    final SessionsViewModel viewModel =
+        SessionsScreenScope.getSessionsViewModel(context);
 
     // TODO extract text to stings
     final ThemeData theme = Theme.of(context);
@@ -81,7 +87,7 @@ class _Body extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           tg.Section(
-            text: _getString('CurrentSession'),
+            text: stringsProvider.currentSession,
           ),
           // todo widget method call
           tileFactory.create(context, activeSession),
@@ -89,17 +95,17 @@ class _Body extends StatelessWidget {
           tg.TextCell(
             onTap: viewModel.onTerminatedSessionsTap,
             titleColor: theme.errorColor,
-            title: _getString('TerminateAllSessions'),
+            title: stringsProvider.terminateAllSessions,
           ),
           tg.Annotation(
-            text: _getString('ClearOtherSessionsHelp'),
+            text: stringsProvider.clearOtherSessionsHelp,
           ),
           tg.Section(
-            text: _getString('OtherSessions'),
+            text: stringsProvider.otherSessions,
           ),
           tg.TextCell(
             onTap: viewModel.onScanQRCodeTap,
-            title: _getString('AuthAnotherClient'),
+            title: stringsProvider.authAnotherClient,
             titleColor: theme.colorScheme.secondary,
           ),
           const tg.Divider(),
@@ -112,7 +118,7 @@ class _Body extends StatelessWidget {
             ).toList(),
           ),
           ListTile(
-            title: Text(_getString('Tap on a session to terminate.')),
+            title: Text(stringsProvider.terminateSessionInfo),
           ),
         ],
       ),

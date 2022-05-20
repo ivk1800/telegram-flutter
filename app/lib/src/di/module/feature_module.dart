@@ -444,11 +444,11 @@ abstract class FeatureModule {
     IConnectionStateProvider connectionStateProvider,
     ISessionsScreenRouter router,
     ISessionRepository sessionRepository,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
   ) =>
       SessionsFeatureDependencies(
         connectionStateProvider: connectionStateProvider,
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
         router: router,
         sessionRepository: sessionRepository,
       );

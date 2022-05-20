@@ -27,13 +27,13 @@ class SessionsFeatureImpl implements ISessionsFeatureApi {
 
 class SessionsFeatureDependencies {
   SessionsFeatureDependencies({
-    required this.localizationManager,
+    required this.stringsProvider,
     required this.sessionRepository,
     required this.router,
     required this.connectionStateProvider,
   });
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
   final ISessionsScreenRouter router;
   final ISessionRepository sessionRepository;
   final IConnectionStateProvider connectionStateProvider;

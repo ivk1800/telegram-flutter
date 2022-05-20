@@ -18,7 +18,7 @@ abstract class ISessionsScreenComponent {
 
   TileFactory getTileFactory();
 
-  ILocalizationManager getLocalizationManager();
+  IStringsProvider getStringsProvider();
 
   tg.TgAppBarFactory getTgAppBarFactory();
 }
@@ -76,10 +76,10 @@ abstract class SessionsScreenModule {
 
   @j.singleton
   @j.provides
-  static ILocalizationManager provideLocalizationManager(
+  static IStringsProvider provideStringsProvider(
     SessionsFeatureDependencies dependencies,
   ) =>
-      dependencies.localizationManager;
+      dependencies.stringsProvider;
 
   @j.singleton
   @j.provides
