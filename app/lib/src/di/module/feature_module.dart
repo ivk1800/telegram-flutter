@@ -232,12 +232,12 @@ abstract class FeatureModule {
       provideSettingsSearchFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
     ISettingsSearchScreenRouter router,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
   ) =>
           SettingsSearchFeatureDependencies(
             connectionStateProvider: connectionStateProvider,
             router: router,
-            localizationManager: localizationManager,
+            stringsProvider: stringsProvider,
           );
 
   @j.provides

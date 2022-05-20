@@ -1,8 +1,7 @@
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
+import 'package:feature_settings_search_impl/src/screen/settings_search_screen_scope.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:tile/tile.dart';
 
 import 'search_state.dart';
@@ -29,7 +28,9 @@ class _SettingsSearchPageState extends State<SettingsSearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    final SettingsSearchViewModel viewModel = context.read();
+    final SettingsSearchViewModel viewModel =
+        SettingsSearchScreenScope.getSettingsSearchViewModel(context);
+
     return StreamListener<SearchState>(
       stream: viewModel.state,
       builder: (BuildContext context, SearchState state) {
@@ -45,7 +46,8 @@ class _SettingsSearchPageState extends State<SettingsSearchPage> {
             );
           },
           data: (List<ITileModel> models) {
-            final TileFactory tileFactory = context.read();
+            final TileFactory tileFactory =
+                SettingsSearchScreenScope.getTileFactory(context);
 
             return ListView.builder(
               itemCount: models.length,
@@ -62,7 +64,8 @@ class _SettingsSearchPageState extends State<SettingsSearchPage> {
 
   void onCallback() {
     final String query = widget.controller.queryValue.value;
-    context.read<SettingsSearchViewModel>().onQueryChanged(query);
+    SettingsSearchScreenScope.getSettingsSearchViewModel(context)
+        .onQueryChanged(query);
   }
 
   @override

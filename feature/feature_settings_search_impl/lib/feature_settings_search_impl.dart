@@ -24,12 +24,12 @@ class SettingsSearchFeature implements ISettingsSearchFeatureApi {
 
 class SettingsSearchFeatureDependencies {
   const SettingsSearchFeatureDependencies({
-    required this.localizationManager,
+    required this.stringsProvider,
     required this.router,
     required this.connectionStateProvider,
   });
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
 
   final ISettingsSearchScreenRouter router;
 

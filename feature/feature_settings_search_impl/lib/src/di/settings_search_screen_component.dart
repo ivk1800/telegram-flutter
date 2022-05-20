@@ -1,10 +1,15 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:coreui/coreui.dart';
 import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
 import 'package:feature_settings_search_impl/src/data/search_repository.dart';
 import 'package:feature_settings_search_impl/src/domain/search_item_data.dart';
 import 'package:feature_settings_search_impl/src/screen/search_item_listener.dart';
 import 'package:feature_settings_search_impl/src/screen/settings_search_interactor.dart';
 import 'package:feature_settings_search_impl/src/screen/settings_search_view_model.dart';
+import 'package:feature_settings_search_impl/src/tile/delegate/faq_result_tile_factory_delegate.dart';
+import 'package:feature_settings_search_impl/src/tile/delegate/search_result_tile_factory_delegate.dart';
+import 'package:feature_settings_search_impl/src/tile/model/faq_result_tile_model.dart';
+import 'package:feature_settings_search_impl/src/tile/model/search_result_tile_model.dart';
 import 'package:feature_settings_search_impl/src/tile/search_result_tile_model_mapper.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
@@ -12,20 +17,24 @@ import 'package:search_component/search_component.dart';
 import 'package:tile/tile.dart';
 
 @j.Component(
-  modules: <Type>[SearchSettingsScreenModule],
+  modules: <Type>[SettingsSearchScreenModule],
 )
-abstract class ISearchSettingsScreenComponent {
+abstract class ISettingsSearchScreenComponent {
   SettingsSearchViewModel getSettingsSearchViewModel();
 
-  ILocalizationManager getLocalizationManager();
+  IStringsProvider getStringsProvider();
 
   IConnectionStateProvider getConnectionStateProvider();
 
   SearchItemListener getSearchItemListener();
+
+  TileFactory getTileFactory();
+
+  ConnectionStateWidgetFactory getConnectionStateWidgetFactory();
 }
 
 @j.module
-abstract class SearchSettingsScreenModule {
+abstract class SettingsSearchScreenModule {
   @j.singleton
   @j.provides
   static SettingsSearchViewModel provideSettingsSearchViewModel(
@@ -46,6 +55,24 @@ abstract class SearchSettingsScreenModule {
 
   @j.singleton
   @j.provides
+  static TileFactory provideTileFactory(
+    SettingsSearchFeatureDependencies dependencies,
+    ISearchResultTapListener resultTapListener,
+    IFaqResultTapListener faqResultTapListener,
+  ) =>
+      TileFactory(
+        delegates: <Type, ITileFactoryDelegate<ITileModel>>{
+          FaqResultTileModel: FaqResultTileFactoryDelegate(
+            listener: faqResultTapListener,
+          ),
+          SearchResultTileModel: SearchResultTileFactoryDelegate(
+            listener: resultTapListener,
+          ),
+        },
+      );
+
+  @j.singleton
+  @j.provides
   static ISearchInteractor<List<ITileModel>> provideSearchInteractor(
     SettingsSearchFeatureDependencies dependencies,
     SearchRepository searchRepository,
@@ -63,18 +90,27 @@ abstract class SearchSettingsScreenModule {
 
   @j.singleton
   @j.provides
-  static ILocalizationManager provideLocalizationManager(
+  static IStringsProvider provideStringsProvider(
     SettingsSearchFeatureDependencies dependencies,
   ) =>
-      dependencies.localizationManager;
+      dependencies.stringsProvider;
+
+  @j.singleton
+  @j.provides
+  static ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
+    SettingsSearchFeatureDependencies dependencies,
+  ) =>
+      ConnectionStateWidgetFactory(
+        connectionStateProvider: dependencies.connectionStateProvider,
+      );
 
   @j.singleton
   @j.provides
   static SearchRepository provideSearchRepository(
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
   ) =>
       SearchRepository(
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
       );
 
   @j.singleton
@@ -90,6 +126,16 @@ abstract class SearchSettingsScreenModule {
     SettingsSearchViewModel viewModel,
   ) =>
       SearchItemListener(viewModel: viewModel);
+
+  @j.singleton
+  @j.binds
+  IFaqResultTapListener bindsFaqResultTapListener(SearchItemListener impl);
+
+  @j.singleton
+  @j.binds
+  ISearchResultTapListener bindsSearchResultTapListener(
+    SearchItemListener impl,
+  );
 }
 
 @j.componentBuilder
@@ -98,5 +144,5 @@ abstract class ISearchSettingsScreenComponentBuilder {
     SettingsSearchFeatureDependencies dependencies,
   );
 
-  ISearchSettingsScreenComponent build();
+  ISettingsSearchScreenComponent build();
 }
