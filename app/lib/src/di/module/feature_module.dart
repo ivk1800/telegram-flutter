@@ -431,10 +431,10 @@ abstract class FeatureModule {
   static FoldersFeatureDependencies provideFoldersFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
     IFoldersRouter router,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
   ) =>
       FoldersFeatureDependencies(
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
         connectionStateProvider: connectionStateProvider,
         router: router,
       );

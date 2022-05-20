@@ -2,9 +2,10 @@ library feature_folders_impl;
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_folders_api/feature_folders_api.dart';
-import 'package:feature_folders_impl/src/di/di.dart';
 import 'package:localization_api/localization_api.dart';
 
+import 'src/di/folders_component.dart';
+import 'src/di/folders_component.jugger.dart';
 import 'src/folders_router.dart';
 import 'src/screen/folders/folders_screen_factory.dart';
 import 'src/screen/setup_folder/setup_folder_screen_factory.dart';
@@ -17,38 +18,37 @@ class FoldersFeatureImpl implements IFoldersFeatureApi {
   }) : _dependencies = dependencies;
 
   final FoldersFeatureDependencies _dependencies;
-  IFoldersScreenFactory? _foldersScreenFactory;
-  ISetupFolderScreenFactory? _setupFolderScreenFactory;
 
-  IFoldersComponent? _component;
+  late final FoldersScreenFactory _foldersScreenFactory =
+      FoldersScreenFactory(foldersComponent: _foldersComponent);
+  late final ISetupFolderScreenFactory _setupFolderScreenFactory =
+      SetupFolderScreenFactory(
+    foldersComponent: _foldersComponent,
+  );
 
-  IFoldersComponent get _foldersComponent =>
-      _component ??
+  late final IFoldersComponent _component =
       JuggerFoldersComponentBuilder().dependencies(_dependencies).build();
 
+  IFoldersComponent get _foldersComponent => _component;
+
   @override
-  IFoldersScreenFactory get foldersScreenFactory =>
-      _foldersScreenFactory ??
-      FoldersScreenFactory(foldersComponent: _foldersComponent);
+  IFoldersScreenFactory get foldersScreenFactory => _foldersScreenFactory;
 
   @override
   ISetupFolderScreenFactory get setupFolderScreenFactory =>
-      _setupFolderScreenFactory ??
-      SetupFolderScreenFactory(
-        foldersComponent: _foldersComponent,
-      );
+      _setupFolderScreenFactory;
 }
 
 class FoldersFeatureDependencies {
   const FoldersFeatureDependencies({
     required this.router,
     required this.connectionStateProvider,
-    required this.localizationManager,
+    required this.stringsProvider,
   });
 
   final IFoldersRouter router;
 
   final IConnectionStateProvider connectionStateProvider;
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
 }

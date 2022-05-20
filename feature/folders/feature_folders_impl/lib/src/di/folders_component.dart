@@ -9,9 +9,9 @@ import 'package:localization_api/localization_api.dart';
 abstract class IFoldersComponent {
   tg.TgAppBarFactory getTgAppBarFactory();
 
-  ILocalizationManager getLocalizationManager();
-
   IFoldersRouter getFoldersRouter();
+
+  IStringsProvider getStringsProvider();
 }
 
 @j.module
@@ -29,10 +29,10 @@ abstract class FoldersModule {
 
   @j.singleton
   @j.provides
-  static ILocalizationManager provideLocalizationManager(
+  static IStringsProvider provideStringsProvider(
     FoldersFeatureDependencies dependencies,
   ) =>
-      dependencies.localizationManager;
+      dependencies.stringsProvider;
 
   @j.singleton
   @j.provides

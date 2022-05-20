@@ -7,23 +7,23 @@ import 'setup_folder_screen_router.dart';
 class SetupFolderViewModel extends BaseViewModel {
   SetupFolderViewModel({
     required ISetupFolderScreenRouter router,
-    required ILocalizationManager localizationManager,
+    required IStringsProvider stringsProvider,
   })  : _router = router,
-        _localizationManager = localizationManager;
+        _stringsProvider = stringsProvider;
 
   final ISetupFolderScreenRouter _router;
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
 
   void onRemoveFolderTap() {
     _router.toDialog(
       body: Body.text(
-        text: _localizationManager.getString('FilterDeleteAlert'),
+        text: _stringsProvider.filterDeleteAlert,
       ),
-      title: _localizationManager.getString('FilterDelete'),
+      title: _stringsProvider.filterDelete,
       actions: <Action>[
-        Action(text: _localizationManager.getString('Cancel')),
+        Action(text: _stringsProvider.cancel),
         Action(
-          text: _localizationManager.getString('Delete'),
+          text: _stringsProvider.delete,
           type: ActionType.attention,
           callback: (IDismissible dismissible) {
             _router.toNotImplemented();

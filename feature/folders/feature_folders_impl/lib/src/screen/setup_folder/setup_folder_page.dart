@@ -1,7 +1,7 @@
 import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_folders_impl/src/screen/setup_folder/setup_folder_screen_scope.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider/provider.dart';
 
 class SetupFolderPage extends StatefulWidget {
   const SetupFolderPage({super.key});
@@ -13,12 +13,15 @@ class SetupFolderPage extends StatefulWidget {
 class _SetupFolderPageState extends State<SetupFolderPage> {
   @override
   Widget build(BuildContext context) {
-    final tg.TgAppBarFactory appBarFactory = context.read();
-    final ILocalizationManager localizationManager = context.read();
+    final tg.TgAppBarFactory appBarFactory =
+        SetupFolderScreenScope.getTgAppBarFactory(context);
+    final IStringsProvider stringsProvider =
+        SetupFolderScreenScope.getStringsProvider(context);
+
     return Scaffold(
       appBar: appBarFactory.createDefaultTitle(
         context,
-        localizationManager.getString('FilterNew'),
+        stringsProvider.filterNew,
       ),
     );
   }

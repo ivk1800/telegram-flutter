@@ -1,5 +1,8 @@
+import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_folders_impl/feature_folders_impl.dart';
 import 'package:feature_folders_impl/src/folders_router.dart';
-import 'package:folders_presentation/folders_presentation.dart';
+import 'package:feature_folders_impl/src/screen/setup_folder/setup_folder_screen_router.dart';
+import 'package:feature_folders_impl/src/screen/setup_folder/setup_folder_view_model.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
@@ -11,6 +14,10 @@ import 'folders_component.dart';
 )
 abstract class ISetupFolderScreenComponent {
   SetupFolderViewModel getSetupFolderViewModel();
+
+  tg.TgAppBarFactory getTgAppBarFactory();
+
+  IStringsProvider getStringsProvider();
 }
 
 @j.module
@@ -18,12 +25,12 @@ abstract class SetupFolderScreenModule {
   @j.singleton
   @j.provides
   static SetupFolderViewModel provideSetupFolderViewModel(
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     ISetupFolderScreenRouter router,
   ) =>
       SetupFolderViewModel(
         router: router,
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
       )..init();
 
   @j.singleton

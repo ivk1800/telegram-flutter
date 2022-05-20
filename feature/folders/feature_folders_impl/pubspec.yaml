@@ -14,14 +14,12 @@ dependencies:
     path: ../../../core_tdlib_api
   coreui:
     path: ../../../coreui
+  dialog_api:
+    path: ../../../dialog_api
   feature_folders_api:
     path: ../feature_folders_api
   flutter:
     sdk: flutter
-  folders_presentation:
-    path: ../folders_presentation
-  folders_ui_common:
-    path: ../folders_ui_common
   jugger: 2.1.0
   localization_api:
     path: ../../../localization_api

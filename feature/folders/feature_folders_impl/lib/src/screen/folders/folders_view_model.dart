@@ -1,5 +1,6 @@
 import 'package:core_arch/core_arch.dart';
-import 'package:folders_presentation/folders_presentation.dart';
+
+import 'folders_screen_router.dart';
 
 class FoldersViewModel extends BaseViewModel {
   FoldersViewModel({
