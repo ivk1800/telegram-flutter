@@ -1,7 +1,7 @@
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:core_arch/core_arch.dart';
-import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:dialog_api/dialog_api.dart';
+import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:localization_api/localization_api.dart';
@@ -16,12 +16,15 @@ class AuthViewModel extends BaseViewModel {
     required IStringsProvider stringsProvider,
     required IAuthFeatureRouter router,
     required ICountryRepository countryRepository,
+    required IErrorTransformer errorTransformer,
     required IAuthenticationManager authenticationManager,
   })  : _stringsProvider = stringsProvider,
         _countryRepository = countryRepository,
+        _errorTransformer = errorTransformer,
         _router = router,
         _authenticationManager = authenticationManager;
 
+  final IErrorTransformer _errorTransformer;
   final IStringsProvider _stringsProvider;
   final IAuthFeatureRouter _router;
   final ICountryRepository _countryRepository;
@@ -100,7 +103,7 @@ class AuthViewModel extends BaseViewModel {
         _actionSubject.add(const AuthAction.resetCode());
         _router.toDialog(
           title: _stringsProvider.appName,
-          body: Body.text(text: _tryConvertToHumanError(e)),
+          body: Body.text(text: _errorTransformer.transformToString(e)),
           actions: <Action>[
             Action(text: _stringsProvider.oK),
           ],
@@ -135,21 +138,13 @@ class AuthViewModel extends BaseViewModel {
         );
         _router.toDialog(
           title: _stringsProvider.appName,
-          body: Body.text(text: _tryConvertToHumanError(e)),
+          body: Body.text(text: _errorTransformer.transformToString(e)),
           actions: <Action>[
             Action(text: _stringsProvider.oK),
           ],
         );
       },
     );
-  }
-
-  // todo implement human texts
-  String _tryConvertToHumanError(Object error) {
-    if (error is TdError) {
-      return error.error.message;
-    }
-    return error.toString();
   }
 
   Future<void> _handleCountryCodeChanged(String codeString) async {

@@ -18,6 +18,8 @@ dependencies:
     path: ../../coreui
   dialog_api:
     path: ../../dialog_api
+  error_transformer_api:
+    path: ../../error_transformer_api
   feature_auth_api:
     path: ../feature_auth_api
   feature_country_api:

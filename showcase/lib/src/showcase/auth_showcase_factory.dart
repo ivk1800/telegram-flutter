@@ -29,6 +29,7 @@ class AuthShowcaseFactory {
     final SplitViewState splitView = SplitView.of(context);
     final AuthFeature authFeature = AuthFeature(
       dependencies: AuthFeatureDependencies(
+        errorTransformer: const FakeErrorTransformer(),
         authenticationStateUpdatesProvider:
             FakeAuthenticationStateUpdatesProvider(),
         connectionStateProvider: const FakeConnectionStateProvider(),

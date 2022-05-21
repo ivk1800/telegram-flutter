@@ -2,6 +2,7 @@ library feature_auth_impl;
 
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_country_api/feature_country_api.dart';
 import 'package:localization_api/localization_api.dart';
@@ -31,6 +32,7 @@ class AuthFeatureDependencies {
     required this.authenticationStateUpdatesProvider,
     required this.countryRepository,
     required this.authenticationManager,
+    required this.errorTransformer,
   });
 
   final IConnectionStateProvider connectionStateProvider;
@@ -39,4 +41,5 @@ class AuthFeatureDependencies {
   final IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider;
   final ICountryRepository countryRepository;
   final IAuthenticationManager authenticationManager;
+  final IErrorTransformer errorTransformer;
 }

@@ -20,6 +20,7 @@ abstract class AuthScreenModule {
     AuthFeatureDependencies dependencies,
   ) =>
       AuthViewModel(
+        errorTransformer: dependencies.errorTransformer,
         stringsProvider: dependencies.stringsProvider,
         router: dependencies.router,
         authenticationManager: dependencies.authenticationManager,

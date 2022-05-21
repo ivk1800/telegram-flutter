@@ -390,8 +390,10 @@ abstract class FeatureModule {
     IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
     ICountryFeatureApi countryFeatureApi,
     IAuthenticationManager authenticationManager,
+    IErrorTransformer errorTransformer,
   ) =>
       AuthFeatureDependencies(
+        errorTransformer: errorTransformer,
         connectionStateProvider: connectionStateProvider,
         stringsProvider: stringsProvider,
         router: router,
