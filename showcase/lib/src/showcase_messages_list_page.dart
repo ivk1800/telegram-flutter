@@ -4,6 +4,7 @@ import 'package:fake/fake.dart' as fake;
 import 'package:flutter/material.dart';
 import 'package:showcase/src/showcase/message/message_bundle.dart';
 import 'package:showcase/src/showcase/showcase_scope.dart';
+import 'package:split_view/split_view.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 import 'showcase/message/message_data.dart';
@@ -45,10 +46,10 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
                 bundle,
               );
 
-              Navigator.of(context).push<dynamic>(
-                MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => widget,
-                ),
+              SplitView.of(context).add(
+                key: UniqueKey(),
+                builder: (_) => widget,
+                container: ContainerType.right,
               );
             },
           );
