@@ -19,8 +19,6 @@ dependencies:
   jugger: 2.1.0
   localization_api:
     path: ../../../../localization_api
-  provider_extensions:
-    path: ../../../../provider_extensions
 
 dev_dependencies:
   build_runner: 2.1.7

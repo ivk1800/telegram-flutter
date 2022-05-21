@@ -1,6 +1,5 @@
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'new_secret_chat.dart';
 
@@ -12,7 +11,7 @@ class NewSecretChatScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<ICreateNewSecretChatScreenComponent> create;
+  final ICreateNewSecretChatScreenComponent Function() create;
 
   @override
   State<NewSecretChatScreenScope> createState() =>

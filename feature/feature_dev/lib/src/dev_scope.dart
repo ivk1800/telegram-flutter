@@ -2,7 +2,6 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_dev/feature_dev.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 import 'package:showcase/showcase.dart';
 import 'package:theme_manager_api/theme_manager_api.dart';
 
@@ -16,7 +15,7 @@ class DevScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IDevComponent> create;
+  final IDevComponent Function() create;
 
   @override
   State<DevScope> createState() => _DevScopeState();

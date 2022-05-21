@@ -2,7 +2,6 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_folders_impl/src/di/folders_screen_component.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'folders_view_model.dart';
 
@@ -14,7 +13,7 @@ class FoldersScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IFoldersScreenComponent> create;
+  final IFoldersScreenComponent Function() create;
 
   @override
   State<FoldersScreenScope> createState() => _FoldersScreenScopeState();

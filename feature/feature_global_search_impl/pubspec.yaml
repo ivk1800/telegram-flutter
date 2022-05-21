@@ -23,8 +23,6 @@ dependencies:
   freezed_annotation: 1.1.0
   localization_api:
     path: ../../localization_api
-  provider_extensions:
-    path: ../../provider_extensions
   rxdart: 0.27.3
   search_component:
     path: ../../search_component

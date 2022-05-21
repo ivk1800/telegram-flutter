@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 import 'package:tile/tile.dart';
 
 import 'message_showcase_component.dart';
@@ -13,7 +12,7 @@ class MessageShowcaseScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IMessageShowcaseComponent> create;
+  final IMessageShowcaseComponent Function() create;
 
   @override
   State<MessageShowcaseScope> createState() => _MessageShowcaseScopeState();

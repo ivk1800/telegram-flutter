@@ -2,7 +2,6 @@ import 'package:coreui/coreui.dart';
 import 'package:feature_settings_search_impl/src/di/settings_search_screen_component.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 import 'package:tile/tile.dart';
 
 import 'settings_search_view_model.dart';
@@ -15,7 +14,7 @@ class SettingsSearchScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<ISettingsSearchScreenComponent> create;
+  final ISettingsSearchScreenComponent Function() create;
 
   @override
   State<SettingsSearchScreenScope> createState() =>

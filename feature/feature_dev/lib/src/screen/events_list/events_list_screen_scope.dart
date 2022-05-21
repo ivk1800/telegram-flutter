@@ -1,6 +1,5 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:flutter/widgets.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'events_list_screen_component.dart';
 import 'events_list_view_model.dart';
@@ -14,7 +13,7 @@ class EventsListScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IEventsListScreenComponent> create;
+  final IEventsListScreenComponent Function() create;
 
   @override
   State<EventsListScreenScope> createState() => _EventsListScreenScopeState();

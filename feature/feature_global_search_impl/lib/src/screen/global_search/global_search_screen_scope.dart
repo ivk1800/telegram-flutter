@@ -1,7 +1,6 @@
 import 'package:feature_global_search_impl/src/screen/global_search/global_search_view_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 import 'package:tile/tile.dart';
 
 import '../di/global_search_screen_component.dart';
@@ -15,7 +14,7 @@ class GlobalSearchScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IGlobalSearchScreenComponent> create;
+  final IGlobalSearchScreenComponent Function() create;
 
   @override
   State<GlobalSearchScreenScope> createState() =>

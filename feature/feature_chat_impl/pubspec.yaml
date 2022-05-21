@@ -49,8 +49,6 @@ dependencies:
   path_provider: 2.0.9
   profile_navigation_api:
     path: ../profile/profile_navigation_api
-  provider_extensions:
-    path: ../../provider_extensions
   queue:
     path: ../../queue
   rich_text_format:

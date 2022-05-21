@@ -26,8 +26,6 @@ dependencies:
   jugger: 2.1.0
   localization_api:
     path: ../../localization_api
-  provider_extensions:
-    path: ../../provider_extensions
   rxdart: 0.27.3
   user_info:
     path: ../user/user_info

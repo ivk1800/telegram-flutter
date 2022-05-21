@@ -1,6 +1,5 @@
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'new_group_view_model.dart';
 
@@ -12,7 +11,7 @@ class CreateNewGroupScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<ICreateNewGroupScreenComponent> create;
+  final ICreateNewGroupScreenComponent Function() create;
 
   @override
   State<CreateNewGroupScreenScope> createState() =>

@@ -1,7 +1,6 @@
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'new_channel_view_model.dart';
 import 'new_channel_widget_model.dart';
@@ -14,7 +13,7 @@ class CreateNewChannelScreenScore extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<ICreateNewChannelScreenComponent> create;
+  final ICreateNewChannelScreenComponent Function() create;
 
   @override
   State<CreateNewChannelScreenScore> createState() =>

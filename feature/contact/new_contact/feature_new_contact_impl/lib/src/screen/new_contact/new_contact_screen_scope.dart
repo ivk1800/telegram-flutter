@@ -3,7 +3,6 @@ import 'package:feature_new_contact_impl/src/di/new_contact_screen_component.dar
 import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_widget_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'new_contact_view_model.dart';
 
@@ -15,7 +14,7 @@ class NewContactScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<INewContactScreenComponent> create;
+  final INewContactScreenComponent Function() create;
 
   @override
   State<NewContactScreenScope> createState() => _NewContactScreenScopeState();

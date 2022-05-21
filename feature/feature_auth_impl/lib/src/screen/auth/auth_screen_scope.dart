@@ -1,7 +1,6 @@
 import 'package:feature_auth_impl/src/di/di.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'view_model/auth_view_model.dart';
 
@@ -13,7 +12,7 @@ class AuthScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IAuthScreenComponent> create;
+  final IAuthScreenComponent Function() create;
 
   @override
   State<AuthScreenScope> createState() => _AuthScreenScopeState();

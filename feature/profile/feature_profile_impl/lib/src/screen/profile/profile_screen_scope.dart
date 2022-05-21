@@ -2,7 +2,6 @@ import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/src/di/di.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'profile_view_model.dart';
 
@@ -14,7 +13,7 @@ class ProfileScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IProfileScreenComponent> create;
+  final IProfileScreenComponent Function() create;
 
   @override
   State<ProfileScreenScope> createState() => _ProfileScreenScopeState();

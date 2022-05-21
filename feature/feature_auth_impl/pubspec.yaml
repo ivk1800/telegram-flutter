@@ -30,8 +30,6 @@ dependencies:
     path: ../../localization_api
   mask_text_input_formatter: 2.1.0
   provider: 6.0.2
-  provider_extensions:
-    path: ../../provider_extensions
   rxdart: 0.27.3
 
 dev_dependencies:

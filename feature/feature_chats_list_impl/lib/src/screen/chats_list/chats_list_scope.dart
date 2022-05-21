@@ -1,6 +1,5 @@
 import 'package:feature_chats_list_impl/src/di/chats_list_screen_component.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 import 'package:tile/tile.dart';
 
 import 'chats_list_view_model.dart';
@@ -13,7 +12,7 @@ class ChatsListScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IChatsListScreenComponent> create;
+  final IChatsListScreenComponent Function() create;
 
   @override
   State<ChatsListScope> createState() => _ChatsListScopeState();

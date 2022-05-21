@@ -3,7 +3,6 @@ import 'package:feature_main_screen_impl/src/di/main_screen_component.dart';
 import 'package:feature_main_screen_impl/src/screen/main/main_screen_widget_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'header_view_model.dart';
 import 'main_view_model.dart';
@@ -16,7 +15,7 @@ class MainScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IMainScreenComponent> create;
+  final IMainScreenComponent Function() create;
 
   @override
   State<MainScreenScope> createState() => _MainScreenScopeState();

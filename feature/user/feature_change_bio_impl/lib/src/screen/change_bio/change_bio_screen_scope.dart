@@ -1,7 +1,6 @@
 import 'package:feature_change_bio_impl/src/di/change_bio_screen_component.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'change_bio_view_model.dart';
 
@@ -13,7 +12,7 @@ class ChangeBioScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IChangeBioScreenComponent> create;
+  final IChangeBioScreenComponent Function() create;
 
   @override
   State<ChangeBioScreenScope> createState() => _ChangeBioScreenScopeState();

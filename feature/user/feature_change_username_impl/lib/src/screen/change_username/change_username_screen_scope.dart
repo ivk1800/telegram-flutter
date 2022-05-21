@@ -3,7 +3,6 @@ import 'package:feature_change_username_impl/src/di/change_username_screen_compo
 import 'package:feature_change_username_impl/src/screen/change_username/change_username_view_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'change_username_screen_widget_model.dart';
 
@@ -15,7 +14,7 @@ class ChangeUsernameScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IChangeUsernameScreenComponent> create;
+  final IChangeUsernameScreenComponent Function() create;
 
   @override
   State<ChangeUsernameScreenScope> createState() =>

@@ -1,7 +1,6 @@
 import 'package:feature_create_new_chat_impl/src/di/di.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'new_chat_view_model.dart';
 
@@ -13,7 +12,7 @@ class NewChatScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<ICreateNewChatScreenComponent> create;
+  final ICreateNewChatScreenComponent Function() create;
 
   @override
   State<NewChatScreenScope> createState() => _NewChatScreenScopeState();

@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 import 'package:showcase/src/di/showcase_component.dart';
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
 
@@ -17,7 +16,7 @@ class ShowcaseScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IShowcaseComponent> create;
+  final IShowcaseComponent Function() create;
 
   @override
   State<ShowcaseScope> createState() => _ShowcaseScopeState();

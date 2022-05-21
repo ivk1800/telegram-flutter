@@ -3,7 +3,6 @@ import 'package:feature_settings_impl/src/di/settings_screen_component.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'setting_view_model.dart';
 import 'settings_screen_widget_model.dart';
@@ -16,7 +15,7 @@ class SettingsScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<ISettingsComponent> create;
+  final ISettingsComponent Function() create;
 
   @override
   State<SettingsScreenScope> createState() => _SettingsScreenScopeState();

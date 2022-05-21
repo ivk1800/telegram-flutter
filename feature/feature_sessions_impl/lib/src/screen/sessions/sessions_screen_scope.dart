@@ -2,7 +2,6 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_sessions_impl/src/di/sessions_screen_component.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 import 'package:tile/tile.dart';
 
 import 'sessions_view_model.dart';
@@ -15,7 +14,7 @@ class SessionsScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<ISessionsScreenComponent> create;
+  final ISessionsScreenComponent Function() create;
 
   @override
   State<SessionsScreenScope> createState() => _SessionsScreenScopeState();

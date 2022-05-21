@@ -6,7 +6,6 @@ import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'message_factory.dart';
 
@@ -18,7 +17,7 @@ class ChatScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IChatScreenComponent> create;
+  final IChatScreenComponent Function() create;
 
   @override
   State<ChatScreenScope> createState() => _ChatScreenScopeState();

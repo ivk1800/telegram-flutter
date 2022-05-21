@@ -2,7 +2,6 @@ import 'package:feature_contacts_impl/src/di/di.dart';
 import 'package:feature_contacts_impl/src/screen/contacts/contacts_view_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 class ContactsScreenScope extends StatefulWidget {
   const ContactsScreenScope({
@@ -12,7 +11,7 @@ class ContactsScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IContactsScreenComponent> create;
+  final IContactsScreenComponent Function() create;
 
   @override
   State<ContactsScreenScope> createState() => _ContactsScreenScopeState();

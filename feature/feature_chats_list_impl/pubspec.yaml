@@ -28,8 +28,6 @@ dependencies:
   jugger: 2.1.0
   localization_api:
     path: ../../localization_api
-  provider_extensions:
-    path: ../../provider_extensions
   queue:
     path: ../../queue
   shimmer: 2.0.0

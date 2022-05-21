@@ -1,6 +1,5 @@
 import 'package:feature_shared_media_impl/src/di/shared_media_component.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'share_media_view_model.dart';
 
@@ -12,7 +11,7 @@ class SharedMediaScreenScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<ISharedMediaComponent> create;
+  final ISharedMediaComponent Function() create;
 
   @override
   State<SharedMediaScreenScope> createState() => _SharedMediaScreenScopeState();

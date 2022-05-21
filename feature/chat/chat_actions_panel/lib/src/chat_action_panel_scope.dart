@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:provider_extensions/provider_extensions.dart';
 
 import 'chat_actions_panel_component.dart';
 import 'chat_actions_panel_view_model.dart';
@@ -13,7 +12,7 @@ class ChatActionPanelScope extends StatefulWidget {
   });
 
   final Widget child;
-  final CreateComponent<IChatActionsPanelComponent> create;
+  final IChatActionsPanelComponent Function() create;
 
   @override
   State<ChatActionPanelScope> createState() => _ChatActionPanelScopeState();
