@@ -168,6 +168,10 @@ dependencies:
     path: ../split_view
   td_client:
     path: ../td_client
+  tg_logger_api:
+    path: ../tg_logger_api
+  tg_logger_impl:
+    path: ../tg_logger_impl
   tg_theme:
     path: ../feature/theme/tg_theme
   theme_manager_api:

@@ -75,6 +75,7 @@ import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:tg_logger_api/tg_logger_api.dart';
 import 'package:theme_manager_api/theme_manager_api.dart';
 
 import '../../navigation/router/chat_screen_router_factory.dart';
@@ -783,8 +784,10 @@ abstract class FeatureModule {
     ISplitNavigationDelegate navigationDelegate,
     KeyGenerator keyGenerator,
     ChatRouterDelegate chatRouterDelegate,
+    ILogger logger,
   ) =>
       CommonScreenRouterImpl(
+        logger: logger,
         chatRouterDelegate: chatRouterDelegate,
         dialogNavigatorKey: TgApp.navigatorKey,
         featureProvider: featureProvider,

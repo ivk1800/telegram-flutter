@@ -25,6 +25,7 @@ import 'package:feature_stickers_impl/feature_stickers_impl.dart';
 import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:split_view/split_view.dart';
+import 'package:tg_logger_api/tg_logger_api.dart';
 
 import 'chat_router_delegate.dart';
 import 'navigation_router.dart';
@@ -56,12 +57,15 @@ class CommonScreenRouterImpl
     required FeatureProvider featureProvider,
     required KeyGenerator keyGenerator,
     required ChatRouterDelegate chatRouterDelegate,
+    required ILogger logger,
   })  : _navigationDelegate = navigationDelegate,
         _dialogNavigatorKey = dialogNavigatorKey,
         _keyGenerator = keyGenerator,
         _chatRouterDelegate = chatRouterDelegate,
-        _dialogRouter =
-            DialogRouterImpl(dialogNavigatorKey: dialogNavigatorKey),
+        _dialogRouter = DialogRouterImpl(
+          dialogNavigatorKey: dialogNavigatorKey,
+          logger: logger,
+        ),
         _featureProvider = featureProvider;
 
   final ISplitNavigationDelegate _navigationDelegate;

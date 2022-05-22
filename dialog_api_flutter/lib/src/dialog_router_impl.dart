@@ -1,12 +1,16 @@
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:flutter/material.dart';
+import 'package:tg_logger_api/tg_logger_api.dart';
 
 class DialogRouterImpl implements d.IDialogRouter {
   DialogRouterImpl({
     required GlobalKey<NavigatorState> dialogNavigatorKey,
-  }) : _dialogNavigatorKey = dialogNavigatorKey;
+    required ILogger logger,
+  })  : _dialogNavigatorKey = dialogNavigatorKey,
+        _logger = logger;
 
   final GlobalKey<NavigatorState> _dialogNavigatorKey;
+  final ILogger _logger;
 
   @override
   void toDialog({
@@ -62,6 +66,10 @@ class DialogRouterImpl implements d.IDialogRouter {
     final BuildContext? context = _dialogNavigatorKey.currentContext;
 
     if (context == null) {
+      _logger.d(
+        tag: 'DialogRouterImpl',
+        o: 'currentContext is null, skip show dialog',
+      );
       return;
     }
 

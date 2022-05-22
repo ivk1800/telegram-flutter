@@ -9,6 +9,8 @@ import 'package:showcase/src/showcase/create_new_channel_showcase_factory.dart';
 import 'package:showcase/src/showcase/message/message_showcase_factory.dart';
 import 'package:showcase/src/showcase/new_contact_showcase_factory.dart';
 import 'package:showcase/src/showcase/widget/showcase_block_interaction_manager.dart';
+import 'package:tg_logger_api/tg_logger_api.dart';
+import 'package:tg_logger_impl/tg_logger_impl.dart';
 
 @j.Component(
   modules: <Type>[ShowcaseModule],
@@ -59,6 +61,10 @@ abstract class ShowcaseModule {
   @j.singleton
   static GlobalKey<NavigatorState> provideNavigationKey() =>
       GlobalKey<NavigatorState>();
+
+  @j.provides
+  @j.singleton
+  static ILogger provideLogger() => TgLoggerImpl();
 }
 
 @j.componentBuilder

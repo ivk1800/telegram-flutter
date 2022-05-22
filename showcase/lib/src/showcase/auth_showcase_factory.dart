@@ -8,17 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:split_view/split_view.dart';
+import 'package:tg_logger_api/tg_logger_api.dart';
 
 class AuthShowcaseFactory {
   @j.inject
   AuthShowcaseFactory({
     required IStringsProvider stringsProvider,
     required GlobalKey<NavigatorState> navigatorKey,
+    required ILogger logger,
   })  : _stringsProvider = stringsProvider,
+        _logger = logger,
         _navigatorKey = navigatorKey;
 
   final IStringsProvider _stringsProvider;
   final GlobalKey<NavigatorState> _navigatorKey;
+  final ILogger _logger;
 
   Widget create(BuildContext context) {
     final CountryFeature countryFeature = CountryFeature(
@@ -54,6 +58,7 @@ class AuthShowcaseFactory {
           },
         ),
         router: _Router(
+          logger: _logger,
           chooseCountryScreenFactory: countryFeature.chooseCountryScreenFactory,
           splitView: splitView,
           dialogNavigatorKey: _navigatorKey,
@@ -72,7 +77,9 @@ class _Router implements IAuthFeatureRouter {
     required IChooseCountryScreenFactory chooseCountryScreenFactory,
     required GlobalKey<NavigatorState> dialogNavigatorKey,
     required SplitViewState splitView,
+    required ILogger logger,
   })  : _dialogRouterImpl = DialogRouterImpl(
+          logger: logger,
           dialogNavigatorKey: dialogNavigatorKey,
         ),
         _chooseCountryScreenFactory = chooseCountryScreenFactory,

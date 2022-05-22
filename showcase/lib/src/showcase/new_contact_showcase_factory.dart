@@ -8,6 +8,7 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:split_view/split_view.dart';
 import 'package:tdlib/td_api.dart' as td;
+import 'package:tg_logger_api/tg_logger_api.dart';
 
 class NewContactShowcaseFactory {
   @j.inject
@@ -15,13 +16,16 @@ class NewContactShowcaseFactory {
     required IStringsProvider stringsProvider,
     required IBlockInteractionManager blockInteractionManager,
     required GlobalKey<NavigatorState> navigatorKey,
+    required ILogger logger,
   })  : _stringsProvider = stringsProvider,
         _navigatorKey = navigatorKey,
+        _logger = logger,
         _blockInteractionManager = blockInteractionManager;
 
   final IStringsProvider _stringsProvider;
   final IBlockInteractionManager _blockInteractionManager;
   final GlobalKey<NavigatorState> _navigatorKey;
+  final ILogger _logger;
 
   Widget create(BuildContext context) {
     final NewContactFeatureDependencies dependencies =
@@ -33,6 +37,7 @@ class NewContactShowcaseFactory {
       ),
       connectionStateProvider: const FakeConnectionStateProvider(),
       router: _Router(
+        logger: _logger,
         splitView: SplitView.of(context),
         dialogNavigatorKey: _navigatorKey,
       ),
@@ -60,7 +65,9 @@ class _Router implements INewContactRouter {
   _Router({
     required SplitViewState splitView,
     required GlobalKey<NavigatorState> dialogNavigatorKey,
+    required ILogger logger,
   })  : _dialogRouterImpl = DialogRouterImpl(
+          logger: logger,
           dialogNavigatorKey: dialogNavigatorKey,
         ),
         _splitView = splitView;

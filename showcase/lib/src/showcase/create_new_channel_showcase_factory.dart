@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:split_view/split_view.dart';
+import 'package:tg_logger_api/tg_logger_api.dart';
 
 class CreateNewChannelShowcaseFactory {
   @j.inject
@@ -14,11 +15,14 @@ class CreateNewChannelShowcaseFactory {
     required IStringsProvider stringsProvider,
     required IBlockInteractionManager blockInteractionManager,
     required GlobalKey<NavigatorState> navigatorKey,
+    required ILogger logger,
   })  : _stringsProvider = stringsProvider,
         _navigatorKey = navigatorKey,
+        _logger = logger,
         _blockInteractionManager = blockInteractionManager;
 
   final IStringsProvider _stringsProvider;
+  final ILogger _logger;
   final IBlockInteractionManager _blockInteractionManager;
   final GlobalKey<NavigatorState> _navigatorKey;
 
@@ -41,6 +45,7 @@ class CreateNewChannelShowcaseFactory {
       ),
       connectionStateProvider: const FakeConnectionStateProvider(),
       router: _Router(
+        logger: _logger,
         splitView: SplitView.of(context),
         dialogNavigatorKey: _navigatorKey,
       ),
@@ -58,7 +63,9 @@ class _Router implements ICreateNewChatRouter {
   _Router({
     required SplitViewState splitView,
     required GlobalKey<NavigatorState> dialogNavigatorKey,
+    required ILogger logger,
   })  : _dialogRouterImpl = DialogRouterImpl(
+          logger: logger,
           dialogNavigatorKey: dialogNavigatorKey,
         ),
         _splitView = splitView;

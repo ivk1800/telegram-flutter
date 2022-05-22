@@ -1,6 +1,7 @@
 // @dart=2.9
 
 import 'package:auth_manager_api/auth_manager_api.dart';
+import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_auth_impl/src/auth_feature_router.dart';
 import 'package:feature_auth_impl/src/screen/auth/view_model/auth_view_model.dart';
 import 'package:feature_country_api/feature_country_api.dart';
@@ -17,6 +18,7 @@ import 'auth_view_model_test.mocks.dart';
     MockSpec<IAuthFeatureRouter>(returnNullOnMissingStub: true),
     MockSpec<ICountryRepository>(returnNullOnMissingStub: true),
     MockSpec<IAuthenticationManager>(returnNullOnMissingStub: true),
+    MockSpec<IErrorTransformer>(returnNullOnMissingStub: true),
   ],
 )
 void main() {
@@ -25,6 +27,7 @@ void main() {
   MockIAuthFeatureRouter mockAuthFeatureRouter;
   MockICountryRepository mockCountryRepository;
   MockIAuthenticationManager mockAuthenticationManager;
+  MockIErrorTransformer mockErrorTransformer;
 
   setUp(() {
     mockStringsProvider = MockIStringsProvider();
@@ -33,6 +36,7 @@ void main() {
     mockAuthenticationManager = MockIAuthenticationManager();
 
     viewModel = AuthViewModel(
+      errorTransformer: mockErrorTransformer,
       stringsProvider: mockStringsProvider,
       router: mockAuthFeatureRouter,
       countryRepository: mockCountryRepository,

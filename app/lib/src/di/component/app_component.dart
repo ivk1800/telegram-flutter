@@ -17,6 +17,7 @@ import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
+import 'package:tg_logger_api/tg_logger_api.dart';
 import 'package:theme_manager_flutter/theme_manager_flutter.dart';
 
 @j.Component(
@@ -118,6 +119,8 @@ abstract class IAppComponent {
   // endregion
 
   IChatManager get chatManager;
+
+  ILogger get logger;
 }
 
 @j.componentBuilder

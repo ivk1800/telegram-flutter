@@ -26,9 +26,15 @@ import 'package:error_transformer_td/error_transformer_td.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
+import 'package:tg_logger_api/tg_logger_api.dart';
+import 'package:tg_logger_impl/tg_logger_impl.dart';
 
 @j.module
 abstract class AppModule {
+  @j.singleton
+  @j.provides
+  static ILogger provideLogger() => TgLoggerImpl();
+
   @j.singleton
   @j.provides
   static FeatureFactory provideFeatureFactory(IAppComponent appComponent) {

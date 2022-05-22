@@ -1,18 +1,14 @@
-name: dialog_api_flutter
+name: tg_logger_impl
 publish_to: 'none'
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
-  flutter: ^3.0.0
 
 dependencies:
-  dialog_api:
-    path: ../dialog_api
-  flutter:
-    sdk: flutter
   tg_logger_api:
     path: ../tg_logger_api
 
 dev_dependencies:
+  dependency_validator: 3.2.0
   tg_lint_rules:
     path: ../tg_lint_rules

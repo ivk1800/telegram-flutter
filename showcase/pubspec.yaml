@@ -66,6 +66,10 @@ dependencies:
   rxdart: 0.27.3
   split_view:
     path: ../split_view
+  tg_logger_api:
+    path: ../tg_logger_api
+  tg_logger_impl:
+    path: ../tg_logger_impl
   tg_theme:
     path: ../feature/theme/tg_theme
   tile:
