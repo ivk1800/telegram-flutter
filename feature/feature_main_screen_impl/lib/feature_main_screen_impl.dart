@@ -28,26 +28,26 @@ class MainScreenFeature implements IMainScreenFeatureApi {
 
 class MainScreenFeatureDependencies {
   const MainScreenFeatureDependencies({
-    required this.globalSearchFeatureApi,
-    required this.chatsListFeatureApi,
+    required this.globalSearchScreenFactory,
+    required this.chatsListScreenFactory,
     required this.connectionStateProvider,
     required this.router,
-    required this.localizationManager,
+    required this.stringsProvider,
     required this.userRepository,
     required this.themeManager,
     required this.optionsManager,
     required this.fileRepository,
   });
 
-  final IGlobalSearchFeatureApi globalSearchFeatureApi;
+  final IGlobalSearchScreenFactory globalSearchScreenFactory;
 
-  final IChatsListFeatureApi chatsListFeatureApi;
+  final IChatsListScreenFactory chatsListScreenFactory;
 
   final IConnectionStateProvider connectionStateProvider;
 
   final IMainScreenRouter router;
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
 
   final IUserRepository userRepository;
 

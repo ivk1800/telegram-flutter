@@ -41,10 +41,8 @@ abstract class MainScreenModule {
   ) =>
       MainScreenWidgetModel(
         viewModel: viewModel,
-        chatsListScreenFactory:
-            dependencies.chatsListFeatureApi.chatsListScreenFactory,
-        globalSearchScreenFactory:
-            dependencies.globalSearchFeatureApi.globalSearchScreenFactory,
+        chatsListScreenFactory: dependencies.chatsListScreenFactory,
+        globalSearchScreenFactory: dependencies.globalSearchScreenFactory,
       );
 
   @j.provides
@@ -97,38 +95,24 @@ abstract class MainScreenModule {
 
   @j.provides
   @j.singleton
-  static IGlobalSearchFeatureApi provideGlobalSearchFeatureApi(
-    MainScreenFeatureDependencies dependencies,
-  ) =>
-      dependencies.globalSearchFeatureApi;
-
-  @j.provides
-  @j.singleton
   static IGlobalSearchScreenFactory provideGlobalSearchScreenFactory(
-    IGlobalSearchFeatureApi api,
-  ) =>
-      api.globalSearchScreenFactory;
-
-  @j.provides
-  @j.singleton
-  static IChatsListFeatureApi provideChatsListFeatureApi(
     MainScreenFeatureDependencies dependencies,
   ) =>
-      dependencies.chatsListFeatureApi;
+      dependencies.globalSearchScreenFactory;
 
   @j.provides
   @j.singleton
   static IChatsListScreenFactory provideChatsListWidgetFactory(
-    IChatsListFeatureApi api,
+    MainScreenFeatureDependencies dependencies,
   ) =>
-      api.chatsListScreenFactory;
+      dependencies.chatsListScreenFactory;
 
   @j.provides
   @j.singleton
   static IStringsProvider provideStringsProvider(
     MainScreenFeatureDependencies dependencies,
   ) =>
-      dependencies.localizationManager.stringsProvider;
+      dependencies.stringsProvider;
 }
 
 @j.componentBuilder

@@ -22,8 +22,12 @@ dependencies:
     path: ../feature/feature_chat_api
   feature_chat_header_info_api:
     path: ../feature/feature_chat_header_info_api
+  feature_chats_list_api:
+    path: ../feature/feature_chats_list_api
   feature_file_api:
     path: ../feature/feature_file_api
+  feature_global_search_api:
+    path: ../feature/feature_global_search_api
   flutter:
     sdk: flutter
   localization_impl:

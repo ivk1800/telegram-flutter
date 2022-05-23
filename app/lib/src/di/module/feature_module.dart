@@ -86,7 +86,7 @@ abstract class FeatureModule {
 
   @j.provides
   static MainScreenFeatureDependencies provideMainScreenFeatureDependencies(
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     IMainScreenRouter router,
     // todo do not depend on feature
     IGlobalSearchFeatureApi globalSearchFeatureApi,
@@ -101,12 +101,13 @@ abstract class FeatureModule {
       MainScreenFeatureDependencies(
         themeManager: themeManager,
         userRepository: userRepository,
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
         fileRepository: fileRepository,
         router: router,
         connectionStateProvider: connectionStateProvider,
-        chatsListFeatureApi: chatsListFeatureApi,
-        globalSearchFeatureApi: globalSearchFeatureApi,
+        chatsListScreenFactory: chatsListFeatureApi.chatsListScreenFactory,
+        globalSearchScreenFactory:
+            globalSearchFeatureApi.globalSearchScreenFactory,
         optionsManager: optionsManager,
       );
 

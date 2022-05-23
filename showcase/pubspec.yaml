@@ -46,6 +46,8 @@ dependencies:
     path: ../feature/feature_create_new_chat_impl
   feature_file_api:
     path: ../feature/feature_file_api
+  feature_main_screen_impl:
+    path: ../feature/feature_main_screen_impl
   feature_message_preview_resolver:
     path: ../feature/feature_message_preview_resolver
   feature_message_preview_resolver_impl:
@@ -72,6 +74,8 @@ dependencies:
     path: ../tg_logger_impl
   tg_theme:
     path: ../feature/theme/tg_theme
+  theme_manager_flutter:
+    path: ../feature/theme/theme_manager_flutter
   tile:
     path: ../tile
 

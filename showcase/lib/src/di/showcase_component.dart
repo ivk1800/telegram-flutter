@@ -6,6 +6,7 @@ import 'package:showcase/showcase.dart';
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
 import 'package:showcase/src/showcase/change_username_showcase_factory.dart';
 import 'package:showcase/src/showcase/create_new_channel_showcase_factory.dart';
+import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/message/message_showcase_factory.dart';
 import 'package:showcase/src/showcase/new_contact_showcase_factory.dart';
 import 'package:showcase/src/showcase/widget/showcase_block_interaction_manager.dart';
@@ -31,6 +32,8 @@ abstract class IShowcaseComponent {
   GlobalKey<NavigatorState> getNavigatorKey();
 
   MessageShowcaseFactory getMessageShowcaseFactory();
+
+  MainScreenShowcaseFactory getMainScreenShowcaseFactory();
 }
 
 @j.module

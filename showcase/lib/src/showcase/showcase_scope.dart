@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:showcase/src/di/showcase_component.dart';
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
+import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 
 import 'change_username_showcase_factory.dart';
 import 'create_new_channel_showcase_factory.dart';
@@ -48,6 +49,11 @@ class ShowcaseScope extends StatefulWidget {
     BuildContext context,
   ) =>
       _InheritedScope.of(context)._messageShowcaseFactory;
+
+  static MainScreenShowcaseFactory getMainScreenShowcaseFactory(
+    BuildContext context,
+  ) =>
+      _InheritedScope.of(context)._mainScreenShowcaseFactory;
 }
 
 class _ShowcaseScopeState extends State<ShowcaseScope> {
@@ -70,6 +76,9 @@ class _ShowcaseScopeState extends State<ShowcaseScope> {
 
   late final MessageShowcaseFactory _messageShowcaseFactory =
       _component.getMessageShowcaseFactory();
+
+  late final MainScreenShowcaseFactory _mainScreenShowcaseFactory =
+      _component.getMainScreenShowcaseFactory();
 
   @override
   Widget build(BuildContext context) {
