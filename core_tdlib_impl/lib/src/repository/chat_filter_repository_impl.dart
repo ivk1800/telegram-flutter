@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatFilterRepositoryImpl implements IChatFilterRepository {
@@ -12,22 +13,23 @@ class ChatFilterRepositoryImpl implements IChatFilterRepository {
 
   final IChatFiltersUpdatesProvider _chatFiltersUpdatesProvider;
 
-  List<td.ChatFilterInfo> _chatFilters = <td.ChatFilterInfo>[];
+  final BehaviorSubject<List<td.ChatFilterInfo>> _chatFiltersSubject =
+      BehaviorSubject<List<td.ChatFilterInfo>>.seeded(<td.ChatFilterInfo>[]);
 
-  StreamSubscription<td.UpdateChatFilters>? _chatFiltersUpdatesSubscription;
+  StreamSubscription<List<td.ChatFilterInfo>>? _chatFiltersUpdatesSubscription;
+
+  @override
+  Stream<List<td.ChatFilterInfo>> get chatFiltersStream => _chatFiltersSubject;
 
   void _init() {
     _chatFiltersUpdatesSubscription = _chatFiltersUpdatesProvider
         .chatFiltersUpdates
-        .listen((td.UpdateChatFilters event) {
-      _chatFilters = event.chatFilters;
-    });
+        .map((td.UpdateChatFilters event) => event.chatFilters)
+        .listen(_chatFiltersSubject.add);
   }
 
-  @override
-  List<td.ChatFilterInfo> get chatFilters => _chatFilters;
-
   void dispose() {
+    _chatFiltersSubject.close();
     _chatFiltersUpdatesSubscription?.cancel();
   }
 }

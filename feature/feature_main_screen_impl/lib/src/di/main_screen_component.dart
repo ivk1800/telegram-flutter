@@ -3,6 +3,7 @@ import 'package:coreui/coreui.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
+import 'package:feature_main_screen_impl/src/screen/main/folders_interactor.dart';
 import 'package:feature_main_screen_impl/src/screen/main/header_view_model.dart';
 import 'package:feature_main_screen_impl/src/screen/main/main_screen_widget_model.dart';
 import 'package:feature_main_screen_impl/src/screen/main/main_view_model.dart';
@@ -40,6 +41,7 @@ abstract class MainScreenModule {
     MainViewModel viewModel,
   ) =>
       MainScreenWidgetModel(
+        stringsProvider: dependencies.stringsProvider,
         viewModel: viewModel,
         chatsListScreenFactory: dependencies.chatsListScreenFactory,
         globalSearchScreenFactory: dependencies.globalSearchScreenFactory,
@@ -49,10 +51,20 @@ abstract class MainScreenModule {
   @j.singleton
   static MainViewModel provideMainViewModel(
     MainScreenFeatureDependencies dependencies,
+    FoldersInteractor foldersInteractor,
   ) =>
       MainViewModel(
+        foldersInteractor: foldersInteractor,
         router: dependencies.router,
       )..init();
+
+  @j.provides
+  static FoldersInteractor provideFoldersInteractor(
+    MainScreenFeatureDependencies dependencies,
+  ) =>
+      FoldersInteractor(
+        chatFilterRepository: dependencies.chatFilterRepository,
+      );
 
   @j.provides
   @j.singleton

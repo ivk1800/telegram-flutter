@@ -22,6 +22,12 @@ class MainPage extends StatefulWidget {
 
 class MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
+  void initState() {
+    MainScreenScope.getMainScreenWidgetModel(context).init(this);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final MainScreenWidgetModel widgetModel =
         MainScreenScope.getMainScreenWidgetModel(context);
@@ -90,6 +96,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
           );
         } else {
           return AppBar(
+            elevation: 0.0,
             title: const _DefaultTitle(),
             leading: IconButton(
               // color: _navigationIconColorTween.value,
@@ -128,7 +135,7 @@ class _Body extends StatelessWidget {
 
     return Stack(
       children: <Widget>[
-        widgetModel.chatsListWidget,
+        const _ChatLists(),
         ValueListenableBuilder<ScreenState>(
           valueListenable: widgetModel.screenState,
           builder:
@@ -147,6 +154,118 @@ class _Body extends StatelessWidget {
       ],
     );
   }
+}
+
+class _ChatLists extends StatelessWidget {
+  const _ChatLists();
+
+  @override
+  Widget build(BuildContext context) {
+    return const _TabsPages();
+  }
+}
+
+class _Tabs extends StatelessWidget implements PreferredSizeWidget {
+  const _Tabs();
+
+  @override
+  Widget build(BuildContext context) {
+    final MainScreenWidgetModel widgetModel =
+        MainScreenScope.getMainScreenWidgetModel(context);
+
+    return StreamListener<List<TabInfo>>(
+      stream: widgetModel.tabsInfoStream,
+      builder: (BuildContext context, List<TabInfo> tabs) {
+        // only main list
+        if (tabs.length == 1) {
+          return const SizedBox.shrink();
+        }
+
+        return Align(
+          alignment: Alignment.centerLeft,
+          child: Material(
+            color: Colors.transparent,
+            child: TabBar(
+              controller: widgetModel.tabController,
+              indicatorColor: Colors.red,
+              isScrollable: true,
+              tabs: tabs
+                  .map<Widget>(
+                    (TabInfo info) => Tab(
+                      text: info.title,
+                    ),
+                  )
+                  .toList(growable: false),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size(double.infinity, kToolbarHeight);
+}
+
+class _TabsPages extends StatelessWidget {
+  const _TabsPages();
+
+  @override
+  Widget build(BuildContext context) {
+    final MainScreenWidgetModel widgetModel =
+        MainScreenScope.getMainScreenWidgetModel(context);
+
+    final ThemeData theme = Theme.of(context);
+
+    return StreamListener<List<TabInfo>>(
+      stream: widgetModel.tabsInfoStream,
+      builder: (BuildContext context, List<TabInfo> tabs) {
+        return Column(
+          children: <Widget>[
+            ColoredBox(
+              color: theme.appBarTheme.backgroundColor ?? theme.primaryColor,
+              child: const _Tabs(),
+            ),
+            Expanded(
+              child: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: widgetModel.tabController,
+                children: tabs
+                    .map(
+                      (TabInfo info) => _ChatsListPage(
+                        key: ValueKey<int>(info.id),
+                        child: info.widget,
+                      ),
+                    )
+                    .toList(growable: false),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _ChatsListPage extends StatefulWidget {
+  const _ChatsListPage({required this.child, super.key});
+
+  final Widget child;
+
+  @override
+  State<_ChatsListPage> createState() => _ChatsListPageState();
+}
+
+class _ChatsListPageState extends State<_ChatsListPage>
+    with AutomaticKeepAliveClientMixin<_ChatsListPage> {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return widget.child;
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class _DefaultTitle extends StatelessWidget {

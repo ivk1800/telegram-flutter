@@ -605,6 +605,9 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get message => _get('Message');
 
+  @override
+  String get filterAllChatsShort => _get('FilterAllChatsShort');
+
   String _get(String key) => _stringGetter.call(key);
 
   String _getFormatted(String key, List<dynamic> args) =>

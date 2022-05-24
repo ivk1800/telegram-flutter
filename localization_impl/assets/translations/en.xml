@@ -399,4 +399,6 @@ This link opens a chat with you:
     <string lang="UsernameEmpty">None</string>
     <!-- https://translations.telegram.org/en/android/private_chats/Message -->
     <string lang="Message">Message</string>
+    <!-- https://translations.telegram.org/en/android/unsorted/FilterAllChatsShort -->
+    <string lang="FilterAllChatsShort">All</string>
 </resources>

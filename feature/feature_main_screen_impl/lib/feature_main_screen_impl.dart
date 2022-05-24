@@ -37,23 +37,17 @@ class MainScreenFeatureDependencies {
     required this.themeManager,
     required this.optionsManager,
     required this.fileRepository,
+    required this.chatFilterRepository,
   });
 
   final IGlobalSearchScreenFactory globalSearchScreenFactory;
-
   final IChatsListScreenFactory chatsListScreenFactory;
-
   final IConnectionStateProvider connectionStateProvider;
-
   final IMainScreenRouter router;
-
   final IStringsProvider stringsProvider;
-
   final IUserRepository userRepository;
-
   final IThemeManager themeManager;
-
   final OptionsManager optionsManager;
-
   final IFileRepository fileRepository;
+  final IChatFilterRepository chatFilterRepository;
 }

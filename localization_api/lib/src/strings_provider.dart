@@ -386,4 +386,6 @@ abstract class IStringsProvider {
   String get usernameEmpty;
 
   String get message;
+
+  String get filterAllChatsShort;
 }

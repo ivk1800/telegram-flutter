@@ -19,6 +19,7 @@ class GlobalSearchWidgetModel {
 
   void init(TickerProvider vsync, GlobalSearchScreenController controller) {
     tabController = TabController(vsync: vsync, length: 6);
+    // todo remove listener
     tabController!.addListener(() {
       _viewModel.onCurrentPageChanged(
         GlobalSearchResultCategory.values[tabController!.index],

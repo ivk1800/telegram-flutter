@@ -25,6 +25,27 @@ class MainScreenShowcaseFactory {
 
     final MainScreenFeatureDependencies dependencies =
         MainScreenFeatureDependencies(
+      chatFilterRepository: FakeChatFilterRepository(
+        chatFilters: Stream<List<td.ChatFilterInfo>>.value(
+          <td.ChatFilterInfo>[
+            const td.ChatFilterInfo(
+              id: 1,
+              title: 'test',
+              iconName: 'All',
+            ),
+            const td.ChatFilterInfo(
+              id: 2,
+              title: 'test2',
+              iconName: 'All',
+            ),
+            const td.ChatFilterInfo(
+              id: 3,
+              title: 'test3',
+              iconName: 'All',
+            ),
+          ],
+        ),
+      ),
       chatsListScreenFactory: const FakeChatsListScreenFactory(),
       globalSearchScreenFactory: const FakeGlobalSearchScreenFactory(),
       connectionStateProvider:

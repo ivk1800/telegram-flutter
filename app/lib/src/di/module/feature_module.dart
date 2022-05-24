@@ -97,8 +97,10 @@ abstract class FeatureModule {
     IUserRepository userRepository,
     OptionsManager optionsManager,
     IFileRepository fileRepository,
+    IChatFilterRepository chatFilterRepository,
   ) =>
       MainScreenFeatureDependencies(
+        chatFilterRepository: chatFilterRepository,
         themeManager: themeManager,
         userRepository: userRepository,
         stringsProvider: stringsProvider,
