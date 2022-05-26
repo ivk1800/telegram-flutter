@@ -2,6 +2,7 @@
 *.jugger.dart
 *.freezed.dart
 *.mocks.dart
+*.dmg.dart
 .metadata
 *.g.dart
 /tdlib

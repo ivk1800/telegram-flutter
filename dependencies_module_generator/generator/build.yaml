@@ -1,0 +1,9 @@
+builders:
+  dependencies_module_generator:
+    import: "package:dependencies_module_generator/builder.dart"
+    builder_factories:
+      - "dmg"
+    build_extensions: { ".dart": [".dmg.dart"] }
+    auto_apply: dependents
+    build_to: source
+    runs_before: ["jugger_generator"]

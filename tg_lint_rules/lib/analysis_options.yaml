@@ -8,6 +8,7 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/*.mocks.dart"
     - "**/*.jugger.dart"
+    - "**/*.dmg.dart"
 
   strong-mode:
     implicit-casts: false
