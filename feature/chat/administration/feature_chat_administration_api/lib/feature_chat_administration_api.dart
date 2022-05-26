@@ -1,11 +1,4 @@
 library feature_new_contact_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class IChatAdministrationFeatureApi {
-  IChatAdministrationScreenFactory get chatAdministrationScreenFactory;
-}
-
-abstract class IChatAdministrationScreenFactory {
-  Widget create(int chatId);
-}
+export 'src/chat_administration_feature_api.dart';
+export 'src/chat_administration_screen_factory.dart';

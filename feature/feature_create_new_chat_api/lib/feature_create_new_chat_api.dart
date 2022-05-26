@@ -1,29 +1,7 @@
 library feature_create_new_chat_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class ICreateNewChatFeatureApi {
-  INewChatScreenFactory get newChatScreenFactory;
-
-  ICreateNewGroupScreenFactory get createNewGroupScreenFactory;
-
-  ICreateNewSecretChatScreenFactory get createNewSecretChatScreenFactory;
-
-  ICreateNewChannelScreenFactory get createNewChannelScreenFactory;
-}
-
-abstract class INewChatScreenFactory {
-  Widget create();
-}
-
-abstract class ICreateNewGroupScreenFactory {
-  Widget create();
-}
-
-abstract class ICreateNewChannelScreenFactory {
-  Widget create();
-}
-
-abstract class ICreateNewSecretChatScreenFactory {
-  Widget create();
-}
+export 'src/create_new_channel_screen_factory.dart';
+export 'src/create_new_chat_feature_api.dart';
+export 'src/create_new_group_screen_factory.dart';
+export 'src/create_new_secret_chat_screen_factory.dart';
+export 'src/new_chat_screen_factory.dart';

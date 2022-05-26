@@ -1,5 +1,3 @@
-library localization_api;
-
 import 'package:app_controller/src/app_lifecycle_state_delegate.dart';
 import 'package:app_controller/src/authorization_state_delegate.dart';
 import 'package:app_controller/src/connectivity_delegate.dart';
@@ -7,7 +5,7 @@ import 'package:app_controller/src/device_info_provider.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 
-import 'src/app_controller.dart';
+import 'app_controller.dart';
 
 class AppControllerComponent {
   AppControllerComponent({

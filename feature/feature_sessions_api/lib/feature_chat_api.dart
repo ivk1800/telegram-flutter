@@ -1,11 +1,4 @@
 library feature_sessions_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class ISessionsFeatureApi {
-  ISessionsScreenFactory get sessionsScreenFactory;
-}
-
-abstract class ISessionsScreenFactory {
-  Widget create();
-}
+export 'src/sessions_feature_api.dart';
+export 'src/sessions_screen_factory.dart';

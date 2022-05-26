@@ -1,5 +1,3 @@
 library chat_navigation_api;
 
-abstract class IChatRouter {
-  void toChat(int chatId);
-}
+export 'src/chat_router.dart';

@@ -1,11 +1,4 @@
 library feature_logout_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class ILogoutFeatureApi {
-  ILogoutScreenFactory get logoutScreenFactory;
-}
-
-abstract class ILogoutScreenFactory {
-  Widget create();
-}
+export 'src/logout_feature_api.dart';
+export 'src/logout_screen_factory.dart';

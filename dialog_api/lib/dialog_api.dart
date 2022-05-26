@@ -1,8 +1,9 @@
 library dialog_api;
 
-import 'src/body.dart';
+import 'dialog_api.dart';
 
 export 'src/body.dart';
+export 'src/dialog_router.dart';
 
 abstract class IDialogRouter {
   void toDialog({

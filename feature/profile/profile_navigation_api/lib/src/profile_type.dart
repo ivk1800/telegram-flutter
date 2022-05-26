@@ -1,0 +1,4 @@
+enum ProfileType {
+  user,
+  chat,
+}

@@ -1,11 +1,4 @@
 library feature_change_bio_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class IChangeBioFeatureApi {
-  IChangeBioScreenFactory get changeBioScreenFactory;
-}
-
-abstract class IChangeBioScreenFactory {
-  Widget create();
-}
+export 'src/change_bio_feature_api.dart';
+export 'src/change_bio_screen_factory.dart';

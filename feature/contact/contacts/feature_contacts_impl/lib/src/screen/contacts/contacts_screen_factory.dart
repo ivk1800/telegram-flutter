@@ -7,8 +7,9 @@ import 'contacts_page.dart';
 import 'contacts_screen_scope.dart';
 
 class ContactsScreenFactory implements IContactsScreenFactory {
-  ContactsScreenFactory({required ContactsFeatureDependencies dependencies})
-      : _dependencies = dependencies;
+  ContactsScreenFactory({
+    required ContactsFeatureDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final ContactsFeatureDependencies _dependencies;
 

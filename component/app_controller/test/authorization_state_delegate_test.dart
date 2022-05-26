@@ -1,7 +1,7 @@
 // @dart=2.9
 /*
 // todo fix tests
-import 'package:app_controller/app_controller_component.dart';
+import 'package:app_controller/app_controller.dart';
 import 'package:app_controller/src/authorization_state_delegate.dart';
 import 'package:app_controller/src/device_info_provider.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';

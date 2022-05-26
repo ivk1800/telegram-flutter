@@ -1,5 +1,3 @@
 library error_transformer_api;
 
-abstract class IErrorTransformer {
-  String transformToString(Object error);
-}
+export 'src/error_transformer.dart';

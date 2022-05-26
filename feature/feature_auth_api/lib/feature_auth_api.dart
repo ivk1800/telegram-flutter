@@ -1,11 +1,4 @@
 library feature_auth_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class IAuthFeatureApi {
-  IAuthScreenFactory get authScreenFactory;
-}
-
-abstract class IAuthScreenFactory {
-  Widget create();
-}
+export 'src/auth_feature_api.dart';
+export 'src/auth_screen_factory.dart';

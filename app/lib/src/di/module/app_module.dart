@@ -9,7 +9,7 @@ import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app/src/navigation/split_navigation_router.dart';
 import 'package:app/src/tdlib/config_provider.dart';
 import 'package:app/src/widget/block_interaction_manager.dart';
-import 'package:app_controller/app_controller_component.dart';
+import 'package:app_controller/app_controller.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:auth_manager_impl/auth_manager_impl.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';

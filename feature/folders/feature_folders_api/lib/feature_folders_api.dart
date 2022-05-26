@@ -1,17 +1,5 @@
 library feature_folders_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class IFoldersFeatureApi {
-  IFoldersScreenFactory get foldersScreenFactory;
-
-  ISetupFolderScreenFactory get setupFolderScreenFactory;
-}
-
-abstract class IFoldersScreenFactory {
-  Widget create();
-}
-
-abstract class ISetupFolderScreenFactory {
-  Widget create();
-}
+export 'src/folders_feature_api.dart';
+export 'src/folders_screen_factory.dart';
+export 'src/setup_folder_screen_factory.dart';

@@ -1,4 +1,4 @@
-import 'package:app_controller/app_controller_component.dart';
+import 'package:app_controller/app_controller.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:flutter/material.dart';

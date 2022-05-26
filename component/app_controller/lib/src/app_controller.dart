@@ -1,6 +1,6 @@
-import 'package:app_controller/app_controller_component.dart';
 import 'package:app_controller/src/connectivity_delegate.dart';
 
+import 'app_controller_component.dart';
 import 'app_lifecycle_state_delegate.dart';
 import 'authorization_state_delegate.dart';
 

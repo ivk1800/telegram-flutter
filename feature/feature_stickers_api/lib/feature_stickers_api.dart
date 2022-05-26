@@ -1,35 +1,8 @@
 library feature_stickers_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class IStickersFeatureApi {
-  IStickersWidgetFactory get stickersWidgetFactory;
-
-  ITrendingStickersWidgetFactory get trendingStickersWidgetFactory;
-
-  IArchivedStickersWidgetFactory get archivedStickersWidgetFactory;
-
-  IMasksWidgetFactory get masksWidgetFactory;
-
-  IStickerSetWidgetFactory get stickerSetWidgetFactory;
-}
-
-abstract class IStickersWidgetFactory {
-  Widget create();
-}
-
-abstract class ITrendingStickersWidgetFactory {
-  Widget create();
-}
-
-abstract class IArchivedStickersWidgetFactory {
-  Widget create();
-}
-
-abstract class IMasksWidgetFactory {
-  Widget create();
-}
-
-abstract class IStickerSetWidgetFactory {
-  Widget create(int setId);
-}
+export 'src/archived_stickers_widget_factory.dart';
+export 'src/masks_widget_factory.dart';
+export 'src/sticker_set_widget_factory.dart';
+export 'src/stickers_feature_api.dart';
+export 'src/stickers_widget_factory.dart';
+export 'src/trending_stickers_widget_factory.dart';

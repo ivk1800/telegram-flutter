@@ -1,11 +1,4 @@
 library feature_chat_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class IChatFeatureApi {
-  IChatScreenFactory get chatScreenFactory;
-}
-
-abstract class IChatScreenFactory {
-  Widget create(int chatId);
-}
+export 'src/chat_feature_api.dart';
+export 'src/chat_screen_factory.dart';

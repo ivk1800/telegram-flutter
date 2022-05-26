@@ -1,0 +1,17 @@
+import 'package:feature_change_bio_api/feature_change_bio_api.dart';
+
+import 'change_bio_feature_dependencies.dart';
+import 'screen/change_bio/change_bio_screen_factory.dart';
+
+class ChangeBioFeature implements IChangeBioFeatureApi {
+  ChangeBioFeature({
+    required ChangeBioFeatureDependencies dependencies,
+  }) : _dependencies = dependencies;
+
+  final ChangeBioFeatureDependencies _dependencies;
+  late final ChangeBioScreenFactory _changeBioScreenFactory =
+      ChangeBioScreenFactory(dependencies: _dependencies);
+
+  @override
+  IChangeBioScreenFactory get changeBioScreenFactory => _changeBioScreenFactory;
+}

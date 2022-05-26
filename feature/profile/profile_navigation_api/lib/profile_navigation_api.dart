@@ -1,10 +1,4 @@
 library profile_navigation_api;
 
-abstract class IProfileRouter {
-  void toChatProfile({required int chatId, required ProfileType type});
-}
-
-enum ProfileType {
-  user,
-  chat,
-}
+export 'src/profile_router.dart';
+export 'src/profile_type.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app_controller/app_controller_component.dart';
+import 'package:app_controller/app_controller.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:jugger/jugger.dart' as j;
 

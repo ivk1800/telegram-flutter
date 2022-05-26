@@ -1,18 +1,5 @@
 library feature_notifications_settings_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class INotificationsSettingsFeatureApi {
-  INotificationsSettingsWidgetFactory get screenWidgetFactory;
-
-  IQuickNotificationSettingsScreenFactory
-      get quickNotificationSettingsScreenFactory;
-}
-
-abstract class INotificationsSettingsWidgetFactory {
-  Widget create();
-}
-
-abstract class IQuickNotificationSettingsScreenFactory {
-  Widget create();
-}
+export 'src/notifications_settings_feature_api.dart';
+export 'src/notifications_settings_widget_factory.dart';
+export 'src/quick_notification_settings_screen_factory.dart';

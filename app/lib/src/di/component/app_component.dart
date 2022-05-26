@@ -5,7 +5,7 @@ import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app/src/widget/block_interaction_manager.dart';
-import 'package:app_controller/app_controller_component.dart';
+import 'package:app_controller/app_controller.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:chat_manager_api/chat_manager_api.dart';

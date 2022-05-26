@@ -3,6 +3,7 @@ import 'package:feature_chat_administration_impl/feature_chat_administration_imp
 import 'package:feature_chat_administration_impl/src/di/chat_administration_screen_component.jugger.dart';
 import 'package:flutter/material.dart';
 
+import 'args.dart';
 import 'chat_administration_page.dart';
 import 'chat_administration_screen_scope.dart';
 

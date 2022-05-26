@@ -1,11 +1,4 @@
 library feature_data_settings_api;
 
-import 'package:flutter/widgets.dart';
-
-abstract class IDataSettingsFeatureApi {
-  IDataSettingsWidgetFactory get screenWidgetFactory;
-}
-
-abstract class IDataSettingsWidgetFactory {
-  Widget create();
-}
+export 'src/data_settings_feature_api.dart';
+export 'src/data_settings_widget_factory.dart';
