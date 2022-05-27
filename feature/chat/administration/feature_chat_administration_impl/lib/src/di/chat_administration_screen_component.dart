@@ -38,7 +38,7 @@ abstract class ChatAdministrationScreenModule {
         blockInteractionManager: dependencies.blockInteractionManager,
         router: dependencies.routerFactory.create(args.chatId),
         chatManager: dependencies.chatManager,
-      )..init();
+      );
 
   @j.provides
   @j.singleton

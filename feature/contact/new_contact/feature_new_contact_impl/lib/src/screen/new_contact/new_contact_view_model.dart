@@ -29,7 +29,12 @@ class NewContactViewModel extends BaseViewModel {
         _contactsManager = contactsManager,
         _userInfoResolver = userInfoResolver,
         _stringsProvider = stringsProvider,
-        _blockInteractionManager = blockInteractionManager;
+        _blockInteractionManager = blockInteractionManager {
+    subscribe(
+      _userInfoResolver.resolveAsStream(_args.userId),
+      _onNewUserInfo,
+    );
+  }
 
   final Args _args;
   final INewContactRouter _router;
@@ -45,14 +50,6 @@ class NewContactViewModel extends BaseViewModel {
       BehaviorSubject<NewContactState>.seeded(const NewContactState.loading());
 
   Stream<NewContactState> get state => _stateSubject;
-
-  @override
-  void init() {
-    subscribe(
-      _userInfoResolver.resolveAsStream(_args.userId),
-      _onNewUserInfo,
-    );
-  }
 
   void onDoneTap({
     required String firstName,

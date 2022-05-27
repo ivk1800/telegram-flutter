@@ -26,7 +26,7 @@ abstract class ChangeBioScreenModule {
   static ChangeBioViewModel provideChangeBioViewModel(
     ChangeBioFeatureDependencies dependencies,
   ) =>
-      ChangeBioViewModel()..init();
+      ChangeBioViewModel();
 }
 
 @j.componentBuilder

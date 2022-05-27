@@ -56,7 +56,7 @@ abstract class MainScreenModule {
       MainViewModel(
         foldersInteractor: foldersInteractor,
         router: dependencies.router,
-      )..init();
+      );
 
   @j.provides
   static FoldersInteractor provideFoldersInteractor(
@@ -76,7 +76,7 @@ abstract class MainScreenModule {
         optionsManager: dependencies.optionsManager,
         userInfoResolver: userInfoResolver,
         themeManager: dependencies.themeManager,
-      )..init();
+      );
 
   @j.provides
   @j.singleton

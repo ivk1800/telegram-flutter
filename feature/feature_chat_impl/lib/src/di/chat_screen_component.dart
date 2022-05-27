@@ -168,7 +168,7 @@ abstract class ChatScreenModule {
         router: dependencies.routerFactory.create(args.chatId),
         messagesInteractor: chatMessagesInteractor,
         args: args,
-      )..init();
+      );
 
   @j.provides
   @j.singleton
@@ -189,7 +189,7 @@ abstract class ChatScreenModule {
         args: args,
         chatRepository: dependencies.chatRepository,
         stringsProvider: stringsProvider,
-      )..init();
+      );
 
   @j.provides
   @j.singleton

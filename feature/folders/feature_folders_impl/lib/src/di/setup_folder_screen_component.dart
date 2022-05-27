@@ -31,7 +31,7 @@ abstract class SetupFolderScreenModule {
       SetupFolderViewModel(
         router: router,
         stringsProvider: stringsProvider,
-      )..init();
+      );
 
   @j.singleton
   @j.binds

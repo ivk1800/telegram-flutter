@@ -112,7 +112,7 @@ abstract class ChatsListScreenModule {
       ChatsListViewModel(
         router: router,
         interactor: interactor,
-      )..init();
+      );
 }
 
 @j.componentBuilder

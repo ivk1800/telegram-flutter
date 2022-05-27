@@ -58,7 +58,7 @@ abstract class NewContactScreenModule {
         stringsProvider: dependencies.stringsProvider,
         blockInteractionManager: dependencies.blockInteractionManager,
         userInfoResolver: userInfoResolver,
-      )..init();
+      );
 }
 
 @j.componentBuilder

@@ -44,7 +44,7 @@ abstract class SettingsSearchScreenModule {
       SettingsSearchViewModel(
         searchInteractor: searchInteractor,
         router: router,
-      )..init();
+      );
 
   @j.singleton
   @j.provides

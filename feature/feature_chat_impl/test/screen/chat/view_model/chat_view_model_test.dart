@@ -52,7 +52,6 @@ void main() {
   });
 
   test('should mark opened chat on init', () async {
-    viewModel.init();
     verify(mockChatManager.markAsOpenedChat(any)).called(1);
   });
 

@@ -27,7 +27,12 @@ class ChatAdministrationViewModel extends BaseViewModel {
         _chatInfoResolver = chatInfoResolver,
         _errorTransformer = errorTransformer,
         _blockInteractionManager = blockInteractionManager,
-        _chatId = chatId;
+        _chatId = chatId {
+    subscribe<ChatInfo>(
+      _chatInfoResolver.resolveAsStream(_chatId),
+      _handleChatInfo,
+    );
+  }
 
   final IChatManager _chatManager;
   final IChatAdministrationRouter _router;
@@ -42,15 +47,6 @@ class ChatAdministrationViewModel extends BaseViewModel {
 
   Stream<AvailableActionsState> get availableActionsState =>
       _availableActionsStateSubject;
-
-  @override
-  void init() {
-    subscribe<ChatInfo>(
-      _chatInfoResolver.resolveAsStream(_chatId),
-      _handleChatInfo,
-    );
-    super.init();
-  }
 
   @override
   void dispose() {

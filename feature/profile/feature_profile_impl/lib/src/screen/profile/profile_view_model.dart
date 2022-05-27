@@ -22,7 +22,9 @@ class ProfileViewModel extends BaseViewModel {
         _headerActionsResolver = headerActionsResolver,
         _args = args,
         _router = router,
-        _headerInfoInteractor = headerInfoInteractor;
+        _headerInfoInteractor = headerInfoInteractor {
+    _initCompositeStateSubscription();
+  }
 
   final ContentInteractor _contentInteractor;
   final IProfileFeatureRouter _router;
@@ -39,12 +41,6 @@ class ProfileViewModel extends BaseViewModel {
   );
 
   Stream<ProfileState> get state => _stateSubject;
-
-  @override
-  void init() {
-    super.init();
-    _initCompositeStateSubscription();
-  }
 
   @override
   void dispose() {

@@ -31,7 +31,9 @@ class ChangeUsernameViewModel extends BaseViewModel {
         _stringsProvider = stringsProvider,
         _optionsManager = optionsManager,
         _errorTransformer = errorTransformer,
-        _blockInteractionManager = blockInteractionManager;
+        _blockInteractionManager = blockInteractionManager {
+    _load();
+  }
 
   final UsernameChecker _usernameChecker;
   final IBlockInteractionManager _blockInteractionManager;
@@ -48,12 +50,6 @@ class ChangeUsernameViewModel extends BaseViewModel {
   );
 
   Stream<CheckUsernameState> get state => _stateSubject;
-
-  @override
-  void init() {
-    super.init();
-    _load();
-  }
 
   void _load() {
     final CancelableOperation<String> operation = _optionsManager

@@ -52,7 +52,7 @@ abstract class MessageShowcaseModule {
       MessageShowcaseViewModel(
         messageTileMapper: messageTileMapper,
         messageBundle: messageBundle,
-      )..init();
+      );
 
   @j.provides
   @j.singleton

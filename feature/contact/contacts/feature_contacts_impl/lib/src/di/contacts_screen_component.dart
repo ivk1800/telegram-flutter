@@ -26,7 +26,7 @@ abstract class ContactsScreenModule {
   static ContactsViewModel provideContactsViewModel(
     ContactsFeatureDependencies dependencies,
   ) =>
-      ContactsViewModel(router: dependencies.router)..init();
+      ContactsViewModel(router: dependencies.router);
 }
 
 @j.componentBuilder

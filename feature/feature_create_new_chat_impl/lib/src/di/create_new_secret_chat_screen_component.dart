@@ -19,7 +19,7 @@ abstract class CreateNewSecretChatScreenModule {
   @j.singleton
   @j.provides
   static NewSecretChatViewModel provideNewSecretChatViewModel() =>
-      NewSecretChatViewModel()..init();
+      NewSecretChatViewModel();
 }
 
 @j.componentBuilder

@@ -18,8 +18,7 @@ abstract class ICreateNewGroupScreenComponent {
 abstract class CreateNewGroupScreenModule {
   @j.singleton
   @j.provides
-  static NewGroupViewModel provideNewGroupViewModel() =>
-      NewGroupViewModel()..init();
+  static NewGroupViewModel provideNewGroupViewModel() => NewGroupViewModel();
 }
 
 @j.componentBuilder

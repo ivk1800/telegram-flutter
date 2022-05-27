@@ -55,7 +55,7 @@ abstract class SettingsScreenModule {
       SettingViewModel(
         contentInteractor: contentInteractor,
         router: dependencies.router,
-      )..init();
+      );
 
   @j.singleton
   @j.provides

@@ -25,7 +25,7 @@ abstract class AuthScreenModule {
         router: dependencies.router,
         authenticationManager: dependencies.authenticationManager,
         countryRepository: dependencies.countryRepository,
-      )..init();
+      );
 
   @j.provides
   @j.singleton

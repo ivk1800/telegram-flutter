@@ -32,7 +32,7 @@ abstract class ChatActionsPanelModule {
         chatId: dependencies.chatId,
         chatManager: dependencies.chatManager,
         chatActionPanelInteractor: chatActionPanelInteractor,
-      )..init();
+      );
 
   @j.provides
   @j.singleton

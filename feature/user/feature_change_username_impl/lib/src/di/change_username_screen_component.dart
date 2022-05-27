@@ -45,7 +45,7 @@ abstract class ChangeUsernameScreenModule {
         usernameChecker: usernameChecker,
         blockInteractionManager: dependencies.blockInteractionManager,
         router: dependencies.router,
-      )..init();
+      );
 
   @j.provides
   static tg.ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(

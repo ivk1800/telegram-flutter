@@ -34,7 +34,7 @@ abstract class SessionsScreenModule {
       SessionsViewModel(
         router: dependencies.router,
         sessionsInteractor: sessionsInteractor,
-      )..init();
+      );
 
   @j.singleton
   @j.provides

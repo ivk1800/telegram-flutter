@@ -24,7 +24,7 @@ abstract class CreateNewChatScreenModule {
   ) =>
       NewChatViewModel(
         router: router,
-      )..init();
+      );
 
   @j.singleton
   @j.binds

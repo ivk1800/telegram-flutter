@@ -18,7 +18,10 @@ class ChatMessagesViewModel extends BaseViewModel {
   })  : _args = args,
         _router = router,
         _chatManager = chatManager,
-        _messagesInteractor = messagesInteractor;
+        _messagesInteractor = messagesInteractor {
+    _messagesInteractor.init();
+    _chatManager.markAsOpenedChat(_args.chatId);
+  }
 
   final ChatArgs _args;
   final ChatMessagesInteractor _messagesInteractor;
@@ -30,13 +33,6 @@ class ChatMessagesViewModel extends BaseViewModel {
         (List<ITileModel> models) => BodyState.data(models: models),
       )
       .startWith(const BodyState.loading());
-
-  @override
-  void init() {
-    super.init();
-    _messagesInteractor.init();
-    _chatManager.markAsOpenedChat(_args.chatId);
-  }
 
   void onLoadOldestMessages() => _messagesInteractor.loadOldestMessages();
 

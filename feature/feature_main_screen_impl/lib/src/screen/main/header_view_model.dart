@@ -13,7 +13,9 @@ class HeaderViewModel extends BaseViewModel {
     required OptionsManager optionsManager,
   })  : _themeManager = themeManager,
         _optionsManager = optionsManager,
-        _userInfoResolver = userInfoResolver;
+        _userInfoResolver = userInfoResolver {
+    _init();
+  }
 
   final IThemeManager _themeManager;
   final UserInfoResolver _userInfoResolver;
@@ -24,8 +26,22 @@ class HeaderViewModel extends BaseViewModel {
 
   Stream<HeaderState> get state => _stateSubject;
 
+  void onToggleThemeTap() {
+    // todo handle more themes
+    if (_themeManager.theme == const Theme.classic()) {
+      _themeManager.theme = const Theme.dark();
+    } else {
+      _themeManager.theme = const Theme.classic();
+    }
+  }
+
   @override
-  void init() {
+  void dispose() {
+    _stateSubject.close();
+    super.dispose();
+  }
+
+  void _init() {
     final Stream<UserInfo> userInfoStream = _optionsManager
         .getMyId()
         .asStream()
@@ -54,20 +70,5 @@ class HeaderViewModel extends BaseViewModel {
     );
 
     subscribe<HeaderState>(flatMap, _stateSubject.add);
-  }
-
-  void onToggleThemeTap() {
-    // todo handle more themes
-    if (_themeManager.theme == const Theme.classic()) {
-      _themeManager.theme = const Theme.dark();
-    } else {
-      _themeManager.theme = const Theme.classic();
-    }
-  }
-
-  @override
-  void dispose() {
-    _stateSubject.close();
-    super.dispose();
   }
 }

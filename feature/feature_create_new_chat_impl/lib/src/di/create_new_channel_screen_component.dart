@@ -29,7 +29,7 @@ abstract class CreateNewChannelScreenModule {
         errorTransformer: parentComponent.getErrorTransformer(),
         router: parentComponent.getNewChannelScreenRouter(),
         chatManager: parentComponent.getChatManager(),
-      )..init();
+      );
 
   @j.singleton
   @j.provides

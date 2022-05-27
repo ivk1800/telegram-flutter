@@ -26,7 +26,7 @@ abstract class FoldersScreenModule {
   static FoldersViewModel provideFoldersViewModel(
     IFoldersScreenRouter router,
   ) =>
-      FoldersViewModel(router: router)..init();
+      FoldersViewModel(router: router);
 
   @j.singleton
   @j.binds

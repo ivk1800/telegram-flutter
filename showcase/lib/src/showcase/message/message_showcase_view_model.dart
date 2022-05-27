@@ -13,23 +13,8 @@ class MessageShowcaseViewModel extends BaseViewModel {
     required MessageBundle messageBundle,
     required MessageTileMapper messageTileMapper,
   })  : _messageBundle = messageBundle,
-        _messageTileMapper = messageTileMapper;
-
-  @override
-  void init() {
-    super.init();
-    final Stream<MessageShowcaseState> stateStream =
-        Stream<MessageData>.fromIterable(_messageBundle.messages)
-            .asyncMap((MessageData data) async {
-              final td.Message message = await data.messageFactory.call();
-              return _messageTileMapper.mapToTileModel(message);
-            })
-            .bufferCount(100)
-            .map((List<ITileModel> items) {
-              return MessageShowcaseState(items: items);
-            })
-            .startWith(const MessageShowcaseState.loading());
-    subscribe(stateStream, _stateSubject.add);
+        _messageTileMapper = messageTileMapper {
+    _init();
   }
 
   final MessageBundle _messageBundle;
@@ -47,5 +32,20 @@ class MessageShowcaseViewModel extends BaseViewModel {
   void dispose() {
     _stateSubject.close();
     super.dispose();
+  }
+
+  void _init() {
+    final Stream<MessageShowcaseState> stateStream =
+        Stream<MessageData>.fromIterable(_messageBundle.messages)
+            .asyncMap((MessageData data) async {
+              final td.Message message = await data.messageFactory.call();
+              return _messageTileMapper.mapToTileModel(message);
+            })
+            .bufferCount(100)
+            .map((List<ITileModel> items) {
+              return MessageShowcaseState(items: items);
+            })
+            .startWith(const MessageShowcaseState.loading());
+    subscribe(stateStream, _stateSubject.add);
   }
 }
