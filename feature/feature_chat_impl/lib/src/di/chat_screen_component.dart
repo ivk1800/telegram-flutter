@@ -2,27 +2,42 @@ import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_info/chat_info.dart';
 import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
-import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/chat_feature_dependencies.dart';
+import 'package:feature_chat_impl/src/chat_feature_dependencies.dmg.dart';
 import 'package:feature_chat_impl/src/chat_message_updates_handler.dart';
+import 'package:feature_chat_impl/src/chat_screen_router.dart';
+import 'package:feature_chat_impl/src/chat_screen_router_factory.dart';
+import 'package:feature_chat_impl/src/component/message_mapper_component.dart';
+import 'package:feature_chat_impl/src/component/message_tile_factory_component.dart';
 import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
+import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
+import 'package:feature_chat_impl/src/screen/chat/message_action_listener.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
 import 'package:feature_chat_impl/src/tile/model/loading_tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/loading_tile_factory_delegate.dart';
+import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
+import 'package:feature_file_api/feature_file_api.dart';
+import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:tile/tile.dart';
 
 @j.Component(
-  modules: <Type>[ChatScreenModule],
+  modules: <Type>[
+    ChatScreenModule,
+    ChatFeatureDependenciesModule,
+  ],
 )
 abstract class IChatScreenComponent {
   MessageTileMapper getMessageTileMapper();
@@ -44,36 +59,60 @@ abstract class IChatScreenComponent {
 abstract class ChatScreenModule {
   @j.provides
   @j.singleton
+  static IChatHeaderInfoFactory provideChatHeaderInfoFactory(
+    IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
+  ) =>
+      chatHeaderInfoFeatureApi.getChatHeaderInfoFactory();
+
+  @j.provides
+  @j.singleton
   static MessageTileMapper provideMessageTileMapper(
-    ChatFeatureDependencies dependencies,
+    DateParser dateParser,
+    IStringsProvider stringsProvider,
+    IFileRepository fileRepository,
+    IChatRepository chatRepository,
+    IUserRepository userRepository,
+    IChatMessageRepository chatMessageRepository,
+    IMessagePreviewResolver messagePreviewResolver,
+    MessageMapperDependencies messageMapperDependencies,
   ) =>
       MessageMapperComponent(
-        dependencies: MessageMapperDependencies(
-          dateParser: dependencies.dateParser,
-          stringsProvider: dependencies.stringsProvider,
-          fileRepository: dependencies.fileRepository,
-          chatRepository: dependencies.chatRepository,
-          userRepository: dependencies.userRepository,
-          chatMessageRepository: dependencies.chatMessageRepository,
-          messagePreviewResolver: dependencies.messagePreviewResolver,
-        ),
+        dependencies: messageMapperDependencies,
       ).create();
+
+  @j.provides
+  @j.singleton
+  static MessageMapperDependencies provideMessageMapperDependencies(
+    DateParser dateParser,
+    IStringsProvider stringsProvider,
+    IFileRepository fileRepository,
+    IChatRepository chatRepository,
+    IUserRepository userRepository,
+    IChatMessageRepository chatMessageRepository,
+    IMessagePreviewResolver messagePreviewResolver,
+  ) =>
+      MessageMapperDependencies(
+        dateParser: dateParser,
+        stringsProvider: stringsProvider,
+        fileRepository: fileRepository,
+        chatRepository: chatRepository,
+        userRepository: userRepository,
+        chatMessageRepository: chatMessageRepository,
+        messagePreviewResolver: messagePreviewResolver,
+      );
 
   @j.provides
   @j.singleton
   static TileFactory provideTileFactory(
     IMessageWallContext messageWallContext,
-    ChatFeatureDependencies dependencies,
+    IFileDownloader fileDownloader,
+    IStringsProvider stringsProvider,
+    IFileRepository fileRepository,
     IMessageActionListener messageActionListener,
+    MessageTileFactoryDependencies messageTileFactoryDependencies,
   ) {
     final TileFactory messageTileFactory = MessageTileFactoryComponent(
-      dependencies: MessageTileFactoryDependencies(
-        fileDownloader: dependencies.fileDownloader,
-        messageActionListener: messageActionListener,
-        messageWallContext: messageWallContext,
-        stringsProvider: dependencies.stringsProvider,
-        fileRepository: dependencies.fileRepository,
-      ),
+      dependencies: messageTileFactoryDependencies,
     ).create();
     return CompositeTileFactory(
       factories: <TileFactory>[
@@ -86,6 +125,22 @@ abstract class ChatScreenModule {
       ],
     );
   }
+
+  @j.provides
+  static MessageTileFactoryDependencies provideMessageTileFactoryDependencies(
+    IMessageWallContext messageWallContext,
+    IFileDownloader fileDownloader,
+    IStringsProvider stringsProvider,
+    IFileRepository fileRepository,
+    IMessageActionListener messageActionListener,
+  ) =>
+      MessageTileFactoryDependencies(
+        fileDownloader: fileDownloader,
+        messageActionListener: messageActionListener,
+        messageWallContext: messageWallContext,
+        stringsProvider: stringsProvider,
+        fileRepository: fileRepository,
+      );
 
   @j.provides
   @j.singleton
@@ -127,13 +182,6 @@ abstract class ChatScreenModule {
 
   @j.provides
   @j.singleton
-  static IFileRepository provideFileRepository(
-    ChatFeatureDependencies dependencies,
-  ) =>
-      dependencies.fileRepository;
-
-  @j.provides
-  @j.singleton
   static IMessageActionListener provideMessageActionListener(
     ChatMessagesViewModel viewModel,
   ) =>
@@ -143,52 +191,17 @@ abstract class ChatScreenModule {
 
   @j.provides
   @j.singleton
-  static IChatHeaderInfoFactory provideChatHeaderInfoFactory(
-    ChatFeatureDependencies dependencies,
-  ) =>
-      dependencies.chatHeaderInfoFeatureApi.getChatHeaderInfoFactory();
-
-  @j.provides
-  @j.singleton
-  static IStringsProvider provideStringsProvider(
-    ChatFeatureDependencies dependencies,
-  ) =>
-      dependencies.stringsProvider;
-
-  @j.provides
-  @j.singleton
   static ChatMessagesViewModel provideChatMessagesViewModel(
     ChatArgs args,
     ChatMessagesInteractor chatMessagesInteractor,
-    ChatFeatureDependencies dependencies,
+    IChatScreenRouter router,
     IChatManager chatManager,
   ) =>
       ChatMessagesViewModel(
         chatManager: chatManager,
-        router: dependencies.routerFactory.create(args.chatId),
+        router: router,
         messagesInteractor: chatMessagesInteractor,
         args: args,
-      );
-
-  @j.provides
-  @j.singleton
-  static ChatActionBarViewModel provideChatActionBarViewModel(
-    ChatArgs args,
-    ChatMessagesInteractor chatMessagesInteractor,
-    IChatHeaderInfoInteractor headerInfoInteractor,
-    IStringsProvider stringsProvider,
-    ChatHeaderActionsInteractor headerActionsInteractor,
-    ChatFeatureDependencies dependencies,
-    IChatManager chatManager,
-  ) =>
-      ChatActionBarViewModel(
-        headerActionsInteractor: headerActionsInteractor,
-        chatManager: chatManager,
-        headerInfoInteractor: headerInfoInteractor,
-        router: dependencies.routerFactory.create(args.chatId),
-        args: args,
-        chatRepository: dependencies.chatRepository,
-        stringsProvider: stringsProvider,
       );
 
   @j.provides
@@ -196,46 +209,45 @@ abstract class ChatScreenModule {
   static ChatMessagesInteractor provideChatMessagesInteractor(
     MessageTileMapper messageTileMapper,
     ChatArgs args,
-    ChatFeatureDependencies dependencies,
+    IChatMessageRepository chatMessageRepository,
     ChatMessageUpdatesHandler chatMessageUpdatesHandler,
   ) =>
       ChatMessagesInteractor(
         chatMessageUpdatesHandler: chatMessageUpdatesHandler,
         chatId: args.chatId,
         messageTileMapper: messageTileMapper,
-        messageRepository: dependencies.chatMessageRepository,
+        messageRepository: chatMessageRepository,
       );
 
   @j.provides
   static ChatMessageUpdatesHandler provideChatMessageUpdatesHandler(
     ChatArgs args,
-    ChatFeatureDependencies dependencies,
+    IChatMessagesUpdatesProvider chatMessagesUpdatesProvider,
     MessageTileMapper messageTileMapper,
   ) =>
       ChatMessageUpdatesHandler(
         messageTileMapper: messageTileMapper,
         chatId: args.chatId,
-        chatMessagesUpdatesProvider: dependencies.chatMessagesUpdatesProvider,
+        chatMessagesUpdatesProvider: chatMessagesUpdatesProvider,
       );
 
   @j.provides
   @j.singleton
   static IChatHeaderInfoInteractor provideChatHeaderInfoInteractor(
     ChatArgs args,
-    ChatFeatureDependencies dependencies,
+    IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
   ) =>
-      dependencies.chatHeaderInfoFeatureApi
-          .getChatHeaderInfoInteractor(args.chatId);
+      chatHeaderInfoFeatureApi.getChatHeaderInfoInteractor(args.chatId);
 
   @j.provides
   @j.singleton
   static ChatHeaderActionsInteractor provideChatHeaderActionsInteractor(
     ChatArgs args,
     ChatInfoResolver chatInfoResolver,
-    ChatFeatureDependencies dependencies,
+    IStringsProvider stringsProvider,
   ) =>
       ChatHeaderActionsInteractor(
-        stringsProvider: dependencies.stringsProvider,
+        stringsProvider: stringsProvider,
         chatInfoResolver: chatInfoResolver,
         chatId: args.chatId,
       );
@@ -243,44 +255,62 @@ abstract class ChatScreenModule {
   @j.provides
   @j.singleton
   static ChatInfoResolver provideChatInfoResolver(
-    ChatFeatureDependencies dependencies,
+    IChatRepository chatRepository,
+    ISuperGroupRepository superGroupRepository,
+    IBasicGroupRepository basicGroupRepository,
   ) =>
       ChatInfoResolver(
-        chatRepository: dependencies.chatRepository,
-        superGroupRepository: dependencies.superGroupRepository,
-        basicGroupRepository: dependencies.basicGroupRepository,
+        chatRepository: chatRepository,
+        superGroupRepository: superGroupRepository,
+        basicGroupRepository: basicGroupRepository,
       );
+
+  @j.singleton
+  @j.provides
+  static IChatScreenRouter provideChatScreenRouter(
+    IChatScreenRouterFactory routerFactory,
+    ChatArgs args,
+  ) =>
+      routerFactory.create(args.chatId);
 
   @j.provides
   @j.singleton
   static ChatActionPanelFactory provideChatActionPanelFactory(
-    ChatFeatureDependencies dependencies,
+    ChatActionPanelDependencies dependencies,
     ChatArgs args,
   ) =>
-      ChatActionPanelFactory(
-        dependencies: ChatActionPanelDependencies(
-          errorTransformer: dependencies.errorTransformer,
-          // todo pass dialog router
-          dialogRouter: dependencies.routerFactory.create(args.chatId),
-          functionExecutor: dependencies.functionExecutor,
-          chatManager: dependencies.chatManager,
-          chatId: args.chatId,
-          chatRepository: dependencies.chatRepository,
-          stringsProvider: dependencies.stringsProvider,
-          superGroupRepository: dependencies.superGroupRepository,
-          basicGroupRepository: dependencies.basicGroupRepository,
-          basicGroupUpdatesProvider: dependencies.basicGroupUpdatesProvider,
-          chatUpdatesProvider: dependencies.chatUpdatesProvider,
-          superGroupUpdatesProvider: dependencies.superGroupUpdatesProvider,
-        ),
-      );
+      ChatActionPanelFactory(dependencies: dependencies);
 
   @j.provides
-  @j.singleton
-  static IChatManager provideChatManager(
-    ChatFeatureDependencies dependencies,
+  static ChatActionPanelDependencies provideChatActionPanelDependencies(
+    IErrorTransformer errorTransformer,
+    ITdFunctionExecutor functionExecutor,
+    IChatManager chatManager,
+    IChatScreenRouter chatScreenRouter,
+    IChatRepository chatRepository,
+    IStringsProvider stringsProvider,
+    ISuperGroupRepository superGroupRepository,
+    IBasicGroupRepository basicGroupRepository,
+    IBasicGroupUpdatesProvider basicGroupUpdatesProvider,
+    IChatUpdatesProvider chatUpdatesProvider,
+    ISuperGroupUpdatesProvider superGroupUpdatesProvider,
+    ChatArgs args,
   ) =>
-      dependencies.chatManager;
+      ChatActionPanelDependencies(
+        errorTransformer: errorTransformer,
+        // todo pass dialog router
+        dialogRouter: chatScreenRouter,
+        functionExecutor: functionExecutor,
+        chatManager: chatManager,
+        chatId: args.chatId,
+        chatRepository: chatRepository,
+        stringsProvider: stringsProvider,
+        superGroupRepository: superGroupRepository,
+        basicGroupRepository: basicGroupRepository,
+        basicGroupUpdatesProvider: basicGroupUpdatesProvider,
+        chatUpdatesProvider: chatUpdatesProvider,
+        superGroupUpdatesProvider: superGroupUpdatesProvider,
+      );
 }
 
 @j.componentBuilder

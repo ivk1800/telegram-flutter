@@ -30,8 +30,9 @@ class MessageMapperDependencies {
 }
 
 class MessageMapperComponent {
-  MessageMapperComponent({required MessageMapperDependencies dependencies})
-      : _dependencies = dependencies;
+  MessageMapperComponent({
+    required MessageMapperDependencies dependencies,
+  }) : _dependencies = dependencies;
 
   final MessageMapperDependencies _dependencies;
 

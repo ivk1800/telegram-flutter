@@ -11,11 +11,14 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 
+@j.singleton
 class ChatActionBarViewModel extends BaseViewModel {
+  @j.inject
   ChatActionBarViewModel({
     required ChatArgs args,
     required IChatScreenRouter router,
