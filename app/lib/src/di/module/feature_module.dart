@@ -124,9 +124,11 @@ abstract class FeatureModule {
     IUserRepository userRepository,
     ILocalizationManager localizationManager,
     IChatMessageRepository chatMessageRepository,
+    ISuperGroupRepository superGroupRepository,
   ) =>
       ChatsListFeatureDependencies(
         router: router,
+        superGroupRepository: superGroupRepository,
         localizationManager: localizationManager,
         userRepository: userRepository,
         dateParser: dateParser,

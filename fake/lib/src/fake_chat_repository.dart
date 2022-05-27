@@ -22,11 +22,6 @@ class FakeChatRepository implements IChatRepository {
   }
 
   @override
-  Future<td.Supergroup> getSupergroup(int id) {
-    return Completer<td.Supergroup>().future;
-  }
-
-  @override
   Future<List<td.Chat>> findChats({required String query}) {
     return Completer<List<td.Chat>>().future;
   }

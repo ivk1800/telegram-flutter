@@ -1,17 +1,14 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_tdlib_impl/src/data_source/data_source.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class SessionRepositoryImpl implements ISessionRepository {
   SessionRepositoryImpl({
-    required ITdFunctionExecutor functionExecutor,
-  }) : _functionExecutor = functionExecutor;
+    required SessionDataSource dataSource,
+  }) : _dataSource = dataSource;
 
-  final ITdFunctionExecutor _functionExecutor;
+  final SessionDataSource _dataSource;
 
   @override
-  Stream<List<td.Session>> get activeSessions => Stream<td.Sessions>.fromFuture(
-        _functionExecutor.send<td.Sessions>(
-          const td.GetActiveSessions(),
-        ),
-      ).map((td.Sessions event) => event.sessions);
+  Future<List<td.Session>> get activeSessions => _dataSource.activeSessions;
 }

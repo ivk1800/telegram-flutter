@@ -55,6 +55,13 @@ abstract class ChatsListScreenModule {
 
   @j.provides
   @j.singleton
+  static ISuperGroupRepository provideSuperGroupRepository(
+    ChatsListFeatureDependencies dependencies,
+  ) =>
+      dependencies.superGroupRepository;
+
+  @j.provides
+  @j.singleton
   static DateFormatter provideDateFormatter(
     ChatsListFeatureDependencies dependencies,
   ) =>

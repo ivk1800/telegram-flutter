@@ -1,18 +1,18 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_tdlib_impl/src/data_source/data_source.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class SuperGroupRepositoryImpl extends ISuperGroupRepository {
   SuperGroupRepositoryImpl({
-    required ITdFunctionExecutor functionExecutor,
-  }) : _functionExecutor = functionExecutor;
+    required SuperGroupDataSource dataSource,
+  }) : _dataSource = dataSource;
 
-  final ITdFunctionExecutor _functionExecutor;
-
-  @override
-  Future<td.Supergroup> getGroup(int id) =>
-      _functionExecutor.send<td.Supergroup>(td.GetSupergroup(supergroupId: id));
+  final SuperGroupDataSource _dataSource;
 
   @override
-  Future<td.SupergroupFullInfo> getGroupFullInfo(int id) => _functionExecutor
-      .send<td.SupergroupFullInfo>(td.GetSupergroupFullInfo(supergroupId: id));
+  Future<td.Supergroup> getGroup(int id) => _dataSource.getGroup(id);
+
+  @override
+  Future<td.SupergroupFullInfo> getGroupFullInfo(int id) =>
+      _dataSource.getGroupFullInfo(id);
 }

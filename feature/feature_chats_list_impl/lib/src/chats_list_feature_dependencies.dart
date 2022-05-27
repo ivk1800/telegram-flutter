@@ -15,6 +15,7 @@ class ChatsListFeatureDependencies {
     required this.userRepository,
     required this.localizationManager,
     required this.messagePreviewResolver,
+    required this.superGroupRepository,
   });
 
   final IChatRepository chatRepository;
@@ -34,4 +35,6 @@ class ChatsListFeatureDependencies {
   final ILocalizationManager localizationManager;
 
   final IMessagePreviewResolver messagePreviewResolver;
+
+  final ISuperGroupRepository superGroupRepository;
 }

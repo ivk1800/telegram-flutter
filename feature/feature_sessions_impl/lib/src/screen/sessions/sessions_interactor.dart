@@ -34,7 +34,8 @@ class SessionsInteractor {
   }
 
   Stream<SessionsState> _getSessionsStream() =>
-      _sessionRepository.activeSessions.map((List<td.Session> sessions) {
+      Stream<List<td.Session>>.fromFuture(_sessionRepository.activeSessions)
+          .map((List<td.Session> sessions) {
         return SessionsState(
           activeSession: _sessionTileMapper.mapToTileModel(
             sessions.firstWhere((td.Session session) => session.isCurrent),

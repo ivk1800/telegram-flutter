@@ -1,4 +1,5 @@
 import 'package:app/src/di/module/app_module.dart';
+import 'package:app/src/di/module/data_module.dart';
 import 'package:app/src/di/module/td_module.dart';
 import 'package:app/src/di/module/theme_module.dart';
 import 'package:app/src/feature/feature_provider.dart';
@@ -23,6 +24,7 @@ import 'package:theme_manager_flutter/theme_manager_flutter.dart';
 @j.Component(
   modules: <Type>[
     AppModule,
+    DataModule,
     TdModule,
     ThemeModule,
   ],

@@ -1,35 +1,21 @@
 import 'dart:async';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:core_tdlib_impl/src/data_source/data_source.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatFilterRepositoryImpl implements IChatFilterRepository {
   ChatFilterRepositoryImpl({
-    required IChatFiltersUpdatesProvider chatFiltersUpdatesProvider,
-  }) : _chatFiltersUpdatesProvider = chatFiltersUpdatesProvider {
-    _init();
-  }
+    required ChatFilterDataSource dataSource,
+  }) : _dataSource = dataSource;
 
-  final IChatFiltersUpdatesProvider _chatFiltersUpdatesProvider;
-
-  final BehaviorSubject<List<td.ChatFilterInfo>> _chatFiltersSubject =
-      BehaviorSubject<List<td.ChatFilterInfo>>.seeded(<td.ChatFilterInfo>[]);
-
-  StreamSubscription<List<td.ChatFilterInfo>>? _chatFiltersUpdatesSubscription;
+  final ChatFilterDataSource _dataSource;
 
   @override
-  Stream<List<td.ChatFilterInfo>> get chatFiltersStream => _chatFiltersSubject;
-
-  void _init() {
-    _chatFiltersUpdatesSubscription = _chatFiltersUpdatesProvider
-        .chatFiltersUpdates
-        .map((td.UpdateChatFilters event) => event.chatFilters)
-        .listen(_chatFiltersSubject.add);
-  }
+  Stream<List<td.ChatFilterInfo>> get chatFiltersStream =>
+      _dataSource.chatFiltersStream;
 
   void dispose() {
-    _chatFiltersSubject.close();
-    _chatFiltersUpdatesSubscription?.cancel();
+    _dataSource.dispose();
   }
 }

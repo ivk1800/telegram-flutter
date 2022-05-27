@@ -11,13 +11,13 @@ class ChatTileModelMapper {
     required DateFormatter dateFormatter,
     required DateParser dateParser,
     required IMessagePreviewResolver previewDataResolver,
-    required IChatRepository chatRepository,
+    required ISuperGroupRepository superGroupRepository,
   })  : _dateFormatter = dateFormatter,
         _messagePreviewResolver = previewDataResolver,
-        _chatRepository = chatRepository,
+        _superGroupRepository = superGroupRepository,
         _dateParser = dateParser;
 
-  final IChatRepository _chatRepository;
+  final ISuperGroupRepository _superGroupRepository;
   final IMessagePreviewResolver _messagePreviewResolver;
   final DateFormatter _dateFormatter;
   final DateParser _dateParser;
@@ -52,7 +52,7 @@ class ChatTileModelMapper {
     if (chat.type.getConstructor() == td.ChatTypeSupergroup.constructor) {
       final td.ChatTypeSupergroup supergroupType =
           chat.type as td.ChatTypeSupergroup;
-      return (await _chatRepository.getSupergroup(supergroupType.supergroupId))
+      return (await _superGroupRepository.getGroup(supergroupType.supergroupId))
           .isVerified;
     }
     return false;
