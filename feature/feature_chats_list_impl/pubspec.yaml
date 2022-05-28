@@ -43,7 +43,7 @@ dev_dependencies:
   fake:
     path: ../../fake
   freezed: 1.1.1
-  jugger_generator: 2.2.1
+  jugger_generator: 2.3.0
   mockito: 5.1.0
   test: 1.20.1
   tg_lint_rules:
