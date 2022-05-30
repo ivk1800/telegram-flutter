@@ -34,7 +34,7 @@ abstract class NewContactScreenModule {
   static AvatarWidgetFactory provideAvatarWidgetFactory(
     NewContactFeatureDependencies dependencies,
   ) =>
-      AvatarWidgetFactory(fileRepository: dependencies.fileRepository);
+      AvatarWidgetFactory(fileDownloader: dependencies.fileDownloader);
 
   @j.provides
   @j.singleton

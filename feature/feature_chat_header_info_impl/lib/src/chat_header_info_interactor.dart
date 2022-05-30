@@ -1,7 +1,9 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_models/shared_models.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
@@ -20,10 +22,14 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
         _userRepository = userRepository {
     _infoSubject.add(
       ChatHeaderInfo(
+        // todo display correct text
         title: 'chat',
         subtitle: '',
-        photoId: null,
-        chatId: chatId,
+        avatar: Avatar(
+          abbreviation: getAvatarAbbreviation(first: '', second: ''),
+          imageFileId: null,
+          objectId: chatId,
+        ),
       ),
     );
   }
@@ -95,8 +101,14 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
           {
             return Stream<ChatHeaderInfo>.value(
               ChatHeaderInfo(
-                photoId: chat.photo?.small.id,
-                chatId: chat.id,
+                avatar: Avatar(
+                  abbreviation: getAvatarAbbreviation(
+                    first: chat.title,
+                    second: '',
+                  ),
+                  imageFileId: chat.photo?.small.id,
+                  objectId: chat.id,
+                ),
                 title: chat.title,
                 subtitle: statusToString(user.status),
               ),
@@ -107,8 +119,14 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
           {
             return Stream<ChatHeaderInfo>.value(
               ChatHeaderInfo(
-                photoId: chat.photo?.small.id,
-                chatId: chat.id,
+                avatar: Avatar(
+                  abbreviation: getAvatarAbbreviation(
+                    first: chat.title,
+                    second: '',
+                  ),
+                  imageFileId: chat.photo?.small.id,
+                  objectId: chat.id,
+                ),
                 title: _getString('HiddenName'),
                 // https://git.io/J483z
                 subtitle: _getString('ALongTimeAgo'),
@@ -120,8 +138,14 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
           {
             return Stream<ChatHeaderInfo>.value(
               ChatHeaderInfo(
-                photoId: chat.photo?.small.id,
-                chatId: chat.id,
+                avatar: Avatar(
+                  abbreviation: getAvatarAbbreviation(
+                    first: chat.title,
+                    second: '',
+                  ),
+                  imageFileId: chat.photo?.small.id,
+                  objectId: chat.id,
+                ),
                 title: chat.title,
                 subtitle: _getString('Bot'),
               ),
@@ -174,8 +198,14 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
   ) {
     // todo handle UpdateChatOnlineMemberCount
     return ChatHeaderInfo(
-      photoId: chat.photo?.small.id,
-      chatId: chat.id,
+      avatar: Avatar(
+        abbreviation: getAvatarAbbreviation(
+          first: chat.title,
+          second: '',
+        ),
+        imageFileId: chat.photo?.small.id,
+        objectId: chat.id,
+      ),
       title: chat.title,
       // todo implement plural
       subtitle: '${_localizationManager.getStringFormatted('Members', <dynamic>[

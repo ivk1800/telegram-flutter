@@ -3,9 +3,17 @@ import 'dart:async';
 import 'package:feature_file_api/feature_file_api.dart';
 
 class FakeFileDownloader implements IFileDownloader {
+  const FakeFileDownloader({
+    this.fileDownloadStateStreamProvider,
+  });
+
+  final Stream<FileDownloadState>? Function(int fileId)?
+      fileDownloadStateStreamProvider;
+
   @override
   Future<void> downloadFile(int fileId) {
-    return Completer<void>().future;
+    final Completer<void> completer = Completer<void>()..complete(null);
+    return completer.future;
   }
 
   @override
@@ -15,8 +23,9 @@ class FakeFileDownloader implements IFileDownloader {
 
   @override
   Stream<FileDownloadState> getFileDownloadStateStream(int fileId) {
-    return Stream<FileDownloadState>.value(
-      const FileDownloadState.downloading(progress: 0),
-    );
+    return fileDownloadStateStreamProvider?.call(fileId) ??
+        Stream<FileDownloadState>.value(
+          const FileDownloadState.downloading(progress: 0),
+        );
   }
 }

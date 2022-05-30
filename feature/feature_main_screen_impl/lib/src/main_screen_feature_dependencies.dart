@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:theme_manager_api/theme_manager_api.dart';
@@ -17,7 +18,7 @@ class MainScreenFeatureDependencies {
     required this.userRepository,
     required this.themeManager,
     required this.optionsManager,
-    required this.fileRepository,
+    required this.fileDownloader,
     required this.chatFilterRepository,
   });
 
@@ -29,6 +30,6 @@ class MainScreenFeatureDependencies {
   final IUserRepository userRepository;
   final IThemeManager themeManager;
   final OptionsManager optionsManager;
-  final IFileRepository fileRepository;
+  final IFileDownloader fileDownloader;
   final IChatFilterRepository chatFilterRepository;
 }

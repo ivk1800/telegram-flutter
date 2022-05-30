@@ -1,5 +1,7 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/painting.dart';
+import 'package:shared_models/shared_models.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
@@ -15,7 +17,11 @@ class GlobalSearchResultTileMapper {
   Future<ITileModel> mapToChatTileModel(td.Chat chat) async {
     return ChatResultTileModel(
       chatId: chat.id,
-      avatarId: chat.photo?.small.id,
+      avatar: Avatar(
+        abbreviation: getAvatarAbbreviation(first: chat.title, second: ''),
+        imageFileId: chat.photo?.small.id,
+        objectId: chat.id,
+      ),
       title: TextSpan(text: chat.title),
       subtitle: TextSpan(text: chat.title),
     );
@@ -25,7 +31,11 @@ class GlobalSearchResultTileMapper {
     final td.Chat chat = await _chatRepository.getChat(message.chatId);
     return MediaResultTileModel(
       chatId: message.chatId,
-      avatarId: chat.photo?.small.id,
+      avatar: Avatar(
+        abbreviation: getAvatarAbbreviation(first: chat.title, second: ''),
+        objectId: message.chatId,
+        imageFileId: chat.photo?.small.id,
+      ),
       title: TextSpan(text: chat.title),
       subtitle: TextSpan(text: message.content.getFormattedText()!.text),
     );

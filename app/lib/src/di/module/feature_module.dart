@@ -96,7 +96,7 @@ abstract class FeatureModule {
     IThemeManager themeManager,
     IUserRepository userRepository,
     OptionsManager optionsManager,
-    IFileRepository fileRepository,
+    IFileDownloader fileDownloader,
     IChatFilterRepository chatFilterRepository,
   ) =>
       MainScreenFeatureDependencies(
@@ -104,7 +104,7 @@ abstract class FeatureModule {
         themeManager: themeManager,
         userRepository: userRepository,
         stringsProvider: stringsProvider,
-        fileRepository: fileRepository,
+        fileDownloader: fileDownloader,
         router: router,
         connectionStateProvider: connectionStateProvider,
         chatsListScreenFactory: chatsListFeatureApi.chatsListScreenFactory,
@@ -116,7 +116,7 @@ abstract class FeatureModule {
   @j.provides
   static ChatsListFeatureDependencies provideChatsListFeatureDependencies(
     IChatRepository chatRepository,
-    IFileRepository fileRepository,
+    IFileDownloader fileDownloader,
     IChatsListScreenRouter router,
     DateFormatter dateFormatter,
     DateParser dateParser,
@@ -135,7 +135,7 @@ abstract class FeatureModule {
         dateFormatter: dateFormatter,
         chatUpdatesProvider: chatUpdatesProvider,
         chatRepository: chatRepository,
-        fileRepository: fileRepository,
+        fileDownloader: fileDownloader,
         messagePreviewResolver: MessagePreviewResolver(
           messageRepository: chatMessageRepository,
           chatRepository: chatRepository,
@@ -149,7 +149,7 @@ abstract class FeatureModule {
   static GlobalSearchFeatureDependencies provideGlobalSearchFeatureDependencies(
     IStringsProvider stringsProvider,
     IChatRepository chatRepository,
-    IFileRepository fileRepository,
+    IFileDownloader fileDownloader,
     IChatMessageRepository chatMessageRepository,
     IGlobalSearchFeatureRouter router,
   ) =>
@@ -157,7 +157,7 @@ abstract class FeatureModule {
         router: router,
         stringsProvider: stringsProvider,
         chatRepository: chatRepository,
-        fileRepository: fileRepository,
+        fileDownloader: fileDownloader,
         chatMessageRepository: chatMessageRepository,
       );
 
@@ -170,7 +170,7 @@ abstract class FeatureModule {
     IChatScreenRouterFactory routerFactory,
     IChatMessageRepository chatMessageRepository,
     IChatRepository chatRepository,
-    FeatureProvider featureProvider,
+    IFileDownloader fileDownloader,
     ISuperGroupUpdatesProvider superGroupUpdatesProvider,
     IBasicGroupUpdatesProvider basicGroupUpdatesProvider,
     IChatUpdatesProvider chatUpdatesProvider,
@@ -192,7 +192,7 @@ abstract class FeatureModule {
         basicGroupUpdatesProvider: basicGroupUpdatesProvider,
         superGroupRepository: superGroupRepository,
         functionExecutor: functionExecutor,
-        fileDownloader: featureProvider.fileFeatureApi.fileDownloader,
+        fileDownloader: fileDownloader,
         chatHeaderInfoFeatureApi: chatHeaderInfoFeatureApi,
         chatRepository: chatRepository,
         messagePreviewResolver: MessagePreviewResolver(
@@ -214,7 +214,7 @@ abstract class FeatureModule {
   static SettingsFeatureDependencies provideSettingsFeatureDependencies(
     ILocalizationManager localizationManager,
     ISettingsScreenRouter router,
-    IFileRepository fileRepository,
+    IFileDownloader fileDownloader,
     IUserRepository userRepository,
     OptionsManager optionsManager,
     // todo do not depend on feature
@@ -223,7 +223,7 @@ abstract class FeatureModule {
       SettingsFeatureDependencies(
         optionsManager: optionsManager,
         userRepository: userRepository,
-        fileRepository: fileRepository,
+        fileDownloader: fileDownloader,
         localizationManager: localizationManager,
         router: router,
         settingsSearchFeatureApi: settingsSearchFeatureApi,
@@ -295,7 +295,7 @@ abstract class FeatureModule {
   @j.provides
   static WallpapersFeatureDependencies provideWallpapersFeatureDependencies(
     IBackgroundRepository backgroundRepository,
-    FeatureProvider featureProvider,
+    IFileDownloader fileDownloader,
     ILocalizationManager localizationManager,
     IWallpapersFeatureRouter router,
     IConnectionStateProvider connectionStateProvider,
@@ -305,7 +305,7 @@ abstract class FeatureModule {
         router: router,
         connectionStateProvider: connectionStateProvider,
         backgroundRepository: backgroundRepository,
-        fileDownloader: featureProvider.fileFeatureApi.fileDownloader,
+        fileDownloader: fileDownloader,
       );
 
   @j.provides
@@ -330,7 +330,7 @@ abstract class FeatureModule {
     IBasicGroupRepository basicGroupRepository,
     ISuperGroupRepository superGroupRepository,
     IConnectionStateProvider connectionStateProvider,
-    IFileRepository fileRepository,
+    IFileDownloader fileDownloader,
     IUserRepository userRepository,
   ) {
     return ChatHeaderInfoFeatureDependencies(
@@ -340,7 +340,7 @@ abstract class FeatureModule {
       superGroupRepository: superGroupRepository,
       userRepository: userRepository,
       connectionStateProvider: connectionStateProvider,
-      fileRepository: fileRepository,
+      fileDownloader: fileDownloader,
     );
   }
 
@@ -494,7 +494,7 @@ abstract class FeatureModule {
     ILocalizationManager localizationManager,
     INewContactRouter router,
     IBlockInteractionManager blockInteractionManager,
-    IFileRepository fileRepository,
+    IFileDownloader fileDownloader,
     IUserRepository userRepository,
     IContactsManager contactsManager,
     IErrorTransformer errorTransformer,
@@ -504,7 +504,7 @@ abstract class FeatureModule {
         contactsManager: contactsManager,
         router: router,
         userRepository: userRepository,
-        fileRepository: fileRepository,
+        fileDownloader: fileDownloader,
         blockInteractionManager: blockInteractionManager,
         connectionStateProvider: connectionStateProvider,
         stringsProvider: localizationManager.stringsProvider,

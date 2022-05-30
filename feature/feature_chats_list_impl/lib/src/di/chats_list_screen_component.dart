@@ -43,7 +43,7 @@ abstract class ChatsListScreenModule {
     ChatsListFeatureDependencies dependencies,
   ) =>
       AvatarWidgetFactory(
-        fileRepository: dependencies.fileRepository,
+        fileDownloader: dependencies.fileDownloader,
       );
 
   @j.provides

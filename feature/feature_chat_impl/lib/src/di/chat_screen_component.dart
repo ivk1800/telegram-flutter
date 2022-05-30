@@ -166,13 +166,13 @@ abstract class ChatScreenModule {
   @j.singleton
   static MessageComponentResolver provideMessageComponentResolver(
     IMessageActionListener messageActionListener,
-    IFileRepository fileRepository,
+    IFileDownloader fileDownloader,
     IMessageWallContext messageWallContext,
   ) =>
       MessageComponentResolver(
         senderAvatarFactory: SenderAvatarFactory(
           avatarWidgetFactory: tg.AvatarWidgetFactory(
-            fileRepository: fileRepository,
+            fileDownloader: fileDownloader,
           ),
         ),
         messageWallContext: messageWallContext,

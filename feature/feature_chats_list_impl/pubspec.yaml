@@ -20,6 +20,8 @@ dependencies:
     path: ../../coreui
   feature_chats_list_api:
     path: ../feature_chats_list_api
+  feature_file_api:
+    path: ../feature_file_api
   feature_message_preview_resolver:
     path: ../feature_message_preview_resolver
   flutter:
@@ -30,6 +32,8 @@ dependencies:
     path: ../../localization_api
   queue:
     path: ../../queue
+  shared_models:
+    path: ../../shared/models
   shimmer: 2.0.0
   td_client:
     path: ../../td_client

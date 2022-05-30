@@ -93,7 +93,7 @@ abstract class MainScreenModule {
     MainScreenFeatureDependencies dependencies,
   ) =>
       AvatarWidgetFactory(
-        fileRepository: dependencies.fileRepository,
+        fileDownloader: dependencies.fileDownloader,
       );
 
   @j.provides

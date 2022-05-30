@@ -23,8 +23,7 @@ class ChatHeaderInfoFactory implements IChatHeaderInfoFactory {
       contentPadding: EdgeInsets.zero,
       leading: _avatarWidgetFactory.create(
         context,
-        chatId: info.chatId,
-        imageId: info.photoId,
+        avatar: info.avatar,
       ),
       title: Text(
         info.title,

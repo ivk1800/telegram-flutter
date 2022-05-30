@@ -31,7 +31,7 @@ class NewContactShowcaseFactory {
     final NewContactFeatureDependencies dependencies =
         NewContactFeatureDependencies(
       errorTransformer: const FakeErrorTransformer(),
-      fileRepository: const FakeFileRepository(),
+      fileDownloader: const FakeFileDownloader(),
       userRepository: FakeUserRepository(
         fakeUserProvider: const FakeUserProvider(),
       ),

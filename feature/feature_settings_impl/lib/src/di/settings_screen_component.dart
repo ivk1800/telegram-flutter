@@ -85,7 +85,7 @@ abstract class SettingsScreenModule {
     SettingsFeatureDependencies dependencies,
   ) =>
       tg.AvatarWidgetFactory(
-        fileRepository: dependencies.fileRepository,
+        fileDownloader: dependencies.fileDownloader,
       );
 
   @j.provides

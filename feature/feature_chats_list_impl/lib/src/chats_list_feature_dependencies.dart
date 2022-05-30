@@ -1,13 +1,14 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chats_list_impl/src/chats_list_screen_router.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:localization_api/localization_api.dart';
 
 class ChatsListFeatureDependencies {
   const ChatsListFeatureDependencies({
     required this.chatRepository,
-    required this.fileRepository,
+    required this.fileDownloader,
     required this.router,
     required this.dateFormatter,
     required this.dateParser,
@@ -20,7 +21,7 @@ class ChatsListFeatureDependencies {
 
   final IChatRepository chatRepository;
 
-  final IFileRepository fileRepository;
+  final IFileDownloader fileDownloader;
 
   final IChatsListScreenRouter router;
 

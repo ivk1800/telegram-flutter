@@ -8,6 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_models:
+    path: ../../shared/models
 
 dev_dependencies:
   dependency_validator: 3.2.0

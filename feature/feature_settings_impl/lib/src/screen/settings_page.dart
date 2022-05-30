@@ -154,7 +154,7 @@ class _SettingsStateAppBar extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               leading: avatarWidgetFactory.create(
                 context,
-                chatId: data.appBarState.userId,
+                avatar: data.appBarState.avatar,
               ),
               title: Text(
                 data.appBarState.name,

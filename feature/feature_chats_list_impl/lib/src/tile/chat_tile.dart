@@ -89,8 +89,7 @@ class _Cell extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10.0),
                 child: avatarWidgetFactory.create(
                   context,
-                  chatId: model.id,
-                  imageId: model.photoId,
+                  avatar: model.avatar,
                   radius: 28,
                 ),
               ),

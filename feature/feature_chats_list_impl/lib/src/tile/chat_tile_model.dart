@@ -1,9 +1,10 @@
+import 'package:shared_models/shared_models.dart';
 import 'package:tile/tile.dart';
 
 class ChatTileModel implements ITileModel {
   const ChatTileModel({
-    this.photoId,
     required this.id,
+    required this.avatar,
     required this.unreadMessagesCount,
     required this.isPinned,
     required this.isVerified,
@@ -19,9 +20,9 @@ class ChatTileModel implements ITileModel {
 
   final bool isPinned;
   final int id;
+  final Avatar avatar;
   final String? lastMessageDate;
   final int unreadMessagesCount;
-  final int? photoId;
   final bool isVerified;
   final bool isMuted;
   final bool isMentioned;
@@ -38,7 +39,7 @@ extension ChatTileModelExtension on ChatTileModel {
     int? id,
     int? unreadMessagesCount,
     String? lastMessageDate,
-    int? photoId,
+    Avatar? avatar,
     bool? isVerified,
     bool? isMentioned,
     bool? isMuted,
@@ -61,6 +62,6 @@ extension ChatTileModelExtension on ChatTileModel {
         secondSubtitle: secondSubtitle ?? this.secondSubtitle,
         lastMessageDate: lastMessageDate ?? this.lastMessageDate,
         title: title ?? this.title,
-        photoId: photoId ?? this.photoId,
+        avatar: avatar ?? this.avatar,
       );
 }

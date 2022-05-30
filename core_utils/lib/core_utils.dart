@@ -4,4 +4,4 @@ export 'src/date_formatter.dart';
 export 'src/date_parser.dart';
 export 'src/ext/minithumbnail_extensions.dart';
 export 'src/ext/string_extensions.dart';
-export 'src/util/minithumbnail.dart';
+export 'src/utils/avatar_utils.dart';

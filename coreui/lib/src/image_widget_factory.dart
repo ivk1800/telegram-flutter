@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'dart:ui';
 
-import 'package:core_utils/core_utils.dart';
+import 'package:coreui/src/widget/minithumbnail_widget.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shared_models/shared_models.dart';
 
 class ImageWidgetFactory {
   ImageWidgetFactory({
@@ -67,9 +67,7 @@ class _ImageWidgetState extends State<_ImageWidget> {
           fit: StackFit.expand,
           children: <Widget>[
             if (minithumbnail != null)
-              _Minithumbnail(
-                minithumbnail: minithumbnail,
-              ),
+              MinithumbnailWidget(minithumbnail: minithumbnail),
             _Image(
               path: path,
               layoutBuilder: widget.layoutBuilder,
@@ -126,30 +124,6 @@ class _FinalImage extends StatelessWidget {
       return lb.call(image);
     }
     return image;
-  }
-}
-
-class _Minithumbnail extends StatelessWidget {
-  const _Minithumbnail({
-    required this.minithumbnail,
-  });
-
-  final Minithumbnail minithumbnail;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRect(
-      child: ImageFiltered(
-        imageFilter: ImageFilter.blur(
-          sigmaX: 5,
-          sigmaY: 5,
-        ),
-        child: Image.memory(
-          minithumbnail.data!,
-          fit: BoxFit.fill,
-        ),
-      ),
-    );
   }
 }
 

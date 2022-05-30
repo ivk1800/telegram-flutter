@@ -56,7 +56,8 @@ abstract class MessageShowcaseModule {
 
   @j.provides
   @j.singleton
-  static IFileDownloader provideFileDownloader() => fake.FakeFileDownloader();
+  static IFileDownloader provideFileDownloader() =>
+      const fake.FakeFileDownloader();
 
   @j.provides
   @j.singleton

@@ -16,6 +16,8 @@ dependencies:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
+  feature_file_api:
+    path: ../feature_file_api
   feature_settings_api:
     path: ../feature_settings_api
   feature_settings_search_api:
@@ -27,6 +29,8 @@ dependencies:
   localization_api:
     path: ../../localization_api
   rxdart: 0.27.3
+  shared_models:
+    path: ../../shared/models
   user_info:
     path: ../user/user_info
 

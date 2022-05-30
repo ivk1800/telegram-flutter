@@ -15,6 +15,7 @@ import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:error_transformer_api/error_transformer_api.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:td_client/td_client.dart';
@@ -123,6 +124,8 @@ abstract class IAppComponent {
   IChatManager get chatManager;
 
   ILogger get logger;
+
+  IFileDownloader get fileDownloader;
 }
 
 @j.componentBuilder

@@ -3,6 +3,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:jugger/jugger.dart' as j;
+import 'package:shared_models/shared_models.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class ChatTileModelMapper {
@@ -41,7 +42,12 @@ class ChatTileModelMapper {
         _dateParser.parseUnixTimeStampToDateOrNull(chat.lastMessage?.date),
       ),
       id: chat.id,
-      photoId: chat.photo?.small.id,
+      avatar: Avatar(
+        abbreviation: getAvatarAbbreviation(first: chat.title, second: ''),
+        objectId: chat.id,
+        minithumbnail: chat.photo?.minithumbnail?.toMinithumbnail(),
+        imageFileId: chat.photo?.small.id,
+      ),
       title: chat.title,
       firstSubtitle: preview.firstText,
       secondSubtitle: preview.secondText,

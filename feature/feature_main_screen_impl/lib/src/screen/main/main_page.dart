@@ -429,8 +429,7 @@ class _HeaderData extends StatelessWidget {
                 width: 70,
                 child: avatarWidgetFactory.create(
                   context,
-                  chatId: data.userId,
-                  imageId: data.avatarFileId,
+                  avatar: data.avatar,
                 ),
               ),
               const Spacer(),

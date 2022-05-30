@@ -3,11 +3,13 @@ import 'package:async_utils/async_utils.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:contacts_manager_api/contacts_manager_api.dart';
 import 'package:core_arch/core_arch.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_router.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_models/shared_models.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:user_info/user_info.dart';
 
@@ -85,9 +87,15 @@ class NewContactViewModel extends BaseViewModel {
         userInformation: UserInformation(
           firstName: info.user.firstName,
           lastNameName: info.user.lastName,
-          id: info.user.id,
+          avatar: Avatar(
+            abbreviation: getAvatarAbbreviation(
+              first: info.user.firstName,
+              second: info.user.lastName,
+            ),
+            objectId: info.user.id,
+            imageFileId: info.user.profilePhoto?.small.id,
+          ),
           onlineStatus: info.statusHumanString,
-          avatarImageId: info.user.profilePhoto?.small.id,
           phoneNumber: info.user.phoneNumber.isNotEmpty
               ? info.user.phoneNumber
               : _stringsProvider.mobileHidden,
@@ -121,16 +129,14 @@ class NewContactViewModel extends BaseViewModel {
 
 class UserInformation {
   const UserInformation({
-    required this.id,
-    required this.avatarImageId,
+    required this.avatar,
     required this.phoneNumber,
     required this.onlineStatus,
     required this.firstName,
     required this.lastNameName,
   });
 
-  final int id;
-  final int? avatarImageId;
+  final Avatar avatar;
 
   final String phoneNumber;
   final String onlineStatus;

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shared_models/shared_models.dart';
 
 part 'content_state.freezed.dart';
 
@@ -15,14 +16,12 @@ class ContentState with _$ContentState {
 
 class AppBarState {
   AppBarState({
-    required this.photoFileId,
-    required this.userId,
+    required this.avatar,
     required this.name,
     required this.onlineStatus,
   });
 
-  final int? photoFileId;
-  final int userId;
+  final Avatar avatar;
   final String name;
   final String onlineStatus;
 }

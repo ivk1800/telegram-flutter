@@ -59,7 +59,7 @@ class MainScreenShowcaseFactory {
       optionsManager: FakeOptionsManager(
         functionExecutor: fakeTdFunctionExecutor,
       ),
-      fileRepository: const FakeFileRepository(),
+      fileDownloader: const FakeFileDownloader(),
     );
 
     final MainScreenFeature feature = MainScreenFeature(

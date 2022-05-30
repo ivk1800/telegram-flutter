@@ -3,6 +3,7 @@ import 'package:showcase/src/di/showcase_component.dart';
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
 import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 
+import 'avatar/avatar_showcase_factory.dart';
 import 'change_username_showcase_factory.dart';
 import 'create_new_channel_showcase_factory.dart';
 import 'message/message_showcase_factory.dart';
@@ -54,6 +55,9 @@ class ShowcaseScope extends StatefulWidget {
     BuildContext context,
   ) =>
       _InheritedScope.of(context)._mainScreenShowcaseFactory;
+
+  static AvatarShowcaseFactory getAvatarShowcaseFactory(BuildContext context) =>
+      _InheritedScope.of(context)._avatarShowcaseFactory;
 }
 
 class _ShowcaseScopeState extends State<ShowcaseScope> {
@@ -70,6 +74,9 @@ class _ShowcaseScopeState extends State<ShowcaseScope> {
 
   late final AuthShowcaseFactory _authShowcaseFactory =
       _component.getAuthShowcaseFactory();
+
+  late final AvatarShowcaseFactory _avatarShowcaseFactory =
+      _component.getAvatarShowcaseFactory();
 
   late final ShowcaseBlockInteractionManager _showcaseBlockInteractionManager =
       _component.getShowcaseBlockInteractionManager();

@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:fake/fake.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_models/shared_models.dart';
 
 class ChatCellShowCase extends StatefulWidget {
   const ChatCellShowCase({super.key});
@@ -27,7 +29,7 @@ class _ChatCellShowCaseState extends State<ChatCellShowCase>
     chatTileFactory = ChatTileFactory(
       listener: this,
       avatarWidgetFactory: AvatarWidgetFactory(
-        fileRepository: const FakeFileRepository(),
+        fileDownloader: const FakeFileDownloader(),
       ),
     );
     models = _createModels();
@@ -238,7 +240,7 @@ class _ChatCellShowCaseState extends State<ChatCellShowCase>
     int? id,
     int? unreadMessagesCount,
     String? lastMessageDate,
-    int? photoId,
+    Avatar? avatar,
     bool? isVerified,
     bool? isMentioned,
     bool? isSecret,
@@ -261,6 +263,14 @@ class _ChatCellShowCaseState extends State<ChatCellShowCase>
         secondSubtitle: secondSubtitle,
         lastMessageDate: lastMessageDate ?? '12:00',
         title: title ?? 'title',
-        photoId: photoId,
+        avatar: avatar ??
+            Avatar(
+              abbreviation: getAvatarAbbreviation(
+                first: title ?? 'title',
+                second: '',
+              ),
+              objectId: id ?? 0,
+              imageFileId: null,
+            ),
       );
 }

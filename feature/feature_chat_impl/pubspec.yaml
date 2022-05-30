@@ -38,6 +38,8 @@ dependencies:
     path: ../feature_chat_api
   feature_chat_header_info_api:
     path: ../feature_chat_header_info_api
+  feature_file_api:
+    path: ../feature_file_api
   feature_message_preview_resolver:
     path: ../feature_message_preview_resolver
   flutter:
@@ -58,6 +60,8 @@ dependencies:
   rich_text_format_flutter:
     path: ../../rich_text/rich_text_format_flutter
   scrollable_positioned_list: 0.3.2
+  shared_models:
+    path: ../../shared/models
   td_rich_text_parser:
     path: ../../rich_text/td_rich_text_parser
   tg_theme:

@@ -4,6 +4,7 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:showcase/showcase.dart';
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
+import 'package:showcase/src/showcase/avatar/avatar_showcase_factory.dart';
 import 'package:showcase/src/showcase/change_username_showcase_factory.dart';
 import 'package:showcase/src/showcase/create_new_channel_showcase_factory.dart';
 import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
@@ -26,6 +27,8 @@ abstract class IShowcaseComponent {
   CreateNewChannelShowcaseFactory getCreateNewChannelShowcaseFactory();
 
   AuthShowcaseFactory getAuthShowcaseFactory();
+
+  AvatarShowcaseFactory getAvatarShowcaseFactory();
 
   ShowcaseBlockInteractionManager getShowcaseBlockInteractionManager();
 

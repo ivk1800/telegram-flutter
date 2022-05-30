@@ -66,6 +66,8 @@ dependencies:
   localization_impl:
     path: ../localization_impl
   rxdart: 0.27.3
+  shared_models:
+    path: ../shared/models
   split_view:
     path: ../split_view
   tg_logger_api:
@@ -86,3 +88,7 @@ dev_dependencies:
   jugger_generator: 2.3.0
   tg_lint_rules:
     path: ../tg_lint_rules
+
+flutter:
+  assets:
+    - assets/durov.jpg

@@ -22,8 +22,7 @@ class ChatResultTileFactoryDelegate
       onTap: () => _onTap.call(context, model.chatId),
       leading: _avatarWidgetFactory.create(
         context,
-        chatId: model.chatId,
-        imageId: model.avatarId,
+        avatar: model.avatar,
       ),
       title: Text.rich(
         model.title,

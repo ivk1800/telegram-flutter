@@ -16,6 +16,8 @@ dependencies:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
+  feature_file_api:
+    path: ../feature_file_api
   feature_global_search_api:
     path: ../feature_global_search_api
   flutter:
@@ -26,6 +28,8 @@ dependencies:
   rxdart: 0.27.3
   search_component:
     path: ../../search_component
+  shared_models:
+    path: ../../shared/models
   td_client:
     path: ../../td_client
   tile:

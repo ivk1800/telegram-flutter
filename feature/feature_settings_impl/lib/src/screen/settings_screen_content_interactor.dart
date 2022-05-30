@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:core_arch/core_arch.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_settings_impl/src/screen/content_state.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_models/shared_models.dart';
 import 'package:user_info/user_info.dart';
 
 class SettingsScreenContentInteractor with SubscriptionMixin {
@@ -43,8 +45,14 @@ class SettingsScreenContentInteractor with SubscriptionMixin {
             .where((String s) => s.isNotEmpty)
             .join(' '),
         onlineStatus: info.statusHumanString,
-        userId: info.user.id,
-        photoFileId: info.user.profilePhoto?.small.id,
+        avatar: Avatar(
+          abbreviation: getAvatarAbbreviation(
+            first: info.user.firstName,
+            second: info.user.lastName,
+          ),
+          objectId: info.user.id,
+          imageFileId: info.user.profilePhoto?.small.id,
+        ),
       ),
       bodyState: BodyState(
         bio: '',

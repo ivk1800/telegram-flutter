@@ -136,9 +136,24 @@ class _UserInfo extends StatelessWidget {
               children: <Widget>[
                 avatarWidgetFactory.create(
                   context,
-                  chatId: information.id,
-                  imageId: information.avatarImageId,
+                  avatar: information.avatar,
                   radius: 32,
+                ),
+                const SizedBox(width: 16),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        information.phoneNumber,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      Text(
+                        information.onlineStatus,
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Flexible(

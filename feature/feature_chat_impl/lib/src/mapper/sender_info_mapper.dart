@@ -1,6 +1,8 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
+import 'package:shared_models/shared_models.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 class SenderInfoMapper {
@@ -21,9 +23,16 @@ class SenderInfoMapper {
               .getUser((sender as td.MessageSenderUser).userId);
           return SenderInfo(
             id: user.id,
+            avatar: Avatar(
+              abbreviation: getAvatarAbbreviation(
+                first: user.firstName,
+                second: user.lastName,
+              ),
+              objectId: user.id,
+              imageFileId: user.profilePhoto?.small.id,
+            ),
             type: SenderType.user,
             senderName: '${user.firstName} ${user.lastName}',
-            senderPhotoId: user.profilePhoto?.small.id,
           );
         }
       case td.MessageSenderChat.constructor:
@@ -32,9 +41,16 @@ class SenderInfoMapper {
               .getChat((sender as td.MessageSenderChat).chatId);
           return SenderInfo(
             id: chat.id,
+            avatar: Avatar(
+              abbreviation: getAvatarAbbreviation(
+                first: chat.title,
+                second: '',
+              ),
+              imageFileId: chat.photo?.small.id,
+              objectId: chat.id,
+            ),
             type: SenderType.chat,
             senderName: chat.title,
-            senderPhotoId: chat.photo?.small.id,
           );
         }
     }

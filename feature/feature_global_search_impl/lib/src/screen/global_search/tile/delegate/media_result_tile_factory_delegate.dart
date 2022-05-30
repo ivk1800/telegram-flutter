@@ -17,8 +17,7 @@ class MediaResultTileFactoryDelegate
       onTap: () {},
       leading: _avatarWidgetFactory.create(
         context,
-        chatId: model.chatId,
-        imageId: model.avatarId,
+        avatar: model.avatar,
         radius: 25,
       ),
       title: Text.rich(

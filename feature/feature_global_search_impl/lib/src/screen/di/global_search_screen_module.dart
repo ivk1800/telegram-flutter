@@ -61,7 +61,7 @@ abstract class GlobalSearchScreenModule {
     GlobalSearchFeatureDependencies dependencies,
   ) =>
       AvatarWidgetFactory(
-        fileRepository: dependencies.fileRepository,
+        fileDownloader: dependencies.fileDownloader,
       );
 
   @j.singleton

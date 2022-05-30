@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/rendering.dart';
+import 'package:shared_models/shared_models.dart';
 import 'package:tdlib/td_api.dart' as td;
-
-import '../util/minithumbnail.dart';
 
 extension MinithumbnailExtensions on Minithumbnail {
   MemoryImage? toMemoryImage() => MemoryImage(data!);

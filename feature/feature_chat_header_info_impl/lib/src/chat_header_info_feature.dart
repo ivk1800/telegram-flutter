@@ -28,7 +28,7 @@ class ChatHeaderInfoFeature implements IChatHeaderInfoFeatureApi {
   @override
   IChatHeaderInfoFactory getChatHeaderInfoFactory() => ChatHeaderInfoFactory(
         avatarWidgetFactory: tg.AvatarWidgetFactory(
-          fileRepository: _dependencies.fileRepository,
+          fileDownloader: _dependencies.fileDownloader,
         ),
         connectionStateWidgetFactory: tg.ConnectionStateWidgetFactory(
           connectionStateProvider: _dependencies.connectionStateProvider,

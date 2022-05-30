@@ -1,5 +1,5 @@
-import 'package:core_utils/core_utils.dart';
 import 'package:rich_text_format/rich_text_format.dart';
+import 'package:shared_models/shared_models.dart';
 
 import 'base_conversation_message_tile_model.dart';
 

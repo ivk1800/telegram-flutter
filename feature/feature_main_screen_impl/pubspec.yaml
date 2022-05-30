@@ -18,6 +18,8 @@ dependencies:
     path: ../../coreui
   feature_chats_list_api:
     path: ../feature_chats_list_api
+  feature_file_api:
+    path: ../feature_file_api
   feature_global_search_api:
     path: ../feature_global_search_api
   feature_main_screen_api:
@@ -29,6 +31,8 @@ dependencies:
     path: ../../localization_api
   provider: 6.0.2
   rxdart: 0.27.3
+  shared_models:
+    path: ../../shared/models
   td_client:
     path: ../../td_client
   theme_manager_api:

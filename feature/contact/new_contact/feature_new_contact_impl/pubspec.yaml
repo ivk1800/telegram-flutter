@@ -26,6 +26,8 @@ dependencies:
     path: ../../../../dialog_api
   error_transformer_api:
     path: ../../../../error_transformer_api
+  feature_file_api:
+    path: ../../../../feature/feature_file_api
   feature_new_contact_api:
     path: ../feature_new_contact_api
   flutter:
@@ -35,6 +37,8 @@ dependencies:
   localization_api:
     path: ../../../../localization_api
   rxdart: 0.27.3
+  shared_models:
+    path: ../../../../shared/models
   user_info:
     path: ../../../user/user_info
 

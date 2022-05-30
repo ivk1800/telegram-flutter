@@ -1,4 +1,4 @@
-import 'package:core_utils/core_utils.dart';
+import 'package:shared_models/shared_models.dart';
 import 'package:tile/tile.dart';
 
 class BackgroundWallpaperTileModel implements ITileModel {

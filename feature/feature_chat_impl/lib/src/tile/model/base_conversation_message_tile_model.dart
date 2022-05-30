@@ -1,4 +1,5 @@
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:shared_models/shared_models.dart';
 
 import 'base_message_tile_model.dart';
 
@@ -33,13 +34,13 @@ class SenderInfo {
     required this.id,
     required this.type,
     required this.senderName,
-    required this.senderPhotoId,
+    required this.avatar,
   });
 
   final int id;
   final SenderType type;
   final String senderName;
-  final int? senderPhotoId;
+  final Avatar avatar;
 }
 
 class AdditionalInfo {
