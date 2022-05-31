@@ -19,7 +19,7 @@ dependencies:
   error_transformer_api:
     path: ../error_transformer_api
   feature_chat_api:
-    path: ../feature/feature_chat_api
+    path: ../feature/chat/feature_chat_api
   feature_chat_header_info_api:
     path: ../feature/feature_chat_header_info_api
   feature_chats_list_api:
