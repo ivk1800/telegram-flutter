@@ -78,8 +78,11 @@ class MainScreenWidgetModel with SubscriptionMixin {
       }),
       (List<TabInfo> value) {
         _tabsInfoSubject.add(value);
-        // todo handle current index
-        _tabController = TabController(vsync: vsync, length: value.length);
+        _tabController = TabController(
+          vsync: vsync,
+          length: value.length,
+          initialIndex: (_tabController?.index ?? 0).clamp(0, value.length - 1),
+        );
       },
     );
 

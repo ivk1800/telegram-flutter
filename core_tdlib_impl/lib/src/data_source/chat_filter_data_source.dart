@@ -24,6 +24,9 @@ class ChatFilterDataSource {
     _chatFiltersUpdatesSubscription = _chatFiltersUpdatesProvider
         .chatFiltersUpdates
         .map((td.UpdateChatFilters event) => event.chatFilters)
+        // todo do not emit if filters not changed,
+        // todo in case if pin chat in custom folder, td lib emit update event,
+        // todo but filters is same
         .listen(_chatFiltersSubject.add);
   }
 
