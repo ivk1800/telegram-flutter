@@ -5,7 +5,7 @@ class FakeChatsListScreenFactory implements IChatsListScreenFactory {
   const FakeChatsListScreenFactory();
 
   @override
-  Widget create() {
+  Widget create(ChatListType type) {
     return const _Page();
   }
 }

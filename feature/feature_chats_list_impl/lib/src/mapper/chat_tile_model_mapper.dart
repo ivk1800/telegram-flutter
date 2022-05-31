@@ -1,5 +1,6 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:feature_chats_list_impl/src/list/chat_ext.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -23,18 +24,23 @@ class ChatTileModelMapper {
   final DateFormatter _dateFormatter;
   final DateParser _dateParser;
 
-  Future<ChatTileModel> mapToModel(td.Chat chat) async {
+  Future<ChatTileModel> mapToModel({
+    required td.Chat chat,
+    required td.ChatList chatList,
+  }) async {
     final MessagePreviewData preview =
         await _messagePreviewResolver.resolveFromChatOrEmpty(chat);
 
-    assert(chat.positions.length == 1);
+    final td.ChatPosition? position = chat.getPositionByChatList(chatList);
+    assert(position != null);
+
     final bool isSecret =
         chat.type.getConstructor() == td.ChatTypeSecret.constructor;
     return ChatTileModel(
       isMuted: chat.notificationSettings.muteFor > 0,
       isVerified: await getVerified(chat),
       unreadMessagesCount: chat.unreadCount,
-      isPinned: chat.positions[0].isPinned,
+      isPinned: position!.isPinned,
       isRead: null,
       isSecret: isSecret,
       isMentioned: chat.unreadMentionCount > 0,

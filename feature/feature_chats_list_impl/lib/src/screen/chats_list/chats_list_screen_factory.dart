@@ -14,11 +14,12 @@ class ChatsListScreenFactory implements IChatsListScreenFactory {
   final ChatsListFeatureDependencies _dependencies;
 
   @override
-  Widget create() {
+  Widget create(ChatListType type) {
     return ChatsListScope(
       child: const ChatsListPage(),
       create: () => JuggerChatsListScreenComponentBuilder()
           .dependencies(_dependencies)
+          .chatListType(type)
           .build(),
     );
   }

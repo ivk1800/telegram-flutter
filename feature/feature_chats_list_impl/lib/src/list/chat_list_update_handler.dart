@@ -9,6 +9,7 @@ import 'package:queue/queue.dart' as q;
 import 'package:tdlib/td_api.dart' as td;
 
 import 'chat_data.dart';
+import 'chat_ext.dart';
 import 'chat_list.dart';
 import 'ordered_chat.dart';
 
@@ -75,8 +76,15 @@ class ChatListUpdateHandler {
   Future<bool> _enqueue(Future<bool> Function() action) =>
       _eventsQueue.enqueue(action);
 
-  Future<ChatData> _toChatData(td.Chat chat) async =>
-      ChatData(chat: chat, model: await _chatTileModelMapper.mapToModel(chat));
+  Future<ChatData> _toChatData(td.Chat chat) async {
+    return ChatData(
+      chat: chat,
+      model: await _chatTileModelMapper.mapToModel(
+        chat: chat,
+        chatList: _chatListConfig.chatList,
+      ),
+    );
+  }
 
   ChatData? _getChatData(int chatId) => _chats[chatId];
 
@@ -88,16 +96,18 @@ class ChatListUpdateHandler {
     if (chat.positions.isEmpty) {
       return false;
     }
-    assert(chat.positions.length == 1);
 
-    final int order = chat.getPosition().order;
+    final int? order = getOrder(chat);
+    if (order == null) {
+      return false;
+    }
+
     final bool add = _orderedChats.add(
       OrderedChat(chatId: chat.id, order: order),
     );
     assert(add);
 
     final ChatData data = await _toChatData(chat);
-    assert(data.chat.positions.length == 1);
     _chats[chat.id] = data;
 
     return true;
@@ -115,10 +125,13 @@ class ChatListUpdateHandler {
       final ChatData? removeChat = _chats.remove(chatId);
       assert(removeChat != null);
 
+      final int? order = getOrder(removeChat!.chat);
+      assert(order != null);
+
       final bool removedPrevChat = _orderedChats.remove(
         OrderedChat(
-          chatId: removeChat!.chat.id,
-          order: removeChat.chat.getPosition().order,
+          chatId: removeChat.chat.id,
+          order: order!,
         ),
       );
       assert(removedPrevChat);
@@ -150,11 +163,14 @@ class ChatListUpdateHandler {
     }
 
     final ChatData chatData = _chats[chatId]!;
-    assert(chatData.chat.positions.length == 1);
+
+    final int? order = getOrder(chatData.chat);
+    assert(order != null);
+
     final bool removedPrevChat = _orderedChats.remove(
       OrderedChat(
         chatId: chatData.chat.id,
-        order: chatData.chat.getPosition().order,
+        order: order!,
       ),
     );
     assert(removedPrevChat);
@@ -186,7 +202,10 @@ class ChatListUpdateHandler {
       ..chat = chatData.chat.copyWith(lastMessage: message)
       // ignore: flutter_style_todos
       //TODO(Ivan): map only changed part
-      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
+      ..model = await _chatTileModelMapper.mapToModel(
+        chat: chatData.chat,
+        chatList: _chatListConfig.chatList,
+      );
     return true;
   }
 
@@ -206,7 +225,10 @@ class ChatListUpdateHandler {
             update.unreadCount == 0 ? 0 : chatData.chat.unreadMentionCount,
         lastReadInboxMessageId: update.lastReadInboxMessageId,
       )
-      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
+      ..model = await _chatTileModelMapper.mapToModel(
+        chat: chatData.chat,
+        chatList: _chatListConfig.chatList,
+      );
     return true;
   }
 
@@ -220,10 +242,12 @@ class ChatListUpdateHandler {
     }
 
     chatData
-      ..chat = chatData.chat.copyWith(
-        unreadMentionCount: update.unreadMentionCount,
-      )
-      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
+      ..chat =
+          chatData.chat.copyWith(unreadMentionCount: update.unreadMentionCount)
+      ..model = await _chatTileModelMapper.mapToModel(
+        chat: chatData.chat,
+        chatList: _chatListConfig.chatList,
+      );
     return true;
   }
 
@@ -240,7 +264,10 @@ class ChatListUpdateHandler {
       ..chat = chatData.chat.copyWith(
         unreadMentionCount: update.unreadMentionCount,
       )
-      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
+      ..model = await _chatTileModelMapper.mapToModel(
+        chat: chatData.chat,
+        chatList: _chatListConfig.chatList,
+      );
     return true;
   }
 
@@ -257,14 +284,13 @@ class ChatListUpdateHandler {
       ..chat = chatData.chat.copyWith(
         notificationSettings: update.notificationSettings,
       )
-      ..model = await _chatTileModelMapper.mapToModel(chatData.chat);
+      ..model = await _chatTileModelMapper.mapToModel(
+        chat: chatData.chat,
+        chatList: _chatListConfig.chatList,
+      );
     return true;
   }
-}
 
-extension _ChatExtensions on td.Chat {
-  td.ChatPosition getPosition() {
-    assert(positions.length == 1);
-    return positions[0];
-  }
+  int? getOrder(td.Chat chat) =>
+      chat.getPositionByChatList(_chatListConfig.chatList)?.order;
 }

@@ -60,7 +60,12 @@ class TestScope {
       (_) => const td.ChatListMain(),
     );
 
-    when(mockChatTileModelMapper.mapToModel(any)).thenAnswer(
+    when(
+      mockChatTileModelMapper.mapToModel(
+        chat: anyNamed('chat'),
+        chatList: anyNamed('chatList'),
+      ),
+    ).thenAnswer(
       (_) {
         return Future<ChatTileModel>.value(
           const ChatTileModel(

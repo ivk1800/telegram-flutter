@@ -65,7 +65,14 @@ class MainScreenWidgetModel with SubscriptionMixin {
               main: (MainFolder value) => _stringsProvider.filterAllChatsShort,
               id: (IdFolder value) => value.title,
             ),
-            widget: _chatsListScreenFactory.create(),
+            widget: _chatsListScreenFactory.create(
+              folder.map(
+                main: (_) => const ChatListType.main(),
+                id: (IdFolder folder) {
+                  return ChatListType.filter(chatFilterId: folder.id);
+                },
+              ),
+            ),
           );
         }).toList();
       }),
@@ -125,8 +132,9 @@ class MainScreenWidgetModel with SubscriptionMixin {
   }
 }
 
+@immutable
 class TabInfo {
-  TabInfo({
+  const TabInfo({
     required this.title,
     required this.widget,
     required this.id,

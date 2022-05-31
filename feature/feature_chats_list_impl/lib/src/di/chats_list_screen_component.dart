@@ -1,6 +1,7 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
+import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:feature_chats_list_impl/src/list/chat_list.dart';
 import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_tile_listener.dart';
@@ -23,8 +24,18 @@ abstract class IChatsListScreenComponent {
 abstract class ChatsListScreenModule {
   @j.provides
   @j.singleton
-  static ChatListConfig provideChatListConfig() =>
-      ChatListConfig(chatList: const td.ChatListMain());
+  static ChatListConfig provideChatListConfig(
+    ChatListType type,
+  ) =>
+      ChatListConfig(
+        chatList: type.map(
+          main: (_) => const td.ChatListMain(),
+          archive: (_) => const td.ChatListArchive(),
+          filter: (ChatListFilter filter) {
+            return td.ChatListFilter(chatFilterId: filter.chatFilterId);
+          },
+        ),
+      );
 
   @j.binds
   @j.singleton
@@ -127,6 +138,8 @@ abstract class IChatsListScreenComponentBuilder {
   IChatsListScreenComponentBuilder dependencies(
     ChatsListFeatureDependencies dependencies,
   );
+
+  IChatsListScreenComponentBuilder chatListType(ChatListType type);
 
   IChatsListScreenComponent build();
 }
