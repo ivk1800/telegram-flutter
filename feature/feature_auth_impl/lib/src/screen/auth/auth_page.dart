@@ -160,11 +160,13 @@ class _CodeCell extends StatelessWidget {
     required this.controller,
     this.focusNode,
     this.focusNext = true,
+    this.autofocus = false,
   });
 
   final FocusNode? focusNode;
   final TextEditingController controller;
   final bool focusNext;
+  final bool autofocus;
 
   @override
   Widget build(BuildContext context) {
@@ -173,6 +175,7 @@ class _CodeCell extends StatelessWidget {
       child: TextField(
         focusNode: focusNode,
         controller: controller,
+        autofocus: autofocus,
         onChanged: (String value) {
           if (focusNext && value.isNotEmpty) {
             FocusScope.of(context).nextFocus();
@@ -255,6 +258,7 @@ class _PhoneNumberStateWidget extends StatelessWidget {
               SizedBox(
                 width: calculatedCodeWidth.width,
                 child: TextField(
+                  autofocus: true,
                   controller: authContext.countryCodeController,
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
@@ -338,6 +342,7 @@ class CodeStateWidget extends StatelessWidget {
           children: <Widget>[
             _CodeCell(
               focusNode: authContext.code1FocusNode,
+              autofocus: true,
               controller: authContext.codeCell1Controller,
             ),
             const SizedBox(
