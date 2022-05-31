@@ -1,155 +1,27 @@
-import 'dart:async';
-
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_auth_impl/src/screen/auth/auth_screen_scope.dart';
+import 'package:feature_auth_impl/src/screen/auth/auth_screen_vidget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 
-import 'view_model/auth_action.dart';
 import 'view_model/auth_state.dart';
-import 'view_model/auth_view_model.dart';
 
-class AuthPage extends StatefulWidget {
+class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
 
   @override
-  _AuthPageState createState() => _AuthPageState();
-}
-
-class _AuthContext {
-  _AuthContext({
-    required this.countryCodeController,
-    required this.phoneNumberFocusNode,
-    required this.phoneMaskFormatter,
-    required this.phoneNumberController,
-    required this.code1FocusNode,
-    required this.codeCell1Controller,
-    required this.codeCell2Controller,
-    required this.codeCell3Controller,
-    required this.codeCell4Controller,
-    required this.codeCell5Controller,
-  });
-
-  final TextEditingController countryCodeController;
-  final FocusNode phoneNumberFocusNode;
-  final MaskTextInputFormatter phoneMaskFormatter;
-
-  final TextEditingController phoneNumberController;
-  final FocusNode code1FocusNode;
-  final TextEditingController codeCell1Controller;
-  final TextEditingController codeCell2Controller;
-  final TextEditingController codeCell3Controller;
-  final TextEditingController codeCell4Controller;
-
-  final TextEditingController codeCell5Controller;
-}
-
-class _AuthPageState extends State<AuthPage> {
-  final TextEditingController _countryCodeController = TextEditingController();
-  final MaskTextInputFormatter _phoneMaskFormatter = MaskTextInputFormatter();
-
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _codeCell1Controller = TextEditingController();
-  final TextEditingController _codeCell2Controller = TextEditingController();
-  final TextEditingController _codeCell3Controller = TextEditingController();
-  final TextEditingController _codeCell4Controller = TextEditingController();
-  final TextEditingController _codeCell5Controller = TextEditingController();
-
-  StreamSubscription<AuthAction>? _actionsSubscription;
-
-  final FocusNode _phoneNumberFocusNode = FocusNode();
-  final FocusNode _code1FocusNode = FocusNode();
-
-  late final _AuthContext _authContext = _AuthContext(
-    code1FocusNode: _code1FocusNode,
-    codeCell1Controller: _codeCell1Controller,
-    codeCell2Controller: _codeCell2Controller,
-    codeCell3Controller: _codeCell3Controller,
-    codeCell4Controller: _codeCell4Controller,
-    codeCell5Controller: _codeCell5Controller,
-    countryCodeController: _countryCodeController,
-    phoneMaskFormatter: _phoneMaskFormatter,
-    phoneNumberController: _phoneNumberController,
-    phoneNumberFocusNode: _phoneNumberFocusNode,
-  );
-
-  @override
-  void initState() {
-    final AuthViewModel viewModel = AuthScreenScope.getAuthViewModel(context);
-    _countryCodeController.addListener(() {
-      viewModel.onCountryCodeChanged(_countryCodeController.text);
-    });
-    _codeCell5Controller.addListener(() {
-      final String code5 = _codeCell5Controller.text;
-      if (code5.isNotEmpty) {
-        final String code1 = _codeCell1Controller.text;
-        final String code2 = _codeCell2Controller.text;
-        final String code3 = _codeCell3Controller.text;
-        final String code4 = _codeCell4Controller.text;
-        viewModel.onSubmitCodeTap('$code1$code2$code3$code4$code5');
-      }
-    });
-
-    _actionsSubscription = viewModel.actions.listen(_handleAction);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _countryCodeController.dispose();
-    _phoneNumberController.dispose();
-    _codeCell1Controller.dispose();
-    _codeCell2Controller.dispose();
-    _codeCell3Controller.dispose();
-    _codeCell4Controller.dispose();
-    _codeCell5Controller.dispose();
-    _actionsSubscription?.cancel();
-    _code1FocusNode.dispose();
-    _phoneNumberFocusNode.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final AuthViewModel viewModel = AuthScreenScope.getAuthViewModel(context);
+    final AuthScreenWidgetModel widgetModel =
+        AuthScreenScope.getAuthScreenWidgetModel(context);
     return StreamListener<AuthState>(
-      stream: viewModel.state,
+      stream: widgetModel.state,
       builder: (_, AuthState state) {
         return tg.BlockInteraction(
           block: state.blockInteraction,
-          child: Provider<_AuthContext>(
-            create: (_) => _authContext,
-            child: _AuthScaffold(state: state),
-          ),
+          child: _AuthScaffold(state: state),
         );
-      },
-    );
-  }
-
-  void _handleAction(AuthAction event) {
-    event.when(
-      setCountryCode: (int code) {
-        _countryCodeController.value = _countryCodeController.value.copyWith(
-          text: code.toString(),
-        );
-        _phoneNumberFocusNode.requestFocus();
-      },
-      setPhoneNumberMask: (String mask) {
-        _phoneMaskFormatter.updateMask(
-          mask: mask,
-        );
-      },
-      resetCode: () {
-        _codeCell1Controller.value = TextEditingValue.empty;
-        _codeCell2Controller.value = TextEditingValue.empty;
-        _codeCell3Controller.value = TextEditingValue.empty;
-        _codeCell4Controller.value = TextEditingValue.empty;
-        _codeCell5Controller.value = TextEditingValue.empty;
-        _code1FocusNode.requestFocus();
       },
     );
   }
@@ -209,7 +81,7 @@ class _AuthScaffold extends StatelessWidget {
         child: state.map(
           phoneNumber: (PhoneNumberState value) =>
               _PhoneNumberStateWidget(state: value),
-          code: (CodeState value) => CodeStateWidget(
+          code: (CodeState value) => _CodeStateWidget(
             state: value,
           ),
         ),
@@ -231,7 +103,8 @@ class _PhoneNumberStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _AuthContext authContext = context.read();
+    final AuthScreenWidgetModel widgetModel =
+        AuthScreenScope.getAuthScreenWidgetModel(context);
     final IStringsProvider stringsProvider =
         AuthScreenScope.getStringsProvider(context);
     final Size calculatedCodeWidth = (TextPainter(
@@ -247,8 +120,7 @@ class _PhoneNumberStateWidget extends StatelessWidget {
       children: <Widget>[
         MaterialButton(
           child: Text(state.countryTitle),
-          onPressed: () =>
-              AuthScreenScope.getAuthViewModel(context).onChangeCountryTap(),
+          onPressed: widgetModel.onChangeCountryTap,
         ),
         const Divider(),
         Padding(
@@ -259,7 +131,7 @@ class _PhoneNumberStateWidget extends StatelessWidget {
                 width: calculatedCodeWidth.width,
                 child: TextField(
                   autofocus: true,
-                  controller: authContext.countryCodeController,
+                  controller: widgetModel.countryCodeController,
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     LengthLimitingTextInputFormatter(4),
@@ -272,14 +144,14 @@ class _PhoneNumberStateWidget extends StatelessWidget {
               ),
               Expanded(
                 child: TextField(
-                  focusNode: authContext.phoneNumberFocusNode,
+                  focusNode: widgetModel.phoneNumberFocusNode,
                   inputFormatters: <TextInputFormatter>[
-                    authContext.phoneMaskFormatter
+                    widgetModel.phoneMaskFormatter
                   ],
-                  controller: authContext.phoneNumberController,
+                  controller: widgetModel.phoneNumberController,
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
-                    hintText: authContext.phoneMaskFormatter.getMask(),
+                    hintText: widgetModel.phoneMaskFormatter.getMask(),
                   ),
                 ),
               ),
@@ -295,17 +167,15 @@ class _PhoneNumberStateWidget extends StatelessWidget {
   }
 }
 
-class CodeStateWidget extends StatelessWidget {
-  const CodeStateWidget({
-    super.key,
-    required this.state,
-  });
+class _CodeStateWidget extends StatelessWidget {
+  const _CodeStateWidget({required this.state});
 
   final CodeState state;
 
   @override
   Widget build(BuildContext context) {
-    final _AuthContext authContext = context.read();
+    final AuthScreenWidgetModel widgetModel =
+        AuthScreenScope.getAuthScreenWidgetModel(context);
     final IStringsProvider stringsProvider =
         AuthScreenScope.getStringsProvider(context);
     final ThemeData theme = Theme.of(context);
@@ -341,33 +211,21 @@ class CodeStateWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _CodeCell(
-              focusNode: authContext.code1FocusNode,
+              focusNode: widgetModel.code1FocusNode,
               autofocus: true,
-              controller: authContext.codeCell1Controller,
+              controller: widgetModel.codeCell1Controller,
             ),
-            const SizedBox(
-              width: 8,
-            ),
+            const SizedBox(width: 8),
+            _CodeCell(controller: widgetModel.codeCell2Controller),
+            const SizedBox(width: 8),
             _CodeCell(
-              controller: authContext.codeCell2Controller,
+              controller: widgetModel.codeCell3Controller,
             ),
-            const SizedBox(
-              width: 8,
-            ),
+            const SizedBox(width: 8),
+            _CodeCell(controller: widgetModel.codeCell4Controller),
+            const SizedBox(width: 8),
             _CodeCell(
-              controller: authContext.codeCell3Controller,
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            _CodeCell(
-              controller: authContext.codeCell4Controller,
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            _CodeCell(
-              controller: authContext.codeCell5Controller,
+              controller: widgetModel.codeCell5Controller,
               focusNext: false,
             ),
           ],
@@ -398,14 +256,11 @@ class _SubmitPhone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _AuthContext authContext = context.read();
+    final AuthScreenWidgetModel widgetModel =
+        AuthScreenScope.getAuthScreenWidgetModel(context);
     return FloatingActionButton(
       child: const Icon(Icons.arrow_forward_outlined),
-      onPressed: () {
-        AuthScreenScope.getAuthViewModel(context).onSubmitPhoneTap(
-          '${authContext.countryCodeController.text}${authContext.phoneMaskFormatter.getUnmaskedText()}',
-        );
-      },
+      onPressed: widgetModel.onSubmitPhoneTap,
     );
   }
 }
@@ -419,6 +274,8 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthScreenWidgetModel widgetModel =
+        AuthScreenScope.getAuthScreenWidgetModel(context);
     return AppBar(
       leading: state is PhoneNumberState
           ? null
@@ -426,8 +283,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: const Icon(
                 Icons.arrow_back,
               ),
-              onPressed: () => AuthScreenScope.getAuthViewModel(context)
-                  .onStopVerificationTap(),
+              onPressed: widgetModel.onStopVerificationTap,
             ),
       // todo: override ModelRoute in splitview
       automaticallyImplyLeading: false,

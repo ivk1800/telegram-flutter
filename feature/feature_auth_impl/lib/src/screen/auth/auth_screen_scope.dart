@@ -2,6 +2,7 @@ import 'package:feature_auth_impl/src/di/di.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 
+import 'auth_screen_vidget_model.dart';
 import 'view_model/auth_view_model.dart';
 
 class AuthScreenScope extends StatefulWidget {
@@ -17,17 +18,19 @@ class AuthScreenScope extends StatefulWidget {
   @override
   State<AuthScreenScope> createState() => _AuthScreenScopeState();
 
-  static AuthViewModel getAuthViewModel(BuildContext context) =>
-      _InheritedScope.of(context)._viewModel;
-
   static IStringsProvider getStringsProvider(BuildContext context) =>
       _InheritedScope.of(context)._stringsProvider;
+
+  static AuthScreenWidgetModel getAuthScreenWidgetModel(BuildContext context) =>
+      _InheritedScope.of(context)._authScreenWidgetModel;
 }
 
 class _AuthScreenScopeState extends State<AuthScreenScope> {
   late final IAuthScreenComponent _component = widget.create.call();
 
   late final AuthViewModel _viewModel = _component.getAuthViewModel();
+  late final AuthScreenWidgetModel _authScreenWidgetModel =
+      _component.getAuthScreenWidgetModel();
   late final IStringsProvider _stringsProvider =
       _component.getStringsProvider();
 
@@ -39,6 +42,7 @@ class _AuthScreenScopeState extends State<AuthScreenScope> {
   @override
   void dispose() {
     _viewModel.dispose();
+    _authScreenWidgetModel.dispose();
     super.dispose();
   }
 }

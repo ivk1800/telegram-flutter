@@ -1,4 +1,5 @@
 import 'package:feature_auth_impl/feature_auth_impl.dart';
+import 'package:feature_auth_impl/src/screen/auth/auth_screen_vidget_model.dart';
 import 'package:feature_auth_impl/src/screen/auth/view_model/auth_view_model.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
@@ -10,6 +11,8 @@ abstract class IAuthScreenComponent {
   AuthViewModel getAuthViewModel();
 
   IStringsProvider getStringsProvider();
+
+  AuthScreenWidgetModel getAuthScreenWidgetModel();
 }
 
 @j.module
