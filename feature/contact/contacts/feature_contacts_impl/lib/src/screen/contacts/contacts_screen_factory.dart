@@ -1,6 +1,6 @@
 import 'package:feature_contacts_api/feature_contacts_api.dart';
 import 'package:feature_contacts_impl/feature_contacts_impl.dart';
-import 'package:feature_contacts_impl/src/di/di.dart';
+import 'package:feature_contacts_impl/src/di/contacts_screen_component.jugger.dart';
 import 'package:flutter/material.dart';
 
 import 'contacts_page.dart';

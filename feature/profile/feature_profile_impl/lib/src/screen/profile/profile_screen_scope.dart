@@ -1,5 +1,5 @@
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
-import 'package:feature_profile_impl/src/di/di.dart';
+import 'package:feature_profile_impl/src/di/profile_screen_component.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 

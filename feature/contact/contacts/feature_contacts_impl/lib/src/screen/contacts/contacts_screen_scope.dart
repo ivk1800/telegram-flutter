@@ -1,4 +1,4 @@
-import 'package:feature_contacts_impl/src/di/di.dart';
+import 'package:feature_contacts_impl/src/di/contacts_screen_component.dart';
 import 'package:feature_contacts_impl/src/screen/contacts/contacts_view_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';

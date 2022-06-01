@@ -1,5 +1,6 @@
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
-import 'package:feature_create_new_chat_impl/src/di/di.dart';
+import 'package:feature_create_new_chat_impl/src/di/create_new_chat_component.dart';
+import 'package:feature_create_new_chat_impl/src/di/create_new_group_screen_component.jugger.dart';
 import 'package:feature_create_new_chat_impl/src/screen/new_group/new_group.dart';
 import 'package:flutter/widgets.dart';
 

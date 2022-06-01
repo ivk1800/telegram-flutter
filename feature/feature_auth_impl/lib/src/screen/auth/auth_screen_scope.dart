@@ -1,4 +1,4 @@
-import 'package:feature_auth_impl/src/di/di.dart';
+import 'package:feature_auth_impl/src/di/auth_screen_component.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 

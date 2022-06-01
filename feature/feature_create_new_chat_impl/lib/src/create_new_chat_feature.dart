@@ -1,5 +1,6 @@
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
-import 'package:feature_create_new_chat_impl/src/di/di.dart';
+import 'package:feature_create_new_chat_impl/src/di/create_new_chat_component.dart';
+import 'package:feature_create_new_chat_impl/src/di/create_new_chat_component.jugger.dart';
 
 import 'create_new_chat_feature_dependencies.dart';
 import 'screen/factory/create_new_channel_screen_factory.dart';

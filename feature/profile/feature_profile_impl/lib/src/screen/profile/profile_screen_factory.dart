@@ -1,6 +1,6 @@
 import 'package:feature_profile_api/feature_profile_api.dart';
 import 'package:feature_profile_impl/feature_profile_impl.dart';
-import 'package:feature_profile_impl/src/di/di.dart';
+import 'package:feature_profile_impl/src/di/profile_screen_component.jugger.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_page.dart';
 import 'package:flutter/material.dart';
