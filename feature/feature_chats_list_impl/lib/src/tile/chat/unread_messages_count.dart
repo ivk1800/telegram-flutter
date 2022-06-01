@@ -1,4 +1,4 @@
-import 'package:coreui/coreui.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
 class UnreadMessagesCount extends StatefulWidget {
@@ -64,10 +64,17 @@ class _UnreadMessagesCountState extends State<UnreadMessagesCount>
   Widget build(BuildContext context) {
     return ScaleTransition(
       scale: _animation,
-      child: TextCircle(
-        context: context,
-        text: '${widget.count}',
-        color: widget.isMuted
+      child: Badge(
+        padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 3.0),
+        borderRadius: BorderRadius.circular(15),
+        toAnimate: false,
+        animationType: BadgeAnimationType.scale,
+        shape: BadgeShape.square,
+        badgeContent: Text(
+          '${widget.count}',
+          style: const TextStyle(color: Colors.white),
+        ),
+        badgeColor: widget.isMuted
             ? Colors.blueGrey
             : Theme.of(context).colorScheme.secondary,
       ),

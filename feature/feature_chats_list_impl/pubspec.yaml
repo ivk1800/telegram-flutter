@@ -6,6 +6,7 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  badges: 2.0.2
   chat_navigation_api:
     path: ../chat/chat_navigation_api
   core_arch:
