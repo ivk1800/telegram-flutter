@@ -167,6 +167,24 @@ class _ShowcaseMessageListPageState extends State<ShowcaseMessageListPage> {
             name: 'text1',
             messageFactory: () => _getMessage('message_text_1'),
           ),
+          MessageData(
+            name: 'text1',
+            messageFactory: () {
+              return _getMessage('message_text_1').then(
+                (td.Message value) => value.copyWith(
+                  isOutgoing: true,
+                ),
+              );
+            },
+          ),
+          MessageData(
+            name: 'text1',
+            messageFactory: () {
+              return _getMessage('message_text_1').then(
+                (td.Message value) => value.copyWith(),
+              );
+            },
+          ),
         ],
       ),
       MessageBundle(

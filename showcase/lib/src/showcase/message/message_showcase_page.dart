@@ -69,8 +69,9 @@ class _Required extends StatelessWidget {
   Widget build(BuildContext context) {
     return TgTheme(
       data: TgThemeData(
+        textTheme: TgTextTheme.light(),
         themes: <Type, ITgThemeData>{
-          ChatThemeData: ChatThemeData.def(context: context),
+          ChatThemeData: ChatThemeData.light(context: context),
         },
       ),
       child: LayoutBuilder(

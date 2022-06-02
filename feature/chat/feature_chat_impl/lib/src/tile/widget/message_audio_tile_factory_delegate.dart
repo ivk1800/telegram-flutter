@@ -83,8 +83,12 @@ class MessageAudioTileFactoryDelegate
                         ],
                       ),
                       shortInfo: _shortInfoFactory.create(
-                        context,
-                        model.additionalInfo,
+                        context: context,
+                        additionalInfo: model.additionalInfo,
+                        isOutgoing: model.isOutgoing,
+                        padding: EdgeInsets.only(
+                          bottom: chatContext.verticalPadding,
+                        ),
                       ),
                     ),
                   ],

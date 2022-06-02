@@ -1,11 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+
+import 'text_theme.dart';
 
 @immutable
 class TgThemeData {
   const TgThemeData({
+    required this.textTheme,
     required Map<Type, ITgThemeData> themes,
   }) : _themes = themes;
 
+  final TgTextTheme textTheme;
   final Map<Type, ITgThemeData> _themes;
 
   T themeOf<T extends ITgThemeData>() {

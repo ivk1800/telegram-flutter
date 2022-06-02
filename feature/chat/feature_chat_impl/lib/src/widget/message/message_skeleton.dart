@@ -98,15 +98,20 @@ class _BodyRenderBox extends RenderBox
 
     final double width = hasSize ? size.width : constraints.maxWidth;
     if (newWidth > width) {
-      final double offsetY = lastBox.right + second.size.width > width
-          ? lastBox.bottom
-          : lastBox.top;
-      secondParentData.offset =
-          Offset(constraints.maxWidth - second.size.width, offsetY);
+      final bool isFitted = lastBox.right + second.size.width > width;
+      final double offsetY = isFitted ? lastBox.bottom : lastBox.top;
+      secondParentData.offset = Offset(
+        constraints.maxWidth - second.size.width,
+        isFitted ? offsetY : offsetY + _kContentBottomPadding,
+      );
     } else {
       secondParentData.offset = Offset(
         secondXOffset,
-        max(lastBox.bottom - second.size.height, lastBox.top),
+        max(
+              lastBox.bottom - second.size.height,
+              lastBox.top,
+            ) +
+            _kContentBottomPadding,
       );
     }
     size = constraints.constrain(
@@ -123,6 +128,8 @@ class _BodyRenderBox extends RenderBox
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
     return defaultHitTestChildren(result, position: position);
   }
+
+  static const int _kContentBottomPadding = 4;
 }
 
 // TODO: why?

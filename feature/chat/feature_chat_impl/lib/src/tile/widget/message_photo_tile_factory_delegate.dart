@@ -28,6 +28,7 @@ class MessagePhotoTileFactoryDelegate
 
   @override
   Widget create(BuildContext context, MessagePhotoTileModel model) {
+    final ChatContextData chatContextData = ChatContext.of(context);
     return _chatMessageFactory.createConversationMessage(
       id: model.id,
       isOutgoing: model.isOutgoing,
@@ -48,7 +49,14 @@ class MessagePhotoTileFactoryDelegate
         if (model.caption != null)
           MessageCaption(
             text: model.caption!,
-            shortInfo: _shortInfoFactory.create(context, model.additionalInfo),
+            shortInfo: _shortInfoFactory.create(
+              context: context,
+              additionalInfo: model.additionalInfo,
+              isOutgoing: model.isOutgoing,
+              padding: EdgeInsets.only(
+                bottom: chatContextData.verticalPadding,
+              ),
+            ),
           ),
       ],
     );

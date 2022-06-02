@@ -1,5 +1,5 @@
+import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
-import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:tile/tile.dart';
@@ -23,16 +23,25 @@ class MessageTextTileFactoryDelegate
 
   @override
   Widget create(BuildContext context, MessageTextTileModel model) {
+    final ChatContextData chatContextData = ChatContext.of(context);
     return _chatMessageFactory.createConversationMessage(
       id: model.id,
       isOutgoing: model.isOutgoing,
       context: context,
-      senderTitle: _messageComponentResolver.resolveSenderName(context, model),
+      senderTitle:
+          _messageComponentResolver.resolveSenderName(context, model) ??
+              // todo extract ext
+              SizedBox(height: chatContextData.verticalPadding),
       reply: _replyInfoFactory.createFromMessageModel(context, model),
       blocks: <Widget>[
         MessageCaption(
           text: model.text,
-          shortInfo: _shortInfoFactory.create(context, model.additionalInfo),
+          shortInfo: _shortInfoFactory.create(
+            context: context,
+            additionalInfo: model.additionalInfo,
+            isOutgoing: model.isOutgoing,
+            padding: EdgeInsets.only(bottom: chatContextData.verticalPadding),
+          ),
         ),
       ],
     );

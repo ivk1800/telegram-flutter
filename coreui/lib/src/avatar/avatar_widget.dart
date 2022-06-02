@@ -99,6 +99,7 @@ class _DefaultAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       child: child,
+      // todo extract ext
       backgroundColor: AvatarWidgetFactory
           .colors[(objectId % AvatarWidgetFactory.colors.length).abs()],
       maxRadius: radius,

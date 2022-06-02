@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tg_theme/tg_theme.dart';
 import 'package:theme_manager_api/theme_manager_api.dart' as th;
 
 class ThemeDataResolver {
@@ -14,9 +15,9 @@ class ThemeDataResolver {
             },
           ),
           platform: TargetPlatform.android,
-          primaryColor: const Color(0xff5682a3),
+          primaryColor: kPrimaryColor,
           colorScheme: ThemeData.light().colorScheme.copyWith(
-                secondary: const Color(0xff598fba),
+                secondary: kSecondaryColor,
               ),
           appBarTheme: const AppBarTheme(
             color: Color(0xff5682a3),

@@ -28,6 +28,7 @@ class MessageVideoTileFactoryDelegate
 
   @override
   Widget create(BuildContext context, MessageVideoTileModel model) {
+    final ChatContextData chatContextData = ChatContext.of(context);
     return _chatMessageFactory.createConversationMessage(
       id: model.id,
       isOutgoing: model.isOutgoing,
@@ -46,8 +47,20 @@ class MessageVideoTileFactoryDelegate
         ),
         if (model.caption != null)
           MessageCaption(
+            padding: EdgeInsets.only(
+              left: chatContextData.horizontalPadding,
+              right: chatContextData.horizontalPadding,
+              top: chatContextData.verticalPadding,
+            ),
             text: model.caption!,
-            shortInfo: _shortInfoFactory.create(context, model.additionalInfo),
+            shortInfo: _shortInfoFactory.create(
+              context: context,
+              additionalInfo: model.additionalInfo,
+              isOutgoing: model.isOutgoing,
+              padding: EdgeInsets.only(
+                bottom: chatContextData.verticalPadding,
+              ),
+            ),
           ),
       ],
     );

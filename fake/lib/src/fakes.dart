@@ -53,7 +53,7 @@ td.Chat createFakeChat({
       hasParticipants: false,
     ),
     id: id ?? 0,
-    title: 'title',
+    title: 'Title Name',
     canBeReported: false,
     clientData: '',
     defaultDisableNotification: false,

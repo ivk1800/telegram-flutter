@@ -24,7 +24,8 @@ class MessageComponentResolver {
     BuildContext context,
     BaseConversationMessageTileModel model,
   ) {
-    return _messageWallContext.isDisplaySenderNameFor(model.id)
+    return !model.isOutgoing &&
+            _messageWallContext.isDisplaySenderNameFor(model.id)
         ? _senderTitleFactory.createFromMessageModel(context, model)
         : null;
   }

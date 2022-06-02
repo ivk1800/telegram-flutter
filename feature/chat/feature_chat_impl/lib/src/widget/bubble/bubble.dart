@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'bubble_clipper.dart';
 
@@ -10,11 +10,23 @@ class Bubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: BubbleClipper(
-        radius: radius,
+    return DecoratedBox(
+      child: ClipPath(
+        clipper: BubbleClipper(
+          radius: radius,
+        ),
+        child: child,
       ),
-      child: child,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 0.1,
+            blurRadius: 3,
+          ),
+        ],
+      ),
     );
   }
 }

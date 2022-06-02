@@ -8,6 +8,7 @@ environment:
 dependencies:
   async_utils:
     path: ../../../async_utils
+  badges: 2.0.2
   chat_actions_panel:
     path: ../chat_actions_panel
   chat_info:

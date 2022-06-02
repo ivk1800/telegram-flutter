@@ -24,7 +24,6 @@ class MessagesTileFactoryFactory {
       delegates: <Type, ITileFactoryDelegate<ITileModel>>{
         MessageAnimationTileModel: MessageAnimationTileFactoryDelegate(
           shortInfoFactory: shortInfoFactory,
-          messageComponentResolver: messageComponentResolver,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory,
         ),

@@ -42,7 +42,6 @@ class MessageContactTileFactoryDelegate
           constraints: const BoxConstraints(maxWidth: maxWidth),
           child: Padding(
             padding: EdgeInsets.only(
-              bottom: chatContext.verticalPadding,
               left: chatContext.horizontalPadding,
               right: chatContext.horizontalPadding,
             ),
@@ -82,8 +81,14 @@ class MessageContactTileFactoryDelegate
                   alignment: Alignment.centerRight,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 4, top: 4),
-                    child:
-                        _shortInfoFactory.create(context, model.additionalInfo),
+                    child: _shortInfoFactory.create(
+                      context: context,
+                      additionalInfo: model.additionalInfo,
+                      isOutgoing: model.isOutgoing,
+                      padding: EdgeInsets.only(
+                        bottom: chatContext.verticalPadding,
+                      ),
+                    ),
                   ),
                 ),
               ],

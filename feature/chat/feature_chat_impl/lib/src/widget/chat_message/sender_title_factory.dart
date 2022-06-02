@@ -1,6 +1,8 @@
+import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
 import 'package:flutter/material.dart';
+import 'package:tg_theme/tg_theme.dart';
 
 class SenderTitleFactory {
   const SenderTitleFactory();
@@ -11,7 +13,7 @@ class SenderTitleFactory {
   ) {
     final String senderName = messageModel.senderInfo.senderName;
 
-    final ThemeData theme = Theme.of(context);
+    final TgThemeData theme = TgTheme.of(context);
     final ChatContextData chatContext = ChatContext.of(context);
 
     return Padding(
@@ -25,7 +27,12 @@ class SenderTitleFactory {
         senderName,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: theme.textTheme.button!.copyWith(color: theme.primaryColor),
+        style: theme.textTheme.subtitle3.copyWith(
+          // todo extract ext
+          color: AvatarWidgetFactory.colors[
+              (messageModel.senderInfo.id % AvatarWidgetFactory.colors.length)
+                  .abs()],
+        ),
       ),
     );
   }

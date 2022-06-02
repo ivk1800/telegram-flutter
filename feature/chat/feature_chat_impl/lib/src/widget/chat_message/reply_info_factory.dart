@@ -1,6 +1,8 @@
+import 'package:chat_theme/chat_theme.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
+import 'package:tg_theme/tg_theme.dart';
 
 class ReplyInfoFactory {
   Widget? createFromMessageModel(
@@ -17,9 +19,9 @@ class ReplyInfoFactory {
 }
 
 class _Painter extends CustomPainter {
-  _Painter({required ThemeData theme})
+  _Painter({required Color lineColor})
       : _paint = Paint()
-          ..color = theme.primaryColor
+          ..color = lineColor
           ..strokeWidth = 2;
 
   final Paint _paint;
@@ -51,21 +53,19 @@ class _Decoration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChatContextData chatContextData = ChatContext.of(context);
+    final ChatThemeData chatTheme = TgTheme.of(context).themeOf();
     return Padding(
       padding: EdgeInsets.only(
         right: chatContextData.horizontalPadding,
-        top: chatContextData.verticalPadding,
         bottom: chatContextData.verticalPadding,
       ),
       child: CustomPaint(
         child: Padding(
-          padding: const EdgeInsets.only(
-            left: 16,
-          ),
+          padding: const EdgeInsets.only(left: 16),
           child: child,
         ),
         painter: _Painter(
-          theme: Theme.of(context),
+          lineColor: chatTheme.replyTitle.color!,
         ),
       ),
     );
@@ -81,7 +81,8 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final ChatThemeData chatTheme = TgTheme.of(context).themeOf();
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -94,13 +95,13 @@ class _Body extends StatelessWidget {
                 replyInfo.title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style:
-                    theme.textTheme.button!.copyWith(color: theme.primaryColor),
+                style: chatTheme.replyTitle,
               ),
               Text(
                 replyInfo.subtitle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
+                style: chatTheme.replySubtitle,
               ),
             ],
           ),

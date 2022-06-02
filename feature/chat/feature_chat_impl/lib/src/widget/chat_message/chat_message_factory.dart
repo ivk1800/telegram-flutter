@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:chat_theme/chat_theme.dart';
 import 'package:feature_chat_impl/src/widget/bubble/bubble.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
@@ -15,13 +16,17 @@ class ChatMessageFactory {
     required BuildContext context,
     required rt.RichText text,
   }) {
+    final TgThemeData tgTheme = TgTheme.of(context);
+    final ChatThemeData chatTheme = tgTheme.themeOf();
+
     return _Notification(
       key: ValueKey<int>(id),
       child: Text.rich(
         text.toInlineSpan(context),
         textAlign: TextAlign.center,
-        // todo extract style
-        style: const TextStyle(color: Colors.white),
+        style: tgTheme.textTheme.caption3.copyWith(
+          color: chatTheme.notificationTextColor,
+        ),
       ),
     );
   }
@@ -115,15 +120,11 @@ class ChatMessageFactory {
     return _BaseMessage(
       id: id,
       alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
-      body: _BaseMessage(
-        id: id,
-        alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
-        body: _Bubble(
-          child: MessageContent(
-            children: blocks,
-          ),
-          isOutgoing: isOutgoing,
+      body: _Bubble(
+        child: MessageContent(
+          children: blocks,
         ),
+        isOutgoing: isOutgoing,
       ),
     );
   }
@@ -169,7 +170,8 @@ class _Bubble extends StatelessWidget {
     return Bubble(
       radius: 10,
       child: Container(
-        color: isOutgoing ? theme.bubbleOutgoingColor : theme.bubbleColor,
+        color:
+            isOutgoing ? theme.bubbleOutgoingColor : theme.bubbleIncomingColor,
         child: child,
       ),
     );
@@ -186,16 +188,19 @@ class _Notification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ChatThemeData chatTheme = TgTheme.of(context).themeOf();
+
     return Align(
       alignment: Alignment.topCenter,
-      child: Container(
-        child: child,
-        padding: const EdgeInsets.only(top: 3, bottom: 3, left: 6, right: 6),
-        decoration: BoxDecoration(
-          // todo extract color to styles
-          color: Colors.black.withAlpha(60),
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-        ),
+      child: Badge(
+        padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 3.0),
+        borderRadius: BorderRadius.circular(15),
+        toAnimate: false,
+        animationType: BadgeAnimationType.scale,
+        shape: BadgeShape.square,
+        elevation: 0.0,
+        badgeContent: child,
+        badgeColor: chatTheme.notificationColor,
       ),
     );
   }

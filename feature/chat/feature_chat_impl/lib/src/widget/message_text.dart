@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rich_text_format/rich_text_format.dart' as rt;
 import 'package:rich_text_format_flutter/rich_text_format_flutter.dart';
+import 'package:tg_theme/tg_theme.dart';
 import 'message/message_skeleton.dart';
 
 class MessageText extends StatelessWidget {
@@ -14,10 +15,10 @@ class MessageText extends StatelessWidget {
     return MessageSkeleton(
       content: Text.rich(
         text.toInlineSpan(context),
+        style: TgTheme.of(context).textTheme.regular,
       ),
-      // content: Container(color: Colors.blue, height: 30,),
       shortInfo: Padding(
-        padding: const EdgeInsets.only(left: 4, top: 4),
+        padding: const EdgeInsets.only(left: 4),
         child: shortInfo,
       ),
     );

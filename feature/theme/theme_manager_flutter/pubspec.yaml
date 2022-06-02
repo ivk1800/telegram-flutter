@@ -13,5 +13,7 @@ dependencies:
 dev_dependencies:
   tg_lint_rules:
     path: ../../../tg_lint_rules
+  tg_theme:
+    path: ../../../feature/theme/tg_theme
   theme_manager_api:
     path: ../theme_manager_api

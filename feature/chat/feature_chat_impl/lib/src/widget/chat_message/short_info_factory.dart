@@ -1,8 +1,10 @@
 import 'dart:ui' as ui show PlaceholderAlignment;
 
+import 'package:chat_theme/chat_theme.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
+import 'package:tg_theme/tg_theme.dart';
 
 class ShortInfoFactory {
   const ShortInfoFactory({
@@ -11,15 +13,30 @@ class ShortInfoFactory {
 
   final IStringsProvider _stringsProvider;
 
-  Widget create(BuildContext context, AdditionalInfo additionalInfo) {
-    return _createBase(context, additionalInfo);
+  Widget create({
+    required BuildContext context,
+    required AdditionalInfo additionalInfo,
+    required bool isOutgoing,
+    EdgeInsets padding = EdgeInsets.zero,
+  }) {
+    return Padding(
+      padding: padding,
+      child: _createBase(context, additionalInfo, isOutgoing),
+    );
   }
 
-  Widget _createBase(BuildContext context, AdditionalInfo additionalInfo) {
-    final ThemeData theme = Theme.of(context);
-
-    // todo extract sizes to theme
-    final TextStyle caption = theme.textTheme.caption!.copyWith(fontSize: 12);
+  Widget _createBase(
+    BuildContext context,
+    AdditionalInfo additionalInfo,
+    bool isOutgoing,
+  ) {
+    final TgThemeData theme = TgTheme.of(context);
+    final ChatThemeData chatThemeData = theme.themeOf();
+    final TextStyle caption = theme.textTheme.caption.copyWith(
+      color: isOutgoing
+          ? chatThemeData.bubbleShortInfoOutgoingColor
+          : chatThemeData.bubbleShortInfoIncomingColor,
+    );
     final double iconSize = caption.fontSize! * 1.4;
     return RichText(
       text: TextSpan(
