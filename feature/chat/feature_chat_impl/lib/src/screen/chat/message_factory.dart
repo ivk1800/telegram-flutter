@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tile/tile.dart';
 
-class MessageFactory {
+import 'interactable_message_factory.dart';
+
+class MessageFactory implements IInteractableMessageFactory {
   const MessageFactory({
     required MessageComponentResolver messageComponentResolver,
     required TileFactory tileFactory,
@@ -14,6 +16,7 @@ class MessageFactory {
   final MessageComponentResolver _messageComponentResolver;
   final TileFactory _tileFactory;
 
+  @override
   Widget create({
     required BuildContext context,
     required ITileModel model,

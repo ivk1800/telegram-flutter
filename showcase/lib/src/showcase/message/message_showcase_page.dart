@@ -29,13 +29,16 @@ class MessageShowcasePage extends StatelessWidget {
         builder: (BuildContext context, MessageShowcaseState data) {
           return data.when(
             (List<ITileModel> items) {
-              final TileFactory tileFactory =
-                  MessageShowcaseScope.getTileFactory(context);
+              final IInteractableMessageFactory tileFactory =
+                  MessageShowcaseScope.getInteractableMessageFactory(context);
               return _Required(
                 child: ListView.separated(
                   padding: const EdgeInsets.all(8.0),
                   itemBuilder: (BuildContext context, int index) {
-                    return tileFactory.create(context, items[index]);
+                    return tileFactory.create(
+                      context: context,
+                      model: items[index],
+                    );
                   },
                   separatorBuilder: (BuildContext context, int index) =>
                       const SizedBox(height: 8),

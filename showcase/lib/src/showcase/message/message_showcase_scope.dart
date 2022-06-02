@@ -1,5 +1,5 @@
+import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tile/tile.dart';
 
 import 'message_showcase_component.dart';
 import 'message_showcase_view_model.dart';
@@ -22,8 +22,10 @@ class MessageShowcaseScope extends StatefulWidget {
   ) =>
       _InheritedScope.of(context)._messageShowcaseViewModel;
 
-  static TileFactory getTileFactory(BuildContext context) =>
-      _InheritedScope.of(context)._tileFactory;
+  static IInteractableMessageFactory getInteractableMessageFactory(
+    BuildContext context,
+  ) =>
+      _InheritedScope.of(context)._interactableMessageFactory;
 }
 
 class _MessageShowcaseScopeState extends State<MessageShowcaseScope> {
@@ -32,7 +34,8 @@ class _MessageShowcaseScopeState extends State<MessageShowcaseScope> {
   late final MessageShowcaseViewModel _messageShowcaseViewModel =
       _component.getMessageShowcaseViewModel();
 
-  late final TileFactory _tileFactory = _component.getTileFactory();
+  late final IInteractableMessageFactory _interactableMessageFactory =
+      _component.getInteractableMessageFactory();
 
   @override
   Widget build(BuildContext context) {

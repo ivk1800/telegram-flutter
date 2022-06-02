@@ -1,5 +1,6 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:coreui/coreui.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_file_api/feature_file_api.dart';
@@ -19,7 +20,7 @@ import 'message_showcase_view_model.dart';
 abstract class IMessageShowcaseComponent {
   MessageShowcaseViewModel getMessageShowcaseViewModel();
 
-  TileFactory getTileFactory();
+  IInteractableMessageFactory getInteractableMessageFactory();
 }
 
 @j.module
@@ -42,6 +43,28 @@ abstract class MessageShowcaseModule {
           stringsProvider: stringsProvider,
         ),
       ).create();
+
+  @j.provides
+  @j.singleton
+  static IInteractableMessageFactory provideInteractableMessageFactory(
+    IMessageWallContext messageWallContext,
+    IMessageActionListener messageActionListener,
+    AvatarWidgetFactory avatarWidgetFactory,
+    TileFactory tileFactory,
+  ) =>
+      InteractableMessageFactoryComponent(
+        tileFactory: tileFactory,
+        messageActionListener: messageActionListener,
+        messageWallContext: messageWallContext,
+        avatarWidgetFactory: avatarWidgetFactory,
+      ).create();
+
+  @j.provides
+  @j.singleton
+  static AvatarWidgetFactory provideAvatarWidgetFactory(
+    IFileDownloader fileDownloader,
+  ) =>
+      AvatarWidgetFactory(fileDownloader: fileDownloader);
 
   @j.provides
   @j.singleton
@@ -153,7 +176,7 @@ class _MessageActionListenerStub implements IMessageActionListener {
 
 class _FakeMessageWallContext implements IMessageWallContext {
   @override
-  bool isDisplayAvatarFor(int messageId) => false;
+  bool isDisplayAvatarFor(int messageId) => true;
 
   @override
   bool isDisplaySenderNameFor(int messageId) => false;
