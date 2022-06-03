@@ -1,32 +1,50 @@
 import 'package:flutter/material.dart';
 
+import 'bubble_border_widget.dart';
 import 'bubble_clipper.dart';
+import 'bubble_render_box.dart';
 
-class Bubble extends StatelessWidget {
-  const Bubble({super.key, required this.child, required this.radius});
+class Bubble extends StatefulWidget {
+  const Bubble({
+    super.key,
+    required this.child,
+    required this.radius,
+    required this.borderColor,
+  });
 
   final Widget child;
   final double radius;
+  final Color borderColor;
+
+  @override
+  State<Bubble> createState() => _BubbleState();
+}
+
+class _BubbleState extends State<Bubble> implements BorderPathProvider {
+  late final BubbleClipper _clipper = BubbleClipper(radius: widget.radius);
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    return BubbleBorderWidget(
+      borderPathProvider: this,
+      color: widget.borderColor,
       child: ClipPath(
         clipper: BubbleClipper(
-          radius: radius,
+          radius: widget.radius,
         ),
-        child: child,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 0.1,
-            blurRadius: 3,
-          ),
-        ],
+        child: widget.child,
       ),
     );
   }
+
+  @override
+  void didUpdateWidget(covariant Bubble oldWidget) {
+    if (oldWidget.radius != widget.radius) {
+      _clipper.radius = widget.radius;
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  Path getPath(Size size) => _clipper.getClip(size);
 }

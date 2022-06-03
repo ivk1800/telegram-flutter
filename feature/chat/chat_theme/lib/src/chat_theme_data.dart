@@ -14,11 +14,15 @@ class ChatThemeData implements ITgThemeData {
     required this.notificationTextColor,
     required this.replyTitle,
     required this.replySubtitle,
+    required this.bubbleOutgoingBorderColor,
+    required this.bubbleIncomingBorderColor,
   });
 
   factory ChatThemeData.light({required BuildContext context}) {
     final TgTextTheme textTheme = TgTextTheme.light();
     return ChatThemeData(
+      bubbleIncomingBorderColor: Colors.grey.shade200,
+      bubbleOutgoingBorderColor: Colors.grey.shade200,
       bubbleOutgoingColor: const Color.fromARGB(255, 239, 254, 221),
       bubbleIncomingColor: Colors.white,
       backgroundColor: Colors.white,
@@ -38,6 +42,8 @@ class ChatThemeData implements ITgThemeData {
   final Color bubbleShortInfoIncomingColor;
   final Color backgroundColor;
   final TextStyle bubbleTextStyle;
+  final Color bubbleIncomingBorderColor;
+  final Color bubbleOutgoingBorderColor;
 
   final Color notificationColor;
   final Color notificationTextColor;

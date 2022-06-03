@@ -168,8 +168,11 @@ class _Bubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final ChatThemeData theme = TgTheme.of(context).themeOf();
     return Bubble(
+      borderColor: isOutgoing
+          ? theme.bubbleOutgoingBorderColor
+          : theme.bubbleIncomingBorderColor,
       radius: 10,
-      child: Container(
+      child: ColoredBox(
         color:
             isOutgoing ? theme.bubbleOutgoingColor : theme.bubbleIncomingColor,
         child: child,
