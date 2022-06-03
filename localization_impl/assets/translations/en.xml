@@ -401,4 +401,10 @@ This link opens a chat with you:
     <string lang="Message">Message</string>
     <!-- https://translations.telegram.org/en/android/unsorted/FilterAllChatsShort -->
     <string lang="FilterAllChatsShort">All</string>
+    <!-- https://translations.telegram.org/en/android/general/Forward -->
+    <string lang="Forward">Forward</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/Copy -->
+    <string lang="Copy">Copy</string>
+    <!-- https://translations.telegram.org/en/android/general/Reply -->
+    <string lang="Reply">Reply</string>
 </resources>

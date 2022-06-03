@@ -7,6 +7,7 @@ abstract class IChatMessageRepository {
     required int limit,
   });
 
+  /// return null if message not exists
   Future<td.Message?> getMessage({required int chatId, required int messageId});
 
   Future<List<td.Message>> findMessages({

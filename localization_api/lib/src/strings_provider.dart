@@ -388,4 +388,10 @@ abstract class IStringsProvider {
   String get message;
 
   String get filterAllChatsShort;
+
+  String get forward;
+
+  String get copy;
+
+  String get reply;
 }

@@ -1,20 +1,25 @@
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
+import 'package:feature_chat_impl/src/tile/model/base_message_tile_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tile/tile.dart';
 
 import 'interactable_message_factory.dart';
+import 'message/popup/message_popup_listener.dart';
+import 'message/popup/message_popup_menu_area.dart';
 
 class MessageFactory implements IInteractableMessageFactory {
   const MessageFactory({
     required MessageComponentResolver messageComponentResolver,
     required TileFactory tileFactory,
+    required IMessagePopupMenuListener popupMenuListener,
   })  : _messageComponentResolver = messageComponentResolver,
+        _popupMenuListener = popupMenuListener,
         _tileFactory = tileFactory;
 
   final MessageComponentResolver _messageComponentResolver;
   final TileFactory _tileFactory;
+  final IMessagePopupMenuListener _popupMenuListener;
 
   @override
   Widget create({
@@ -22,16 +27,28 @@ class MessageFactory implements IInteractableMessageFactory {
     required ITileModel model,
   }) {
     if (model is BaseConversationMessageTileModel) {
-      return _Leading(
-        leading: _messageComponentResolver.resolveAvatar(context, model),
-        body: _tileFactory.create(context, model),
+      return MessagePopupMenuArea(
+        messageId: model.id,
+        listener: _popupMenuListener,
+        child: _Leading(
+          leading: _messageComponentResolver.resolveAvatar(context, model),
+          body: _tileFactory.create(context, model),
+        ),
       );
     }
 
-    return _Leading(
-      leading: null,
-      body: _tileFactory.create(context, model),
-    );
+    if (model is BaseMessageTileModel) {
+      return MessagePopupMenuArea(
+        messageId: model.id,
+        listener: _popupMenuListener,
+        child: _Leading(
+          leading: null,
+          body: _tileFactory.create(context, model),
+        ),
+      );
+    }
+
+    return _tileFactory.create(context, model);
   }
 }
 

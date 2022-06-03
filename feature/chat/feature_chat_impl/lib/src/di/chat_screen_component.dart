@@ -19,6 +19,8 @@ import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
+import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_listener.dart';
+import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_menu_listener_impl.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_action_listener.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
 import 'package:feature_chat_impl/src/tile/model/loading_tile_model.dart';
@@ -156,11 +158,18 @@ abstract class ChatScreenModule {
   static MessageFactory provideMessageFactory(
     TileFactory tileFactory,
     MessageComponentResolver messageComponentResolver,
+    IMessagePopupMenuListener messagePopupMenuListener,
   ) =>
       MessageFactory(
+        popupMenuListener: messagePopupMenuListener,
         tileFactory: tileFactory,
         messageComponentResolver: messageComponentResolver,
       );
+
+  @j.binds
+  IMessagePopupMenuListener bindMessagePopupMenuListener(
+    MessagePopupMenuListenerImpl impl,
+  );
 
   @j.provides
   @j.singleton
