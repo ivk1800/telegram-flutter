@@ -67,14 +67,12 @@ class ChatMessageFactory {
     required BuildContext context,
     required bool isOutgoing,
     required Widget body,
+    bool withBubble = true,
   }) {
     return _BaseMessage(
       id: id,
       alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
-      body: _Bubble(
-        isOutgoing: isOutgoing,
-        child: body,
-      ),
+      body: withBubble ? _Bubble(isOutgoing: isOutgoing, child: body) : body,
     );
   }
 
@@ -116,16 +114,19 @@ class ChatMessageFactory {
     required BuildContext context,
     required bool isOutgoing,
     required List<Widget> blocks,
+    bool withBubble = true,
   }) {
     return _BaseMessage(
       id: id,
       alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
-      body: _Bubble(
-        child: MessageContent(
-          children: blocks,
-        ),
-        isOutgoing: isOutgoing,
-      ),
+      body: withBubble
+          ? _Bubble(
+              child: MessageContent(
+                children: blocks,
+              ),
+              isOutgoing: isOutgoing,
+            )
+          : MessageContent(children: blocks),
     );
   }
 }

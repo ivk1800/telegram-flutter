@@ -376,7 +376,9 @@ class MessageTileMapper {
         return MessageStickerTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
-          type: notImplementedText,
+          stickerFileId: value.sticker.sticker.id,
+          setId: value.sticker.setId,
+          isAnimated: value.sticker.isAnimated,
         );
       },
       messageSupergroupChatCreate: (td.MessageSupergroupChatCreate value) {

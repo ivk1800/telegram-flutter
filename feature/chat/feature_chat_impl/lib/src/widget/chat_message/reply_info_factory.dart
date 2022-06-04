@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:tg_theme/tg_theme.dart';
 
 class ReplyInfoFactory {
+  const ReplyInfoFactory();
+
   Widget? createFromMessageModel(
     BuildContext context,
     BaseConversationMessageTileModel messageModel,

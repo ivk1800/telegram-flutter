@@ -6,26 +6,19 @@ import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
-import 'package:feature_chat_impl/src/chat_feature_dependencies.dart';
+import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/chat_feature_dependencies.dmg.dart';
 import 'package:feature_chat_impl/src/chat_message_updates_handler.dart';
-import 'package:feature_chat_impl/src/chat_screen_router.dart';
-import 'package:feature_chat_impl/src/chat_screen_router_factory.dart';
-import 'package:feature_chat_impl/src/component/message_mapper_component.dart';
-import 'package:feature_chat_impl/src/component/message_tile_factory_component.dart';
 import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
-import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_listener.dart';
 import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_menu_listener_impl.dart';
-import 'package:feature_chat_impl/src/screen/chat/message_action_listener.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
 import 'package:feature_chat_impl/src/tile/model/loading_tile_model.dart';
 import 'package:feature_chat_impl/src/tile/widget/loading_tile_factory_delegate.dart';
-import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context_impl.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
@@ -113,7 +106,7 @@ abstract class ChatScreenModule {
     IMessageActionListener messageActionListener,
     MessageTileFactoryDependencies messageTileFactoryDependencies,
   ) {
-    final TileFactory messageTileFactory = MessageTileFactoryComponent(
+    final TileFactory messageTileFactory = MessageTileFactory(
       dependencies: messageTileFactoryDependencies,
     ).create();
     return CompositeTileFactory(
@@ -133,15 +126,15 @@ abstract class ChatScreenModule {
     IMessageWallContext messageWallContext,
     IFileDownloader fileDownloader,
     IStringsProvider stringsProvider,
-    IFileRepository fileRepository,
     IMessageActionListener messageActionListener,
+    IChatScreenRouter router,
   ) =>
       MessageTileFactoryDependencies(
+        chatScreenRouter: router,
         fileDownloader: fileDownloader,
         messageActionListener: messageActionListener,
         messageWallContext: messageWallContext,
         stringsProvider: stringsProvider,
-        fileRepository: fileRepository,
       );
 
   @j.provides

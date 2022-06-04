@@ -1,6 +1,7 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
+import 'package:feature_chat_impl/src/tile/message_bloc_provider.dart';
 import 'package:feature_chat_impl/src/tile/widget/message_invite_video_chat_participants_tile_factory_delegate.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
@@ -19,6 +20,7 @@ class MessagesTileFactoryFactory {
     required MessageComponentResolver messageComponentResolver,
     required IMessageWallContext messageWallContext,
     required ShortInfoFactory shortInfoFactory,
+    required MessageBlocProvider messageBlocProvider,
   }) {
     return TileFactory(
       delegates: <Type, ITileFactoryDelegate<ITileModel>>{
@@ -157,6 +159,7 @@ class MessagesTileFactoryFactory {
           chatMessageFactory: chatMessageFactory,
         ),
         MessageStickerTileModel: MessageStickerTileFactoryDelegate(
+          blocProvider: messageBlocProvider.messageStickerBlocProvider,
           chatMessageFactory: chatMessageFactory,
         ),
         MessageSupergroupChatCreateTileModel:

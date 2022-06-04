@@ -63,6 +63,8 @@ dependencies:
   scrollable_positioned_list: 0.3.2
   shared_models:
     path: ../../../shared/models
+  sticker_navigation_api:
+    path: ../../sticker/sticker_navigation_api
   td_rich_text_parser:
     path: ../../../rich_text/td_rich_text_parser
   tg_theme:

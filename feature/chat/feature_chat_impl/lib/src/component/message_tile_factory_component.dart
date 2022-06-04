@@ -1,83 +1,133 @@
-import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
-import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
+import 'package:feature_chat_impl/src/tile/message_bloc_provider.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/factory/messages_tile_factory_factory.dart';
 import 'package:feature_file_api/feature_file_api.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:sticker_navigation_api/sticker_navigation_api.dart';
 import 'package:tile/tile.dart';
 
-class MessageTileFactoryDependencies {
-  const MessageTileFactoryDependencies({
-    required this.fileRepository,
-    required this.stringsProvider,
-    required this.messageWallContext,
-    required this.messageActionListener,
-    required this.fileDownloader,
-  });
+import 'message_tile_factory_dependencies.dmg.dart';
 
-  final IStringsProvider stringsProvider;
-  final IFileRepository fileRepository;
-  final IMessageWallContext messageWallContext;
-  final IMessageActionListener messageActionListener;
-  final IFileDownloader fileDownloader;
+@j.Component(
+  modules: <Type>[
+    MessageTileFactoryModule,
+    MessageTileFactoryDependenciesModule,
+  ],
+)
+abstract class IMessageTileFactoryComponent {
+  TileFactory getTileFactory();
 }
 
-abstract class IMessageActionListener {
-  void onSenderAvatarTap({required int senderId, required SenderType type});
+@j.module
+abstract class MessageTileFactoryModule {
+  @j.provides
+  @j.singleton
+  static MessagesTileFactoryFactory provideMessagesTileFactoryFactory() =>
+      MessagesTileFactoryFactory();
+
+  @j.provides
+  @j.singleton
+  static ShortInfoFactory provideShortInfoFactory(
+    IStringsProvider stringsProvider,
+  ) =>
+      ShortInfoFactory(stringsProvider: stringsProvider);
+
+  @j.provides
+  @j.singleton
+  static ReplyInfoFactory provideReplyInfoFactory() => const ReplyInfoFactory();
+
+  @j.provides
+  @j.singleton
+  static SenderTitleFactory provideSenderTitleFactory() =>
+      const SenderTitleFactory();
+
+  @j.provides
+  @j.singleton
+  static ChatMessageFactory provideChatMessageFactory() =>
+      const ChatMessageFactory();
+
+  @j.provides
+  @j.singleton
+  static SenderAvatarFactory provideSenderAvatarFactory(
+    tg.AvatarWidgetFactory avatarWidgetFactory,
+  ) =>
+      SenderAvatarFactory(avatarWidgetFactory: avatarWidgetFactory);
+
+  @j.provides
+  @j.singleton
+  static MessageComponentResolver provideMessageComponentResolver(
+    tg.AvatarWidgetFactory avatarWidgetFactory,
+    SenderAvatarFactory senderAvatarFactory,
+    IMessageWallContext messageWallContext,
+    SenderTitleFactory senderTitleFactory,
+    IMessageActionListener messageActionListener,
+  ) =>
+      MessageComponentResolver(
+        senderAvatarFactory: senderAvatarFactory,
+        messageWallContext: messageWallContext,
+        senderTitleFactory: senderTitleFactory,
+        messageActionListener: messageActionListener,
+      );
+
+  @j.provides
+  @j.singleton
+  static tg.AvatarWidgetFactory provideAvatarWidgetFactory(
+    IFileDownloader fileDownloader,
+  ) =>
+      tg.AvatarWidgetFactory(fileDownloader: fileDownloader);
+
+  @j.provides
+  @j.singleton
+  static tg.ImageWidgetFactory provideImageWidgetFactory(
+    IFileDownloader fileDownloader,
+  ) =>
+      tg.ImageWidgetFactory(fileDownloader: fileDownloader);
+
+  @j.provides
+  @j.singleton
+  static TileFactory provideTileFactory(
+    MessagesTileFactoryFactory factory,
+    tg.ImageWidgetFactory imageWidgetFactory,
+    IMessageWallContext messageWallContext,
+    SenderTitleFactory senderTitleFactory,
+    ReplyInfoFactory replyInfoFactory,
+    ShortInfoFactory shortInfoFactory,
+    IStringsProvider stringsProvider,
+    ChatMessageFactory chatMessageFactory,
+    MessageComponentResolver messageComponentResolver,
+    SenderAvatarFactory senderAvatarFactory,
+    MessageBlocProvider messageBlocProvider,
+  ) =>
+      factory.create(
+        imageWidgetFactory: imageWidgetFactory,
+        messageBlocProvider: messageBlocProvider,
+        messageComponentResolver: messageComponentResolver,
+        senderAvatarFactory: senderAvatarFactory,
+        messageWallContext: messageWallContext,
+        senderTitleFactory: senderTitleFactory,
+        replyInfoFactory: replyInfoFactory,
+        shortInfoFactory: shortInfoFactory,
+        stringsProvider: stringsProvider,
+        chatMessageFactory: chatMessageFactory,
+      );
+
+  @j.singleton
+  @j.binds
+  IStickersSetScreenRouter bindStickersSetScreenRouter(
+    IChatScreenRouter router,
+  );
 }
 
-enum SenderType {
-  user,
-  chat,
-}
+@j.componentBuilder
+abstract class IMessageTileFactoryComponentBuilder {
+  IMessageTileFactoryComponentBuilder dependencies(
+    MessageTileFactoryDependencies dependencies,
+  );
 
-class MessageTileFactoryComponent {
-  MessageTileFactoryComponent({
-    required MessageTileFactoryDependencies dependencies,
-  }) : _dependencies = dependencies;
-
-  final MessageTileFactoryDependencies _dependencies;
-
-  TileFactory create() {
-    final MessagesTileFactoryFactory tileFactoryFactory =
-        MessagesTileFactoryFactory();
-
-    final ShortInfoFactory shortInfoFactory = ShortInfoFactory(
-      stringsProvider: _dependencies.stringsProvider,
-    );
-    final ReplyInfoFactory replyInfoFactory = ReplyInfoFactory();
-    const SenderTitleFactory senderTitleFactory = SenderTitleFactory();
-
-    final tg.AvatarWidgetFactory avatarWidgetFactory = tg.AvatarWidgetFactory(
-      fileDownloader: _dependencies.fileDownloader,
-    );
-    const ChatMessageFactory chatMessageFactory = ChatMessageFactory();
-
-    final SenderAvatarFactory senderAvatarFactory =
-        SenderAvatarFactory(avatarWidgetFactory: avatarWidgetFactory);
-
-    final MessageComponentResolver componentResolver = MessageComponentResolver(
-      senderAvatarFactory: senderAvatarFactory,
-      messageWallContext: _dependencies.messageWallContext,
-      senderTitleFactory: senderTitleFactory,
-      messageActionListener: _dependencies.messageActionListener,
-    );
-
-    return tileFactoryFactory.create(
-      imageWidgetFactory: tg.ImageWidgetFactory(
-        fileDownloader: _dependencies.fileDownloader,
-      ),
-      messageComponentResolver: componentResolver,
-      senderAvatarFactory: senderAvatarFactory,
-      messageWallContext: _dependencies.messageWallContext,
-      senderTitleFactory: senderTitleFactory,
-      replyInfoFactory: replyInfoFactory,
-      shortInfoFactory: shortInfoFactory,
-      stringsProvider: _dependencies.stringsProvider,
-      chatMessageFactory: chatMessageFactory,
-    );
-  }
+  IMessageTileFactoryComponent build();
 }

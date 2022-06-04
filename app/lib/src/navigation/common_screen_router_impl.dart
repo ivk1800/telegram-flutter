@@ -402,6 +402,11 @@ class CommonScreenRouterImpl
     );
   }
 
+  @override
+  void toStickersSet(int setId) {
+    toNotImplemented();
+  }
+
   void _showDialog({required WidgetBuilder builder}) {
     final BuildContext? context = _dialogNavigatorKey.currentContext;
 

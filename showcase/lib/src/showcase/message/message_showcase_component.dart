@@ -1,6 +1,7 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
+import 'package:dialog_api/dialog_api.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_file_api/feature_file_api.dart';
@@ -31,15 +32,14 @@ abstract class MessageShowcaseModule {
     IFileDownloader fileDownloader,
     IMessageWallContext messageWallContext,
     IMessageActionListener messageActionListener,
-    IFileRepository fileRepository,
     IStringsProvider stringsProvider,
   ) =>
-      MessageTileFactoryComponent(
+      MessageTileFactory(
         dependencies: MessageTileFactoryDependencies(
+          chatScreenRouter: const ChatScreenRouterStub(),
           fileDownloader: fileDownloader,
           messageWallContext: messageWallContext,
           messageActionListener: messageActionListener,
-          fileRepository: fileRepository,
           stringsProvider: stringsProvider,
         ),
       ).create();
@@ -180,4 +180,28 @@ class _FakeMessageWallContext implements IMessageWallContext {
 
   @override
   bool isDisplaySenderNameFor(int messageId) => false;
+}
+
+// todo model to fake module
+class ChatScreenRouterStub implements IChatScreenRouter {
+  const ChatScreenRouterStub();
+
+  @override
+  void close() {}
+
+  @override
+  void toChat(int chatId) {}
+
+  @override
+  void toChatProfile({required int chatId, required ProfileType type}) {}
+
+  @override
+  void toDialog({
+    String? title,
+    required Body body,
+    List<Action> actions = const <Action>[],
+  }) {}
+
+  @override
+  void toStickersSet(int setId) {}
 }

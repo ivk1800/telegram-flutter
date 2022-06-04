@@ -166,6 +166,8 @@ dependencies:
   rxdart: 0.27.3
   split_view:
     path: ../split_view
+  sticker_navigation_api:
+    path: ../feature/sticker/sticker_navigation_api
   td_client:
     path: ../td_client
   tg_logger_api:

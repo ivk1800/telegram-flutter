@@ -40,4 +40,7 @@ class ChatScreenRouterImpl implements IChatScreenRouter {
     List<d.Action> actions = const <d.Action>[],
   }) =>
       _commonScreenRouter.toDialog(title: title, body: body, actions: actions);
+
+  @override
+  void toStickersSet(int setId) => _commonScreenRouter.toStickersSet(setId);
 }
