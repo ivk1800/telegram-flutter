@@ -1,10 +1,8 @@
-import 'dart:async';
-
-import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_theme/chat_theme.dart';
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
+import 'package:feature_chat_impl/src/screen/chat/chat_widget_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -12,7 +10,6 @@ import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
 import 'message_factory.dart';
-import 'messages_scroll_controller.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -22,74 +19,59 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final ItemScrollController _itemScrollController = ItemScrollController();
-
-  final ItemPositionsListener _itemPositionsListener =
-      ItemPositionsListener.create();
-
-  late MessagesScrollController _messagesScrollController;
-
   @override
-  void initState() {
-    final ChatMessagesViewModel viewModel =
-        ChatScreenScope.getChatMessagesViewModel(context);
-
-    final Stream<int> itemsCountStream = viewModel.bodyStateStream
-        .where((BodyState event) => event is BodyData)
-        .cast<BodyData>()
-        .map((BodyData data) => data.models.length);
-    _messagesScrollController = MessagesScrollController(
-      onScrollToNewest: viewModel.onLoadNewestMessages,
-      onScrollToOldest: viewModel.onLoadOldestMessages,
-      itemsCountStream: itemsCountStream,
-      itemPositions: _itemPositionsListener.itemPositions,
-    )..attach();
-    super.initState();
+  Widget build(BuildContext context) {
+    return _ChatContextWrapper(
+      child: Scaffold(
+        backgroundColor:
+            TgTheme.of(context).themeOf<ChatThemeData>().backgroundColor,
+        appBar: const _AppBar(),
+        body: Column(
+          children: const <Widget>[
+            Expanded(child: _Body()),
+            _ActionsPanel(),
+          ],
+        ),
+      ),
+    );
   }
+}
 
-  @override
-  void dispose() {
-    _messagesScrollController.dispose();
-    super.dispose();
-  }
+class _Body extends StatelessWidget {
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
     final ChatMessagesViewModel viewModel =
         ChatScreenScope.getChatMessagesViewModel(context);
-    final ChatActionPanelFactory chatActionPanelFactory =
-        ChatScreenScope.getChatActionPanelFactory(context);
 
-    return Scaffold(
-      backgroundColor:
-          TgTheme.of(context).themeOf<ChatThemeData>().backgroundColor,
-      appBar: const _AppBar(),
-      body: StreamListener<BodyState>(
-        stream: viewModel.bodyStateStream,
-        builder: (BuildContext context, BodyState data) {
-          return AnimatedSwitcher(
-            duration: const Duration(milliseconds: 200),
-            child: data.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              data: (List<ITileModel> models) {
-                return _ChatContextWrapper(
-                  child: _InheritedChatScreenContext(
-                    child: _Messages(
-                      models: models,
-                    ),
-                    state: this,
-                  ),
-                );
-              },
-            ),
-          );
-        },
-      ),
-      bottomNavigationBar: chatActionPanelFactory.create(),
+    return StreamListener<BodyState>(
+      stream: viewModel.bodyStateStream,
+      builder: (BuildContext context, BodyState data) {
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: data.when(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            data: (List<ITileModel> models) {
+              return _Messages(models: models);
+            },
+          ),
+        );
+      },
     );
   }
 }
 
+class _ActionsPanel extends StatelessWidget {
+  const _ActionsPanel();
+
+  @override
+  Widget build(BuildContext context) {
+    return ChatScreenScope.getChatActionPanelFactory(context).create();
+  }
+}
+
+// todo may be move to chat screen scope?
 class _ChatContextWrapper extends StatelessWidget {
   const _ChatContextWrapper({required this.child});
 
@@ -108,28 +90,6 @@ class _ChatContextWrapper extends StatelessWidget {
   }
 }
 
-class _InheritedChatScreenContext extends InheritedWidget {
-  const _InheritedChatScreenContext({
-    required super.child,
-    required _ChatPageState state,
-  }) : _state = state;
-
-  final _ChatPageState _state;
-
-  static _ChatPageState of(BuildContext context) {
-    final _ChatPageState? result = (context
-            .getElementForInheritedWidgetOfExactType<
-                _InheritedChatScreenContext>()
-            ?.widget as _InheritedChatScreenContext?)
-        ?._state;
-    assert(result != null, 'No _ChatPageState found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(_InheritedChatScreenContext oldWidget) => false;
-}
-
 class _Messages extends StatelessWidget {
   const _Messages({required this.models});
 
@@ -139,14 +99,15 @@ class _Messages extends StatelessWidget {
   Widget build(BuildContext context) {
     final MessageFactory messageFactory =
         ChatScreenScope.getMessageFactory(context);
-    final _ChatPageState state = _InheritedChatScreenContext.of(context);
+    final ChatWidgetModel widgetModel =
+        ChatScreenScope.getChatWidgetModel(context);
 
     return Scrollbar(
       child: ScrollablePositionedList.separated(
         // todo extract to config
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-        itemPositionsListener: state._itemPositionsListener,
-        itemScrollController: state._itemScrollController,
+        itemPositionsListener: widgetModel.itemPositionsListener,
+        itemScrollController: widgetModel.itemScrollController,
         reverse: true,
         itemCount: models.length,
         itemBuilder: (BuildContext context, int index) {

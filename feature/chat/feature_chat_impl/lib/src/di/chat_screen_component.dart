@@ -14,6 +14,7 @@ import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.d
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
+import 'package:feature_chat_impl/src/screen/chat/chat_widget_model.dart';
 import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_listener.dart';
 import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_menu_listener_impl.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
@@ -48,6 +49,8 @@ abstract class IChatScreenComponent {
   ChatActionBarViewModel getChatActionBarViewModel();
 
   ChatActionPanelFactory getChatActionPanelFactory();
+
+  ChatWidgetModel getChatWidgetModel();
 }
 
 @j.module
