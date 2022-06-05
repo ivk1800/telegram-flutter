@@ -1,4 +1,5 @@
 import 'package:core_arch_flutter/core_arch_flutter.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_impl/src/tile/message_sticker/message_sticker_bloc.dart';
 import 'package:feature_chat_impl/src/tile/message_sticker/message_sticker_scope.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
@@ -65,18 +66,7 @@ class _StickerBody extends StatelessWidget {
           return Image.file(loaded.file);
         },
         loadedAnimated: (MessageStickerStateLoadedAnimated loaded) {
-          return Center(
-            child: Stack(
-              alignment: Alignment.center,
-              children: const <Widget>[
-                Placeholder(),
-                Text(
-                  'Animated sticker not implemented',
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-          );
+          return tg.Sticker(file: loaded.file);
         },
       ),
     );

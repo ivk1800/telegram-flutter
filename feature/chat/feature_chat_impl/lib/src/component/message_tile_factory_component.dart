@@ -8,6 +8,7 @@ import 'package:feature_chat_impl/src/widget/factory/messages_tile_factory_facto
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:lottie_utils/lottie_utils.dart';
 import 'package:sticker_navigation_api/sticker_navigation_api.dart';
 import 'package:tile/tile.dart';
 
@@ -121,6 +122,12 @@ abstract class MessageTileFactoryModule {
   IStickersSetScreenRouter bindStickersSetScreenRouter(
     IChatScreenRouter router,
   );
+
+  // todo temporary
+  @j.provides
+  @j.singleton
+  static LottieStickerFileResolver provideLottieStickerFileResolver() =>
+      const LottieStickerFileResolver();
 }
 
 @j.componentBuilder

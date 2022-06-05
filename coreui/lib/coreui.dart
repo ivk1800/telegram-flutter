@@ -7,5 +7,6 @@ export 'src/search_app_bar.dart';
 export 'src/tg_appbar_factory.dart';
 export 'src/tg_switched_app_bar.dart';
 export 'src/widget/minithumbnail_widget.dart';
+export 'src/widget/sticker.dart';
 export 'src/widget/tg/block_interaction.dart';
 export 'src/widget/tg/tg_widget.dart';

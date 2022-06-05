@@ -1,0 +1,15 @@
+name: lottie_utils
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ^3.0.0
+
+dependencies:
+  archive: 3.3.0
+  path_provider: 2.0.9
+
+dev_dependencies:
+  dependency_validator: 3.2.0
+  tg_lint_rules:
+    path: ../tg_lint_rules
