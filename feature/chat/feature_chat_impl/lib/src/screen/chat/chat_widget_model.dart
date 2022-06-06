@@ -13,7 +13,7 @@ class ChatWidgetModel {
     final Stream<int> itemsCountStream = viewModel.bodyStateStream
         .where((BodyState event) => event is BodyData)
         .cast<BodyData>()
-        .map((BodyData data) => data.models.length);
+        .map((BodyData data) => data.messageBundle.length);
     _messagesScrollController = MessagesScrollController(
       onScrollToNewest: viewModel.onLoadNewestMessages,
       onScrollToOldest: viewModel.onLoadOldestMessages,

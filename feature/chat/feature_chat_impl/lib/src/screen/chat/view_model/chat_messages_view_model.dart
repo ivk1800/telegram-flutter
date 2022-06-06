@@ -6,6 +6,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
+import 'package:feature_chat_impl/src/screen/chat/messages_bundle.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:tile/tile.dart';
@@ -31,11 +32,14 @@ class ChatMessagesViewModel extends BaseViewModel {
   final IChatManager _chatManager;
   final IChatScreenRouter _router;
 
-  Stream<BodyState> get bodyStateStream => _messagesInteractor.messagesStream
-      .map<BodyState>(
-        (List<ITileModel> models) => BodyState.data(models: models),
-      )
-      .startWith(const BodyState.loading());
+  Stream<BodyState> get bodyStateStream =>
+      _messagesInteractor.messagesStream.map<BodyState>(
+        (List<ITileModel> models) {
+          return BodyState.data(
+            messageBundle: IMessagesBundle.fromList(models),
+          );
+        },
+      ).startWith(const BodyState.loading());
 
   void onLoadOldestMessages() => _messagesInteractor.loadOldestMessages();
 

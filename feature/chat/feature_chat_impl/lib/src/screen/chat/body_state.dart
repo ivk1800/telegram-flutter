@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tile/tile.dart';
+
+import 'messages_bundle.dart';
 
 part 'body_state.freezed.dart';
 
@@ -8,7 +9,6 @@ part 'body_state.freezed.dart';
 class BodyState with _$BodyState {
   const factory BodyState.loading() = _Loading;
 
-  const factory BodyState.data({
-    required List<ITileModel> models,
-  }) = BodyData;
+  const factory BodyState.data({required IMessagesBundle messageBundle}) =
+      BodyData;
 }

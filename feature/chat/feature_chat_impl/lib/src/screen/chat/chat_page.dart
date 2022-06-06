@@ -10,6 +10,7 @@ import 'package:tg_theme/tg_theme.dart';
 import 'package:tile/tile.dart';
 
 import 'message_factory.dart';
+import 'messages_bundle.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -52,8 +53,8 @@ class _Body extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           child: data.when(
             loading: () => const Center(child: CircularProgressIndicator()),
-            data: (List<ITileModel> models) {
-              return _Messages(models: models);
+            data: (IMessagesBundle messagesBundle) {
+              return _Messages(messagesBundle: messagesBundle);
             },
           ),
         );
@@ -91,9 +92,12 @@ class _ChatContextWrapper extends StatelessWidget {
 }
 
 class _Messages extends StatelessWidget {
-  const _Messages({required this.models});
+  const _Messages({
+    super.key,
+    required this.messagesBundle,
+  });
 
-  final List<ITileModel> models;
+  final IMessagesBundle messagesBundle;
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +113,9 @@ class _Messages extends StatelessWidget {
         itemPositionsListener: widgetModel.itemPositionsListener,
         itemScrollController: widgetModel.itemScrollController,
         reverse: true,
-        itemCount: models.length,
+        itemCount: messagesBundle.length,
         itemBuilder: (BuildContext context, int index) {
-          final ITileModel tileModel = models[index];
+          final ITileModel tileModel = messagesBundle[index];
           return messageFactory.create(
             context: context,
             model: tileModel,
