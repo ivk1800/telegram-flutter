@@ -1,5 +1,5 @@
+export '../message_animation/message_animation_tile_factory_delegate.dart';
 export 'message_animated_emoji_tile_factory_delegate.dart';
-export 'message_animation_tile_factory_delegate.dart';
 export 'message_audio_tile_factory_delegate.dart';
 export 'message_basic_group_chat_create_tile_factory_delegate.dart';
 export 'message_call_tile_factory_delegate.dart';

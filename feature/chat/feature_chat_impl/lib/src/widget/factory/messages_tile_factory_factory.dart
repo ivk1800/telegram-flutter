@@ -28,6 +28,7 @@ class MessagesTileFactoryFactory {
           shortInfoFactory: shortInfoFactory,
           replyInfoFactory: replyInfoFactory,
           chatMessageFactory: chatMessageFactory,
+          blocProvider: messageBlocProvider.messageAnimationBlocProvider,
         ),
         MessageAudioTileModel: MessageAudioTileFactoryDelegate(
           messageComponentResolver: messageComponentResolver,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:feature_chat_impl/src/tile/bloc/message_bloc.dart';
+import 'package:feature_chat_impl/src/tile/bloc/state_mixin.dart';
 import 'package:feature_chat_impl/src/tile/model/message_sticker_tile_model.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -11,8 +12,8 @@ import 'package:sticker_navigation_api/sticker_navigation_api.dart';
 
 import 'message_sticker_state.dart';
 
-class MessageStickerBloc
-    extends MessageBloc<MessageStickerTileModel, MessageStickerState> {
+class MessageStickerBloc extends MessageBloc<MessageStickerTileModel>
+    with StateMixin<MessageStickerTileModel, MessageStickerState> {
   @j.inject
   MessageStickerBloc({
     required IFileDownloader fileDownloader,

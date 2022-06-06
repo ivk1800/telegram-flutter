@@ -7,12 +7,14 @@ class MediaWrapper extends StatelessWidget {
   const MediaWrapper({
     super.key,
     required this.child,
-    required this.aspectRatio,
+    required this.width,
+    required this.height,
     required this.type,
   });
 
   final Widget child;
-  final double aspectRatio;
+  final double width;
+  final double height;
   final MediaType type;
 
   @override
@@ -27,7 +29,7 @@ class MediaWrapper extends StatelessWidget {
           maxHeight: mediaConstraint.height,
         ),
         child: AspectRatio(
-          aspectRatio: aspectRatio,
+          aspectRatio: width / height,
           child: child,
         ),
       ),

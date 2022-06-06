@@ -1,8 +1,9 @@
-import 'package:rich_text_format/rich_text_format.dart';
+import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
+import 'package:flutter/foundation.dart';
+import 'package:rich_text_format/rich_text_format.dart' as rt;
 import 'package:shared_models/shared_models.dart';
 
-import 'base_conversation_message_tile_model.dart';
-
+@immutable
 class MessageAnimationTileModel extends BaseConversationMessageTileModel {
   const MessageAnimationTileModel({
     required super.id,
@@ -12,8 +13,14 @@ class MessageAnimationTileModel extends BaseConversationMessageTileModel {
     required super.additionalInfo,
     required this.minithumbnail,
     required this.caption,
+    required this.width,
+    required this.height,
+    required this.animationFileId,
   });
 
   final Minithumbnail? minithumbnail;
-  final RichText? caption;
+  final double width;
+  final double height;
+  final rt.RichText? caption;
+  final int animationFileId;
 }

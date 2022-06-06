@@ -1,4 +1,3 @@
-import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
@@ -44,7 +43,8 @@ class MessagePhotoTileFactoryDelegate
             imageId: model.photoId,
           ),
           // todo maybe crash
-          aspectRatio: model.minithumbnail!.aspectRatio(),
+          width: model.minithumbnail!.width,
+          height: model.minithumbnail!.height,
         ),
         if (model.caption != null)
           MessageCaption(

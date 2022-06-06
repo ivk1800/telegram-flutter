@@ -59,6 +59,9 @@ class MessageTileMapper {
           isOutgoing: message.isOutgoing,
           caption: _formattedTextResolver.resolve(value.caption),
           minithumbnail: value.animation.minithumbnail?.toMinithumbnail(),
+          width: value.animation.width.toDouble(),
+          height: value.animation.height.toDouble(),
+          animationFileId: value.animation.animation.id,
         );
       },
       messageAudio: (td.MessageAudio value) async {
