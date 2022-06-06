@@ -16,7 +16,6 @@ class MessagePaymentSuccessfulTileFactoryDelegate
   @override
   Widget create(BuildContext context, MessagePaymentSuccessfulTileModel model) {
     return _chatMessageFactory.create(
-      id: model.id,
       context: context,
       isOutgoing: model.isOutgoing,
       body: NotImplementedWidget(type: model.type),

@@ -28,6 +28,7 @@ class MessageFactory implements IInteractableMessageFactory {
   }) {
     if (model is BaseConversationMessageTileModel) {
       return MessagePopupMenuArea(
+        key: ValueKey<int>(model.id),
         messageId: model.id,
         listener: _popupMenuListener,
         child: _Leading(
@@ -39,6 +40,7 @@ class MessageFactory implements IInteractableMessageFactory {
 
     if (model is BaseMessageTileModel) {
       return MessagePopupMenuArea(
+        key: ValueKey<int>(model.id),
         messageId: model.id,
         listener: _popupMenuListener,
         child: _Leading(

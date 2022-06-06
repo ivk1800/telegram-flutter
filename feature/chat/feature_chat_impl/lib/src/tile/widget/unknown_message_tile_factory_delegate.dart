@@ -16,7 +16,6 @@ class UnknownMessageTileFactoryDelegate
   @override
   Widget create(BuildContext context, UnknownMessageTileModel model) {
     return _chatMessageFactory.create(
-      id: model.id,
       context: context,
       isOutgoing: model.isOutgoing,
       body: NotImplementedWidget(type: model.type),

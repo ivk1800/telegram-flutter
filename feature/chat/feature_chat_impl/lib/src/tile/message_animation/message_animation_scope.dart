@@ -9,11 +9,11 @@ import 'message_animation_dependencies.dart';
 
 class MessageAnimationScope extends StatefulWidget {
   const MessageAnimationScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.create,
     required this.model,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final MessageAnimationTileModel model;
@@ -76,11 +76,9 @@ class _MessageAnimationScopeState extends State<MessageAnimationScope> {
 
 class _InheritedScope extends InheritedWidget {
   const _InheritedScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required _MessageAnimationScopeState holderState,
-  })  : _state = holderState,
-        super(key: key, child: child);
+  }) : _state = holderState;
 
   final _MessageAnimationScopeState _state;
 

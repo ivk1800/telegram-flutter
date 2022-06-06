@@ -25,7 +25,6 @@ class MessageTextTileFactoryDelegate
   Widget create(BuildContext context, MessageTextTileModel model) {
     final ChatContextData chatContextData = ChatContext.of(context);
     return _chatMessageFactory.createConversationMessage(
-      id: model.id,
       isOutgoing: model.isOutgoing,
       context: context,
       senderTitle:

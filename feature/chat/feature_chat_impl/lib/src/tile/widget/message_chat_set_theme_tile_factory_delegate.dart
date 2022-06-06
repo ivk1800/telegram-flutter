@@ -16,7 +16,6 @@ class MessageChatSetThemeTileFactoryDelegate
   @override
   Widget create(BuildContext context, MessageChatSetThemeTileModel model) {
     return _chatMessageFactory.create(
-      id: model.id,
       context: context,
       isOutgoing: model.isOutgoing,
       body: NotImplementedWidget(type: model.type),

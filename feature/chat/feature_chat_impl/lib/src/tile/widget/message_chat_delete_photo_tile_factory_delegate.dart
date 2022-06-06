@@ -14,7 +14,6 @@ class MessageChatDeletePhotoTileFactoryDelegate
   @override
   Widget create(BuildContext context, MessageChatDeletePhotoTileModel model) {
     return _chatMessageFactory.createChatNotificationFromText(
-      id: model.id,
       context: context,
       text: model.title,
     );

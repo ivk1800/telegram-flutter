@@ -16,7 +16,6 @@ class MessageInvoiceTileFactoryDelegate
   @override
   Widget create(BuildContext context, MessageInvoiceTileModel model) {
     return _chatMessageFactory.create(
-      id: model.id,
       context: context,
       isOutgoing: model.isOutgoing,
       body: NotImplementedWidget(type: model.type),

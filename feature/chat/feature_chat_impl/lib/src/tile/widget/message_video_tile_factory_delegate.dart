@@ -29,7 +29,6 @@ class MessageVideoTileFactoryDelegate
   Widget create(BuildContext context, MessageVideoTileModel model) {
     final ChatContextData chatContextData = ChatContext.of(context);
     return _chatMessageFactory.createConversationMessage(
-      id: model.id,
       isOutgoing: model.isOutgoing,
       context: context,
       senderTitle: _messageComponentResolver.resolveSenderName(context, model),

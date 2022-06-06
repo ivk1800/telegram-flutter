@@ -12,7 +12,6 @@ class ChatMessageFactory {
   const ChatMessageFactory();
 
   Widget createChatNotificationFromText({
-    required int id,
     required BuildContext context,
     required rt.RichText text,
   }) {
@@ -20,7 +19,6 @@ class ChatMessageFactory {
     final ChatThemeData chatTheme = tgTheme.themeOf();
 
     return _Notification(
-      key: ValueKey<int>(id),
       child: Text.rich(
         text.toInlineSpan(context),
         textAlign: TextAlign.center,
@@ -63,34 +61,29 @@ class ChatMessageFactory {
   }
 
   Widget create({
-    required int id,
     required BuildContext context,
     required bool isOutgoing,
     required Widget body,
     bool withBubble = true,
   }) {
     return _BaseMessage(
-      id: id,
       alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
       body: withBubble ? _Bubble(isOutgoing: isOutgoing, child: body) : body,
     );
   }
 
   Widget createCustom({
-    required int id,
     required BuildContext context,
     required AlignmentGeometry alignment,
     required Widget body,
   }) {
     return _BaseMessage(
-      id: id,
       alignment: alignment,
       body: body,
     );
   }
 
   Widget createConversationMessage({
-    required int id,
     required BuildContext context,
     required Widget? reply,
     required Widget? senderTitle,
@@ -98,7 +91,6 @@ class ChatMessageFactory {
     required bool isOutgoing,
   }) {
     return createFromBlocks(
-      id: id,
       context: context,
       isOutgoing: isOutgoing,
       blocks: <Widget>[
@@ -110,14 +102,12 @@ class ChatMessageFactory {
   }
 
   Widget createFromBlocks({
-    required int id,
     required BuildContext context,
     required bool isOutgoing,
     required List<Widget> blocks,
     bool withBubble = true,
   }) {
     return _BaseMessage(
-      id: id,
       alignment: isOutgoing ? Alignment.topRight : Alignment.topLeft,
       body: withBubble
           ? _Bubble(
@@ -133,12 +123,10 @@ class ChatMessageFactory {
 
 class _BaseMessage extends StatelessWidget {
   const _BaseMessage({
-    required this.id,
     required this.alignment,
     required this.body,
   });
 
-  final int id;
   final AlignmentGeometry alignment;
   final Widget body;
 
@@ -146,7 +134,6 @@ class _BaseMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ChatContextData chatContext = ChatContext.of(context);
     return Align(
-      key: ValueKey<int>(id),
       alignment: alignment,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: chatContext.maxWidth),
@@ -183,10 +170,7 @@ class _Bubble extends StatelessWidget {
 }
 
 class _Notification extends StatelessWidget {
-  const _Notification({
-    required this.child,
-    super.key,
-  });
+  const _Notification({required this.child});
 
   final Widget child;
 

@@ -16,7 +16,6 @@ class MessageGameScoreTileFactoryDelegate
   @override
   Widget create(BuildContext context, MessageGameScoreTileModel model) {
     return _chatMessageFactory.create(
-      id: model.id,
       context: context,
       isOutgoing: model.isOutgoing,
       body: NotImplementedWidget(type: model.type),

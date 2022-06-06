@@ -16,7 +16,6 @@ class MessagePollTileFactoryDelegate
   @override
   Widget create(BuildContext context, MessagePollTileModel model) {
     return _chatMessageFactory.create(
-      id: model.id,
       context: context,
       isOutgoing: model.isOutgoing,
       body: NotImplementedWidget(type: model.type),

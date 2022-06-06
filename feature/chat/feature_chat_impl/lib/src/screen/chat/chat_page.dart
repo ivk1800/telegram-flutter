@@ -92,10 +92,7 @@ class _ChatContextWrapper extends StatelessWidget {
 }
 
 class _Messages extends StatelessWidget {
-  const _Messages({
-    super.key,
-    required this.messagesBundle,
-  });
+  const _Messages({required this.messagesBundle});
 
   final IMessagesBundle messagesBundle;
 

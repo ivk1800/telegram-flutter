@@ -13,7 +13,7 @@ import 'package:shared_models/shared_models.dart';
 import 'message_animation_bloc.dart';
 
 class MessageAnimation extends StatelessWidget {
-  const MessageAnimation({Key? key}) : super(key: key);
+  const MessageAnimation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,6 @@ class MessageAnimation extends StatelessWidget {
     final ChatContextData chatContextData = ChatContext.of(context);
 
     return chatMessageFactory.createConversationMessage(
-      id: model.id,
       context: context,
       isOutgoing: model.isOutgoing,
       senderTitle: null,
@@ -69,10 +68,7 @@ class MessageAnimation extends StatelessWidget {
 }
 
 class _MediaBody extends StatelessWidget {
-  const _MediaBody({
-    Key? key,
-    required this.state,
-  }) : super(key: key);
+  const _MediaBody({required this.state});
 
   final MediaState state;
 

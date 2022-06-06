@@ -18,7 +18,6 @@ class MessageSticker extends StatelessWidget {
         MessageStickerScope.getChatMessageFactory(context);
 
     return chatMessageFactory.createFromBlocks(
-      id: bloc.id,
       context: context,
       isOutgoing: bloc.isOutgoing,
       withBubble: false,

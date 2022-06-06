@@ -16,7 +16,6 @@ class MessageChatChangePhotoTileFactoryDelegate
   @override
   Widget create(BuildContext context, MessageChatChangePhotoTileModel model) {
     return _chatMessageFactory.createCustom(
-      id: model.id,
       context: context,
       alignment: Alignment.center,
       body: Column(

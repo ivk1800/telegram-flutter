@@ -14,7 +14,6 @@ class MessageChatSetTtlTileFactoryDelegate
   @override
   Widget create(BuildContext context, MessageChatSetTtlTileModel model) {
     return _chatMessageFactory.createChatNotificationFromText(
-      id: model.id,
       context: context,
       text: model.title,
     );

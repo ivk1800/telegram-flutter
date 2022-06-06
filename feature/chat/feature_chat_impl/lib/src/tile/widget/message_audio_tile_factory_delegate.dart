@@ -27,7 +27,6 @@ class MessageAudioTileFactoryDelegate
     final ChatContextData chatContext = ChatContext.of(context);
     final ThemeData theme = Theme.of(context);
     return _chatMessageFactory.createConversationMessage(
-      id: model.id,
       isOutgoing: model.isOutgoing,
       context: context,
       senderTitle: _messageComponentResolver.resolveSenderName(context, model),

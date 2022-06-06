@@ -32,7 +32,6 @@ class MessageContactTileFactoryDelegate
     // todo move to config
     const double maxWidth = 220;
     return _chatMessageFactory.createConversationMessage(
-      id: model.id,
       isOutgoing: model.isOutgoing,
       context: context,
       senderTitle: _messageComponentResolver.resolveSenderName(context, model),

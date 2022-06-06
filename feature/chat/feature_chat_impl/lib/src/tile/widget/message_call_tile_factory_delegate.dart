@@ -24,7 +24,6 @@ class MessageCallTileFactoryDelegate
     final ChatContextData contextData = ChatContext.of(context);
 
     return _chatMessageFactory.createConversationMessage(
-      id: model.id,
       isOutgoing: model.isOutgoing,
       context: context,
       senderTitle: _messageComponentResolver.resolveSenderName(context, model),
