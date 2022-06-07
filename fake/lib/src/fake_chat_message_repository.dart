@@ -49,4 +49,12 @@ class FakeChatMessageRepository implements IChatMessageRepository {
   }) async {
     return 1;
   }
+
+  @override
+  Future<void> deleteMessages({
+    required int chatId,
+    required List<int> messageIds,
+  }) {
+    return Completer<void>().future;
+  }
 }

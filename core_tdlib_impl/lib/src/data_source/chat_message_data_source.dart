@@ -122,4 +122,16 @@ class ChatMessageDataSource {
             ),
           )
           .then((td.Count value) => value.count);
+
+  Future<void> deleteMessages({
+    required int chatId,
+    required List<int> messageIds,
+  }) =>
+      _functionExecutor.send<td.Ok>(
+        td.DeleteMessages(
+          chatId: chatId,
+          messageIds: messageIds,
+          revoke: true,
+        ),
+      );
 }

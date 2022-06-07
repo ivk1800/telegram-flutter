@@ -407,4 +407,8 @@ This link opens a chat with you:
     <string lang="Copy">Copy</string>
     <!-- https://translations.telegram.org/en/android/general/Reply -->
     <string lang="Reply">Reply</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/DeleteSingleMessagesTitle -->
+    <string lang="DeleteSingleMessagesTitle">Delete message</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/AreYouSureDeleteSingleMessage -->
+    <string lang="AreYouSureDeleteSingleMessage">Are you sure you want to delete this message?</string>
 </resources>

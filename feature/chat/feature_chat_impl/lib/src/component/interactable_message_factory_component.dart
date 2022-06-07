@@ -53,5 +53,5 @@ class _MessagePopupMenuListenerStub implements IMessagePopupMenuListener {
   void onWillShowPopupMenu(int messageId, IMessagePopupMenu popupMenu) {}
 
   @override
-  void onItemSelected(ItemAction item) {}
+  void onItemSelected(int messageId, ItemAction item) {}
 }

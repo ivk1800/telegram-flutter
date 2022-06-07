@@ -9,6 +9,7 @@ import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/chat_feature_dependencies.dmg.dart';
 import 'package:feature_chat_impl/src/chat_message_updates_handler.dart';
+import 'package:feature_chat_impl/src/di/chat_qualifiers.dart';
 import 'package:feature_chat_impl/src/interactor/chat_header_actions_intractor.dart';
 import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
@@ -316,6 +317,11 @@ abstract class ChatScreenModule {
         chatUpdatesProvider: chatUpdatesProvider,
         superGroupUpdatesProvider: superGroupUpdatesProvider,
       );
+
+  @j.provides
+  @j.singleton
+  @chatIdQualifier
+  static int provideChatId(ChatArgs args) => args.chatId;
 }
 
 @j.componentBuilder

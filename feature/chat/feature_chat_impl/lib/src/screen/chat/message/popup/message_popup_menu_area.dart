@@ -31,7 +31,9 @@ class _MessagePopupMenuAreaState extends State<MessagePopupMenuArea> {
             MessagePopupMenuImpl(onShow: show);
         widget.listener.onWillShowPopupMenu(widget.messageId, popupMenu);
       },
-      onSelected: widget.listener.onItemSelected,
+      onSelected: (ItemAction item) {
+        widget.listener.onItemSelected(widget.messageId, item);
+      },
       child: ColoredBox(
         color: Colors.transparent,
         child: widget.child,

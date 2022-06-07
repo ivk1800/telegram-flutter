@@ -394,4 +394,8 @@ abstract class IStringsProvider {
   String get copy;
 
   String get reply;
+
+  String get deleteSingleMessagesTitle;
+
+  String get areYouSureDeleteSingleMessage;
 }

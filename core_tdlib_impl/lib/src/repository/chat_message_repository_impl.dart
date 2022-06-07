@@ -56,4 +56,11 @@ class ChatMessageRepositoryImpl implements IChatMessageRepository {
         chatId: chatId,
         filter: filter,
       );
+
+  @override
+  Future<void> deleteMessages({
+    required int chatId,
+    required List<int> messageIds,
+  }) =>
+      _dataSource.deleteMessages(chatId: chatId, messageIds: messageIds);
 }

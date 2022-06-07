@@ -22,4 +22,9 @@ abstract class IChatMessageRepository {
     required int chatId,
     required td.SearchMessagesFilter filter,
   });
+
+  Future<void> deleteMessages({
+    required int chatId,
+    required List<int> messageIds,
+  });
 }
