@@ -45,7 +45,7 @@ class ChatMessagesInteractor {
 
   Future<void> init() async {
     _chatMessageUpdatesHandler.attach(
-      actualMessages: () => messages,
+      actualMessages: () => messages.toList(),
       onUpdated: _messagesSubject.add,
     );
     load(0);

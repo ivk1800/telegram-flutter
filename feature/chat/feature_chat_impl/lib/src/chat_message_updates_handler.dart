@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
+import 'package:feature_chat_impl/src/tile/model/base_message_tile_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:queue/queue.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
+/// Return copy of actual messages.
 typedef ActualMessages = List<ITileModel> Function();
 typedef UpdatedMessages = void Function(List<ITileModel> updatedMessages);
 
@@ -61,7 +63,7 @@ class ChatMessageUpdatesHandler {
       mentionRead: (td.UpdateMessageMentionRead value) {},
       sendAcknowledged: (td.UpdateMessageSendAcknowledged value) {},
       newMessage: (td.UpdateNewMessage value) {
-        if (_filterUpdate(value.message.chatId)) {
+        if (_isThisChat(value.message.chatId)) {
           _updatesQueue.enqueue(() async {
             _runIfAttached((
               UpdatedMessages updatedMessagesCallback,
@@ -76,11 +78,30 @@ class ChatMessageUpdatesHandler {
           });
         }
       },
-      updateDeleteMessages: (td.UpdateDeleteMessages value) {},
+      updateDeleteMessages: (td.UpdateDeleteMessages value) {
+        if (value.fromCache || !_isThisChat(value.chatId)) {
+          return;
+        }
+
+        _updatesQueue.enqueue(() async {
+          _runIfAttached((
+            UpdatedMessages updatedMessagesCallback,
+            List<ITileModel> actualMessages,
+          ) async {
+            final List<ITileModel> newList = actualMessages
+              ..removeWhere(
+                (ITileModel element) =>
+                    element is BaseMessageTileModel &&
+                    value.messageIds.contains(element.id),
+              );
+            updatedMessagesCallback.call(newList);
+          });
+        });
+      },
     );
   }
 
-  bool _filterUpdate(int chatId) => _chatId == chatId;
+  bool _isThisChat(int chatId) => _chatId == chatId;
 
   void _runIfAttached(
     Function(
