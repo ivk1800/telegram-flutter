@@ -37,7 +37,7 @@ class ChatMessagesInteractor {
   Stream<List<ITileModel>> get messagesStream => _messagesSubject;
 
   td.Message? _last;
-  bool _isCnBeLodOldest = true;
+  bool _isCanBeLodOldest = true;
   CancelableOperation<_Result>? _oldestMessagesOperation;
 
   List<ITileModel> get currentItems =>
@@ -52,7 +52,7 @@ class ChatMessagesInteractor {
   }
 
   void loadOldestMessages() {
-    if (_isCnBeLodOldest) {
+    if (_isCanBeLodOldest) {
       if (_last != null) {
         load(_last!.id);
       }
@@ -62,7 +62,7 @@ class ChatMessagesInteractor {
   void loadNewestMessages() {}
 
   void load(int fromMessageId) {
-    _isCnBeLodOldest = false;
+    _isCanBeLodOldest = false;
 
     if (currentItems.isNotEmpty) {
       _messagesSubject
@@ -79,7 +79,7 @@ class ChatMessagesInteractor {
 
       _messagesSubject.add(list);
       _last = result.messages.lastOrNull;
-      _isCnBeLodOldest = result.messages.isNotEmpty;
+      _isCanBeLodOldest = result.messages.isNotEmpty;
     });
   }
 

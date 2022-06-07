@@ -2,15 +2,12 @@ import 'package:chat_theme/chat_theme.dart';
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
-import 'package:feature_chat_impl/src/screen/chat/chat_widget_model.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tg_theme/tg_theme.dart';
-import 'package:tile/tile.dart';
 
-import 'message_factory.dart';
 import 'messages_bundle.dart';
+import 'messages_list.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -54,7 +51,7 @@ class _Body extends StatelessWidget {
           child: data.when(
             loading: () => const Center(child: CircularProgressIndicator()),
             data: (IMessagesBundle messagesBundle) {
-              return _Messages(messagesBundle: messagesBundle);
+              return MessagesList(messagesBundle: messagesBundle);
             },
           ),
         );
@@ -87,41 +84,6 @@ class _ChatContextWrapper extends StatelessWidget {
           child: child,
         );
       },
-    );
-  }
-}
-
-class _Messages extends StatelessWidget {
-  const _Messages({required this.messagesBundle});
-
-  final IMessagesBundle messagesBundle;
-
-  @override
-  Widget build(BuildContext context) {
-    final MessageFactory messageFactory =
-        ChatScreenScope.getMessageFactory(context);
-    final ChatWidgetModel widgetModel =
-        ChatScreenScope.getChatWidgetModel(context);
-
-    return Scrollbar(
-      child: ScrollablePositionedList.separated(
-        // todo extract to config
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-        itemPositionsListener: widgetModel.itemPositionsListener,
-        itemScrollController: widgetModel.itemScrollController,
-        reverse: true,
-        itemCount: messagesBundle.length,
-        itemBuilder: (BuildContext context, int index) {
-          final ITileModel tileModel = messagesBundle[index];
-          return messageFactory.create(
-            context: context,
-            model: tileModel,
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(height: 8.0);
-        },
-      ),
     );
   }
 }
