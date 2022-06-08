@@ -181,8 +181,10 @@ abstract class FeatureModule {
     IChatMessagesUpdatesProvider chatMessagesUpdatesProvider,
     IChatManager chatManager,
     IErrorTransformer errorTransformer,
+    OptionsManager optionsManager,
   ) =>
       ChatFeatureDependencies(
+        optionsManager: optionsManager,
         errorTransformer: errorTransformer,
         chatManager: chatManager,
         chatMessagesUpdatesProvider: chatMessagesUpdatesProvider,

@@ -1,6 +1,7 @@
 library feature_chat_impl;
 
 import 'package:chat_manager_api/chat_manager_api.dart';
+import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:dmg_annotation/dmg_annotation.dart';
@@ -36,6 +37,7 @@ class ChatFeatureDependencies {
     required this.chatMessagesUpdatesProvider,
     required this.chatManager,
     required this.errorTransformer,
+    required this.optionsManager,
   });
 
   final IChatRepository chatRepository;
@@ -57,4 +59,5 @@ class ChatFeatureDependencies {
   final IChatMessagesUpdatesProvider chatMessagesUpdatesProvider;
   final IChatManager chatManager;
   final IErrorTransformer errorTransformer;
+  final OptionsManager optionsManager;
 }

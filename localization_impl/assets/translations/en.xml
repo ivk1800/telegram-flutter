@@ -411,4 +411,8 @@ This link opens a chat with you:
     <string lang="DeleteSingleMessagesTitle">Delete message</string>
     <!-- https://translations.telegram.org/en/android/private_chats/AreYouSureDeleteSingleMessage -->
     <string lang="AreYouSureDeleteSingleMessage">Are you sure you want to delete this message?</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/ChatYourSelfTitle -->
+    <string lang="ChatYourSelfTitle">Your cloud storage</string>
+    <!-- https://translations.telegram.org/en/android/private_chats/NoMessages -->
+    <string lang="NoMessages">No messages here yet...</string>
 </resources>

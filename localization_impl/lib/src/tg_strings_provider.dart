@@ -624,6 +624,12 @@ class TgStringsProvider implements IStringsProvider {
   String get areYouSureDeleteSingleMessage =>
       _get('AreYouSureDeleteSingleMessage');
 
+  @override
+  String get chatYourSelfTitle => _get('ChatYourSelfTitle');
+
+  @override
+  String get noMessages => _get('NoMessages');
+
   String _get(String key) => _stringGetter.call(key);
 
   String _getFormatted(String key, List<dynamic> args) =>

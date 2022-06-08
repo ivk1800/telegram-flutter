@@ -53,6 +53,10 @@ class _Body extends StatelessWidget {
             data: (IMessagesBundle messagesBundle) {
               return MessagesList(messagesBundle: messagesBundle);
             },
+            empty: () {
+              return ChatScreenScope.getEmptyChatWidgetFactory(context)
+                  .create();
+            },
           ),
         );
       },

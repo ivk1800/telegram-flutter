@@ -1,6 +1,7 @@
 import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_info/chat_info.dart';
 import 'package:chat_manager_api/chat_manager_api.dart';
+import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart' as tg;
@@ -16,6 +17,7 @@ import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_widget_model.dart';
+import 'package:feature_chat_impl/src/screen/chat/empty_chat/empty_chat_widget_factory.dart';
 import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_listener.dart';
 import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_menu_listener_impl.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
@@ -52,6 +54,15 @@ abstract class IChatScreenComponent {
   ChatActionPanelFactory getChatActionPanelFactory();
 
   ChatWidgetModel getChatWidgetModel();
+
+  EmptyChatWidgetFactory getEmptyWidgetFactory();
+
+  @chatIdQualifier
+  int get chatId;
+
+  IChatRepository get chatRepository;
+
+  OptionsManager get optionsManager;
 }
 
 @j.module

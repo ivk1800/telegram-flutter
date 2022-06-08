@@ -398,4 +398,8 @@ abstract class IStringsProvider {
   String get deleteSingleMessagesTitle;
 
   String get areYouSureDeleteSingleMessage;
+
+  String get chatYourSelfTitle;
+
+  String get noMessages;
 }

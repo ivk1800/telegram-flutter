@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'chat_widget_model.dart';
+import 'empty_chat/empty_chat_widget_factory.dart';
 import 'message_factory.dart';
 
 class ChatScreenScope extends StatefulWidget {
@@ -47,9 +48,17 @@ class ChatScreenScope extends StatefulWidget {
 
   static ChatWidgetModel getChatWidgetModel(BuildContext context) =>
       _InheritedScope.of(context)._chatWidgetModel;
+
+  static EmptyChatWidgetFactory getEmptyChatWidgetFactory(
+    BuildContext context,
+  ) =>
+      _InheritedScope.of(context)._emptyStateWidgetFactory;
 }
 
 class _ChatScreenScopeState extends State<ChatScreenScope> {
+  late final EmptyChatWidgetFactory _emptyStateWidgetFactory =
+      _component.getEmptyWidgetFactory();
+
   late final IChatScreenComponent _component = widget.create.call();
 
   late final ChatWidgetModel _chatWidgetModel = _component.getChatWidgetModel();

@@ -19,6 +19,8 @@ dependencies:
     path: ../chat_navigation_api
   chat_theme:
     path: ../chat_theme
+  core:
+    path: ../../../core
   core_arch:
     path: ../../../core_arch
   core_arch_flutter:

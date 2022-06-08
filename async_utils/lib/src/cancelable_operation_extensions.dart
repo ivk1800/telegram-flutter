@@ -10,6 +10,12 @@ extension CancelableOperationExt<T> on CancelableOperation<T> {
     });
   }
 
+  CancelableOperation<R> map<R>(FutureOr<R> Function(T value) callback) {
+    return then((T result) {
+      return callback.call(result);
+    });
+  }
+
   CancelableOperation<T> onError(void Function(Object error) callback) {
     return then(
       (T result) => result,

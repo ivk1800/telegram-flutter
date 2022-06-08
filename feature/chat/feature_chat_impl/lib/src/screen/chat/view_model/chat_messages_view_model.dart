@@ -35,6 +35,10 @@ class ChatMessagesViewModel extends BaseViewModel {
   Stream<BodyState> get bodyStateStream =>
       _messagesInteractor.messagesStream.map<BodyState>(
         (List<ITileModel> models) {
+          if (models.isEmpty) {
+            return const BodyState.empty();
+          }
+
           return BodyState.data(
             messageBundle: IMessagesBundle.fromList(models),
           );
