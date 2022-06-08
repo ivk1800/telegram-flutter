@@ -1,8 +1,10 @@
 import 'package:app/src/di/module/app_module.dart';
+import 'package:app/src/di/module/app_navigation_module.dart';
 import 'package:app/src/di/module/data_module.dart';
 import 'package:app/src/di/module/td_module.dart';
 import 'package:app/src/di/module/theme_module.dart';
 import 'package:app/src/feature/feature_provider.dart';
+import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app/src/widget/block_interaction_manager.dart';
@@ -28,6 +30,7 @@ import 'package:theme_manager_flutter/theme_manager_flutter.dart';
     DataModule,
     TdModule,
     ThemeModule,
+    AppNavigationModule,
   ],
 )
 abstract class IAppComponent {
@@ -128,6 +131,8 @@ abstract class IAppComponent {
   ILogger get logger;
 
   IFileDownloader get fileDownloader;
+
+  CommonScreenRouterImpl get commonScreenRouter;
 }
 
 @j.componentBuilder

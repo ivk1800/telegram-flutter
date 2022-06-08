@@ -31,6 +31,7 @@ import 'package:tg_logger_api/tg_logger_api.dart';
 import 'chat_router_delegate.dart';
 import 'navigation_router.dart';
 
+// TODO rename, remove Impl from class name
 class CommonScreenRouterImpl
     implements
         IFoldersRouter,
