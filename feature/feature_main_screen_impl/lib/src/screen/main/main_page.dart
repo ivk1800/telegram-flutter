@@ -340,9 +340,10 @@ class _MainDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.of(context).pop();
+              viewModel.onMenuItemTap(m.MenuItem.savedMessages);
             },
             leading: const Icon(Icons.bookmark_border),
-            title: const Text('Saved Messages'),
+            title: Text(stringsProvider.savedMessages),
           ),
           ListTile(
             onTap: () {

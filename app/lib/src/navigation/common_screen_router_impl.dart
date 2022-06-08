@@ -1,5 +1,6 @@
 import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/key_generator.dart';
+import 'package:core/core.dart';
 import 'package:dialog_api/dialog_api.dart' as dialog_api;
 import 'package:dialog_api/dialog_api.dart';
 import 'package:dialog_api_flutter/dialog_api_flutter.dart';
@@ -57,17 +58,20 @@ class CommonScreenRouterImpl
     required FeatureProvider featureProvider,
     required KeyGenerator keyGenerator,
     required ChatRouterDelegate chatRouterDelegate,
+    required MyChatProvider myChatProvider,
     required ILogger logger,
   })  : _navigationDelegate = navigationDelegate,
         _dialogNavigatorKey = dialogNavigatorKey,
         _keyGenerator = keyGenerator,
         _chatRouterDelegate = chatRouterDelegate,
+        _myChatProvider = myChatProvider,
         _dialogRouter = DialogRouterImpl(
           dialogNavigatorKey: dialogNavigatorKey,
           logger: logger,
         ),
         _featureProvider = featureProvider;
 
+  final MyChatProvider _myChatProvider;
   final ISplitNavigationDelegate _navigationDelegate;
   final FeatureProvider _featureProvider;
   final ChatRouterDelegate _chatRouterDelegate;
@@ -441,5 +445,11 @@ class CommonScreenRouterImpl
   @override
   void close() {
     throw Exception('not allowed here, you must implement router for screen');
+  }
+
+  @override
+  void toSavedMessages() {
+    // TODO not controls of future result
+    _myChatProvider.myChatId.then(toChat);
   }
 }

@@ -402,4 +402,6 @@ abstract class IStringsProvider {
   String get chatYourSelfTitle;
 
   String get noMessages;
+
+  String get savedMessages;
 }

@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -71,5 +72,16 @@ abstract class TdModule {
   static ITdFunctionExecutor provideTdFunctionExecutor(TdClient client) =>
       TdFunctionExecutor(
         client: client,
+      );
+
+  @j.singleton
+  @j.provides
+  static MyChatProvider provideMyChatProvider(
+    ITdFunctionExecutor functionExecutor,
+    OptionsManager optionsManager,
+  ) =>
+      MyChatProvider(
+        functionExecutor: functionExecutor,
+        optionsManager: optionsManager,
       );
 }

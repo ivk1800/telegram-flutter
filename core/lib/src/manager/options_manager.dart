@@ -1,6 +1,7 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:tdlib/td_api.dart' as td;
 
+// TODO move to core-td module
 class OptionsManager {
   const OptionsManager({
     required ITdFunctionExecutor functionExecutor,

@@ -788,8 +788,10 @@ abstract class FeatureModule {
     KeyGenerator keyGenerator,
     ChatRouterDelegate chatRouterDelegate,
     ILogger logger,
+    MyChatProvider myChatProvider,
   ) =>
       CommonScreenRouterImpl(
+        myChatProvider: myChatProvider,
         logger: logger,
         chatRouterDelegate: chatRouterDelegate,
         dialogNavigatorKey: TgApp.navigatorKey,

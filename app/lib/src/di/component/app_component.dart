@@ -119,7 +119,9 @@ abstract class IAppComponent {
 
   ThemeDataResolver getThemeDataResolver();
 
-  // endregion
+  // endregion theme
+
+  MyChatProvider get myChatProvider;
 
   IChatManager get chatManager;
 

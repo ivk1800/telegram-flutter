@@ -28,6 +28,9 @@ class MainViewModel extends BaseViewModel {
       case MenuItem.contacts:
         _router.toContacts();
         break;
+      case MenuItem.savedMessages:
+        _router.toSavedMessages();
+        break;
     }
   }
 

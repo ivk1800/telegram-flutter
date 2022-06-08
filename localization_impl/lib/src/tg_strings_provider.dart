@@ -630,6 +630,9 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get noMessages => _get('NoMessages');
 
+  @override
+  String get savedMessages => _get('SavedMessages');
+
   String _get(String key) => _stringGetter.call(key);
 
   String _getFormatted(String key, List<dynamic> args) =>

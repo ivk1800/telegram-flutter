@@ -83,4 +83,7 @@ class _Router implements IMainScreenRouter {
 
   @override
   void toSettings() {}
+
+  @override
+  void toSavedMessages() {}
 }

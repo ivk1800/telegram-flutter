@@ -415,4 +415,6 @@ This link opens a chat with you:
     <string lang="ChatYourSelfTitle">Your cloud storage</string>
     <!-- https://translations.telegram.org/en/android/private_chats/NoMessages -->
     <string lang="NoMessages">No messages here yet...</string>
+    <!-- https://translations.telegram.org/en/android/chat_list/SavedMessages -->
+    <string lang="SavedMessages">Saved Messages</string>
 </resources>
