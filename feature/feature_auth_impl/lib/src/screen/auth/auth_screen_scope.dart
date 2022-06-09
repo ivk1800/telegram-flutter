@@ -1,69 +1,52 @@
+import 'package:core_arch_flutter/core_arch_flutter.dart';
+import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_auth_impl/src/di/auth_screen_component.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'auth_screen_vidget_model.dart';
-import 'view_model/auth_view_model.dart';
 
-class AuthScreenScope extends StatefulWidget {
-  const AuthScreenScope({
+class AuthScreenScope extends BaseScope<_AuthScreenScopeDelegate> {
+  AuthScreenScope({
     super.key,
-    required this.child,
-    required this.create,
-  });
-
-  final Widget child;
-  final IAuthScreenComponent Function() create;
-
-  @override
-  State<AuthScreenScope> createState() => _AuthScreenScopeState();
+    required super.child,
+    required IAuthScreenComponent Function() create,
+  }) : super(
+          create: () => _AuthScreenScopeDelegate(component: create.call()),
+        );
 
   static IStringsProvider getStringsProvider(BuildContext context) =>
-      _InheritedScope.of(context)._stringsProvider;
+      BaseScope.getScopeDelegate<_AuthScreenScopeDelegate>(context)
+          ._stringsProvider;
 
   static AuthScreenWidgetModel getAuthScreenWidgetModel(BuildContext context) =>
-      _InheritedScope.of(context)._authScreenWidgetModel;
+      BaseScope.getScopeDelegate<_AuthScreenScopeDelegate>(context)
+          ._authScreenWidgetModel;
+
+  static tg.TgAppBarFactory getTgAppBarFactory(BuildContext context) =>
+      BaseScope.getScopeDelegate<_AuthScreenScopeDelegate>(context)
+          ._tgAppBarFactory;
 }
 
-class _AuthScreenScopeState extends State<AuthScreenScope> {
-  late final IAuthScreenComponent _component = widget.create.call();
+class _AuthScreenScopeDelegate extends ScopeDelegate {
+  _AuthScreenScopeDelegate({
+    required IAuthScreenComponent component,
+  }) : _component = component;
 
-  late final AuthViewModel _viewModel = _component.getAuthViewModel();
+  final IAuthScreenComponent _component;
+
   late final AuthScreenWidgetModel _authScreenWidgetModel =
       _component.getAuthScreenWidgetModel();
+
   late final IStringsProvider _stringsProvider =
       _component.getStringsProvider();
 
-  @override
-  Widget build(BuildContext context) {
-    return _InheritedScope(state: this, child: widget.child);
-  }
+  late final tg.TgAppBarFactory _tgAppBarFactory =
+      _component.getTgAppBarFactory();
 
   @override
-  void dispose() {
-    _viewModel.dispose();
-    _authScreenWidgetModel.dispose();
-    super.dispose();
+  void onDispose() {
+    _component.scopeDisposer.dispose();
+    super.onDispose();
   }
-}
-
-class _InheritedScope extends InheritedWidget {
-  const _InheritedScope({
-    required super.child,
-    required _AuthScreenScopeState state,
-  }) : _state = state;
-
-  final _AuthScreenScopeState _state;
-
-  static _AuthScreenScopeState of(BuildContext context) {
-    final _AuthScreenScopeState? result = (context
-            .getElementForInheritedWidgetOfExactType<_InheritedScope>()
-            ?.widget as _InheritedScope?)
-        ?._state;
-    assert(result != null, 'No AuthScreenScope found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(_InheritedScope oldWidget) => false;
 }

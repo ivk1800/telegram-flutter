@@ -4,6 +4,7 @@ import 'package:dialog_api/dialog_api.dart';
 import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_auth_impl/feature_auth_impl.dart';
 import 'package:feature_country_api/feature_country_api.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
@@ -11,7 +12,9 @@ import 'package:tdlib/td_api.dart' as td;
 import 'auth_action.dart';
 import 'auth_state.dart';
 
+@j.singleton
 class AuthViewModel extends BaseViewModel {
+  @j.inject
   AuthViewModel({
     required IStringsProvider stringsProvider,
     required IAuthFeatureRouter router,

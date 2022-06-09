@@ -14,10 +14,14 @@ dependencies:
     path: ../../core_arch_flutter
   core_tdlib_api:
     path: ../../core_tdlib_api
+  core_ui_jugger:
+    path: ../../core_ui_jugger
   coreui:
     path: ../../coreui
   dialog_api:
     path: ../../dialog_api
+  dmg_annotation:
+    path: ../../dependencies_module_generator/dmg_annotation
   error_transformer_api:
     path: ../../error_transformer_api
   feature_auth_api:
@@ -35,6 +39,8 @@ dependencies:
 
 dev_dependencies:
   build_runner: 2.1.7
+  dependencies_module_generator:
+    path: ../../dependencies_module_generator/generator
   dependency_validator: 3.2.0
   freezed: 1.1.1
   jugger_generator: 2.3.0

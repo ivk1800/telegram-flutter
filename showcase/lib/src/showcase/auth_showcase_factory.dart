@@ -34,8 +34,6 @@ class AuthShowcaseFactory {
     final AuthFeature authFeature = AuthFeature(
       dependencies: AuthFeatureDependencies(
         errorTransformer: const FakeErrorTransformer(),
-        authenticationStateUpdatesProvider:
-            FakeAuthenticationStateUpdatesProvider(),
         connectionStateProvider: const FakeConnectionStateProvider(),
         authenticationManager: FakeAuthenticationManager(
           phoneNumberCallback: (String phone) async {

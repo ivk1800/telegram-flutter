@@ -386,7 +386,6 @@ abstract class FeatureModule {
     IConnectionStateProvider connectionStateProvider,
     IStringsProvider stringsProvider,
     IAuthFeatureRouter router,
-    IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
     ICountryFeatureApi countryFeatureApi,
     IAuthenticationManager authenticationManager,
     IErrorTransformer errorTransformer,
@@ -396,7 +395,6 @@ abstract class FeatureModule {
         connectionStateProvider: connectionStateProvider,
         stringsProvider: stringsProvider,
         router: router,
-        authenticationStateUpdatesProvider: authenticationStateUpdatesProvider,
         countryRepository: countryFeatureApi.countryRepository,
         authenticationManager: authenticationManager,
       );
