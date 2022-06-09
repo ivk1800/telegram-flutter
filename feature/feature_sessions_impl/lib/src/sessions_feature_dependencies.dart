@@ -1,8 +1,10 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:dmg_annotation/dmg_annotation.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'screen/sessions/sessions_screen_router.dart';
 
+@dependencies
 class SessionsFeatureDependencies {
   SessionsFeatureDependencies({
     required this.stringsProvider,

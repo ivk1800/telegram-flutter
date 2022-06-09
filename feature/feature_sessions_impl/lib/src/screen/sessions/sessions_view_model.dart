@@ -3,8 +3,11 @@ import 'package:dialog_api/dialog_api.dart';
 import 'package:feature_sessions_impl/feature_sessions_impl.dart';
 import 'package:feature_sessions_impl/src/screen/sessions/sessions_interactor.dart';
 import 'package:feature_sessions_impl/src/screen/sessions/sessions_state.dart';
+import 'package:jugger/jugger.dart' as j;
 
+@j.singleton
 class SessionsViewModel extends BaseViewModel {
+  @j.inject
   SessionsViewModel({
     required SessionsInteractor sessionsInteractor,
     required ISessionsScreenRouter router,
