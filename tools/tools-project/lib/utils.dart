@@ -17,7 +17,7 @@ Future<List<DartProject>> getDartProjects(String directory) async {
             entity is File && entity.path.endsWith('pubspec.yaml'),
       );
 
-  final Iterable<Future<DartProject>> futures = pubspecEntities.map(
+  final Iterable<Future<DartProject>> projectsFutures = pubspecEntities.map(
     (FileSystemEntity e) async {
       final String lines =
           await File(e.path).openRead().map(utf8.decode).single;
@@ -58,5 +58,7 @@ Future<List<DartProject>> getDartProjects(String directory) async {
       );
     },
   );
-  return Future.wait(futures);
+  final List<DartProject> projects = await Future.wait(projectsFutures);
+  return projects
+    ..sort((DartProject a, DartProject b) => a.name.compareTo(b.name));
 }

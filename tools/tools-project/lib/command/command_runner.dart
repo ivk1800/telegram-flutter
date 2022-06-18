@@ -10,34 +10,61 @@ import 'command.dart';
 Future<void> runCommands({
   required List<Command> commands,
   required bool withOutputs,
+  bool withRetry = true,
 }) async {
   int count = 0;
 
   final int startMillis = DateTime.now().millisecondsSinceEpoch;
 
-  await Stream<Command>.fromIterable(commands).flatMap<void>(
+  final List<_CommandResultWrapper> failedCommands =
+      (await Stream<Command>.fromIterable(commands)
+              .flatMap<_CommandResultWrapper>(
     (Command command) {
       TextPen()
         ..setColor(Color.YELLOW)
         ..text('start: ${command.name}')
         ..print();
-      return Stream<void>.fromFuture(
+      return Stream<_CommandResultWrapper>.fromFuture(
         _runCommand(
           workingDirectory: command.workingDirectory,
           executable: command.executable,
           arguments: command.arguments,
+          name: command.name,
+          throwOnFail: !withRetry,
           withOutputs: withOutputs,
-        ).then((void value) {
+        ).then((_CommandResult value) {
           TextPen()
             ..setColor(Color.GREEN)
             ..text('${++count}/${commands.length}: ${command.name}')
             ..print();
-          return value;
+          return _CommandResultWrapper(
+            command: command,
+            result: value,
+          );
         }),
       );
     },
-    maxConcurrent: Platform.numberOfProcessors,
-  ).toList();
+    maxConcurrent: 4,
+  ).toList())
+          .where(
+            (_CommandResultWrapper result) =>
+                result.result == _CommandResult.failed,
+          )
+          .toList();
+
+  if (failedCommands.isNotEmpty) {
+    TextPen()
+      ..setColor(Color.YELLOW)
+      ..text('retry...')
+      ..print();
+    await runCommands(
+      commands: failedCommands
+          .map((_CommandResultWrapper result) => result.command)
+          .toList(),
+      withOutputs: withOutputs,
+      withRetry: false,
+    );
+  }
 
   final int endMillis = DateTime.now().millisecondsSinceEpoch;
   final Duration duration = Duration(milliseconds: endMillis - startMillis);
@@ -55,13 +82,15 @@ String _printDuration(Duration duration) {
   return '${twoDigitMinutes}m, ${twoDigitSeconds}s';
 }
 
-Future<void> _runCommand({
+Future<_CommandResult> _runCommand({
   required String workingDirectory,
   required String executable,
+  required String name,
   required List<String> arguments,
   required bool withOutputs,
+  required bool throwOnFail,
 }) async {
-  final Completer<void> completer = Completer<void>();
+  final Completer<_CommandResult> completer = Completer<_CommandResult>();
 
   final Process process = await Process.start(
     executable,
@@ -88,18 +117,43 @@ Future<void> _runCommand({
     onDone: () async {
       final int exitCode = await process.exitCode;
       if (exitCode != 0) {
-        if (!withOutputs && lastOutputs.isNotEmpty) {
-          Console.write(lastOutputs.join('\n'));
+        if (throwOnFail) {
+          if (!withOutputs && lastOutputs.isNotEmpty) {
+            Console.write(lastOutputs.join('\n'));
+          }
+          completer.completeError('command finished with exit code $exitCode');
+        } else {
+          TextPen()
+            ..setColor(Color.RED)
+            ..text('failed: $name')
+            ..print();
+          completer.complete(_CommandResult.failed);
         }
-        completer.completeError('command finished with exit code $exitCode');
       } else {
-        completer.complete(null);
+        completer.complete(_CommandResult.success);
       }
     },
     onError: (Object error) {
-      completer.completeError(error);
+      completer.complete(_CommandResult.failed);
+      // completer.completeError(error);
     },
   );
 
   return completer.future;
+}
+
+class _CommandResultWrapper {
+  _CommandResultWrapper({
+    required this.command,
+    required this.result,
+  });
+
+  final _CommandResult result;
+
+  final Command command;
+}
+
+enum _CommandResult {
+  success,
+  failed,
 }
