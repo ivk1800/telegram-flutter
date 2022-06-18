@@ -28,7 +28,7 @@ dependencies:
     path: ../feature_create_new_chat_api
   flutter:
     sdk: flutter
-  jugger: 2.1.0
+  jugger: 2.2.0-dev.1
   localization_api:
     path: ../../localization_api
   provider: 6.0.2
@@ -36,6 +36,6 @@ dependencies:
 dev_dependencies:
   build_runner: 2.1.7
   dependency_validator: 3.2.0
-  jugger_generator: 2.3.0
+  jugger_generator: 2.4.0-dev.1
   tg_lint_rules:
     path: ../../tg_lint_rules

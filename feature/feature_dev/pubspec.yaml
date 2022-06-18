@@ -20,7 +20,7 @@ dependencies:
     path: ../feature_country_api
   flutter:
     sdk: flutter
-  jugger: 2.1.0
+  jugger: 2.2.0-dev.1
   rxdart: 0.27.3
   scrollable_positioned_list: 0.3.2
   showcase:
@@ -33,6 +33,6 @@ dependencies:
 dev_dependencies:
   build_runner: 2.1.7
   dependency_validator: 3.2.0
-  jugger_generator: 2.3.0
+  jugger_generator: 2.4.0-dev.1
   tg_lint_rules:
     path: ../../tg_lint_rules
