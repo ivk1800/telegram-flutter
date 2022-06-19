@@ -9,6 +9,7 @@ analyzer:
     - "**/*.mocks.dart"
     - "**/*.jugger.dart"
     - "**/*.dmg.dart"
+    - "**/*.scope.dart"
 
   strong-mode:
     implicit-casts: false

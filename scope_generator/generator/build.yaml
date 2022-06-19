@@ -1,0 +1,9 @@
+builders:
+  scope_generator:
+    import: "package:scope_generator/builder.dart"
+    builder_factories:
+      - "scopeGenerator"
+    build_extensions: { ".dart": [".scope.dart"] }
+    auto_apply: dependents
+    build_to: source
+    runs_before: ["jugger_generator"]

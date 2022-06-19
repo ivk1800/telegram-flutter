@@ -3,6 +3,7 @@
 *.freezed.dart
 *.mocks.dart
 *.dmg.dart
+*.scope.dart
 .metadata
 *.g.dart
 /tdlib
