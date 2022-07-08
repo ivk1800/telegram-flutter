@@ -9,6 +9,7 @@ import 'view_model/auth_state.dart';
 import 'view_model/auth_view_model.dart';
 
 @j.singleton
+@j.disposable
 class AuthScreenWidgetModel {
   @j.inject
   AuthScreenWidgetModel({

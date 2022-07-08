@@ -13,6 +13,7 @@ import 'auth_action.dart';
 import 'auth_state.dart';
 
 @j.singleton
+@j.disposable
 class AuthViewModel extends BaseViewModel {
   @j.inject
   AuthViewModel({
