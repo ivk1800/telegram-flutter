@@ -16,8 +16,7 @@ import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.d
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
-import 'package:feature_chat_impl/src/screen/chat/chat_widget_model.dart';
-import 'package:feature_chat_impl/src/screen/chat/empty_chat/empty_chat_widget_factory.dart';
+import 'package:feature_chat_impl/src/screen/chat/chat_screen_scope_delegate.dart';
 import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_listener.dart';
 import 'package:feature_chat_impl/src/screen/chat/message/popup/message_popup_menu_listener_impl.dart';
 import 'package:feature_chat_impl/src/screen/chat/message_factory.dart';
@@ -38,25 +37,7 @@ import 'package:tile/tile.dart';
     ChatFeatureDependenciesModule,
   ],
 )
-abstract class IChatScreenComponent {
-  MessageTileMapper getMessageTileMapper();
-
-  MessageFactory getMessageFactory();
-
-  IStringsProvider getStringsProvider();
-
-  IChatHeaderInfoFactory getChatHeaderInfoFactory();
-
-  ChatMessagesViewModel getChatMessagesViewModel();
-
-  ChatActionBarViewModel getChatActionBarViewModel();
-
-  ChatActionPanelFactory getChatActionPanelFactory();
-
-  ChatWidgetModel getChatWidgetModel();
-
-  EmptyChatWidgetFactory getEmptyWidgetFactory();
-
+abstract class IChatScreenComponent implements IChatScreenScopeDelegate {
   @chatIdQualifier
   int get chatId;
 
@@ -202,24 +183,7 @@ abstract class ChatScreenModule {
   static IMessageActionListener provideMessageActionListener(
     ChatMessagesViewModel viewModel,
   ) =>
-      MessageActionListener(
-        viewModel: viewModel,
-      );
-
-  @j.provides
-  @j.singleton
-  static ChatMessagesViewModel provideChatMessagesViewModel(
-    ChatArgs args,
-    ChatMessagesInteractor chatMessagesInteractor,
-    IChatScreenRouter router,
-    IChatManager chatManager,
-  ) =>
-      ChatMessagesViewModel(
-        chatManager: chatManager,
-        router: router,
-        messagesInteractor: chatMessagesInteractor,
-        args: args,
-      );
+      MessageActionListener(viewModel: viewModel);
 
   @j.provides
   @j.singleton

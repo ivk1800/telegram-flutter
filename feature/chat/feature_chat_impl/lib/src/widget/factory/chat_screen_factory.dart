@@ -3,7 +3,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/di/chat_screen_component.jugger.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_args.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_page.dart';
-import 'package:feature_chat_impl/src/screen/chat/chat_screen_scope.dart';
+import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 

@@ -12,6 +12,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tile/tile.dart';
 
 @j.singleton
+@j.disposable
 class ChatMessagesViewModel extends BaseViewModel {
   @j.inject
   ChatMessagesViewModel({

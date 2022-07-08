@@ -63,6 +63,8 @@ dependencies:
     path: ../../../rich_text/rich_text_format
   rich_text_format_flutter:
     path: ../../../rich_text/rich_text_format_flutter
+  scope_generator_annotation:
+    path: ../../../scope_generator/scope_generator_annotation
   shared_models:
     path: ../../../shared/models
   sticker_navigation_api:
@@ -83,6 +85,8 @@ dev_dependencies:
   freezed: 1.1.1
   jugger_generator: 2.4.0-dev.1
   mockito: 5.1.0
+  scope_generator:
+    path: ../../../scope_generator/generator
   test: 1.20.1
   tg_lint_rules:
     path: ../../../tg_lint_rules

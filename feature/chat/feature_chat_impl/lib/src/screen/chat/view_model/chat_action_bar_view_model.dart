@@ -17,6 +17,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 
 @j.singleton
+@j.disposable
 class ChatActionBarViewModel extends BaseViewModel {
   @j.inject
   ChatActionBarViewModel({
