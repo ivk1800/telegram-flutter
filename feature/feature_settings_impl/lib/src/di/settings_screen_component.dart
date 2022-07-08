@@ -1,100 +1,48 @@
+import 'package:core/core.dart';
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
-import 'package:feature_settings_impl/src/screen/setting_view_model.dart';
 import 'package:feature_settings_impl/src/screen/settings_screen_content_interactor.dart';
-import 'package:feature_settings_impl/src/screen/settings_screen_widget_model.dart';
-import 'package:feature_settings_search_api/feature_settings_search_api.dart';
+import 'package:feature_settings_impl/src/screen/settings_screen_scope_delegate.dart';
+import 'package:feature_settings_impl/src/settings_feature_dependencies.dmg.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:user_info/user_info.dart';
 
 @j.Component(
-  modules: <Type>[SettingsScreenModule],
+  modules: <Type>[
+    SettingsScreenModule,
+    SettingsFeatureDependenciesModule,
+  ],
 )
-abstract class ISettingsComponent {
-  ILocalizationManager getLocalizationManager();
-
-  ISettingsSearchScreenFactory getSettingsSearchScreenFactory();
-
-  SettingViewModel getSettingViewModel();
-
-  SettingsScreenWidgetModel getSettingsScreenWidgetModel();
-
-  tg.AvatarWidgetFactory getAvatarWidgetFactory();
-}
+abstract class ISettingsComponent implements ISettingsScreenScopeDelegate {}
 
 @j.module
 abstract class SettingsScreenModule {
   @j.provides
-  @j.singleton
-  static ISettingsSearchScreenFactory provideSettingsSearchScreenFactory(
-    ISettingsSearchFeatureApi api,
-  ) =>
-      api.settingsSearchScreenFactory;
-
-  @j.provides
-  @j.singleton
-  static ISettingsSearchFeatureApi provideSettingsSearchFeatureApi(
-    SettingsFeatureDependencies dependencies,
-  ) =>
-      dependencies.settingsSearchFeatureApi;
-
-  @j.provides
-  @j.singleton
-  static ILocalizationManager provideLocalizationManager(
-    SettingsFeatureDependencies dependencies,
-  ) =>
-      dependencies.localizationManager;
-
-  @j.singleton
-  @j.provides
-  static SettingViewModel provideSettingViewModel(
-    SettingsFeatureDependencies dependencies,
-    SettingsScreenContentInteractor contentInteractor,
-  ) =>
-      SettingViewModel(
-        contentInteractor: contentInteractor,
-        router: dependencies.router,
-      );
-
-  @j.singleton
-  @j.provides
-  static SettingsScreenWidgetModel provideSettingsScreenWidgetModel(
-    SettingsFeatureDependencies dependencies,
-    SettingViewModel viewModel,
-  ) =>
-      SettingsScreenWidgetModel(
-        viewModel: viewModel,
-        settingsSearchScreenFactory:
-            dependencies.settingsSearchFeatureApi.settingsSearchScreenFactory,
-      )..init();
-
-  @j.provides
   static SettingsScreenContentInteractor provideSettingsScreenContentInteractor(
-    SettingsFeatureDependencies dependencies,
+    IStringsProvider stringsProvider,
+    OptionsManager optionsManager,
     UserInfoResolver userInfoResolver,
   ) =>
       SettingsScreenContentInteractor(
-        stringsProvider: dependencies.localizationManager.stringsProvider,
+        stringsProvider: stringsProvider,
         userInfoResolver: userInfoResolver,
-        optionsManager: dependencies.optionsManager,
+        optionsManager: optionsManager,
       );
 
   @j.provides
   static tg.AvatarWidgetFactory provideAvatarWidgetFactory(
-    SettingsFeatureDependencies dependencies,
+    IFileDownloader fileDownloader,
   ) =>
-      tg.AvatarWidgetFactory(
-        fileDownloader: dependencies.fileDownloader,
-      );
+      tg.AvatarWidgetFactory(fileDownloader: fileDownloader);
 
   @j.provides
   static UserInfoResolver provideUserInfoResolver(
-    SettingsFeatureDependencies dependencies,
+    IUserRepository userRepository,
   ) =>
-      UserInfoResolver(
-        userRepository: dependencies.userRepository,
-      );
+      UserInfoResolver(userRepository: userRepository);
 }
 
 @j.componentBuilder

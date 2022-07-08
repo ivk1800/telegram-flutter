@@ -2,10 +2,14 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_settings_impl/src/screen/setting_view_model.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jugger/jugger.dart' as j;
 
 import 'settings_screen.dart';
 
+@j.singleton
+@j.disposable
 class SettingsScreenWidgetModel {
+  @j.inject
   SettingsScreenWidgetModel({
     required SettingViewModel viewModel,
     required ISettingsSearchScreenFactory settingsSearchScreenFactory,

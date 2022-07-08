@@ -1,10 +1,14 @@
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_settings_impl/feature_settings_impl.dart';
+import 'package:jugger/jugger.dart' as j;
 
 import 'content_state.dart';
 import 'settings_screen_content_interactor.dart';
 
+@j.singleton
+@j.disposable
 class SettingViewModel extends BaseViewModel {
+  @j.inject
   SettingViewModel({
     required ISettingsScreenRouter router,
     required SettingsScreenContentInteractor contentInteractor,

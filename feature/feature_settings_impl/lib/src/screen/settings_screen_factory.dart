@@ -4,7 +4,7 @@ import 'package:feature_settings_impl/src/di/settings_screen_component.jugger.da
 import 'package:flutter/widgets.dart';
 
 import 'settings_page.dart';
-import 'settings_screen_scope.dart';
+import 'settings_screen_scope_delegate.scope.dart';
 
 class SettingsScreenFactory implements ISettingScreenFactory {
   SettingsScreenFactory({

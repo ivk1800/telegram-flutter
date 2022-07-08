@@ -209,7 +209,7 @@ abstract class FeatureModule {
 
   @j.provides
   static SettingsFeatureDependencies provideSettingsFeatureDependencies(
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     ISettingsScreenRouter router,
     IFileDownloader fileDownloader,
     IUserRepository userRepository,
@@ -221,9 +221,10 @@ abstract class FeatureModule {
         optionsManager: optionsManager,
         userRepository: userRepository,
         fileDownloader: fileDownloader,
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
         router: router,
-        settingsSearchFeatureApi: settingsSearchFeatureApi,
+        settingsSearchScreenFactory:
+            settingsSearchFeatureApi.settingsSearchScreenFactory,
       );
 
   @j.provides
