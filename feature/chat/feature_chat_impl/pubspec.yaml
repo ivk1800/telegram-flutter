@@ -50,7 +50,7 @@ dependencies:
   flutter_svg: 1.0.3
   freezed_annotation: 1.1.0
   intl: 0.17.0
-  jugger: 2.2.0-dev.1
+  jugger: 2.2.0
   localization_api:
     path: ../../../localization_api
   lottie_utils:
@@ -83,7 +83,7 @@ dev_dependencies:
     path: ../../../dependencies_module_generator/generator
   dependency_validator: 3.2.0
   freezed: 1.1.1
-  jugger_generator: 2.4.0-dev.1
+  jugger_generator: 2.4.0
   mockito: 5.1.0
   scope_generator:
     path: ../../../scope_generator/generator
