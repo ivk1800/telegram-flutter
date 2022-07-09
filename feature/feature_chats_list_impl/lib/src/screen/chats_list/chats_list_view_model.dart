@@ -1,10 +1,14 @@
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_chats_list_impl/src/chats_list_screen_router.dart';
 import 'package:feature_chats_list_impl/src/list/chat_list.dart';
+import 'package:jugger/jugger.dart' as j;
 
 import 'chats_list_state.dart';
 
+@j.singleton
+@j.disposable
 class ChatsListViewModel extends BaseViewModel {
+  @j.inject
   ChatsListViewModel({
     required IChatsListScreenRouter router,
     required ChatListInteractor interactor,

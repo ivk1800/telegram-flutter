@@ -124,8 +124,6 @@ abstract class FeatureModule {
       ChatsListFeatureDependencies(
         router: router,
         superGroupRepository: superGroupRepository,
-        localizationManager: localizationManager,
-        userRepository: userRepository,
         dateParser: dateParser,
         dateFormatter: dateFormatter,
         chatUpdatesProvider: chatUpdatesProvider,

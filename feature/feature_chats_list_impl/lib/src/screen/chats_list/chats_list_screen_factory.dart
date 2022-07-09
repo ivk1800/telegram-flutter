@@ -4,7 +4,7 @@ import 'package:feature_chats_list_impl/src/di/chats_list_screen_component.jugge
 import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_page.dart';
 import 'package:flutter/widgets.dart';
 
-import 'chats_list_scope.dart';
+import 'chats_list_screen_scope_delegate.scope.dart';
 
 class ChatsListScreenFactory implements IChatsListScreenFactory {
   ChatsListScreenFactory({
@@ -15,7 +15,7 @@ class ChatsListScreenFactory implements IChatsListScreenFactory {
 
   @override
   Widget create(ChatListType type) {
-    return ChatsListScope(
+    return ChatsListScreenScope(
       child: const ChatsListPage(),
       create: () => JuggerChatsListScreenComponentBuilder()
           .dependencies(_dependencies)

@@ -1,24 +1,24 @@
-import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
+import 'package:feature_chats_list_impl/src/chats_list_feature_dependencies.dmg.dart';
 import 'package:feature_chats_list_impl/src/list/chat_list.dart';
+import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_screen_scope_delegate.dart';
 import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_tile_listener.dart';
 import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_view_model.dart';
-import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:tdlib/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 @j.Component(
-  modules: <Type>[ChatsListScreenModule],
+  modules: <Type>[
+    ChatsListScreenModule,
+    ChatsListFeatureDependenciesModule,
+  ],
 )
-abstract class IChatsListScreenComponent {
-  TileFactory getTileFactory();
-
-  ChatsListViewModel getChatsListViewModel();
-}
+abstract class IChatsListScreenComponent
+    implements IChatsListScreenScopeDelegate {}
 
 @j.module
 abstract class ChatsListScreenModule {
@@ -43,61 +43,10 @@ abstract class ChatsListScreenModule {
 
   @j.provides
   @j.singleton
-  static IChatRepository provideChatRepository(
-    ChatsListFeatureDependencies dependencies,
-  ) =>
-      dependencies.chatRepository;
-
-  @j.provides
-  @j.singleton
   static AvatarWidgetFactory provideAvatarWidgetFactory(
-    ChatsListFeatureDependencies dependencies,
+    IFileDownloader fileDownloader,
   ) =>
-      AvatarWidgetFactory(
-        fileDownloader: dependencies.fileDownloader,
-      );
-
-  @j.provides
-  @j.singleton
-  static IChatsListScreenRouter provideChatsListScreenRouter(
-    ChatsListFeatureDependencies dependencies,
-  ) =>
-      dependencies.router;
-
-  @j.provides
-  @j.singleton
-  static ISuperGroupRepository provideSuperGroupRepository(
-    ChatsListFeatureDependencies dependencies,
-  ) =>
-      dependencies.superGroupRepository;
-
-  @j.provides
-  @j.singleton
-  static DateFormatter provideDateFormatter(
-    ChatsListFeatureDependencies dependencies,
-  ) =>
-      dependencies.dateFormatter;
-
-  @j.provides
-  @j.singleton
-  static DateParser provideDateParser(
-    ChatsListFeatureDependencies dependencies,
-  ) =>
-      dependencies.dateParser;
-
-  @j.provides
-  @j.singleton
-  static IChatUpdatesProvider provideChatUpdatesProvider(
-    ChatsListFeatureDependencies dependencies,
-  ) =>
-      dependencies.chatUpdatesProvider;
-
-  @j.provides
-  @j.singleton
-  static IMessagePreviewResolver provideMessagePreviewResolver(
-    ChatsListFeatureDependencies dependencies,
-  ) =>
-      dependencies.messagePreviewResolver;
+      AvatarWidgetFactory(fileDownloader: fileDownloader);
 
   @j.provides
   @j.singleton
@@ -120,17 +69,6 @@ abstract class ChatsListScreenModule {
     ChatsListViewModel viewModel,
   ) =>
       ChatsListTileListener(viewModel: viewModel);
-
-  @j.provides
-  @j.singleton
-  static ChatsListViewModel provideChatsListViewModel(
-    IChatsListScreenRouter router,
-    ChatListInteractor interactor,
-  ) =>
-      ChatsListViewModel(
-        router: router,
-        interactor: interactor,
-      );
 }
 
 @j.componentBuilder
