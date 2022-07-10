@@ -5,7 +5,7 @@ import 'package:feature_change_username_impl/src/screen/change_username/change_u
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
-import 'change_username_screen_scope.dart';
+import 'change_username_screen_scope_delegate.scope.dart';
 
 class ChangeUsernamePage extends StatelessWidget {
   const ChangeUsernamePage({super.key});

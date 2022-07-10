@@ -9,12 +9,16 @@ import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_change_username_impl/feature_change_username_impl.dart';
 import 'package:feature_change_username_impl/src/screen/change_username/change_username_state.dart';
 import 'package:feature_change_username_impl/src/screen/username_checker.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tdlib/td_api.dart' as td;
 import 'package:user_info/user_info.dart';
 
+@j.singleton
+@j.disposable
 class ChangeUsernameViewModel extends BaseViewModel {
+  @j.inject
   ChangeUsernameViewModel({
     required IChangeUsernameRouter router,
     required IBlockInteractionManager blockInteractionManager,

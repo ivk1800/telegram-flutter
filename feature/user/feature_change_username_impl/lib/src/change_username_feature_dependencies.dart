@@ -1,15 +1,19 @@
 import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:dmg_annotation/dmg_annotation.dart';
 import 'package:error_transformer_api/error_transformer_api.dart';
+import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'change_username_router.dart';
 
 export 'change_username_router.dart';
 
+@dependencies
+@immutable
 class ChangeUsernameFeatureDependencies {
-  ChangeUsernameFeatureDependencies({
+  const ChangeUsernameFeatureDependencies({
     required this.connectionStateProvider,
     required this.stringsProvider,
     required this.blockInteractionManager,

@@ -4,7 +4,7 @@ import 'package:feature_change_username_impl/src/di/change_username_screen_compo
 import 'package:flutter/material.dart';
 
 import 'change_username_page.dart';
-import 'change_username_screen_scope.dart';
+import 'change_username_screen_scope_delegate.scope.dart';
 
 class ChangeUsernameScreenFactory implements IChangeUsernameScreenFactory {
   ChangeUsernameScreenFactory({

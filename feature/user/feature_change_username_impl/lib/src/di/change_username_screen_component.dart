@@ -1,75 +1,24 @@
-import 'package:coreui/coreui.dart' as tg;
+import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_ui_jugger/core_ui_jugger.dart';
 import 'package:feature_change_username_impl/feature_change_username_impl.dart';
-import 'package:feature_change_username_impl/src/screen/change_username/change_username_screen_widget_model.dart';
-import 'package:feature_change_username_impl/src/screen/change_username/change_username_view_model.dart';
+import 'package:feature_change_username_impl/src/change_username_feature_dependencies.dmg.dart';
+import 'package:feature_change_username_impl/src/screen/change_username/change_username_screen_scope_delegate.dart';
 import 'package:feature_change_username_impl/src/screen/username_checker.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:localization_api/localization_api.dart';
 import 'package:user_info/user_info.dart';
 
 @j.Component(
-  modules: <Type>[ChangeUsernameScreenModule],
+  modules: <Type>[
+    ChangeUsernameScreenModule,
+    TgAppBarModule,
+    ChangeUsernameFeatureDependenciesModule
+  ],
 )
-abstract class IChangeUsernameScreenComponent {
-  IStringsProvider getStringsProvider();
-
-  ChangeUsernameViewModel getChangeUsernameViewModel();
-
-  tg.TgAppBarFactory getTgAppBarFactory();
-
-  ChangeUsernameScreenWidgetModel getChangeUsernameScreenWidgetModel();
-}
+abstract class IChangeUsernameScreenComponent
+    implements IChangeUsernameScreenScopeDelegate {}
 
 @j.module
 abstract class ChangeUsernameScreenModule {
-  @j.provides
-  @j.singleton
-  static IStringsProvider provideStringsProvider(
-    ChangeUsernameFeatureDependencies dependencies,
-  ) =>
-      dependencies.stringsProvider;
-
-  @j.provides
-  @j.singleton
-  static ChangeUsernameViewModel provideChangeUsernameViewModel(
-    ChangeUsernameFeatureDependencies dependencies,
-    UsernameChecker usernameChecker,
-    UserInfoResolver userInfoResolver,
-  ) =>
-      ChangeUsernameViewModel(
-        functionExecutor: dependencies.functionExecutor,
-        optionsManager: dependencies.optionManager,
-        userInfoResolver: userInfoResolver,
-        errorTransformer: dependencies.errorTransformer,
-        stringsProvider: dependencies.stringsProvider,
-        usernameChecker: usernameChecker,
-        blockInteractionManager: dependencies.blockInteractionManager,
-        router: dependencies.router,
-      );
-
-  @j.provides
-  static tg.ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
-    ChangeUsernameFeatureDependencies dependencies,
-  ) =>
-      tg.ConnectionStateWidgetFactory(
-        connectionStateProvider: dependencies.connectionStateProvider,
-      );
-
-  @j.provides
-  static tg.TgAppBarFactory provideTgAppBarFactory(
-    tg.ConnectionStateWidgetFactory connectionStateWidgetFactory,
-  ) =>
-      tg.TgAppBarFactory(
-        connectionStateWidgetFactory: connectionStateWidgetFactory,
-      );
-
-  @j.provides
-  @j.singleton
-  static ChangeUsernameScreenWidgetModel provideChangeUsernameScreenWidgetModel(
-    ChangeUsernameViewModel viewModel,
-  ) =>
-      ChangeUsernameScreenWidgetModel(viewModel: viewModel);
-
   @j.provides
   static UsernameChecker provideUsernameChecker(
     ChangeUsernameFeatureDependencies dependencies,
@@ -83,9 +32,9 @@ abstract class ChangeUsernameScreenModule {
   @j.provides
   @j.singleton
   static UserInfoResolver provideUserInfoResolver(
-    ChangeUsernameFeatureDependencies dependencies,
+    IUserRepository userRepository,
   ) =>
-      UserInfoResolver(userRepository: dependencies.userRepository);
+      UserInfoResolver(userRepository: userRepository);
 }
 
 @j.componentBuilder

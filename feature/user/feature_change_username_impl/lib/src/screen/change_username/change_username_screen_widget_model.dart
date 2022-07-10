@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_change_username_impl/src/screen/change_username/change_username_view_model.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:jugger/jugger.dart' as j;
 import 'change_username_state.dart';
 
+@j.singleton
+@j.disposable
 class ChangeUsernameScreenWidgetModel with SubscriptionMixin {
+  @j.inject
   ChangeUsernameScreenWidgetModel({
     required ChangeUsernameViewModel viewModel,
   }) : _viewModel = viewModel {
