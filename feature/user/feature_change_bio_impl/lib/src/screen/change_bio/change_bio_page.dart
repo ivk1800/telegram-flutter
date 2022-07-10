@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
-import 'change_bio_screen_scope.dart';
+import 'change_bio_screen_scope_delegate.scope.dart';
 
 class ChangeBioPage extends StatelessWidget {
   const ChangeBioPage({super.key});

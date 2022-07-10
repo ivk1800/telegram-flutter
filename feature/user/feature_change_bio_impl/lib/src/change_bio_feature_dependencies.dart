@@ -2,15 +2,19 @@ library feature_change_bio_impl;
 
 import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:dmg_annotation/dmg_annotation.dart';
 import 'package:error_transformer_api/error_transformer_api.dart';
+import 'package:flutter/foundation.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'change_bio_router.dart';
 
 export 'change_bio_router.dart';
 
+@dependencies
+@immutable
 class ChangeBioFeatureDependencies {
-  ChangeBioFeatureDependencies({
+  const ChangeBioFeatureDependencies({
     required this.connectionStateProvider,
     required this.stringsProvider,
     required this.blockInteractionManager,

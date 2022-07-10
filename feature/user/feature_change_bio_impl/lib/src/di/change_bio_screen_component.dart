@@ -1,33 +1,21 @@
+import 'package:core_ui_jugger/core_ui_jugger.dart';
 import 'package:feature_change_bio_impl/feature_change_bio_impl.dart';
-import 'package:feature_change_bio_impl/src/screen/change_bio/change_bio_view_model.dart';
+import 'package:feature_change_bio_impl/src/change_bio_feature_dependencies.dmg.dart';
+import 'package:feature_change_bio_impl/src/screen/change_bio/change_bio_screen_scope_delegate.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:localization_api/localization_api.dart';
 
 @j.Component(
-  modules: <Type>[ChangeBioScreenModule],
+  modules: <Type>[
+    ChangeBioScreenModule,
+    ChangeBioFeatureDependenciesModule,
+    TgAppBarModule,
+  ],
 )
-abstract class IChangeBioScreenComponent {
-  IStringsProvider getStringsProvider();
-
-  ChangeBioViewModel getChangeBioViewModel();
-}
+abstract class IChangeBioScreenComponent
+    implements IChangeBioScreenScopeDelegate {}
 
 @j.module
-abstract class ChangeBioScreenModule {
-  @j.provides
-  @j.singleton
-  static IStringsProvider provideStringsProvider(
-    ChangeBioFeatureDependencies dependencies,
-  ) =>
-      dependencies.stringsProvider;
-
-  @j.provides
-  @j.singleton
-  static ChangeBioViewModel provideChangeBioViewModel(
-    ChangeBioFeatureDependencies dependencies,
-  ) =>
-      ChangeBioViewModel();
-}
+abstract class ChangeBioScreenModule {}
 
 @j.componentBuilder
 abstract class IChangeBioScreenComponentBuilder {
