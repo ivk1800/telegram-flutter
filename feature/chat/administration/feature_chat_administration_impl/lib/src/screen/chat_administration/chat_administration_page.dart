@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'available_actions_state.dart';
-import 'chat_administration_screen_scope.dart';
+import 'chat_administration_screen_scope_delegate.scope.dart';
 import 'chat_administration_view_model.dart';
 
 class ChatAdministrationPage extends StatelessWidget {

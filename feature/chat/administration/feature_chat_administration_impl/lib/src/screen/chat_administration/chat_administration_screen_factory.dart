@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'args.dart';
 import 'chat_administration_page.dart';
-import 'chat_administration_screen_scope.dart';
+import 'chat_administration_screen_scope_delegate.scope.dart';
 
 class ChatAdministrationScreenFactory
     implements IChatAdministrationScreenFactory {

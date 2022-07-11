@@ -6,16 +6,21 @@ import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:error_transformer_api/error_transformer_api.dart';
+import 'package:feature_chat_administration_impl/src/screen/chat_administration/args.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'available_actions_state.dart';
 import 'chat_administration_router.dart';
 
+@j.singleton
+@j.disposable
 class ChatAdministrationViewModel extends BaseViewModel {
+  @j.inject
   ChatAdministrationViewModel({
     required IChatManager chatManager,
-    required int chatId,
+    required Args args,
     required IChatAdministrationRouter router,
     required IStringsProvider stringsProvider,
     required ChatInfoResolver chatInfoResolver,
@@ -27,7 +32,7 @@ class ChatAdministrationViewModel extends BaseViewModel {
         _chatInfoResolver = chatInfoResolver,
         _errorTransformer = errorTransformer,
         _blockInteractionManager = blockInteractionManager,
-        _chatId = chatId {
+        _chatId = args.chatId {
     subscribe<ChatInfo>(
       _chatInfoResolver.resolveAsStream(_chatId),
       _handleChatInfo,
