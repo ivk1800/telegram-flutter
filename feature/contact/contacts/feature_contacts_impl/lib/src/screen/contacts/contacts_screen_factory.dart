@@ -4,7 +4,7 @@ import 'package:feature_contacts_impl/src/di/contacts_screen_component.jugger.da
 import 'package:flutter/material.dart';
 
 import 'contacts_page.dart';
-import 'contacts_screen_scope.dart';
+import 'contacts_screen_scope_delegate.scope.dart';
 
 class ContactsScreenFactory implements IContactsScreenFactory {
   ContactsScreenFactory({

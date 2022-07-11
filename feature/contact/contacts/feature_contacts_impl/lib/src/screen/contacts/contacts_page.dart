@@ -2,7 +2,7 @@ import 'package:feature_contacts_impl/src/screen/contacts/contacts_view_model.da
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
-import 'contacts_screen_scope.dart';
+import 'contacts_screen_scope_delegate.scope.dart';
 
 class ContactsPage extends StatelessWidget {
   const ContactsPage({super.key});

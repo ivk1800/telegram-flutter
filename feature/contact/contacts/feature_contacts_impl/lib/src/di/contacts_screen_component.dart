@@ -1,33 +1,15 @@
+import 'package:core_ui_jugger/core_ui_jugger.dart';
 import 'package:feature_contacts_impl/feature_contacts_impl.dart';
-import 'package:feature_contacts_impl/src/screen/contacts/contacts_view_model.dart';
+import 'package:feature_contacts_impl/src/contacts_feature_dependencies.dmg.dart';
+import 'package:feature_contacts_impl/src/screen/contacts/contacts_screen_scope_delegate.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:localization_api/localization_api.dart';
 
-@j.Component(
-  modules: <Type>[ContactsScreenModule],
-)
-abstract class IContactsScreenComponent {
-  IStringsProvider getStringsProvider();
-
-  ContactsViewModel getContactsViewModel();
-}
-
-@j.module
-abstract class ContactsScreenModule {
-  @j.provides
-  @j.singleton
-  static IStringsProvider provideStringsProvider(
-    ContactsFeatureDependencies dependencies,
-  ) =>
-      dependencies.stringsProvider;
-
-  @j.provides
-  @j.singleton
-  static ContactsViewModel provideContactsViewModel(
-    ContactsFeatureDependencies dependencies,
-  ) =>
-      ContactsViewModel(router: dependencies.router);
-}
+@j.Component(modules: <Type>[
+  ContactsFeatureDependenciesModule,
+  TgAppBarModule,
+])
+abstract class IContactsScreenComponent
+    implements IContactsScreenScopeDelegate {}
 
 @j.componentBuilder
 abstract class IContactsScreenComponentBuilder {
