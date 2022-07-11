@@ -1,64 +1,39 @@
+import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:core_ui_jugger/core_ui_jugger.dart';
 import 'package:coreui/coreui.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:feature_new_contact_impl/feature_new_contact_impl.dart';
+import 'package:feature_new_contact_impl/src/new_contact_feature_dependencies.dmg.dart';
 import 'package:feature_new_contact_impl/src/screen/new_contact/args.dart';
-import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_view_model.dart';
-import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_widget_model.dart';
+import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_screen_scope_delegate.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:localization_api/localization_api.dart';
 import 'package:user_info/user_info.dart';
 
 @j.Component(
-  modules: <Type>[NewContactScreenModule],
+  modules: <Type>[
+    NewContactScreenModule,
+    NewContactFeatureDependenciesModule,
+    TgAppBarModule,
+  ],
 )
-abstract class INewContactScreenComponent {
-  IStringsProvider getStringsProvider();
-
-  NewContactViewModel getNewContactViewModel();
-
-  NewContactWidgetModel getNewContactWidgetModel();
-
-  AvatarWidgetFactory getAvatarWidgetFactory();
-}
+abstract class INewContactScreenComponent
+    implements INewContactScreenScopeDelegate {}
 
 @j.module
 abstract class NewContactScreenModule {
   @j.provides
   @j.singleton
-  static IStringsProvider provideStringsProvider(
-    NewContactFeatureDependencies dependencies,
-  ) =>
-      dependencies.stringsProvider;
-
-  @j.provides
-  @j.singleton
   static AvatarWidgetFactory provideAvatarWidgetFactory(
-    NewContactFeatureDependencies dependencies,
+    IFileDownloader fileDownloader,
   ) =>
-      AvatarWidgetFactory(fileDownloader: dependencies.fileDownloader);
+      AvatarWidgetFactory(fileDownloader: fileDownloader);
 
   @j.provides
   @j.singleton
   static UserInfoResolver provideUserInfoResolver(
-    NewContactFeatureDependencies dependencies,
+    IUserRepository userRepository,
   ) =>
-      UserInfoResolver(userRepository: dependencies.userRepository);
-
-  @j.provides
-  @j.singleton
-  static NewContactViewModel provideNewContactViewModel(
-    Args args,
-    NewContactFeatureDependencies dependencies,
-    UserInfoResolver userInfoResolver,
-  ) =>
-      NewContactViewModel(
-        errorTransformer: dependencies.errorTransformer,
-        contactsManager: dependencies.contactsManager,
-        router: dependencies.router,
-        args: args,
-        stringsProvider: dependencies.stringsProvider,
-        blockInteractionManager: dependencies.blockInteractionManager,
-        userInfoResolver: userInfoResolver,
-      );
+      UserInfoResolver(userRepository: userRepository);
 }
 
 @j.componentBuilder

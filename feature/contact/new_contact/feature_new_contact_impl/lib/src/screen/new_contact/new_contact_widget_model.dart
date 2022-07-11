@@ -7,6 +7,7 @@ import 'package:jugger/jugger.dart' as j;
 import 'new_contact_view_model.dart';
 
 @j.singleton
+@j.disposable
 class NewContactWidgetModel with SubscriptionMixin {
   @j.inject
   NewContactWidgetModel({

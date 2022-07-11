@@ -5,7 +5,7 @@ import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_view
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 
-import 'new_contact_screen_scope.dart';
+import 'new_contact_screen_scope_delegate.scope.dart';
 import 'new_contact_widget_model.dart';
 
 class NewContactPage extends StatelessWidget {
@@ -57,7 +57,7 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NewContactScreenScope.getNewContactsViewModel(context);
+    NewContactScreenScope.getNewContactViewModel(context);
 
     final IStringsProvider stringsProvider =
         NewContactScreenScope.getStringsProvider(context);

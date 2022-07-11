@@ -7,6 +7,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:error_transformer_api/error_transformer_api.dart';
 import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_router.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_models/shared_models.dart';
@@ -16,7 +17,10 @@ import 'package:user_info/user_info.dart';
 import 'args.dart';
 import 'new_contact_state.dart';
 
+@j.singleton
+@j.disposable
 class NewContactViewModel extends BaseViewModel {
+  @j.inject
   NewContactViewModel({
     required Args args,
     required INewContactRouter router,

@@ -5,7 +5,7 @@ import 'package:feature_new_contact_impl/src/screen/new_contact/args.dart';
 import 'package:flutter/material.dart';
 
 import 'new_contact_page.dart';
-import 'new_contact_screen_scope.dart';
+import 'new_contact_screen_scope_delegate.scope.dart';
 
 class NewContactScreenFactory implements INewContactScreenFactory {
   NewContactScreenFactory({required NewContactFeatureDependencies dependencies})
