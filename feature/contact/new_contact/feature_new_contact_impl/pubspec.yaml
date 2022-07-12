@@ -6,12 +6,11 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  async: 2.8.2
   async_utils:
     path: ../../../../async_utils
   block_interaction_api:
     path: ../../../../block_interaction_api
-  chat_navigation_api:
-    path: ../../../chat/chat_navigation_api
   contacts_manager_api:
     path: ../../../contact/contacts_manager/contacts_manager_api
   core_arch:
@@ -22,6 +21,8 @@ dependencies:
     path: ../../../../core_tdlib_api
   core_ui_jugger:
     path: ../../../../core_ui_jugger
+  core_utils:
+    path: ../../../../core_utils
   coreui:
     path: ../../../../coreui
   dialog_api:
@@ -45,6 +46,8 @@ dependencies:
     path: ../../../../scope_generator/scope_generator_annotation
   shared_models:
     path: ../../../../shared/models
+  td_api:
+    path: ../../../../td/td_api
   user_info:
     path: ../../../user/user_info
 

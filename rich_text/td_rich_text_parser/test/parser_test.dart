@@ -1,7 +1,7 @@
 import 'package:rich_text_format/rich_text_format.dart';
 import 'package:td_rich_text_parser/src/parser.dart';
 import 'package:test/test.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 void main() {
   late Parser parser;

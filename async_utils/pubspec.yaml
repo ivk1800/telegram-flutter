@@ -8,5 +8,6 @@ dependencies:
   async: 2.8.2
 
 dev_dependencies:
+  dependency_validator: 3.2.0
   tg_lint_rules:
     path: ../tg_lint_rules

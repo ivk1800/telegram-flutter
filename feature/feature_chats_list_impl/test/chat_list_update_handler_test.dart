@@ -12,7 +12,7 @@ import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_models/shared_models.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:test/test.dart';
 
 import 'chat_list_update_handler_test.mocks.dart';

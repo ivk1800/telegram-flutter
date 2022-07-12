@@ -8,6 +8,8 @@ environment:
 dependencies:
   core_tdlib_api:
     path: ../../core_tdlib_api
+  core_utils:
+    path: ../../core_utils
   coreui:
     path: ../../coreui
   feature_chat_header_info_api:
@@ -21,6 +23,8 @@ dependencies:
   rxdart: 0.27.3
   shared_models:
     path: ../../shared/models
+  td_api:
+    path: ../../td/td_api
 
 dev_dependencies:
   dependency_validator: 3.2.0

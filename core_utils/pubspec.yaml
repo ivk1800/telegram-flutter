@@ -6,13 +6,13 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
-  core_tdlib_api:
-    path: ../core_tdlib_api
   flutter:
     sdk: flutter
   intl: 0.17.0
   shared_models:
     path: ../shared/models
+  td_api:
+    path: ../td/td_api
 
 dev_dependencies:
   dependency_validator: 3.2.0

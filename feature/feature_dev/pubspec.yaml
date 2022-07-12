@@ -21,12 +21,14 @@ dependencies:
   flutter:
     sdk: flutter
   jugger: 2.2.0
+  localization_api:
+    path: ../../localization_api
   rxdart: 0.27.3
   scrollable_positioned_list: 0.3.2
   showcase:
     path: ../../showcase
-  td_client:
-    path: ../../td_client
+  td_api:
+    path: ../../td/td_api
   theme_manager_api:
     path: ../theme/theme_manager_api
 

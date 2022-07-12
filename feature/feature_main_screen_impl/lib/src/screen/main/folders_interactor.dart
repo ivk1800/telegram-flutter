@@ -1,7 +1,7 @@
 import 'package:core_arch/core_arch.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'folder.dart';
 
 class FoldersInteractor with SubscriptionMixin {

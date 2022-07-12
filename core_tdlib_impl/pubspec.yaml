@@ -9,6 +9,8 @@ dependencies:
   core_tdlib_api:
     path: ../core_tdlib_api
   rxdart: 0.27.3
+  td_api:
+    path: ../td/td_api
   td_client:
     path: ../td_client
 

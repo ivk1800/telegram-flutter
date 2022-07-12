@@ -1,5 +1,5 @@
 import 'package:rich_text_format/rich_text_format.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class Parser {
   const Parser();

@@ -4,7 +4,7 @@ import 'package:feature_dev/src/screen/events_list/events_list_screen_scope.dart
 import 'package:feature_dev/src/screen/events_list/events_list_widget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class EventsListPage extends StatefulWidget {
   const EventsListPage({super.key});

@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 extension ChatExt on td.Chat {
   td.ChatPosition? getPositionByChatList(td.ChatList chatList) {

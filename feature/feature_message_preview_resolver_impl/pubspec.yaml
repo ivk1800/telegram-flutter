@@ -3,19 +3,16 @@ publish_to: 'none'
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
-  flutter: ^3.0.0
 
 dependencies:
   core_tdlib_api:
     path: ../../core_tdlib_api
-  core_utils:
-    path: ../../core_utils
   feature_message_preview_resolver:
     path: ../feature_message_preview_resolver
-  flutter:
-    sdk: flutter
   localization_api:
     path: ../../localization_api
+  td_api:
+    path: ../../td/td_api
 
 dev_dependencies:
   dependency_validator: 3.2.0

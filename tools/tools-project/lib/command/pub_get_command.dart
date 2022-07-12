@@ -18,7 +18,11 @@ Future<void> runPubGetCommandForProjects({
           : <String>['pub', 'get'],
     );
   }).toList();
-  await runCommands(commands: commands, withOutputs: withOutputs);
+  await runCommands(
+    commands: commands,
+    withOutputs: withOutputs,
+    withRetry: true,
+  );
 }
 
 Future<void> runBuildRunnerCommandForProjects({
@@ -98,5 +102,8 @@ Future<void> runValidateDependenciesCommandForProjects({
       ],
     );
   }).toList();
-  await runCommands(commands: commands, withOutputs: withOutputs);
+  await runCommands(
+    commands: commands,
+    withOutputs: withOutputs,
+  );
 }

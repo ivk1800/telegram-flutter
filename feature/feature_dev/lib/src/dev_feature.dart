@@ -7,7 +7,7 @@ import 'package:feature_dev/src/dev_router.dart';
 import 'package:feature_dev/src/dev_scope.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:theme_manager_api/theme_manager_api.dart';
 
 import 'di/dev_component.dart';

@@ -6,7 +6,7 @@ import 'package:feature_chats_list_impl/src/mapper/chat_tile_model_mapper.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:queue/queue.dart' as q;
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 import 'chat_data.dart';
 import 'chat_ext.dart';

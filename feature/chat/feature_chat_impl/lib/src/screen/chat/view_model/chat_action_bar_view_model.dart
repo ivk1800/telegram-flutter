@@ -14,7 +14,7 @@ import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 @j.singleton
 @j.disposable

@@ -9,11 +9,12 @@ dependencies:
   flutter:
     sdk: flutter
   rxdart: 0.27.3
-
-dev_dependencies:
-  tg_lint_rules:
-    path: ../../../tg_lint_rules
   tg_theme:
     path: ../../../feature/theme/tg_theme
   theme_manager_api:
     path: ../theme_manager_api
+
+dev_dependencies:
+  dependency_validator: 3.2.0
+  tg_lint_rules:
+    path: ../../../tg_lint_rules

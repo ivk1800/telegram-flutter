@@ -3,9 +3,10 @@ publish_to: 'none'
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
-  flutter: ^3.0.0
 
 dependencies:
+  core_tdlib_api:
+    path: ../core_tdlib_api
   coreui:
     path: ../coreui
   flutter:

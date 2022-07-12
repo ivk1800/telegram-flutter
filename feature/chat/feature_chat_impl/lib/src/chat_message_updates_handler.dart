@@ -5,7 +5,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/base_message_tile_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:queue/queue.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 /// Return copy of actual messages.

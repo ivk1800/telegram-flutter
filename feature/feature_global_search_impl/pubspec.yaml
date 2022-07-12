@@ -14,6 +14,8 @@ dependencies:
     path: ../../core_arch_flutter
   core_tdlib_api:
     path: ../../core_tdlib_api
+  core_utils:
+    path: ../../core_utils
   coreui:
     path: ../../coreui
   feature_file_api:
@@ -23,6 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   freezed_annotation: 1.1.0
+  jugger: 2.2.0
   localization_api:
     path: ../../localization_api
   rxdart: 0.27.3
@@ -30,8 +33,8 @@ dependencies:
     path: ../../search_component
   shared_models:
     path: ../../shared/models
-  td_client:
-    path: ../../td_client
+  td_api:
+    path: ../../td/td_api
   tile:
     path: ../../tile
 

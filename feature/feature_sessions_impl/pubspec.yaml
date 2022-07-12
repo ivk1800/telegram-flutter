@@ -8,8 +8,6 @@ environment:
 dependencies:
   core_arch:
     path: ../../core_arch
-  core_arch_flutter:
-    path: ../../core_arch_flutter
   core_tdlib_api:
     path: ../../core_tdlib_api
   core_ui_jugger:
@@ -29,6 +27,8 @@ dependencies:
   localization_api:
     path: ../../localization_api
   rxdart: 0.27.3
+  td_api:
+    path: ../../td/td_api
   tile:
     path: ../../tile
 

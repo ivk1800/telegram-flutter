@@ -2,7 +2,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/painting.dart';
 import 'package:shared_models/shared_models.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 import 'tile/model/model.dart';

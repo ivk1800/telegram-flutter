@@ -2,7 +2,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class MessageReplyInfoMapper {
   MessageReplyInfoMapper({

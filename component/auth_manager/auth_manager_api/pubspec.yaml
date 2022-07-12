@@ -5,9 +5,10 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
-  core_tdlib_api:
-    path: ../../../core_tdlib_api
+  td_api:
+    path: ../../../td/td_api
 
 dev_dependencies:
+  dependency_validator: 3.2.0
   tg_lint_rules:
     path: ../../../tg_lint_rules

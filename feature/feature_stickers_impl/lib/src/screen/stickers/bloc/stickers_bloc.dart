@@ -2,7 +2,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_stickers_impl/feature_stickers_impl.dart';
 import 'package:feature_stickers_impl/src/tile/model/sticker_set_tile_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 import 'stickers_event.dart';

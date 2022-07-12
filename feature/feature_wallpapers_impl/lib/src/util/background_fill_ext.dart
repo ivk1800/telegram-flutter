@@ -1,4 +1,4 @@
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 import 'background_fill.dart';
 import 'color_rgb24_ext.dart';

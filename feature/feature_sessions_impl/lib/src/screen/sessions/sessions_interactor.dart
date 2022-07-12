@@ -4,7 +4,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_sessions_impl/src/screen/sessions/sessions_state.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 import 'session_tile_mapper.dart';
 

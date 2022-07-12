@@ -8,10 +8,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  tg_theme:
+    path: ../../theme/tg_theme
 
 dev_dependencies:
   dependency_validator: 3.2.0
   tg_lint_rules:
     path: ../../../tg_lint_rules
-  tg_theme:
-    path: ../../theme/tg_theme

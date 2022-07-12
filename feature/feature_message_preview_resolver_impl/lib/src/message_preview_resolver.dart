@@ -4,7 +4,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:feature_message_preview_resolver_impl/src/chat_preview_delegate.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 import 'message_text_resolver.dart';
 import 'mode.dart';

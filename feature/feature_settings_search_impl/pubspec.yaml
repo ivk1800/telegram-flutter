@@ -18,6 +18,8 @@ dependencies:
     path: ../../dialog_api
   feature_settings_search_api:
     path: ../feature_settings_search_api
+  flutter:
+    sdk: flutter
   freezed_annotation: 1.1.0
   jugger: 2.2.0
   localization_api:
@@ -30,8 +32,6 @@ dependencies:
 dev_dependencies:
   build_runner: 2.1.7
   dependency_validator: 3.2.0
-  flutter:
-    sdk: flutter
   freezed: 1.1.1
   jugger_generator: 2.4.0
   tg_lint_rules:

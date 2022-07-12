@@ -7,10 +7,11 @@ environment:
 dependencies:
   rich_text_format:
     path: ../rich_text_format
-  td_client:
-    path: ../../td_client
+  td_api:
+    path: ../../td/td_api
 
 dev_dependencies:
+  dependency_validator: 3.2.0
   test: 1.20.1
   tg_lint_rules:
     path: ../../tg_lint_rules

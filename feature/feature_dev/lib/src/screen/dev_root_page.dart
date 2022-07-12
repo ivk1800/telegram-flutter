@@ -4,7 +4,7 @@ import 'package:feature_country_api/feature_country_api.dart';
 import 'package:feature_dev/feature_dev.dart';
 import 'package:feature_dev/src/dev_scope.dart';
 import 'package:flutter/material.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:theme_manager_api/theme_manager_api.dart' as th;
 
 class DevRootPage extends StatelessWidget {

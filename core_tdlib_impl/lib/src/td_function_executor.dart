@@ -1,6 +1,7 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:td_api/td_api.dart' as td;
 import 'package:td_client/td_client.dart';
-import 'package:tdlib/td_api.dart' as td;
+
 import 'util/td_error_ext.dart';
 
 class TdFunctionExecutor implements ITdFunctionExecutor {

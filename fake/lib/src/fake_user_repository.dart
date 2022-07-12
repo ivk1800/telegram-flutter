@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:username_generator/username_generator.dart';
 
 import 'fake_user_provider.dart';

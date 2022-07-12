@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:td_api/td_api.dart' as td;
 import 'package:td_client/td_client.dart';
-import 'package:tdlib/td_api.dart' as td;
 
 extension TdErrorExt<T extends td.TdObject> on Future<T> {
   Future<T> catchTdError() {

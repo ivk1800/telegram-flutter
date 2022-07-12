@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:showcase/src/showcase/message/message_bundle.dart';
 import 'package:showcase/src/showcase/showcase_scope.dart';
 import 'package:split_view/split_view.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 import 'showcase/message/message_data.dart';
 

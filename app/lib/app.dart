@@ -5,8 +5,8 @@ import 'package:app/src/di/component/app_component.jugger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_impl/localization_impl.dart';
+import 'package:td_api/td_api.dart' as td;
 import 'package:td_client/td_client.dart';
-import 'package:tdlib/td_api.dart' as td;
 
 import 'src/di/component/app_component.dart';
 

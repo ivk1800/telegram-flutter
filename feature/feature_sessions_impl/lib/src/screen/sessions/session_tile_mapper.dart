@@ -1,6 +1,6 @@
 import 'package:feature_sessions_impl/src/screen/sessions/tile/session_tile_model.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 class SessionTileMapper {

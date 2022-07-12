@@ -6,10 +6,10 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
-  core_arch:
-    path: ../../core_arch
   core_tdlib_api:
     path: ../../core_tdlib_api
+  core_utils:
+    path: ../../core_utils
   coreui:
     path: ../../coreui
   feature_file_api:
@@ -23,8 +23,11 @@ dependencies:
   freezed_annotation: 1.1.0
   localization_api:
     path: ../../localization_api
+  provider: 6.0.2
   shared_models:
     path: ../../shared/models
+  td_api:
+    path: ../../td/td_api
   tile:
     path: ../../tile
 

@@ -7,7 +7,7 @@ import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:feature_chats_list_impl/src/util/loader.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 import 'chat_list.dart';
 import 'ordered_chat.dart';

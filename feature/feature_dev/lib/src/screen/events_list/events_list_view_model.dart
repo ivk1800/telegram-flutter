@@ -1,6 +1,6 @@
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_dev/src/events_repository.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class EventsListVieModel extends BaseViewModel {
   EventsListVieModel({

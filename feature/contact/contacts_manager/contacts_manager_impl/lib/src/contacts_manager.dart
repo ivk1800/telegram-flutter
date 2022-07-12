@@ -1,6 +1,6 @@
 import 'package:contacts_manager_api/contacts_manager_api.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class ContactsManager implements IContactsManager {
   const ContactsManager({

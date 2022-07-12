@@ -7,7 +7,7 @@ import 'package:feature_country_api/feature_country_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 import 'auth_action.dart';
 import 'auth_state.dart';

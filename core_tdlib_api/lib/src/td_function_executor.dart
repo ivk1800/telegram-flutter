@@ -1,4 +1,4 @@
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 abstract class ITdFunctionExecutor {
   Future<T> send<T extends td.TdObject>(td.TdFunction object);

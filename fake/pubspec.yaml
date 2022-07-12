@@ -18,10 +18,6 @@ dependencies:
     path: ../core_tdlib_api
   error_transformer_api:
     path: ../error_transformer_api
-  feature_chat_api:
-    path: ../feature/chat/feature_chat_api
-  feature_chat_header_info_api:
-    path: ../feature/feature_chat_header_info_api
   feature_chats_list_api:
     path: ../feature/feature_chats_list_api
   feature_file_api:
@@ -30,10 +26,13 @@ dependencies:
     path: ../feature/feature_global_search_api
   flutter:
     sdk: flutter
+  localization_api:
+    path: ../localization_api
   localization_impl:
     path: ../localization_impl
-  td_client:
-    path: ../td_client
+  rxdart: 0.27.3
+  td_api:
+    path: ../td/td_api
   username_generator: ^1.3.0
 
 dev_dependencies:

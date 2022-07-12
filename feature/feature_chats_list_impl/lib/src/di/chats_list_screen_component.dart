@@ -8,7 +8,7 @@ import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_tile_li
 import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_view_model.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 @j.Component(

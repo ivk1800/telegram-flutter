@@ -8,5 +8,6 @@ dependencies:
   mockito: 5.1.0
 
 dev_dependencies:
+  dependency_validator: 3.2.0
   tg_lint_rules:
     path: ../tg_lint_rules

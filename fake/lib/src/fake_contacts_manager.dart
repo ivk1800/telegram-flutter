@@ -1,5 +1,5 @@
 import 'package:contacts_manager_api/contacts_manager_api.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class FakeContactsManager implements IContactsManager {
   FakeContactsManager({required this.addContactCallback});

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class FakeSuperGroupRepository implements ISuperGroupRepository {
   @override

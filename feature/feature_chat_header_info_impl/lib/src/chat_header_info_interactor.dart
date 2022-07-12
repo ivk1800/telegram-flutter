@@ -4,7 +4,7 @@ import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_models/shared_models.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
   ChatHeaderInfoInteractor({

@@ -7,7 +7,7 @@ import 'package:app_controller/src/device_info_provider.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:test/test.dart';
 
 import 'authorization_state_delegate_test.mocks.dart';

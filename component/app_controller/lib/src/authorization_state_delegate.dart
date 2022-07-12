@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 import 'app_controller_component.dart';
 import 'device_info_provider.dart';

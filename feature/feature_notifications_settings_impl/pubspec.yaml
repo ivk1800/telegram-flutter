@@ -12,13 +12,13 @@ dependencies:
     path: ../../coreui
   feature_notifications_settings_api:
     path: ../feature_notifications_settings_api
+  flutter:
+    sdk: flutter
   localization_api:
     path: ../../localization_api
   provider: 6.0.2
 
 dev_dependencies:
   dependency_validator: 3.2.0
-  flutter:
-    sdk: flutter
   tg_lint_rules:
     path: ../../tg_lint_rules

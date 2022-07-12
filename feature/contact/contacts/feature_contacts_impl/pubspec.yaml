@@ -16,6 +16,8 @@ dependencies:
     path: ../../../../core_tdlib_api
   core_ui_jugger:
     path: ../../../../core_ui_jugger
+  coreui:
+    path: ../../../../coreui
   dmg_annotation:
     path: ../../../../dependencies_module_generator/dmg_annotation
   feature_contacts_api:

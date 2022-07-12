@@ -29,6 +29,8 @@ dependencies:
   localization_api:
     path: ../../../localization_api
   rxdart: 0.27.3
+  td_api:
+    path: ../../../td/td_api
   tuple: 2.0.0
   user_info:
     path: ../../user/user_info

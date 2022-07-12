@@ -8,8 +8,6 @@ environment:
 dependencies:
   core_tdlib_api:
     path: ../core_tdlib_api
-  core_utils:
-    path: ../core_utils
   feature_file_api:
     path: ../feature/feature_file_api
   flutter:
@@ -19,6 +17,8 @@ dependencies:
   rxdart: 0.27.3
   shared_models:
     path: ../shared/models
+  td_api:
+    path: ../td/td_api
 
 dev_dependencies:
   build_runner: 2.1.7

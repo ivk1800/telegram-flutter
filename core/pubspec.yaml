@@ -7,16 +7,13 @@ environment:
 
 dependencies:
   connectivity_plus: 2.2.1
-  core_arch:
-    path: ../core_arch
   core_tdlib_api:
     path: ../core_tdlib_api
   flutter:
     sdk: flutter
-  intl: 0.17.0
   rxdart: 0.27.3
-  td_client:
-    path: ../td_client
+  td_api:
+    path: ../td/td_api
 
 dev_dependencies:
   dependency_validator: 3.2.0

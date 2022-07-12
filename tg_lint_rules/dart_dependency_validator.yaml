@@ -1,1 +1,3 @@
 allow_pins: true
+ignore:
+  - flutter_lints

@@ -17,6 +17,8 @@ dependencies:
     path: ../feature/chat/chat_manager/chat_manager_api
   chat_manager_impl:
     path: ../feature/chat/chat_manager/chat_manager_impl
+  chat_navigation_api:
+    path: ../feature/chat/chat_navigation_api
   chat_theme:
     path: ../feature/chat/chat_theme
   contacts_manager_api:
@@ -111,8 +113,6 @@ dependencies:
     path: ../feature/feature_main_screen_api
   feature_main_screen_impl:
     path: ../feature/feature_main_screen_impl
-  feature_message_preview_resolver:
-    path: ../feature/feature_message_preview_resolver
   feature_message_preview_resolver_impl:
     path: ../feature/feature_message_preview_resolver_impl
   feature_new_contact_api:
@@ -162,12 +162,10 @@ dependencies:
     path: ../localization_api
   localization_impl:
     path: ../localization_impl
-  path_provider: 2.0.9
-  rxdart: 0.27.3
   split_view:
     path: ../split_view
-  sticker_navigation_api:
-    path: ../feature/sticker/sticker_navigation_api
+  td_api:
+    path: ../td/td_api
   td_client:
     path: ../td_client
   tg_logger_api:

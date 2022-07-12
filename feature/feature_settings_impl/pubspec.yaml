@@ -14,6 +14,8 @@ dependencies:
     path: ../../core_arch_flutter
   core_tdlib_api:
     path: ../../core_tdlib_api
+  core_utils:
+    path: ../../core_utils
   coreui:
     path: ../../coreui
   dmg_annotation:

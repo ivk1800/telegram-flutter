@@ -2,7 +2,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:fake/fake.dart' as fake;
 import 'package:localization_api/localization_api.dart';
 import 'package:localization_impl/localization_impl.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class FakeProvider {
   IChatRepository getChatRepository() {

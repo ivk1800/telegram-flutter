@@ -3,7 +3,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
 import 'package:shared_models/shared_models.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 
 class SenderInfoMapper {
   SenderInfoMapper({

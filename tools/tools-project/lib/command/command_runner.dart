@@ -10,7 +10,7 @@ import 'command.dart';
 Future<void> runCommands({
   required List<Command> commands,
   required bool withOutputs,
-  bool withRetry = true,
+  bool withRetry = false,
 }) async {
   int count = 0;
 
@@ -52,7 +52,7 @@ Future<void> runCommands({
           )
           .toList();
 
-  if (failedCommands.isNotEmpty) {
+  if (failedCommands.isNotEmpty && withRetry) {
     TextPen()
       ..setColor(Color.YELLOW)
       ..text('retry...')
@@ -62,7 +62,6 @@ Future<void> runCommands({
           .map((_CommandResultWrapper result) => result.command)
           .toList(),
       withOutputs: withOutputs,
-      withRetry: false,
     );
   }
 

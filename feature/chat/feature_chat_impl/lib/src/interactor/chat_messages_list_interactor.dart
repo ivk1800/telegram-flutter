@@ -8,7 +8,7 @@ import 'package:feature_chat_impl/src/chat_message_updates_handler.dart';
 import 'package:feature_chat_impl/src/mapper/message_tile_mapper.dart';
 import 'package:feature_chat_impl/src/tile/model/loading_tile_model.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 class ChatMessagesInteractor {

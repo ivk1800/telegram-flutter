@@ -8,7 +8,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_impl/src/di/chat_qualifiers.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
-import 'package:tdlib/td_api.dart';
+import 'package:td_api/td_api.dart' as td;
 
 import 'empty_state.dart';
 
@@ -43,10 +43,10 @@ class EmptyChatViewModel extends BaseViewModel {
   void _init() {
     final CancelableOperation<EmptyState> operation =
         _chatRepository.getChat(_chatId).toCancelableOperation().map(
-      (Chat value) {
+      (td.Chat value) {
         // TODO: implement others states: admin of channel, greeting state...
         return value.type.maybeMap<FutureOr<EmptyState>>(
-          private: (ChatTypePrivate private) async {
+          private: (td.ChatTypePrivate private) async {
             final int myId = await _optionsManager.getMyId();
             if (private.userId == myId) {
               return const EmptyState.self();

@@ -6,7 +6,7 @@ import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rich_text_format/rich_text_format.dart' as rt;
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 import 'message_call_tile_model_mapper.dart';

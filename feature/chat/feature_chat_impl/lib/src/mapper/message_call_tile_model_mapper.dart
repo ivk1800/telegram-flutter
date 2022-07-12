@@ -3,7 +3,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/mapper/sender_info_mapper.dart';
 import 'package:intl/intl.dart';
 import 'package:localization_api/localization_api.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 import 'additional_info_mapper.dart';

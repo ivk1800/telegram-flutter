@@ -3,7 +3,7 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:showcase/src/showcase/message/message_data.dart';
 import 'package:showcase/src/showcase/message/message_showcase_state.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 import 'message_bundle.dart';

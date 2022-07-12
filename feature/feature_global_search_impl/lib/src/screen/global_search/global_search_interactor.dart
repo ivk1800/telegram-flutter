@@ -1,7 +1,7 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:search_component/search_component.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 import 'global_search_result_category.dart';

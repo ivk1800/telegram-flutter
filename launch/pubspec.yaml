@@ -7,8 +7,6 @@ environment:
 dependencies:
   app:
     path: ../app
-  flutter:
-    sdk: flutter
   showcase:
     path: ../showcase
 

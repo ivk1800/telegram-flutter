@@ -3,7 +3,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:feature_wallpapers_impl/src/tile/model/model.dart';
 import 'package:feature_wallpapers_impl/src/util/background_fill_ext.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tdlib/td_api.dart' as td;
+import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 import 'wallpaper_list_event.dart';
