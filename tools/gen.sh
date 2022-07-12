@@ -5,5 +5,5 @@ parent_path=$(
   cd "$(dirname "${BASH_SOURCE[0]}")"
   pwd -P
 )
-echo $parent_path;
-dart run tools-project/lib/main.dart gen --work-directory "$parent_path/../"
+echo "gen..."
+dart run "$parent_path/tools-project/lib/main.dart" gen --work-directory "$parent_path/../"
