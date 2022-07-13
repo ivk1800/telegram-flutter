@@ -6,10 +6,8 @@ import 'package:td_client/td_client.dart';
 extension TdErrorExt<T extends td.TdObject> on Future<T> {
   Future<T> catchTdError() {
     return catchError(
-      (Object error) {
-        error as TdFunctionException;
-        Error.throwWithStackTrace(error, error.stackTrace!);
-      },
+      // TODO: check correct handle errors
+      Error.throwWithStackTrace,
       test: (Object error) => error is TdFunctionException,
     );
   }

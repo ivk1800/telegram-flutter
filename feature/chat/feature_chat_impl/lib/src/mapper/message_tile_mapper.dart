@@ -381,7 +381,8 @@ class MessageTileMapper {
           isOutgoing: message.isOutgoing,
           stickerFileId: value.sticker.sticker.id,
           setId: value.sticker.setId,
-          isAnimated: value.sticker.isAnimated,
+          // TODO: support more types
+          isAnimated: value.sticker.type is td.StickerTypeAnimated,
         );
       },
       messageSupergroupChatCreate: (td.MessageSupergroupChatCreate value) {
@@ -494,6 +495,20 @@ class MessageTileMapper {
       },
       messageChatJoinByRequest: (td.MessageChatJoinByRequest value) {
         return MessageChatJoinByRequestTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageWebAppDataReceived: (td.MessageWebAppDataReceived value) {
+        return MessageWebAppDataReceivedTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageWebAppDataSent: (td.MessageWebAppDataSent value) {
+        return MessageWebAppDataSentTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
           type: notImplementedText,

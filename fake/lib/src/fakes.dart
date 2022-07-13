@@ -2,6 +2,8 @@ import 'package:td_api/td_api.dart' as td;
 
 td.Message createFakeMessage() {
   return const td.Message(
+    unreadReactions: <td.UnreadReaction>[],
+    canGetAddedReactions: false,
     canBeSaved: false,
     canGetMediaTimestampLinks: false,
     canGetViewers: false,
@@ -45,6 +47,8 @@ td.Chat createFakeChat({
   List<td.ChatPosition>? positions,
 }) {
   return td.Chat(
+    unreadReactionCount: 0,
+    availableReactions: const <String>[],
     hasProtectedContent: false,
     messageTtl: 0,
     themeName: '',
@@ -84,7 +88,7 @@ td.Chat createFakeChat({
       disableMentionNotifications: false,
       disablePinnedMessageNotifications: false,
       showPreview: false,
-      sound: '',
+      soundId: 0,
       useDefaultDisableMentionNotifications: false,
       useDefaultDisablePinnedMessageNotifications: false,
       useDefaultMuteFor: false,

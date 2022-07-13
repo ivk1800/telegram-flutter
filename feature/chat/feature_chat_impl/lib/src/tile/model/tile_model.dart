@@ -47,5 +47,7 @@ export 'message_video_tile_model.dart';
 export 'message_voice_chat_ended_tile_model.dart';
 export 'message_voice_chat_started_tile_model.dart';
 export 'message_voice_note_tile_model.dart';
+export 'message_web_app_data_received_tile_model.dart';
+export 'message_web_app_data_sent_tile_model.dart';
 export 'message_website_connected_tile_model.dart';
 export 'unknown_message_tile_model.dart';

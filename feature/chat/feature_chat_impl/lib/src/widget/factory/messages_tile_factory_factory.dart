@@ -3,6 +3,8 @@ import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/message_bloc_provider.dart';
 import 'package:feature_chat_impl/src/tile/widget/message_invite_video_chat_participants_tile_factory_delegate.dart';
+import 'package:feature_chat_impl/src/tile/widget/message_web_app_data_received_tile_factory_delegate.dart';
+import 'package:feature_chat_impl/src/tile/widget/message_web_app_data_sent_tile_factory_delegate.dart';
 import 'package:feature_chat_impl/src/widget/chat_message/sender_avatar_factory.dart';
 import 'package:feature_chat_impl/src/widget/widget.dart';
 import 'package:localization_api/localization_api.dart';
@@ -223,6 +225,14 @@ class MessagesTileFactoryFactory {
         ),
         MessageChatJoinByRequestTileModel:
             MessageChatJoinByRequestTileFactoryDelegate(
+          chatMessageFactory: chatMessageFactory,
+        ),
+        MessageWebAppDataSentTileModel:
+            MessageWebAppDataSentTileFactoryDelegate(
+          chatMessageFactory: chatMessageFactory,
+        ),
+        MessageWebAppDataReceivedTileModel:
+            MessageWebAppDataReceivedTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),
       },
