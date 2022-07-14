@@ -1,10 +1,9 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_logout_api/feature_logout_api.dart';
 import 'package:feature_logout_impl/feature_logout_impl.dart';
-import 'package:feature_logout_impl/src/screen/logout/bloc/logout_bloc.dart';
 import 'package:feature_logout_impl/src/screen/logout/logout_page.dart';
+import 'package:feature_logout_impl/src/screen/logout/logout_view_model.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
@@ -28,14 +27,15 @@ class LogoutScreenFactory implements ILogoutScreenFactory {
             _dependencies.connectionStateProvider,
           ),
         ),
-      ],
-      child: BlocProvider<LogoutBloc>(
-        create: (BuildContext context) => LogoutBloc(
-          localizationManager: _dependencies.localizationManager,
-          router: _dependencies.router,
+        Provider<LogoutViewModel>(
+          create: (_) => LogoutViewModel(
+            localizationManager: _dependencies.localizationManager,
+            router: _dependencies.router,
+          ),
+          dispose: (_, LogoutViewModel value) => value.dispose(),
         ),
-        child: const LogoutPage(),
-      ),
+      ],
+      child: const LogoutPage(),
     );
   }
 }

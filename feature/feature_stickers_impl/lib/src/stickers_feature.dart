@@ -17,6 +17,7 @@ class StickersFeature implements IStickersFeatureApi {
 
   StickersWidgetFactory? _stickersWidgetFactory;
 
+  // TODO replace by late final
   @override
   IStickersWidgetFactory get stickersWidgetFactory =>
       _stickersWidgetFactory ??

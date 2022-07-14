@@ -6,6 +6,13 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  async: 2.8.2
+  async_utils:
+    path: ../../async_utils
+  core_arch:
+    path: ../../core_arch
+  core_arch_flutter:
+    path: ../../core_arch_flutter
   core_tdlib_api:
     path: ../../core_tdlib_api
   core_utils:
@@ -24,6 +31,7 @@ dependencies:
   localization_api:
     path: ../../localization_api
   provider: 6.0.2
+  rxdart: 0.27.3
   shared_models:
     path: ../../shared/models
   td_api:

@@ -1,11 +1,10 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
-import 'bloc/chat_settings_bloc.dart';
-import 'bloc/chat_settings_event.dart';
+import 'chat_settings_event.dart';
+import 'chat_settings_view_model.dart';
 
 class ChatSettingsPage extends StatefulWidget {
   const ChatSettingsPage({super.key});
@@ -37,7 +36,7 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
     final ILocalizationManager localizationManager =
         Provider.of(context, listen: false);
-    final ChatSettingsBloc bloc = BlocProvider.of(context, listen: false);
+    final ChatSettingsViewModel bloc = Provider.of(context, listen: false);
     final ThemeData theme = Theme.of(context);
     final Color accentColor = theme.colorScheme.secondary;
     return Column(
@@ -45,7 +44,7 @@ class _Body extends StatelessWidget {
       children: <Widget>[
         const tg.SectionDivider(),
         tg.TextCell(
-          onTap: () => bloc.add(const WallpapersTap()),
+          onTap: () => bloc.onEvent(const WallpapersTap()),
           titleColor: accentColor,
           title: localizationManager.getString('ChangeChatBackground'),
           leading: Icon(
@@ -121,7 +120,7 @@ class _Body extends StatelessWidget {
         ),
         const tg.SectionDivider(),
         tg.TextCell(
-          onTap: () => bloc.add(const StickersAndMasksTap()),
+          onTap: () => bloc.onEvent(const StickersAndMasksTap()),
           title: localizationManager.getString('StickersAndMasks'),
         ),
         const tg.SectionDivider(),

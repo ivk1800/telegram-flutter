@@ -1,8 +1,7 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
-import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/bloc/wallpaper_list_bloc.dart';
-import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/bloc/wallpaper_list_event.dart';
+import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_bloc.dart';
 import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_page.dart';
 import 'package:feature_wallpapers_impl/src/tile/model/model.dart';
 import 'package:feature_wallpapers_impl/src/tile/widget/background_wallpaper_tile_factory_delegate.dart';
@@ -11,7 +10,6 @@ import 'package:feature_wallpapers_impl/src/tile/widget/fill_wallpaper_tile_fact
 import 'package:feature_wallpapers_impl/src/tile/widget/pattern_wallpaper_tile_factory_delegate.dart';
 import 'package:feature_wallpapers_impl/src/tile/widget/top_group_tile_factory_delegate.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 import 'package:tile/tile.dart';
@@ -63,13 +61,16 @@ class WallpapersListScreenFactory implements IWallpapersListScreenFactory {
             _dependencies.connectionStateProvider,
           ),
         ),
+        Provider<WallpaperListViewModel>(
+          create: (BuildContext context) => WallpaperListViewModel(
+            backgroundRepository: _dependencies.backgroundRepository,
+          ),
+          dispose: (_, WallpaperListViewModel value) {
+            value.dispose();
+          },
+        ),
       ],
-      child: BlocProvider<WallpaperListBloc>(
-        create: (BuildContext context) => WallpaperListBloc(
-          backgroundRepository: _dependencies.backgroundRepository,
-        )..add(const WallpaperListEvent.init()),
-        child: const WallpaperListPage(),
-      ),
+      child: const WallpaperListPage(),
     );
   }
 }

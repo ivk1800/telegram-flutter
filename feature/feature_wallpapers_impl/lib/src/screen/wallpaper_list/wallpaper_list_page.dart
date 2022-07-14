@@ -1,6 +1,7 @@
+import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/bloc/wallpaper_list_bloc.dart';
-import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/bloc/wallpaper_list_state.dart';
+import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_bloc.dart';
+import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_state.dart';
 import 'package:feature_wallpapers_impl/src/tile/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,14 +16,15 @@ class WallpaperListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ILocalizationManager localizationManager = context.read();
     final tg.TgAppBarFactory appBarFactory = context.read();
+    final WallpaperListViewModel viewModel = context.read();
 
     return Scaffold(
       appBar: appBarFactory.createDefaultTitle(
         context,
         localizationManager.getString('ChatBackground'),
       ),
-      body: BlocConsumer<WallpaperListBloc, WallpaperListState>(
-        listener: (BuildContext context, WallpaperListState state) {},
+      body: StreamListener<WallpaperListState>(
+        stream: viewModel.state,
         builder: (BuildContext context, WallpaperListState state) {
           return AnimatedSwitcher(
             child: _Body(state: state),

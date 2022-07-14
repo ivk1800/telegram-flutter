@@ -1,26 +1,26 @@
+import 'package:core_arch/core_arch.dart';
 import 'package:dialog_api/dialog_api.dart';
 import 'package:feature_logout_impl/src/logout_feature_router.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'logout_event.dart';
-import 'logout_state.dart';
 
-class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
-  LogoutBloc({
+class LogoutViewModel extends BaseViewModel {
+  LogoutViewModel({
     required ILogoutFeatureRouter router,
     required ILocalizationManager localizationManager,
   })  : _router = router,
-        _localizationManager = localizationManager,
-        super(const LogoutState()) {
-    on<Tap>(_onTapEvent);
-  }
+        _localizationManager = localizationManager;
 
   final ILogoutFeatureRouter _router;
   final ILocalizationManager _localizationManager;
 
-  void _onTapEvent(Tap tap, Emitter<LogoutState> emit) {
-    switch (tap.tap) {
+  void onEvent(LogoutEvent event) {
+    event.when(tap: _onTapEvent);
+  }
+
+  void _onTapEvent(TapType tap) {
+    switch (tap) {
       case TapType.addAnotherAccount:
         _router.toAddAccount();
         break;

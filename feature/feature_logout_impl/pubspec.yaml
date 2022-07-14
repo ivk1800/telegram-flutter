@@ -10,6 +10,8 @@ dependencies:
     path: ../../component/auth_manager/auth_manager_api
   chat_navigation_api:
     path: ../chat/chat_navigation_api
+  core_arch:
+    path: ../../core_arch
   core_tdlib_api:
     path: ../../core_tdlib_api
   coreui:

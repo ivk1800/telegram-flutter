@@ -2,12 +2,11 @@ import 'package:coreui/coreui.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chat_settings_impl/src/screen/settings/chat_settings_page.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:provider/provider.dart';
 
 import 'chat_settings_feature_dependencies.dart';
-import 'screen/settings/bloc/chat_settings_bloc.dart';
+import 'screen/settings/chat_settings_view_model.dart';
 
 class ChatSettingsFeature implements IChatSettingsFeatureApi {
   ChatSettingsFeature({
@@ -37,11 +36,11 @@ class _ScreenWidgetFactory implements IChatSettingsWidgetFactory {
               connectionStateProvider: dependencies.connectionStateProvider,
             ),
           ),
+          Provider<ChatSettingsViewModel>(
+            create: (_) => ChatSettingsViewModel(router: dependencies.router),
+            dispose: (_, ChatSettingsViewModel value) => value.dispose(),
+          ),
         ],
-        child: BlocProvider<ChatSettingsBloc>(
-          create: (BuildContext context) =>
-              ChatSettingsBloc(router: dependencies.router),
-          child: const ChatSettingsPage(),
-        ),
+        child: const ChatSettingsPage(),
       );
 }

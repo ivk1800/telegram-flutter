@@ -1,3 +1,0 @@
-class LogoutState {
-  const LogoutState();
-}
