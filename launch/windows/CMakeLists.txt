@@ -67,25 +67,10 @@ set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}")
 
 # begin td
 set(dll_path "${CMAKE_CURRENT_SOURCE_DIR}/../../tdlib/windows")
-set(libcrypto "libcrypto-1_1.dll")
-set(libcrypto_path "${dll_path}/${libcrypto}")
-install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/${libcrypto}\")" COMPONENT Runtime)
-install(FILES "${libcrypto_path}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
-
-set(libssl "libssl-1_1.dll")
-set(libssl_path "${dll_path}/${libssl}")
-install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/${libssl}\")" COMPONENT Runtime)
-install(FILES "${libssl_path}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
-
-set(tdjson "tdjson.dll")
-set(tdjson_path "${dll_path}/${tdjson}")
-install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/${tdjson}\")" COMPONENT Runtime)
-install(FILES "${tdjson_path}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
-
-set(zlib "zlib1.dll")
-set(zlib_path "${dll_path}/${zlib}")
-install(CODE "file(REMOVE_RECURSE \"${INSTALL_BUNDLE_LIB_DIR}/${zlib}\")" COMPONENT Runtime)
-install(FILES "${zlib_path}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
+install(FILES "${dll_path}/libcrypto-1_1.dll" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
+install(FILES "${dll_path}/libssl-1_1.dll" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
+install(FILES "${dll_path}/tdjson.dll" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
+install(FILES "${dll_path}/zlib1.dll" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}" COMPONENT Runtime)
 # end td
 
 install(TARGETS ${BINARY_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}"
