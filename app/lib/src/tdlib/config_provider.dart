@@ -16,9 +16,6 @@ class TdConfigProvider implements ITdConfigProvider {
   @override
   Future<String> getApiHash() async => (await _cache)['apiHash']!;
 
-  @override
-  Future<String> getEncryptionKey() async => (await _cache)['encryptionKey']!;
-
   Future<Map<String, String>> _readFromAssets() async {
     final String raw =
         await rootBundle.loadString('packages/app/assets/tdlib/config.txt');

@@ -83,9 +83,7 @@ class AuthorizationStateDelegate {
 
   Future<void> _handleWaitEncryptionKey() async {
     await _functionExecutor.send<td.Ok>(
-      td.CheckDatabaseEncryptionKey(
-        encryptionKey: await _tdConfigProvider.getEncryptionKey(),
-      ),
+      const td.CheckDatabaseEncryptionKey(encryptionKey: ''),
     );
   }
 }
