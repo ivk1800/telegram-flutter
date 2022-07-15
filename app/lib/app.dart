@@ -20,7 +20,6 @@ Future<void> launch() async {
       .build();
 
   appComponent.getFeatureProvider().devFeature.init();
-  appComponent.getAppController().onInit();
 
   final TgApp app = TgApp(
     themeDataResolver: appComponent.getThemeDataResolver(),
@@ -31,6 +30,7 @@ Future<void> launch() async {
 
   final TdClient client = appComponent.getTdClient();
   await client.init();
+  appComponent.getAppController().onInit();
 
   client.execute<td.TdObject>(
     const td.SetLogVerbosityLevel(newVerbosityLevel: 0),

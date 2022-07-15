@@ -8,7 +8,7 @@ dependencies:
   tdlib:
     git:
       url: git@github.com:ivk1800/tdlib-dart.git
-      ref: 324fa2bd1f01213f803a5a747c50fe93f293bc62
+      ref: ebe3a2a74edd15b7358ade6681276caa471b1815
 
 dev_dependencies:
   dependency_validator: 3.2.0
