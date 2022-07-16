@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = app
+PRODUCT_NAME = Telegram
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.td.app
+PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.telegram.telegram
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2021 ru.ivk1800.td. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 ru.ivk1800.telegram. All rights reserved.

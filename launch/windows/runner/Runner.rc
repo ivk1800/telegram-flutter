@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "ru.ivk1800.td" "\0"
+            VALUE "CompanyName", "ivk1800" "\0"
             VALUE "FileDescription", "A new Flutter project." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "app" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 ru.ivk1800.td. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2021 ivk1800. All rights reserved." "\0"
             VALUE "OriginalFilename", "app.exe" "\0"
-            VALUE "ProductName", "app" "\0"
+            VALUE "ProductName", "Telegram" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

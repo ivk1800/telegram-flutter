@@ -3,13 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
-		2CE494F92631EBBC00EDD46C /* libtdjson.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE494F82631EBBC00EDD46C /* libtdjson.dylib */; };
-		2CE494FA2631EBC100EDD46C /* libtdjson.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE494F82631EBBC00EDD46C /* libtdjson.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2C9108BE2883463B0012D01D /* libtdjson.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9108BD2883463B0012D01D /* libtdjson.dylib */; platformFilter = ios; };
+		2C9108BF288346460012D01D /* libtdjson.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9108BD2883463B0012D01D /* libtdjson.dylib */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
@@ -25,6 +25,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				2C9108BF288346460012D01D /* libtdjson.dylib in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -34,7 +35,7 @@
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
-		2CE494F82631EBBC00EDD46C /* libtdjson.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtdjson.dylib; path = ../../tdlib/ios/libtdjson.dylib; sourceTree = "<group>"; };
+		2C9108BD2883463B0012D01D /* libtdjson.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtdjson.dylib; path = ../../tdlib/ios/libtdjson.dylib; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		540657026FF7E9F2A8F395E1 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A1D2A34B5146876D9B673BD /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
@@ -57,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CE494F92631EBBC00EDD46C /* libtdjson.dylib in Frameworks */,
+				2C9108BE2883463B0012D01D /* libtdjson.dylib in Frameworks */,
 				E4895BD40B425698073138AA /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,7 +73,6 @@
 				ABCF5A6B3B6A97EA95D78B6B /* Pods-Runner.release.xcconfig */,
 				C5267ACD758121C36FC99CC7 /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -90,7 +90,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
-				2CE494F82631EBBC00EDD46C /* libtdjson.dylib */,
+				2C9108BD2883463B0012D01D /* libtdjson.dylib */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
@@ -372,7 +372,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/../../tdlib/ios",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.tg;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.telegram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -505,7 +505,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/../../tdlib/ios",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.tg;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.telegram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -532,7 +532,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/../../tdlib/ios",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.tg;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.ivk1800.telegram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

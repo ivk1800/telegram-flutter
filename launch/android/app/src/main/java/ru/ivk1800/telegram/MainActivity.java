@@ -1,4 +1,4 @@
-package ru.ivk1800.td.app;
+package ru.ivk1800.telegram;
 
 import io.flutter.embedding.android.FlutterActivity;
 

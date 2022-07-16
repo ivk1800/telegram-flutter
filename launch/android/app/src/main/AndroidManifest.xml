@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.ivk1800.td.app">
+    package="ru.ivk1800.telegram">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
    <application
-        android:label="app"
+        android:label="Telegram"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
