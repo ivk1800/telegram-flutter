@@ -15,7 +15,6 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
   MessagePreviewResolver({
     required Mode mode,
     required IUserRepository userRepository,
-    required IChatMessageRepository messageRepository,
     required IChatRepository chatRepository,
     required IStringsProvider stringsProvider,
   })  : _stringsProvider = stringsProvider,
@@ -26,7 +25,6 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
                 userRepository: userRepository,
               )
             : ReplyPreviewDelegate(
-                messageRepository: messageRepository,
                 messageTextResolver: MessageTextResolver(),
                 userRepository: userRepository,
                 chatRepository: chatRepository,

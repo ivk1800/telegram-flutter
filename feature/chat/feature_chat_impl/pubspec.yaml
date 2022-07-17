@@ -10,7 +10,6 @@ dependencies:
   async_utils:
     path: ../../../async_utils
   badges: 2.0.2
-  collection: 1.16.0
   chat_actions_panel:
     path: ../chat_actions_panel
   chat_info:
@@ -21,6 +20,7 @@ dependencies:
     path: ../chat_navigation_api
   chat_theme:
     path: ../chat_theme
+  collection: 1.16.0
   core:
     path: ../../../core
   core_arch:

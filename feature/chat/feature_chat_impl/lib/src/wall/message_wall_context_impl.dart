@@ -1,15 +1,7 @@
-import 'package:feature_chat_impl/src/interactor/chat_messages_list_interactor.dart';
-
 import 'message_wall_context.dart';
 
 // todo refactor and optimize
 class MessageWallContextImpl implements IMessageWallContext {
-  const MessageWallContextImpl({
-    required ChatMessagesInteractor chatMessagesInteractor,
-  }) : _chatMessagesInteractor = chatMessagesInteractor;
-
-  final ChatMessagesInteractor _chatMessagesInteractor;
-
   @override
   bool isDisplayAvatarFor(int messageId) {
     return true;

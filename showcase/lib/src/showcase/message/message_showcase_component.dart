@@ -144,14 +144,12 @@ abstract class MessageShowcaseModule {
     IUserRepository userRepository,
     IChatRepository chatRepository,
     IStringsProvider stringsProvider,
-    IChatMessageRepository chatMessageRepository,
   ) {
     return MessagePreviewResolver(
       userRepository: userRepository,
       chatRepository: chatRepository,
       stringsProvider: stringsProvider,
       mode: Mode.replyPreview,
-      messageRepository: chatMessageRepository,
     );
   }
 }

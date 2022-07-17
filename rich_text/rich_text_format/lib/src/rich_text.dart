@@ -9,8 +9,10 @@ class RichText {
   final List<Entity> entities;
 
   factory RichText.planeText(String text) {
-    return RichText(entities: <Entity>[
-      Entity(text: text, types: <Type>[Type.planeText()])
-    ]);
+    return RichText(
+      entities: <Entity>[
+        Entity(text: text, types: <Type>[const Type.planeText()])
+      ],
+    );
   }
 }

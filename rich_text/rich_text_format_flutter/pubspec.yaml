@@ -6,10 +6,10 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
-  rich_text_format:
-    path: ../rich_text_format
   flutter:
     sdk: flutter
+  rich_text_format:
+    path: ../rich_text_format
 
 dev_dependencies:
   dependency_validator: 3.2.0

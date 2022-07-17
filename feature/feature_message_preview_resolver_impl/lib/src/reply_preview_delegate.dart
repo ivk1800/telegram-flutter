@@ -7,19 +7,16 @@ import 'preview_delegate.dart';
 
 class ReplyPreviewDelegate implements IPreviewDelegate {
   const ReplyPreviewDelegate({
-    required IChatMessageRepository messageRepository,
     required IChatRepository chatRepository,
     required MessageTextResolver messageTextResolver,
     required IUserRepository userRepository,
   })  : _userRepository = userRepository,
         _messageTextResolver = messageTextResolver,
-        _messageRepository = messageRepository,
         _chatRepository = chatRepository;
 
   final MessageTextResolver _messageTextResolver;
   final IUserRepository _userRepository;
   final IChatRepository _chatRepository;
-  final IChatMessageRepository _messageRepository;
 
   @override
   Future<MessagePreviewData> resolveForAnimation(

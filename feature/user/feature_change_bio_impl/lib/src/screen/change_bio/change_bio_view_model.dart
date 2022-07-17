@@ -16,7 +16,10 @@ class ChangeBioViewModel extends BaseViewModel {
         _errorTransformer = errorTransformer,
         _router = router;
 
+  // ignore: unused_field
   final IBlockInteractionManager _blockInteractionManager;
+  // ignore: unused_field
   final IErrorTransformer _errorTransformer;
+  // ignore: unused_field
   final IChangeBioRouter _router;
 }

@@ -4,10 +4,12 @@ import 'package:feature_contacts_impl/src/contacts_feature_dependencies.dmg.dart
 import 'package:feature_contacts_impl/src/screen/contacts/contacts_screen_scope_delegate.dart';
 import 'package:jugger/jugger.dart' as j;
 
-@j.Component(modules: <Type>[
-  ContactsFeatureDependenciesModule,
-  TgAppBarModule,
-])
+@j.Component(
+  modules: <Type>[
+    ContactsFeatureDependenciesModule,
+    TgAppBarModule,
+  ],
+)
 abstract class IContactsScreenComponent
     implements IContactsScreenScopeDelegate {}
 

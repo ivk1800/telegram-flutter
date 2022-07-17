@@ -15,14 +15,14 @@ class SearchInteractor<T, R> implements ISearchInteractor<R> {
         .map((String query) => query.trim())
         .doOnData((String query) {
           if (query.isEmpty) {
-            _resultSubject.add(const SearchState.def());
+            _resultSubject.add(SearchState<R>.def());
           }
         })
         .distinct()
         .debounceTime(const Duration(milliseconds: 300))
         .where((String query) => query.isNotEmpty)
         .doOnData((_) {
-          _resultSubject.add(const SearchState.loading());
+          _resultSubject.add(SearchState<R>.loading());
         })
         .switchMap((String query) {
           return Stream<T>.fromFuture(_resultFetcher.call(query))
@@ -33,22 +33,20 @@ class SearchInteractor<T, R> implements ISearchInteractor<R> {
             return SearchState<R>.result(await _resultMapper.call(result));
           });
         })
-        .listen((SearchState<R> result) {
-          _resultSubject.add(result);
-        });
+        .listen(_resultSubject.add);
   }
 
   final ResultMapper<R, T> _resultMapper;
   final ResultFetcher<T> _resultFetcher;
   final EmptyTest<T> _emptyTest;
 
-  StreamSubscription<SearchState>? _queryResultSubscription;
+  StreamSubscription<SearchState<R>>? _queryResultSubscription;
 
   final BehaviorSubject<String> _querySubject =
       BehaviorSubject<String>.seeded('');
 
   final BehaviorSubject<SearchState<R>> _resultSubject =
-      BehaviorSubject<SearchState<R>>.seeded(const SearchState.def());
+      BehaviorSubject<SearchState<R>>.seeded(SearchState<R>.def());
 
   @override
   Stream<SearchState<R>> get result => _resultSubject;

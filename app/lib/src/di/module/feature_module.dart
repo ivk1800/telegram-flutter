@@ -118,7 +118,6 @@ abstract class FeatureModule {
     IChatUpdatesProvider chatUpdatesProvider,
     IUserRepository userRepository,
     ILocalizationManager localizationManager,
-    IChatMessageRepository chatMessageRepository,
     ISuperGroupRepository superGroupRepository,
   ) =>
       ChatsListFeatureDependencies(
@@ -130,7 +129,6 @@ abstract class FeatureModule {
         chatRepository: chatRepository,
         fileDownloader: fileDownloader,
         messagePreviewResolver: MessagePreviewResolver(
-          messageRepository: chatMessageRepository,
           chatRepository: chatRepository,
           mode: Mode.chatPreview,
           userRepository: userRepository,
@@ -191,7 +189,6 @@ abstract class FeatureModule {
         chatHeaderInfoFeatureApi: chatHeaderInfoFeatureApi,
         chatRepository: chatRepository,
         messagePreviewResolver: MessagePreviewResolver(
-          messageRepository: chatMessageRepository,
           mode: Mode.replyPreview,
           chatRepository: chatRepository,
           userRepository: userRepository,

@@ -6,12 +6,12 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  bloc: 8.0.2
   collection: 1.16.0
   feature_country_api:
     path: ../feature_country_api
   flutter:
     sdk: flutter
-  bloc: 8.0.2
   flutter_bloc: 8.0.1
   freezed_annotation: 1.1.0
   localization_api:
