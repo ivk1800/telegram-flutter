@@ -65,8 +65,10 @@ abstract class ShowcaseModule {
 
   @j.provides
   @j.singleton
-  static GlobalKey<NavigatorState> provideNavigationKey() =>
-      GlobalKey<NavigatorState>();
+  static GlobalKey<NavigatorState> provideNavigationKey(
+    ShowcaseDependencies dependencies,
+  ) =>
+      dependencies.dialogNavigatorKey;
 
   @j.provides
   @j.singleton

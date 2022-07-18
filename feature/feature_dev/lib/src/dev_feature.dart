@@ -53,6 +53,7 @@ class DevDependencies {
     required this.stringsProvider,
     required this.eventsProvider,
     required this.themeManager,
+    required this.navigatorKey,
   });
 
   final ITdFunctionExecutor functionExecutor;
@@ -61,4 +62,5 @@ class DevDependencies {
   final IConnectionStateProvider connectionStateProvider;
   final IEventsProvider eventsProvider;
   final IThemeManager themeManager;
+  final GlobalKey<NavigatorState> navigatorKey;
 }

@@ -30,7 +30,9 @@ class ShowcaseFeature {
 class ShowcaseDependencies {
   ShowcaseDependencies({
     required this.stringsProvider,
+    required this.dialogNavigatorKey,
   });
 
   final IStringsProvider stringsProvider;
+  final GlobalKey<NavigatorState> dialogNavigatorKey;
 }

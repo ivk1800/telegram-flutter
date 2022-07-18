@@ -95,6 +95,7 @@ abstract class DevModule {
       ShowcaseFeature(
         dependencies: ShowcaseDependencies(
           stringsProvider: dependencies.stringsProvider,
+          dialogNavigatorKey: dependencies.navigatorKey,
         ),
       );
 

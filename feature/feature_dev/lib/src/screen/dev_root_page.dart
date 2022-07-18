@@ -113,7 +113,7 @@ class _Body extends StatelessWidget {
               ),
             );
           },
-          title: const Text('Demo'),
+          title: const Text('Showcase'),
         ),
         const Divider(),
         ListTile(

@@ -1,3 +1,4 @@
+import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/router/change_bio_router.dart';
@@ -581,6 +582,7 @@ abstract class FeatureModule {
         functionExecutor: functionExecutor,
         stringsProvider: stringsProvider,
         connectionStateProvider: connectionStateProvider,
+        navigatorKey: TgApp.navigatorKey,
       );
 
   // endregion dependencies

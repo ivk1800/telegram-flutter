@@ -146,8 +146,16 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final NavigatorState navigator = Navigator.of(context, rootNavigator: true);
+
     return Scaffold(
       appBar: AppBar(
+        leading: navigator.canPop()
+            ? IconButton(
+                onPressed: navigator.pop,
+                icon: const Icon(Icons.arrow_back),
+              )
+            : null,
         title: const Text('showcase'),
       ),
       body: ListView.builder(

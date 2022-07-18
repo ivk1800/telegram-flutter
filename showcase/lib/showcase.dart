@@ -17,6 +17,7 @@ Future<void> launch() async {
   final ShowcaseFeature showcase = ShowcaseFeature(
     dependencies: ShowcaseDependencies(
       stringsProvider: localizationManager.stringsProvider,
+      dialogNavigatorKey: GlobalKey<NavigatorState>(),
     ),
   );
 

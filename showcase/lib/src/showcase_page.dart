@@ -17,6 +17,9 @@ class _ShowcasePageState extends State<ShowcasePage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      splitViewNavigatorKey.currentState?.setRightContainerPlaceholder(
+        const Material(child: Center(child: Text('Showcase'))),
+      );
       splitViewNavigatorKey.currentState?.add(
         key: UniqueKey(),
         builder: (_) => const ShowcaseListPage(),
