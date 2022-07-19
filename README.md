@@ -4,55 +4,78 @@
 
 Preferred flutter version: `stable, 3.0.0`
 
-td lib version: `1.8.0` c0385078
+[TdLib](https://github.com/tdlib/td) version: `1.8.4` `d489014`
 
-#### Supported platform
+### Supported platform
 |Platform| Status|
 |-|-|
-|android|✅|
+|Android|✅|
 |iOS|✅|
-|macOS|✅|
+|MacOS|✅|
 |Windows|✅|
-|Linux|Need add native app and build td lib|
+|Linux|✅|
+|Web|TBD|
 
-#### Showcase mode
-`https://stackoverflow.com/a/64686348/4110159`
+### Getting started
 
-`--dart-define="mode=showcase"`
+1. Build TbLib for your platform, following the instructions: https://github.com/ivk1800/tdlib-dart#build-tdlib
+2. Place binaries to `tdlib` to the repo folder:
 
-### build tdlib
+For Android:
+```
+└── tdlib 
+    └── android 
+        └── arm64-v8a
+        │   └── libtdjsonandroid.so
+        │   └── libtdjsonandroid.so.debug
+        └── armeabi-v7a
+        │   └── libtdjsonandroid.so
+        │   └── libtdjsonandroid.so.debug
+        └── x86
+        │   └── libtdjsonandroid.so
+        │   └── libtdjsonandroid.so.debug
+        └── x86_64
+            └── libtdjsonandroid.so
+            └── libtdjsonandroid.so.debug
+```
+For iOS:
+```
+└── tdlib 
+    └── ios 
+        └── libtdjson.dylib
+```
+For MacOS:
+```
+└── tdlib 
+    └── macos 
+        └── libtdjson.dylib
+```
+For Windows:
+```
+└── tdlib 
+    └── windows 
+        └── libcrypto-1_1.dll
+        └── libssl-1_1.dll
+        └── tdjson.dll
+        └── zlib1.dll
+```
 
-1. `git clone git@github.com:tdlib/td.git`
-2. cd td
-3. git checkout `c0385078`
-
-#### android
-Instruction: https://github.com/tdlib/td/issues/77#issuecomment-640719893
-1. Download libtdjsonandroid.zip https://github.com/tdlib/td/issues/77#issuecomment-640719893
-2. Unpack the archive to td/example directory.
-3. Then download the latest OpenSSL 1.1.1 source code as a .tar.gz archive from OpenSSL 1.1.1 release page and place it in the third_party/crypto subfolder.
-4. Edit `example/third_party/crypto/build.sh`. Set your ANDROID_NDK path, `export ANDROID_NDK=/Users/arseny30/Library/Android/sdk/ndk-bundle` replace by own path to ndk.
-5. chmod +x `build.sh` and `build-all.sh` in `example/third_party/crypto/` folder.
-6. chmod +x `export.sh` in `example`
-7. Setup ANDROID_NDK path in `example/build.sh`. Replace `...=${ANDROID_SDK_ROOT}/ndk-bundle/...` by own path to ndk.
-8. chmod +x `build.sh` and `build-all.sh` in `example/` folder.
-9. Fix cmake path in `CMakeLists.txt`, replace `set(TD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../..)` by `set(TD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)`.
-10. Run `example/third_party/crypto/build-all.sh`
-11. Run `example/export.sh`
-12. copy folder `example/libs` to `<repo path>/tdlib` and rename `libs` to `android`
-
-#### iOS, macOS
-Instruction: https://github.com/tdlib/td/tree/master/example/ios
-
-1. Remove watchOs and tvOS in `example/ios/build-openssl.sh` and `example/ios/build.sh`: replace `platforms="macOS iOS watchOS tvOS"` by `platforms="macOS iOS"`.
-2. Build following the guide.
-3. Copy `example/ios/tdjson/iOS/lib/libtdjson.dylib` to `<repo path>/tdlib/ios` and `example/ios/tdjson/macOS/lib/libtdjson.dylib` to `<repo path>/tdlib/macos`
-
-#### windows
-Instruction: https://tdlib.github.io/td/build.html
-
-1. Choose language `C++`
-2. Choose operating system `Windows`
-3. Build following the guide.
-4. Copy files from `/tdlib/bin` to `<repo path>/tdlib/windows`
-5. Rename `libcrypto-1_1-(x64|x32).dll` to `libcrypto-1_1.dll` and `libssl-1_1-(x64|x32).dll` to `libssl-1_1.dll`
+2. Obtain api_id and api_hash at https://my.telegram.org
+3. Create file `config.txt` with content in assets:
+```
+└── app 
+    └── assets 
+        └── tdlib
+            └── config.txt
+```
+Content:
+```
+apiId:<api_id>
+apiHash:<api_hash>
+useTestDc:<true/false>
+```
+4. `cd <repo folder>`
+5. `cd tools/tools-project/ && dart pub get && cd ../..`
+6. `./tools/packages_get.sh`
+7. `./tools/gen.sh`
+8. `cd launch/ && flutter run `
