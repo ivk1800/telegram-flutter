@@ -80,18 +80,6 @@ class ChatActionPanelInteractor {
     return Stream<PanelState>.value(const PanelState.empty());
   }
 
-  Stream<PanelState> _getSuperGroupState({
-    required td.Supergroup supergroup,
-    required td.ChatNotificationSettings notificationSettings,
-    required td.ChatPermissions permissions,
-  }) {
-    if (permissions.canSendMessages) {
-      return Stream<PanelState>.value(const PanelState.writer());
-    }
-
-    return Stream<PanelState>.value(const PanelState.empty());
-  }
-
   Stream<PanelState> _finalPanelState({
     required td.ChatMemberStatus status,
     required td.ChatNotificationSettings notificationSettings,
@@ -167,8 +155,8 @@ class ChatActionPanelInteractor {
         final td.ChatNotificationSettings notificationSettings = data.item2;
         final td.ChatPermissions permissions = data.item3;
 
-        return _getSuperGroupState(
-          supergroup: group,
+        return _finalPanelState(
+          status: group.status,
           notificationSettings: notificationSettings,
           permissions: permissions,
         );
