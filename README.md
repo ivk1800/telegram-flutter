@@ -18,7 +18,7 @@ Preferred flutter version: `stable, 3.0.0`
 
 ### Getting started
 
-1. Build TbLib for your platform, following the instructions: https://github.com/ivk1800/tdlib-dart#build-tdlib
+1. Download prebuild TbLib for your platform from [page](https://github.com/ivk1800/td-json-client-prebuilt/releases)
 2. Place binaries to `tdlib` to the repo folder:
 
 For Android:
@@ -27,16 +27,12 @@ For Android:
     └── android 
         └── arm64-v8a
         │   └── libtdjsonandroid.so
-        │   └── libtdjsonandroid.so.debug
         └── armeabi-v7a
         │   └── libtdjsonandroid.so
-        │   └── libtdjsonandroid.so.debug
         └── x86
         │   └── libtdjsonandroid.so
-        │   └── libtdjsonandroid.so.debug
         └── x86_64
             └── libtdjsonandroid.so
-            └── libtdjsonandroid.so.debug
 ```
 For iOS:
 ```
