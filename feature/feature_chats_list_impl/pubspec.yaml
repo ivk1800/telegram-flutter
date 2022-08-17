@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
   flutter_svg: 1.0.3
   freezed_annotation: 1.1.0
-  jugger: 2.3.0
+  jugger: 2.3.1
   provider: 6.0.2
   queue:
     path: ../../queue
@@ -55,7 +55,7 @@ dev_dependencies:
   fake:
     path: ../../fake
   freezed: 1.1.1
-  jugger_generator: 2.5.0
+  jugger_generator: 2.5.1
   mockito: 5.1.0
   scope_generator:
     path: ../../scope_generator/generator
