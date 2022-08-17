@@ -3,11 +3,13 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 import 'chat_action_panel_interactor.dart';
+import 'chat_actions_panel_component_builder.dart';
 import 'chat_actions_panel_view_model.dart';
 import 'message_sender.dart';
 
 @j.Component(
   modules: <Type>[ChatActionsPanelModule],
+  builder: IChatActionsPanelComponentBuilder,
 )
 abstract class IChatActionsPanelComponent {
   ChatActionsPanelViewModel get chatActionsPanelViewModel;
@@ -63,13 +65,4 @@ abstract class ChatActionsPanelModule {
         chatRepository: dependencies.chatRepository,
         chatId: dependencies.chatId,
       );
-}
-
-@j.componentBuilder
-abstract class IChatActionsPanelComponentBuilder {
-  IChatActionsPanelComponentBuilder dependencies(
-    ChatActionPanelDependencies dependencies,
-  );
-
-  IChatActionsPanelComponent build();
 }

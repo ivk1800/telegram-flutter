@@ -1,8 +1,9 @@
 import 'package:core_ui_jugger/core_ui_jugger.dart';
-import 'package:feature_change_bio_impl/feature_change_bio_impl.dart';
 import 'package:feature_change_bio_impl/src/change_bio_feature_dependencies.dmg.dart';
 import 'package:feature_change_bio_impl/src/screen/change_bio/change_bio_screen_scope_delegate.dart';
 import 'package:jugger/jugger.dart' as j;
+
+import 'change_bio_screen_component_builder.dart';
 
 @j.Component(
   modules: <Type>[
@@ -10,18 +11,10 @@ import 'package:jugger/jugger.dart' as j;
     ChangeBioFeatureDependenciesModule,
     TgAppBarModule,
   ],
+  builder: IChangeBioScreenComponentBuilder,
 )
 abstract class IChangeBioScreenComponent
     implements IChangeBioScreenScopeDelegate {}
 
 @j.module
 abstract class ChangeBioScreenModule {}
-
-@j.componentBuilder
-abstract class IChangeBioScreenComponentBuilder {
-  IChangeBioScreenComponentBuilder dependencies(
-    ChangeBioFeatureDependencies dependencies,
-  );
-
-  IChangeBioScreenComponent build();
-}

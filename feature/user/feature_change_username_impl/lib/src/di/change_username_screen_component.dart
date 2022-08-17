@@ -7,12 +7,15 @@ import 'package:feature_change_username_impl/src/screen/username_checker.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:user_info/user_info.dart';
 
+import 'change_username_screen_component_builder.dart';
+
 @j.Component(
   modules: <Type>[
     ChangeUsernameScreenModule,
     TgAppBarModule,
     ChangeUsernameFeatureDependenciesModule
   ],
+  builder: IChangeUsernameScreenComponentBuilder,
 )
 abstract class IChangeUsernameScreenComponent
     implements IChangeUsernameScreenScopeDelegate {}
@@ -35,13 +38,4 @@ abstract class ChangeUsernameScreenModule {
     IUserRepository userRepository,
   ) =>
       UserInfoResolver(userRepository: userRepository);
-}
-
-@j.componentBuilder
-abstract class IChangeUsernameScreenComponentBuilder {
-  IChangeUsernameScreenComponentBuilder dependencies(
-    ChangeUsernameFeatureDependencies dependencies,
-  );
-
-  IChangeUsernameScreenComponent build();
 }

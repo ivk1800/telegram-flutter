@@ -7,12 +7,15 @@ import 'package:feature_chat_administration_impl/src/screen/chat_administration/
 import 'package:feature_chat_administration_impl/src/screen/chat_administration/chat_administration_screen_scope_delegate.dart';
 import 'package:jugger/jugger.dart' as j;
 
+import 'chat_administration_screen_component_builder.dart';
+
 @j.Component(
   modules: <Type>[
     ChatAdministrationScreenModule,
     ChatAdministrationFeatureDependenciesModule,
     TgAppBarModule,
   ],
+  builder: IChatAdministrationScreenComponentBuilder,
 )
 abstract class IChatAdministrationScreenComponent
     implements IChatAdministrationScreenScopeDelegate {}
@@ -38,15 +41,4 @@ abstract class ChatAdministrationScreenModule {
         chatRepository: chatRepository,
         superGroupRepository: superGroupRepository,
       );
-}
-
-@j.componentBuilder
-abstract class IChatAdministrationScreenComponentBuilder {
-  IChatAdministrationScreenComponentBuilder dependencies(
-    ChatAdministrationFeatureDependencies dependencies,
-  );
-
-  IChatAdministrationScreenComponentBuilder args(Args args);
-
-  IChatAdministrationScreenComponent build();
 }

@@ -13,10 +13,12 @@ import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
 import 'message_bundle.dart';
+import 'message_showcase_component_builder.dart';
 import 'message_showcase_view_model.dart';
 
 @j.Component(
   modules: <Type>[MessageShowcaseModule],
+  builder: IMessageShowcaseComponentBuilder,
 )
 abstract class IMessageShowcaseComponent {
   MessageShowcaseViewModel getMessageShowcaseViewModel();
@@ -152,19 +154,6 @@ abstract class MessageShowcaseModule {
       mode: Mode.replyPreview,
     );
   }
-}
-
-@j.componentBuilder
-abstract class IMessageShowcaseComponentBuilder {
-  IMessageShowcaseComponentBuilder stringsProvider(
-    IStringsProvider value,
-  );
-
-  IMessageShowcaseComponentBuilder messageBundle(
-    MessageBundle value,
-  );
-
-  IMessageShowcaseComponent build();
 }
 
 class _MessageActionListenerStub implements IMessageActionListener {

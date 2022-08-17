@@ -11,8 +11,11 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:user_info/user_info.dart';
 
+import 'main_screen_component_builder.dart';
+
 @j.Component(
   modules: <Type>[MainScreenModule],
+  builder: IMainScreenComponentBuilder,
 )
 abstract class IMainScreenComponent {
   MainViewModel getMainViewModel();
@@ -125,13 +128,4 @@ abstract class MainScreenModule {
     MainScreenFeatureDependencies dependencies,
   ) =>
       dependencies.stringsProvider;
-}
-
-@j.componentBuilder
-abstract class IMainScreenComponentBuilder {
-  IMainScreenComponentBuilder dependencies(
-    MainScreenFeatureDependencies dependencies,
-  );
-
-  IMainScreenComponent build();
 }

@@ -6,10 +6,12 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 import 'folders_component.dart';
+import 'folders_screen_component_builder.dart';
 
 @j.Component(
   dependencies: <Type>[IFoldersComponent],
   modules: <Type>[FoldersScreenModule],
+  builder: IFoldersScreenComponentBuilder,
 )
 abstract class IFoldersScreenComponent {
   FoldersViewModel getFoldersViewModel();
@@ -31,13 +33,4 @@ abstract class FoldersScreenModule {
   @j.singleton
   @j.binds
   IFoldersScreenRouter bindFoldersScreenRouter(IFoldersRouter router);
-}
-
-@j.componentBuilder
-abstract class IFoldersScreenComponentBuilder {
-  IFoldersScreenComponentBuilder foldersComponent(
-    IFoldersComponent foldersComponent,
-  );
-
-  IFoldersScreenComponent build();
 }

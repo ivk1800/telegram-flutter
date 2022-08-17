@@ -2,11 +2,13 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 import '../screen/new_channel/new_channel.dart';
+import 'create_new_channel_screen_component_builder.dart';
 import 'create_new_chat_component.dart';
 
 @j.Component(
   dependencies: <Type>[ICreateNewChatComponent],
   modules: <Type>[CreateNewChannelScreenModule],
+  builder: ICreateNewChannelScreenComponentBuilder,
 )
 abstract class ICreateNewChannelScreenComponent {
   NewChannelViewModel getNewChannelViewModel();
@@ -37,13 +39,4 @@ abstract class CreateNewChannelScreenModule {
     NewChannelViewModel viewModel,
   ) =>
       NewChannelWidgetModel(viewModel: viewModel);
-}
-
-@j.componentBuilder
-abstract class ICreateNewChannelScreenComponentBuilder {
-  ICreateNewChannelScreenComponentBuilder createNewChatComponent(
-    ICreateNewChatComponent component,
-  );
-
-  ICreateNewChannelScreenComponent build();
 }

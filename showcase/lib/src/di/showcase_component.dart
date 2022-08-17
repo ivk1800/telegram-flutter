@@ -14,8 +14,11 @@ import 'package:showcase/src/showcase/widget/showcase_block_interaction_manager.
 import 'package:tg_logger_api/tg_logger_api.dart';
 import 'package:tg_logger_impl/tg_logger_impl.dart';
 
+import 'showcase_component_builder.dart';
+
 @j.Component(
   modules: <Type>[ShowcaseModule],
+  builder: IShowcaseComponentBuilder,
 )
 abstract class IShowcaseComponent {
   IStringsProvider getStringsProvider();
@@ -73,13 +76,4 @@ abstract class ShowcaseModule {
   @j.provides
   @j.singleton
   static ILogger provideLogger() => TgLoggerImpl();
-}
-
-@j.componentBuilder
-abstract class IShowcaseComponentBuilder {
-  IShowcaseComponentBuilder dependencies(
-    ShowcaseDependencies dependencies,
-  );
-
-  IShowcaseComponent build();
 }

@@ -7,8 +7,11 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:showcase/showcase.dart';
 import 'package:theme_manager_api/theme_manager_api.dart';
 
+import 'dev_component_builder.dart';
+
 @j.Component(
   modules: <Type>[DevModule],
+  builder: IDevComponentBuilder,
 )
 abstract class IDevComponent {
   IEventsProvider getEventsProvider();
@@ -107,11 +110,4 @@ abstract class DevModule {
       tg.ConnectionStateWidgetFactory(
         connectionStateProvider: connectionStateProvider,
       );
-}
-
-@j.componentBuilder
-abstract class IDevComponentBuilder {
-  IDevComponentBuilder devDependencies(DevDependencies dependencies);
-
-  IDevComponent build();
 }

@@ -12,6 +12,7 @@ import 'package:lottie_utils/lottie_utils.dart';
 import 'package:sticker_navigation_api/sticker_navigation_api.dart';
 import 'package:tile/tile.dart';
 
+import 'message_tile_factory_component_builder.dart';
 import 'message_tile_factory_dependencies.dmg.dart';
 
 @j.Component(
@@ -19,6 +20,7 @@ import 'message_tile_factory_dependencies.dmg.dart';
     MessageTileFactoryModule,
     MessageTileFactoryDependenciesModule,
   ],
+  builder: IMessageTileFactoryComponentBuilder,
 )
 abstract class IMessageTileFactoryComponent {
   TileFactory getTileFactory();
@@ -128,13 +130,4 @@ abstract class MessageTileFactoryModule {
   @j.singleton
   static LottieStickerFileResolver provideLottieStickerFileResolver() =>
       const LottieStickerFileResolver();
-}
-
-@j.componentBuilder
-abstract class IMessageTileFactoryComponentBuilder {
-  IMessageTileFactoryComponentBuilder dependencies(
-    MessageTileFactoryDependencies dependencies,
-  );
-
-  IMessageTileFactoryComponent build();
 }

@@ -3,10 +3,12 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 import 'create_new_chat_component.dart';
+import 'create_new_secret_chat_screen_component_builder.dart';
 
 @j.Component(
   dependencies: <Type>[ICreateNewChatComponent],
   modules: <Type>[CreateNewSecretChatScreenModule],
+  builder: CreateNewSecretChatScreenComponentBuilder,
 )
 abstract class ICreateNewSecretChatScreenComponent {
   NewSecretChatViewModel getNewSecretChatViewModel();
@@ -20,13 +22,4 @@ abstract class CreateNewSecretChatScreenModule {
   @j.provides
   static NewSecretChatViewModel provideNewSecretChatViewModel() =>
       NewSecretChatViewModel();
-}
-
-@j.componentBuilder
-abstract class CreateNewSecretChatScreenComponentBuilder {
-  CreateNewSecretChatScreenComponentBuilder createNewChatComponent(
-    ICreateNewChatComponent component,
-  );
-
-  ICreateNewSecretChatScreenComponent build();
 }

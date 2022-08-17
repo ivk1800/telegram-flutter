@@ -4,10 +4,12 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 import 'create_new_chat_component.dart';
+import 'create_new_chat_screen_component_builder.dart';
 
 @j.Component(
   dependencies: <Type>[ICreateNewChatComponent],
   modules: <Type>[CreateNewChatScreenModule],
+  builder: CreateNewChatScreenComponentBuilder,
 )
 abstract class ICreateNewChatScreenComponent {
   NewChatViewModel getNewChatViewModel();
@@ -29,13 +31,4 @@ abstract class CreateNewChatScreenModule {
   @j.singleton
   @j.binds
   INewChatScreenRouter bindINewChatScreenRouter(ICreateNewChatRouter impl);
-}
-
-@j.componentBuilder
-abstract class CreateNewChatScreenComponentBuilder {
-  CreateNewChatScreenComponentBuilder createNewChatComponent(
-    ICreateNewChatComponent component,
-  );
-
-  ICreateNewChatScreenComponent build();
 }

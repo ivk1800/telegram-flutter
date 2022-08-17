@@ -9,8 +9,11 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:user_info/user_info.dart';
 
+import 'profile_screen_component_builder.dart';
+
 @j.Component(
   modules: <Type>[ProfileScreenModule],
+  builder: IProfileScreenComponentBuilder,
 )
 abstract class IProfileScreenComponent {
   IChatHeaderInfoFactory getChatHeaderInfoFactory();
@@ -102,15 +105,4 @@ abstract class ProfileScreenModule {
     ProfileFeatureDependencies dependencies,
   ) =>
       dependencies.localizationManager;
-}
-
-@j.componentBuilder
-abstract class IProfileScreenComponentBuilder {
-  IProfileScreenComponentBuilder dependencies(
-    ProfileFeatureDependencies dependencies,
-  );
-
-  IProfileScreenComponentBuilder chatArgs(ProfileArgs args);
-
-  IProfileScreenComponent build();
 }

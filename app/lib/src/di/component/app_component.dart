@@ -24,6 +24,8 @@ import 'package:td_client/td_client.dart';
 import 'package:tg_logger_api/tg_logger_api.dart';
 import 'package:theme_manager_flutter/theme_manager_flutter.dart';
 
+import 'app_component_builder.dart';
+
 @j.Component(
   modules: <Type>[
     AppModule,
@@ -32,6 +34,7 @@ import 'package:theme_manager_flutter/theme_manager_flutter.dart';
     ThemeModule,
     AppNavigationModule,
   ],
+  builder: IAppComponentBuilder,
 )
 abstract class IAppComponent {
   // region component
@@ -133,13 +136,4 @@ abstract class IAppComponent {
   IFileDownloader get fileDownloader;
 
   CommonScreenRouterImpl get commonScreenRouter;
-}
-
-@j.componentBuilder
-abstract class IAppComponentBuilder {
-  IAppComponentBuilder localizationManager(
-    ILocalizationManager localizationManager,
-  );
-
-  IAppComponent build();
 }

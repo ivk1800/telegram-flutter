@@ -3,8 +3,11 @@ import 'package:feature_folders_impl/feature_folders_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
+import 'folders_component_builder.dart';
+
 @j.Component(
   modules: <Type>[FoldersModule],
+  builder: IFoldersComponentBuilder,
 )
 abstract class IFoldersComponent {
   tg.TgAppBarFactory getTgAppBarFactory();
@@ -40,13 +43,4 @@ abstract class FoldersModule {
     FoldersFeatureDependencies dependencies,
   ) =>
       dependencies.router;
-}
-
-@j.componentBuilder
-abstract class IFoldersComponentBuilder {
-  IFoldersComponentBuilder dependencies(
-    FoldersFeatureDependencies dependencies,
-  );
-
-  IFoldersComponent build();
 }

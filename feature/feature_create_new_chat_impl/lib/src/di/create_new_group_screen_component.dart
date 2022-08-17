@@ -3,10 +3,12 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 import 'create_new_chat_component.dart';
+import 'create_new_group_screen_component_builder.dart';
 
 @j.Component(
   dependencies: <Type>[ICreateNewChatComponent],
   modules: <Type>[CreateNewGroupScreenModule],
+  builder: CreateNewGroupScreenComponentBuilder,
 )
 abstract class ICreateNewGroupScreenComponent {
   NewGroupViewModel getNewGroupViewModel();
@@ -19,13 +21,4 @@ abstract class CreateNewGroupScreenModule {
   @j.singleton
   @j.provides
   static NewGroupViewModel provideNewGroupViewModel() => NewGroupViewModel();
-}
-
-@j.componentBuilder
-abstract class CreateNewGroupScreenComponentBuilder {
-  CreateNewGroupScreenComponentBuilder createNewChatComponent(
-    ICreateNewChatComponent component,
-  );
-
-  ICreateNewGroupScreenComponent build();
 }

@@ -6,8 +6,11 @@ import 'package:feature_create_new_chat_impl/src/screen/new_channel/new_channel.
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
+import 'create_new_chat_component_builder.dart';
+
 @j.Component(
   modules: <Type>[CreateNewChatModule],
+  builder: ICreateNewChatComponentBuilder,
 )
 abstract class ICreateNewChatComponent {
   IStringsProvider getStringsProvider();
@@ -60,13 +63,4 @@ abstract class CreateNewChatModule {
     CreateNewChatFeatureDependencies dependencies,
   ) =>
       dependencies.router;
-}
-
-@j.componentBuilder
-abstract class ICreateNewChatComponentBuilder {
-  ICreateNewChatComponentBuilder dependencies(
-    CreateNewChatFeatureDependencies dependencies,
-  );
-
-  ICreateNewChatComponent build();
 }

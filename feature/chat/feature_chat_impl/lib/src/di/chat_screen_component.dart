@@ -31,11 +31,14 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:tile/tile.dart';
 
+import 'chats_screen_component_builder.dart';
+
 @j.Component(
   modules: <Type>[
     ChatScreenModule,
     ChatFeatureDependenciesModule,
   ],
+  builder: IChatsScreenComponentBuilder,
 )
 abstract class IChatScreenComponent implements IChatScreenScopeDelegate {
   @chatIdQualifier
@@ -293,15 +296,4 @@ abstract class ChatScreenModule {
   @j.singleton
   @chatIdQualifier
   static int provideChatId(ChatArgs args) => args.chatId;
-}
-
-@j.componentBuilder
-abstract class IChatsScreenComponentBuilder {
-  IChatsScreenComponentBuilder dependencies(
-    ChatFeatureDependencies dependencies,
-  );
-
-  IChatsScreenComponentBuilder chatArgs(ChatArgs args);
-
-  IChatScreenComponent build();
 }

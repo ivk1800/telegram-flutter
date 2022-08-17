@@ -16,8 +16,11 @@ import 'package:localization_api/localization_api.dart';
 import 'package:search_component/search_component.dart';
 import 'package:tile/tile.dart';
 
+import 'search_settings_screen_component_builder.dart';
+
 @j.Component(
   modules: <Type>[SettingsSearchScreenModule],
+  builder: ISearchSettingsScreenComponentBuilder,
 )
 abstract class ISettingsSearchScreenComponent {
   SettingsSearchViewModel getSettingsSearchViewModel();
@@ -136,13 +139,4 @@ abstract class SettingsSearchScreenModule {
   ISearchResultTapListener bindsSearchResultTapListener(
     SearchItemListener impl,
   );
-}
-
-@j.componentBuilder
-abstract class ISearchSettingsScreenComponentBuilder {
-  ISearchSettingsScreenComponentBuilder dependencies(
-    SettingsSearchFeatureDependencies dependencies,
-  );
-
-  ISettingsSearchScreenComponent build();
 }

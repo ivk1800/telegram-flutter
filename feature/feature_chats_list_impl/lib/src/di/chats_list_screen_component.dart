@@ -11,11 +11,14 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
+import 'chats_list_screen_component_builder.dart';
+
 @j.Component(
   modules: <Type>[
     ChatsListScreenModule,
     ChatsListFeatureDependenciesModule,
   ],
+  builder: IChatsListScreenComponentBuilder,
 )
 abstract class IChatsListScreenComponent
     implements IChatsListScreenScopeDelegate {}
@@ -69,15 +72,4 @@ abstract class ChatsListScreenModule {
     ChatsListViewModel viewModel,
   ) =>
       ChatsListTileListener(viewModel: viewModel);
-}
-
-@j.componentBuilder
-abstract class IChatsListScreenComponentBuilder {
-  IChatsListScreenComponentBuilder dependencies(
-    ChatsListFeatureDependencies dependencies,
-  );
-
-  IChatsListScreenComponentBuilder chatListType(ChatListType type);
-
-  IChatsListScreenComponent build();
 }
