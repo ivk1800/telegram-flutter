@@ -11,6 +11,7 @@ import 'global_search_screen_module.dart';
   modules: <Type>[GlobalSearchScreenModule],
   builder: IGlobalSearchScreenComponentBuilder,
 )
+@j.singleton
 abstract class IGlobalSearchScreenComponent {
   TileFactory getTileFactory();
 

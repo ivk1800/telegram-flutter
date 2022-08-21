@@ -10,6 +10,7 @@ import 'create_new_chat_component.dart';
   modules: <Type>[CreateNewChannelScreenModule],
   builder: ICreateNewChannelScreenComponentBuilder,
 )
+@j.singleton
 abstract class ICreateNewChannelScreenComponent {
   NewChannelViewModel getNewChannelViewModel();
 

@@ -20,6 +20,7 @@ import 'message_showcase_view_model.dart';
   modules: <Type>[MessageShowcaseModule],
   builder: IMessageShowcaseComponentBuilder,
 )
+@j.singleton
 abstract class IMessageShowcaseComponent {
   MessageShowcaseViewModel getMessageShowcaseViewModel();
 

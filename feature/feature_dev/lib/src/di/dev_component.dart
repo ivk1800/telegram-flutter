@@ -13,6 +13,7 @@ import 'dev_component_builder.dart';
   modules: <Type>[DevModule],
   builder: IDevComponentBuilder,
 )
+@j.singleton
 abstract class IDevComponent {
   IEventsProvider getEventsProvider();
 

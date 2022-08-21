@@ -22,6 +22,8 @@ import 'message_tile_factory_dependencies.dmg.dart';
   ],
   builder: IMessageTileFactoryComponentBuilder,
 )
+// TODO subcomponent?
+@j.singleton
 abstract class IMessageTileFactoryComponent {
   TileFactory getTileFactory();
 }

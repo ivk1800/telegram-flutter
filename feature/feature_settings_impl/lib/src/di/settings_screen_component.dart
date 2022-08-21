@@ -18,6 +18,7 @@ import 'settings_component_builder.dart';
   ],
   builder: ISettingsComponentBuilder,
 )
+@j.singleton
 abstract class ISettingsComponent implements ISettingsScreenScopeDelegate {}
 
 @j.module

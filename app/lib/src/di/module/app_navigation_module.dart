@@ -1,4 +1,5 @@
 import 'package:app/src/app/tg_app.dart';
+import 'package:app/src/di/scope/application_scope.dart';
 import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/chat_router_delegate.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
@@ -11,7 +12,7 @@ import 'package:tg_logger_api/tg_logger_api.dart';
 @j.module
 abstract class AppNavigationModule {
   @j.provides
-  @j.singleton
+  @applicationScope
   static CommonScreenRouterImpl provideCommonScreenRouter(
     FeatureProvider featureProvider,
     ISplitNavigationDelegate navigationDelegate,

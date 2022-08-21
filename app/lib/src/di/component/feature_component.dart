@@ -1,5 +1,6 @@
 import 'package:app/src/di/component/app_component.dart';
 import 'package:app/src/di/module/feature_module.dart';
+import 'package:app/src/di/scope/features_scope.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_change_bio_api/feature_change_bio_api.dart';
 import 'package:feature_change_username_api/feature_change_username_api.dart';
@@ -29,6 +30,7 @@ import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:jugger/jugger.dart' as j;
 
+import 'app_component.dart';
 import 'feature_component_builder.dart';
 
 @j.Component(
@@ -36,6 +38,7 @@ import 'feature_component_builder.dart';
   dependencies: <Type>[IAppComponent],
   builder: IFeatureComponentBuilder,
 )
+@featuresScope
 abstract class IFeatureComponent {
   IGlobalSearchFeatureApi getGlobalSearchFeatureApi();
 

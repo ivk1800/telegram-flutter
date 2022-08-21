@@ -12,6 +12,8 @@ import 'events_list_widget_model.dart';
   modules: <Type>[EventsListScreenModule],
   builder: IEventsListScreenComponentBuilder,
 )
+// TODO subcomponent?
+@j.singleton
 abstract class IEventsListScreenComponent {
   EventsListVieModel get eventsListVieModel;
 

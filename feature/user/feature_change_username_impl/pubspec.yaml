@@ -34,7 +34,7 @@ dependencies:
   flutter:
     sdk: flutter
   freezed_annotation: 1.1.0
-  jugger: 2.3.1
+  jugger: 2.4.0-dev.1
   localization_api:
     path: ../../../localization_api
   rxdart: 0.27.3
@@ -52,7 +52,7 @@ dev_dependencies:
     path: ../../../dependencies_module_generator/generator
   dependency_validator: 3.2.0
   freezed: 1.1.1
-  jugger_generator: 2.5.1
+  jugger_generator: 3.0.0-dev.1
   scope_generator:
     path: ../../../scope_generator/generator
   tg_lint_rules:

@@ -12,6 +12,7 @@ import 'create_new_chat_component_builder.dart';
   modules: <Type>[CreateNewChatModule],
   builder: ICreateNewChatComponentBuilder,
 )
+@j.singleton
 abstract class ICreateNewChatComponent {
   IStringsProvider getStringsProvider();
 

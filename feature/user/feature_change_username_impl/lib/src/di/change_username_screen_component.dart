@@ -17,6 +17,7 @@ import 'change_username_screen_component_builder.dart';
   ],
   builder: IChangeUsernameScreenComponentBuilder,
 )
+@j.singleton
 abstract class IChangeUsernameScreenComponent
     implements IChangeUsernameScreenScopeDelegate {}
 

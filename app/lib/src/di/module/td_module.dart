@@ -1,3 +1,4 @@
+import 'package:app/src/di/scope/application_scope.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_tdlib_impl/core_tdlib_impl.dart';
@@ -6,33 +7,33 @@ import 'package:td_client/td_client.dart';
 
 @j.module
 abstract class TdModule {
-  @j.singleton
+  @applicationScope
   @j.provides
   static UpdatesProvider provideUpdatesProvider(TdClient client) =>
       UpdatesProvider(client: client);
 
-  @j.singleton
+  @applicationScope
   @j.binds
   IChatUpdatesProvider bindChatUpdatesProvider(UpdatesProvider impl);
 
-  @j.singleton
+  @applicationScope
   @j.binds
   IChatMessagesUpdatesProvider bindChatMessagesUpdatesProvider(
     UpdatesProvider impl,
   );
 
-  @j.singleton
+  @applicationScope
   @j.binds
   IChatFiltersUpdatesProvider bindChatFiltersUpdatesProvider(
     UpdatesProvider impl,
   );
 
-  @j.singleton
+  @applicationScope
   @j.binds
   @j.nonLazy
   IUserUpdatesProvider bindUserUpdatesProvider(UpdatesProvider impl);
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IConnectionStateProvider bindConnectionStateProvider(
     UpdatesProvider updatesProvider,
@@ -41,40 +42,40 @@ abstract class TdModule {
         updatesProvider: updatesProvider,
       );
 
-  @j.singleton
+  @applicationScope
   @j.binds
   IAuthenticationStateUpdatesProvider bindAuthenticationStateUpdatesProvider(
     UpdatesProvider impl,
   );
 
-  @j.singleton
+  @applicationScope
   @j.binds
   IFileUpdatesProvider bindFileUpdatesProvider(UpdatesProvider impl);
 
-  @j.singleton
+  @applicationScope
   @j.binds
   IEventsProvider bindEventsProvider(UpdatesProvider impl);
 
-  @j.singleton
+  @applicationScope
   @j.binds
   ISuperGroupUpdatesProvider bindSuperGroupUpdatesProvider(
     UpdatesProvider impl,
   );
 
-  @j.singleton
+  @applicationScope
   @j.binds
   IBasicGroupUpdatesProvider bindBasicGroupUpdatesProvider(
     UpdatesProvider impl,
   );
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static ITdFunctionExecutor provideTdFunctionExecutor(TdClient client) =>
       TdFunctionExecutor(
         client: client,
       );
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static MyChatProvider provideMyChatProvider(
     ITdFunctionExecutor functionExecutor,

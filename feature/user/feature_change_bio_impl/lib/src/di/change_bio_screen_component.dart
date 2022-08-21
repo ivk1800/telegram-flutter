@@ -13,6 +13,7 @@ import 'change_bio_screen_component_builder.dart';
   ],
   builder: IChangeBioScreenComponentBuilder,
 )
+@j.singleton
 abstract class IChangeBioScreenComponent
     implements IChangeBioScreenScopeDelegate {}
 

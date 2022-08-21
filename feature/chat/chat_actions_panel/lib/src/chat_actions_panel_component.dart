@@ -11,6 +11,7 @@ import 'message_sender.dart';
   modules: <Type>[ChatActionsPanelModule],
   builder: IChatActionsPanelComponentBuilder,
 )
+@j.singleton
 abstract class IChatActionsPanelComponent {
   ChatActionsPanelViewModel get chatActionsPanelViewModel;
 

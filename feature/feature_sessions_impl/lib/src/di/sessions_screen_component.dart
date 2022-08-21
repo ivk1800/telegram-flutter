@@ -19,6 +19,7 @@ import 'sessions_screen_component_builder.dart';
   ],
   builder: ISessionsScreenComponentBuilder,
 )
+@j.singleton
 abstract class ISessionsScreenComponent {
   SessionsViewModel getSessionsViewModel();
 

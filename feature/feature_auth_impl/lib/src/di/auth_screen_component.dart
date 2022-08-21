@@ -12,4 +12,5 @@ import 'auth_screen_component_builder.dart';
   ],
   builder: IAuthScreenComponentBuilder,
 )
+@j.singleton
 abstract class IAuthScreenComponent implements IAuthScreenScopeDelegate {}

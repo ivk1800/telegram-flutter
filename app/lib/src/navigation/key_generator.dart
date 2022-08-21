@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:jugger/jugger.dart' as j;
 
-@j.singleton
+// TODO must be scoped?
 class KeyGenerator {
   @j.inject
-  KeyGenerator();
+  const KeyGenerator();
 
   ValueKey<dynamic> generateForChat(int chatId) =>
       ValueKey<dynamic>('chat $chatId}');

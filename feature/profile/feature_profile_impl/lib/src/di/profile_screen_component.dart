@@ -15,6 +15,7 @@ import 'profile_screen_component_builder.dart';
   modules: <Type>[ProfileScreenModule],
   builder: IProfileScreenComponentBuilder,
 )
+@j.singleton
 abstract class IProfileScreenComponent {
   IChatHeaderInfoFactory getChatHeaderInfoFactory();
 

@@ -40,6 +40,7 @@ import 'chats_screen_component_builder.dart';
   ],
   builder: IChatsScreenComponentBuilder,
 )
+@j.singleton
 abstract class IChatScreenComponent implements IChatScreenScopeDelegate {
   @chatIdQualifier
   int get chatId;

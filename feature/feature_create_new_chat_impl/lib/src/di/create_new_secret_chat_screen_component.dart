@@ -10,6 +10,7 @@ import 'create_new_secret_chat_screen_component_builder.dart';
   modules: <Type>[CreateNewSecretChatScreenModule],
   builder: CreateNewSecretChatScreenComponentBuilder,
 )
+@j.singleton
 abstract class ICreateNewSecretChatScreenComponent {
   NewSecretChatViewModel getNewSecretChatViewModel();
 

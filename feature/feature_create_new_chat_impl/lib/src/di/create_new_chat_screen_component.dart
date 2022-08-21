@@ -11,6 +11,7 @@ import 'create_new_chat_screen_component_builder.dart';
   modules: <Type>[CreateNewChatScreenModule],
   builder: CreateNewChatScreenComponentBuilder,
 )
+@j.singleton
 abstract class ICreateNewChatScreenComponent {
   NewChatViewModel getNewChatViewModel();
 

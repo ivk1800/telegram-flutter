@@ -20,6 +20,7 @@ import 'showcase_component_builder.dart';
   modules: <Type>[ShowcaseModule],
   builder: IShowcaseComponentBuilder,
 )
+@j.singleton
 abstract class IShowcaseComponent {
   IStringsProvider getStringsProvider();
 

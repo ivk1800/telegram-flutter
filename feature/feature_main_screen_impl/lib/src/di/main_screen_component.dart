@@ -17,6 +17,7 @@ import 'main_screen_component_builder.dart';
   modules: <Type>[MainScreenModule],
   builder: IMainScreenComponentBuilder,
 )
+@j.singleton
 abstract class IMainScreenComponent {
   MainViewModel getMainViewModel();
 

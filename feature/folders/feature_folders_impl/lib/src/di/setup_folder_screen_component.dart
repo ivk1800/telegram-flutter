@@ -14,6 +14,7 @@ import 'setup_folder_screen_component_builder.dart';
   modules: <Type>[SetupFolderScreenModule],
   builder: ISetupFolderScreenComponentBuilder,
 )
+@j.singleton
 abstract class ISetupFolderScreenComponent {
   SetupFolderViewModel getSetupFolderViewModel();
 

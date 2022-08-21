@@ -9,6 +9,7 @@ import 'folders_component_builder.dart';
   modules: <Type>[FoldersModule],
   builder: IFoldersComponentBuilder,
 )
+@j.singleton
 abstract class IFoldersComponent {
   tg.TgAppBarFactory getTgAppBarFactory();
 

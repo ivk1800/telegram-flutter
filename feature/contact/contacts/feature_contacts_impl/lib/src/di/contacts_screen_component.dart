@@ -12,5 +12,6 @@ import 'contacts_screen_component_builder.dart';
   ],
   builder: IContactsScreenComponentBuilder,
 )
+@j.singleton
 abstract class IContactsScreenComponent
     implements IContactsScreenScopeDelegate {}

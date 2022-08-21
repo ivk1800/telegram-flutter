@@ -17,6 +17,7 @@ import 'chat_administration_screen_component_builder.dart';
   ],
   builder: IChatAdministrationScreenComponentBuilder,
 )
+@j.singleton
 abstract class IChatAdministrationScreenComponent
     implements IChatAdministrationScreenScopeDelegate {}
 

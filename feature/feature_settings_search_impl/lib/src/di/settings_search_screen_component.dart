@@ -22,6 +22,7 @@ import 'search_settings_screen_component_builder.dart';
   modules: <Type>[SettingsSearchScreenModule],
   builder: ISearchSettingsScreenComponentBuilder,
 )
+@j.singleton
 abstract class ISettingsSearchScreenComponent {
   SettingsSearchViewModel getSettingsSearchViewModel();
 

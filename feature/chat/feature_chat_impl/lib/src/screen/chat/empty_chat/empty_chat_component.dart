@@ -10,6 +10,7 @@ import 'empty_chat_view_model.dart';
   modules: <Type>[EmptyStateModule],
   builder: IEmptyChatComponentBuilder,
 )
+@j.singleton
 abstract class IEmptyChatComponent {
   EmptyChatViewModel get viewModel;
 

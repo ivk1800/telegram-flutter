@@ -1,6 +1,7 @@
 import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/di/component/app_component.dart';
 import 'package:app/src/di/component/feature_component.jugger.dart';
+import 'package:app/src/di/scope/application_scope.dart';
 import 'package:app/src/feature/feature.dart';
 import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/app_controller_router_impl.dart';
@@ -31,11 +32,11 @@ import 'package:tg_logger_impl/tg_logger_impl.dart';
 
 @j.module
 abstract class AppModule {
-  @j.singleton
+  @applicationScope
   @j.provides
   static ILogger provideLogger() => TgLoggerImpl();
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static FeatureFactory provideFeatureFactory(IAppComponent appComponent) {
     return FeatureFactory(
@@ -44,7 +45,7 @@ abstract class AppModule {
     );
   }
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static FeatureProvider provideFeatureProvider(
     FeatureFactory featureFactory,
@@ -54,13 +55,13 @@ abstract class AppModule {
     );
   }
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static TdClient provideTdClient() {
     return TdClient();
   }
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static OptionsManager provideOptionsManager(
     ITdFunctionExecutor functionExecutor,
@@ -69,7 +70,7 @@ abstract class AppModule {
         functionExecutor: functionExecutor,
       );
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IContactsManager provideContactsManager(
     ITdFunctionExecutor functionExecutor,
@@ -78,58 +79,58 @@ abstract class AppModule {
         functionExecutor: functionExecutor,
       );
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IConnectivityProvider provideConnectivityProvider() =>
       ConnectivityProviderImpl();
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IAppLifecycleStateProvider provideAppLifecycleStateProvider() =>
       AppLifecycleStateProviderImpl();
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static SplitNavigationInfoProvider provideSplitNavigationInfoProvider() =>
       SplitNavigationInfoProvider(TgApp.splitViewNavigatorKey);
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static DateFormatter provideDateFormatter() => DateFormatter();
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static DateParser provideDateParser() => DateParser();
 
-  @j.singleton
+  @applicationScope
   @j.binds
   ITdConfigProvider bindTdConfigProvider(TdConfigProvider impl);
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static ISplitNavigationDelegate provideSplitNavigationDelegate() =>
       SplitNavigationDelegateImpl(
         TgApp.splitViewNavigatorKey,
       );
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IStringsProvider provideStringsProvider(
     ILocalizationManager localizationManager,
   ) =>
       localizationManager.stringsProvider;
 
-  @j.singleton
+  @applicationScope
   @j.binds
   IBlockInteractionManager bindBlockInteractionManager(
     BlockInteractionManager impl,
   );
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IErrorTransformer provideErrorTransformer() => TdErrorTransformer();
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IFileDownloader provideFileDownloader(
     FeatureProvider featureProvider,
@@ -138,7 +139,7 @@ abstract class AppModule {
 
   // region component
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IAppController provideAppController(
     ITdConfigProvider tdConfigProvider,
@@ -162,7 +163,7 @@ abstract class AppModule {
         ),
       ).appController;
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IAuthenticationManager provideAuthenticationManager(
     ITdFunctionExecutor functionExecutor,
@@ -173,7 +174,7 @@ abstract class AppModule {
         authenticationStateUpdatesProvider: authenticationStateUpdatesProvider,
       );
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IAppControllerRouter provideAppControllerRouter(
     FeatureProvider featureProvider,
@@ -185,7 +186,7 @@ abstract class AppModule {
             featureProvider.mainScreenFeatureApi.mainScreenFactory,
       );
 
-  @j.singleton
+  @applicationScope
   @j.provides
   static IChatManager provideChatManager(
     IChatRepository chatRepository,

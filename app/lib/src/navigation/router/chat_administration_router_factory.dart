@@ -1,3 +1,4 @@
+import 'package:app/src/di/scope/features_scope.dart';
 import 'package:feature_chat_administration_impl/feature_chat_administration_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 
@@ -6,7 +7,7 @@ import '../navigation.dart';
 import '../navigation_router.dart';
 import 'chat_administration_router_impl.dart';
 
-@j.singleton
+@featuresScope
 class ChatAdministrationRouterFactory
     implements IChatAdministrationRouterFactory {
   @j.inject

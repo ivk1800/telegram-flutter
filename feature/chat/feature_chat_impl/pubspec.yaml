@@ -51,7 +51,7 @@ dependencies:
     sdk: flutter
   freezed_annotation: 1.1.0
   intl: 0.17.0
-  jugger: 2.3.1
+  jugger: 2.4.0-dev.1
   localization_api:
     path: ../../../localization_api
   lottie_utils:
@@ -86,7 +86,7 @@ dev_dependencies:
     path: ../../../dependencies_module_generator/generator
   dependency_validator: 3.2.0
   freezed: 1.1.1
-  jugger_generator: 2.5.1
+  jugger_generator: 3.0.0-dev.1
   mockito: 5.1.0
   scope_generator:
     path: ../../../scope_generator/generator

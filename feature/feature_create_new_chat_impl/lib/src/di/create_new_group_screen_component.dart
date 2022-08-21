@@ -10,6 +10,7 @@ import 'create_new_group_screen_component_builder.dart';
   modules: <Type>[CreateNewGroupScreenModule],
   builder: CreateNewGroupScreenComponentBuilder,
 )
+@j.singleton
 abstract class ICreateNewGroupScreenComponent {
   NewGroupViewModel getNewGroupViewModel();
 

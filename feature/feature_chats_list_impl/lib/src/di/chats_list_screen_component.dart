@@ -20,6 +20,7 @@ import 'chats_list_screen_component_builder.dart';
   ],
   builder: IChatsListScreenComponentBuilder,
 )
+@j.singleton
 abstract class IChatsListScreenComponent
     implements IChatsListScreenScopeDelegate {}
 

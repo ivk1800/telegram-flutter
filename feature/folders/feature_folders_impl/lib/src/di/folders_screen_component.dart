@@ -13,6 +13,7 @@ import 'folders_screen_component_builder.dart';
   modules: <Type>[FoldersScreenModule],
   builder: IFoldersScreenComponentBuilder,
 )
+@j.singleton
 abstract class IFoldersScreenComponent {
   FoldersViewModel getFoldersViewModel();
 

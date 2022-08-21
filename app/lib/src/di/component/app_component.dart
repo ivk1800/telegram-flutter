@@ -3,6 +3,7 @@ import 'package:app/src/di/module/app_navigation_module.dart';
 import 'package:app/src/di/module/data_module.dart';
 import 'package:app/src/di/module/td_module.dart';
 import 'package:app/src/di/module/theme_module.dart';
+import 'package:app/src/di/scope/application_scope.dart';
 import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/common_screen_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
@@ -36,6 +37,7 @@ import 'app_component_builder.dart';
   ],
   builder: IAppComponentBuilder,
 )
+@applicationScope
 abstract class IAppComponent {
   // region component
 
