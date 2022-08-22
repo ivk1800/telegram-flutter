@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:dmg_annotation/dmg_annotation.dart';
 import 'package:source_gen/source_gen.dart';
@@ -12,6 +13,17 @@ class DependenciesModuleGenerator extends GeneratorForAnnotation<Dependencies> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) async {
-    return DmgDelegate().generateForAnnotatedElement(element as ClassElement);
+    final ConstantReader? scopeReader = annotation.peek('scope');
+    final DartType? scopeType;
+    if (scopeReader == null || scopeReader.isNull) {
+      scopeType = null;
+    } else {
+      scopeType = scopeReader.typeValue;
+    }
+    // TODO check scope type, must be with public constructor
+    return DmgDelegate().generateForAnnotatedElement(
+      element: element as ClassElement,
+      scopeType: scopeType,
+    );
   }
 }

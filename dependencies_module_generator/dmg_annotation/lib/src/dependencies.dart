@@ -1,7 +1,7 @@
 class Dependencies {
-  const factory Dependencies() = Dependencies._;
+  const Dependencies({required this.scope});
 
-  const Dependencies._();
+  final Type? scope;
 }
 
-const Dependencies dependencies = Dependencies._();
+const Dependencies dependencies = Dependencies(scope: null);

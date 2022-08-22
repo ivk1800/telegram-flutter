@@ -29,18 +29,41 @@ class DmgDelegate {
     ),
   );
 
-  late final Expression _singletonAnnotation = CodeExpression(
-    Code(
-      _allocator.allocate(
-        const Reference(
-          'singleton',
-          'package:jugger/jugger.dart',
+  DartType? _scopeType;
+
+  late final Expression _scopeExpression = () {
+    final DartType? scopeType = _scopeType;
+    if (scopeType != null) {
+      final Element? element = scopeType.element;
+      return CodeExpression(
+        Code(
+          _allocator.allocate(
+            Reference(
+              element!.name,
+              element.librarySource!.uri.toString(),
+            ),
+          ),
+        ),
+      ).call(<Expression>[]);
+    }
+
+    return CodeExpression(
+      Code(
+        _allocator.allocate(
+          const Reference(
+            'singleton',
+            'package:jugger/jugger.dart',
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }();
 
-  Future<String> generateForAnnotatedElement(ClassElement element) async {
+  Future<String> generateForAnnotatedElement({
+    required ClassElement element,
+    DartType? scopeType,
+  }) async {
+    _scopeType = scopeType;
     final LibraryBuilder target = LibraryBuilder();
 
     target.body.add(_buildModule(dependenciesClassElement: element));
@@ -81,7 +104,7 @@ class DmgDelegate {
         builder.annotations.addAll(
           <Expression>[
             _providesAnnotation,
-            _singletonAnnotation,
+            _scopeExpression,
           ],
         );
         builder.static = true;
