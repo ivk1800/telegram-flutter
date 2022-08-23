@@ -28,7 +28,7 @@ dependencies:
     path: ../feature_change_bio_api
   flutter:
     sdk: flutter
-  jugger: 2.4.0-dev.1
+  jugger: 2.4.0-dev.3
   localization_api:
     path: ../../../localization_api
   scope_generator_annotation:
@@ -39,7 +39,7 @@ dev_dependencies:
   dependencies_module_generator:
     path: ../../../dependencies_module_generator/generator
   dependency_validator: 3.2.0
-  jugger_generator: 3.0.0-dev.1
+  jugger_generator: 3.0.0-dev.3
   scope_generator:
     path: ../../../scope_generator/generator
   tg_lint_rules:
