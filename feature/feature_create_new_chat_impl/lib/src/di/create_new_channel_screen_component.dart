@@ -1,3 +1,4 @@
+import 'package:feature_create_new_chat_impl/feature_create_new_chat_impl.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
@@ -25,12 +26,13 @@ abstract class CreateNewChannelScreenModule {
   @j.provides
   static NewChannelViewModel provideNewChannelViewModel(
     ICreateNewChatComponent parentComponent,
+    INewChannelScreenRouter router,
   ) =>
       NewChannelViewModel(
         stringsProvider: parentComponent.getStringsProvider(),
         blockInteractionManager: parentComponent.getBlockInteractionManager(),
         errorTransformer: parentComponent.getErrorTransformer(),
-        router: parentComponent.getNewChannelScreenRouter(),
+        router: router,
         chatManager: parentComponent.getChatManager(),
       );
 
@@ -40,4 +42,8 @@ abstract class CreateNewChannelScreenModule {
     NewChannelViewModel viewModel,
   ) =>
       NewChannelWidgetModel(viewModel: viewModel);
+
+  @j.binds
+  @j.singleton
+  INewChannelScreenRouter bindNewChannelScreenRouter(ICreateNewChatRouter impl);
 }

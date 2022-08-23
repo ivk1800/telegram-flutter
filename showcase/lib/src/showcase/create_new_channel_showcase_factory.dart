@@ -43,7 +43,6 @@ class CreateNewChannelShowcaseFactory {
           });
         },
       ),
-      connectionStateProvider: const FakeConnectionStateProvider(),
       router: _Router(
         logger: _logger,
         splitView: SplitView.of(context),

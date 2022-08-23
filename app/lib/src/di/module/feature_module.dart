@@ -452,7 +452,6 @@ abstract class FeatureModule {
   @j.provides
   static CreateNewChatFeatureDependencies
       provideCreateNewChatFeatureDependencies(
-    IConnectionStateProvider connectionStateProvider,
     IStringsProvider stringsProvider,
     ICreateNewChatRouter router,
     IChatManager chatManager,
@@ -464,7 +463,6 @@ abstract class FeatureModule {
             blockInteractionManager: blockInteractionManager,
             chatManager: chatManager,
             router: router,
-            connectionStateProvider: connectionStateProvider,
             stringsProvider: stringsProvider,
           );
 
