@@ -5,11 +5,15 @@ import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:error_transformer_api/error_transformer_api.dart';
+import 'package:feature_create_new_chat_impl/src/di/scope/screen_scope.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 import 'new_channel_screen_router.dart';
 
+@screenScope
 class NewChannelViewModel extends BaseViewModel {
+  @j.inject
   NewChannelViewModel({
     required IChatManager chatManager,
     required IBlockInteractionManager blockInteractionManager,

@@ -1,5 +1,4 @@
 import 'package:feature_create_new_chat_api/feature_create_new_chat_api.dart';
-import 'package:feature_create_new_chat_impl/src/di/create_new_channel_screen_component.jugger.dart';
 import 'package:feature_create_new_chat_impl/src/di/create_new_chat_component.dart';
 import 'package:feature_create_new_chat_impl/src/screen/new_channel/new_channel.dart';
 import 'package:flutter/widgets.dart';
@@ -15,9 +14,7 @@ class CreateNewChannelScreenFactory implements ICreateNewChannelScreenFactory {
   Widget create() {
     return CreateNewChannelScreenScore(
       child: const NewChannelPage(),
-      create: () => JuggerCreateNewChannelScreenComponentBuilder()
-          .createNewChatComponent(_component)
-          .build(),
+      create: _component.createNewChannelScreenComponent,
     );
   }
 }

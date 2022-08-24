@@ -1,4 +1,4 @@
-import 'package:feature_create_new_chat_impl/src/di/create_new_chat_screen_component.dart';
+import 'package:feature_create_new_chat_impl/src/di/create_new_chat_screen/create_new_chat_screen_component.dart';
 import 'package:flutter/widgets.dart';
 import 'package:localization_api/localization_api.dart';
 

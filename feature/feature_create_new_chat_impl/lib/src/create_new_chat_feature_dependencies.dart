@@ -6,8 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:localization_api/localization_api.dart';
 
 import 'create_new_chat_router.dart';
+import 'di/scope/feature_scope.dart';
 
-@dependencies
+@Dependencies(scope: FeatureScope)
 @immutable
 class CreateNewChatFeatureDependencies {
   const CreateNewChatFeatureDependencies({

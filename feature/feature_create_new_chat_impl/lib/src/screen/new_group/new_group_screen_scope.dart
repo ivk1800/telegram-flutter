@@ -1,4 +1,4 @@
-import 'package:feature_create_new_chat_impl/src/di/create_new_group_screen_component.dart';
+import 'package:feature_create_new_chat_impl/src/di/create_new_group_screen/create_new_group_screen_component.dart';
 import 'package:flutter/widgets.dart';
 
 import 'new_group_view_model.dart';
