@@ -3,10 +3,10 @@ import 'package:feature_create_new_chat_impl/src/di/create_new_chat_component.da
 import 'package:feature_create_new_chat_impl/src/di/create_new_chat_component.jugger.dart';
 
 import 'create_new_chat_feature_dependencies.dart';
-import 'screen/factory/create_new_channel_screen_factory.dart';
-import 'screen/factory/create_new_group_screen_factory.dart';
-import 'screen/factory/create_new_secret_chat_screen_factory.dart';
-import 'screen/factory/new_chat_screen_factory.dart';
+import 'screen/new_channel/create_new_channel_screen_factory.dart';
+import 'screen/new_chat/new_chat_screen_factory.dart';
+import 'screen/new_group/create_new_group_screen_factory.dart';
+import 'screen/new_secret_chat/create_new_secret_chat_screen_factory.dart';
 
 class CreateNewChatFeature implements ICreateNewChatFeatureApi {
   CreateNewChatFeature({

@@ -4,6 +4,7 @@ import 'package:feature_create_new_chat_impl/src/screen/new_chat/new_chat_screen
 import 'package:jugger/jugger.dart' as j;
 
 @screenScope
+@j.disposable
 class NewChatViewModel extends BaseViewModel {
   @j.inject
   NewChatViewModel({

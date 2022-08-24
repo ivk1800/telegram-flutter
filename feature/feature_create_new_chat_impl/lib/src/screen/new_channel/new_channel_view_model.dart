@@ -12,6 +12,7 @@ import 'package:localization_api/localization_api.dart';
 import 'new_channel_screen_router.dart';
 
 @screenScope
+@j.disposable
 class NewChannelViewModel extends BaseViewModel {
   @j.inject
   NewChannelViewModel({
