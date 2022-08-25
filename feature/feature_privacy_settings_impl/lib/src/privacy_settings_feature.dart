@@ -8,12 +8,11 @@ export 'privacy_settings_screen_router.dart';
 class PrivacySettingsFeature implements IPrivacySettingsFeatureApi {
   PrivacySettingsFeature({
     required PrivacySettingsFeatureDependencies dependencies,
-  }) : _settingsWidgetFactory =
-            PrivacySettingsWidgetFactory(dependencies: dependencies);
+  }) : _dependencies = dependencies;
 
-  final IPrivacySettingsWidgetFactory _settingsWidgetFactory;
+  final PrivacySettingsFeatureDependencies _dependencies;
 
   @override
-  IPrivacySettingsWidgetFactory get screenWidgetFactory =>
-      _settingsWidgetFactory;
+  late final IPrivacySettingsWidgetFactory screenWidgetFactory =
+      PrivacySettingsWidgetFactory(dependencies: _dependencies);
 }

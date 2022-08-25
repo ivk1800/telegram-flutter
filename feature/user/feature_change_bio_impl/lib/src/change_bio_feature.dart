@@ -9,9 +9,8 @@ class ChangeBioFeature implements IChangeBioFeatureApi {
   }) : _dependencies = dependencies;
 
   final ChangeBioFeatureDependencies _dependencies;
-  late final ChangeBioScreenFactory _changeBioScreenFactory =
-      ChangeBioScreenFactory(dependencies: _dependencies);
 
   @override
-  IChangeBioScreenFactory get changeBioScreenFactory => _changeBioScreenFactory;
+  late final IChangeBioScreenFactory changeBioScreenFactory =
+      ChangeBioScreenFactory(dependencies: _dependencies);
 }

@@ -8,12 +8,8 @@ class SharedMediaFeature implements ISharedMediaFeatureApi {
       : _dependencies = dependencies;
 
   final SharedMediaFeatureDependencies _dependencies;
-  late final SharedMediaScreenFactory _sharedMediaScreenFactory =
-      SharedMediaScreenFactory(
-    dependencies: _dependencies,
-  );
 
   @override
-  ISharedMediaScreenFactory get sharedMediaScreenFactory =>
-      _sharedMediaScreenFactory;
+  late final ISharedMediaScreenFactory sharedMediaScreenFactory =
+      SharedMediaScreenFactory(dependencies: _dependencies);
 }

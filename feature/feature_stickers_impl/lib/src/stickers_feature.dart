@@ -15,43 +15,23 @@ class StickersFeature implements IStickersFeatureApi {
 
   final StickersFeatureDependencies _dependencies;
 
-  StickersWidgetFactory? _stickersWidgetFactory;
-
-  // TODO replace by late final
   @override
-  IStickersWidgetFactory get stickersWidgetFactory =>
-      _stickersWidgetFactory ??
-      (_stickersWidgetFactory =
-          StickersWidgetFactory(dependencies: _dependencies));
-
-  ArchivedStickersWidgetFactory? _archivedStickersWidgetFactory;
+  late final IStickersWidgetFactory stickersWidgetFactory =
+      StickersWidgetFactory(dependencies: _dependencies);
 
   @override
-  IArchivedStickersWidgetFactory get archivedStickersWidgetFactory =>
-      _archivedStickersWidgetFactory ??
-      (_archivedStickersWidgetFactory =
-          ArchivedStickersWidgetFactory(dependencies: _dependencies));
-
-  MasksWidgetFactory? _masksWidgetFactory;
+  late final IArchivedStickersWidgetFactory archivedStickersWidgetFactory =
+      ArchivedStickersWidgetFactory(dependencies: _dependencies);
 
   @override
-  IMasksWidgetFactory get masksWidgetFactory =>
-      _masksWidgetFactory ??
-      (_masksWidgetFactory = MasksWidgetFactory(dependencies: _dependencies));
-
-  TrendingStickersWidgetFactory? _trendingStickersWidgetFactory;
+  late final IMasksWidgetFactory masksWidgetFactory =
+      MasksWidgetFactory(dependencies: _dependencies);
 
   @override
-  ITrendingStickersWidgetFactory get trendingStickersWidgetFactory =>
-      _trendingStickersWidgetFactory ??
-      (_trendingStickersWidgetFactory =
-          TrendingStickersWidgetFactory(dependencies: _dependencies));
-
-  StickerSetWidgetFactory? _stickerSetWidgetFactory;
+  late final ITrendingStickersWidgetFactory trendingStickersWidgetFactory =
+      TrendingStickersWidgetFactory(dependencies: _dependencies);
 
   @override
-  IStickerSetWidgetFactory get stickerSetWidgetFactory =>
-      _stickerSetWidgetFactory ??
-      (_stickerSetWidgetFactory =
-          StickerSetWidgetFactory(dependencies: _dependencies));
+  late final IStickerSetWidgetFactory stickerSetWidgetFactory =
+      StickerSetWidgetFactory(dependencies: _dependencies);
 }

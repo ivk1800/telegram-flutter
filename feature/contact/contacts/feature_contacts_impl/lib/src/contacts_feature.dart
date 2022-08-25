@@ -9,9 +9,8 @@ class ContactsFeature implements IContactsFeatureApi {
   }) : _dependencies = dependencies;
 
   final ContactsFeatureDependencies _dependencies;
-  late final ContactsScreenFactory _contactsScreenFactory =
-      ContactsScreenFactory(dependencies: _dependencies);
 
   @override
-  IContactsScreenFactory get contactsScreenFactory => _contactsScreenFactory;
+  late final IContactsScreenFactory contactsScreenFactory =
+      ContactsScreenFactory(dependencies: _dependencies);
 }

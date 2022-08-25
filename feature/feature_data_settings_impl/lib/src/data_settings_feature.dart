@@ -8,11 +8,11 @@ import 'widget/factory/data_settings_widget_factory.dart';
 class DataSettingsFeature implements IDataSettingsFeatureApi {
   DataSettingsFeature({
     required DataSettingsFeatureDependencies dependencies,
-  }) : _settingsWidgetFactory =
-            DataSettingsWidgetFactory(dependencies: dependencies);
+  }) : _dependencies = dependencies;
 
-  final IDataSettingsWidgetFactory _settingsWidgetFactory;
+  final DataSettingsFeatureDependencies _dependencies;
 
   @override
-  IDataSettingsWidgetFactory get screenWidgetFactory => _settingsWidgetFactory;
+  late final IDataSettingsWidgetFactory screenWidgetFactory =
+      DataSettingsWidgetFactory(dependencies: _dependencies);
 }

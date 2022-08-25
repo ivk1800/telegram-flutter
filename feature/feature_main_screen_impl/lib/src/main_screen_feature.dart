@@ -9,9 +9,8 @@ class MainScreenFeature implements IMainScreenFeatureApi {
   }) : _dependencies = dependencies;
 
   final MainScreenFeatureDependencies _dependencies;
-  MainScreenFactory? _mainScreenFactory;
 
   @override
-  IMainScreenFactory get mainScreenFactory =>
-      _mainScreenFactory ?? MainScreenFactory(dependencies: _dependencies);
+  late final IMainScreenFactory mainScreenFactory =
+      MainScreenFactory(dependencies: _dependencies);
 }

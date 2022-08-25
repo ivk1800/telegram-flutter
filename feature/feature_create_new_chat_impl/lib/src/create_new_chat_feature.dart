@@ -18,34 +18,20 @@ class CreateNewChatFeature implements ICreateNewChatFeatureApi {
   late final ICreateNewChatComponent _component =
       JuggerCreateNewChatComponentBuilder().dependencies(_dependencies).build();
 
-  late final CreateNewChannelScreenFactory _createNewChannelScreenFactory =
-      CreateNewChannelScreenFactory(
-    component: _component,
-  );
-  late final CreateNewGroupScreenFactory _createNewGroupScreenFactory =
-      CreateNewGroupScreenFactory(
-    component: _component,
-  );
-  late final CreateNewSecretChatScreenFactory
-      _createNewSecretChatScreenFactory = CreateNewSecretChatScreenFactory(
-    component: _component,
-  );
-  late final NewChatScreenFactory _chatScreenFactory = NewChatScreenFactory(
-    component: _component,
-  );
+  @override
+  late final ICreateNewChannelScreenFactory createNewChannelScreenFactory =
+      CreateNewChannelScreenFactory(component: _component);
 
   @override
-  ICreateNewChannelScreenFactory get createNewChannelScreenFactory =>
-      _createNewChannelScreenFactory;
+  late final ICreateNewGroupScreenFactory createNewGroupScreenFactory =
+      CreateNewGroupScreenFactory(component: _component);
 
   @override
-  ICreateNewGroupScreenFactory get createNewGroupScreenFactory =>
-      _createNewGroupScreenFactory;
+  late final ICreateNewSecretChatScreenFactory
+      createNewSecretChatScreenFactory =
+      CreateNewSecretChatScreenFactory(component: _component);
 
   @override
-  ICreateNewSecretChatScreenFactory get createNewSecretChatScreenFactory =>
-      _createNewSecretChatScreenFactory;
-
-  @override
-  INewChatScreenFactory get newChatScreenFactory => _chatScreenFactory;
+  late final INewChatScreenFactory newChatScreenFactory =
+      NewChatScreenFactory(component: _component);
 }

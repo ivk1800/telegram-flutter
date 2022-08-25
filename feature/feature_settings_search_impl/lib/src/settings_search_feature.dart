@@ -8,12 +8,11 @@ import 'settings_search_feature_dependencies.dart';
 class SettingsSearchFeature implements ISettingsSearchFeatureApi {
   SettingsSearchFeature({
     required SettingsSearchFeatureDependencies dependencies,
-  }) : _settingsWidgetFactory =
-            SearchSettingsScreenFactory(dependencies: dependencies);
+  }) : _dependencies = dependencies;
 
-  final ISettingsSearchScreenFactory _settingsWidgetFactory;
+  final SettingsSearchFeatureDependencies _dependencies;
 
   @override
-  ISettingsSearchScreenFactory get settingsSearchScreenFactory =>
-      _settingsWidgetFactory;
+  late final ISettingsSearchScreenFactory settingsSearchScreenFactory =
+      SearchSettingsScreenFactory(dependencies: _dependencies);
 }

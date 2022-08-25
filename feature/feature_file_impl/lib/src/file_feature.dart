@@ -10,12 +10,10 @@ class FileFeature implements IFileFeatureApi {
 
   final FileFeatureDependencies _dependencies;
 
-  late final FileDownloader _fileDownloader = FileDownloader(
+  @override
+  late final IFileDownloader fileDownloader = FileDownloader(
     fileUpdatesProvider: _dependencies.fileUpdatesProvider,
     fileRepository: _dependencies.fileRepository,
     functionExecutor: _dependencies.functionExecutor,
   );
-
-  @override
-  IFileDownloader get fileDownloader => _fileDownloader;
 }

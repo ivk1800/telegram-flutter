@@ -13,9 +13,8 @@ class LogoutFeature implements ILogoutFeatureApi {
   }) : _dependencies = dependencies;
 
   final LogoutFeatureDependencies _dependencies;
-  late final LogoutScreenFactory _logoutScreenFactory =
-      LogoutScreenFactory(dependencies: _dependencies);
 
   @override
-  ILogoutScreenFactory get logoutScreenFactory => _logoutScreenFactory;
+  late final ILogoutScreenFactory logoutScreenFactory =
+      LogoutScreenFactory(dependencies: _dependencies);
 }

@@ -8,9 +8,8 @@ class AuthFeature implements IAuthFeatureApi {
       : _dependencies = dependencies;
 
   final AuthFeatureDependencies _dependencies;
-  late final AuthScreenFactory _authScreenFactory =
-      AuthScreenFactory(dependencies: _dependencies);
 
   @override
-  IAuthScreenFactory get authScreenFactory => _authScreenFactory;
+  late final IAuthScreenFactory authScreenFactory =
+      AuthScreenFactory(dependencies: _dependencies);
 }

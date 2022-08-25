@@ -6,11 +6,11 @@ import 'settings_feature_dependencies.dart';
 class SettingsFeature implements ISettingsFeatureApi {
   SettingsFeature({
     required SettingsFeatureDependencies dependencies,
-  }) : _settingsWidgetFactory =
-            SettingsScreenFactory(dependencies: dependencies);
+  }) : _dependencies = dependencies;
 
-  final ISettingScreenFactory _settingsWidgetFactory;
+  final SettingsFeatureDependencies _dependencies;
 
   @override
-  ISettingScreenFactory get settingsScreenFactory => _settingsWidgetFactory;
+  late final ISettingScreenFactory settingsScreenFactory =
+      SettingsScreenFactory(dependencies: _dependencies);
 }

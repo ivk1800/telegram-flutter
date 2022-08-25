@@ -11,8 +11,8 @@ class ChatFeature implements IChatFeatureApi {
   }) : _dependencies = dependencies;
 
   final ChatFeatureDependencies _dependencies;
-  late final IChatScreenFactory _chatScreenFactory =
-      ChatScreenFactory(dependencies: _dependencies);
+
   @override
-  IChatScreenFactory get chatScreenFactory => _chatScreenFactory;
+  late final IChatScreenFactory chatScreenFactory =
+      ChatScreenFactory(dependencies: _dependencies);
 }

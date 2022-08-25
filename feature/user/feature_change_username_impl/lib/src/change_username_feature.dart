@@ -13,10 +13,8 @@ class ChangeUsernameFeature implements IChangeUsernameFeatureApi {
   }) : _dependencies = dependencies;
 
   final ChangeUsernameFeatureDependencies _dependencies;
-  late final ChangeUsernameScreenFactory _changeUsernameScreenFactory =
-      ChangeUsernameScreenFactory(dependencies: _dependencies);
 
   @override
-  IChangeUsernameScreenFactory get changeUsernameScreenFactory =>
-      _changeUsernameScreenFactory;
+  late final IChangeUsernameScreenFactory changeUsernameScreenFactory =
+      ChangeUsernameScreenFactory(dependencies: _dependencies);
 }

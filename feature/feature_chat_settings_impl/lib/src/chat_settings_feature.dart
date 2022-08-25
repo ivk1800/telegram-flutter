@@ -11,13 +11,13 @@ import 'screen/settings/chat_settings_view_model.dart';
 class ChatSettingsFeature implements IChatSettingsFeatureApi {
   ChatSettingsFeature({
     required ChatSettingsFeatureDependencies dependencies,
-  }) : _settingsWidgetFactory =
-            _ScreenWidgetFactory(dependencies: dependencies);
+  }) : _dependencies = dependencies;
 
-  final IChatSettingsWidgetFactory _settingsWidgetFactory;
+  final ChatSettingsFeatureDependencies _dependencies;
 
   @override
-  IChatSettingsWidgetFactory get screenWidgetFactory => _settingsWidgetFactory;
+  late final IChatSettingsWidgetFactory screenWidgetFactory =
+      _ScreenWidgetFactory(dependencies: _dependencies);
 }
 
 class _ScreenWidgetFactory implements IChatSettingsWidgetFactory {

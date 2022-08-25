@@ -12,12 +12,9 @@ class GlobalSearchFeature implements IGlobalSearchFeatureApi {
     required GlobalSearchFeatureDependencies dependencies,
   }) : _dependencies = dependencies;
 
-  late final GlobalSearchScreenFactory _globalSearchScreenFactory =
-      GlobalSearchScreenFactory(dependencies: _dependencies);
-
   final GlobalSearchFeatureDependencies _dependencies;
 
   @override
-  IGlobalSearchScreenFactory get globalSearchScreenFactory =>
-      _globalSearchScreenFactory;
+  late final IGlobalSearchScreenFactory globalSearchScreenFactory =
+      GlobalSearchScreenFactory(dependencies: _dependencies);
 }

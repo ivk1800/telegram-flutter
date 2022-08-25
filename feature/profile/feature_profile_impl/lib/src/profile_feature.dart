@@ -8,10 +8,8 @@ class ProfileFeature implements IProfileFeatureApi {
       : _dependencies = dependencies;
 
   final ProfileFeatureDependencies _dependencies;
-  late final ProfileScreenFactory _profileScreenFactory = ProfileScreenFactory(
-    dependencies: _dependencies,
-  );
 
   @override
-  IProfileScreenFactory get profileScreenFactory => _profileScreenFactory;
+  late final IProfileScreenFactory profileScreenFactory =
+      ProfileScreenFactory(dependencies: _dependencies);
 }

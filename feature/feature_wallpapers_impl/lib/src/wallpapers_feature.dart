@@ -12,12 +12,7 @@ class WallpapersFeature implements IWallpapersFeatureApi {
 
   final WallpapersFeatureDependencies _dependencies;
 
-  late final IWallpapersListScreenFactory _wallpapersListScreenFactory =
-      WallpapersListScreenFactory(
-    dependencies: _dependencies,
-  );
-
   @override
-  IWallpapersListScreenFactory get wallpapersListScreenFactory =>
-      _wallpapersListScreenFactory;
+  late final IWallpapersListScreenFactory wallpapersListScreenFactory =
+      WallpapersListScreenFactory(dependencies: _dependencies);
 }

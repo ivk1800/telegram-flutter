@@ -9,10 +9,8 @@ class ChatAdministrationFeature implements IChatAdministrationFeatureApi {
   }) : _dependencies = dependencies;
 
   final ChatAdministrationFeatureDependencies _dependencies;
-  late final ChatAdministrationScreenFactory _chatAdministrationScreenFactory =
-      ChatAdministrationScreenFactory(dependencies: _dependencies);
 
   @override
-  IChatAdministrationScreenFactory get chatAdministrationScreenFactory =>
-      _chatAdministrationScreenFactory;
+  late final IChatAdministrationScreenFactory chatAdministrationScreenFactory =
+      ChatAdministrationScreenFactory(dependencies: _dependencies);
 }
