@@ -1,17 +1,22 @@
 import 'dart:async';
+
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_profile_impl/src/profile_feature_router.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 
 import 'header_action_data.dart';
 import 'header_actions_resolver.dart';
 import 'profile_state.dart';
 
+@j.singleton
+@j.disposable
 class ProfileViewModel extends BaseViewModel {
+  @j.inject
   ProfileViewModel({
     required ProfileArgs args,
     required IProfileFeatureRouter router,

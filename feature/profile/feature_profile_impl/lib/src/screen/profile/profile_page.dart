@@ -1,7 +1,7 @@
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
-import 'package:feature_profile_impl/src/screen/profile/profile_screen_scope.dart';
+import 'package:feature_profile_impl/src/screen/profile/profile_screen_scope_delegate.scope.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_state.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_view_model.dart';
 import 'package:flutter/material.dart';

@@ -347,11 +347,11 @@ abstract class FeatureModule {
     IChatMessageRepository messageRepository,
     IChatRepository chatRepository,
     IProfileFeatureRouter router,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
   ) =>
       ProfileFeatureDependencies(
         router: router,
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
         chatRepository: chatRepository,
         messageRepository: messageRepository,
         userRepository: userRepository,

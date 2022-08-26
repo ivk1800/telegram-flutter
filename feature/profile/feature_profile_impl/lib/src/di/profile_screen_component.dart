@@ -1,10 +1,11 @@
 import 'package:chat_info/chat_info.dart';
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
-import 'package:feature_profile_impl/feature_profile_impl.dart';
+import 'package:feature_profile_impl/src/profile_feature_dependencies.dmg.dart';
 import 'package:feature_profile_impl/src/screen/profile/content_interactor.dart';
 import 'package:feature_profile_impl/src/screen/profile/header_actions_resolver.dart';
 import 'package:feature_profile_impl/src/screen/profile/profile_args.dart';
-import 'package:feature_profile_impl/src/screen/profile/profile_view_model.dart';
+import 'package:feature_profile_impl/src/screen/profile/profile_screen_scope_delegate.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:user_info/user_info.dart';
@@ -12,17 +13,14 @@ import 'package:user_info/user_info.dart';
 import 'profile_screen_component_builder.dart';
 
 @j.Component(
-  modules: <Type>[ProfileScreenModule],
+  modules: <Type>[
+    ProfileScreenModule,
+    ProfileFeatureDependenciesModule,
+  ],
   builder: IProfileScreenComponentBuilder,
 )
 @j.singleton
-abstract class IProfileScreenComponent {
-  IChatHeaderInfoFactory getChatHeaderInfoFactory();
-
-  ProfileViewModel getProfileViewModel();
-
-  ILocalizationManager getLocalizationManager();
-}
+abstract class IProfileScreenComponent implements IProfileScreenScopeDelegate {}
 
 @j.module
 abstract class ProfileScreenModule {
@@ -30,56 +28,47 @@ abstract class ProfileScreenModule {
   @j.singleton
   static IChatHeaderInfoFactory provideChatHeaderInfoFactory(
     ProfileArgs args,
-    ProfileFeatureDependencies dependencies,
+    IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
   ) =>
-      dependencies.chatHeaderInfoFeatureApi.getChatHeaderInfoFactory();
+      chatHeaderInfoFeatureApi.getChatHeaderInfoFactory();
 
   @j.provides
   @j.singleton
-  static ProfileViewModel provideProfileViewModel(
+  static IChatHeaderInfoInteractor provideChatHeaderInfoInteractor(
     ProfileArgs args,
-    ProfileFeatureDependencies dependencies,
-    ContentInteractor contentInteractor,
-    HeaderActionsResolver headerActionsResolver,
+    IChatHeaderInfoFeatureApi chatHeaderInfoFeatureApi,
   ) =>
-      ProfileViewModel(
-        router: dependencies.router,
-        args: args,
-        headerActionsResolver: headerActionsResolver,
-        headerInfoInteractor: dependencies.chatHeaderInfoFeatureApi
-            .getChatHeaderInfoInteractor(args.id),
-        contentInteractor: contentInteractor,
-      );
+      chatHeaderInfoFeatureApi.getChatHeaderInfoInteractor(args.id);
 
   @j.provides
   @j.singleton
   static ChatInfoResolver provideChatInfoResolver(
-    ProfileFeatureDependencies dependencies,
+    IBasicGroupRepository basicGroupRepository,
+    IChatRepository chatRepository,
+    ISuperGroupRepository superGroupRepository,
   ) =>
       ChatInfoResolver(
-        basicGroupRepository: dependencies.basicGroupRepository,
-        chatRepository: dependencies.chatRepository,
-        superGroupRepository: dependencies.superGroupRepository,
+        basicGroupRepository: basicGroupRepository,
+        chatRepository: chatRepository,
+        superGroupRepository: superGroupRepository,
       );
 
   @j.provides
   @j.singleton
   static UserInfoResolver provideUserInfoResolver(
-    ProfileFeatureDependencies dependencies,
+    IUserRepository userRepository,
   ) =>
-      UserInfoResolver(
-        userRepository: dependencies.userRepository,
-      );
+      UserInfoResolver(userRepository: userRepository);
 
   @j.provides
   @j.singleton
   static HeaderActionsResolver provideHeaderActionsResolver(
     ChatInfoResolver chatInfoResolver,
-    ProfileFeatureDependencies dependencies,
+    IStringsProvider stringsProvider,
     UserInfoResolver userInfoResolver,
   ) =>
       HeaderActionsResolver(
-        stringsProvider: dependencies.localizationManager.stringsProvider,
+        stringsProvider: stringsProvider,
         chatInfoResolver: chatInfoResolver,
         userInfoResolver: userInfoResolver,
       );
@@ -88,22 +77,20 @@ abstract class ProfileScreenModule {
   @j.singleton
   static ContentInteractor provideContentInteractor(
     ProfileArgs args,
-    ProfileFeatureDependencies dependencies,
+    IStringsProvider stringsProvider,
+    IChatRepository chatRepository,
+    IUserRepository userRepository,
+    IBasicGroupRepository basicGroupRepository,
+    ISuperGroupRepository superGroupRepository,
+    IChatMessageRepository messageRepository,
   ) =>
       ContentInteractor(
         args: args,
-        localizationManager: dependencies.localizationManager,
-        chatRepository: dependencies.chatRepository,
-        userRepository: dependencies.userRepository,
-        basicGroupRepository: dependencies.basicGroupRepository,
-        superGroupRepository: dependencies.superGroupRepository,
-        messageRepository: dependencies.messageRepository,
+        stringsProvider: stringsProvider,
+        chatRepository: chatRepository,
+        userRepository: userRepository,
+        basicGroupRepository: basicGroupRepository,
+        superGroupRepository: superGroupRepository,
+        messageRepository: messageRepository,
       );
-
-  @j.provides
-  @j.singleton
-  static ILocalizationManager provideLocalizationManager(
-    ProfileFeatureDependencies dependencies,
-  ) =>
-      dependencies.localizationManager;
 }

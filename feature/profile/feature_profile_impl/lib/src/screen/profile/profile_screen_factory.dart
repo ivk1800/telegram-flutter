@@ -6,7 +6,7 @@ import 'package:feature_profile_impl/src/screen/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'profile_screen_scope.dart';
+import 'profile_screen_scope_delegate.scope.dart';
 
 class ProfileScreenFactory implements IProfileScreenFactory {
   ProfileScreenFactory({required ProfileFeatureDependencies dependencies})

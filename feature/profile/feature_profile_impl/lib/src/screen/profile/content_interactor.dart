@@ -10,7 +10,7 @@ class ContentInteractor {
   ContentInteractor({
     required ProfileArgs args,
     required IUserRepository userRepository,
-    required ILocalizationManager localizationManager,
+    required IStringsProvider stringsProvider,
     required IChatRepository chatRepository,
     required ISuperGroupRepository superGroupRepository,
     required IBasicGroupRepository basicGroupRepository,
@@ -18,7 +18,7 @@ class ContentInteractor {
   })  : _args = args,
         _userRepository = userRepository,
         _chatRepository = chatRepository,
-        _localizationManager = localizationManager,
+        _stringsProvider = stringsProvider,
         _superGroupRepository = superGroupRepository,
         _basicGroupRepository = basicGroupRepository,
         _messageRepository = messageRepository;
@@ -29,7 +29,7 @@ class ContentInteractor {
   final IBasicGroupRepository _basicGroupRepository;
   final IUserRepository _userRepository;
   final IChatRepository _chatRepository;
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
 
   Future<ContentData> getContent() async {
     switch (_args.type) {
@@ -216,7 +216,7 @@ class ContentInteractor {
       case SharedContentType.files:
         break;
       case SharedContentType.links:
-        return _localizationManager.getString('SharedLinks');
+        return _stringsProvider.sharedLinks;
       case SharedContentType.music:
         break;
       case SharedContentType.voice:
