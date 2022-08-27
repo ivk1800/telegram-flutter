@@ -3,11 +3,14 @@ import 'package:dialog_api/dialog_api.dart';
 import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
 import 'package:feature_settings_search_impl/src/domain/search_item.dart';
 import 'package:feature_settings_search_impl/src/settings_search_screen_router.dart';
-
+import 'package:jugger/jugger.dart' as j;
 import 'search_state.dart';
 import 'settings_search_interactor.dart';
 
+@j.singleton
+@j.disposable
 class SettingsSearchViewModel extends BaseViewModel {
+  @j.inject
   SettingsSearchViewModel({
     required ISettingsSearchScreenRouter router,
     required SettingsSearchInteractor searchInteractor,

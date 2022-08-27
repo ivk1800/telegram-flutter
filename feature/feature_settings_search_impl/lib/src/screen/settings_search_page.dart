@@ -1,6 +1,6 @@
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_settings_search_api/feature_settings_search_api.dart';
-import 'package:feature_settings_search_impl/src/screen/settings_search_screen_scope.dart';
+import 'package:feature_settings_search_impl/src/screen/settings_search_screen_scope_delegate.scope.dart';
 import 'package:flutter/material.dart';
 import 'package:tile/tile.dart';
 
@@ -87,49 +87,3 @@ class _SettingsSearchPageState extends State<SettingsSearchPage> {
     widget.controller.queryValue.addListener(onCallback);
   }
 }
-//
-// class SettingsSearchPageState extends State<SettingsSearchPage>
-//     with
-//         TickerProviderStateMixin,
-//         StateInjectorMixin<SettingsSearchPage, SettingsSearchPageState>
-//     implements IFaqResultTileListener, ISearchResultTileListener {
-//   @j.inject
-//   late ILocalizationManager localizationManager;
-//
-//   @j.inject
-//   late SettingsSearchViewModel viewModel;
-//
-//   @j.inject
-//   late ConnectionStateWidgetFactory connectionStateWidgetFactory;
-//
-//   @j.inject
-//   late TileFactory tileFactory;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return StreamBuilder<List<ITileModel>>(
-//       stream: viewModel.suggests,
-//       builder:
-//           (BuildContext context, AsyncSnapshot<List<ITileModel>> snapshot) {
-//         if (snapshot.hasData) {
-//           final List<ITileModel> items = snapshot.data!;
-//           return ListView.builder(
-//             itemCount: items.length,
-//             itemBuilder: (BuildContext context, int index) {
-//               final ITileModel tileModel = items[index];
-//               return tileFactory.create(context, tileModel);
-//             },
-//           );
-//         }
-//         return const Center(child: CircularProgressIndicator());
-//       },
-//     );
-//   }
-//
-//   @override
-//   void onFaqResultTap(String url) => viewModel.onFaqResultTap(url);
-//
-//   @override
-//   void onSearchResultTap(SearchResultType type) =>
-//       viewModel.onSearchResultTap(type);
-// }

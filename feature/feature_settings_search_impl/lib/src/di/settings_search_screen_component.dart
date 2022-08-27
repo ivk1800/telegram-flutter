@@ -1,11 +1,11 @@
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart';
-import 'package:feature_settings_search_impl/feature_settings_search_impl.dart';
 import 'package:feature_settings_search_impl/src/data/search_repository.dart';
 import 'package:feature_settings_search_impl/src/domain/search_item_data.dart';
 import 'package:feature_settings_search_impl/src/screen/search_item_listener.dart';
-import 'package:feature_settings_search_impl/src/screen/settings_search_interactor.dart';
+import 'package:feature_settings_search_impl/src/screen/settings_search_screen_scope_delegate.dart';
 import 'package:feature_settings_search_impl/src/screen/settings_search_view_model.dart';
+import 'package:feature_settings_search_impl/src/settings_search_feature_dependencies.dmg.dart';
 import 'package:feature_settings_search_impl/src/tile/delegate/faq_result_tile_factory_delegate.dart';
 import 'package:feature_settings_search_impl/src/tile/delegate/search_result_tile_factory_delegate.dart';
 import 'package:feature_settings_search_impl/src/tile/model/faq_result_tile_model.dart';
@@ -19,48 +19,21 @@ import 'package:tile/tile.dart';
 import 'search_settings_screen_component_builder.dart';
 
 @j.Component(
-  modules: <Type>[SettingsSearchScreenModule],
+  modules: <Type>[
+    SettingsSearchScreenModule,
+    SettingsSearchFeatureDependenciesModule,
+  ],
   builder: ISearchSettingsScreenComponentBuilder,
 )
 @j.singleton
-abstract class ISettingsSearchScreenComponent {
-  SettingsSearchViewModel getSettingsSearchViewModel();
-
-  IStringsProvider getStringsProvider();
-
-  IConnectionStateProvider getConnectionStateProvider();
-
-  SearchItemListener getSearchItemListener();
-
-  TileFactory getTileFactory();
-
-  ConnectionStateWidgetFactory getConnectionStateWidgetFactory();
-}
+abstract class ISettingsSearchScreenComponent
+    implements ISettingsSearchScreenScopeDelegate {}
 
 @j.module
 abstract class SettingsSearchScreenModule {
   @j.singleton
   @j.provides
-  static SettingsSearchViewModel provideSettingsSearchViewModel(
-    SettingsSearchInteractor searchInteractor,
-    ISettingsSearchScreenRouter router,
-  ) =>
-      SettingsSearchViewModel(
-        searchInteractor: searchInteractor,
-        router: router,
-      );
-
-  @j.singleton
-  @j.provides
-  static ISettingsSearchScreenRouter provideSettingsSearchScreenRouter(
-    SettingsSearchFeatureDependencies dependencies,
-  ) =>
-      dependencies.router;
-
-  @j.singleton
-  @j.provides
   static TileFactory provideTileFactory(
-    SettingsSearchFeatureDependencies dependencies,
     ISearchResultTapListener resultTapListener,
     IFaqResultTapListener faqResultTapListener,
   ) =>
@@ -78,7 +51,6 @@ abstract class SettingsSearchScreenModule {
   @j.singleton
   @j.provides
   static ISearchInteractor<List<ITileModel>> provideSearchInteractor(
-    SettingsSearchFeatureDependencies dependencies,
     SearchRepository searchRepository,
     SearchResultTileModelMapper mapper,
   ) =>
@@ -94,18 +66,11 @@ abstract class SettingsSearchScreenModule {
 
   @j.singleton
   @j.provides
-  static IStringsProvider provideStringsProvider(
-    SettingsSearchFeatureDependencies dependencies,
-  ) =>
-      dependencies.stringsProvider;
-
-  @j.singleton
-  @j.provides
   static ConnectionStateWidgetFactory provideConnectionStateWidgetFactory(
-    SettingsSearchFeatureDependencies dependencies,
+    IConnectionStateProvider connectionStateProvider,
   ) =>
       ConnectionStateWidgetFactory(
-        connectionStateProvider: dependencies.connectionStateProvider,
+        connectionStateProvider: connectionStateProvider,
       );
 
   @j.singleton
@@ -113,16 +78,7 @@ abstract class SettingsSearchScreenModule {
   static SearchRepository provideSearchRepository(
     IStringsProvider stringsProvider,
   ) =>
-      SearchRepository(
-        stringsProvider: stringsProvider,
-      );
-
-  @j.singleton
-  @j.provides
-  static IConnectionStateProvider provideConnectionStateProvider(
-    SettingsSearchFeatureDependencies dependencies,
-  ) =>
-      dependencies.connectionStateProvider;
+      SearchRepository(stringsProvider: stringsProvider);
 
   @j.singleton
   @j.provides
