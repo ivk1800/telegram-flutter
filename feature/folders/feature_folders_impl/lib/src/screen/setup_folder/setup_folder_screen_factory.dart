@@ -1,6 +1,5 @@
 import 'package:feature_folders_api/feature_folders_api.dart';
 import 'package:feature_folders_impl/src/di/folders_component.dart';
-import 'package:feature_folders_impl/src/di/setup_folder_screen_component.jugger.dart';
 import 'package:feature_folders_impl/src/screen/setup_folder/setup_folder_page.dart';
 import 'package:flutter/widgets.dart';
 
@@ -17,9 +16,7 @@ class SetupFolderScreenFactory implements ISetupFolderScreenFactory {
   Widget create() {
     return SetupFolderScreenScope(
       child: const SetupFolderPage(),
-      create: () => JuggerSetupFolderScreenComponentBuilder()
-          .foldersComponent(_foldersComponent)
-          .build(),
+      create: _foldersComponent.createSetupFolderScreenComponent,
     );
   }
 }

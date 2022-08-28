@@ -1,10 +1,15 @@
 import 'package:core_arch/core_arch.dart';
 import 'package:dialog_api/dialog_api.dart';
+import 'package:feature_folders_impl/src/di/scope/screen_scope.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 
 import 'setup_folder_screen_router.dart';
 
+@j.disposable
+@screenScope
 class SetupFolderViewModel extends BaseViewModel {
+  @j.inject
   SetupFolderViewModel({
     required ISetupFolderScreenRouter router,
     required IStringsProvider stringsProvider,

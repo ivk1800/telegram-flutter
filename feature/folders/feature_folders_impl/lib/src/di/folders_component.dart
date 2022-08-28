@@ -1,47 +1,24 @@
-import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_folders_impl/feature_folders_impl.dart';
+import 'package:core_ui_jugger/core_ui_jugger.dart';
+import 'package:feature_folders_impl/src/di/scope/feature_scope.dart';
+import 'package:feature_folders_impl/src/folders_feature_dependencies.dmg.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:localization_api/localization_api.dart';
 
 import 'folders_component_builder.dart';
+import 'folders_screen_component.dart';
+import 'setup_folder_screen_component.dart';
 
 @j.Component(
-  modules: <Type>[FoldersModule],
+  modules: <Type>[
+    FoldersFeatureDependenciesModule,
+    TgAppBarModule,
+  ],
   builder: IFoldersComponentBuilder,
 )
-@j.singleton
+@featureScope
 abstract class IFoldersComponent {
-  tg.TgAppBarFactory getTgAppBarFactory();
+  @j.subcomponentFactory
+  ISetupFolderScreenComponent createSetupFolderScreenComponent();
 
-  IFoldersRouter getFoldersRouter();
-
-  IStringsProvider getStringsProvider();
-}
-
-@j.module
-abstract class FoldersModule {
-  @j.singleton
-  @j.provides
-  static tg.TgAppBarFactory provideTgAppBarFactory(
-    FoldersFeatureDependencies dependencies,
-  ) =>
-      tg.TgAppBarFactory(
-        connectionStateWidgetFactory: tg.ConnectionStateWidgetFactory(
-          connectionStateProvider: dependencies.connectionStateProvider,
-        ),
-      );
-
-  @j.singleton
-  @j.provides
-  static IStringsProvider provideStringsProvider(
-    FoldersFeatureDependencies dependencies,
-  ) =>
-      dependencies.stringsProvider;
-
-  @j.singleton
-  @j.provides
-  static IFoldersRouter provideFoldersRouter(
-    FoldersFeatureDependencies dependencies,
-  ) =>
-      dependencies.router;
+  @j.subcomponentFactory
+  IFoldersScreenComponent createFoldersScreenComponent();
 }
