@@ -1,4 +1,4 @@
-import 'package:app/src/di/component/feature_component.dart';
+import 'package:app/src/di/scope/application_scope.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_change_bio_api/feature_change_bio_api.dart';
 import 'package:feature_change_username_api/feature_change_username_api.dart';
@@ -26,90 +26,184 @@ import 'package:feature_settings_search_api/feature_settings_search_api.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
+import 'package:jugger/jugger.dart' as j;
 
+@applicationScope
 class FeatureFactory {
-  FeatureFactory({required IFeatureComponent featureComponent})
-      : _featureComponent = featureComponent;
+  @j.inject
+  FeatureFactory({
+    required j.IProvider<IMainScreenFeatureApi> mainScreenFeatureApiProvider,
+    required j.IProvider<IChatsListFeatureApi> chatsListFeatureApiProvider,
+    required j.IProvider<IGlobalSearchFeatureApi>
+        globalSearchFeatureApiProvider,
+    required j.IProvider<IChatFeatureApi> chatFeatureApiProvider,
+    required j.IProvider<ISettingsFeatureApi> settingsFeatureApiProvider,
+    required j.IProvider<ISettingsSearchFeatureApi>
+        settingsSearchFeatureApiProvider,
+    required j.IProvider<IPrivacySettingsFeatureApi>
+        privacySettingsFeatureApiProvider,
+    required j.IProvider<INotificationsSettingsFeatureApi>
+        notificationsSettingsFeatureApiProvider,
+    required j.IProvider<IDataSettingsFeatureApi>
+        dataSettingsFeatureApiProvider,
+    required j.IProvider<IChatSettingsFeatureApi>
+        chatSettingsFeatureApiProvider,
+    required j.IProvider<IWallpapersFeatureApi> wallpapersFeatureApiProvider,
+    required j.IProvider<IStickersFeatureApi> stickersFeatureApiProvider,
+    required j.IProvider<IFoldersFeatureApi> foldersFeatureApiProvider,
+    required j.IProvider<IProfileFeatureApi> profileFeatureApiProvider,
+    required j.IProvider<ISharedMediaFeatureApi> sharedMediaFeatureApiProvider,
+    required j.IProvider<DevFeature> devFeatureProvider,
+    required j.IProvider<ICountryFeatureApi> countryFeatureApiProvider,
+    required j.IProvider<IAuthFeatureApi> authFeatureApiProvider,
+    required j.IProvider<ILogoutFeatureApi> logoutFeatureApiProvider,
+    required j.IProvider<IFileFeatureApi> fileFeatureApiProvider,
+    required j.IProvider<ISessionsFeatureApi> sessionsFeatureApiProvider,
+    required j.IProvider<ICreateNewChatFeatureApi>
+        createNewChatFeatureApiProvider,
+    required j.IProvider<IContactsFeatureApi> contactsFeatureApiProvider,
+    required j.IProvider<INewContactFeatureApi> newContactFeatureApiProvider,
+    required j.IProvider<IChatAdministrationFeatureApi>
+        chatAdministrationFeatureApiProvider,
+    required j.IProvider<IChangeUsernameFeatureApi>
+        changeUsernameFeatureApiProvider,
+    required j.IProvider<IChangeBioFeatureApi> changeBioFeatureApiProvider,
+  })  : _mainScreenFeatureApiProvider = mainScreenFeatureApiProvider,
+        _chatsListFeatureApiProvider = chatsListFeatureApiProvider,
+        _chatFeatureApiProvider = chatFeatureApiProvider,
+        _settingsFeatureApiProvider = settingsFeatureApiProvider,
+        _settingsSearchFeatureApiProvider = settingsSearchFeatureApiProvider,
+        _privacySettingsFeatureApiProvider = privacySettingsFeatureApiProvider,
+        _notificationsSettingsFeatureApiProvider =
+            notificationsSettingsFeatureApiProvider,
+        _dataSettingsFeatureApiProvider = dataSettingsFeatureApiProvider,
+        _chatSettingsFeatureApiProvider = chatSettingsFeatureApiProvider,
+        _wallpapersFeatureApiProvider = wallpapersFeatureApiProvider,
+        _stickersFeatureApiProvider = stickersFeatureApiProvider,
+        _foldersFeatureApiProvider = foldersFeatureApiProvider,
+        _profileFeatureApiProvider = profileFeatureApiProvider,
+        _sharedMediaFeatureApiProvider = sharedMediaFeatureApiProvider,
+        _devFeatureProvider = devFeatureProvider,
+        _countryFeatureApiProvider = countryFeatureApiProvider,
+        _authFeatureApiProvider = authFeatureApiProvider,
+        _logoutFeatureApiProvider = logoutFeatureApiProvider,
+        _fileFeatureApiProvider = fileFeatureApiProvider,
+        _sessionsFeatureApiProvider = sessionsFeatureApiProvider,
+        _createNewChatFeatureApiProvider = createNewChatFeatureApiProvider,
+        _contactsFeatureApiProvider = contactsFeatureApiProvider,
+        _newContactFeatureApiProvider = newContactFeatureApiProvider,
+        _chatAdministrationFeatureApiProvider =
+            chatAdministrationFeatureApiProvider,
+        _changeUsernameFeatureApiProvider = changeUsernameFeatureApiProvider,
+        _changeBioFeatureApiProvider = changeBioFeatureApiProvider,
+        _globalSearchFeatureApiProvider = globalSearchFeatureApiProvider;
 
-  final IFeatureComponent _featureComponent;
+  final j.IProvider<IMainScreenFeatureApi> _mainScreenFeatureApiProvider;
+  final j.IProvider<IChatsListFeatureApi> _chatsListFeatureApiProvider;
+  final j.IProvider<IGlobalSearchFeatureApi> _globalSearchFeatureApiProvider;
+  final j.IProvider<IChatFeatureApi> _chatFeatureApiProvider;
+  final j.IProvider<ISettingsFeatureApi> _settingsFeatureApiProvider;
+  final j.IProvider<ISettingsSearchFeatureApi>
+      _settingsSearchFeatureApiProvider;
+  final j.IProvider<IPrivacySettingsFeatureApi>
+      _privacySettingsFeatureApiProvider;
+  final j.IProvider<INotificationsSettingsFeatureApi>
+      _notificationsSettingsFeatureApiProvider;
+  final j.IProvider<IDataSettingsFeatureApi> _dataSettingsFeatureApiProvider;
+  final j.IProvider<IChatSettingsFeatureApi> _chatSettingsFeatureApiProvider;
+  final j.IProvider<IWallpapersFeatureApi> _wallpapersFeatureApiProvider;
+  final j.IProvider<IStickersFeatureApi> _stickersFeatureApiProvider;
+  final j.IProvider<IFoldersFeatureApi> _foldersFeatureApiProvider;
+  final j.IProvider<IProfileFeatureApi> _profileFeatureApiProvider;
+  final j.IProvider<ISharedMediaFeatureApi> _sharedMediaFeatureApiProvider;
+  final j.IProvider<DevFeature> _devFeatureProvider;
+  final j.IProvider<ICountryFeatureApi> _countryFeatureApiProvider;
+  final j.IProvider<IAuthFeatureApi> _authFeatureApiProvider;
+  final j.IProvider<ILogoutFeatureApi> _logoutFeatureApiProvider;
+  final j.IProvider<IFileFeatureApi> _fileFeatureApiProvider;
+  final j.IProvider<ISessionsFeatureApi> _sessionsFeatureApiProvider;
+  final j.IProvider<ICreateNewChatFeatureApi> _createNewChatFeatureApiProvider;
+  final j.IProvider<IContactsFeatureApi> _contactsFeatureApiProvider;
+  final j.IProvider<INewContactFeatureApi> _newContactFeatureApiProvider;
+  final j.IProvider<IChatAdministrationFeatureApi>
+      _chatAdministrationFeatureApiProvider;
+  final j.IProvider<IChangeUsernameFeatureApi>
+      _changeUsernameFeatureApiProvider;
+  final j.IProvider<IChangeBioFeatureApi> _changeBioFeatureApiProvider;
 
   IMainScreenFeatureApi createMainScreenFeature() =>
-      _featureComponent.getMainScreenFeatureApi();
+      _mainScreenFeatureApiProvider.get();
 
   IChatsListFeatureApi createChatsListFeatureApi() =>
-      _featureComponent.getChatsListFeatureApi();
+      _chatsListFeatureApiProvider.get();
 
   IGlobalSearchFeatureApi createGlobalSearchFeatureApi() =>
-      _featureComponent.getGlobalSearchFeatureApi();
+      _globalSearchFeatureApiProvider.get();
 
-  IChatFeatureApi createChatFeatureApi() =>
-      _featureComponent.getChatListFeatureApi();
+  IChatFeatureApi createChatFeatureApi() => _chatFeatureApiProvider.get();
 
   ISettingsFeatureApi createSettingsFeatureApi() =>
-      _featureComponent.getSettingsFeatureApi();
+      _settingsFeatureApiProvider.get();
 
   ISettingsSearchFeatureApi createSettingsSearchFeatureApi() =>
-      _featureComponent.getSettingsSearchFeatureApi();
+      _settingsSearchFeatureApiProvider.get();
 
   IPrivacySettingsFeatureApi createPrivacySettingsFeatureApi() =>
-      _featureComponent.getPrivacySettingsFeatureApi();
+      _privacySettingsFeatureApiProvider.get();
 
   INotificationsSettingsFeatureApi createNotificationsSettingsFeatureApi() =>
-      _featureComponent.getNotificationsSettingsFeatureApi();
+      _notificationsSettingsFeatureApiProvider.get();
 
   IDataSettingsFeatureApi createDataSettingsFeatureApi() =>
-      _featureComponent.getDataSettingsFeatureApi();
+      _dataSettingsFeatureApiProvider.get();
 
   IChatSettingsFeatureApi createChatSettingsFeatureApi() =>
-      _featureComponent.getChatSettingsFeatureApi();
+      _chatSettingsFeatureApiProvider.get();
 
   IWallpapersFeatureApi createWallpapersFeatureApi() =>
-      _featureComponent.getWallpapersFeatureApi();
+      _wallpapersFeatureApiProvider.get();
 
   IStickersFeatureApi createStickersFeatureApi() =>
-      _featureComponent.getStickersFeatureApi();
+      _stickersFeatureApiProvider.get();
 
   IFoldersFeatureApi createFoldersFeatureApi() =>
-      _featureComponent.getFoldersFeatureApi();
+      _foldersFeatureApiProvider.get();
 
   IProfileFeatureApi createProfileFeatureApi() =>
-      _featureComponent.getProfileFeatureApi();
+      _profileFeatureApiProvider.get();
 
   ISharedMediaFeatureApi createSharedMediaFeatureApi() =>
-      _featureComponent.getSharedMediaFeatureApi();
+      _sharedMediaFeatureApiProvider.get();
 
-  DevFeature createDevFeature() => _featureComponent.getDevFeature();
+  DevFeature createDevFeature() => _devFeatureProvider.get();
 
   ICountryFeatureApi createCountryFeatureApi() =>
-      _featureComponent.getCountryFeatureApi();
+      _countryFeatureApiProvider.get();
 
-  IAuthFeatureApi createAuthFeatureApi() =>
-      _featureComponent.getAuthFeatureApi();
+  IAuthFeatureApi createAuthFeatureApi() => _authFeatureApiProvider.get();
 
-  ILogoutFeatureApi createLogoutFeatureApi() =>
-      _featureComponent.getLogoutFeatureApi();
+  ILogoutFeatureApi createLogoutFeatureApi() => _logoutFeatureApiProvider.get();
 
-  IFileFeatureApi createFileFeatureApi() =>
-      _featureComponent.getFileFeatureApi();
+  IFileFeatureApi createFileFeatureApi() => _fileFeatureApiProvider.get();
 
   ISessionsFeatureApi createSessionsFeatureApi() =>
-      _featureComponent.getSessionsFeatureApi();
+      _sessionsFeatureApiProvider.get();
 
   ICreateNewChatFeatureApi createCreateNewChatFeatureApi() =>
-      _featureComponent.getCreateNewChatFeatureApi();
+      _createNewChatFeatureApiProvider.get();
 
   IContactsFeatureApi createContactsFeatureApi() =>
-      _featureComponent.getContactsFeatureApi();
+      _contactsFeatureApiProvider.get();
 
   INewContactFeatureApi createNewContactFeatureApi() =>
-      _featureComponent.getNewContactFeatureApi();
+      _newContactFeatureApiProvider.get();
 
   IChatAdministrationFeatureApi createChatAdministrationFeatureApi() =>
-      _featureComponent.getChatAdministrationFeatureApi();
+      _chatAdministrationFeatureApiProvider.get();
 
   IChangeUsernameFeatureApi createChangeUsernameFeatureApi() =>
-      _featureComponent.getChangeUsernameFeatureApi();
+      _changeUsernameFeatureApiProvider.get();
 
   IChangeBioFeatureApi createChangeBioFeatureApi() =>
-      _featureComponent.getChangeBioFeatureApi();
+      _changeBioFeatureApiProvider.get();
 }

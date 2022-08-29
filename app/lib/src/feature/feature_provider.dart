@@ -1,3 +1,4 @@
+import 'package:app/src/di/scope/application_scope.dart';
 import 'package:app/src/feature/feature.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_change_bio_api/feature_change_bio_api.dart';
@@ -23,8 +24,11 @@ import 'package:feature_settings_api/feature_settings_api.dart';
 import 'package:feature_shared_media_api/feature_shared_media_api.dart';
 import 'package:feature_stickers_api/feature_stickers_api.dart';
 import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
+import 'package:jugger/jugger.dart' as j;
 
+@applicationScope
 class FeatureProvider {
+  @j.inject
   FeatureProvider({
     required FeatureFactory featureFactory,
   }) : _featureFactory = featureFactory;

@@ -1,8 +1,5 @@
 import 'package:app/src/app/tg_app.dart';
-import 'package:app/src/di/component/app_component.dart';
-import 'package:app/src/di/component/feature_component.jugger.dart';
 import 'package:app/src/di/scope/application_scope.dart';
-import 'package:app/src/feature/feature.dart';
 import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/app_controller_router_impl.dart';
 import 'package:app/src/navigation/navigation.dart';
@@ -35,25 +32,6 @@ abstract class AppModule {
   @applicationScope
   @j.provides
   static ILogger provideLogger() => TgLoggerImpl();
-
-  @applicationScope
-  @j.provides
-  static FeatureFactory provideFeatureFactory(IAppComponent appComponent) {
-    return FeatureFactory(
-      featureComponent:
-          JuggerFeatureComponentBuilder().appComponent(appComponent).build(),
-    );
-  }
-
-  @applicationScope
-  @j.provides
-  static FeatureProvider provideFeatureProvider(
-    FeatureFactory featureFactory,
-  ) {
-    return FeatureProvider(
-      featureFactory: featureFactory,
-    );
-  }
 
   @applicationScope
   @j.provides

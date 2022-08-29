@@ -1,4 +1,4 @@
-import 'package:app/src/di/scope/features_scope.dart';
+import 'package:app/src/di/scope/application_scope.dart';
 import 'package:app/src/navigation/key_generator.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:jugger/jugger.dart' as j;
@@ -7,7 +7,7 @@ import '../common_screen_router_impl.dart';
 import '../navigation_router.dart';
 import 'chat_screen_router_impl.dart';
 
-@featuresScope
+@applicationScope
 class ChatScreenRouterFactory implements IChatScreenRouterFactory {
   @j.inject
   ChatScreenRouterFactory({
