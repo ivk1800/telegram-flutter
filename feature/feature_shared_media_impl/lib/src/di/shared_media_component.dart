@@ -1,31 +1,13 @@
-import 'package:feature_shared_media_impl/feature_shared_media_impl.dart';
-import 'package:feature_shared_media_impl/src/screen/factory/share_media_view_model.dart';
+import 'package:feature_shared_media_impl/src/screen/factory/shared_media_screen_scope_delegate.dart';
+import 'package:feature_shared_media_impl/src/shared_media_feature_dependencies.dmg.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:localization_api/localization_api.dart';
 
 import 'shared_media_component_builder.dart';
 
 @j.Component(
-  modules: <Type>[SharedMediaModule],
+  modules: <Type>[SharedMediaFeatureDependenciesModule],
   builder: ISharedMediaComponentBuilder,
 )
-abstract class ISharedMediaComponent {
-  ILocalizationManager getLocalizationManager();
-
-  SharedMediaViewModel getSharedMediaViewModel();
-}
-
-@j.module
-abstract class SharedMediaModule {
-  @j.provides
-  static ILocalizationManager provideLocalizationManager(
-    SharedMediaFeatureDependencies dependencies,
-  ) =>
-      dependencies.localizationManager;
-
-  @j.provides
-  static SharedMediaViewModel provideSharedMediaViewModel(
-    SharedMediaFeatureDependencies dependencies,
-  ) =>
-      SharedMediaViewModel();
-}
+@j.singleton
+abstract class ISharedMediaComponent
+    implements ISharedMediaScreenScopeDelegate {}

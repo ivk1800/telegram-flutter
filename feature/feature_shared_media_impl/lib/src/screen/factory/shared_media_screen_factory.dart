@@ -3,9 +3,8 @@ import 'package:feature_shared_media_impl/feature_shared_media_impl.dart';
 import 'package:feature_shared_media_impl/src/di/shared_media_component.jugger.dart';
 import 'package:feature_shared_media_impl/src/screen/factory/shared_media_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-import 'shared_media_screen_scope.dart';
+import 'shared_media_screen_scope_delegate.scope.dart';
 
 class SharedMediaScreenFactory implements ISharedMediaScreenFactory {
   SharedMediaScreenFactory({
