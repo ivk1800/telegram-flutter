@@ -1,5 +1,5 @@
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_folders_impl/src/screen/setup_folder/setup_folder_screen_scope.dart';
+import 'package:feature_folders_impl/src/screen/setup_folder/setup_folder_screen_scope_delegate.scope.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 

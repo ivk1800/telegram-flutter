@@ -3,7 +3,7 @@ import 'package:feature_folders_impl/src/di/folders_component.dart';
 import 'package:feature_folders_impl/src/screen/setup_folder/setup_folder_page.dart';
 import 'package:flutter/widgets.dart';
 
-import 'setup_folder_screen_scope.dart';
+import 'setup_folder_screen_scope_delegate.scope.dart';
 
 class SetupFolderScreenFactory implements ISetupFolderScreenFactory {
   SetupFolderScreenFactory({
