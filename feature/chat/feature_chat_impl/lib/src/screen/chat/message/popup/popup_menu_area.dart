@@ -54,7 +54,6 @@ class _PopupMenuAreaState<T> extends State<PopupMenuArea<T>> {
       showMenu<T>(
         context: context,
         items: items,
-        initialValue: null,
         position: position,
         shape: popupMenuTheme.shape,
         color: popupMenuTheme.color,

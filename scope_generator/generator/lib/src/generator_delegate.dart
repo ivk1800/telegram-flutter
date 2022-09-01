@@ -205,8 +205,8 @@ class GeneratorDelegate {
 
     final String name = _allocator.allocate(
       Reference(
-        type.element.name,
-        type.element.librarySource.uri.toString(),
+        type.element2.name,
+        type.element2.librarySource.uri.toString(),
       ),
     );
 

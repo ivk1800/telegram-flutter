@@ -35,7 +35,7 @@ dependencies:
     path: ../../../scope_generator/scope_generator_annotation
 
 dev_dependencies:
-  build_runner: 2.1.7
+  build_runner: 2.2.0
   dependencies_module_generator:
     path: ../../../dependencies_module_generator/generator
   dependency_validator: 3.2.0

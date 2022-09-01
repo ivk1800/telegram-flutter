@@ -34,7 +34,7 @@ class DmgDelegate {
   late final Expression _scopeExpression = () {
     final DartType? scopeType = _scopeType;
     if (scopeType != null) {
-      final Element? element = scopeType.element;
+      final Element? element = scopeType.element2;
       return CodeExpression(
         Code(
           _allocator.allocate(
@@ -134,8 +134,8 @@ class DmgDelegate {
 
     final String name = _allocator.allocate(
       Reference(
-        type.element.name,
-        type.element.librarySource.uri.toString(),
+        type.element2.name,
+        type.element2.librarySource.uri.toString(),
       ),
     );
 
