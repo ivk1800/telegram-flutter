@@ -1,12 +1,11 @@
 import 'package:core_ui_jugger/core_ui_jugger.dart';
-import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_sessions_impl/src/screen/sessions/session_tile_listener.dart';
+import 'package:feature_sessions_impl/src/screen/sessions/sessions_screen_scope_delegate.dart';
 import 'package:feature_sessions_impl/src/screen/sessions/sessions_view_model.dart';
 import 'package:feature_sessions_impl/src/screen/sessions/tile/session_tile_factory_delegate.dart';
 import 'package:feature_sessions_impl/src/screen/sessions/tile/session_tile_model.dart';
 import 'package:feature_sessions_impl/src/sessions_feature_dependencies.dmg.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:localization_api/localization_api.dart';
 import 'package:tile/tile.dart';
 
 import 'sessions_screen_component_builder.dart';
@@ -20,15 +19,8 @@ import 'sessions_screen_component_builder.dart';
   builder: ISessionsScreenComponentBuilder,
 )
 @j.singleton
-abstract class ISessionsScreenComponent {
-  SessionsViewModel getSessionsViewModel();
-
-  TileFactory getTileFactory();
-
-  IStringsProvider getStringsProvider();
-
-  tg.TgAppBarFactory getTgAppBarFactory();
-}
+abstract class ISessionsScreenComponent
+    implements ISessionsScreenScopeDelegate {}
 
 @j.module
 abstract class SessionsScreenModule {

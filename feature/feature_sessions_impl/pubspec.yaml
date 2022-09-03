@@ -8,6 +8,8 @@ environment:
 dependencies:
   core_arch:
     path: ../../core_arch
+  core_arch_flutter:
+    path: ../../core_arch_flutter
   core_tdlib_api:
     path: ../../core_tdlib_api
   core_ui_jugger:
@@ -27,6 +29,8 @@ dependencies:
   localization_api:
     path: ../../localization_api
   rxdart: 0.27.3
+  scope_generator_annotation:
+    path: ../../scope_generator/scope_generator_annotation
   td_api:
     path: ../../td/td_api
   tile:
@@ -39,5 +43,7 @@ dev_dependencies:
   dependency_validator: 3.2.0
   freezed: 2.1.0+1
   jugger_generator: 3.0.0
+  scope_generator:
+    path: ../../scope_generator/generator
   tg_lint_rules:
     path: ../../tg_lint_rules

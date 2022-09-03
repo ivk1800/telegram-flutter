@@ -1,5 +1,5 @@
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_sessions_impl/src/screen/sessions/sessions_screen_scope.dart';
+import 'package:feature_sessions_impl/src/screen/sessions/sessions_screen_scope_delegate.scope.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:tile/tile.dart';

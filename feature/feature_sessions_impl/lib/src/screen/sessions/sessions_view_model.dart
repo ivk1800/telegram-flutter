@@ -6,6 +6,7 @@ import 'package:feature_sessions_impl/src/screen/sessions/sessions_state.dart';
 import 'package:jugger/jugger.dart' as j;
 
 @j.singleton
+@j.disposable
 class SessionsViewModel extends BaseViewModel {
   @j.inject
   SessionsViewModel({

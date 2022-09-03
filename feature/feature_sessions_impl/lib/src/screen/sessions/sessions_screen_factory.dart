@@ -4,7 +4,7 @@ import 'package:feature_sessions_impl/src/di/sessions_screen_component.jugger.da
 import 'package:feature_sessions_impl/src/screen/sessions/sessions_page.dart';
 import 'package:flutter/widgets.dart';
 
-import 'sessions_screen_scope.dart';
+import 'sessions_screen_scope_delegate.scope.dart';
 
 class SessionsScreenFactory implements ISessionsScreenFactory {
   SessionsScreenFactory({
