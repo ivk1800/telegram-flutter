@@ -5,9 +5,7 @@ analyzer:
     - dart_code_metrics
   exclude:
     - "build/**"
-    - "**/*.freezed.dart"
     - "**/*.mocks.dart"
-    - "**/*.jugger.dart"
     - "**/*.dmg.dart"
     - "**/*.scope.dart"
 
