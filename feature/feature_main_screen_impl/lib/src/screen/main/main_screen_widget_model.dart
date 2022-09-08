@@ -4,13 +4,17 @@ import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_main_screen_impl/src/screen/main/main_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'folder.dart';
 import 'main_screen.dart';
 
+@j.singleton
+@j.disposable
 class MainScreenWidgetModel with SubscriptionMixin {
+  @j.inject
   MainScreenWidgetModel({
     required IChatsListScreenFactory chatsListScreenFactory,
     required MainViewModel viewModel,

@@ -1,7 +1,7 @@
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_main_screen_impl/src/screen/main/header_state.dart';
-import 'package:feature_main_screen_impl/src/screen/main/main_screen_scope.dart';
+import 'package:feature_main_screen_impl/src/screen/main/main_screen_scope_delegate.scope.dart';
 import 'package:feature_main_screen_impl/src/screen/main/main_screen_widget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:localization_api/localization_api.dart';

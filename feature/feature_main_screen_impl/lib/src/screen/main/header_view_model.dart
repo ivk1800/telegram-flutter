@@ -2,13 +2,17 @@ import 'package:core/core.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_main_screen_impl/src/screen/main/header_state.dart';
+import 'package:jugger/jugger.dart' as j;
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_models/shared_models.dart';
 import 'package:theme_manager_api/theme_manager_api.dart';
 import 'package:tuple/tuple.dart';
 import 'package:user_info/user_info.dart';
 
+@j.singleton
+@j.disposable
 class HeaderViewModel extends BaseViewModel {
+  @j.inject
   HeaderViewModel({
     required IThemeManager themeManager,
     required UserInfoResolver userInfoResolver,

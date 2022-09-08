@@ -1,7 +1,7 @@
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
 import 'package:feature_main_screen_impl/src/di/main_screen_component.jugger.dart';
-import 'package:feature_main_screen_impl/src/screen/main/main_screen_scope.dart';
+import 'package:feature_main_screen_impl/src/screen/main/main_screen_scope_delegate.scope.dart';
 import 'package:flutter/widgets.dart';
 
 import 'main_page.dart';

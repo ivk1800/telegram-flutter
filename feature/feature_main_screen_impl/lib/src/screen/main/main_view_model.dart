@@ -1,11 +1,15 @@
 import 'package:core_arch/core_arch.dart';
 import 'package:feature_main_screen_impl/feature_main_screen_impl.dart';
 import 'package:feature_main_screen_impl/src/screen/main/folders_interactor.dart';
+import 'package:jugger/jugger.dart' as j;
 
 import 'folder.dart';
 import 'menu_item.dart';
 
+@j.singleton
+@j.disposable
 class MainViewModel extends BaseViewModel {
+  @j.inject
   MainViewModel({
     required IMainScreenRouter router,
     required FoldersInteractor foldersInteractor,
