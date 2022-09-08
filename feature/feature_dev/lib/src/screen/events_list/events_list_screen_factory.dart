@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'events_list_page.dart';
 import 'events_list_screen_component.jugger.dart';
-import 'events_list_screen_scope.dart';
+import 'events_list_screen_scope_delegate.scope.dart';
 
 class EventsListScreenFactory {
   EventsListScreenFactory({
