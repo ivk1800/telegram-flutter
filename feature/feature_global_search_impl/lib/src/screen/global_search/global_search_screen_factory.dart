@@ -4,7 +4,7 @@ import 'package:feature_global_search_impl/src/screen/global_search/global_searc
 import 'package:flutter/widgets.dart';
 
 import '../di/global_search_screen_component.jugger.dart';
-import 'global_search_screen_scope.dart';
+import 'global_search_screen_scope_delegate.scope.dart';
 
 class GlobalSearchScreenFactory implements IGlobalSearchScreenFactory {
   GlobalSearchScreenFactory({

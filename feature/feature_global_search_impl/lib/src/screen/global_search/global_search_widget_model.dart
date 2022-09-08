@@ -1,11 +1,14 @@
 import 'package:feature_global_search_api/feature_global_search_api.dart';
 import 'package:feature_global_search_impl/src/screen/global_search/global_search_state.dart';
 import 'package:flutter/material.dart';
-
+import 'package:jugger/jugger.dart' as j;
 import 'global_search_result_category.dart';
 import 'global_search_view_model.dart';
 
+@j.singleton
+@j.disposable
 class GlobalSearchWidgetModel {
+  @j.inject
   GlobalSearchWidgetModel({
     required GlobalSearchViewModel viewModel,
   }) : _viewModel = viewModel;

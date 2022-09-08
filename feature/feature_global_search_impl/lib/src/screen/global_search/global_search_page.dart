@@ -1,7 +1,7 @@
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_global_search_api/feature_global_search_api.dart';
-import 'package:feature_global_search_impl/src/screen/global_search/global_search_screen_scope.dart';
+import 'package:feature_global_search_impl/src/screen/global_search/global_search_screen_scope_delegate.scope.dart';
 import 'package:feature_global_search_impl/src/screen/global_search/global_search_widget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:tile/tile.dart';
