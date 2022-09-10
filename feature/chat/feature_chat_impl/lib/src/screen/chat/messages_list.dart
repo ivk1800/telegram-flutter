@@ -62,14 +62,15 @@ class _MessagesListState extends State<MessagesList> {
             if (index.isEven) {
               final ITileModel tileModel =
                   this.widget.messagesBundle[itemIndex];
-              widget = messageFactory.create(
-                context: context,
-                model: tileModel,
+              widget = Padding(
+                padding: EdgeInsets.zero,
+                child: messageFactory.create(
+                  context: context,
+                  model: tileModel,
+                ),
               );
-              // widget = itemBuilder(context, itemIndex);
             } else {
-              widget = const SizedBox(height: 8.0);
-              // widget = separatorBuilder(context, itemIndex);
+              widget = const Padding(padding: EdgeInsets.only(bottom: 8.0));
             }
             return widget;
           },
