@@ -1,3 +1,4 @@
+import 'package:app_controller/app_controller.dart';
 import 'package:app_controller/src/app_lifecycle_state_delegate.dart';
 import 'package:app_controller/src/authorization_state_delegate.dart';
 import 'package:app_controller/src/connectivity_delegate.dart';
@@ -31,6 +32,7 @@ class AppControllerComponent {
       tdConfigProvider: _dependencies.tdConfigProvider,
       router: _dependencies.router,
     ),
+    appLauncher: _dependencies.appLauncher,
   );
 
   IAppController get appController => _appController;
@@ -65,6 +67,7 @@ class AppControllerComponentDependencies {
     required this.tdConfigProvider,
     required this.router,
     required this.optionsManager,
+    required this.appLauncher,
   });
 
   final ITdFunctionExecutor functionExecutor;
@@ -74,4 +77,5 @@ class AppControllerComponentDependencies {
   final ITdConfigProvider tdConfigProvider;
   final IAppControllerRouter router;
   final OptionsManager optionsManager;
+  final IAppLauncher appLauncher;
 }

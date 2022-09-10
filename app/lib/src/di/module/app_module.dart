@@ -1,3 +1,4 @@
+import 'package:app/src/app/app_launcher.dart';
 import 'package:app/src/app/tg_app.dart';
 import 'package:app/src/di/scope/application_scope.dart';
 import 'package:app/src/feature/feature_provider.dart';
@@ -23,6 +24,7 @@ import 'package:error_transformer_td/error_transformer_td.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
+import 'package:localization_impl/localization_impl.dart';
 import 'package:td_client/td_client.dart';
 import 'package:tg_logger_api/tg_logger_api.dart';
 import 'package:tg_logger_impl/tg_logger_impl.dart';
@@ -93,6 +95,15 @@ abstract class AppModule {
 
   @applicationScope
   @j.provides
+  static ILocalizationManager provideLocalizationManager() =>
+      LocalizationManager();
+
+  @applicationScope
+  @j.binds
+  IAppLauncher bindAppLauncher(AppLauncher impl);
+
+  @applicationScope
+  @j.provides
   static IStringsProvider provideStringsProvider(
     ILocalizationManager localizationManager,
   ) =>
@@ -119,7 +130,7 @@ abstract class AppModule {
 
   @applicationScope
   @j.provides
-  static IAppController provideAppController(
+  static AppControllerComponent provideAppControllerComponent(
     ITdConfigProvider tdConfigProvider,
     IAppLifecycleStateProvider appLifecycleStateProvider,
     IConnectivityProvider connectivityProvider,
@@ -127,6 +138,7 @@ abstract class AppModule {
     ITdFunctionExecutor functionExecutor,
     IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
     IAppControllerRouter router,
+    IAppLauncher appLauncher,
   ) =>
       AppControllerComponent(
         dependencies: AppControllerComponentDependencies(
@@ -138,8 +150,16 @@ abstract class AppModule {
           connectivityProvider: connectivityProvider,
           optionsManager: optionsManager,
           tdConfigProvider: tdConfigProvider,
+          appLauncher: appLauncher,
         ),
-      ).appController;
+      );
+
+  @applicationScope
+  @j.provides
+  static IAppController provideAppController(
+    AppControllerComponent appControllerComponent,
+  ) =>
+      appControllerComponent.appController;
 
   @applicationScope
   @j.provides

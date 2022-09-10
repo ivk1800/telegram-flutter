@@ -1,6 +1,8 @@
 import 'strings_provider.dart';
 
 abstract class ILocalizationManager {
+  Future<void> init(String defaultLanguage, String currentLanguage);
+
   String getString(String key, [String defaultValue = '']);
 
   String getStringFormatted(

@@ -11,6 +11,7 @@ class LocalizationManager implements ILocalizationManager {
   late Map<String, String> _currentStrings;
   late IStringsProvider _stringsProvider;
 
+  @override
   Future<void> init(String defaultLanguage, String currentLanguage) async {
     _defaultStrings = await _readStrings(defaultLanguage);
 
@@ -68,5 +69,7 @@ class LocalizationManager implements ILocalizationManager {
   }
 
   @override
-  IStringsProvider get stringsProvider => _stringsProvider;
+  IStringsProvider get stringsProvider {
+    return _stringsProvider;
+  }
 }
