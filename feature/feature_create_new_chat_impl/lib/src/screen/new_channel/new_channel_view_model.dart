@@ -48,21 +48,23 @@ class NewChannelViewModel extends BaseViewModel {
     required String description,
   }) {
     _blockInteractionManager.setState(active: true);
-    final CancelableOperation<int> operation = _chatManager
+    final CancelableOperation<void> operation = _chatManager
         .createChannel(name: name, description: description)
         .toCancelableOperation()
         .onTerminate(() {
-      _blockInteractionManager.setState(active: false);
-    }).onError((Object error) {
-      _router.toDialog(
-        body: d.Body.text(
-          text: _errorTransformer.transformToString(error),
-        ),
-        actions: <d.Action>[
-          d.Action(text: _stringsProvider.oK),
-        ],
-      );
-    }).onValue(_router.closeAfterCreateChannel);
+          _blockInteractionManager.setState(active: false);
+        })
+        .onValue(_router.closeAfterCreateChannel)
+        .onError((Object error) {
+          _router.toDialog(
+            body: d.Body.text(
+              text: _errorTransformer.transformToString(error),
+            ),
+            actions: <d.Action>[
+              d.Action(text: _stringsProvider.oK),
+            ],
+          );
+        });
     attach(operation);
   }
 }
