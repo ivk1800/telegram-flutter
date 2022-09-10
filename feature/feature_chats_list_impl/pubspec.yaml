@@ -10,10 +10,14 @@ dependencies:
   chat_navigation_api:
     path: ../chat/chat_navigation_api
   collection: 1.16.0
+  core:
+    path: ../../core
   core_arch:
     path: ../../core_arch
   core_arch_flutter:
     path: ../../core_arch_flutter
+  core_presentation:
+    path: ../../core_presentation
   core_tdlib_api:
     path: ../../core_tdlib_api
   core_utils:

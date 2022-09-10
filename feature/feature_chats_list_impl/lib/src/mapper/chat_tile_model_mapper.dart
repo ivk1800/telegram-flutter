@@ -1,10 +1,10 @@
+import 'package:core_presentation/core_presentation.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chats_list_impl/src/list/chat_ext.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:feature_message_preview_resolver/feature_message_preview_resolver.dart';
 import 'package:jugger/jugger.dart' as j;
-import 'package:shared_models/shared_models.dart';
 import 'package:td_api/td_api.dart' as td;
 
 class ChatTileModelMapper {
@@ -14,15 +14,18 @@ class ChatTileModelMapper {
     required DateParser dateParser,
     required IMessagePreviewResolver previewDataResolver,
     required ISuperGroupRepository superGroupRepository,
+    required AvatarResolver avatarResolver,
   })  : _dateFormatter = dateFormatter,
         _messagePreviewResolver = previewDataResolver,
         _superGroupRepository = superGroupRepository,
+        _avatarResolver = avatarResolver,
         _dateParser = dateParser;
 
   final ISuperGroupRepository _superGroupRepository;
   final IMessagePreviewResolver _messagePreviewResolver;
   final DateFormatter _dateFormatter;
   final DateParser _dateParser;
+  final AvatarResolver _avatarResolver;
 
   Future<ChatTileModel> mapToModel({
     required td.Chat chat,
@@ -48,12 +51,7 @@ class ChatTileModelMapper {
         _dateParser.parseUnixTimeStampToDateOrNull(chat.lastMessage?.date),
       ),
       id: chat.id,
-      avatar: Avatar(
-        abbreviation: getAvatarAbbreviation(first: chat.title, second: ''),
-        objectId: chat.id,
-        minithumbnail: chat.photo?.minithumbnail?.toMinithumbnail(),
-        imageFileId: chat.photo?.small.id,
-      ),
+      avatar: await _avatarResolver.resolveForChat(chat),
       title: chat.title,
       firstSubtitle: preview.firstText,
       secondSubtitle: preview.secondText,

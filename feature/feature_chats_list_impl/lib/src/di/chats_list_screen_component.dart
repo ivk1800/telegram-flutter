@@ -1,3 +1,5 @@
+import 'package:core/core.dart';
+import 'package:core_presentation/core_presentation.dart';
 import 'package:coreui/coreui.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
@@ -73,4 +75,11 @@ abstract class ChatsListScreenModule {
     ChatsListViewModel viewModel,
   ) =>
       ChatsListTileListener(viewModel: viewModel);
+
+  @j.provides
+  @j.singleton
+  static AvatarResolver provideAvatarResolver(
+    OptionsManager optionsManager,
+  ) =>
+      AvatarResolver(optionsManager: optionsManager);
 }

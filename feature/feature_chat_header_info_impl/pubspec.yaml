@@ -6,6 +6,10 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  core:
+    path: ../../core
+  core_presentation:
+    path: ../../core_presentation
   core_tdlib_api:
     path: ../../core_tdlib_api
   core_utils:

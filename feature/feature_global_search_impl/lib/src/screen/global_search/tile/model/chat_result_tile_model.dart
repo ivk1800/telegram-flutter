@@ -1,5 +1,5 @@
+import 'package:core_presentation/core_presentation.dart';
 import 'package:flutter/painting.dart';
-import 'package:shared_models/shared_models.dart';
 import 'package:tile/tile.dart';
 
 class ChatResultTileModel implements ITileModel {

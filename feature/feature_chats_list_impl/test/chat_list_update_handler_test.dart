@@ -2,6 +2,7 @@
 
 import 'dart:collection';
 
+import 'package:core_presentation/core_presentation.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:fake/fake.dart';
 import 'package:feature_chats_list_impl/src/list/chat_data.dart';
@@ -11,7 +12,6 @@ import 'package:feature_chats_list_impl/src/mapper/chat_tile_model_mapper.dart';
 import 'package:feature_chats_list_impl/src/tile/chat_tile_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:shared_models/shared_models.dart';
 import 'package:td_api/td_api.dart' as td;
 import 'package:test/test.dart';
 
@@ -70,7 +70,7 @@ class TestScope {
         return Future<ChatTileModel>.value(
           const ChatTileModel(
             secondSubtitle: '',
-            avatar: Avatar(
+            avatar: Avatar.simple(
               objectId: 0,
               imageFileId: null,
               abbreviation: '',

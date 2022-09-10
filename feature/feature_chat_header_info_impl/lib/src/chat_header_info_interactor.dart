@@ -1,9 +1,9 @@
+import 'package:core_presentation/core_presentation.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:shared_models/shared_models.dart';
 import 'package:td_api/td_api.dart' as td;
 
 class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
@@ -14,18 +14,20 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
     required IBasicGroupRepository basicGroupRepository,
     required ISuperGroupRepository superGroupRepository,
     required ILocalizationManager localizationManager,
+    required AvatarResolver avatarResolver,
   })  : _chatId = chatId,
         _chatRepository = chatRepository,
         _superGroupRepository = superGroupRepository,
         _basicGroupRepository = basicGroupRepository,
         _localizationManager = localizationManager,
+        _avatarResolver = avatarResolver,
         _userRepository = userRepository {
     _infoSubject.add(
       ChatHeaderInfo(
         // todo display correct text
         title: 'chat',
         subtitle: '',
-        avatar: Avatar(
+        avatar: Avatar.simple(
           abbreviation: getAvatarAbbreviation(first: '', second: ''),
           imageFileId: null,
           objectId: chatId,
@@ -40,6 +42,7 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
   final IBasicGroupRepository _basicGroupRepository;
   final ISuperGroupRepository _superGroupRepository;
   final ILocalizationManager _localizationManager;
+  final AvatarResolver _avatarResolver;
 
   final BehaviorSubject<ChatHeaderInfo> _infoSubject =
       BehaviorSubject<ChatHeaderInfo>();
@@ -99,19 +102,14 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
       switch (user.type.getConstructor()) {
         case td.UserTypeRegular.constructor:
           {
-            return Stream<ChatHeaderInfo>.value(
-              ChatHeaderInfo(
-                avatar: Avatar(
-                  abbreviation: getAvatarAbbreviation(
-                    first: chat.title,
-                    second: '',
-                  ),
-                  imageFileId: chat.photo?.small.id,
-                  objectId: chat.id,
-                ),
-                title: chat.title,
-                subtitle: statusToString(user.status),
-              ),
+            return Stream<ChatHeaderInfo>.fromFuture(
+              () async {
+                return ChatHeaderInfo(
+                  avatar: await _avatarResolver.resolveForChat(chat),
+                  title: chat.title,
+                  subtitle: statusToString(user.status),
+                );
+              }(),
             );
           }
         case td.UserTypeUnknown.constructor:
@@ -119,7 +117,7 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
           {
             return Stream<ChatHeaderInfo>.value(
               ChatHeaderInfo(
-                avatar: Avatar(
+                avatar: Avatar.simple(
                   abbreviation: getAvatarAbbreviation(
                     first: chat.title,
                     second: '',
@@ -138,7 +136,7 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
           {
             return Stream<ChatHeaderInfo>.value(
               ChatHeaderInfo(
-                avatar: Avatar(
+                avatar: Avatar.simple(
                   abbreviation: getAvatarAbbreviation(
                     first: chat.title,
                     second: '',
@@ -198,7 +196,7 @@ class ChatHeaderInfoInteractor implements IChatHeaderInfoInteractor {
   ) {
     // todo handle UpdateChatOnlineMemberCount
     return ChatHeaderInfo(
-      avatar: Avatar(
+      avatar: Avatar.simple(
         abbreviation: getAvatarAbbreviation(
           first: chat.title,
           second: '',

@@ -6,6 +6,8 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  core_presentation:
+    path: ../../core_presentation
   flutter:
     sdk: flutter
   shared_models:

@@ -1,5 +1,5 @@
+import 'package:core_presentation/core_presentation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shared_models/shared_models.dart';
 
 part 'header_state.freezed.dart';
 

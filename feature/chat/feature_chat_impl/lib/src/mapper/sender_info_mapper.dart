@@ -1,8 +1,8 @@
+import 'package:core_presentation/core_presentation.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/tile/model/base_conversation_message_tile_model.dart';
-import 'package:shared_models/shared_models.dart';
 import 'package:td_api/td_api.dart' as td;
 
 class SenderInfoMapper {
@@ -23,7 +23,7 @@ class SenderInfoMapper {
               .getUser((sender as td.MessageSenderUser).userId);
           return SenderInfo(
             id: user.id,
-            avatar: Avatar(
+            avatar: Avatar.simple(
               abbreviation: getAvatarAbbreviation(
                 first: user.firstName,
                 second: user.lastName,
@@ -41,7 +41,7 @@ class SenderInfoMapper {
               .getChat((sender as td.MessageSenderChat).chatId);
           return SenderInfo(
             id: chat.id,
-            avatar: Avatar(
+            avatar: Avatar.simple(
               abbreviation: getAvatarAbbreviation(
                 first: chat.title,
                 second: '',

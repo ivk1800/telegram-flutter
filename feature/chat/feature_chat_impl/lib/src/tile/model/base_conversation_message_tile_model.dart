@@ -1,5 +1,5 @@
+import 'package:core_presentation/core_presentation.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
-import 'package:shared_models/shared_models.dart';
 
 import 'base_message_tile_model.dart';
 

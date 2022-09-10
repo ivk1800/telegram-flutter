@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:dmg_annotation/dmg_annotation.dart';
@@ -18,6 +19,7 @@ class ChatsListFeatureDependencies {
     required this.chatUpdatesProvider,
     required this.messagePreviewResolver,
     required this.superGroupRepository,
+    required this.optionsManager,
   });
 
   final IChatRepository chatRepository;
@@ -35,4 +37,6 @@ class ChatsListFeatureDependencies {
   final IMessagePreviewResolver messagePreviewResolver;
 
   final ISuperGroupRepository superGroupRepository;
+
+  final OptionsManager optionsManager;
 }

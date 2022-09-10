@@ -1,4 +1,4 @@
-import 'package:shared_models/shared_models.dart';
+import 'package:core_presentation/core_presentation.dart';
 import 'package:tile/tile.dart';
 
 class ChatTileModel implements ITileModel {

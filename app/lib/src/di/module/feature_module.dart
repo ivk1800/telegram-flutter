@@ -120,6 +120,7 @@ abstract class FeatureModule {
     IUserRepository userRepository,
     ILocalizationManager localizationManager,
     ISuperGroupRepository superGroupRepository,
+    OptionsManager optionsManager,
   ) =>
       ChatsListFeatureDependencies(
         router: router,
@@ -135,6 +136,7 @@ abstract class FeatureModule {
           userRepository: userRepository,
           stringsProvider: localizationManager.stringsProvider,
         ),
+        optionsManager: optionsManager,
       );
 
   @j.provides
@@ -326,6 +328,7 @@ abstract class FeatureModule {
     IConnectionStateProvider connectionStateProvider,
     IFileDownloader fileDownloader,
     IUserRepository userRepository,
+    OptionsManager optionsManager,
   ) {
     return ChatHeaderInfoFeatureDependencies(
       chatRepository: chatRepository,
@@ -335,6 +338,7 @@ abstract class FeatureModule {
       userRepository: userRepository,
       connectionStateProvider: connectionStateProvider,
       fileDownloader: fileDownloader,
+      optionsManager: optionsManager,
     );
   }
 

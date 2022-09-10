@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:localization_api/localization_api.dart';
@@ -11,6 +12,7 @@ class ChatHeaderInfoFeatureDependencies {
     required this.userRepository,
     required this.fileDownloader,
     required this.connectionStateProvider,
+    required this.optionsManager,
   });
 
   final IChatRepository chatRepository;
@@ -26,4 +28,6 @@ class ChatHeaderInfoFeatureDependencies {
   final IBasicGroupRepository basicGroupRepository;
 
   final ISuperGroupRepository superGroupRepository;
+
+  final OptionsManager optionsManager;
 }

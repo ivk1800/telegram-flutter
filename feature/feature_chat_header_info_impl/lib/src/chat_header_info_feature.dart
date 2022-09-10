@@ -1,5 +1,6 @@
 library feature_chat_header_info_impl;
 
+import 'package:core_presentation/core_presentation.dart';
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 
@@ -23,6 +24,9 @@ class ChatHeaderInfoFeature implements IChatHeaderInfoFeatureApi {
         chatRepository: _dependencies.chatRepository,
         userRepository: _dependencies.userRepository,
         localizationManager: _dependencies.localizationManager,
+        avatarResolver: AvatarResolver(
+          optionsManager: _dependencies.optionsManager,
+        ),
       );
 
   @override

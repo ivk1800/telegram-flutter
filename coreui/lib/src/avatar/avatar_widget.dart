@@ -1,9 +1,9 @@
+import 'package:core_presentation/core_presentation.dart';
 import 'package:coreui/coreui.dart';
 import 'package:coreui/src/avatar/avatar_scope.dart';
 import 'package:coreui/src/avatar/avatar_state.dart';
 import 'package:coreui/src/avatar/avatar_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_models/shared_models.dart';
 
 class AvatarWidget extends StatefulWidget {
   const AvatarWidget({
@@ -26,9 +26,15 @@ class _AvatarWidgetState extends State<AvatarWidget> {
 
     return StreamBuilder<AvatarState>(
       stream: viewModel.state,
-      initialData: AvatarState.abbreviation(
-        abbreviation: '',
-        objectId: widget.avatar.objectId,
+      initialData: widget.avatar.map(
+        simple: (SimpleAvatar value) {
+          return AvatarState.abbreviation(
+            abbreviation: '',
+            objectId: value.objectId,
+          );
+        },
+        savedMessages: (SavedMessagesAvatar value) =>
+            const AvatarState.savedMessages(),
       ),
       builder: (BuildContext context, AsyncSnapshot<AvatarState> snapshot) {
         return snapshot.data!.map(
@@ -70,6 +76,9 @@ class _AvatarWidgetState extends State<AvatarWidget> {
               backgroundImage: FileImage(state.file),
             );
           },
+          savedMessages: (SavedMessagesAvatarState value) {
+            return _SavedMessages(radius: widget.radius);
+          },
         );
       },
     );
@@ -103,6 +112,22 @@ class _DefaultAvatar extends StatelessWidget {
       backgroundColor: AvatarWidgetFactory
           .colors[(objectId % AvatarWidgetFactory.colors.length).abs()],
       maxRadius: radius,
+    );
+  }
+}
+
+class _SavedMessages extends StatelessWidget {
+  const _SavedMessages({
+    required this.radius,
+  });
+
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      maxRadius: radius,
+      child: const Icon(Icons.bookmark_outline),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:core_presentation/core_presentation.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
 import 'package:coreui/coreui.dart' as tg;
@@ -7,7 +8,6 @@ import 'package:fake/fake.dart';
 import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_models/shared_models.dart';
 
 class ChatCellShowCase extends StatefulWidget {
   const ChatCellShowCase({super.key});
@@ -264,7 +264,7 @@ class _ChatCellShowCaseState extends State<ChatCellShowCase>
         lastMessageDate: lastMessageDate ?? '12:00',
         title: title ?? 'title',
         avatar: avatar ??
-            Avatar(
+            Avatar.simple(
               abbreviation: getAvatarAbbreviation(
                 first: title ?? 'title',
                 second: '',

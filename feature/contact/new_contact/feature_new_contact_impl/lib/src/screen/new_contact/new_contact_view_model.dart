@@ -3,6 +3,7 @@ import 'package:async_utils/async_utils.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
 import 'package:contacts_manager_api/contacts_manager_api.dart';
 import 'package:core_arch/core_arch.dart';
+import 'package:core_presentation/core_presentation.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:dialog_api/dialog_api.dart' as d;
 import 'package:error_transformer_api/error_transformer_api.dart';
@@ -10,7 +11,6 @@ import 'package:feature_new_contact_impl/src/screen/new_contact/new_contact_rout
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:shared_models/shared_models.dart';
 import 'package:td_api/td_api.dart' as td;
 import 'package:user_info/user_info.dart';
 
@@ -91,7 +91,7 @@ class NewContactViewModel extends BaseViewModel {
         userInformation: UserInformation(
           firstName: info.user.firstName,
           lastNameName: info.user.lastName,
-          avatar: Avatar(
+          avatar: Avatar.simple(
             abbreviation: getAvatarAbbreviation(
               first: info.user.firstName,
               second: info.user.lastName,

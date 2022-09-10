@@ -18,4 +18,5 @@ class AvatarState with _$AvatarState {
   }) = AbbreviationAvatarState;
 
   const factory AvatarState.file({required File file}) = FileAvatarState;
+  const factory AvatarState.savedMessages() = SavedMessagesAvatarState;
 }

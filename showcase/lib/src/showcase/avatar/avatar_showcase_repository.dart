@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:core_presentation/core_presentation.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:shared_models/shared_models.dart';
 
@@ -6,7 +7,7 @@ class AvatarsRepository {
   Future<List<AvatarInfo>> getAvatars() async {
     return <AvatarInfo>[
       AvatarInfo(
-        avatar: Avatar(
+        avatar: Avatar.simple(
           abbreviation: getAvatarAbbreviation(
             first: 'firstName',
             second: 'lastName',
@@ -17,7 +18,7 @@ class AvatarsRepository {
         description: 'only abbreviation',
       ),
       AvatarInfo(
-        avatar: Avatar(
+        avatar: Avatar.simple(
           abbreviation: getAvatarAbbreviation(
             first: 'firstName',
             second: 'lastName',
@@ -33,7 +34,7 @@ class AvatarsRepository {
         description: 'only minithumbnail',
       ),
       AvatarInfo(
-        avatar: Avatar(
+        avatar: Avatar.simple(
           abbreviation: getAvatarAbbreviation(
             first: 'firstName',
             second: 'lastName',

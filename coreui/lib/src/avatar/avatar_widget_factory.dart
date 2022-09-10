@@ -1,7 +1,7 @@
+import 'package:core_presentation/core_presentation.dart';
 import 'package:coreui/src/avatar/avatar_view_model.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_models/shared_models.dart';
 
 import 'avatar_scope.dart';
 import 'avatar_widget.dart';
