@@ -177,7 +177,7 @@ class ContentInteractor {
     td.Chat chat,
   ) async {
     return ContentData(
-      // TODO: support formatte text
+      // TODO: support formatter text
       description: userFullInfo.bio?.text ?? '',
       sharedContent: messagesInfo,
       isMuted: chat.notificationSettings.muteFor > 0,
