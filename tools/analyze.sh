@@ -6,4 +6,4 @@ parent_path=$(
   pwd -P
 )
 echo "analyze..."
-dart dart run "$parent_path/tools-project/lib/main.dart" analyze --work-directory "$parent_path/../"
+dart run "$parent_path/tools-project/lib/main.dart" analyze --work-directory "$parent_path/../"
