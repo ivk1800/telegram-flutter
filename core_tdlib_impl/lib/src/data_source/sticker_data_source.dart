@@ -13,4 +13,9 @@ class StickerDataSource {
         .send<td.StickerSets>(const td.GetInstalledStickerSets(isMasks: false))
         .then((td.StickerSets value) => value.sets);
   }
+
+  Future<td.StickerSet> getStickersSet(int setId) {
+    return _functionExecutor
+        .send<td.StickerSet>(td.GetStickerSet(setId: setId));
+  }
 }

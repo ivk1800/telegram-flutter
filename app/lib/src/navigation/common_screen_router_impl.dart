@@ -172,9 +172,9 @@ class CommonScreenRouterImpl
   }
 
   @override
-  void toStickerSet(int setId) {
+  void toStickersSet(int setId) {
     _add(
-      widget: _featureProvider.stickersFeatureApi.stickerSetWidgetFactory
+      widget: _featureProvider.stickersFeatureApi.stickerSetScreenFactory
           .create(setId),
       container: ContainerType.top,
     );
@@ -405,11 +405,6 @@ class CommonScreenRouterImpl
       key: _keyGenerator.generateForChangeBio(),
       container: ContainerType.top,
     );
-  }
-
-  @override
-  void toStickersSet(int setId) {
-    toNotImplemented();
   }
 
   void _showDialog({required WidgetBuilder builder}) {

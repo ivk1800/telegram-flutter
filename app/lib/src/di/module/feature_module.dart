@@ -307,15 +307,17 @@ abstract class FeatureModule {
   @j.provides
   static StickersFeatureDependencies provideStickersFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     IStickerRepository stickerRepository,
     IStickersFeatureRouter router,
+    IFileDownloader fileDownloader,
   ) =>
       StickersFeatureDependencies(
         connectionStateProvider: connectionStateProvider,
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
         stickerRepository: stickerRepository,
         stickersFeatureRouter: router,
+        fileDownloader: fileDownloader,
       );
 
   @j.provides

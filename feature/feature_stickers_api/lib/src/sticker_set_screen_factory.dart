@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-abstract class IStickerSetWidgetFactory {
+abstract class IStickerSetScreenFactory {
   Widget create(int setId);
 }

@@ -17,16 +17,23 @@ dependencies:
     path: ../../core_tdlib_api
   coreui:
     path: ../../coreui
+  dmg_annotation:
+    path: ../../dependencies_module_generator/dmg_annotation
+  feature_file_api:
+    path: ../feature_file_api
   feature_stickers_api:
     path: ../feature_stickers_api
   flutter:
     sdk: flutter
-  flutter_bloc: 8.0.1
   freezed_annotation: 2.1.0
+  jugger: 3.0.0
   localization_api:
     path: ../../localization_api
-  provider: 6.0.2
   rxdart: 0.27.3
+  scope_generator_annotation:
+    path: ../../scope_generator/scope_generator_annotation
+  sticker_navigation_api:
+    path: ../sticker/sticker_navigation_api
   td_api:
     path: ../../td/td_api
   tile:
@@ -34,7 +41,13 @@ dependencies:
 
 dev_dependencies:
   build_runner: 2.2.0
+  dependencies_module_generator:
+    path: ../../dependencies_module_generator/generator
   dependency_validator: 3.2.0
   freezed: 2.1.0+1
+  jugger_generator: 3.1.0-dev.1
+  modal_bottom_sheet: 2.1.2
+  scope_generator:
+    path: ../../scope_generator/generator
   tg_lint_rules:
     path: ../../tg_lint_rules

@@ -14,15 +14,13 @@ class StickersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager = Provider.of(context);
+    final IStringsProvider stringsProvider = Provider.of(context);
     final StickersViewModel viewModel = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Provider.of<tg.ConnectionStateWidgetFactory>(context).create(
           context,
-          (BuildContext context) => Text(
-            localizationManager.getString('StickersAndMasks'),
-          ),
+          (BuildContext context) => Text(stringsProvider.stickersAndMasks),
         ),
       ),
       body: StreamListener<StickersState>(

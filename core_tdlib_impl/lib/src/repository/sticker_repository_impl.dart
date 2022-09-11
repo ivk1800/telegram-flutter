@@ -13,4 +13,9 @@ class StickerRepositoryImpl implements IStickerRepository {
   Future<List<td.StickerSetInfo>> getInstalledStickers() {
     return _dataSource.getInstalledStickers();
   }
+
+  @override
+  Future<td.StickerSet> getStickersSet(int setId) {
+    return _dataSource.getStickersSet(setId);
+  }
 }

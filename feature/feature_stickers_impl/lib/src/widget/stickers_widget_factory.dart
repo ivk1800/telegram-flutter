@@ -19,8 +19,8 @@ class StickersWidgetFactory implements IStickersWidgetFactory {
   @override
   Widget create() => MultiProvider(
         providers: <Provider<dynamic>>[
-          Provider<ILocalizationManager>.value(
-            value: dependencies.localizationManager,
+          Provider<IStringsProvider>.value(
+            value: dependencies.stringsProvider,
           ),
           Provider<TileFactory>.value(
             value: TileFactory(

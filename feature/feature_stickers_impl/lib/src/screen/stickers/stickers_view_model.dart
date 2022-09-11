@@ -42,7 +42,7 @@ class StickersViewModel extends BaseViewModel {
         _router.toMasks();
       },
       stickerSetTap: (int setId) {
-        _router.toStickerSet(setId);
+        _router.toStickersSet(setId);
       },
       init: () {},
     );
