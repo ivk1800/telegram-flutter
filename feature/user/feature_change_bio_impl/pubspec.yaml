@@ -39,7 +39,7 @@ dev_dependencies:
   dependencies_module_generator:
     path: ../../../dependencies_module_generator/generator
   dependency_validator: 3.2.0
-  jugger_generator: 3.1.0-dev.1
+  jugger_generator: 3.1.0
   scope_generator:
     path: ../../../scope_generator/generator
   tg_lint_rules:

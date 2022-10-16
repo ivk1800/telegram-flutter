@@ -3,7 +3,7 @@ import 'package:coreui/coreui.dart' as tg;
 import 'package:localization_api/localization_api.dart';
 import 'package:scope_generator_annotation/scope_generator_annotation.dart';
 
-import 'auth_screen_Widget_model.dart';
+import 'auth_screen_widget_model.dart';
 import 'view_model/auth_view_model.dart';
 
 @scope

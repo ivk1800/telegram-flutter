@@ -1,7 +1,7 @@
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_auth_impl/src/screen/auth/auth_screen_Widget_model.dart';
 import 'package:feature_auth_impl/src/screen/auth/auth_screen_scope_delegate.scope.dart';
+import 'package:feature_auth_impl/src/screen/auth/auth_screen_widget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:localization_api/localization_api.dart';
