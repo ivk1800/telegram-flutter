@@ -23,6 +23,7 @@ export 'message_expired_photo_tile_factory_delegate.dart';
 export 'message_expired_video_tile_factory_delegate.dart';
 export 'message_game_score_tile_factory_delegate.dart';
 export 'message_game_tile_factory_delegate.dart';
+export 'message_gifted_premium_tile_factory_delegate.dart';
 export 'message_invoice_tile_factory_delegate.dart';
 export 'message_location_tile_factory_delegate.dart';
 export 'message_passport_data_received_tile_factory_delegate.dart';

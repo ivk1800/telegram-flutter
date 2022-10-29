@@ -19,10 +19,6 @@ class AuthenticationManager implements IAuthenticationManager {
       _functionExecutor.send<td.Ok>(td.CheckAuthenticationCode(code: code));
 
   @override
-  Future<td.Ok> checkDatabaseEncryptionKey(String key) => _functionExecutor
-      .send<td.Ok>(td.CheckDatabaseEncryptionKey(encryptionKey: key));
-
-  @override
   Future<td.AuthorizationState> get currentAuthorizationState =>
       _functionExecutor.send<td.AuthorizationState>(
         const td.GetAuthorizationState(),

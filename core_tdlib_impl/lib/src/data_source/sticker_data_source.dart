@@ -10,7 +10,11 @@ class StickerDataSource {
 
   Future<List<td.StickerSetInfo>> getInstalledStickers() {
     return _functionExecutor
-        .send<td.StickerSets>(const td.GetInstalledStickerSets(isMasks: false))
+        .send<td.StickerSets>(
+          const td.GetInstalledStickerSets(
+            stickerType: td.StickerTypeRegular(),
+          ),
+        )
         .then((td.StickerSets value) => value.sets);
   }
 

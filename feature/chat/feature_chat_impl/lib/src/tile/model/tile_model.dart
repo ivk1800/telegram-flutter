@@ -22,6 +22,7 @@ export 'message_expired_photo_tile_model.dart';
 export 'message_expired_video_tile_model.dart';
 export 'message_game_score_tile_model.dart';
 export 'message_game_tile_model.dart';
+export 'message_gifted_premium_model.dart';
 export 'message_invite_video_chat_participants_tile_model.dart';
 export 'message_invoice_tile_model.dart';
 export 'message_location_tile_model.dart';

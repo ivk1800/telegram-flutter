@@ -39,6 +39,7 @@ td.Message createFakeMessage() {
         entities: <td.TextEntity>[],
       ),
     ),
+    canReportReactions: false,
   );
 }
 
@@ -48,7 +49,7 @@ td.Chat createFakeChat({
 }) {
   return td.Chat(
     unreadReactionCount: 0,
-    availableReactions: const <String>[],
+    availableReactions: const td.ChatAvailableReactionsAll(),
     hasProtectedContent: false,
     messageTtl: 0,
     themeName: '',

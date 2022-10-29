@@ -7,8 +7,6 @@ abstract class IAuthenticationManager {
 
   Future<td.Ok> setTdlibParameters(td.SetTdlibParameters parameters);
 
-  Future<td.Ok> checkDatabaseEncryptionKey(String key);
-
   Future<td.Ok> setAuthenticationPhoneNumber(String phoneNumber);
 
   Future<td.Ok> checkAuthenticationCode(String code);

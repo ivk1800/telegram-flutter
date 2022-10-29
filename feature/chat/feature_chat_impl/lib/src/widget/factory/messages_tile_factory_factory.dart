@@ -235,6 +235,9 @@ class MessagesTileFactoryFactory {
             MessageWebAppDataReceivedTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),
+        MessageGiftedPremiumTileModel: MessageGiftedPremiumTileFactoryDelegate(
+          chatMessageFactory: chatMessageFactory,
+        ),
       },
     );
   }

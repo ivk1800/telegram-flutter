@@ -46,8 +46,6 @@ class AuthorizationStateDelegate {
   ) async {
     if (authorizationState is td.AuthorizationStateWaitTdlibParameters) {
       unawaited(_handleWaitTdlibParametersState());
-    } else if (authorizationState is td.AuthorizationStateWaitEncryptionKey) {
-      unawaited(_handleWaitEncryptionKey());
     } else if (authorizationState is td.AuthorizationStateReady) {
       _router.toRoot();
     } else if (authorizationState is td.AuthorizationStateWaitPhoneNumber) {
@@ -60,30 +58,23 @@ class AuthorizationStateDelegate {
         await getApplicationSupportDirectory();
     await _functionExecutor.send<td.Ok>(
       td.SetTdlibParameters(
-        parameters: td.TdlibParameters(
-          systemVersion: await _deviceInfoProvider.systemVersion,
-          useTestDc: await _tdConfigProvider.isUseTestDc(),
-          useSecretChats: false,
-          useMessageDatabase: true,
-          useFileDatabase: true,
-          useChatInfoDatabase: true,
-          ignoreFileNames: true,
-          enableStorageOptimizer: true,
-          filesDirectory: applicationSupportDirectory.path,
-          databaseDirectory: applicationSupportDirectory.path,
-          systemLanguageCode: await _deviceInfoProvider.systemLanguageCode,
-          deviceModel: await _deviceInfoProvider.deviceModel,
-          applicationVersion: '1.0.0',
-          apiId: await _tdConfigProvider.getAppId(),
-          apiHash: await _tdConfigProvider.getApiHash(),
-        ),
+        systemVersion: await _deviceInfoProvider.systemVersion,
+        useTestDc: await _tdConfigProvider.isUseTestDc(),
+        useSecretChats: false,
+        useMessageDatabase: true,
+        useFileDatabase: true,
+        useChatInfoDatabase: true,
+        ignoreFileNames: true,
+        enableStorageOptimizer: true,
+        filesDirectory: applicationSupportDirectory.path,
+        databaseDirectory: applicationSupportDirectory.path,
+        systemLanguageCode: await _deviceInfoProvider.systemLanguageCode,
+        deviceModel: await _deviceInfoProvider.deviceModel,
+        applicationVersion: '1.0.0',
+        apiId: await _tdConfigProvider.getAppId(),
+        apiHash: await _tdConfigProvider.getApiHash(),
+        databaseEncryptionKey: '',
       ),
-    );
-  }
-
-  Future<void> _handleWaitEncryptionKey() async {
-    await _functionExecutor.send<td.Ok>(
-      const td.CheckDatabaseEncryptionKey(encryptionKey: ''),
     );
   }
 }

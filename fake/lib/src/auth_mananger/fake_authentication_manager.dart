@@ -17,12 +17,6 @@ class FakeAuthenticationManager implements IAuthenticationManager {
   }
 
   @override
-  Future<td.Ok> checkDatabaseEncryptionKey(String key) {
-    // TODO: implement checkDatabaseEncryptionKey
-    throw UnimplementedError();
-  }
-
-  @override
   // TODO: implement currentAuthorizationState
   Future<td.AuthorizationState> get currentAuthorizationState =>
       throw UnimplementedError();

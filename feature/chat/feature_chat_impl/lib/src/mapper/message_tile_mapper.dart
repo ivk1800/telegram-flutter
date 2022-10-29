@@ -382,7 +382,7 @@ class MessageTileMapper {
           stickerFileId: value.sticker.sticker.id,
           setId: value.sticker.setId,
           // TODO: support more types
-          isAnimated: value.sticker.type is td.StickerTypeAnimated,
+          isAnimated: value.sticker.format is td.StickerFormatTgs,
         );
       },
       messageSupergroupChatCreate: (td.MessageSupergroupChatCreate value) {
@@ -509,6 +509,13 @@ class MessageTileMapper {
       },
       messageWebAppDataSent: (td.MessageWebAppDataSent value) {
         return MessageWebAppDataSentTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageGiftedPremium: (td.MessageGiftedPremium value) {
+        return MessageGiftedPremiumTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
           type: notImplementedText,
