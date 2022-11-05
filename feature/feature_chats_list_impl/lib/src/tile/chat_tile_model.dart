@@ -16,6 +16,7 @@ class ChatTileModel implements ITileModel {
     required this.title,
     required this.firstSubtitle,
     required this.secondSubtitle,
+    required this.isForum,
   });
 
   final bool isPinned;
@@ -31,6 +32,7 @@ class ChatTileModel implements ITileModel {
   final String title;
   final String? firstSubtitle;
   final String? secondSubtitle;
+  final bool isForum;
 }
 
 extension ChatTileModelExtension on ChatTileModel {
@@ -48,6 +50,7 @@ extension ChatTileModelExtension on ChatTileModel {
     String? title,
     String? firstSubtitle,
     String? secondSubtitle,
+    bool? isForum,
   }) =>
       ChatTileModel(
         isPinned: isPinned ?? this.isPinned,
@@ -63,5 +66,6 @@ extension ChatTileModelExtension on ChatTileModel {
         lastMessageDate: lastMessageDate ?? this.lastMessageDate,
         title: title ?? this.title,
         avatar: avatar ?? this.avatar,
+        isForum: isForum ?? this.isForum,
       );
 }

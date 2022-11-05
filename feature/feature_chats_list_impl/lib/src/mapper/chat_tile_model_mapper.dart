@@ -55,6 +55,7 @@ class ChatTileModelMapper {
       title: chat.title,
       firstSubtitle: preview.firstText,
       secondSubtitle: preview.secondText,
+      isForum: await _isForum(chat),
     );
   }
 
@@ -70,5 +71,17 @@ class ChatTileModelMapper {
 
   String createForFormattedText(td.FormattedText text) {
     return text.text;
+  }
+
+  Future<bool> _isForum(td.Chat chat) async {
+    return chat.type.maybeMap(
+      supergroup: (td.ChatTypeSupergroup supergroupType) async {
+        final td.Supergroup supergroup = await _superGroupRepository.getGroup(
+          supergroupType.supergroupId,
+        );
+        return supergroup.isForum;
+      },
+      orElse: () => false,
+    );
   }
 }

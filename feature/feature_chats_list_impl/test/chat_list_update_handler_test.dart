@@ -86,6 +86,7 @@ class TestScope {
             title: '',
             isPinned: false,
             unreadMessagesCount: 0,
+            isForum: false,
           ),
         );
       },

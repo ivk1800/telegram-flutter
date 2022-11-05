@@ -249,6 +249,7 @@ class _ChatCellShowCaseState extends State<ChatCellShowCase>
     String? title,
     String? firstSubtitle,
     String? secondSubtitle,
+    bool? isForum,
   }) =>
       ChatTileModel(
         isPinned: isPinned ?? false,
@@ -272,5 +273,6 @@ class _ChatCellShowCaseState extends State<ChatCellShowCase>
               objectId: id ?? 0,
               imageFileId: null,
             ),
+        isForum: isForum ?? false,
       );
 }
