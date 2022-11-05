@@ -521,6 +521,29 @@ class MessageTileMapper {
           type: notImplementedText,
         );
       },
+      messageForumTopicCreated: (td.MessageForumTopicCreated value) {
+        return MessageForumTopicCreatedTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageForumTopicEdited: (td.MessageForumTopicEdited value) {
+        return MessageForumTopicEditedTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageForumTopicIsClosedToggled: (
+        td.MessageForumTopicIsClosedToggled value,
+      ) {
+        return MessageForumTopicClosedTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
     );
   }
 }

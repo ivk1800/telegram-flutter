@@ -40,6 +40,7 @@ td.Message createFakeMessage() {
       ),
     ),
     canReportReactions: false,
+    isTopicMessage: false,
   );
 }
 
@@ -80,6 +81,7 @@ td.Chat createFakeChat({
       canSendMessages: false,
       canSendOtherMessages: false,
       canSendPolls: false,
+      canManageTopics: false,
     ),
     positions: positions ?? <td.ChatPosition>[],
     unreadCount: 0,

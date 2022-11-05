@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:core/core.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:core_presentation/core_presentation.dart';
@@ -7,6 +8,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:feature_settings_impl/src/screen/content_state.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:td_api/td_api.dart' as td;
 import 'package:user_info/user_info.dart';
 
 class SettingsScreenContentInteractor with SubscriptionMixin {
@@ -33,10 +35,12 @@ class SettingsScreenContentInteractor with SubscriptionMixin {
 
   ContentState _mapUserInfo(UserInfo info) {
     final String username;
-    if (info.user.username.isEmpty) {
+    final td.Usernames? usernames = info.user.usernames;
+    if (usernames == null) {
       username = _stringsProvider.usernameEmpty;
     } else {
-      username = '@${info.user.username}';
+      // TODO handle empty list
+      username = '@${usernames.activeUsernames.firstOrNull}';
     }
 
     return ContentState.data(

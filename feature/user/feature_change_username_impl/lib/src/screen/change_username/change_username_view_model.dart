@@ -1,6 +1,7 @@
 import 'package:async/async.dart';
 import 'package:async_utils/async_utils.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
+import 'package:collection/collection.dart';
 import 'package:core/core.dart';
 import 'package:core_arch/core_arch.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
@@ -59,7 +60,11 @@ class ChangeUsernameViewModel extends BaseViewModel {
     final CancelableOperation<String> operation = _optionsManager
         .getMyId()
         .then(_userInfoResolver.resolveAsFuture)
-        .then((UserInfo info) => info.user.username)
+        // TODO handle multiple names
+        .then(
+          (UserInfo info) =>
+              info.user.usernames?.activeUsernames.firstOrNull ?? '',
+        )
         .toCancelableOperation()
         .onValue(
       (String username) {

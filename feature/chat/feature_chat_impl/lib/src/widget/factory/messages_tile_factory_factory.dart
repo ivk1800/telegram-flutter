@@ -238,6 +238,18 @@ class MessagesTileFactoryFactory {
         MessageGiftedPremiumTileModel: MessageGiftedPremiumTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),
+        MessageForumTopicCreatedTileFactoryDelegate:
+            MessageForumTopicCreatedTileFactoryDelegate(
+          chatMessageFactory: chatMessageFactory,
+        ),
+        MessageForumTopicEditedTileFactoryDelegate:
+            MessageForumTopicEditedTileFactoryDelegate(
+          chatMessageFactory: chatMessageFactory,
+        ),
+        MessageForumTopicClosedTileFactoryDelegate:
+            MessageForumTopicClosedTileFactoryDelegate(
+          chatMessageFactory: chatMessageFactory,
+        ),
       },
     );
   }
