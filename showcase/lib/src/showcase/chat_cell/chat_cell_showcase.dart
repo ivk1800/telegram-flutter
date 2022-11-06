@@ -53,14 +53,17 @@ class _ChatCellShowCaseState extends State<ChatCellShowCase>
 
   @override
   Widget build(BuildContext context) {
+    final ListView listView = ListView.separated(
+      itemCount: models.length,
+      itemBuilder: (BuildContext context, int index) =>
+          chatTileFactory.create(context, models[index]),
+      separatorBuilder: (BuildContext context, int index) =>
+          const tg.Divider(indent: DividerIndent.large),
+    );
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.separated(
-        itemCount: models.length,
-        itemBuilder: (BuildContext context, int index) =>
-            chatTileFactory.create(context, models[index]),
-        separatorBuilder: (BuildContext context, int index) =>
-            const tg.Divider(indent: DividerIndent.large),
+      body: ChatHeightProvider(
+        child: listView,
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:feature_chats_list_impl/feature_chats_list_impl.dart';
 import 'package:feature_chats_list_impl/src/screen/chats_list/chats_list_screen_scope_delegate.scope.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -112,16 +113,17 @@ class _Data extends StatelessWidget {
     final TileFactory tileFactory =
         ChatsListScreenScope.getTileFactory(context);
 
+    final ListView listView = ListView.separated(
+      separatorBuilder: (BuildContext context, int index) {
+        return Divider(indent: 72, height: 0, color: Colors.grey[400]);
+      },
+      itemCount: models.length,
+      itemBuilder: (BuildContext context, int index) {
+        return tileFactory.create(context, models[index]);
+      },
+    );
     return Scrollbar(
-      child: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider(indent: 72, height: 0, color: Colors.grey[400]);
-        },
-        itemCount: models.length,
-        itemBuilder: (BuildContext context, int index) {
-          return tileFactory.create(context, models[index]);
-        },
-      ),
+      child: ChatHeightProvider(child: listView),
     );
   }
 }

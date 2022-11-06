@@ -1,6 +1,8 @@
 import 'package:coreui/coreui.dart';
 import 'package:flutter/material.dart';
 import 'package:showcase/src/showcase_feature.dart';
+import 'package:theme_manager_api/theme_manager_api.dart' as th;
+import 'package:theme_manager_flutter/theme_manager_flutter.dart';
 
 class ShowcaseAppFactory {
   final ShowcaseFeature showcase;
@@ -18,21 +20,7 @@ class ShowcaseAppFactory {
           },
         );
       },
-      theme: ThemeData(
-        pageTransitionsTheme: const PageTransitionsTheme(
-          builders: <TargetPlatform, PageTransitionsBuilder>{
-            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          },
-        ),
-        platform: TargetPlatform.android,
-        primaryColor: const Color(0xff5682a3),
-        colorScheme: ThemeData.light().colorScheme.copyWith(
-              secondary: const Color(0xff598fba),
-            ),
-        appBarTheme: const AppBarTheme(
-          color: Color(0xff5682a3),
-        ),
-      ),
+      theme: const ThemeDataResolver().resolve(const th.Theme.classic()),
       navigatorKey: showcase.navigationKey,
       title: 'showcase',
       debugShowCheckedModeBanner: false,

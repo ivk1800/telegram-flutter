@@ -1,3 +1,4 @@
+import 'package:chat_list_theme/chat_list_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:tg_theme/tg_theme.dart';
 import 'package:theme_manager_api/theme_manager_api.dart' as th;
@@ -22,6 +23,9 @@ class ThemeDataResolver {
           appBarTheme: const AppBarTheme(
             color: Color(0xff5682a3),
           ),
+          extensions: <ThemeExtension<Object?>>[
+            ChatCellTheme.light,
+          ],
         );
       },
       dark: (_) {
@@ -32,6 +36,9 @@ class ThemeDataResolver {
             },
           ),
           platform: TargetPlatform.android,
+          extensions: <ThemeExtension<Object?>>[
+            ChatCellTheme.light,
+          ],
         );
       },
     );

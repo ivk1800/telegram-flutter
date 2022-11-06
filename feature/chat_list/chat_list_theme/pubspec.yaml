@@ -1,4 +1,4 @@
-name: theme_manager_flutter
+name: chat_list_theme
 publish_to: 'none'
 
 environment:
@@ -6,15 +6,10 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
-  chat_list_theme:
-    path: ../../../feature/chat_list/chat_list_theme
   flutter:
     sdk: flutter
-  rxdart: 0.27.3
   tg_theme:
-    path: ../../../feature/theme/tg_theme
-  theme_manager_api:
-    path: ../theme_manager_api
+    path: ../../theme/tg_theme
 
 dev_dependencies:
   dependency_validator: 3.2.0
