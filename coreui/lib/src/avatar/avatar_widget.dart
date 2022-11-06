@@ -9,11 +9,13 @@ class AvatarWidget extends StatefulWidget {
   const AvatarWidget({
     required this.radius,
     required this.avatar,
+    required this.borderRadius,
     super.key,
   });
 
   final double radius;
   final Avatar avatar;
+  final BorderRadiusGeometry borderRadius;
 
   @override
   State<AvatarWidget> createState() => _AvatarWidgetState();
@@ -39,45 +41,31 @@ class _AvatarWidgetState extends State<AvatarWidget> {
       builder: (BuildContext context, AsyncSnapshot<AvatarState> snapshot) {
         return snapshot.data!.map(
           thumbnail: (ThumbnailAvatarState state) {
-            final double size = widget.radius * 2;
-            return ClipRRect(
-              // todo specify correct radius
-              borderRadius: BorderRadius.circular(40.0),
-              child: SizedBox(
-                height: size,
-                width: size,
-                child: MinithumbnailWidget(
-                  minithumbnail: state.thumbnail,
-                ),
-              ),
+            return _Thumbnail(
+              radius: widget.radius,
+              state: state,
+              borderRadius: widget.borderRadius,
             );
           },
           abbreviation: (AbbreviationAvatarState state) {
-            return _DefaultAvatar(
+            return _Abbreviation(
               radius: widget.radius,
-              objectId: state.objectId,
-              child: FittedBox(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    state.abbreviation,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+              state: state,
+              borderRadius: widget.borderRadius,
             );
           },
           file: (FileAvatarState state) {
-            return CircleAvatar(
-              backgroundColor: Colors.transparent,
-              maxRadius: widget.radius,
-              backgroundImage: FileImage(state.file),
+            return _File(
+              radius: widget.radius,
+              state: state,
+              borderRadius: widget.borderRadius,
             );
           },
           savedMessages: (SavedMessagesAvatarState value) {
-            return _SavedMessages(radius: widget.radius);
+            return _SavedMessages(
+              radius: widget.radius,
+              borderRadius: widget.borderRadius,
+            );
           },
         );
       },
@@ -97,21 +85,24 @@ class _DefaultAvatar extends StatelessWidget {
   const _DefaultAvatar({
     required this.radius,
     required this.objectId,
+    required this.borderRadius,
     this.child,
   });
 
   final double radius;
+  final BorderRadiusGeometry borderRadius;
   final int objectId;
   final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
+    return _BaseAvatar(
       child: child,
       // todo extract ext
       backgroundColor: AvatarWidgetFactory
           .colors[(objectId % AvatarWidgetFactory.colors.length).abs()],
-      maxRadius: radius,
+      radius: radius,
+      borderRadius: borderRadius,
     );
   }
 }
@@ -119,15 +110,144 @@ class _DefaultAvatar extends StatelessWidget {
 class _SavedMessages extends StatelessWidget {
   const _SavedMessages({
     required this.radius,
+    required this.borderRadius,
   });
 
+  final double radius;
+  final BorderRadiusGeometry borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle textStyle = theme.primaryTextTheme.subtitle1!;
+    return _BaseAvatar(
+      radius: radius,
+      borderRadius: borderRadius,
+      child: Icon(Icons.bookmark_outline, color: textStyle.color),
+    );
+  }
+}
+
+class _Thumbnail extends StatelessWidget {
+  const _Thumbnail({
+    required this.state,
+    required this.radius,
+    required this.borderRadius,
+  });
+
+  final BorderRadiusGeometry borderRadius;
+  final ThumbnailAvatarState state;
   final double radius;
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      maxRadius: radius,
-      child: const Icon(Icons.bookmark_outline),
+    final double size = radius * 2;
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child: SizedBox(
+        height: size,
+        width: size,
+        child: MinithumbnailWidget(
+          minithumbnail: state.thumbnail,
+        ),
+      ),
+    );
+  }
+}
+
+class _Abbreviation extends StatelessWidget {
+  const _Abbreviation({
+    required this.state,
+    required this.radius,
+    required this.borderRadius,
+  });
+
+  final AbbreviationAvatarState state;
+  final double radius;
+  final BorderRadiusGeometry borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    return _DefaultAvatar(
+      radius: radius,
+      borderRadius: borderRadius,
+      objectId: state.objectId,
+      child: FittedBox(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text(
+            state.abbreviation,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _File extends StatelessWidget {
+  const _File({
+    required this.state,
+    required this.radius,
+    required this.borderRadius,
+  });
+
+  final FileAvatarState state;
+  final double radius;
+  final BorderRadiusGeometry borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    return _BaseAvatar(
+      backgroundColor: Colors.transparent,
+      radius: radius,
+      borderRadius: borderRadius,
+      backgroundImage: FileImage(state.file),
+    );
+  }
+}
+
+class _BaseAvatar extends StatelessWidget {
+  const _BaseAvatar({
+    required this.radius,
+    required this.borderRadius,
+    this.backgroundImage,
+    this.backgroundColor,
+    this.child,
+  });
+
+  final double radius;
+  final Color? backgroundColor;
+  final ImageProvider? backgroundImage;
+  final Widget? child;
+  final BorderRadiusGeometry borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    final double diameter = radius * 2;
+    final ThemeData theme = Theme.of(context);
+
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: diameter,
+        minWidth: diameter,
+        maxWidth: diameter,
+        maxHeight: diameter,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: borderRadius,
+        color: backgroundColor ?? theme.primaryColor,
+        image: backgroundImage != null
+            ? DecorationImage(
+                image: backgroundImage!,
+                fit: BoxFit.cover,
+              )
+            : null,
+        // shape: BoxShape.circle,
+      ),
+      child: child,
     );
   }
 }

@@ -232,6 +232,13 @@ class _ChatCellShowCaseState extends State<ChatCellShowCase>
         secondSubtitle:
             '😃😃😃😃emoji emoji emoji emoji emoji emoji emoji ❌emoji emoji emoji  emoji ❌emoji emoji emoji',
       ),
+      _createModel(
+        id: 1,
+        title: 'Forum flutter developers',
+        firstSubtitle: 'ivan',
+        secondSubtitle: 'hello',
+        isForum: true,
+      ),
     ];
   }
 

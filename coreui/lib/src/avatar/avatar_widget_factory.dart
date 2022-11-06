@@ -30,11 +30,15 @@ class AvatarWidgetFactory {
     BuildContext context, {
     required Avatar avatar,
     double radius = 20,
+    BorderRadius borderRadius = const BorderRadius.all(
+      Radius.circular(kDefaultBorderRadius),
+    ),
   }) {
     return AvatarScope(
       child: AvatarWidget(
         radius: radius,
         avatar: avatar,
+        borderRadius: borderRadius,
       ),
       create: () {
         return AvatarViewModel(
@@ -44,4 +48,6 @@ class AvatarWidgetFactory {
       },
     );
   }
+
+  static const double kDefaultBorderRadius = 45;
 }
