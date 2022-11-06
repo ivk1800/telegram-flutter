@@ -238,15 +238,15 @@ class MessagesTileFactoryFactory {
         MessageGiftedPremiumTileModel: MessageGiftedPremiumTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),
-        MessageForumTopicCreatedTileFactoryDelegate:
+        MessageForumTopicCreatedTileModel:
             MessageForumTopicCreatedTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),
-        MessageForumTopicEditedTileFactoryDelegate:
+        MessageForumTopicEditedTileModel:
             MessageForumTopicEditedTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),
-        MessageForumTopicClosedTileFactoryDelegate:
+        MessageForumTopicClosedTileModel:
             MessageForumTopicClosedTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),

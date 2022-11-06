@@ -91,6 +91,13 @@ class _Cell extends StatelessWidget {
                   context,
                   avatar: model.avatar,
                   radius: 28,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(
+                      model.isForum
+                          ? 20
+                          : AvatarWidgetFactory.kDefaultBorderRadius,
+                    ),
+                  ),
                 ),
               ),
               Expanded(
