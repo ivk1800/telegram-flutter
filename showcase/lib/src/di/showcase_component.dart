@@ -6,6 +6,7 @@ import 'package:showcase/showcase.dart';
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
 import 'package:showcase/src/showcase/avatar/avatar_showcase_factory.dart';
 import 'package:showcase/src/showcase/change_username_showcase_factory.dart';
+import 'package:showcase/src/showcase/chat_forum_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/create_new_channel_showcase_factory.dart';
 import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/message/message_showcase_factory.dart';
@@ -41,6 +42,8 @@ abstract class IShowcaseComponent {
   MessageShowcaseFactory getMessageShowcaseFactory();
 
   MainScreenShowcaseFactory getMainScreenShowcaseFactory();
+
+  ChatForumScreenShowcaseFactory getChatForumScreenShowcaseFactory();
 }
 
 @j.module

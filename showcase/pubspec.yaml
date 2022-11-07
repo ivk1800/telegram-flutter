@@ -32,6 +32,8 @@ dependencies:
     path: ../feature/feature_auth_impl
   feature_change_username_impl:
     path: ../feature/user/feature_change_username_impl
+  feature_chat_forum_impl:
+    path: ../feature/chat/forum/feature_chat_forum_impl
   feature_chat_impl:
     path: ../feature/chat/feature_chat_impl
   feature_chats_list_impl:

@@ -1,5 +1,6 @@
 import 'package:app/src/feature/feature_provider.dart';
 import 'package:app/src/navigation/key_generator.dart';
+import 'package:chat_forum_navigation_api/chat_forum_navigation_api.dart';
 import 'package:core/core.dart';
 import 'package:dialog_api/dialog_api.dart' as dialog_api;
 import 'package:dialog_api/dialog_api.dart';
@@ -52,6 +53,7 @@ class CommonScreenRouterImpl
         IDialogRouter,
         ILogoutFeatureRouter,
         IContactsRouter,
+        IChatForumScreenRouter,
         IAuthFeatureRouter {
   CommonScreenRouterImpl({
     required ISplitNavigationDelegate navigationDelegate,
@@ -404,6 +406,15 @@ class CommonScreenRouterImpl
           _featureProvider.changeBioFeatureApi.changeBioScreenFactory.create(),
       key: _keyGenerator.generateForChangeBio(),
       container: ContainerType.top,
+    );
+  }
+
+  @override
+  void toChatForum(int chatId) {
+    _add(
+      widget: _featureProvider.chatForumFeatureApi.chatForumScreenFactory
+          .create(chatId),
+      container: ContainerType.left,
     );
   }
 

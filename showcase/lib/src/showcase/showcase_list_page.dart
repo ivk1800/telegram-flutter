@@ -142,6 +142,20 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
         );
       },
     ),
+    _ShowcaseData(
+      title: 'forum screen',
+      routeCallback: (BuildContext context) {
+        final Widget widget =
+            ShowcaseScope.getChatForumScreenShowcaseFactory(context)
+                .create(context);
+
+        SplitView.of(context).add(
+          key: UniqueKey(),
+          builder: (_) => widget,
+          container: ContainerType.left,
+        );
+      },
+    ),
   ];
 
   @override

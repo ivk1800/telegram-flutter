@@ -1,0 +1,15 @@
+name: feature_chat_forum_api
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ^3.0.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  dependency_validator: 3.2.0
+  tg_lint_rules:
+    path: ../../../../tg_lint_rules

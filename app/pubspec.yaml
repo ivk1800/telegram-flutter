@@ -13,6 +13,8 @@ dependencies:
     path: ../component/auth_manager/auth_manager_impl
   block_interaction_api:
     path: ../block_interaction_api
+  chat_forum_navigation_api:
+    path: ../feature/chat/forum/chat_forum_navigation_api
   chat_manager_api:
     path: ../feature/chat/chat_manager/chat_manager_api
   chat_manager_impl:
@@ -61,6 +63,10 @@ dependencies:
     path: ../feature/chat/administration/feature_chat_administration_impl
   feature_chat_api:
     path: ../feature/chat/feature_chat_api
+  feature_chat_forum_api:
+    path: ../feature/chat/forum/feature_chat_forum_api
+  feature_chat_forum_impl:
+    path: ../feature/chat/forum/feature_chat_forum_impl
   feature_chat_header_info_api:
     path: ../feature/feature_chat_header_info_api
   feature_chat_header_info_impl:

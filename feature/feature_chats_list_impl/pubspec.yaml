@@ -6,6 +6,8 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  chat_forum_navigation_api:
+    path: ../../feature/chat/forum/chat_forum_navigation_api
   chat_list_ui_kit:
     path: ../../feature/chat_list/chat_list_ui_kit
   chat_navigation_api:

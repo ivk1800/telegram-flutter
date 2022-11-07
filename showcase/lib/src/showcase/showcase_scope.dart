@@ -5,6 +5,7 @@ import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 
 import 'avatar/avatar_showcase_factory.dart';
 import 'change_username_showcase_factory.dart';
+import 'chat_forum_screen_showcase_factory.dart';
 import 'create_new_channel_showcase_factory.dart';
 import 'message/message_showcase_factory.dart';
 import 'new_contact_showcase_factory.dart';
@@ -58,6 +59,11 @@ class ShowcaseScope extends StatefulWidget {
 
   static AvatarShowcaseFactory getAvatarShowcaseFactory(BuildContext context) =>
       _InheritedScope.of(context)._avatarShowcaseFactory;
+
+  static ChatForumScreenShowcaseFactory getChatForumScreenShowcaseFactory(
+    BuildContext context,
+  ) =>
+      _InheritedScope.of(context)._chatForumScreenShowcaseFactory;
 }
 
 class _ShowcaseScopeState extends State<ShowcaseScope> {
@@ -86,6 +92,9 @@ class _ShowcaseScopeState extends State<ShowcaseScope> {
 
   late final MainScreenShowcaseFactory _mainScreenShowcaseFactory =
       _component.getMainScreenShowcaseFactory();
+
+  late final ChatForumScreenShowcaseFactory _chatForumScreenShowcaseFactory =
+      _component.getChatForumScreenShowcaseFactory();
 
   @override
   Widget build(BuildContext context) {

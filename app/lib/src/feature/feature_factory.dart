@@ -4,6 +4,7 @@ import 'package:feature_change_bio_api/feature_change_bio_api.dart';
 import 'package:feature_change_username_api/feature_change_username_api.dart';
 import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
+import 'package:feature_chat_forum_api/feature_chat_forum_api.dart';
 import 'package:feature_chat_settings_api/feature_chat_settings_api.dart';
 import 'package:feature_chats_list_api/feature_chats_list_api.dart';
 import 'package:feature_contacts_api/feature_contacts_api.dart';
@@ -68,6 +69,7 @@ class FeatureFactory {
     required j.IProvider<IChangeUsernameFeatureApi>
         changeUsernameFeatureApiProvider,
     required j.IProvider<IChangeBioFeatureApi> changeBioFeatureApiProvider,
+    required j.IProvider<IChatForumFeatureApi> chatForumFeatureApiProvider,
   })  : _mainScreenFeatureApiProvider = mainScreenFeatureApiProvider,
         _chatsListFeatureApiProvider = chatsListFeatureApiProvider,
         _chatFeatureApiProvider = chatFeatureApiProvider,
@@ -96,6 +98,7 @@ class FeatureFactory {
             chatAdministrationFeatureApiProvider,
         _changeUsernameFeatureApiProvider = changeUsernameFeatureApiProvider,
         _changeBioFeatureApiProvider = changeBioFeatureApiProvider,
+        _chatForumFeatureApiProvider = chatForumFeatureApiProvider,
         _globalSearchFeatureApiProvider = globalSearchFeatureApiProvider;
 
   final j.IProvider<IMainScreenFeatureApi> _mainScreenFeatureApiProvider;
@@ -130,6 +133,7 @@ class FeatureFactory {
   final j.IProvider<IChangeUsernameFeatureApi>
       _changeUsernameFeatureApiProvider;
   final j.IProvider<IChangeBioFeatureApi> _changeBioFeatureApiProvider;
+  final j.IProvider<IChatForumFeatureApi> _chatForumFeatureApiProvider;
 
   IMainScreenFeatureApi createMainScreenFeature() =>
       _mainScreenFeatureApiProvider.get();
@@ -206,4 +210,7 @@ class FeatureFactory {
 
   IChangeBioFeatureApi createChangeBioFeatureApi() =>
       _changeBioFeatureApiProvider.get();
+
+  IChatForumFeatureApi createChatForumFeatureApi() =>
+      _chatForumFeatureApiProvider.get();
 }

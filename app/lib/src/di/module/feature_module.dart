@@ -4,6 +4,7 @@ import 'package:app/src/navigation/navigation.dart';
 import 'package:app/src/navigation/router/change_bio_router.dart';
 import 'package:app/src/navigation/router/change_username_router.dart';
 import 'package:app/src/navigation/router/chat_administration_router_factory.dart';
+import 'package:app/src/navigation/router/chat_forum_router_impl.dart';
 import 'package:app/src/navigation/router/create_new_chat_router_impl.dart';
 import 'package:app/src/navigation/router/new_contact_router.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
@@ -23,6 +24,8 @@ import 'package:feature_change_username_impl/feature_change_username_impl.dart';
 import 'package:feature_chat_administration_api/feature_chat_administration_api.dart';
 import 'package:feature_chat_administration_impl/feature_chat_administration_impl.dart';
 import 'package:feature_chat_api/feature_chat_api.dart';
+import 'package:feature_chat_forum_api/feature_chat_forum_api.dart';
+import 'package:feature_chat_forum_impl/feature_chat_forum_impl.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_header_info_impl/feature_chat_header_info_impl.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
@@ -589,6 +592,16 @@ abstract class FeatureModule {
         navigatorKey: TgApp.navigatorKey,
       );
 
+  @j.provides
+  static ChatForumFeatureDependencies provideChatForumFeatureDependencies(
+    IStringsProvider stringsProvider,
+    IChatForumRouter router,
+  ) =>
+      ChatForumFeatureDependencies(
+        stringsProvider: stringsProvider,
+        router: router,
+      );
+
   // endregion dependencies
 
   // region api
@@ -763,6 +776,12 @@ abstract class FeatureModule {
   ) =>
       ChangeBioFeature(dependencies: dependencies);
 
+  @j.provides
+  static IChatForumFeatureApi provideChatForumFeatureApi(
+    ChatForumFeatureDependencies dependencies,
+  ) =>
+      ChatForumFeature(dependencies: dependencies);
+
   // endregion api
 
   @j.provides
@@ -868,6 +887,9 @@ abstract class FeatureModule {
 
   @j.binds
   IChangeBioRouter bindChangeBioRouter(ChangeBioRouterImpl impl);
+
+  @j.binds
+  IChatForumRouter bindChatForumRouter(CreateForumRouterImpl impl);
 // endregion router
 
 }
