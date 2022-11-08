@@ -5,6 +5,7 @@ extension RichTextExt on rt.RichText {
   InlineSpan toInlineSpan(BuildContext context) {
     return TextSpan(
       children: entities.map((rt.Entity e) {
+        // TODO support multiple types
         return e.types.first.map(
           planeText: (_) {
             return TextSpan(text: e.text);
@@ -16,6 +17,9 @@ extension RichTextExt on rt.RichText {
                 color: Theme.of(context).colorScheme.primary,
               ),
             );
+          },
+          customEmoji: (rt.CustomEmoji value) {
+            return TextSpan(text: e.text);
           },
         );
       }).toList(),

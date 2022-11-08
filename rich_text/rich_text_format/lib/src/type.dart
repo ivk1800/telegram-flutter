@@ -7,4 +7,5 @@ part 'type.freezed.dart';
 class Type with _$Type {
   const factory Type.planeText() = PlaneText;
   const factory Type.textUrl({required String url}) = TextUrl;
+  const factory Type.customEmoji({required int customEmojiId}) = CustomEmoji;
 }
