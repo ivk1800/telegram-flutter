@@ -633,6 +633,25 @@ class TgStringsProvider implements IStringsProvider {
   @override
   String get savedMessages => _get('SavedMessages');
 
+  @override
+  String noTopicsDescription(List<dynamic> args) =>
+      _getFormatted('NoTopicsDescription', args);
+
+  @override
+  String get noTopics => _get('NoTopics');
+
+  @override
+  String get tapToCreateTopicHint => _get('TapToCreateTopicHint');
+
+  @override
+  String get topicViewAsTopics => _get('TopicViewAsTopics');
+
+  @override
+  String get topicViewAsMessages => _get('TopicViewAsMessages');
+
+  @override
+  String get createTopic => _get('CreateTopic');
+
   String _get(String key) => _stringGetter.call(key);
 
   String _getFormatted(String key, List<dynamic> args) =>

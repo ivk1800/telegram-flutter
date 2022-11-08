@@ -417,4 +417,16 @@ This link opens a chat with you:
     <string lang="NoMessages">No messages here yet...</string>
     <!-- https://translations.telegram.org/en/android/chat_list/SavedMessages -->
     <string lang="SavedMessages">Saved Messages</string>
+    <!-- https://translations.telegram.org/en/android/unsorted/NoTopicsDescription -->
+    <string lang="NoTopicsDescription">You can start your first topic or tap on the %s icon to switch to the messages list.</string>
+    <!-- https://translations.telegram.org/en/android/unsorted/NoTopics -->
+    <string lang="NoTopics">No topics here yet</string>
+    <!-- https://translations.telegram.org/en/android/unsorted/TapToCreateTopicHint -->
+    <string lang="TapToCreateTopicHint">Tap to create a topic</string>
+    <!-- https://translations.telegram.org/en/android/unsorted/TopicViewAsTopics -->
+    <string lang="TopicViewAsTopics">View as topics</string>
+    <!-- https://translations.telegram.org/en/android/unsorted/TopicViewAsMessages -->
+    <string lang="TopicViewAsMessages">View as messages</string>
+    <!-- https://translations.telegram.org/en/android/unsorted/CreateTopic -->
+    <string lang="CreateTopic">Create topic</string>
 </resources>

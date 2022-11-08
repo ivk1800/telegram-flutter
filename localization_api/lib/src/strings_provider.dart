@@ -404,4 +404,16 @@ abstract class IStringsProvider {
   String get noMessages;
 
   String get savedMessages;
+
+  String noTopicsDescription(List<dynamic> args);
+
+  String get noTopics;
+
+  String get tapToCreateTopicHint;
+
+  String get topicViewAsTopics;
+
+  String get topicViewAsMessages;
+
+  String get createTopic;
 }

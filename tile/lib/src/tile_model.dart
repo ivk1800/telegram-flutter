@@ -1,1 +1,3 @@
-abstract class ITileModel {}
+abstract class ITileModel {
+  const ITileModel();
+}
