@@ -19,6 +19,7 @@ class ChatMessageFactory {
     final ChatThemeData chatTheme = tgTheme.themeOf();
 
     return _Notification(
+      // TODO wrap to DefaultTextStyle for custom emoji
       child: Text.rich(
         text.toInlineSpan(context),
         textAlign: TextAlign.center,

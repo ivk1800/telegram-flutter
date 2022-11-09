@@ -1,4 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:rich_text_format_flutter/rich_text_format_flutter.dart';
 import 'package:showcase/src/showcase/chat_cell/chat_cell_showcase.dart';
 import 'package:showcase/src/showcase/showcase_scope.dart';
 import 'package:showcase/src/showcase_messages_list_page.dart';
@@ -153,6 +157,20 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
           key: UniqueKey(),
           builder: (_) => widget,
           container: ContainerType.left,
+        );
+      },
+    ),
+    _ShowcaseData(
+      title: 'custom emoji',
+      routeCallback: (BuildContext context) {
+        final Widget widget =
+            ShowcaseScope.getCustomEmojiShowcaseFactory(context)
+                .create(context);
+
+        SplitView.of(context).add(
+          key: UniqueKey(),
+          builder: (_) => widget,
+          container: ContainerType.right,
         );
       },
     ),

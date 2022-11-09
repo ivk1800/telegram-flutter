@@ -13,6 +13,7 @@ class MessageText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MessageSkeleton(
+      // TODO wrap to DefaultTextStyle for custom emoji
       content: Text.rich(
         text.toInlineSpan(context),
         style: TgTheme.of(context).textTheme.regular,

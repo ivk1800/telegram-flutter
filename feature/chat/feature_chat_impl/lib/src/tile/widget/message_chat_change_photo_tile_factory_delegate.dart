@@ -21,6 +21,7 @@ class MessageChatChangePhotoTileFactoryDelegate
       body: Column(
         children: <Widget>[
           _chatMessageFactory.createChatNotificationBubble(
+            // TODO wrap to DefaultTextStyle for custom emoji
             span: model.title.toInlineSpan(context),
           ),
           const SizedBox(

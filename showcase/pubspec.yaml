@@ -63,6 +63,8 @@ dependencies:
     path: ../localization_api
   localization_impl:
     path: ../localization_impl
+  rich_text_format_flutter:
+    path: ../rich_text/rich_text_format_flutter
   rxdart: 0.27.3
   shared_models:
     path: ../shared/models

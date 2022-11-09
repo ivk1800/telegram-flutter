@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:showcase/src/di/showcase_component.dart';
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
+import 'package:showcase/src/showcase/custom_emoji_showcase_factory.dart';
 import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 
 import 'avatar/avatar_showcase_factory.dart';
@@ -64,6 +65,11 @@ class ShowcaseScope extends StatefulWidget {
     BuildContext context,
   ) =>
       _InheritedScope.of(context)._chatForumScreenShowcaseFactory;
+
+  static CustomEmojiShowcaseFactory getCustomEmojiShowcaseFactory(
+    BuildContext context,
+  ) =>
+      _InheritedScope.of(context)._customEmojiShowcaseFactory;
 }
 
 class _ShowcaseScopeState extends State<ShowcaseScope> {
@@ -95,6 +101,9 @@ class _ShowcaseScopeState extends State<ShowcaseScope> {
 
   late final ChatForumScreenShowcaseFactory _chatForumScreenShowcaseFactory =
       _component.getChatForumScreenShowcaseFactory();
+
+  late final CustomEmojiShowcaseFactory _customEmojiShowcaseFactory =
+      _component.getCustomEmojiShowcaseFactory();
 
   @override
   Widget build(BuildContext context) {
