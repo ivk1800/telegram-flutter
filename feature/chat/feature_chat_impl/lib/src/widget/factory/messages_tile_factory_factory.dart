@@ -1,4 +1,5 @@
 import 'package:coreui/coreui.dart' as tg;
+import 'package:emoji_ui_kit/emoji_ui_kit.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/message_bloc_provider.dart';
@@ -12,6 +13,7 @@ import 'package:tile/tile.dart';
 
 // FactoryFactory :)
 class MessagesTileFactoryFactory {
+  // TODO: does not make sense in a class. static factory?
   TileFactory create({
     required ChatMessageFactory chatMessageFactory,
     required IStringsProvider stringsProvider,
@@ -23,6 +25,7 @@ class MessagesTileFactoryFactory {
     required IMessageWallContext messageWallContext,
     required ShortInfoFactory shortInfoFactory,
     required MessageBlocProvider messageBlocProvider,
+    required CustomEmojiWidgetFactory customEmojiWidgetFactory,
   }) {
     return TileFactory(
       delegates: <Type, ITileFactoryDelegate<ITileModel>>{
@@ -210,6 +213,8 @@ class MessagesTileFactoryFactory {
         ),
         MessageAnimatedEmojiTileModel: MessageAnimatedEmojiTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
+          customEmojiWidgetFactory: customEmojiWidgetFactory,
+          shortInfoFactory: shortInfoFactory,
         ),
         MessageInviteVideoChatParticipantsTileModel:
             MessageInviteVideoChatParticipantsTileFactoryDelegate(

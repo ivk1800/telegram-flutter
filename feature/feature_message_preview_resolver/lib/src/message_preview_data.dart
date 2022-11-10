@@ -3,5 +3,6 @@ class MessagePreviewData {
 
   final String? firstText;
 
+  // TODO: replace by RichText
   final String? secondText;
 }

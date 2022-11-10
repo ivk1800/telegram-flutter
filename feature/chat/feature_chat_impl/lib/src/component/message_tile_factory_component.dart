@@ -1,4 +1,6 @@
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:coreui/coreui.dart' as tg;
+import 'package:emoji_ui_kit/emoji_ui_kit.dart';
 import 'package:feature_chat_impl/feature_chat_impl.dart';
 import 'package:feature_chat_impl/src/resolver/message_component_resolver.dart';
 import 'package:feature_chat_impl/src/tile/message_bloc_provider.dart';
@@ -95,6 +97,17 @@ abstract class MessageTileFactoryModule {
 
   @j.provides
   @j.singleton
+  static CustomEmojiWidgetFactory provideCustomEmojiWidgetFactory(
+    IFileDownloader fileDownloader,
+    IStickerRepository stickerRepository,
+  ) =>
+      CustomEmojiWidgetFactory(
+        fileDownloader: fileDownloader,
+        stickerRepository: stickerRepository,
+      );
+
+  @j.provides
+  @j.singleton
   static TileFactory provideTileFactory(
     MessagesTileFactoryFactory factory,
     tg.ImageWidgetFactory imageWidgetFactory,
@@ -107,6 +120,7 @@ abstract class MessageTileFactoryModule {
     MessageComponentResolver messageComponentResolver,
     SenderAvatarFactory senderAvatarFactory,
     MessageBlocProvider messageBlocProvider,
+    CustomEmojiWidgetFactory customEmojiWidgetFactory,
   ) =>
       factory.create(
         imageWidgetFactory: imageWidgetFactory,
@@ -119,6 +133,7 @@ abstract class MessageTileFactoryModule {
         shortInfoFactory: shortInfoFactory,
         stringsProvider: stringsProvider,
         chatMessageFactory: chatMessageFactory,
+        customEmojiWidgetFactory: customEmojiWidgetFactory,
       );
 
   @j.singleton

@@ -38,6 +38,7 @@ class ChatFeatureDependencies {
     required this.chatManager,
     required this.errorTransformer,
     required this.optionsManager,
+    required this.stickerRepository,
   });
 
   final IChatRepository chatRepository;
@@ -60,4 +61,5 @@ class ChatFeatureDependencies {
   final IChatManager chatManager;
   final IErrorTransformer errorTransformer;
   final OptionsManager optionsManager;
+  final IStickerRepository stickerRepository;
 }

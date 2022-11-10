@@ -77,6 +77,12 @@ class MessagePreviewResolver implements IMessagePreviewResolver {
           value,
         );
       },
+      messageAnimatedEmoji: (td.MessageAnimatedEmoji value) {
+        // TODO: support custom emoji
+        return MessagePreviewData(
+          firstText: value.emoji,
+        );
+      },
       orElse: () {
         return MessagePreviewData(
           secondText: content.runtimeType.toString(),

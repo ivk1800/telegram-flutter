@@ -39,6 +39,8 @@ dependencies:
     path: ../../../dialog_api
   dmg_annotation:
     path: ../../../dependencies_module_generator/dmg_annotation
+  emoji_ui_kit:
+    path: ../../../ui/emoji_ui_kit
   error_transformer_api:
     path: ../../../error_transformer_api
   feature_chat_api:

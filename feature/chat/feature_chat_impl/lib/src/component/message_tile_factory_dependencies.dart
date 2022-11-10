@@ -1,3 +1,4 @@
+import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:dmg_annotation/dmg_annotation.dart';
 import 'package:feature_chat_impl/src/chat_screen_router.dart';
 import 'package:feature_chat_impl/src/wall/message_wall_context.dart';
@@ -14,6 +15,7 @@ class MessageTileFactoryDependencies {
     required this.messageActionListener,
     required this.fileDownloader,
     required this.chatScreenRouter,
+    required this.stickerRepository,
   });
 
   final IStringsProvider stringsProvider;
@@ -21,4 +23,5 @@ class MessageTileFactoryDependencies {
   final IMessageActionListener messageActionListener;
   final IFileDownloader fileDownloader;
   final IChatScreenRouter chatScreenRouter;
+  final IStickerRepository stickerRepository;
 }

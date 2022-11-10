@@ -472,11 +472,17 @@ class MessageTileMapper {
           type: notImplementedText,
         );
       },
-      messageAnimatedEmoji: (td.MessageAnimatedEmoji value) {
-        return MessageInviteVideoChatParticipantsTileModel(
+      messageAnimatedEmoji: (td.MessageAnimatedEmoji value) async {
+        final td.Sticker? sticker = value.animatedEmoji.sticker;
+        // TODO: handle nullable sticker
+        assert(sticker != null);
+        return MessageAnimatedEmojiTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,
-          type: notImplementedText,
+          additionalInfo: await _additionalInfoMapper.map(message),
+          senderInfo: await _senderInfoMapper.map(message.senderId),
+          replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
+          customEmojiId: sticker!.customEmojiId,
         );
       },
       messageVideoChatScheduled: (td.MessageVideoChatScheduled value) {

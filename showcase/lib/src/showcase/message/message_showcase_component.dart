@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:coreui/coreui.dart';
@@ -36,6 +38,7 @@ abstract class MessageShowcaseModule {
     IMessageWallContext messageWallContext,
     IMessageActionListener messageActionListener,
     IStringsProvider stringsProvider,
+    IStickerRepository stickerRepository,
   ) =>
       MessageTileFactory(
         dependencies: MessageTileFactoryDependencies(
@@ -44,6 +47,7 @@ abstract class MessageShowcaseModule {
           messageWallContext: messageWallContext,
           messageActionListener: messageActionListener,
           stringsProvider: stringsProvider,
+          stickerRepository: stickerRepository,
         ),
       ).create();
 
@@ -102,6 +106,15 @@ abstract class MessageShowcaseModule {
         fakeMessages: <td.Message>[
           fake.createFakeMessage(),
         ],
+      );
+
+  @j.provides
+  @j.singleton
+  static IStickerRepository provideStickerRepository() =>
+      fake.FakeStickerRepository(
+        customEmoji: (int customEmojiId) {
+          return Completer<td.Sticker>().future;
+        },
       );
 
   @j.provides

@@ -179,6 +179,7 @@ abstract class FeatureModule {
     IChatManager chatManager,
     IErrorTransformer errorTransformer,
     OptionsManager optionsManager,
+    IStickerRepository stickerRepository,
   ) =>
       ChatFeatureDependencies(
         optionsManager: optionsManager,
@@ -206,6 +207,7 @@ abstract class FeatureModule {
         fileRepository: fileRepository,
         userRepository: userRepository,
         stringsProvider: stringsProvider,
+        stickerRepository: stickerRepository,
       );
 
   @j.provides

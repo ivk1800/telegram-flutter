@@ -128,6 +128,7 @@ abstract class ChatScreenModule {
     IStringsProvider stringsProvider,
     IMessageActionListener messageActionListener,
     IChatScreenRouter router,
+    IStickerRepository stickerRepository,
   ) =>
       MessageTileFactoryDependencies(
         chatScreenRouter: router,
@@ -135,6 +136,7 @@ abstract class ChatScreenModule {
         messageActionListener: messageActionListener,
         messageWallContext: messageWallContext,
         stringsProvider: stringsProvider,
+        stickerRepository: stickerRepository,
       );
 
   @j.provides

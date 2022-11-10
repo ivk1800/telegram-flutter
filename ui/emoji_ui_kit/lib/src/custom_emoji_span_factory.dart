@@ -57,7 +57,7 @@ class _EmojiState extends State<_Emoji> {
     super.initState();
     _loadEmoji(widget.customEmojiId);
   }
-  
+
   @override
   void dispose() {
     _emojiSubscription?.cancel();
