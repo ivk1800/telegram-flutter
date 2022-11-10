@@ -11,6 +11,7 @@ import 'package:showcase/src/showcase/create_new_channel_showcase_factory.dart';
 import 'package:showcase/src/showcase/custom_emoji/custom_emoji_showcase_factory.dart';
 import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/message/message_showcase_factory.dart';
+import 'package:showcase/src/showcase/message_wrap/message_wrap_showcase_factory.dart';
 import 'package:showcase/src/showcase/new_contact_showcase_factory.dart';
 import 'package:showcase/src/showcase/widget/showcase_block_interaction_manager.dart';
 import 'package:tg_logger_api/tg_logger_api.dart';
@@ -47,6 +48,8 @@ abstract class IShowcaseComponent {
   ChatForumScreenShowcaseFactory getChatForumScreenShowcaseFactory();
 
   CustomEmojiShowcaseFactory getCustomEmojiShowcaseFactory();
+
+  MessageWrapShowcaseFactory getMessageWrapShowcaseFactory();
 }
 
 @j.module

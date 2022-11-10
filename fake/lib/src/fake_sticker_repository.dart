@@ -2,7 +2,7 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:td_api/td_api.dart' as td;
 
 class FakeStickerRepository implements IStickerRepository {
-  FakeStickerRepository({required this.customEmoji});
+  const FakeStickerRepository({this.customEmoji});
 
   final Future<td.Sticker> Function(int customEmojiId)? customEmoji;
 

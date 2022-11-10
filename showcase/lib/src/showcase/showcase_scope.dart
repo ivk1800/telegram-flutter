@@ -9,6 +9,7 @@ import 'change_username_showcase_factory.dart';
 import 'chat_forum_screen_showcase_factory.dart';
 import 'create_new_channel_showcase_factory.dart';
 import 'message/message_showcase_factory.dart';
+import 'message_wrap/message_wrap_showcase_factory.dart';
 import 'new_contact_showcase_factory.dart';
 import 'widget/showcase_block_interaction_manager.dart';
 
@@ -70,6 +71,11 @@ class ShowcaseScope extends StatefulWidget {
     BuildContext context,
   ) =>
       _InheritedScope.of(context)._customEmojiShowcaseFactory;
+
+  static MessageWrapShowcaseFactory getMessageWrapShowcaseFactory(
+    BuildContext context,
+  ) =>
+      _InheritedScope.of(context)._messageWrapShowcaseFactory;
 }
 
 class _ShowcaseScopeState extends State<ShowcaseScope> {
@@ -104,6 +110,9 @@ class _ShowcaseScopeState extends State<ShowcaseScope> {
 
   late final CustomEmojiShowcaseFactory _customEmojiShowcaseFactory =
       _component.getCustomEmojiShowcaseFactory();
+
+  late final MessageWrapShowcaseFactory _messageWrapShowcaseFactory =
+      _component.getMessageWrapShowcaseFactory();
 
   @override
   Widget build(BuildContext context) {
