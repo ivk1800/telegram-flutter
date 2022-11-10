@@ -8,6 +8,7 @@ environment:
 dependencies:
   core_presentation:
     path: ../core_presentation
+# TODO: do not depend on this module
   core_tdlib_api:
     path: ../core_tdlib_api
   feature_file_api:

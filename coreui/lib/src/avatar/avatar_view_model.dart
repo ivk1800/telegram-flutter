@@ -40,7 +40,7 @@ class AvatarViewModel {
         Minithumbnail? minithumbnail,
       ) {
         if (imageFileId != null) {
-          _fileDownloader.downloadFile(imageFileId);
+          _fileDownloader.startDownloadFile(imageFileId);
           _fileDownloadStateSubscription = _fileDownloader
               .getFileDownloadStateStream(imageFileId)
               .listen(_onNewState);

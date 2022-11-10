@@ -26,6 +26,8 @@ dependencies:
     path: ../dialog_api
   dialog_api_flutter:
     path: ../dialog_api_flutter
+  emoji_ui_kit:
+    path: ../ui/emoji_ui_kit
   fake:
     path: ../fake
   feature_auth_impl:
@@ -63,8 +65,6 @@ dependencies:
     path: ../localization_api
   localization_impl:
     path: ../localization_impl
-  rich_text_format_flutter:
-    path: ../rich_text/rich_text_format_flutter
   rxdart: 0.27.3
   shared_models:
     path: ../shared/models

@@ -1,6 +1,6 @@
+import 'package:emoji_ui_kit/emoji_ui_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:rich_text_format/rich_text_format.dart' as rt;
-import 'custom_emoji_container.dart';
 
 extension RichTextExt on rt.RichText {
   InlineSpan toInlineSpan(BuildContext context) {

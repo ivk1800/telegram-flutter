@@ -6,6 +6,8 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  emoji_ui_kit:
+    path: ../../ui/emoji_ui_kit
   flutter:
     sdk: flutter
   rich_text_format:

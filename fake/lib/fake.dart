@@ -16,6 +16,7 @@ export 'src/fake_global_search_screen_factory.dart';
 export 'src/fake_messages_provider.dart';
 export 'src/fake_options_manager.dart';
 export 'src/fake_provider.dart';
+export 'src/fake_sticker_repository.dart';
 export 'src/fake_super_group_repository.dart';
 export 'src/fake_user_provider.dart';
 export 'src/fake_user_repository.dart';

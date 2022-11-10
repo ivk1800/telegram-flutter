@@ -1,0 +1,22 @@
+name: emoji_ui_kit
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ^3.0.0
+
+dependencies:
+# TODO: do not depend on this module
+  core_tdlib_api:
+    path: ../../core_tdlib_api
+# TODO: do not depend on this module
+  feature_file_api:
+    path: ../../feature/feature_file_api
+  flutter:
+    sdk: flutter
+  rxdart: 0.27.3
+
+dev_dependencies:
+  dependency_validator: 3.2.0
+  tg_lint_rules:
+    path: ../../tg_lint_rules

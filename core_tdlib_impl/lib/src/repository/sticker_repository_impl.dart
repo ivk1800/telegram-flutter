@@ -18,4 +18,9 @@ class StickerRepositoryImpl implements IStickerRepository {
   Future<td.StickerSet> getStickersSet(int setId) {
     return _dataSource.getStickersSet(setId);
   }
+
+  @override
+  Future<td.Sticker> getCustomEmoji(int customEmojiId) {
+    return _dataSource.getCustomEmoji(customEmojiId);
+  }
 }

@@ -32,7 +32,7 @@ class MessageStickerBloc extends MessageBloc<MessageStickerTileModel>
   @override
   void onModelChanged() {
     _fileStreamSubscription?.cancel();
-    _fileDownloader.downloadFile(model.stickerFileId);
+    _fileDownloader.startDownloadFile(model.stickerFileId);
     _fileStreamSubscription = _fileDownloader
         .getFileDownloadStateStream(model.stickerFileId)
         .map((FileDownloadState fileState) {

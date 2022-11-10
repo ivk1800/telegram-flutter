@@ -1,5 +1,8 @@
+import 'package:emoji_ui_kit/emoji_ui_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:rich_text_format_flutter/rich_text_format_flutter.dart';
+import 'package:showcase/src/showcase/custom_emoji/custom_emoji_showcase_scope.dart';
+
+import 'fake_custom_emoji.dart';
 
 class CustomEmojiShowcasePage extends StatelessWidget {
   const CustomEmojiShowcasePage({super.key});
@@ -24,12 +27,13 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextStyle style = Theme.of(context).textTheme.titleMedium!;
-    final WidgetSpan emoji = WidgetSpan(
+    final CustomEmojiWidgetFactory customEmojiWidgetFactory =
+        CustomEmojiShowcaseScope.getCustomEmojiWidgetFactory(context);
+    final WidgetSpan duck = WidgetSpan(
       alignment: PlaceholderAlignment.middle,
-      child: CustomEmojiContainer(
-        emoji: '🚫',
-        style: style,
-        child: const Placeholder(),
+      child: customEmojiWidgetFactory.create(
+        context,
+        customEmojiId: FakeCustomEmoji.duck.id,
       ),
     );
     return Column(
@@ -39,16 +43,40 @@ class _Body extends StatelessWidget {
           TextSpan(
             children: <InlineSpan>[
               const TextSpan(text: 'It is custom emoji: '),
-              emoji,
-            ],
-          ),
-          style: style,
-        ),
-        Text.rich(
-          TextSpan(
-            children: <InlineSpan>[
-              emoji,
-              emoji,
+              duck,
+              const TextSpan(text: '\n'),
+              const TextSpan(text: 'It is emoji is slow loading: '),
+              WidgetSpan(
+                alignment: PlaceholderAlignment.middle,
+                child: customEmojiWidgetFactory.create(
+                  context,
+                  customEmojiId: FakeCustomEmoji.duckSlowLoading.id,
+                ),
+              ),
+              const TextSpan(text: '\n'),
+              const TextSpan(text: 'It is emoji is not loading: '),
+              WidgetSpan(
+                alignment: PlaceholderAlignment.middle,
+                child: customEmojiWidgetFactory.create(
+                  context,
+                  customEmojiId: FakeCustomEmoji.stuckLoading.id,
+                ),
+              ),
+              const TextSpan(text: '\n'),
+              WidgetSpan(
+                alignment: PlaceholderAlignment.middle,
+                child: customEmojiWidgetFactory.create(
+                  context,
+                  customEmojiId: FakeCustomEmoji.e.id,
+                ),
+              ),
+              const TextSpan(text: '\n'),
+              duck,
+              const TextSpan(text: 'DUCK'),
+              duck,
+              duck,
+              duck,
+              const TextSpan(text: 'DUCK'),
             ],
           ),
           style: style,

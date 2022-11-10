@@ -44,3 +44,5 @@ flutter:
   assets:
     - assets/messages/
     - assets/users/
+    - assets/sticker/emoji/
+    - assets/file/sticker/thumbnail/

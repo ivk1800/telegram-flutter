@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:rxdart/rxdart.dart';
@@ -17,7 +19,7 @@ class FileDownloader implements IFileDownloader {
   final ITdFunctionExecutor _functionExecutor;
 
   @override
-  Future<void> downloadFile(int fileId) {
+  Future<void> startDownloadFile(int fileId) {
     return _functionExecutor.send(
       td.DownloadFile(
         limit: 0,
@@ -27,6 +29,24 @@ class FileDownloader implements IFileDownloader {
         synchronous: false,
       ),
     );
+  }
+
+  @override
+  Future<File> downloadFile(int fileId) {
+    return _functionExecutor
+        .send<td.File>(
+      td.DownloadFile(
+        limit: 0,
+        offset: 0,
+        priority: 1,
+        fileId: fileId,
+        synchronous: true,
+      ),
+    )
+        .then((td.File value) {
+      assert(value.local.isDownloadingCompleted);
+      return File(value.local.path);
+    });
   }
 
   @override

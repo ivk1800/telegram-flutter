@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:showcase/src/di/showcase_component.dart';
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
-import 'package:showcase/src/showcase/custom_emoji_showcase_factory.dart';
+import 'package:showcase/src/showcase/custom_emoji/custom_emoji_showcase_factory.dart';
 import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 
 import 'avatar/avatar_showcase_factory.dart';

@@ -89,7 +89,7 @@ class _ImageWidgetState extends State<_ImageWidget> {
   void _initPhoto(int? photoId) {
     if (photoId != null) {
       final IFileDownloader fileDownloader = widget.fileDownloader
-        ..downloadFile(photoId);
+        ..startDownloadFile(photoId);
       _stream = fileDownloader
           .getFileDownloadStateStream(photoId)
           // todo refactor filter state, do not check Completed state

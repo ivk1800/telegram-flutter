@@ -22,4 +22,17 @@ class StickerDataSource {
     return _functionExecutor
         .send<td.StickerSet>(td.GetStickerSet(setId: setId));
   }
+
+  Future<td.Sticker> getCustomEmoji(int customEmojiId) {
+    return _functionExecutor
+        .send<td.Stickers>(
+      td.GetCustomEmojiStickers(
+        customEmojiIds: <int>[customEmojiId],
+      ),
+    )
+        .then((td.Stickers value) {
+      assert(value.stickers.length == 1);
+      return value.stickers.first;
+    });
+  }
 }

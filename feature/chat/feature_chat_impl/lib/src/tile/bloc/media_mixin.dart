@@ -21,7 +21,7 @@ mixin MediaMixin<Model extends BaseMessageTileModel> on MessageBloc<Model> {
 
   void download(int fileId) {
     _fileStreamSubscription?.cancel();
-    fileDownloader.downloadFile(fileId);
+    fileDownloader.startDownloadFile(fileId);
     _fileStreamSubscription = fileDownloader
         .getFileDownloadStateStream(fileId)
         .map((FileDownloadState fileState) {
