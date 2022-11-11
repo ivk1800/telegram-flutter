@@ -66,25 +66,44 @@ class GeneratorDelegate {
                 builder.type = refer('$delegateClass Function()');
               }),
             );
+
             builder.initializers.add(
-              // TODO build with classes
-              Code(
-                '''
-                super(
-          key: key,
-          child: child,
-          create: () {
-            final $delegateClass scope = create.call();
-            return _Delegate(scope, scope);
-          },
-        )
-''',
+              _buildScopeInitializer(
+                delegateClass: delegateClass,
+                delegateClassElement: delegateClassElement,
               ),
             );
           },
         ),
       );
     });
+  }
+
+  // TODO build with classes
+  Code _buildScopeInitializer({
+    required String delegateClass,
+    required ClassElement delegateClassElement,
+  }) {
+    final StringBuffer stringBuilder = StringBuffer();
+    stringBuilder.write('''
+super(
+key: key,
+child: child,
+create: () {
+        ''');
+
+    if (_isDisposable(delegateClassElement)) {
+      stringBuilder.write('''
+final $delegateClass scope = create.call();
+return _Delegate(scope, scope);
+        ''');
+    } else {
+      stringBuilder.write('''
+return _Delegate(create.call());
+        ''');
+    }
+    stringBuilder.write('},)');
+    return Code(stringBuilder.toString());
   }
 
   Class _buildScopeDelegateClass(ClassElement delegateClassElement) {
@@ -101,18 +120,10 @@ class GeneratorDelegate {
       for (final MethodElement method in visitor.methods) {
         builder.fields.add(_buildField(method));
       }
-      builder.fields.add(
-        Field(
-          (FieldBuilder builder) {
-            builder.modifier = FieldModifier.final$;
-            builder.type = refer(
-              'ScopeDisposer',
-              'package:core_arch_flutter/core_arch_flutter.dart',
-            );
-            builder.name = '_disposer';
-          },
-        ),
-      );
+      final bool isDisposable = _isDisposable(delegateClassElement);
+      if (isDisposable) {
+        builder.fields.add(_buildDisposerField());
+      }
       builder.fields.add(
         Field(
           (FieldBuilder builder) {
@@ -131,30 +142,51 @@ class GeneratorDelegate {
                 builder.name = '_delegate';
               }),
             );
-            builder.requiredParameters.add(
-              Parameter((ParameterBuilder builder) {
-                builder.toThis = true;
-                builder.name = '_disposer';
-              }),
-            );
+            if (isDisposable) {
+              builder.requiredParameters.add(_buildDisposerParameter());
+            }
           },
         ),
       );
-      builder.methods.add(
-        Method((MethodBuilder builder) {
-          builder.annotations.add(refer('override'));
-          builder.name = 'onDispose';
-          builder.returns = refer('void');
+      if (isDisposable) {
+        builder.methods.add(_buildOnDisposeMethod());
+      }
+    });
+  }
 
-          builder.body = Block.of(
-            <Code>[
-              Code(
-                '${_allocator.allocate(refer('unawaited', 'dart:async'))}(_disposer.dispose());',
-              ),
-              const Code('super.onDispose();'),
-            ],
-          );
-        }),
+  Field _buildDisposerField() {
+    return Field(
+      (FieldBuilder builder) {
+        builder.modifier = FieldModifier.final$;
+        builder.type = refer(
+          'ScopeDisposer',
+          'package:core_arch_flutter/core_arch_flutter.dart',
+        );
+        builder.name = '_disposer';
+      },
+    );
+  }
+
+  Parameter _buildDisposerParameter() {
+    return Parameter((ParameterBuilder builder) {
+      builder.toThis = true;
+      builder.name = '_disposer';
+    });
+  }
+
+  Method _buildOnDisposeMethod() {
+    return Method((MethodBuilder builder) {
+      builder.annotations.add(refer('override'));
+      builder.name = 'onDispose';
+      builder.returns = refer('void');
+
+      builder.body = Block.of(
+        <Code>[
+          Code(
+            '${_allocator.allocate(refer('unawaited', 'dart:async'))}(_disposer.dispose());',
+          ),
+          const Code('super.onDispose();'),
+        ],
       );
     });
   }
@@ -218,6 +250,12 @@ class GeneratorDelegate {
       // TODO void type not supported
       return _allocateTypeName(type as InterfaceType);
     }).join(',')}>';
+  }
+
+  bool _isDisposable(ClassElement element) {
+    return element.thisType.allSupertypes.any((InterfaceType interface) {
+      return interface.element2.displayName == 'ScopeDisposer';
+    });
   }
 }
 
