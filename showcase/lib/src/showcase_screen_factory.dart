@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:showcase/src/showcase_page.dart';
 
 import 'di/showcase_component.dart';
-import 'showcase/showcase_scope.dart';
+import 'showcase/showcase_scope_delegate.scope.dart';
 
 class ShowcaseScreenFactory {
   ShowcaseScreenFactory({

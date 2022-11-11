@@ -66,6 +66,8 @@ dependencies:
   localization_impl:
     path: ../localization_impl
   rxdart: 0.27.3
+  scope_generator_annotation:
+    path: ../scope_generator/scope_generator_annotation
   shared_models:
     path: ../shared/models
   split_view:
@@ -88,6 +90,8 @@ dev_dependencies:
   dependency_validator: 3.2.0
   freezed: 2.1.0+1
   jugger_generator: 3.1.0
+  scope_generator:
+    path: ../scope_generator/generator
   tg_lint_rules:
     path: ../tg_lint_rules
 

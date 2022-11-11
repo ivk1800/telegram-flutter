@@ -3,16 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:jugger/jugger.dart' as j;
 import 'package:localization_api/localization_api.dart';
 import 'package:showcase/showcase.dart';
-import 'package:showcase/src/showcase/auth_showcase_factory.dart';
-import 'package:showcase/src/showcase/avatar/avatar_showcase_factory.dart';
-import 'package:showcase/src/showcase/change_username_showcase_factory.dart';
-import 'package:showcase/src/showcase/chat_forum_screen_showcase_factory.dart';
-import 'package:showcase/src/showcase/create_new_channel_showcase_factory.dart';
-import 'package:showcase/src/showcase/custom_emoji/custom_emoji_showcase_factory.dart';
-import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/message/message_showcase_factory.dart';
-import 'package:showcase/src/showcase/message_wrap/message_wrap_showcase_factory.dart';
-import 'package:showcase/src/showcase/new_contact_showcase_factory.dart';
+import 'package:showcase/src/showcase/showcase_scope_delegate.dart';
 import 'package:showcase/src/showcase/widget/showcase_block_interaction_manager.dart';
 import 'package:tg_logger_api/tg_logger_api.dart';
 import 'package:tg_logger_impl/tg_logger_impl.dart';
@@ -24,32 +16,10 @@ import 'showcase_component_builder.dart';
   builder: IShowcaseComponentBuilder,
 )
 @j.singleton
-abstract class IShowcaseComponent {
+abstract class IShowcaseComponent implements IShowcaseScopeDelegate {
   IStringsProvider getStringsProvider();
 
-  ChangeUsernameShowcaseFactory getChangeUsernameShowcaseFactory();
-
-  NewContactShowcaseFactory getNewContactShowcaseFactory();
-
-  CreateNewChannelShowcaseFactory getCreateNewChannelShowcaseFactory();
-
-  AuthShowcaseFactory getAuthShowcaseFactory();
-
-  AvatarShowcaseFactory getAvatarShowcaseFactory();
-
-  ShowcaseBlockInteractionManager getShowcaseBlockInteractionManager();
-
   GlobalKey<NavigatorState> getNavigatorKey();
-
-  MessageShowcaseFactory getMessageShowcaseFactory();
-
-  MainScreenShowcaseFactory getMainScreenShowcaseFactory();
-
-  ChatForumScreenShowcaseFactory getChatForumScreenShowcaseFactory();
-
-  CustomEmojiShowcaseFactory getCustomEmojiShowcaseFactory();
-
-  MessageWrapShowcaseFactory getMessageWrapShowcaseFactory();
 }
 
 @j.module
