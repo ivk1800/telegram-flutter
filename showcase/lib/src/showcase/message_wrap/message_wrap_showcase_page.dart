@@ -33,6 +33,8 @@ class _Body extends StatelessWidget {
         SizedBox(height: 12),
         Example2(),
         SizedBox(height: 12),
+        Example10(),
+        SizedBox(height: 12),
         Example3(),
         SizedBox(height: 12),
         Example4(),
@@ -40,6 +42,14 @@ class _Body extends StatelessWidget {
         Example5(),
         SizedBox(height: 12),
         Example6(),
+        SizedBox(height: 12),
+        Example7(),
+        SizedBox(height: 12),
+        Example11(),
+        SizedBox(height: 12),
+        Example8(),
+        SizedBox(height: 12),
+        Example9(),
       ],
     );
   }
@@ -85,15 +95,40 @@ class Example2 extends StatelessWidget {
     return ColoredBox(
       color: Colors.grey,
       child: MessageWrap(
+        wrapGravity: WrapGravity.top,
         content: Text(
-          'The text style to apply to descendant [Text] widgets which do not have an explicit style',
+          '[Gravity Top] The text style to apply to descendant [Text] widgets which do not have an explicit style',
           style: DefaultTextStyle.of(context)
               .style
               .copyWith(backgroundColor: Colors.amber),
         ),
         shortInfo: Container(
           width: 150,
-          height: 16,
+          height: 4,
+          color: Colors.red,
+        ),
+      ),
+    );
+  }
+}
+
+class Example10 extends StatelessWidget {
+  const Example10({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.grey,
+      child: MessageWrap(
+        content: Text(
+          '[Gravity Top] The text style to apply to descendant [Text] widgets which do not have an explicit style',
+          style: DefaultTextStyle.of(context)
+              .style
+              .copyWith(backgroundColor: Colors.amber),
+        ),
+        shortInfo: Container(
+          width: 150,
+          height: 4,
           color: Colors.red,
         ),
       ),
@@ -134,7 +169,7 @@ class Example4 extends StatelessWidget {
           '🤯',
           style: DefaultTextStyle.of(context)
               .style
-              .copyWith(backgroundColor: Colors.amber),
+              .copyWith(backgroundColor: Colors.amber, fontSize: 30),
         ),
         shortInfo: Container(
           width: 150,
@@ -183,6 +218,126 @@ class Example6 extends StatelessWidget {
           width: 100,
           height: 16,
           color: Colors.red,
+        ),
+      ),
+    );
+  }
+}
+
+class Example7 extends StatelessWidget {
+  const Example7({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.grey,
+      child: MessageWrap(
+        content: Column(
+          children: <Widget>[
+            Container(
+              width: 50,
+              height: 50,
+              color: Colors.yellow,
+            ),
+            const Text('Gravity bottom'),
+            Text(
+              'Support column',
+              style: DefaultTextStyle.of(context)
+                  .style
+                  .copyWith(backgroundColor: Colors.amber, fontSize: 20),
+            )
+          ],
+        ),
+        shortInfo: Container(
+          width: 50,
+          height: 16,
+          color: Colors.red,
+        ),
+      ),
+    );
+  }
+}
+
+class Example11 extends StatelessWidget {
+  const Example11({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.grey,
+      child: MessageWrap(
+        wrapGravity: WrapGravity.top,
+        content: Column(
+          children: <Widget>[
+            Container(
+              width: 50,
+              height: 50,
+              color: Colors.yellow,
+            ),
+            const Text('Gravity top'),
+            Text(
+              'Support column',
+              style: DefaultTextStyle.of(context)
+                  .style
+                  .copyWith(backgroundColor: Colors.amber, fontSize: 20),
+            )
+          ],
+        ),
+        shortInfo: Container(
+          width: 50,
+          height: 16,
+          color: Colors.red,
+        ),
+      ),
+    );
+  }
+}
+
+class Example8 extends StatelessWidget {
+  const Example8({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.grey,
+      child: MessageWrap(
+        wrapGravity: WrapGravity.top,
+        content: Container(
+          width: 50,
+          height: 32,
+          color: Colors.blue,
+        ),
+        shortInfo: Container(
+          width: 150,
+          height: 16,
+          color: Colors.red,
+          child: const Text('with top gravity'),
+        ),
+      ),
+    );
+  }
+}
+
+class Example9 extends StatelessWidget {
+  const Example9({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Colors.grey,
+      child: MessageWrap(
+        wrapGravity: WrapGravity.top,
+        content: Text(
+          'TEXT',
+          style: DefaultTextStyle.of(context)
+              .style
+              .copyWith(backgroundColor: Colors.amber, fontSize: 30),
+        ),
+        shortInfo: Container(
+          width: 150,
+          height: 16,
+          color: Colors.red,
+          child: const Text('with top gravity'),
         ),
       ),
     );

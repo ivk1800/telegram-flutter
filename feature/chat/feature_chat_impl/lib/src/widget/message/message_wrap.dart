@@ -3,30 +3,24 @@ import 'dart:math';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-class MessageWrap extends StatelessWidget {
-  const MessageWrap({
+class MessageWrap extends MultiChildRenderObjectWidget {
+  MessageWrap({
     super.key,
-    required this.content,
-    required this.shortInfo,
-  });
+    required Widget content,
+    required Widget shortInfo,
+    this.wrapGravity = WrapGravity.bottom,
+  }) : super(children: <Widget>[content, shortInfo]);
 
-  final Widget content;
-  final Widget shortInfo;
-
-  @override
-  Widget build(BuildContext context) {
-    return _Body(
-      children: <Widget>[content, shortInfo],
-    );
-  }
-}
-
-class _Body extends MultiChildRenderObjectWidget {
-  _Body({super.children});
+  final WrapGravity wrapGravity;
 
   @override
   RenderObject createRenderObject(BuildContext context) {
-    return _BodyRenderBox();
+    return _BodyRenderBox(wrapGravity: wrapGravity);
+  }
+
+  @override
+  void updateRenderObject(BuildContext context, _BodyRenderBox renderObject) {
+    renderObject.wrapGravity = wrapGravity;
   }
 }
 
@@ -34,6 +28,21 @@ class _BodyRenderBox extends RenderBox
     with
         ContainerRenderObjectMixin<RenderBox, _ParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, _ParentData> {
+  _BodyRenderBox({
+    required WrapGravity wrapGravity,
+  }) : _wrapGravity = wrapGravity;
+
+  WrapGravity _wrapGravity;
+
+  // ignore: avoid_setters_without_getters
+  set wrapGravity(WrapGravity value) {
+    if (_wrapGravity == value) {
+      return;
+    }
+    _wrapGravity = value;
+    markNeedsLayout();
+  }
+
   @override
   void setupParentData(RenderBox child) {
     if (child.parentData is! _ParentData) {
@@ -52,9 +61,9 @@ class _BodyRenderBox extends RenderBox
     second.layout(constraints, parentUsesSize: true);
 
     final double verticalOffset = _calculateVerticalOffsetForSecond(
-      first,
-      second,
-      constraints.maxWidth,
+      first: first,
+      second: second,
+      maxWidth: constraints.maxWidth,
     );
     final double horizontalOffset = _calculateHorizontalOffsetForSecond(
       first,
@@ -103,16 +112,26 @@ class _BodyRenderBox extends RenderBox
     }
   }
 
-  double _calculateVerticalOffsetForSecond(
-    RenderBox first,
-    RenderBox second,
-    double maxWidth,
-  ) {
+  double _calculateVerticalOffsetForSecond({
+    required RenderBox first,
+    required RenderBox second,
+    required double maxWidth,
+  }) {
     if (first is RenderParagraph && first.textSize.width > 0) {
       return _calculateVerticalOffsetOfParagraph(first, second, maxWidth);
+    } else if (first is RenderFlex && first.childCount > 0) {
+      return _calculateVerticalOffsetForSecond(
+        first: first.lastChild!,
+        second: second,
+        maxWidth: maxWidth,
+      );
     } else {
       final double offsetY = first.size.width + second.size.width <= maxWidth
-          ? 0
+          ? _calculateVerticalOffsetByGravity(
+              firstDy: 0,
+              firstHeight: first.size.height,
+              secondHeight: second.size.height,
+            )
           : first.size.height;
       return offsetY;
     }
@@ -130,13 +149,37 @@ class _BodyRenderBox extends RenderBox
       ),
     );
     final TextBox lastBox = boxesForSelection.last;
+    final double dy = _getParentData(first).offset.dy;
     final double offsetY = lastBox.right + second.size.width > maxWidth
-        ? lastBox.bottom
-        : lastBox.top;
+        ? dy + lastBox.bottom
+        : _calculateVerticalOffsetByGravity(
+            firstDy: dy + lastBox.top,
+            firstHeight: lastBox.bottom - lastBox.top,
+            secondHeight: second.size.height,
+          );
     return offsetY;
   }
 
-  _ParentData _getParentData(RenderBox box) => box.parentData as _ParentData;
+  double _calculateVerticalOffsetByGravity({
+    required double firstDy,
+    required double firstHeight,
+    required double secondHeight,
+  }) {
+    switch (_wrapGravity) {
+      case WrapGravity.top:
+        return firstDy;
+      case WrapGravity.bottom:
+        return max(firstDy + firstHeight, secondHeight) - secondHeight;
+    }
+  }
+
+  ContainerBoxParentData<RenderBox> _getParentData(RenderBox box) =>
+      box.parentData as ContainerBoxParentData<RenderBox>;
+}
+
+enum WrapGravity {
+  top,
+  bottom,
 }
 
 class _ParentData extends ContainerBoxParentData<RenderBox> {}
