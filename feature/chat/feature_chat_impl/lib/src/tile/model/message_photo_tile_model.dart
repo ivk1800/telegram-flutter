@@ -10,11 +10,13 @@ class MessagePhotoTileModel extends BaseConversationMessageTileModel {
     required super.isOutgoing,
     required super.replyInfo,
     required super.additionalInfo,
+    required this.photoSize,
     required this.minithumbnail,
     required this.caption,
     required this.photoId,
   });
 
+  final Size photoSize;
   final Minithumbnail? minithumbnail;
   final RichText? caption;
   final int photoId;

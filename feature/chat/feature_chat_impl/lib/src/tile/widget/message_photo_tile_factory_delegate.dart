@@ -41,9 +41,8 @@ class MessagePhotoTileFactoryDelegate
             minithumbnail: model.minithumbnail,
             imageId: model.photoId,
           ),
-          // todo maybe crash
-          width: model.minithumbnail!.width,
-          height: model.minithumbnail!.height,
+          width: model.photoSize.width,
+          height: model.photoSize.height,
         ),
         if (model.caption != null)
           MessageCaption(

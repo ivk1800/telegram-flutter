@@ -6,6 +6,7 @@ import 'package:feature_chat_impl/src/resolver/formatted_text_resolver.dart';
 import 'package:feature_chat_impl/src/tile/model/tile_model.dart';
 import 'package:localization_api/localization_api.dart';
 import 'package:rich_text_format/rich_text_format.dart' as rt;
+import 'package:shared_models/shared_models.dart';
 import 'package:td_api/td_api.dart' as td;
 import 'package:tile/tile.dart';
 
@@ -334,6 +335,7 @@ class MessageTileMapper {
         );
       },
       messagePhoto: (td.MessagePhoto value) async {
+        final td.PhotoSize photoSize = value.photo.sizes.first;
         return MessagePhotoTileModel(
           id: message.id,
           senderInfo: await _senderInfoMapper.map(message.senderId),
@@ -343,7 +345,11 @@ class MessageTileMapper {
           isOutgoing: message.isOutgoing,
           caption: _formattedTextResolver.resolve(value.caption),
           // todo need preferred size for current screen resolution
-          photoId: value.photo.sizes.first.photo.id,
+          photoId: photoSize.photo.id,
+          photoSize: Size(
+            width: photoSize.width.toDouble(),
+            height: photoSize.height.toDouble(),
+          ),
         );
       },
       messagePinMessage: (td.MessagePinMessage value) {
