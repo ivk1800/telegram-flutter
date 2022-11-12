@@ -48,6 +48,7 @@ class BubbleRenderBox extends RenderProxyBoxWithHitTestBehavior {
 
   @override
   void paint(PaintingContext context, Offset offset) {
+    // TODO: call super instead
     if (child != null) {
       context.paintChild(child!, offset);
     }

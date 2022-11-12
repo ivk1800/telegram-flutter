@@ -40,4 +40,6 @@ abstract class IShowcaseScopeDelegate {
 
   CircularProgressWidgetShowcaseFactory
       getCircularProgressWidgetShowcaseFactory();
+
+  ImageWidgetShowcaseFactory getImageWidgetShowcaseFactory();
 }

@@ -8,9 +8,9 @@ class CircularProgressWidgetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Progress')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: const _Body(),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: _Body(),
       ),
     );
   }

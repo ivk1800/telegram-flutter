@@ -147,7 +147,7 @@ class _Thumbnail extends StatelessWidget {
       child: SizedBox(
         height: size,
         width: size,
-        child: MinithumbnailWidget(
+        child: Minithumbnail(
           minithumbnail: state.thumbnail,
         ),
       ),

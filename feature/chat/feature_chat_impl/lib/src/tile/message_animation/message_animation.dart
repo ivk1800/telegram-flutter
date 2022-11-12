@@ -8,7 +8,7 @@ import 'package:feature_chat_impl/src/widget/chat_message/chat_message.dart';
 import 'package:feature_chat_impl/src/widget/media_widget.dart';
 import 'package:feature_chat_impl/src/widget/message_composite_text.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_models/shared_models.dart';
+import 'package:shared_models/shared_models.dart' as shm;
 
 import 'message_animation_bloc.dart';
 
@@ -76,7 +76,7 @@ class _MediaBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final MessageAnimationBloc bloc = MessageAnimationScope.getBloc(context);
     final MessageAnimationTileModel model = bloc.model;
-    final Minithumbnail? minithumbnail = model.minithumbnail;
+    final shm.Minithumbnail? minithumbnail = model.minithumbnail;
 
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 200),
@@ -86,7 +86,7 @@ class _MediaBody extends StatelessWidget {
             constraints: const BoxConstraints.expand(),
             color: Colors.black,
             child: minithumbnail != null
-                ? MinithumbnailWidget(minithumbnail: minithumbnail)
+                ? Minithumbnail(minithumbnail: minithumbnail)
                 : null,
           );
         },

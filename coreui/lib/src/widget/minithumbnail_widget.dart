@@ -1,15 +1,15 @@
 import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
-import 'package:shared_models/shared_models.dart';
+import 'package:shared_models/shared_models.dart' as shm;
 
-class MinithumbnailWidget extends StatelessWidget {
-  const MinithumbnailWidget({
+class Minithumbnail extends StatelessWidget {
+  const Minithumbnail({
     super.key,
     required this.minithumbnail,
   });
 
-  final Minithumbnail minithumbnail;
+  final shm.Minithumbnail minithumbnail;
 
   @override
   Widget build(BuildContext context) {

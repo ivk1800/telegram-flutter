@@ -22,3 +22,4 @@ export 'src/fake_user_provider.dart';
 export 'src/fake_user_repository.dart';
 export 'src/fakes.dart';
 export 'src/tdlib/tdlib.dart';
+export 'src/utils.dart';
