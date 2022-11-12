@@ -1,9 +1,11 @@
 import 'package:scope_generator_annotation/scope_generator_annotation.dart';
+import 'package:showcase/src/showcase/image_widget/image_widget_showcase_factory.dart';
 
 import 'auth_showcase_factory.dart';
 import 'avatar/avatar_showcase_factory.dart';
 import 'change_username_showcase_factory.dart';
 import 'chat_forum_screen_showcase_factory.dart';
+import 'circular_progress/circular_progress_widget_showcase_factory.dart';
 import 'create_new_channel_showcase_factory.dart';
 import 'custom_emoji/custom_emoji_showcase_factory.dart';
 import 'main_screen_showcase_factory.dart';
@@ -35,4 +37,7 @@ abstract class IShowcaseScopeDelegate {
   CustomEmojiShowcaseFactory getCustomEmojiShowcaseFactory();
 
   MessageWrapShowcaseFactory getMessageWrapShowcaseFactory();
+
+  CircularProgressWidgetShowcaseFactory
+      getCircularProgressWidgetShowcaseFactory();
 }

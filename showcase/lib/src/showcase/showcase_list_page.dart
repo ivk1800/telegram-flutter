@@ -184,6 +184,20 @@ class _ShowcaseListPageState extends State<ShowcaseListPage> {
         );
       },
     ),
+    _ShowcaseData(
+      title: 'Circular progress widget',
+      routeCallback: (BuildContext context) {
+        final Widget widget =
+            ShowcaseScope.getCircularProgressWidgetShowcaseFactory(context)
+                .create(context);
+
+        SplitView.of(context).add(
+          key: UniqueKey(),
+          builder: (_) => widget,
+          container: ContainerType.right,
+        );
+      },
+    ),
   ];
 
   @override
