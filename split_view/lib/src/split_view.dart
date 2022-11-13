@@ -73,7 +73,7 @@ class SplitView extends StatefulWidget {
 
   static SplitViewState of(BuildContext context) {
     SplitViewState? navigator;
-    if (context is StatefulElement && context.state is NavigatorState) {
+    if (context is StatefulElement && context.state is SplitViewState) {
       navigator = context.state as SplitViewState;
     }
     navigator = navigator ?? context.findAncestorStateOfType<SplitViewState>();
