@@ -1,5 +1,5 @@
-import 'package:badges/badges.dart';
 import 'package:chat_theme/chat_theme.dart';
+import 'package:coreui/coreui.dart';
 import 'package:feature_chat_impl/src/widget/bubble/bubble.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:feature_chat_impl/src/widget/message/message_content.dart';
@@ -15,31 +15,15 @@ class ChatMessageFactory {
     required BuildContext context,
     required rt.RichText text,
   }) {
-    final TgThemeData tgTheme = TgTheme.of(context);
-    final ChatThemeData chatTheme = tgTheme.themeOf();
-
     return _Notification(
       // TODO wrap to DefaultTextStyle for custom emoji
-      child: Text.rich(
-        text.toInlineSpan(context),
-        textAlign: TextAlign.center,
-        style: tgTheme.textTheme.caption3.copyWith(
-          color: chatTheme.notificationTextColor,
-        ),
-      ),
+      text: text.toInlineSpan(context),
     );
   }
 
   // todo move to another class for message parts
   Widget createChatNotificationBubble({required InlineSpan span}) =>
-      _Notification(
-        child: Text.rich(
-          span,
-          textAlign: TextAlign.center,
-          // todo extract style
-          style: const TextStyle(color: Colors.white),
-        ),
-      );
+      _Notification(text: span);
 
   Widget createChatNotification({
     required int id,
@@ -171,25 +155,24 @@ class _Bubble extends StatelessWidget {
 }
 
 class _Notification extends StatelessWidget {
-  const _Notification({required this.child});
+  const _Notification({required this.text});
 
-  final Widget child;
+  final InlineSpan text;
 
   @override
   Widget build(BuildContext context) {
     final ChatThemeData chatTheme = TgTheme.of(context).themeOf();
 
-    return Align(
-      alignment: Alignment.topCenter,
-      child: Badge(
-        padding: const EdgeInsets.symmetric(horizontal: 7.0, vertical: 3.0),
-        borderRadius: BorderRadius.circular(15),
-        toAnimate: false,
-        animationType: BadgeAnimationType.scale,
-        shape: BadgeShape.square,
-        elevation: 0.0,
-        badgeContent: child,
-        badgeColor: chatTheme.notificationColor,
+    return TextBackground(
+      margin: 8,
+      backgroundColor: Colors.black26,
+      child: Text.rich(
+        text,
+        textAlign: TextAlign.center,
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: chatTheme.notificationTextColor),
       ),
     );
   }
