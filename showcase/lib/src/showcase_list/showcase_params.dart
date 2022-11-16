@@ -25,4 +25,6 @@ class ShowcaseParams with _$ShowcaseParams {
   const factory ShowcaseParams.splitView() = SplitView;
   const factory ShowcaseParams.chatMessages() = ChatMessages;
   const factory ShowcaseParams.chatCells() = ChatCells;
+
+  const factory ShowcaseParams.uiKitIcons() = UiKitIcons;
 }

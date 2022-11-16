@@ -12,6 +12,7 @@ import 'package:showcase/src/showcase/image_widget/image_widget_showcase_factory
 import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/message_wrap/message_wrap_showcase_factory.dart';
 import 'package:showcase/src/showcase/new_contact_showcase_factory.dart';
+import 'package:showcase/src/showcase/ui_kit/ui_kit_icons_showcase_factory.dart';
 import 'package:showcase/src/showcase_messages_list_page.dart';
 import 'package:showcase/src/showcase_split_view_page.dart';
 import 'package:split_view/split_view.dart';
@@ -38,6 +39,7 @@ class ShowcaseInfoResolver {
     required MessageWrapShowcaseFactory messageWrapShowcaseFactory,
     required CustomEmojiShowcaseFactory customEmojiShowcaseFactory,
     required AvatarShowcaseFactory avatarShowcaseFactory,
+    required UiKitIconsShowcaseFactory uiKitIconsShowcaseFactory,
   })  : _authShowcaseFactory = authShowcaseFactory,
         _createNewChannelShowcaseFactory = createNewChannelShowcaseFactory,
         _newContactShowcaseFactory = newContactShowcaseFactory,
@@ -50,6 +52,7 @@ class ShowcaseInfoResolver {
         _messageWrapShowcaseFactory = messageWrapShowcaseFactory,
         _customEmojiShowcaseFactory = customEmojiShowcaseFactory,
         _avatarShowcaseFactory = avatarShowcaseFactory,
+        _uiKitIconsShowcaseFactory = uiKitIconsShowcaseFactory,
         _showcaseListScreenFactory = showcaseListScreenFactory;
 
   final AuthShowcaseFactory _authShowcaseFactory;
@@ -65,6 +68,7 @@ class ShowcaseInfoResolver {
   final MessageWrapShowcaseFactory _messageWrapShowcaseFactory;
   final CustomEmojiShowcaseFactory _customEmojiShowcaseFactory;
   final AvatarShowcaseFactory _avatarShowcaseFactory;
+  final UiKitIconsShowcaseFactory _uiKitIconsShowcaseFactory;
 
   ShowcaseInfo resolve({
     required BuildContext context,
@@ -138,6 +142,15 @@ class ShowcaseInfoResolver {
                   ShowcaseTileModel(
                     title: 'Avatar',
                     params: ShowcaseParams.avatarWidget(),
+                  ),
+                ],
+              ),
+              const GroupTileModel(
+                title: 'UI Kit',
+                items: <ITileModel>[
+                  ShowcaseTileModel(
+                    title: 'Icons',
+                    params: ShowcaseParams.uiKitIcons(),
                   ),
                 ],
               ),
@@ -232,6 +245,12 @@ class ShowcaseInfoResolver {
       avatarWidget: (AvatarWidget value) {
         return ShowcaseInfo(
           widget: _avatarShowcaseFactory.create(context),
+          containerType: ContainerType.right,
+        );
+      },
+      uiKitIcons: (UiKitIcons value) {
+        return ShowcaseInfo(
+          widget: _uiKitIconsShowcaseFactory.create(context),
           containerType: ContainerType.right,
         );
       },

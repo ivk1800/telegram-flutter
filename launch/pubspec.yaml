@@ -16,4 +16,8 @@ dev_dependencies:
     path: ../tg_lint_rules
 
 flutter:
+  fonts:
+    - family: TgIcons
+      fonts:
+        - asset: ../tg_ui_kit/assets/tg_icons.ttf
   uses-material-design: true

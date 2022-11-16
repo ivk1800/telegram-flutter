@@ -80,6 +80,8 @@ dependencies:
     path: ../tg_logger_impl
   tg_theme:
     path: ../feature/theme/tg_theme
+  tg_ui_kit:
+    path: ../tg_ui_kit
   theme_manager_flutter:
     path: ../feature/theme/theme_manager_flutter
   tile:
