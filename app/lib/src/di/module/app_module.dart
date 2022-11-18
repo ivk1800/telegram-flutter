@@ -8,10 +8,12 @@ import 'package:app/src/navigation/navigation_router.dart';
 import 'package:app/src/navigation/split_navigation_router.dart';
 import 'package:app/src/tdlib/config_provider.dart';
 import 'package:app/src/widget/block_interaction_manager.dart';
+import 'package:app/src/widget/right_container_placeholder_factory.dart';
 import 'package:app_controller/app_controller.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:auth_manager_impl/auth_manager_impl.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
+import 'package:chat_kit/chat_kit.dart';
 import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:chat_manager_impl/chat_manager_impl.dart';
 import 'package:contacts_manager_api/contacts_manager_api.dart';
@@ -176,12 +178,21 @@ abstract class AppModule {
   @j.provides
   static IAppControllerRouter provideAppControllerRouter(
     FeatureProvider featureProvider,
+    ChatBackgroundManager chatBackgroundManager,
   ) =>
       AppControllerRouterImpl(
         navigationKey: TgApp.splitViewNavigatorKey,
         authScreenFactory: featureProvider.authFeatureApi.authScreenFactory,
         mainScreenFactory:
             featureProvider.mainScreenFeatureApi.mainScreenFactory,
+        placeholderFactory: RightContainerPlaceholderFactory(
+          chatBackgroundFactory: ChatBackgroundFactory(
+            // TODO: dispose BackgroundListenable
+            backgroundListenable: BackgroundListenable(
+              chatBackgroundManager: chatBackgroundManager,
+            ),
+          ),
+        ),
       );
 
   @applicationScope

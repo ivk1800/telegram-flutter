@@ -1,10 +1,8 @@
-import 'package:chat_theme/chat_theme.dart';
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:feature_chat_header_info_api/feature_chat_header_info_api.dart';
 import 'package:feature_chat_impl/src/screen/chat/chat_screen.dart';
 import 'package:feature_chat_impl/src/widget/chat_context.dart';
 import 'package:flutter/material.dart';
-import 'package:tg_theme/tg_theme.dart';
 
 import 'messages_bundle.dart';
 import 'messages_list.dart';
@@ -19,18 +17,23 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
-    return _ChatContextWrapper(
-      child: Scaffold(
-        backgroundColor:
-            TgTheme.of(context).themeOf<ChatThemeData>().backgroundColor,
-        appBar: const _AppBar(),
-        body: Column(
-          children: const <Widget>[
-            Expanded(child: _Body()),
-            _ActionsPanel(),
-          ],
-        ),
-      ),
+    return Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        ChatScreenScope.getChatBackgroundFactory(context).create(context),
+        _ChatContextWrapper(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: const _AppBar(),
+            body: Column(
+              children: const <Widget>[
+                Expanded(child: _Body()),
+                _ActionsPanel(),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }

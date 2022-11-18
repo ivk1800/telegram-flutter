@@ -1,5 +1,6 @@
 library feature_chat_impl;
 
+import 'package:chat_kit/chat_kit.dart';
 import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
@@ -39,6 +40,7 @@ class ChatFeatureDependencies {
     required this.errorTransformer,
     required this.optionsManager,
     required this.stickerRepository,
+    required this.chatBackgroundManager,
   });
 
   final IChatRepository chatRepository;
@@ -62,4 +64,5 @@ class ChatFeatureDependencies {
   final IErrorTransformer errorTransformer;
   final OptionsManager optionsManager;
   final IStickerRepository stickerRepository;
+  final ChatBackgroundManager chatBackgroundManager;
 }

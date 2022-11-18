@@ -1,3 +1,4 @@
+import 'package:app/src/widget/right_container_placeholder_factory.dart';
 import 'package:app_controller/app_controller.dart';
 import 'package:feature_auth_api/feature_auth_api.dart';
 import 'package:feature_main_screen_api/feature_main_screen_api.dart';
@@ -9,13 +10,16 @@ class AppControllerRouterImpl implements IAppControllerRouter {
     required GlobalKey<SplitViewState> navigationKey,
     required IMainScreenFactory mainScreenFactory,
     required IAuthScreenFactory authScreenFactory,
+    required RightContainerPlaceholderFactory placeholderFactory,
   })  : _navigationKey = navigationKey,
         _authScreenFactory = authScreenFactory,
+        _placeholderFactory = placeholderFactory,
         _mainScreenFactory = mainScreenFactory;
 
   final GlobalKey<SplitViewState> _navigationKey;
   final IMainScreenFactory _mainScreenFactory;
   final IAuthScreenFactory _authScreenFactory;
+  final RightContainerPlaceholderFactory _placeholderFactory;
 
   @override
   void toRoot() {
@@ -30,12 +34,7 @@ class AppControllerRouterImpl implements IAppControllerRouter {
       ..removeUntil(ContainerType.right, (_) => false)
       ..removeUntil(ContainerType.top, (_) => false)
       ..setRightContainerPlaceholder(
-        const Material(
-          child: Center(
-            // TODO extract to strings
-            child: Text('Select a chat to start messaging'),
-          ),
-        ),
+        Builder(builder: _placeholderFactory.create),
       )
       ..add(
         key: UniqueKey(),

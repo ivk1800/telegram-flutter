@@ -43,6 +43,15 @@ abstract class TdModule {
       );
 
   @applicationScope
+  @j.provides
+  static IAuthenticationStateProvider bindAuthenticationStateProvider(
+    IAuthenticationStateUpdatesProvider authenticationStateUpdatesProvider,
+  ) =>
+      AuthenticationStateProviderImpl(
+        authenticationStateUpdatesProvider: authenticationStateUpdatesProvider,
+      );
+
+  @applicationScope
   @j.binds
   IAuthenticationStateUpdatesProvider bindAuthenticationStateUpdatesProvider(
     UpdatesProvider impl,

@@ -9,6 +9,7 @@ import 'package:app/src/navigation/router/create_new_chat_router_impl.dart';
 import 'package:app/src/navigation/router/new_contact_router.dart';
 import 'package:auth_manager_api/auth_manager_api.dart';
 import 'package:block_interaction_api/block_interaction_api.dart';
+import 'package:chat_kit/chat_kit.dart';
 import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:contacts_manager_api/contacts_manager_api.dart';
 import 'package:core/core.dart';
@@ -180,6 +181,7 @@ abstract class FeatureModule {
     IErrorTransformer errorTransformer,
     OptionsManager optionsManager,
     IStickerRepository stickerRepository,
+    ChatBackgroundManager chatBackgroundManager,
   ) =>
       ChatFeatureDependencies(
         optionsManager: optionsManager,
@@ -208,6 +210,7 @@ abstract class FeatureModule {
         userRepository: userRepository,
         stringsProvider: stringsProvider,
         stickerRepository: stickerRepository,
+        chatBackgroundManager: chatBackgroundManager,
       );
 
   @j.provides

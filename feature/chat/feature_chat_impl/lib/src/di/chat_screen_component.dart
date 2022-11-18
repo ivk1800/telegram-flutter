@@ -1,5 +1,6 @@
 import 'package:chat_actions_panel/chat_actions_panel.dart';
 import 'package:chat_info/chat_info.dart';
+import 'package:chat_kit/chat_kit.dart';
 import 'package:chat_manager_api/chat_manager_api.dart';
 import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
@@ -299,4 +300,19 @@ abstract class ChatScreenModule {
   @j.singleton
   @chatIdQualifier
   static int provideChatId(ChatArgs args) => args.chatId;
+
+  @j.provides
+  @j.singleton
+  static ChatBackgroundFactory provideChatBackgroundFactory(
+    BackgroundListenable backgroundListenable,
+  ) =>
+      ChatBackgroundFactory(backgroundListenable: backgroundListenable);
+
+  @j.provides
+  @j.singleton
+  @j.disposable
+  static BackgroundListenable provideBackgroundListenable(
+    ChatBackgroundManager chatBackgroundManager,
+  ) =>
+      BackgroundListenable(chatBackgroundManager: chatBackgroundManager);
 }

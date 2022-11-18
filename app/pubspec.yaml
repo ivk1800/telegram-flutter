@@ -15,6 +15,8 @@ dependencies:
     path: ../block_interaction_api
   chat_forum_navigation_api:
     path: ../feature/chat/forum/chat_forum_navigation_api
+  chat_kit:
+    path: ../feature/chat/chat_kit
   chat_manager_api:
     path: ../feature/chat/chat_manager/chat_manager_api
   chat_manager_impl:
