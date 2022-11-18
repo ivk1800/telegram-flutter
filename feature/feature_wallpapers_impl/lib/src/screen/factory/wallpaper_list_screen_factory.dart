@@ -1,8 +1,8 @@
 import 'package:coreui/coreui.dart' as tg;
 import 'package:feature_wallpapers_api/feature_wallpapers_api.dart';
 import 'package:feature_wallpapers_impl/feature_wallpapers_impl.dart';
-import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_bloc.dart';
 import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_page.dart';
+import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_view_model.dart';
 import 'package:feature_wallpapers_impl/src/tile/model/model.dart';
 import 'package:feature_wallpapers_impl/src/tile/widget/background_wallpaper_tile_factory_delegate.dart';
 import 'package:feature_wallpapers_impl/src/tile/widget/bottom_group_tile_factory_delegate.dart';
@@ -43,8 +43,13 @@ class WallpapersListScreenFactory implements IWallpapersListScreenFactory {
                     fileDownloader: _dependencies.fileDownloader,
                   ),
                 ),
-                FillWallpaperTileModel:
-                    const FillWallpaperTileFactoryDelegate(),
+                FillWallpaperTileModel: FillWallpaperTileFactoryDelegate(
+                  onTap: (FillWallpaperTileModel model) {
+                    // TODO temporary
+                    _dependencies.chatBackgroundManager
+                        .setActiveBackground(model.backgroundId);
+                  },
+                ),
                 TopGroupTileModel: TopGroupTileFactoryDelegate(
                   localizationManager: _dependencies.localizationManager,
                 ),

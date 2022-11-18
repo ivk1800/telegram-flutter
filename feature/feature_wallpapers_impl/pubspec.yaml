@@ -9,6 +9,8 @@ dependencies:
   async: 2.8.2
   async_utils:
     path: ../../async_utils
+  chat_kit:
+    path: ../../feature/chat/chat_kit
   core_arch:
     path: ../../core_arch
   core_arch_flutter:

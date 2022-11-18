@@ -1,7 +1,7 @@
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:coreui/coreui.dart' as tg;
-import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_bloc.dart';
 import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_state.dart';
+import 'package:feature_wallpapers_impl/src/screen/wallpaper_list/wallpaper_list_view_model.dart';
 import 'package:feature_wallpapers_impl/src/tile/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -28,6 +28,7 @@ class WallpaperListViewModel extends BaseViewModel {
 
   @override
   void dispose() {
+    super.dispose();
     _stateSubject.close();
   }
 
@@ -72,6 +73,7 @@ class WallpaperListViewModel extends BaseViewModel {
                   final td.BackgroundTypeFill fill =
                       background.type as td.BackgroundTypeFill;
                   return FillWallpaperTileModel(
+                    backgroundId: background.id,
                     fill: fill.fill.toBackgroundFill(),
                   );
                 }

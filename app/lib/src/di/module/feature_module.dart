@@ -303,6 +303,7 @@ abstract class FeatureModule {
     ILocalizationManager localizationManager,
     IWallpapersFeatureRouter router,
     IConnectionStateProvider connectionStateProvider,
+    ChatBackgroundManager chatBackgroundManager,
   ) =>
       WallpapersFeatureDependencies(
         localizationManager: localizationManager,
@@ -310,6 +311,7 @@ abstract class FeatureModule {
         connectionStateProvider: connectionStateProvider,
         backgroundRepository: backgroundRepository,
         fileDownloader: fileDownloader,
+        chatBackgroundManager: chatBackgroundManager,
       );
 
   @j.provides

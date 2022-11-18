@@ -40,7 +40,14 @@ class _Delegate implements IChatBackgroundWidgetShowcaseScopeDelegate {
         case ChatBackgroundType.gradient:
           return const ChatBackground.gradient();
         case ChatBackgroundType.freeformGradient:
-          return const ChatBackground.freeformGradient();
+          return const ChatBackground.freeformGradient(
+            colors: <Color>[
+              Color(0xff8f6bb7),
+              Color(0xffd469a3),
+              Color(0xfff9c17b),
+              Color(0xfffbdea5),
+            ],
+          );
         case ChatBackgroundType.wallpaper:
           return const ChatBackground.wallpaper();
       }

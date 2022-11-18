@@ -1,5 +1,7 @@
 import 'package:chat_kit/chat_kit.dart';
+import 'package:coreui/coreui.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ChatBackgroundFactory {
@@ -13,30 +15,56 @@ class ChatBackgroundFactory {
     return ValueListenableBuilder<ChatBackground>(
       valueListenable: _backgroundListenable,
       builder: (BuildContext context, ChatBackground value, Widget? child) {
-        return ConstrainedBox(
-          constraints: const BoxConstraints.expand(),
-          child: value.map(
-            pattern: (_) {
-              return const Placeholder();
-            },
-            solid: (ColorBackground value) {
-              return ColoredBox(color: value.color);
-            },
-            gradient: (_) {
-              return const Placeholder();
-            },
-            freeformGradient: (_) {
-              return const Placeholder();
-            },
-            wallpaper: (_) {
-              return const Placeholder();
-            },
-            none: (NoneBackground value) {
-              return const Placeholder();
-            },
+        return AnimatedSwitcher(
+          switchOutCurve: const StaticCurve(),
+          duration: const Duration(milliseconds: 200),
+          child: _Background(
+            key: ValueKey<Object>(value),
+            value: value,
           ),
         );
       },
+    );
+  }
+}
+
+class _Background extends StatelessWidget {
+  const _Background({required this.value, super.key});
+
+  final ChatBackground value;
+
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: const BoxConstraints.expand(),
+      child: value.map(
+        pattern: (_) {
+          return const Placeholder();
+        },
+        solid: (ColorBackground value) {
+          return ColoredBox(color: value.color);
+        },
+        gradient: (_) {
+          return const Placeholder();
+        },
+        freeformGradient: (FreeformGradientBackground value) {
+          return DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: value.colors,
+              ),
+            ),
+          );
+        },
+        wallpaper: (_) {
+          return const Placeholder();
+        },
+        none: (NoneBackground value) {
+          return const Placeholder();
+        },
+      ),
     );
   }
 }
