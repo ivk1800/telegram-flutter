@@ -3,6 +3,8 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
 import 'package:showcase/src/showcase/avatar/avatar_showcase_factory.dart';
 import 'package:showcase/src/showcase/change_username_showcase_factory.dart';
+import 'package:showcase/src/showcase/chat_background/chat_background_type.dart';
+import 'package:showcase/src/showcase/chat_background/chat_background_widget_showcase_factory.dart';
 import 'package:showcase/src/showcase/chat_cell/chat_cell_showcase.dart';
 import 'package:showcase/src/showcase/chat_forum_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/circular_progress/circular_progress_widget_showcase_factory.dart';
@@ -40,6 +42,8 @@ class ShowcaseInfoResolver {
     required CustomEmojiShowcaseFactory customEmojiShowcaseFactory,
     required AvatarShowcaseFactory avatarShowcaseFactory,
     required UiKitIconsShowcaseFactory uiKitIconsShowcaseFactory,
+    required ChatBackgroundWidgetShowcaseFactory
+        chatBackgroundWidgetShowcaseFactory,
   })  : _authShowcaseFactory = authShowcaseFactory,
         _createNewChannelShowcaseFactory = createNewChannelShowcaseFactory,
         _newContactShowcaseFactory = newContactShowcaseFactory,
@@ -53,6 +57,8 @@ class ShowcaseInfoResolver {
         _customEmojiShowcaseFactory = customEmojiShowcaseFactory,
         _avatarShowcaseFactory = avatarShowcaseFactory,
         _uiKitIconsShowcaseFactory = uiKitIconsShowcaseFactory,
+        _chatBackgroundWidgetShowcaseFactory =
+            chatBackgroundWidgetShowcaseFactory,
         _showcaseListScreenFactory = showcaseListScreenFactory;
 
   final AuthShowcaseFactory _authShowcaseFactory;
@@ -69,6 +75,8 @@ class ShowcaseInfoResolver {
   final CustomEmojiShowcaseFactory _customEmojiShowcaseFactory;
   final AvatarShowcaseFactory _avatarShowcaseFactory;
   final UiKitIconsShowcaseFactory _uiKitIconsShowcaseFactory;
+  final ChatBackgroundWidgetShowcaseFactory
+      _chatBackgroundWidgetShowcaseFactory;
 
   ShowcaseInfo resolve({
     required BuildContext context,
@@ -116,14 +124,6 @@ class ShowcaseInfoResolver {
                 title: 'Widget',
                 items: <ITileModel>[
                   ShowcaseTileModel(
-                    title: 'Chat cells',
-                    params: ShowcaseParams.chatCells(),
-                  ),
-                  ShowcaseTileModel(
-                    title: 'Chat messages',
-                    params: ShowcaseParams.chatMessages(),
-                  ),
-                  ShowcaseTileModel(
                     title: 'Custom emoji',
                     params: ShowcaseParams.customEmojiWidget(),
                   ),
@@ -151,6 +151,54 @@ class ShowcaseInfoResolver {
                   ShowcaseTileModel(
                     title: 'Icons',
                     params: ShowcaseParams.uiKitIcons(),
+                  ),
+                ],
+              ),
+              const GroupTileModel(
+                title: 'Chat',
+                items: <ITileModel>[
+                  ShowcaseTileModel(
+                    title: 'Chat cells',
+                    params: ShowcaseParams.chatCells(),
+                  ),
+                  ShowcaseTileModel(
+                    title: 'Chat messages',
+                    params: ShowcaseParams.chatMessages(),
+                  ),
+                  GroupTileModel(
+                    title: 'Chat background',
+                    items: <ITileModel>[
+                      ShowcaseTileModel(
+                        title: 'solid',
+                        params: ShowcaseParams.chatBackground(
+                          type: ChatBackgroundType.solid,
+                        ),
+                      ),
+                      ShowcaseTileModel(
+                        title: 'pattern',
+                        params: ShowcaseParams.chatBackground(
+                          type: ChatBackgroundType.pattern,
+                        ),
+                      ),
+                      ShowcaseTileModel(
+                        title: 'wallpaper',
+                        params: ShowcaseParams.chatBackground(
+                          type: ChatBackgroundType.wallpaper,
+                        ),
+                      ),
+                      ShowcaseTileModel(
+                        title: 'gradient',
+                        params: ShowcaseParams.chatBackground(
+                          type: ChatBackgroundType.gradient,
+                        ),
+                      ),
+                      ShowcaseTileModel(
+                        title: 'freeformGradient',
+                        params: ShowcaseParams.chatBackground(
+                          type: ChatBackgroundType.freeformGradient,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -251,6 +299,15 @@ class ShowcaseInfoResolver {
       uiKitIcons: (UiKitIcons value) {
         return ShowcaseInfo(
           widget: _uiKitIconsShowcaseFactory.create(context),
+          containerType: ContainerType.right,
+        );
+      },
+      chatBackground: (ChatBackground value) {
+        return ShowcaseInfo(
+          widget: _chatBackgroundWidgetShowcaseFactory.create(
+            context,
+            type: value.type,
+          ),
           containerType: ContainerType.right,
         );
       },

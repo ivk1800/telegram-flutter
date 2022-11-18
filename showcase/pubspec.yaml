@@ -8,6 +8,8 @@ environment:
 dependencies:
   block_interaction_api:
     path: ../block_interaction_api
+  chat_kit:
+    path: ../feature/chat/chat_kit
   chat_theme:
     path: ../feature/chat/chat_theme
   core_arch:

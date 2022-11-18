@@ -11,4 +11,7 @@ class BackgroundRepositoryImpl implements IBackgroundRepository {
 
   @override
   Future<List<td.Background>> get backgrounds => _dataSource.backgrounds;
+
+  @override
+  Future<td.Background> getBackground(int id) => _dataSource.getBackground(id);
 }
