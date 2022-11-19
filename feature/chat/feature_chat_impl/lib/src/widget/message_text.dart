@@ -17,7 +17,7 @@ class MessageText extends StatelessWidget {
       // TODO wrap to DefaultTextStyle for custom emoji
       content: Text.rich(
         text.toInlineSpan(context),
-        style: TgTheme.of(context).textTheme.regular,
+        style: Theme.of(context).extension<TgTextTheme>()!.regular,
       ),
       shortInfo: Padding(
         padding: const EdgeInsets.only(left: 4),

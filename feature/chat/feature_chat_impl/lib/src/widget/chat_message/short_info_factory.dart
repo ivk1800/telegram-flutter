@@ -32,11 +32,12 @@ class ShortInfoFactory {
   ) {
     final TgThemeData theme = TgTheme.of(context);
     final ChatThemeData chatThemeData = theme.themeOf();
-    final TextStyle caption = theme.textTheme.caption.copyWith(
-      color: isOutgoing
-          ? chatThemeData.bubbleShortInfoOutgoingColor
-          : chatThemeData.bubbleShortInfoIncomingColor,
-    );
+    final TextStyle caption =
+        Theme.of(context).extension<TgTextTheme>()!.caption.copyWith(
+              color: isOutgoing
+                  ? chatThemeData.bubbleShortInfoOutgoingColor
+                  : chatThemeData.bubbleShortInfoIncomingColor,
+            );
     final double iconSize = caption.fontSize! * 1.4;
     return RichText(
       text: TextSpan(

@@ -15,7 +15,8 @@ class PatternBackgroundFileResolver {
     required File tgvFile,
   }) async {
     final Directory backgroundsDirectory = Directory(
-        '${(await getApplicationSupportDirectory()).path}/backgrounds');
+      '${(await getApplicationSupportDirectory()).path}/backgrounds',
+    );
     if (!backgroundsDirectory.existsSync()) {
       await backgroundsDirectory.create();
     }

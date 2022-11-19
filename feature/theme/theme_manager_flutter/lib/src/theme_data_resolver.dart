@@ -25,6 +25,7 @@ class ThemeDataResolver {
           ),
           extensions: <ThemeExtension<Object?>>[
             ChatCellTheme.light,
+            TgTextTheme.light(),
           ],
         );
       },

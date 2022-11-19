@@ -13,7 +13,7 @@ class SenderTitleFactory {
   ) {
     final String senderName = messageModel.senderInfo.senderName;
 
-    final TgThemeData theme = TgTheme.of(context);
+    final TgTextTheme textTheme = Theme.of(context).extension<TgTextTheme>()!;
     final ChatContextData chatContext = ChatContext.of(context);
 
     return Padding(
@@ -27,7 +27,7 @@ class SenderTitleFactory {
         senderName,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: theme.textTheme.subtitle3.copyWith(
+        style: textTheme.subtitle3.copyWith(
           // todo extract ext
           color: AvatarWidgetFactory.colors[
               (messageModel.senderInfo.id % AvatarWidgetFactory.colors.length)

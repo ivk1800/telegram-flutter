@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 @immutable
-class TgTextTheme {
+class TgTextTheme extends ThemeExtension<TgTextTheme> {
   const TgTextTheme({
     required this.title3,
     required this.title2,
@@ -111,4 +110,66 @@ class TgTextTheme {
   }
 
   static const Color _kTextColor = Color.fromARGB(255, 51, 51, 51);
+
+  @override
+  ThemeExtension<TgTextTheme> copyWith({
+    TextStyle? title3,
+    TextStyle? title2,
+    TextStyle? title,
+    TextStyle? headline3,
+    TextStyle? headline2,
+    TextStyle? headline,
+    TextStyle? regular,
+    TextStyle? subtitle2,
+    TextStyle? subtitle3,
+    TextStyle? subtitle,
+    TextStyle? caption3,
+    TextStyle? caption2,
+    TextStyle? caption,
+    TextStyle? captionMedium,
+  }) {
+    return TgTextTheme(
+      title: title ?? this.title,
+      caption2: caption2 ?? this.caption2,
+      caption3: caption3 ?? this.caption3,
+      caption: caption ?? this.caption,
+      captionMedium: captionMedium ?? this.captionMedium,
+      headline2: headline2 ?? this.headline2,
+      headline3: headline3 ?? this.headline3,
+      headline: headline ?? this.headline,
+      regular: regular ?? this.regular,
+      subtitle2: subtitle2 ?? this.subtitle2,
+      subtitle3: subtitle3 ?? this.subtitle3,
+      subtitle: subtitle ?? this.subtitle,
+      title2: title2 ?? this.title2,
+      title3: title3 ?? this.title3,
+    );
+  }
+
+  @override
+  ThemeExtension<TgTextTheme> lerp(
+    ThemeExtension<TgTextTheme>? other,
+    double t,
+  ) {
+    if (other is! TgTextTheme) {
+      return this;
+    }
+
+    return TgTextTheme(
+      title3: TextStyle.lerp(title3, other.title3, t)!,
+      title2: TextStyle.lerp(title2, other.title2, t)!,
+      subtitle: TextStyle.lerp(subtitle, other.subtitle, t)!,
+      subtitle3: TextStyle.lerp(subtitle3, other.subtitle3, t)!,
+      subtitle2: TextStyle.lerp(subtitle2, other.subtitle2, t)!,
+      regular: TextStyle.lerp(regular, other.regular, t)!,
+      headline: TextStyle.lerp(headline, other.headline, t)!,
+      headline3: TextStyle.lerp(headline3, other.headline3, t)!,
+      headline2: TextStyle.lerp(headline2, other.headline2, t)!,
+      captionMedium: TextStyle.lerp(captionMedium, other.captionMedium, t)!,
+      caption: TextStyle.lerp(caption, other.caption, t)!,
+      caption3: TextStyle.lerp(caption3, other.caption3, t)!,
+      caption2: TextStyle.lerp(caption2, other.caption2, t)!,
+      title: TextStyle.lerp(title, other.title, t)!,
+    );
+  }
 }
