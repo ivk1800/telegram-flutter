@@ -14,6 +14,7 @@ import 'package:showcase/src/showcase/image_widget/image_widget_showcase_factory
 import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/message_wrap/message_wrap_showcase_factory.dart';
 import 'package:showcase/src/showcase/new_contact_showcase_factory.dart';
+import 'package:showcase/src/showcase/settings_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/ui_kit/ui_kit_icons_showcase_factory.dart';
 import 'package:showcase/src/showcase_messages_list_page.dart';
 import 'package:showcase/src/showcase_split_view_page.dart';
@@ -44,6 +45,7 @@ class ShowcaseInfoResolver {
     required UiKitIconsShowcaseFactory uiKitIconsShowcaseFactory,
     required ChatBackgroundWidgetShowcaseFactory
         chatBackgroundWidgetShowcaseFactory,
+    required SettingsScreenShowcaseFactory settingsScreenShowcaseFactory,
   })  : _authShowcaseFactory = authShowcaseFactory,
         _createNewChannelShowcaseFactory = createNewChannelShowcaseFactory,
         _newContactShowcaseFactory = newContactShowcaseFactory,
@@ -59,6 +61,7 @@ class ShowcaseInfoResolver {
         _uiKitIconsShowcaseFactory = uiKitIconsShowcaseFactory,
         _chatBackgroundWidgetShowcaseFactory =
             chatBackgroundWidgetShowcaseFactory,
+        _settingsScreenShowcaseFactory = settingsScreenShowcaseFactory,
         _showcaseListScreenFactory = showcaseListScreenFactory;
 
   final AuthShowcaseFactory _authShowcaseFactory;
@@ -77,6 +80,7 @@ class ShowcaseInfoResolver {
   final UiKitIconsShowcaseFactory _uiKitIconsShowcaseFactory;
   final ChatBackgroundWidgetShowcaseFactory
       _chatBackgroundWidgetShowcaseFactory;
+  final SettingsScreenShowcaseFactory _settingsScreenShowcaseFactory;
 
   ShowcaseInfo resolve({
     required BuildContext context,
@@ -117,6 +121,10 @@ class ShowcaseInfoResolver {
                   ShowcaseTileModel(
                     title: 'Forum',
                     params: ShowcaseParams.forumScreen(),
+                  ),
+                  ShowcaseTileModel(
+                    title: 'Settings',
+                    params: ShowcaseParams.settingsScreen(),
                   ),
                 ],
               ),
@@ -309,6 +317,12 @@ class ShowcaseInfoResolver {
             type: value.type,
           ),
           containerType: ContainerType.right,
+        );
+      },
+      settingsScreen: (SettingsScreen value) {
+        return ShowcaseInfo(
+          widget: _settingsScreenShowcaseFactory.create(context),
+          containerType: ContainerType.top,
         );
       },
     );

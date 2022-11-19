@@ -21,6 +21,8 @@ class ShowcaseParams with _$ShowcaseParams {
 
   const factory ShowcaseParams.forumScreen() = ForumScreen;
 
+  const factory ShowcaseParams.settingsScreen() = SettingsScreen;
+
   const factory ShowcaseParams.imageWidget() = ImageWidget;
 
   const factory ShowcaseParams.circularProgressWidget() =
