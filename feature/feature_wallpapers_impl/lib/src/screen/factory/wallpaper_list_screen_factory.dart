@@ -42,6 +42,11 @@ class WallpapersListScreenFactory implements IWallpapersListScreenFactory {
                   imageWidgetFactory: tg.ImageWidgetFactory(
                     fileDownloader: _dependencies.fileDownloader,
                   ),
+                  onTap: (PatternWallpaperTileModel model) {
+                    // TODO temporary
+                    _dependencies.chatBackgroundManager
+                        .setActiveBackground(model.backgroundId);
+                  },
                 ),
                 FillWallpaperTileModel: FillWallpaperTileFactoryDelegate(
                   onTap: (FillWallpaperTileModel model) {

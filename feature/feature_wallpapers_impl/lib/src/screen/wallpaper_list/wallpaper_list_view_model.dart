@@ -64,6 +64,7 @@ class WallpaperListViewModel extends BaseViewModel {
                       background.type as td.BackgroundTypePattern;
                   final td.Document document = background.document!;
                   return PatternWallpaperTileModel(
+                    backgroundId: background.id,
                     thumbnailImageId: document.thumbnail!.file.id,
                     fill: fill.fill.toBackgroundFill(),
                   );

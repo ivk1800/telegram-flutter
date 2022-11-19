@@ -6,13 +6,18 @@ environment:
   flutter: ^3.0.0
 
 dependencies:
+  archive: 3.3.0
   core_tdlib_api:
     path: ../../../core_tdlib_api
   coreui:
     path: ../../../coreui
+  feature_file_api:
+    path: ../../../feature/feature_file_api
   flutter:
     sdk: flutter
+  flutter_svg: 1.0.3
   freezed_annotation: 2.1.0
+  path_provider: 2.0.9
   rxdart: 0.27.3
   shared_preferences: 2.0.15
 

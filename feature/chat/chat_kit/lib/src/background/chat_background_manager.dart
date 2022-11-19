@@ -1,12 +1,15 @@
 import 'dart:async';
-import 'dart:ui';
+import 'dart:io';
 
+import 'package:core/core.dart';
 import 'package:core_tdlib_api/core_tdlib_api.dart';
+import 'package:feature_file_api/feature_file_api.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:td_api/td_api.dart' as td;
 
 import 'active_background_storage.dart';
 import 'chat_background.dart';
+import 'pattern_background_file_resolver.dart';
 
 class ChatBackgroundManager {
   ChatBackgroundManager({
@@ -15,11 +18,15 @@ class ChatBackgroundManager {
     required IAuthenticationStateUpdatesProvider
         authenticationStateUpdatesProvider,
     required IAuthenticationStateProvider authenticationStateProvider,
+    required IFileDownloader fileDownloader,
+    required PatternBackgroundFileResolver patternBackgroundFileResolver,
   })  : _backgroundRepository = backgroundRepository,
         _authenticationStateUpdatesProvider =
             authenticationStateUpdatesProvider,
         _activeBackgroundStorage = activeBackgroundStorage,
-        _authenticationStateProvider = authenticationStateProvider {
+        _authenticationStateProvider = authenticationStateProvider,
+        _patternBackgroundFileResolver = patternBackgroundFileResolver,
+        _fileDownloader = fileDownloader {
     _init();
   }
 
@@ -34,6 +41,8 @@ class ChatBackgroundManager {
   final IBackgroundRepository _backgroundRepository;
   final ActiveBackgroundStorage _activeBackgroundStorage;
   final IAuthenticationStateProvider _authenticationStateProvider;
+  final IFileDownloader _fileDownloader;
+  final PatternBackgroundFileResolver _patternBackgroundFileResolver;
 
   ChatBackground get background => _backgroundSubject.value;
 
@@ -74,30 +83,20 @@ class ChatBackgroundManager {
         return _backgroundRepository.getBackground(id);
       }).doOnData((td.Background background) {
         _activeBackgroundStorage.value = background.id;
-      }).map((td.Background background) {
+      }).asyncMap((td.Background background) async {
         return background.type.map(
           wallpaper: (_) {
-            return const ChatBackground.none();
+            return Future<ChatBackground>.value(const ChatBackground.none());
           },
-          pattern: (_) {
-            return const ChatBackground.none();
+          pattern: (td.BackgroundTypePattern value) {
+            return _mapPatternToBackground(
+              background: background,
+              pattern: value,
+            );
           },
           fill: (td.BackgroundTypeFill value) {
-            return value.fill.map(
-              solid: (td.BackgroundFillSolid value) {
-                return ChatBackground.solid(
-                  color: _rgb24ToColor(value.color),
-                );
-              },
-              gradient: (_) {
-                return const ChatBackground.none();
-              },
-              freeformGradient: (td.BackgroundFillFreeformGradient value) {
-                return ChatBackground.freeformGradient(
-                  colors:
-                      value.colors.map(_rgb24ToColor).toList(growable: false),
-                );
-              },
+            return Future<ChatBackground>.value(
+              _mapFillToBackground(value.fill),
             );
           },
         );
@@ -105,11 +104,44 @@ class ChatBackgroundManager {
     }).listen(_backgroundSubject.add);
   }
 
-  Color _rgb24ToColor(int color) {
-    final int red = (color >> 16) & 255;
-    final int green = (color >> 8) & 255;
-    final int blue = color & 255;
-    return Color.fromARGB(255, red, green, blue);
+  Future<ChatBackground> _mapPatternToBackground({
+    required td.Background background,
+    required td.BackgroundTypePattern pattern,
+  }) async {
+    final td.Document? document = background.document;
+    assert(document != null);
+    if (document!.mimeType == 'application/x-tgwallpattern') {
+      final File tgvFile =
+          await _fileDownloader.downloadFile(document.document.id);
+      final File pngFile = await _patternBackgroundFileResolver.resolve(
+        backgroundId: background.id,
+        tgvFile: tgvFile,
+      );
+      return ChatBackground.pattern(file: pngFile);
+    } else {
+      // TODO support png
+      return const ChatBackground.none();
+    }
+  }
+
+  ChatBackground _mapFillToBackground(td.BackgroundFill fill) {
+    return fill.map(
+      solid: (td.BackgroundFillSolid value) {
+        return ChatBackground.solid(
+          color: value.color.toColor(),
+        );
+      },
+      gradient: (_) {
+        return const ChatBackground.none();
+      },
+      freeformGradient: (td.BackgroundFillFreeformGradient value) {
+        return ChatBackground.freeformGradient(
+          colors: value.colors.map((int color) => color.toColor()).toList(
+                growable: false,
+              ),
+        );
+      },
+    );
   }
 
   void dispose() {

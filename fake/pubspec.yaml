@@ -48,3 +48,4 @@ flutter:
     - assets/users/
     - assets/sticker/emoji/
     - assets/file/sticker/thumbnail/
+    - assets/file/background/

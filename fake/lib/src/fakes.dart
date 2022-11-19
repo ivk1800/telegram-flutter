@@ -102,3 +102,47 @@ td.Chat createFakeChat({
     canBeDeletedOnlyForSelf: false,
   );
 }
+
+td.Background createBackground() {
+  return td.Background(
+    id: 0,
+    isDark: false,
+    isDefault: false,
+    name: '',
+    type: const td.BackgroundTypeFill(
+      fill: td.BackgroundFillSolid(
+        color: 0,
+      ),
+    ),
+    document: createDocument(),
+  );
+}
+
+td.Document createDocument() {
+  return const td.Document(
+    fileName: '',
+    mimeType: '',
+    document: td.File(
+      id: 0,
+      size: 0,
+      expectedSize: 0,
+      local: td.LocalFile(
+        canBeDeleted: false,
+        canBeDownloaded: false,
+        downloadedPrefixSize: 0,
+        downloadedSize: 0,
+        downloadOffset: 0,
+        isDownloadingActive: false,
+        isDownloadingCompleted: false,
+        path: '',
+      ),
+      remote: td.RemoteFile(
+        id: '',
+        isUploadingActive: false,
+        isUploadingCompleted: false,
+        uniqueId: '',
+        uploadedSize: 0,
+      ),
+    ),
+  );
+}

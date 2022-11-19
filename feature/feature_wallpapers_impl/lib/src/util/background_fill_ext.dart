@@ -1,7 +1,7 @@
+import 'package:core/core.dart';
 import 'package:td_api/td_api.dart' as td;
 
 import 'background_fill.dart';
-import 'color_rgb24_ext.dart';
 
 extension BackgroundFillExt on td.BackgroundFill {
   // todo refactor

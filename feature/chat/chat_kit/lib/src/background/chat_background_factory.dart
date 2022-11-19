@@ -2,7 +2,6 @@ import 'package:chat_kit/chat_kit.dart';
 import 'package:coreui/coreui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ChatBackgroundFactory {
   ChatBackgroundFactory({
@@ -38,8 +37,18 @@ class _Background extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints.expand(),
       child: value.map(
-        pattern: (_) {
-          return const Placeholder();
+        pattern: (PatternBackground value) {
+          return DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.lightGreen,
+              image: DecorationImage(
+                colorFilter:
+                    const ColorFilter.mode(Colors.black26, BlendMode.srcIn),
+                repeat: ImageRepeat.repeat,
+                image: FileImage(value.file),
+              ),
+            ),
+          );
         },
         solid: (ColorBackground value) {
           return ColoredBox(color: value.color);

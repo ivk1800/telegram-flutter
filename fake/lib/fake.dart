@@ -1,6 +1,7 @@
 library fake;
 
 export 'src/auth_mananger/fake_authentication_manager.dart';
+export 'src/fake_background_repository.dart';
 export 'src/fake_basic_group_repository.dart';
 export 'src/fake_chat_background_manager.dart';
 export 'src/fake_chat_filter_repository.dart';

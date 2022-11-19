@@ -8,14 +8,20 @@ class PatternWallpaperTileFactoryDelegate
     implements ITileFactoryDelegate<PatternWallpaperTileModel> {
   const PatternWallpaperTileFactoryDelegate({
     required ImageWidgetFactory imageWidgetFactory,
-  }) : _imageWidgetFactory = imageWidgetFactory;
+    required void Function(PatternWallpaperTileModel model) onTap,
+  })  : _imageWidgetFactory = imageWidgetFactory,
+        _onTap = onTap;
 
   final ImageWidgetFactory _imageWidgetFactory;
+
+  final void Function(PatternWallpaperTileModel model) _onTap;
 
   @override
   Widget create(BuildContext context, PatternWallpaperTileModel model) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        _onTap.call(model);
+      },
       child: _imageWidgetFactory.create(
         context,
         imageId: model.thumbnailImageId,

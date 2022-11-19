@@ -23,6 +23,7 @@ class ConnectivityDelegate {
         .distinct()
         .listen((ConnectivityStatus status) {
       _functionExecutor.send(td.SetNetworkType(type: status.toNetworkType()));
+      // _functionExecutor.send(const td.SetNetworkType(type: td.NetworkTypeNone()));
     });
   }
 

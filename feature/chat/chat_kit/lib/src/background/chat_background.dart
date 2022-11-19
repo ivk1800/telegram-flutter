@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,7 +10,9 @@ part 'chat_background.freezed.dart';
 class ChatBackground with _$ChatBackground {
   const factory ChatBackground.none() = NoneBackground;
 
-  const factory ChatBackground.pattern() = PatternBackground;
+  const factory ChatBackground.pattern({
+    required File file,
+  }) = PatternBackground;
 
   const factory ChatBackground.solid({required Color color}) = ColorBackground;
 
