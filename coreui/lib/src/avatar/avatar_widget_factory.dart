@@ -25,20 +25,20 @@ class AvatarWidgetFactory {
     Color(0xfff2749a),
   ];
 
-  // todo rename chatId to some another name
   Widget create(
     BuildContext context, {
     required Avatar avatar,
-    double radius = 20,
-    BorderRadius borderRadius = const BorderRadius.all(
-      Radius.circular(kDefaultBorderRadius),
-    ),
+    double? radius,
+    BorderRadius? borderRadius,
   }) {
     return AvatarScope(
       child: AvatarWidget(
-        radius: radius,
+        radius: radius ?? 20,
         avatar: avatar,
-        borderRadius: borderRadius,
+        borderRadius: borderRadius ??
+            const BorderRadius.all(
+              Radius.circular(kDefaultBorderRadius),
+            ),
       ),
       create: () {
         return AvatarViewModel(
