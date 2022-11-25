@@ -57,7 +57,7 @@ class MessageMapperComponent {
       messageReplyInfoMapper: messageReplyInfoMapper,
       additionalInfoMapper: additionalInfoMapper,
       userRepository: _dependencies.userRepository,
-      dateParser: DateParser(),
+      dateParser: const DateParser(),
       stringsProvider: _dependencies.stringsProvider,
       formattedTextResolver: FormattedTextResolver(
         parser: const Parser(),

@@ -6,6 +6,8 @@ import 'package:td_api/td_api.dart' as td;
 import 'fakes.dart';
 
 class FakeChatRepository implements IChatRepository {
+  const FakeChatRepository();
+
   @override
   Future<td.Chat> getChat(int id) async {
     return createFakeChat();

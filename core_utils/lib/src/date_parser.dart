@@ -1,5 +1,5 @@
 class DateParser {
-  DateParser();
+  const DateParser();
 
   DateTime parseUnixTimeStampToDate(int timestamp) =>
       DateTime.fromMillisecondsSinceEpoch(

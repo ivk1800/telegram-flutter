@@ -38,6 +38,8 @@ dependencies:
     path: ../feature/user/feature_change_username_impl
   feature_chat_forum_impl:
     path: ../feature/chat/forum/feature_chat_forum_impl
+  feature_chat_header_info_api:
+    path: ../feature/feature_chat_header_info_api
   feature_chat_impl:
     path: ../feature/chat/feature_chat_impl
   feature_chats_list_impl:

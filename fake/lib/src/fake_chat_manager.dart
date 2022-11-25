@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:chat_manager_api/chat_manager_api.dart';
 
 class FakeChatManager implements IChatManager {
-  FakeChatManager({this.createChannelFunction});
+  const FakeChatManager({this.createChannelFunction});
 
   final Future<int> Function(String name, String description)?
       createChannelFunction;

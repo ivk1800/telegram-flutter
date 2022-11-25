@@ -11,6 +11,7 @@ import 'mode.dart';
 import 'preview_delegate.dart';
 import 'reply_preview_delegate.dart';
 
+// TODO: move to chat-kit module
 class MessagePreviewResolver implements IMessagePreviewResolver {
   MessagePreviewResolver({
     required Mode mode,

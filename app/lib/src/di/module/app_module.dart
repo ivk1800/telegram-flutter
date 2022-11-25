@@ -82,7 +82,7 @@ abstract class AppModule {
 
   @applicationScope
   @j.provides
-  static DateParser provideDateParser() => DateParser();
+  static DateParser provideDateParser() => const DateParser();
 
   @applicationScope
   @j.binds

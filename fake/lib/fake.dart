@@ -11,6 +11,7 @@ export 'src/fake_chat_repository.dart';
 export 'src/fake_chats_list_screen_factory.dart';
 export 'src/fake_contacts_manager.dart';
 export 'src/fake_error_transformer.dart';
+export 'src/fake_feature_message_preview_resolver.dart';
 export 'src/fake_file_downloader.dart';
 export 'src/fake_file_repository.dart';
 export 'src/fake_function_executor.dart';

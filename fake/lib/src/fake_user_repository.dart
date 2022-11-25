@@ -7,21 +7,21 @@ import 'package:username_generator/username_generator.dart';
 import 'fake_user_provider.dart';
 
 class FakeUserRepository implements IUserRepository {
-  FakeUserRepository({required this.fakeUserProvider});
+  FakeUserRepository({this.fakeUserProvider});
 
-  final FakeUserProvider fakeUserProvider;
+  final FakeUserProvider? fakeUserProvider;
 
   final UsernameGenerator generator = UsernameGenerator();
 
   @override
-  Future<td.User> getUser(int id) {
-    return fakeUserProvider.getFakeUser().then((td.User value) {
-      return value.copyWith(
-        firstName: generator.generateRandom(),
-        lastName: '',
-      );
-    });
-  }
+  Future<td.User> getUser(int id) =>
+      fakeUserProvider?.getFakeUser().then((td.User value) {
+        return value.copyWith(
+          firstName: generator.generateRandom(),
+          lastName: '',
+        );
+      }) ??
+      Completer<td.User>().future;
 
   @override
   Future<td.UserFullInfo> getUserFullInfo(int id) =>

@@ -119,7 +119,8 @@ abstract class MessageShowcaseModule {
 
   @j.provides
   @j.singleton
-  static IChatRepository provideChatRepository() => fake.FakeChatRepository();
+  static IChatRepository provideChatRepository() =>
+      const fake.FakeChatRepository();
 
   @j.provides
   @j.singleton
@@ -144,7 +145,7 @@ abstract class MessageShowcaseModule {
   ) =>
       MessageMapperComponent(
         dependencies: MessageMapperDependencies(
-          dateParser: DateParser(),
+          dateParser: const DateParser(),
           chatMessageRepository: chatMessageRepository,
           chatRepository: chatRepository,
           userRepository: userRepository,

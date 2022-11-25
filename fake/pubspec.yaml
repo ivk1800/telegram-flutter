@@ -26,6 +26,8 @@ dependencies:
     path: ../feature/feature_file_api
   feature_global_search_api:
     path: ../feature/feature_global_search_api
+  feature_message_preview_resolver:
+    path: ../feature/feature_message_preview_resolver
   feature_settings_search_api:
     path: ../feature/feature_settings_search_api
   flutter:

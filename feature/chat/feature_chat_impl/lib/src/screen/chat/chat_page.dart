@@ -102,9 +102,16 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final ChatActionBarViewModel viewModel =
         ChatScreenScope.getChatActionBarModel(context);
-    return StreamListener<HeaderState>(
+    return StreamBuilder<HeaderState>(
       stream: viewModel.headerStateStream,
-      builder: (BuildContext context, HeaderState data) {
+      builder: (BuildContext context, AsyncSnapshot<HeaderState> data) {
+        final HeaderState? state = data.data;
+
+        // TODO: temporary, fix stuck
+        if (state == null) {
+          return AppBar();
+        }
+
         final IChatHeaderInfoFactory chatHeaderInfoFactory =
             ChatScreenScope.getChatHeaderInfoFactory(context);
         return AppBar(
@@ -112,12 +119,12 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
           // todo wrap to builder?
           title: chatHeaderInfoFactory.create(
             context: context,
-            info: data.info,
+            info: state.info,
             onProfileTap: viewModel.onOpenSelfProfileTap,
           ),
           actions: <Widget>[
             _AppBarPopupMenu(
-              actions: data.actions,
+              actions: state.actions,
               onSelected: viewModel.onHeaderActionTap,
             ),
           ],

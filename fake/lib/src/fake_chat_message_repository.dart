@@ -4,11 +4,9 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:td_api/td_api.dart' as td;
 
 class FakeChatMessageRepository implements IChatMessageRepository {
-  FakeChatMessageRepository({
-    required this.fakeMessages,
-  });
+  const FakeChatMessageRepository({this.fakeMessages});
 
-  final List<td.Message> fakeMessages;
+  final List<td.Message>? fakeMessages;
 
   @override
   Future<List<td.Message>> getMessages({
@@ -16,9 +14,11 @@ class FakeChatMessageRepository implements IChatMessageRepository {
     required int fromMessageId,
     required int limit,
   }) async {
-    List<td.Message> messages = fakeMessages.take(limit).toList();
+    List<td.Message> messages =
+        fakeMessages?.take(limit).toList() ?? <td.Message>[];
 
-    messages += fakeMessages.take(limit - messages.length).toList();
+    messages +=
+        fakeMessages?.take(limit - messages.length).toList() ?? <td.Message>[];
 
     return messages;
   }
@@ -28,7 +28,7 @@ class FakeChatMessageRepository implements IChatMessageRepository {
     required int chatId,
     required int messageId,
   }) async {
-    return fakeMessages.first;
+    return fakeMessages?.first ?? (await Completer<td.Message?>().future);
   }
 
   @override

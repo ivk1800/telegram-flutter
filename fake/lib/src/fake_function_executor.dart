@@ -4,9 +4,9 @@ import 'package:core_tdlib_api/core_tdlib_api.dart';
 import 'package:td_api/td_api.dart' as td;
 
 class FakeTdFunctionExecutor implements ITdFunctionExecutor {
-  FakeTdFunctionExecutor({required this.resultFactory});
+  const FakeTdFunctionExecutor({this.resultFactory});
 
-  Future<td.TdObject> Function(td.TdFunction object) resultFactory;
+  final Future<td.TdObject> Function(td.TdFunction object)? resultFactory;
 
   @override
   T execute<T extends td.TdObject>(td.TdFunction object) {
@@ -15,7 +15,8 @@ class FakeTdFunctionExecutor implements ITdFunctionExecutor {
 
   @override
   Future<T> send<T extends td.TdObject>(td.TdFunction object) async {
-    final td.TdObject tdObject = await resultFactory.call(object);
+    final td.TdObject tdObject =
+        await (resultFactory?.call(object) ?? Completer<td.TdObject>().future);
     return tdObject as T;
   }
 }

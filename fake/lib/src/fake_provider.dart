@@ -6,7 +6,7 @@ import 'package:td_api/td_api.dart' as td;
 
 class FakeProvider {
   IChatRepository getChatRepository() {
-    return fake.FakeChatRepository();
+    return const fake.FakeChatRepository();
   }
 
   ILocalizationManager getLocalizationManager() {
@@ -14,11 +14,11 @@ class FakeProvider {
   }
 
   IBasicGroupRepository getBasicGroupRepository() {
-    return fake.FakeBasicGroupRepository();
+    return const fake.FakeBasicGroupRepository();
   }
 
   ISuperGroupRepository getSuperGroupRepository() {
-    return fake.FakeSuperGroupRepository();
+    return const fake.FakeSuperGroupRepository();
   }
 
   IUserRepository getUserRepository() {
@@ -36,6 +36,6 @@ class FakeProvider {
   }
 
   IChatMessageRepository getChatMessageRepository() {
-    return fake.FakeChatMessageRepository(fakeMessages: <td.Message>[]);
+    return const fake.FakeChatMessageRepository(fakeMessages: <td.Message>[]);
   }
 }

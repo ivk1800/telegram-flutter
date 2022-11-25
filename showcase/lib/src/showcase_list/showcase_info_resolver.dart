@@ -3,6 +3,8 @@ import 'package:jugger/jugger.dart' as j;
 import 'package:showcase/src/showcase/auth_showcase_factory.dart';
 import 'package:showcase/src/showcase/avatar/avatar_showcase_factory.dart';
 import 'package:showcase/src/showcase/change_username_showcase_factory.dart';
+import 'package:showcase/src/showcase/chat/chat_screen_showcase_factory.dart';
+import 'package:showcase/src/showcase/chat/showcase_chat_type.dart';
 import 'package:showcase/src/showcase/chat_background/chat_background_type.dart';
 import 'package:showcase/src/showcase/chat_background/chat_background_widget_showcase_factory.dart';
 import 'package:showcase/src/showcase/chat_cell/chat_cell_showcase.dart';
@@ -46,6 +48,7 @@ class ShowcaseInfoResolver {
     required ChatBackgroundWidgetShowcaseFactory
         chatBackgroundWidgetShowcaseFactory,
     required SettingsScreenShowcaseFactory settingsScreenShowcaseFactory,
+    required ChatScreenShowcaseFactory chatScreenShowcaseFactory,
   })  : _authShowcaseFactory = authShowcaseFactory,
         _createNewChannelShowcaseFactory = createNewChannelShowcaseFactory,
         _newContactShowcaseFactory = newContactShowcaseFactory,
@@ -62,6 +65,7 @@ class ShowcaseInfoResolver {
         _chatBackgroundWidgetShowcaseFactory =
             chatBackgroundWidgetShowcaseFactory,
         _settingsScreenShowcaseFactory = settingsScreenShowcaseFactory,
+        _chatScreenShowcaseFactory = chatScreenShowcaseFactory,
         _showcaseListScreenFactory = showcaseListScreenFactory;
 
   final AuthShowcaseFactory _authShowcaseFactory;
@@ -81,6 +85,7 @@ class ShowcaseInfoResolver {
   final ChatBackgroundWidgetShowcaseFactory
       _chatBackgroundWidgetShowcaseFactory;
   final SettingsScreenShowcaseFactory _settingsScreenShowcaseFactory;
+  final ChatScreenShowcaseFactory _chatScreenShowcaseFactory;
 
   ShowcaseInfo resolve({
     required BuildContext context,
@@ -95,6 +100,17 @@ class ShowcaseInfoResolver {
               const GroupTileModel(
                 title: 'Screen',
                 items: <ITileModel>[
+                  GroupTileModel(
+                    title: 'Chat',
+                    items: <ITileModel>[
+                      ShowcaseTileModel(
+                        title: 'simple',
+                        params: ShowcaseParams.chatScreen(
+                          type: ShowcaseChatType.simple,
+                        ),
+                      ),
+                    ],
+                  ),
                   ShowcaseTileModel(
                     title: 'Auth',
                     description: 'phone: 7-111-111-11-11, code: 11111',
@@ -323,6 +339,12 @@ class ShowcaseInfoResolver {
         return ShowcaseInfo(
           widget: _settingsScreenShowcaseFactory.create(context),
           containerType: ContainerType.top,
+        );
+      },
+      chatScreen: (ChatScreen value) {
+        return ShowcaseInfo(
+          widget: _chatScreenShowcaseFactory.create(context, value.type),
+          containerType: ContainerType.right,
         );
       },
     );

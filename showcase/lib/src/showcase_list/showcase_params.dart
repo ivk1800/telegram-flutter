@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:showcase/src/showcase/chat/showcase_chat_type.dart';
 import 'package:showcase/src/showcase/chat_background/chat_background_type.dart';
 
 part 'showcase_params.freezed.dart';
@@ -22,6 +23,10 @@ class ShowcaseParams with _$ShowcaseParams {
   const factory ShowcaseParams.forumScreen() = ForumScreen;
 
   const factory ShowcaseParams.settingsScreen() = SettingsScreen;
+
+  const factory ShowcaseParams.chatScreen({
+    required ShowcaseChatType type,
+  }) = ChatScreen;
 
   const factory ShowcaseParams.imageWidget() = ImageWidget;
 

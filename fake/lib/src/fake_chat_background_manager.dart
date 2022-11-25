@@ -1,13 +1,15 @@
 import 'package:chat_kit/chat_kit.dart';
+import 'package:flutter/material.dart';
 
 class FakeChatBackgroundManager implements ChatBackgroundManager {
-  const FakeChatBackgroundManager({required this.chatBackgroundFunc});
+  const FakeChatBackgroundManager({this.chatBackgroundFunc});
 
   final ChatBackground Function()? chatBackgroundFunc;
 
   @override
   ChatBackground get background =>
-      chatBackgroundFunc?.call() ?? (throw UnimplementedError());
+      chatBackgroundFunc?.call() ??
+      (const ChatBackground.solid(color: Colors.amber));
 
   @override
   Stream<ChatBackground> get backgroundStream =>
