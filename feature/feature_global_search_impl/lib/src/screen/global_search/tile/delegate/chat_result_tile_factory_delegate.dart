@@ -20,8 +20,8 @@ class ChatResultTileFactoryDelegate
   Widget create(BuildContext context, ChatResultTileModel model) {
     return ListTile(
       onTap: () => _onTap.call(context, model.chatId),
-      leading: _avatarWidgetFactory.create(
-        context,
+      leading: AvatarWidget(
+        factory: _avatarWidgetFactory,
         avatar: model.avatar,
       ),
       title: Text.rich(

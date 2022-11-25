@@ -80,11 +80,8 @@ class _LeadingAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AvatarWidgetFactory avatarWidgetFactory =
-        context.read<AvatarWidgetFactory>();
-
-    return avatarWidgetFactory.create(
-      context,
+    return AvatarWidget(
+      factory: context.read<AvatarWidgetFactory>(),
       avatar: avatar,
       radius: 28,
       borderRadius: BorderRadius.all(

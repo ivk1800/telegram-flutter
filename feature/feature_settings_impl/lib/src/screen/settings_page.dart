@@ -143,17 +143,14 @@ class _SettingsStateAppBar extends StatelessWidget {
         final SettingsScreenWidgetModel settingsScreenWidgetModel =
             SettingsScreenScope.getSettingsScreenWidgetModel(context);
 
-        final tg.AvatarWidgetFactory avatarWidgetFactory =
-            SettingsScreenScope.getAvatarWidgetFactory(context);
-
         final TextTheme primaryTextTheme = Theme.of(context).primaryTextTheme;
         return AppBar(
           titleSpacing: 0.0,
           title: Align(
             child: ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: avatarWidgetFactory.create(
-                context,
+              leading: tg.AvatarWidget(
+                factory: SettingsScreenScope.getAvatarWidgetFactory(context),
                 avatar: data.appBarState.avatar,
               ),
               title: Text(

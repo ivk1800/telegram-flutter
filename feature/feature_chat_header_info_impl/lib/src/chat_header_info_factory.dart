@@ -21,8 +21,8 @@ class ChatHeaderInfoFactory implements IChatHeaderInfoFactory {
     return ListTile(
       onTap: onProfileTap,
       contentPadding: EdgeInsets.zero,
-      leading: _avatarWidgetFactory.create(
-        context,
+      leading: tg.AvatarWidget(
+        factory: _avatarWidgetFactory,
         avatar: info.avatar,
       ),
       title: Text(

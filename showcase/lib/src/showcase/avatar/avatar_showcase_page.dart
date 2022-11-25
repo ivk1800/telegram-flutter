@@ -31,16 +31,14 @@ class _AvatarShowcasePageState extends State<AvatarShowcasePage> {
           BuildContext context,
           AsyncSnapshot<List<AvatarInfo>> snapshot,
         ) {
-          final tg.AvatarWidgetFactory avatarWidgetFactory =
-              AvatarShowcaseScope.getAvatarWidgetFactory(context);
           final List<AvatarInfo> avatars = snapshot.data!;
           return ListView.separated(
             itemCount: avatars.length,
             itemBuilder: (BuildContext context, int index) {
               final AvatarInfo avatarInfo = avatars[index];
               return ListTile(
-                leading: avatarWidgetFactory.create(
-                  context,
+                leading: tg.AvatarWidget(
+                  factory: AvatarShowcaseScope.getAvatarWidgetFactory(context),
                   avatar: avatarInfo.avatar,
                 ),
                 title: Text(avatarInfo.description),

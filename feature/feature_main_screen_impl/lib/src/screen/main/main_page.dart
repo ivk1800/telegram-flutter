@@ -412,8 +412,6 @@ class _HeaderData extends StatelessWidget {
   Widget build(BuildContext context) {
     final HeaderViewModel viewModel =
         MainScreenScope.getHeaderViewModel(context);
-    final tg.AvatarWidgetFactory avatarWidgetFactory =
-        MainScreenScope.getAvatarWidgetFactory(context);
 
     final Color textColor = Theme.of(context).colorScheme.onSecondary;
     return DrawerHeader(
@@ -428,8 +426,8 @@ class _HeaderData extends StatelessWidget {
               SizedBox(
                 height: 70,
                 width: 70,
-                child: avatarWidgetFactory.create(
-                  context,
+                child: tg.AvatarWidget(
+                  factory: MainScreenScope.getAvatarWidgetFactory(context),
                   avatar: data.avatar,
                 ),
               ),

@@ -21,8 +21,8 @@ class SenderAvatarFactory {
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
           onTap: onTap,
-          child: _avatarWidgetFactory.create(
-            context,
+          child: AvatarWidget(
+            factory: _avatarWidgetFactory,
             avatar: senderInfo.avatar,
           ),
         ),

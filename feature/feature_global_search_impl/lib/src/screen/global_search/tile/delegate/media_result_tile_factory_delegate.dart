@@ -15,8 +15,8 @@ class MediaResultTileFactoryDelegate
   Widget create(BuildContext context, MediaResultTileModel model) {
     return ListTile(
       onTap: () {},
-      leading: _avatarWidgetFactory.create(
-        context,
+      leading: AvatarWidget(
+        factory: _avatarWidgetFactory,
         avatar: model.avatar,
         radius: 25,
       ),

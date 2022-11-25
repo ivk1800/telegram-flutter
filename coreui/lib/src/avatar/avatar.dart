@@ -1,12 +1,12 @@
-import 'package:core_presentation/core_presentation.dart';
+import 'package:core_presentation/core_presentation.dart' as cp;
 import 'package:coreui/coreui.dart';
 import 'package:coreui/src/avatar/avatar_scope.dart';
 import 'package:coreui/src/avatar/avatar_state.dart';
 import 'package:coreui/src/avatar/avatar_view_model.dart';
 import 'package:flutter/material.dart';
 
-class AvatarWidget extends StatefulWidget {
-  const AvatarWidget({
+class Avatar extends StatefulWidget {
+  const Avatar({
     required this.radius,
     required this.avatar,
     required this.borderRadius,
@@ -14,14 +14,14 @@ class AvatarWidget extends StatefulWidget {
   });
 
   final double radius;
-  final Avatar avatar;
+  final cp.Avatar avatar;
   final BorderRadiusGeometry borderRadius;
 
   @override
-  State<AvatarWidget> createState() => _AvatarWidgetState();
+  State<Avatar> createState() => _AvatarState();
 }
 
-class _AvatarWidgetState extends State<AvatarWidget> {
+class _AvatarState extends State<Avatar> {
   @override
   Widget build(BuildContext context) {
     final AvatarViewModel viewModel = AvatarScope.getViewModel(context);
@@ -29,13 +29,13 @@ class _AvatarWidgetState extends State<AvatarWidget> {
     return StreamBuilder<AvatarState>(
       stream: viewModel.state,
       initialData: widget.avatar.map(
-        simple: (SimpleAvatar value) {
+        simple: (cp.SimpleAvatar value) {
           return AvatarState.abbreviation(
             abbreviation: '',
             objectId: value.objectId,
           );
         },
-        savedMessages: (SavedMessagesAvatar value) =>
+        savedMessages: (cp.SavedMessagesAvatar value) =>
             const AvatarState.savedMessages(),
       ),
       builder: (BuildContext context, AsyncSnapshot<AvatarState> snapshot) {
@@ -73,7 +73,7 @@ class _AvatarWidgetState extends State<AvatarWidget> {
   }
 
   @override
-  void didUpdateWidget(covariant AvatarWidget oldWidget) {
+  void didUpdateWidget(covariant Avatar oldWidget) {
     if (widget.avatar != oldWidget.avatar) {
       AvatarScope.getViewModel(context).onNewAvatar(widget.avatar);
     }

@@ -118,8 +118,6 @@ class _UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AvatarWidgetFactory avatarWidgetFactory =
-        NewContactScreenScope.getAvatarWidgetFactory(context);
     final NewContactWidgetModel newContactWidgetModel =
         NewContactScreenScope.getNewContactWidgetModel(context);
 
@@ -134,8 +132,9 @@ class _UserInfo extends StatelessWidget {
             final UserInformation information = dataState.userInformation;
             return Row(
               children: <Widget>[
-                avatarWidgetFactory.create(
-                  context,
+                AvatarWidget(
+                  factory:
+                      NewContactScreenScope.getAvatarWidgetFactory(context),
                   avatar: information.avatar,
                   radius: 32,
                 ),
