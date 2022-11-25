@@ -13,39 +13,48 @@ class ChatActionPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ChatActionsPanelViewModel viewModel =
-        ChatActionPanelScope.getChatActionsPanelViewModel(context);
-
-    return Container(
+    return ColoredBox(
       color: Theme.of(context).scaffoldBackgroundColor,
-      constraints: const BoxConstraints(minHeight: kPanelHeight + 1),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const Divider(height: 1),
-          StreamListener<PanelState>(
-            stream: viewModel.actionsPanelState,
-            builder: (BuildContext c, PanelState state) {
-              return state.map(
-                join: (JoinState value) {
-                  return Join(state: value);
-                },
-                empty: (EmptyState state) {
-                  return const SizedBox.shrink();
-                },
-                channelSubscriber: (ChannelSubscriberState state) {
-                  return ChannelSubscriber(state: state);
-                },
-                writer: (WriterState state) {
-                  return Writer(state: state);
-                },
-              );
-            },
+        children: const <Widget>[
+          Divider(height: 1),
+          LimitedBox(
+            maxHeight: kPanelHeight,
+            child: _Content(),
           ),
           // textButton()
           // buildRow()
         ],
       ),
+    );
+  }
+}
+
+class _Content extends StatelessWidget {
+  const _Content();
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamListener<PanelState>(
+      stream: ChatActionPanelScope.getChatActionsPanelViewModel(context)
+          .actionsPanelState,
+      builder: (BuildContext context, PanelState state) {
+        return state.map(
+          join: (JoinState value) {
+            return Join(state: value);
+          },
+          empty: (EmptyState state) {
+            return const SizedBox.expand();
+          },
+          channelSubscriber: (ChannelSubscriberState state) {
+            return ChannelSubscriber(state: state);
+          },
+          writer: (WriterState state) {
+            return Writer(state: state);
+          },
+        );
+      },
     );
   }
 }
