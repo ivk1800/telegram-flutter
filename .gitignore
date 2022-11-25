@@ -2,6 +2,7 @@
 *.jugger.dart
 *.freezed.dart
 *.mocks.dart
+*.fwg.dart
 *.dmg.dart
 *.scope.dart
 .metadata
