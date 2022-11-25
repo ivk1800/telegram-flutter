@@ -16,7 +16,8 @@ class ChatActionPanel extends StatelessWidget {
     final ChatActionsPanelViewModel viewModel =
         ChatActionPanelScope.getChatActionsPanelViewModel(context);
 
-    return ConstrainedBox(
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
       constraints: const BoxConstraints(minHeight: kPanelHeight + 1),
       child: Column(
         mainAxisSize: MainAxisSize.min,
