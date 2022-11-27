@@ -40,7 +40,7 @@ String _handleReservedName(String name) {
 }
 
 void _generateStringProvider(List<_Item> list, String workDirectory) {
-  final DartEmitter emitter = DartEmitter();
+  final DartEmitter emitter = DartEmitter(useNullSafetySyntax: true);
   final LibraryBuilder target = LibraryBuilder();
 
   target.body.add(

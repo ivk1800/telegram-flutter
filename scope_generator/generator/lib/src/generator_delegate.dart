@@ -19,7 +19,10 @@ class GeneratorDelegate {
     target.body.add(_buildScopeClass(element));
     target.body.add(_buildScopeDelegateClass(element));
 
-    final DartEmitter dartEmitter = DartEmitter(allocator: _allocator);
+    final DartEmitter dartEmitter = DartEmitter(
+      allocator: _allocator,
+      useNullSafetySyntax: true,
+    );
     return target.build().accept(dartEmitter).toString();
   }
 

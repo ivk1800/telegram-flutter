@@ -32,7 +32,7 @@ class FactoryWidgetGenerator extends GeneratorForAnnotation<WidgetFactory> {
     target.body.add(_buildWidgetClass(widgetName, factoryClass, parameters));
     target.body.add(_buildStateClass(widgetName, factoryClass, parameters));
 
-    final DartEmitter dartEmitter = DartEmitter();
+    final DartEmitter dartEmitter = DartEmitter(useNullSafetySyntax: true);
     return target.build().accept(dartEmitter).toString();
   }
 
