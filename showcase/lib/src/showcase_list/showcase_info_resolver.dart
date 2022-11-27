@@ -13,6 +13,7 @@ import 'package:showcase/src/showcase/circular_progress/circular_progress_widget
 import 'package:showcase/src/showcase/create_new_channel_showcase_factory.dart';
 import 'package:showcase/src/showcase/custom_emoji/custom_emoji_showcase_factory.dart';
 import 'package:showcase/src/showcase/image_widget/image_widget_showcase_factory.dart';
+import 'package:showcase/src/showcase/logout_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/main_screen_showcase_factory.dart';
 import 'package:showcase/src/showcase/message_wrap/message_wrap_showcase_factory.dart';
 import 'package:showcase/src/showcase/new_contact_showcase_factory.dart';
@@ -49,6 +50,7 @@ class ShowcaseInfoResolver {
         chatBackgroundWidgetShowcaseFactory,
     required SettingsScreenShowcaseFactory settingsScreenShowcaseFactory,
     required ChatScreenShowcaseFactory chatScreenShowcaseFactory,
+    required LogoutShowcaseFactory logoutShowcaseFactory,
   })  : _authShowcaseFactory = authShowcaseFactory,
         _createNewChannelShowcaseFactory = createNewChannelShowcaseFactory,
         _newContactShowcaseFactory = newContactShowcaseFactory,
@@ -66,6 +68,7 @@ class ShowcaseInfoResolver {
             chatBackgroundWidgetShowcaseFactory,
         _settingsScreenShowcaseFactory = settingsScreenShowcaseFactory,
         _chatScreenShowcaseFactory = chatScreenShowcaseFactory,
+        _logoutShowcaseFactory = logoutShowcaseFactory,
         _showcaseListScreenFactory = showcaseListScreenFactory;
 
   final AuthShowcaseFactory _authShowcaseFactory;
@@ -86,6 +89,7 @@ class ShowcaseInfoResolver {
       _chatBackgroundWidgetShowcaseFactory;
   final SettingsScreenShowcaseFactory _settingsScreenShowcaseFactory;
   final ChatScreenShowcaseFactory _chatScreenShowcaseFactory;
+  final LogoutShowcaseFactory _logoutShowcaseFactory;
 
   ShowcaseInfo resolve({
     required BuildContext context,
@@ -141,6 +145,10 @@ class ShowcaseInfoResolver {
                   ShowcaseTileModel(
                     title: 'Settings',
                     params: ShowcaseParams.settingsScreen(),
+                  ),
+                  ShowcaseTileModel(
+                    title: 'Logout',
+                    params: ShowcaseParams.logoutScreen(),
                   ),
                 ],
               ),
@@ -236,7 +244,6 @@ class ShowcaseInfoResolver {
         );
       },
       authScreen: (_) {
-        //+
         return ShowcaseInfo(
           widget: _authShowcaseFactory.create(context),
           containerType: ContainerType.top,
@@ -345,6 +352,12 @@ class ShowcaseInfoResolver {
         return ShowcaseInfo(
           widget: _chatScreenShowcaseFactory.create(context, value.type),
           containerType: ContainerType.right,
+        );
+      },
+      logoutScreen: (_) {
+        return ShowcaseInfo(
+          widget: _logoutShowcaseFactory.create(context),
+          containerType: ContainerType.top,
         );
       },
     );

@@ -6,13 +6,13 @@ import 'logout_feature_router.dart';
 
 class LogoutFeatureDependencies {
   LogoutFeatureDependencies({
-    required this.localizationManager,
+    required this.stringsProvider,
     required this.authenticationManager,
     required this.router,
     required this.connectionStateProvider,
   });
 
-  final ILocalizationManager localizationManager;
+  final IStringsProvider stringsProvider;
   final IAuthenticationManager authenticationManager;
   final ILogoutFeatureRouter router;
   final IConnectionStateProvider connectionStateProvider;

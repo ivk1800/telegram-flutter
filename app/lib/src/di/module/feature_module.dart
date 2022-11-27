@@ -415,14 +415,14 @@ abstract class FeatureModule {
   @j.provides
   static LogoutFeatureDependencies provideLogoutFeatureDependencies(
     IConnectionStateProvider connectionStateProvider,
-    ILocalizationManager localizationManager,
+    IStringsProvider stringsProvider,
     ILogoutFeatureRouter router,
     ITdFunctionExecutor functionExecutor,
     IAuthenticationManager authenticationManager,
   ) =>
       LogoutFeatureDependencies(
         connectionStateProvider: connectionStateProvider,
-        localizationManager: localizationManager,
+        stringsProvider: stringsProvider,
         router: router,
         authenticationManager: authenticationManager,
       );

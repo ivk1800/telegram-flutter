@@ -52,6 +52,8 @@ dependencies:
     path: ../feature/feature_create_new_chat_impl
   feature_file_api:
     path: ../feature/feature_file_api
+  feature_logout_impl:
+    path: ../feature/feature_logout_impl
   feature_main_screen_impl:
     path: ../feature/feature_main_screen_impl
   feature_message_preview_resolver:

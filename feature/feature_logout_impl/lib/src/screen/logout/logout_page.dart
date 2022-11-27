@@ -11,13 +11,13 @@ class LogoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager = context.read();
+    final IStringsProvider stringsProvider = context.read();
     final tg.TgAppBarFactory appBarFactory = context.read();
 
     return Scaffold(
       appBar: appBarFactory.createDefaultTitle(
         context,
-        localizationManager.getString('LogOutTitle'),
+        stringsProvider.logOutTitle,
       ),
       body: const _Body(),
     );
@@ -29,20 +29,20 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ILocalizationManager localizationManager = context.read();
+    final IStringsProvider stringsProvider = context.read();
     final LogoutViewModel viewModel = context.read();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         tg.Section(
-          text: localizationManager.getString('AlternativeOptions'),
+          text: stringsProvider.alternativeOptions,
         ),
         tg.TextCell(
           onTap: () => viewModel
               .onEvent(const LogoutEvent.tap(TapType.addAnotherAccount)),
           leading: const Icon(Icons.circle),
-          title: localizationManager.getString('AddAnotherAccount'),
-          subtitle: localizationManager.getString('AddAnotherAccountInfo'),
+          title: stringsProvider.addAnotherAccount,
+          subtitle: stringsProvider.addAnotherAccountInfo,
         ),
         const tg.Divider(
           indent: tg.DividerIndent.large,
@@ -51,8 +51,8 @@ class _Body extends StatelessWidget {
           onTap: () =>
               viewModel.onEvent(const LogoutEvent.tap(TapType.setPasscode)),
           leading: const Icon(Icons.circle),
-          title: localizationManager.getString('SetPasscode'),
-          subtitle: localizationManager.getString('SetPasscodeInfo'),
+          title: stringsProvider.setPasscode,
+          subtitle: stringsProvider.setPasscodeInfo,
         ),
         const tg.Divider(
           indent: tg.DividerIndent.large,
@@ -61,8 +61,8 @@ class _Body extends StatelessWidget {
           onTap: () =>
               viewModel.onEvent(const LogoutEvent.tap(TapType.clearCache)),
           leading: const Icon(Icons.circle),
-          title: localizationManager.getString('ClearCache'),
-          subtitle: localizationManager.getString('ClearCacheInfo'),
+          title: stringsProvider.clearCache,
+          subtitle: stringsProvider.clearCacheInfo,
         ),
         const tg.Divider(
           indent: tg.DividerIndent.large,
@@ -71,8 +71,8 @@ class _Body extends StatelessWidget {
           onTap: () => viewModel
               .onEvent(const LogoutEvent.tap(TapType.changePhoneNumber)),
           leading: const Icon(Icons.circle),
-          title: localizationManager.getString('ChangePhoneNumber'),
-          subtitle: localizationManager.getString('ChangePhoneNumberInfo'),
+          title: stringsProvider.changePhoneNumber,
+          subtitle: stringsProvider.changePhoneNumberInfo,
         ),
         const tg.Divider(
           indent: tg.DividerIndent.large,
@@ -81,17 +81,17 @@ class _Body extends StatelessWidget {
           onTap: () =>
               viewModel.onEvent(const LogoutEvent.tap(TapType.contactSupport)),
           leading: const Icon(Icons.circle),
-          title: localizationManager.getString('ContactSupport'),
-          subtitle: localizationManager.getString('ContactSupportInfo'),
+          title: stringsProvider.contactSupport,
+          subtitle: stringsProvider.contactSupportInfo,
         ),
         const tg.SectionDivider(),
         tg.TextCell(
           titleColor: Theme.of(context).errorColor,
-          title: localizationManager.getString('LogOutTitle'),
+          title: stringsProvider.logOutTitle,
           onTap: () => viewModel.onEvent(const LogoutEvent.tap(TapType.logOut)),
         ),
         tg.Annotation(
-          text: localizationManager.getString('LogOutInfo'),
+          text: stringsProvider.logOutInfo,
         ),
       ],
     );

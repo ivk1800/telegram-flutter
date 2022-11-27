@@ -18,8 +18,8 @@ class LogoutScreenFactory implements ILogoutScreenFactory {
   Widget create() {
     return MultiProvider(
       providers: <Provider<dynamic>>[
-        Provider<ILocalizationManager>(
-          create: (BuildContext context) => _dependencies.localizationManager,
+        Provider<IStringsProvider>(
+          create: (BuildContext context) => _dependencies.stringsProvider,
         ),
         Provider<tg.TgAppBarFactory>(
           create: (BuildContext context) =>
@@ -29,7 +29,7 @@ class LogoutScreenFactory implements ILogoutScreenFactory {
         ),
         Provider<LogoutViewModel>(
           create: (_) => LogoutViewModel(
-            localizationManager: _dependencies.localizationManager,
+            stringsProvider: _dependencies.stringsProvider,
             router: _dependencies.router,
           ),
           dispose: (_, LogoutViewModel value) => value.dispose(),

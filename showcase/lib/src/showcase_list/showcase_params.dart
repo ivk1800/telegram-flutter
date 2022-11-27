@@ -28,6 +28,8 @@ class ShowcaseParams with _$ShowcaseParams {
     required ShowcaseChatType type,
   }) = ChatScreen;
 
+  const factory ShowcaseParams.logoutScreen() = LogoutScreen;
+
   const factory ShowcaseParams.imageWidget() = ImageWidget;
 
   const factory ShowcaseParams.circularProgressWidget() =

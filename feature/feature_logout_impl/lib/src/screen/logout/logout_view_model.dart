@@ -8,12 +8,12 @@ import 'logout_event.dart';
 class LogoutViewModel extends BaseViewModel {
   LogoutViewModel({
     required ILogoutFeatureRouter router,
-    required ILocalizationManager localizationManager,
+    required IStringsProvider stringsProvider,
   })  : _router = router,
-        _localizationManager = localizationManager;
+        _stringsProvider = stringsProvider;
 
   final ILogoutFeatureRouter _router;
-  final ILocalizationManager _localizationManager;
+  final IStringsProvider _stringsProvider;
 
   void onEvent(LogoutEvent event) {
     event.when(tap: _onTapEvent);
@@ -35,17 +35,17 @@ class LogoutViewModel extends BaseViewModel {
         break;
       case TapType.contactSupport:
         _router.toDialog(
-          title: _getString('AskAQuestion'),
+          title: _stringsProvider.askAQuestion,
           body: const Body.text(text: 'AskAQuestionInfo'),
           actions: <Action>[
             Action(
-              text: _getString('Cancel'),
+              text: _stringsProvider.cancel,
               callback: (IDismissible dismissible) {
                 dismissible.dismiss();
               },
             ),
             Action(
-              text: _getString('AskButton'),
+              text: _stringsProvider.askButton,
               callback: (IDismissible dismissible) {
                 _router.toChat(0);
                 dismissible.dismiss();
@@ -56,18 +56,18 @@ class LogoutViewModel extends BaseViewModel {
         break;
       case TapType.logOut:
         _router.toDialog(
-          title: _getString('LogOutTitle'),
-          body: Body.text(text: _getString('AreYouSureLogout')),
+          title: _stringsProvider.logOutTitle,
+          body: Body.text(text: _stringsProvider.areYouSureLogout),
           actions: <Action>[
             Action(
-              text: _getString('Cancel'),
+              text: _stringsProvider.cancel,
               callback: (IDismissible dismissible) {
                 dismissible.dismiss();
               },
             ),
             Action(
               type: ActionType.attention,
-              text: _getString('LogOutTitle'),
+              text: _stringsProvider.logOutTitle,
               callback: (IDismissible dismissible) {
                 dismissible.dismiss();
               },
@@ -77,6 +77,4 @@ class LogoutViewModel extends BaseViewModel {
         break;
     }
   }
-
-  String _getString(String key) => _localizationManager.getString(key);
 }
