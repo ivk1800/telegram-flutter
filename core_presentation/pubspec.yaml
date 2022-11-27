@@ -9,15 +9,15 @@ dependencies:
     path: ../core
   core_utils:
     path: ../core_utils
-  freezed_annotation: 2.1.0
+  freezed_annotation: 2.2.0
   shared_models:
     path: ../shared/models
   td_api:
     path: ../td/td_api
 
 dev_dependencies:
-  build_runner: 2.2.0
+  build_runner: 2.3.2
   dependency_validator: 3.2.0
-  freezed: 2.1.0+1
+  freezed: 2.2.1
   tg_lint_rules:
     path: ../tg_lint_rules
