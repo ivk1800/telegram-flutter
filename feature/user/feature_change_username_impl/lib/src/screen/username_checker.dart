@@ -39,9 +39,11 @@ class UsernameChecker {
           CheckResult.error(_stringsProvider.usernameInvalid),
       usernameOccupied: (_) =>
           CheckResult.error(_stringsProvider.usernameInUse),
-      publicChatsTooMuch: (_) => const CheckResult.error('publicChatsTooMuch'),
+      publicChatsTooMany: (_) => const CheckResult.error('publicChatsTooMany'),
       publicGroupsUnavailable: (_) =>
           const CheckResult.error('publicGroupsUnavailable'),
+      usernamePurchasable: (_) =>
+          const CheckResult.error('usernamePurchasable'),
     );
   }
 }

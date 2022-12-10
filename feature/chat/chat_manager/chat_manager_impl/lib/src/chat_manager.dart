@@ -61,6 +61,7 @@ class ChatManager implements IChatManager {
       td.CreateNewSupergroupChat(
         description: description,
         title: name,
+        messageTtl: 0,
         forImport: false,
         isChannel: true,
       ),

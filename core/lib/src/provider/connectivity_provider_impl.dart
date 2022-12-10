@@ -57,6 +57,7 @@ extension _ConnectivityExtensions on c.ConnectivityResult {
       case c.ConnectivityResult.none:
         return ConnectivityStatus.none;
       case c.ConnectivityResult.ethernet:
+      case c.ConnectivityResult.vpn:
       case c.ConnectivityResult.bluetooth:
         return ConnectivityStatus.other;
     }

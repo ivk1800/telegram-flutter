@@ -14,11 +14,11 @@ import 'auth_view_model_test.mocks.dart';
 @GenerateMocks(
   <Type>[],
   customMocks: <MockSpec<dynamic>>[
-    MockSpec<IStringsProvider>(returnNullOnMissingStub: true),
-    MockSpec<IAuthFeatureRouter>(returnNullOnMissingStub: true),
-    MockSpec<ICountryRepository>(returnNullOnMissingStub: true),
-    MockSpec<IAuthenticationManager>(returnNullOnMissingStub: true),
-    MockSpec<IErrorTransformer>(returnNullOnMissingStub: true),
+    MockSpec<IStringsProvider>(),
+    MockSpec<IAuthFeatureRouter>(),
+    MockSpec<ICountryRepository>(),
+    MockSpec<IAuthenticationManager>(),
+    MockSpec<IErrorTransformer>(),
   ],
 )
 void main() {

@@ -23,6 +23,7 @@ export 'message_expired_video_tile_model.dart';
 export 'message_forum_topic_closed_tile_model.dart';
 export 'message_forum_topic_created_tile_model.dart';
 export 'message_forum_topic_edited_tile_model.dart';
+export 'message_forum_topic_is_hidden_tile_model.dart';
 export 'message_game_score_tile_model.dart';
 export 'message_game_tile_model.dart';
 export 'message_gifted_premium_model.dart';

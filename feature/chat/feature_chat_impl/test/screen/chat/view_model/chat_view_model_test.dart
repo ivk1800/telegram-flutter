@@ -23,8 +23,8 @@ import 'chat_view_model_test.mocks.dart';
     ChatHeaderActionsInteractor,
   ],
   customMocks: <MockSpec<dynamic>>[
-    MockSpec<ChatMessagesInteractor>(returnNullOnMissingStub: true),
-    MockSpec<IChatManager>(returnNullOnMissingStub: true)
+    MockSpec<ChatMessagesInteractor>(),
+    MockSpec<IChatManager>()
   ],
 )
 void main() {

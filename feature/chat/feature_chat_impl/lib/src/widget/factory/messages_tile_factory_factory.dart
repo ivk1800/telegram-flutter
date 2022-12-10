@@ -255,6 +255,10 @@ class MessagesTileFactoryFactory {
             MessageForumTopicClosedTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),
+        MessageForumTopicIsHiddenTileModel:
+            MessageForumTopicIsHiddenTileFactoryDelegate(
+          chatMessageFactory: chatMessageFactory,
+        )
       },
     );
   }

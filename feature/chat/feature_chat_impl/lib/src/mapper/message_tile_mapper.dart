@@ -556,6 +556,15 @@ class MessageTileMapper {
           type: notImplementedText,
         );
       },
+      messageForumTopicIsHiddenToggled: (
+        td.MessageForumTopicIsHiddenToggled value,
+      ) {
+        return MessageForumTopicIsHiddenTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
     );
   }
 }

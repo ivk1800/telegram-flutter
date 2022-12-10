@@ -1,5 +1,4 @@
 import 'package:chat_actions_panel/src/chat_action_panel_scope.dart';
-import 'package:chat_actions_panel/src/chat_actions_panel_view_model.dart';
 import 'package:chat_actions_panel/src/widget/writer.dart';
 import 'package:core_arch_flutter/core_arch_flutter.dart';
 import 'package:flutter/material.dart';

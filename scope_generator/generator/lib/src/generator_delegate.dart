@@ -240,8 +240,8 @@ return _Delegate(create.call());
 
     final String name = _allocator.allocate(
       Reference(
-        type.element2.name,
-        type.element2.librarySource.uri.toString(),
+        type.element.name,
+        type.element.librarySource.uri.toString(),
       ),
     );
 
@@ -257,7 +257,7 @@ return _Delegate(create.call());
 
   bool _isDisposable(ClassElement element) {
     return element.thisType.allSupertypes.any((InterfaceType interface) {
-      return interface.element2.displayName == 'ScopeDisposer';
+      return interface.element.displayName == 'ScopeDisposer';
     });
   }
 }
