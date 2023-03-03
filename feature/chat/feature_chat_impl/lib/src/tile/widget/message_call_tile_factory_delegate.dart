@@ -20,7 +20,7 @@ class MessageCallTileFactoryDelegate
 
   @override
   Widget create(BuildContext context, MessageCallTileModel model) {
-    final TextStyle captionStyle = Theme.of(context).textTheme.caption!;
+    final TextStyle captionStyle = Theme.of(context).textTheme.bodySmall!;
     final ChatContextData contextData = ChatContext.of(context);
 
     return _chatMessageFactory.createConversationMessage(

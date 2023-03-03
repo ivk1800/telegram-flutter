@@ -161,7 +161,7 @@ class _SettingsStateAppBar extends StatelessWidget {
               subtitle: Text(
                 data.appBarState.onlineStatus,
                 maxLines: 1,
-                style: primaryTextTheme.caption,
+                style: primaryTextTheme.bodySmall,
               ),
             ),
             alignment: Alignment.centerLeft,

@@ -28,7 +28,7 @@ class ChatThemeData implements ITgThemeData {
       backgroundColor: Colors.white,
       bubbleShortInfoIncomingColor: const Color.fromARGB(255, 161, 170, 179),
       bubbleShortInfoOutgoingColor: const Color.fromARGB(255, 98, 172, 85),
-      bubbleTextStyle: Theme.of(context).textTheme.subtitle1!,
+      bubbleTextStyle: Theme.of(context).textTheme.titleMedium!,
       notificationTextColor: Colors.white,
       notificationColor: Colors.black26,
       replyTitle: textTheme.subtitle3.copyWith(color: kPrimaryColor),

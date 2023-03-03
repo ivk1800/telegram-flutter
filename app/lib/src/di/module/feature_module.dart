@@ -898,5 +898,4 @@ abstract class FeatureModule {
   @j.binds
   IChatForumRouter bindChatForumRouter(CreateForumRouterImpl impl);
 // endregion router
-
 }

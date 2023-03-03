@@ -29,7 +29,7 @@ class TextCell extends StatelessWidget {
             value,
             style: Theme.of(context)
                 .textTheme
-                .button
+                .labelLarge
                 ?.copyWith(color: Theme.of(context).colorScheme.secondary),
           );
         },
@@ -92,7 +92,7 @@ class TextCell extends StatelessWidget {
           style: titleColor != null
               ? Theme.of(context)
                   .textTheme
-                  .subtitle1
+                  .titleMedium
                   ?.copyWith(color: titleColor)
               : null,
         ),

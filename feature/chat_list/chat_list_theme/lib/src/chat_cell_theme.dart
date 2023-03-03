@@ -51,12 +51,12 @@ class ChatCellTheme extends ThemeExtension<ChatCellTheme> {
       fontSize: 16,
       height: _kFontHeight,
     ),
-    subtitleStyle: ThemeData.light().textTheme.subtitle1!.copyWith(
+    subtitleStyle: ThemeData.light().textTheme.titleMedium!.copyWith(
           height: _kFontHeight,
           fontSize: 16,
           color: ThemeData.light().primaryColor,
         ),
-    secondarySubtitleStyle: ThemeData.light().textTheme.subtitle1!.copyWith(
+    secondarySubtitleStyle: ThemeData.light().textTheme.titleMedium!.copyWith(
           height: _kFontHeight,
           fontSize: 16,
           color: Colors.grey[600],

@@ -86,7 +86,7 @@ class _Body extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           stringsProvider.mobileHiddenExceptionInfo(<dynamic>['args']),
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         const SizedBox(height: 8),
         Row(
@@ -149,7 +149,7 @@ class _UserInfo extends StatelessWidget {
                       ),
                       Text(
                         information.onlineStatus,
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
                   ),
@@ -165,7 +165,7 @@ class _UserInfo extends StatelessWidget {
                       ),
                       Text(
                         information.onlineStatus,
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
                   ),

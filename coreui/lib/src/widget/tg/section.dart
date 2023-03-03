@@ -10,7 +10,7 @@ class Section extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 4),
         child: Text(
           text,
-          style: Theme.of(context).textTheme.button?.copyWith(
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.secondary,
               ),

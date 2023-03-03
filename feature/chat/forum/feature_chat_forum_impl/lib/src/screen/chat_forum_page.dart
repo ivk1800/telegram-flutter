@@ -92,7 +92,7 @@ class _EmptyState extends StatelessWidget {
             child: Text(
               stringsProvider.noTopics,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           const SizedBox(height: 12.0),
@@ -101,7 +101,7 @@ class _EmptyState extends StatelessWidget {
             child: Text(
               stringsProvider.noTopicsDescription(<Object>['?']),
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
         ],

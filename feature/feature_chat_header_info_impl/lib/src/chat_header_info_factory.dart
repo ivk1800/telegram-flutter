@@ -37,7 +37,7 @@ class ChatHeaderInfoFactory implements IChatHeaderInfoFactory {
             info.subtitle,
             style: Theme.of(context)
                 .textTheme
-                .caption!
+                .bodySmall!
                 .copyWith(color: Colors.white54),
           );
         }),

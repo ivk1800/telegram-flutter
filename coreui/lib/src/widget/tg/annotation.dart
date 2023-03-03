@@ -25,8 +25,8 @@ class Annotation extends StatelessWidget {
       child: Text(
         text,
         textAlign: align,
-        style: theme.textTheme.bodyText2!.copyWith(
-          color: theme.textTheme.caption!.color,
+        style: theme.textTheme.bodyMedium!.copyWith(
+          color: theme.textTheme.bodySmall!.color,
         ),
       ),
     );

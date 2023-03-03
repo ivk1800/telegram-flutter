@@ -22,7 +22,7 @@ dependencies:
     path: ../chat_navigation_api
   chat_theme:
     path: ../chat_theme
-  collection: 1.16.0
+  collection: 1.17.0
   core:
     path: ../../../core
   core_arch:

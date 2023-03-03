@@ -20,7 +20,7 @@ class MessageHeader extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: themeData.textTheme.button!
+        style: themeData.textTheme.labelLarge!
             .copyWith(color: themeData.colorScheme.primary),
       ),
     );

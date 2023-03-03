@@ -44,7 +44,7 @@ class _Body extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             'Network',
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         Row(
@@ -73,7 +73,7 @@ class _Body extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             'theme',
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         Row(
@@ -121,7 +121,7 @@ class _Body extends StatelessWidget {
             'Screens:',
             style: Theme.of(context)
                 .textTheme
-                .subtitle1!
+                .titleMedium!
                 .copyWith(fontWeight: FontWeight.bold),
           ),
         ),

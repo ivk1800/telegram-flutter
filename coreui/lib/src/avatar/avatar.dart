@@ -119,7 +119,7 @@ class _SavedMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle textStyle = theme.primaryTextTheme.subtitle1!;
+    final TextStyle textStyle = theme.primaryTextTheme.titleMedium!;
     return _BaseAvatar(
       radius: radius,
       borderRadius: borderRadius,

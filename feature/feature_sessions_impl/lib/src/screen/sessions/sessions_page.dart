@@ -94,7 +94,7 @@ class _Body extends StatelessWidget {
           const tg.Divider(),
           tg.TextCell(
             onTap: viewModel.onTerminatedSessionsTap,
-            titleColor: theme.errorColor,
+            titleColor: theme.colorScheme.error,
             title: stringsProvider.terminateAllSessions,
           ),
           tg.Annotation(

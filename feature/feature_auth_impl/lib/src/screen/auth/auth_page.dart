@@ -193,7 +193,7 @@ class _CodeStateWidget extends StatelessWidget {
         ),
         Text(
           stringsProvider.sentAppCodeTitle,
-          style: theme.textTheme.bodyText1!.copyWith(
+          style: theme.textTheme.bodyLarge!.copyWith(
             fontSize: 17,
           ),
         ),

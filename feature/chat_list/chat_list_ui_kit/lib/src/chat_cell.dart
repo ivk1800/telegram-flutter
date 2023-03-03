@@ -46,7 +46,7 @@ class Title extends StatelessWidget {
       if (lastMessageDate != null) ...<Widget>[
         Text(
           lastMessageDate,
-          style: theme.textTheme.caption!.copyWith(
+          style: theme.textTheme.bodySmall!.copyWith(
             fontSize: 13,
           ),
         ),

@@ -41,11 +41,11 @@ class QuickNotificationSettingsPage extends StatelessWidget {
             onTap: () {},
             leading: Icon(
               Icons.circle,
-              color: theme.errorColor,
+              color: theme.colorScheme.error,
             ),
             title: Text(
               localizationManager.getString('NotificationsTurnOff'),
-              style: TextStyle(color: theme.errorColor),
+              style: TextStyle(color: theme.colorScheme.error),
             ),
           ),
         ],

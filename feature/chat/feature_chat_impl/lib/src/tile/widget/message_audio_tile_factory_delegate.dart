@@ -60,13 +60,13 @@ class MessageAudioTileFactoryDelegate
                       model.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.bodyText1,
+                      style: theme.textTheme.bodyLarge,
                     ),
                     Text(
                       model.performer,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.bodyText1,
+                      style: theme.textTheme.bodyLarge,
                     ),
                     const SizedBox(
                       height: 4,

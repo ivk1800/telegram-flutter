@@ -86,7 +86,7 @@ class _Body extends StatelessWidget {
         ),
         const tg.SectionDivider(),
         tg.TextCell(
-          titleColor: Theme.of(context).errorColor,
+          titleColor: Theme.of(context).colorScheme.error,
           title: stringsProvider.logOutTitle,
           onTap: () => viewModel.onEvent(const LogoutEvent.tap(TapType.logOut)),
         ),

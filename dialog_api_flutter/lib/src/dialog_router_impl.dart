@@ -33,7 +33,7 @@ class DialogRouterImpl implements d.IDialogRouter {
             case d.ActionType.simple:
               return null;
             case d.ActionType.attention:
-              return Theme.of(context).errorColor;
+              return Theme.of(context).colorScheme.error;
           }
         }
 
