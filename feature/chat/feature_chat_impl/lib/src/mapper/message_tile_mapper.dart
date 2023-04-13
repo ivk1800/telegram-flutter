@@ -180,20 +180,6 @@ class MessageTileMapper {
           ),
         );
       },
-      messageChatSetTtl: (td.MessageChatSetTtl value) {
-        // todo format ttl to human string
-        return MessageChatSetTtlTileModel(
-          id: message.id,
-          isOutgoing: message.isOutgoing,
-          title: rt.RichText.planeText(
-            message.isOutgoing
-                ? _stringsProvider
-                    .messageLifetimeChangedOutgoing(<dynamic>['todo'])
-                : _stringsProvider
-                    .messageLifetimeChanged(<dynamic>['todo', 'todo']),
-          ),
-        );
-      },
       messageChatUpgradeFrom: (td.MessageChatUpgradeFrom value) {
         return MessageChatUpgradeFromTileModel(
           id: message.id,
@@ -488,7 +474,8 @@ class MessageTileMapper {
           additionalInfo: await _additionalInfoMapper.map(message),
           senderInfo: await _senderInfoMapper.map(message.senderId),
           replyInfo: await _messageReplyInfoMapper.mapToReplyInfo(message),
-          customEmojiId: sticker!.customEmojiId,
+          // TODO: Fix emoji
+          customEmojiId: 0,
         );
       },
       messageVideoChatScheduled: (td.MessageVideoChatScheduled value) {
@@ -559,6 +546,42 @@ class MessageTileMapper {
       messageForumTopicIsHiddenToggled: (
         td.MessageForumTopicIsHiddenToggled value,
       ) {
+        return MessageForumTopicIsHiddenTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageChatSetMessageAutoDeleteTime:
+          (td.MessageChatSetMessageAutoDeleteTime value) {
+        return MessageForumTopicIsHiddenTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageSuggestProfilePhoto: (td.MessageSuggestProfilePhoto value) {
+        return MessageForumTopicIsHiddenTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageUserShared: (td.MessageUserShared value) {
+        return MessageForumTopicIsHiddenTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageChatShared: (td.MessageChatShared value) {
+        return MessageForumTopicIsHiddenTileModel(
+          id: message.id,
+          isOutgoing: message.isOutgoing,
+          type: notImplementedText,
+        );
+      },
+      messageBotWriteAccessAllowed: (td.MessageBotWriteAccessAllowed value) {
         return MessageForumTopicIsHiddenTileModel(
           id: message.id,
           isOutgoing: message.isOutgoing,

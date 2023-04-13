@@ -74,7 +74,8 @@ class MessagesTileFactoryFactory {
             MessageChatJoinByLinkTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),
-        MessageChatSetTtlTileModel: MessageChatSetTtlTileFactoryDelegate(
+        MessageNotImplementedTileModel:
+            MessageNotImplementedTileFactoryDelegate(
           chatMessageFactory: chatMessageFactory,
         ),
         MessageChatUpgradeFromTileModel:

@@ -59,9 +59,10 @@ class ChatManager implements IChatManager {
   }) async {
     final td.Chat chat = await _functionExecutor.send<td.Chat>(
       td.CreateNewSupergroupChat(
+        messageAutoDeleteTime: 0,
+        isForum: false,
         description: description,
         title: name,
-        messageTtl: 0,
         forImport: false,
         isChannel: true,
       ),

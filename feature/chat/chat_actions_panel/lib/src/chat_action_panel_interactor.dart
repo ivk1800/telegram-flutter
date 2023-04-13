@@ -73,7 +73,7 @@ class ChatActionPanelInteractor {
   }
 
   Stream<PanelState> _getPrivateChatState(td.Chat chat) {
-    if (chat.permissions.canSendMessages) {
+    if (chat.permissions.canSendOtherMessages) {
       return Stream<PanelState>.value(const PanelState.writer());
     }
 

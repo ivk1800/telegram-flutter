@@ -3,16 +3,16 @@ import 'package:feature_chat_impl/src/widget/chat_message/chat_message_factory.d
 import 'package:flutter/material.dart';
 import 'package:tile/tile.dart';
 
-class MessageChatSetTtlTileFactoryDelegate
-    implements ITileFactoryDelegate<MessageChatSetTtlTileModel> {
-  MessageChatSetTtlTileFactoryDelegate({
+class MessageNotImplementedTileFactoryDelegate
+    implements ITileFactoryDelegate<MessageNotImplementedTileModel> {
+  MessageNotImplementedTileFactoryDelegate({
     required ChatMessageFactory chatMessageFactory,
   }) : _chatMessageFactory = chatMessageFactory;
 
   final ChatMessageFactory _chatMessageFactory;
 
   @override
-  Widget create(BuildContext context, MessageChatSetTtlTileModel model) {
+  Widget create(BuildContext context, MessageNotImplementedTileModel model) {
     return _chatMessageFactory.createChatNotificationFromText(
       context: context,
       text: model.title,

@@ -79,11 +79,9 @@ class ChatMessageDataSource {
         return _functionExecutor
             .send<td.Messages>(
               td.SearchMessages(
+                offset: '',
                 minDate: 0,
                 maxDate: 0,
-                offsetChatId: last?.chatId ?? fromChatId,
-                offsetDate: 0,
-                offsetMessageId: last?.id ?? fromMessageId,
                 filter: filter,
                 limit: limit,
                 query: query,

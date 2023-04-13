@@ -2,6 +2,9 @@ import 'package:td_api/td_api.dart' as td;
 
 td.Message createFakeMessage() {
   return const td.Message(
+    autoDeleteIn: 0,
+    selfDestructIn: 0,
+    selfDestructTime: 0,
     unreadReactions: <td.UnreadReaction>[],
     canGetAddedReactions: false,
     canBeSaved: false,
@@ -30,8 +33,6 @@ td.Message createFakeMessage() {
     replyInChatId: 0,
     replyToMessageId: 0,
     restrictionReason: '',
-    ttl: 0,
-    ttlExpiresIn: 0.0,
     viaBotUserId: 0,
     content: td.MessageText(
       text: td.FormattedText(
@@ -49,10 +50,11 @@ td.Chat createFakeChat({
   List<td.ChatPosition>? positions,
 }) {
   return td.Chat(
+    isTranslatable: false,
+    messageAutoDeleteTime: 0,
     unreadReactionCount: 0,
     availableReactions: const td.ChatAvailableReactionsAll(),
     hasProtectedContent: false,
-    messageTtl: 0,
     themeName: '',
     videoChat: const td.VideoChat(
       groupCallId: 0,
@@ -73,12 +75,17 @@ td.Chat createFakeChat({
       userId: 0,
     ),
     permissions: const td.ChatPermissions(
+      canSendAudios: false,
+      canSendBasicMessages: false,
+      canSendDocuments: false,
+      canSendPhotos: false,
+      canSendVideoNotes: false,
+      canSendVideos: false,
+      canSendVoiceNotes: false,
       canAddWebPagePreviews: false,
       canChangeInfo: false,
       canInviteUsers: false,
       canPinMessages: false,
-      canSendMediaMessages: false,
-      canSendMessages: false,
       canSendOtherMessages: false,
       canSendPolls: false,
       canManageTopics: false,

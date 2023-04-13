@@ -2,8 +2,8 @@ import 'package:rich_text_format/rich_text_format.dart';
 
 import 'base_message_tile_model.dart';
 
-class MessageChatSetTtlTileModel extends BaseMessageTileModel {
-  const MessageChatSetTtlTileModel({
+class MessageNotImplementedTileModel extends BaseMessageTileModel {
+  const MessageNotImplementedTileModel({
     required super.id,
     required super.isOutgoing,
     required this.title,
