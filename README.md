@@ -8,7 +8,7 @@ Work in progress! Some code needs refactoring as it was written in haste. Somewh
 
 Preferred flutter version: `stable, 3.7.6`
 
-[TdLib](https://github.com/tdlib/td) version: `1.8.4` `d489014`
+[TDLib](https://github.com/tdlib/td) version: `1.8.4` `d489014`
 
 ### Supported platform
 |Platform| Status|
