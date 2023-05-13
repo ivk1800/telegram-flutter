@@ -13,6 +13,7 @@ Future<void> main(List<String> arguments) async {
     ..addOption('work-directory')
     ..addOption('withOutputs', defaultsTo: 'false')
     ..addCommand('get')
+    ..addCommand('upgrade')
     ..addCommand('gen')
     ..addCommand('analyze')
     ..addCommand('validate_dependencies')
@@ -31,6 +32,12 @@ Future<void> main(List<String> arguments) async {
   if (command == 'get') {
     Console.write('run packages get\n');
     await runPubGetCommandForProjects(
+      withOutputs: withOutputs,
+      dartProjects: dartProjects,
+    );
+  } else if (command == 'upgrade') {
+    Console.write('run pub upgrade\n');
+    await runPubUpgradeCommandForProjects(
       withOutputs: withOutputs,
       dartProjects: dartProjects,
     );

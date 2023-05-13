@@ -25,6 +25,27 @@ Future<void> runPubGetCommandForProjects({
   );
 }
 
+Future<void> runPubUpgradeCommandForProjects({
+  required List<DartProject> dartProjects,
+  required bool withOutputs,
+}) async {
+  final List<Command> commands = dartProjects.map((DartProject project) {
+    return Command(
+      name: project.name,
+      workingDirectory: project.path,
+      executable: project.isFlutter ? 'flutter' : 'dart',
+      arguments: project.isFlutter
+          ? <String>['packages', 'upgrade']
+          : <String>['pub', 'upgrade'],
+    );
+  }).toList();
+  await runCommands(
+    commands: commands,
+    withOutputs: withOutputs,
+    withRetry: true,
+  );
+}
+
 Future<void> runBuildRunnerCommandForProjects({
   required List<DartProject> dartProjects,
   required bool withOutputs,
