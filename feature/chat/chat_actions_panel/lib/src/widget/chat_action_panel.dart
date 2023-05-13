@@ -14,9 +14,9 @@ class ChatActionPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: Column(
+      child: const Column(
         mainAxisSize: MainAxisSize.min,
-        children: const <Widget>[
+        children: <Widget>[
           Divider(height: 1),
           LimitedBox(
             maxHeight: kPanelHeight,

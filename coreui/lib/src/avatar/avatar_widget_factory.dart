@@ -2,14 +2,14 @@ import 'package:core_presentation/core_presentation.dart';
 import 'package:coreui/src/avatar/avatar_view_model.dart';
 import 'package:feature_file_api/feature_file_api.dart';
 import 'package:flutter/material.dart';
-import 'package:fwg_annotation/fwg_annotation.dart';
+import 'package:fwg_annotation/fwg_annotation.dart' as fwg;
 
 import 'avatar.dart' as aw;
 import 'avatar_scope.dart';
 
 part 'avatar_widget_factory.fwg.dart';
 
-@widgetFactory
+@fwg.widgetFactory
 class AvatarWidgetFactory {
   AvatarWidgetFactory({
     required IFileDownloader fileDownloader,

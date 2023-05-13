@@ -50,9 +50,9 @@ class _StickerBody extends StatelessWidget {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 200),
       child: state.map(
-        loading: (_) => Stack(
+        loading: (_) => const Stack(
           alignment: Alignment.center,
-          children: const <Widget>[
+          children: <Widget>[
             // todo implement outline
             Placeholder(),
             Text(

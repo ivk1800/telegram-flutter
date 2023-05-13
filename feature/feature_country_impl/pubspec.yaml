@@ -2,12 +2,12 @@ name: feature_country_impl
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ^3.0.0
 
 dependencies:
   bloc: 8.0.2
-  collection: 1.17.0
+  collection: 1.17.1
   feature_country_api:
     path: ../feature_country_api
   flutter:
@@ -19,7 +19,7 @@ dependencies:
   provider: 6.0.2
 
 dev_dependencies:
-  build_runner: 2.3.2
+  build_runner: 2.3.3
   dependency_validator: 3.2.0
   freezed: 2.2.1
   tg_lint_rules:

@@ -93,9 +93,9 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: AppBarTheme.of(context).backgroundColor,
       appBarBuilder: (
         AnimationController animationController,
-        BuildContext context,
-        bool isActive,
-      ) {
+        BuildContext context, {
+        required bool isActive,
+      }) {
         if (isActive) {
           return tg.SearchAppBar(
             focusNode: settingsScreenWidgetModel.searchQueryFocusNode,

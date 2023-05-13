@@ -25,7 +25,7 @@ class CustomEmojiContainer extends StatelessWidget {
 }
 
 class _EmojiRenderObject extends MultiChildRenderObjectWidget {
-  _EmojiRenderObject({super.children});
+  const _EmojiRenderObject({super.children});
 
   @override
   RenderObject createRenderObject(BuildContext context) {

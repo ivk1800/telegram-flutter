@@ -21,12 +21,12 @@ class _ChatPageState extends State<ChatPage> {
       fit: StackFit.expand,
       children: <Widget>[
         ChatScreenScope.getChatBackgroundFactory(context).create(context),
-        _ChatContextWrapper(
+        const _ChatContextWrapper(
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            appBar: const _AppBar(),
+            appBar: _AppBar(),
             body: Column(
-              children: const <Widget>[
+              children: <Widget>[
                 Expanded(child: _Body()),
                 _ActionsPanel(),
               ],

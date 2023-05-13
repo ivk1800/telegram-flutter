@@ -2,7 +2,7 @@ name: tg_lint_rules
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
 #  dart_code_metrics: 4.2.1

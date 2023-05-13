@@ -2,19 +2,19 @@ name: tools
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  args: 2.3.0
-  code_builder: 4.3.0
-  collection: 1.17.0
+  args: 2.4.1
+  code_builder: 4.4.0
+  collection: 1.17.1
   console: 4.1.0
-  dart_style: 2.2.1
-  meta: 1.7.0
-  pubspec_parse: 1.2.0
-  quiver: 3.0.1+1
+  dart_style: 2.3.1
+  meta: 1.9.1
+  pubspec_parse: 1.2.3
+  quiver: 3.2.1
   rxdart: 0.27.3
-  xml: ^5.3.1
+  xml: 6.3.0
 
 dev_dependencies:
   dependency_validator: 3.2.0

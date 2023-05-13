@@ -150,11 +150,10 @@ class MessageTileMapper {
               <dynamic>[
                 'todo',
                 // todo extract to extension for concat first and last names
-                (<String>[user.firstName, user.lastName]
-                    .where((String element) {
+                <String>[user.firstName, user.lastName].where((String element) {
                   // todo check by isNotBlack
                   return element.isNotEmpty;
-                }).join(' ')),
+                }).join(' '),
               ],
             ),
           ),

@@ -13,8 +13,10 @@ class _DefaultCompactLayoutStrategy implements CompactLayoutStrategy {
 
   @override
   bool process(BoxConstraints constraints) {
-    final SingletonFlutterWindow window = WidgetsBinding.instance.window;
-    final Size size = window.physicalSize / window.devicePixelRatio;
+    final FlutterView? flutterView = PlatformDispatcher.instance.implicitView;
+    final Size physicalSize = flutterView!.physicalSize;
+    final double devicePixelRatio = flutterView.devicePixelRatio;
+    final Size size = physicalSize / devicePixelRatio;
     return size.shortestSide < 600;
   }
 }

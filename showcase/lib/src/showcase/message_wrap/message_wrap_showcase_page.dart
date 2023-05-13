@@ -26,9 +26,9 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const <Widget>[
+      children: <Widget>[
         Example1(),
         SizedBox(height: 12),
         Example2(),

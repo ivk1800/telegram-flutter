@@ -1,5 +1,6 @@
-// @dart=2.9
 /*
+// @dart=2.9
+// TODO restore tests
 // todo fix tests
 import 'package:app_controller/src/connectivity_delegate.dart';
 import 'package:core/core.dart';

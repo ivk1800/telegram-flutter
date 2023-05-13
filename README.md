@@ -6,9 +6,9 @@ Work in progress! Some code needs refactoring as it was written in haste. Somewh
 
 <img src='res/telegram_picture.png' width='800'>
 
-Preferred flutter version: `stable, 3.7.6`
+Preferred flutter version: `stable, 3.10.0`
 
-[TdLib](https://github.com/tdlib/td) version: `1.8.4` `d489014`
+[TdLib](https://github.com/tdlib/td) version: `1.8.11` `1543c41`
 
 ### Supported platform
 |Platform| Status|

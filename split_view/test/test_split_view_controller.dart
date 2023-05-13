@@ -50,9 +50,6 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
 
   final WidgetTester tester;
 
-  final TestWidgetsFlutterBinding binding =
-      TestWidgetsFlutterBinding.ensureInitialized();
-
   final GlobalKey<SplitViewState> splitViewNavigatorKey =
       GlobalKey<SplitViewState>();
 
@@ -65,7 +62,7 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
   );
 
   Future<void> setup() async {
-    binding.window.devicePixelRatioTestValue = 1.0;
+    tester.view.devicePixelRatio = 1.0;
     await _wrapAndPump(tester, _splitView);
     expect(find.byType(SplitView), findsOneWidget);
   }
@@ -94,11 +91,11 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
   }
 
   void compactScreen() {
-    binding.window.physicalSizeTestValue = const Size(300, 300);
+    tester.view.physicalSize = const Size(300, 300);
   }
 
   void largeScreen() {
-    binding.window.physicalSizeTestValue = const Size(1024, 1024);
+    tester.view.physicalSize = const Size(1024, 1024);
   }
 
   void expectCompactNavigator() {
@@ -277,7 +274,7 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
         return navigators.firstWhereOrNull(
           (Element element) =>
               element.size!.width ==
-              binding.window.physicalSize.width -
+              tester.view.physicalSize.width -
                   leftContainerWidth -
                   _dividerWidth,
         );
@@ -290,7 +287,7 @@ class TestSplitViewController implements SplitViewNavigatorObserver {
         });
       case NavigatorLocation.compact:
         return navigators.firstWhereOrNull(
-          (Element element) => element.size! == binding.window.physicalSize,
+          (Element element) => element.size! == tester.view.physicalSize,
         );
     }
   }

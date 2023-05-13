@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 class MessageContent extends MultiChildRenderObjectWidget {
-  MessageContent({
+  const MessageContent({
     super.key,
     super.children,
   });

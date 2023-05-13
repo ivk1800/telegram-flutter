@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 typedef AppBarBuilder = Widget Function(
   AnimationController animationController,
-  BuildContext context,
-  bool isActive,
-);
+  BuildContext context, {
+  required bool isActive,
+});
 
 class TgSwitchedAppBar extends StatefulWidget implements PreferredSizeWidget {
   TgSwitchedAppBar({
@@ -66,7 +66,7 @@ class TgSwitchedAppBarState extends State<TgSwitchedAppBar>
           );
         },
         child: widget.appBarBuilder!
-            .call(_animationController, context, _isActive),
+            .call(_animationController, context, isActive: _isActive),
       ),
     );
   }

@@ -44,7 +44,10 @@ class NewContactShowcaseFactory {
       blockInteractionManager: _blockInteractionManager,
       stringsProvider: _stringsProvider,
       contactsManager: FakeContactsManager(
-        addContactCallback: (td.Contact contact, bool sharePhoneNumber) async {
+        addContactCallback: (
+          td.Contact contact, {
+          required bool sharePhoneNumber,
+        }) async {
           if (contact.lastName == 'error') {
             await Future<void>.delayed(const Duration(milliseconds: 200));
             throw Exception('invalid lastname');

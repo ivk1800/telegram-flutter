@@ -107,8 +107,7 @@ class ChatMessageUpdatesHandler {
     Function(
       UpdatedMessages updatedMessagesCallback,
       List<ITileModel> actualMessages,
-    )
-        callback,
+    ) callback,
   ) {
     final UpdatedMessages? updatedMessages = _updatedMessages;
     final ActualMessages? actualMessages = _actualMessages;
