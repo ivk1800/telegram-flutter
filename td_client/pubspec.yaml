@@ -1,5 +1,5 @@
 name: td_client
-publish_to: 'none'
+publish_to: "none"
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -8,7 +8,7 @@ dependencies:
   rxdart: 0.27.3
   tdlib:
     git:
-      url: git@github.com:ivk1800/tdlib-dart.git
+      url: https://github.com/ivk1800/tdlib-dart.git
       ref: c54a942a65bd734755659a91964c2b0ad90d6cf2
 
 dev_dependencies:
