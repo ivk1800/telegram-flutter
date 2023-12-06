@@ -12,7 +12,7 @@ dependencies:
     path: ../../feature/chat_list/chat_list_ui_kit
   chat_navigation_api:
     path: ../chat/chat_navigation_api
-  collection: 1.17.1
+  collection: 1.18.0
   core:
     path: ../../core
   core_arch:
