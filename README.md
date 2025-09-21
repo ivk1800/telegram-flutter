@@ -1,4 +1,9 @@
 
+### ⚠️ Archived  
+This repository is no longer maintained.
+
+I am no longer interested in **Flutter** and don’t have time to continue development or provide support.
+
 ### (WIP) Telegram client written in Dart and uses Flutter.
 ---
 
